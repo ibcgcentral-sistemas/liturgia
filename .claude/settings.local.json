@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Bash(where python3:*)",
+      "Bash(where python:*)",
+      "Bash(where node:*)",
+      "Bash(where npx:*)",
+      "Bash(where php:*)",
+      "Bash(ls C:/Python*)",
+      "Bash(where npx.cmd)",
+      "Read(//c/Program Files/nodejs/**)",
+      "Bash(dir \"C:\\\\Users\\\\gonza\\\\OneDrive\\\\Desktop\\\\liturgia\\\\node_modules\\\\docx\\\\build\")",
+      "Bash(dir \"C:\\\\Users\\\\gonza\\\\OneDrive\\\\Desktop\\\\liturgia\\\\node_modules\\\\file-saver\\\\dist\")",
+      "Bash(cmd /c \"dir node_modules\\\\docx\")",
+      "Bash(cmd /c \"cd /d C:\\\\Users\\\\gonza\\\\OneDrive\\\\Desktop\\\\liturgia && dir node_modules\\\\docx\")",
+      "Bash(powershell -Command \"Get-ChildItem 'C:\\\\Users\\\\gonza\\\\OneDrive\\\\Desktop\\\\liturgia\\\\node_modules\\\\docx' -ErrorAction SilentlyContinue | Select-Object Name\")",
+      "Bash(powershell -Command \"Get-ChildItem 'C:\\\\Users\\\\gonza\\\\OneDrive\\\\Desktop\\\\liturgia\\\\node_modules\\\\docx\\\\dist' | Select-Object Name\")",
+      "Bash(powershell -Command \"Get-ChildItem 'C:\\\\Users\\\\gonza\\\\OneDrive\\\\Desktop\\\\liturgia\\\\node_modules\\\\file-saver\\\\dist' | Select-Object Name\")",
+      "Bash(powershell -Command ' *)",
+      "Bash(powershell -Command \"\\(Get-Content 'C:\\\\Users\\\\gonza\\\\OneDrive\\\\Desktop\\\\liturgia\\\\js\\\\lib\\\\docx.iife.js' -TotalCount 3\\) -join ' '\")",
+      "Bash(cargo install *)",
+      "Bash(npm start *)",
+      "Bash(npm run *)",
+      "Bash(npm install *)",
+      "Bash(serve . -l 3000)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "mcp__Claude_in_Chrome__switch_browser",
+      "Bash(curl -s \"http://localhost:57150\")",
+      "Bash(node test-logic.js)",
+      "Bash(curl -s \"http://localhost:57150/verify-fix.html\")",
+      "Bash(curl -s \"http://localhost:57150/js/manual.js\")",
+      "Bash(curl -s \"http://localhost:57150/js/librito-pueblo.js\")",
+      "Bash(curl -s \"http://localhost:57150/js/app.js\")",
+      "Bash(node -c /c/Users/gonza/OneDrive/Desktop/liturgia/js/utils.js)",
+      "Bash(node -c /c/Users/gonza/OneDrive/Desktop/liturgia/js/app.js)",
+      "Bash(node -c /c/Users/gonza/OneDrive/Desktop/liturgia/js/librito-pueblo.js)",
+      "Bash(node -c /c/Users/gonza/OneDrive/Desktop/liturgia/js/intercessions.js)",
+      "Bash(node -e ' *)"
+    ]
+  }
+}

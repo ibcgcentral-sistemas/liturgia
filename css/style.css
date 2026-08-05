@@ -1,0 +1,1803 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   style.css — Misal Anglicano
+   Fondo claro pergamino, rúbricas en rojo, acentos dorados
+   ══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --parchment:     #fcfaf2;
+  --parchment-mid: #f5f1e3;
+  --parchment-dark:#e2dac2;
+  --ink:           #120f0a;
+  --ink-soft:      #2d2820;
+  --rubric:        #cc0000;
+  --gold:          #c5a059;
+  --gold-light:    #e0c891;
+  --gold-dark:     #8a6e1a;
+  --header-bg:     #2a1808;
+  --header-text:   #f5e8c0;
+  --font-main:     'EB Garamond', Georgia, serif;
+  --font-title:    'EB Garamond', Georgia, serif;
+  --font-liturgy:  'EB Garamond', Georgia, serif;
+}
+
+/* ── RESET ────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  color-scheme: light only;
+}
+
+body {
+  background-color: var(--parchment-mid) !important;
+  color: var(--ink) !important;
+  font-family: var(--font-main);
+  font-size: 18px; /* Slightly larger for better readability */
+  line-height: 1.65;
+  min-height: 100vh;
+}
+
+/* ── HEADER NEUMORFISTA (ELEGANT DARK) ────────────────────────────────────── */
+.app-header {
+  background-color: #2a2421 !important;
+  border-bottom: none;
+  padding: 3rem 1rem 2.5rem;
+  text-align: center;
+  box-shadow: inset 8px 8px 16px #1e1a18, 
+              inset -8px -8px 16px #362e2a;
+  border-radius: 0 0 24px 24px;
+  margin-bottom: -1rem; /* Acercar a los controles */
+}
+
+.header-cross {
+  font-size: 2.5rem;
+  color: #e5c158;
+  display: block;
+  margin-bottom: 0.8rem;
+  text-shadow: 3px 3px 6px #151210, 
+               -1px -1px 2px #403732;
+}
+
+.app-header h1 {
+  font-size: 2.4rem;
+  font-weight: bold;
+  letter-spacing: 0.15em;
+  color: #fce29f !important;
+  margin-bottom: 0.5rem;
+  text-shadow: 3px 3px 6px #151210, 
+               -1px -1px 2px #403732;
+}
+
+.subtitle {
+  font-style: italic;
+  color: #c9ad76 !important;
+  font-size: 1.1rem;
+  text-shadow: 2px 2px 4px #151210;
+}
+
+.app-header p:last-of-type {
+  color: #a68f68; /* antes #8c7a5d — 3.68:1 sobre el header oscuro, bajo el mínimo AA de 4.5:1 */
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  margin-top: 1rem;
+  text-transform: uppercase;
+}
+
+/* ── CONTROLS PANEL NEUMORPHISM ───────────────────────────────────────────── */
+.controls.neu-panel {
+  background-color: #e0e5ec !important;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-shadow: none;
+  border: none;
+}
+
+.inputs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.control-group label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #565f70 !important; /* antes #7a8292 — 3.05:1 sobre el panel, bajo el mínimo AA de 4.5:1 */
+}
+
+.neu-input {
+  background: #e0e5ec !important;
+  border: none !important;
+  padding: 0.8rem 1rem !important;
+  font-family: var(--font-main) !important;
+  font-size: 1rem !important;
+  color: #4a5568 !important;
+  border-radius: 12px !important;
+  outline: none !important;
+  box-shadow: inset 4px 4px 8px #bec3c9, 
+              inset -4px -4px 8px #ffffff !important;
+  transition: all 0.2s ease;
+}
+
+.neu-input:focus {
+  box-shadow: inset 6px 6px 10px #bec3c9,
+              inset -6px -6px 10px #ffffff,
+              0 0 0 3px rgba(204,0,0,0.4) !important;
+}
+
+.buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+.neu-btn {
+  background: #e0e5ec !important;
+  border: none !important;
+  padding: 1rem 1.2rem !important;
+  font-family: var(--font-title) !important;
+  font-size: 0.85rem !important;
+  font-weight: bold !important;
+  color: #4a5568 !important;
+  border-radius: 12px !important;
+  cursor: pointer !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  box-shadow: 6px 6px 12px #bec3c9, 
+              -6px -6px 12px #ffffff !important;
+  transition: all 0.2s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+.neu-btn:hover {
+  color: #2d3748 !important;
+}
+
+.neu-btn:active {
+  box-shadow: inset 4px 4px 8px #bec3c9, 
+              inset -4px -4px 8px #ffffff !important;
+}
+
+.primary-neu-btn {
+  width: 100% !important;
+  padding: 1.2rem !important;
+  font-size: 1.1rem !important;
+  color: #9e1b1b !important;
+}
+
+/* ── DAY INFO BAR ─────────────────────────────────────────────────────────── */
+.liturgy-info {
+  background: #fff8e8;
+  border-bottom: 1px solid var(--gold);
+  padding: 0.7rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  font-size: 0.95rem;
+}
+
+#feast-name {
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--rubric);
+  font-weight: bold;
+}
+
+#season-info, #cycle-info {
+  color: var(--ink-soft);
+}
+
+/* ── LOADING ──────────────────────────────────────────────────────────────── */
+.loading {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--parchment);
+  color: var(--rubric);
+}
+
+.cross-spinner {
+  font-size: 3.5rem;
+  animation: pulse 1.4s ease-in-out infinite;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.88); }
+}
+
+.loading p {
+  font-size: 1rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+/* ── UTILITIES ────────────────────────────────────────────────────────────── */
+.hidden { display: none !important; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   LITURGY DOCUMENT
+   ══════════════════════════════════════════════════════════════════════════ */
+.liturgy-output {
+  max-width: 860px;
+  margin: 2rem auto 3rem;
+  padding: 0 1rem;
+}
+
+.liturgy-document {
+  background: var(--parchment);
+  border: 1px solid var(--gold);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+}
+
+/* ── COVER PAGE ───────────────────────────────────────────────────────────── */
+.cover-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 80vh;
+  padding: 4rem 2rem;
+  page-break-after: always;
+  border-bottom: 2px solid var(--gold-dark);
+}
+
+.cover-cross {
+  font-size: 5rem;
+  color: var(--rubric);
+  margin-bottom: 1.5rem;
+}
+
+.cover-title {
+  font-family: var(--font-title);
+  font-size: 3.5rem;
+  color: var(--ink);
+  line-height: 1.1;
+  letter-spacing: 0.1em;
+  margin: 0;
+}
+
+.cover-subtitle {
+  font-family: var(--font-main);
+  font-size: 1.2rem;
+  color: var(--ink-soft);
+  margin-top: 1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.cover-divider {
+  width: 60px;
+  height: 3px;
+  background-color: var(--gold);
+  margin: 2.5rem 0;
+}
+
+.cover-feast {
+  font-family: var(--font-title);
+  font-size: 2rem;
+  color: var(--rubric);
+  margin: 0 0 1rem 0;
+}
+
+.cover-date {
+  font-family: var(--font-main);
+  font-size: 1.2rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin-bottom: 4rem;
+}
+
+.cover-quote {
+  max-width: 600px;
+  margin-top: auto;
+  padding: 2rem;
+  border: 1px solid var(--gold);
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 4px;
+}
+
+.cover-quote .quote-text {
+  font-family: var(--font-liturgy);
+  font-size: 1.3rem;
+  color: var(--ink);
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.cover-quote .quote-author {
+  font-family: var(--font-main);
+  font-size: 1rem;
+  color: var(--rubric);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+/* ── FEAST HEADER ─────────────────────────────────────────────────────────── */
+.feast-header {
+  padding: 2rem 2.5rem 1.8rem;
+  text-align: center;
+  border-bottom: 3px double var(--gold);
+  position: relative;
+}
+
+/* Left color stripe */
+.color-band {
+  position: absolute;
+  top: 0; left: 0;
+  width: 10px;
+  height: 100%;
+}
+
+.color-white  .color-band { background: #f0f0f0; border-right: 1px solid #ccc; }
+.color-red    .color-band { background: #cc0000; }
+.color-violet .color-band { background: #6a0dad; }
+.color-rose   .color-band { background: #ff66cc; }
+.color-black  .color-band { background: #111; }
+.color-green  .color-band { background: #1a7a1a; }
+
+/* Background tint per color */
+.color-white  { background: #fdfaf0; }
+.color-red    { background: #fef5f5; }
+.color-violet { background: #f8f0ff; }
+.color-rose   { background: #fff0f5; }
+.color-black  { background: #f5f5f5; }
+.color-green  { background: #f0f8f0; }
+
+.feast-date {
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #666; /* antes #777 — ~4.3:1 sobre los fondos color-X, bajo el mínimo AA de 4.5:1 */
+  margin-bottom: 0.7rem;
+}
+
+.feast-name-en {
+  font-family: var(--font-title);
+  font-size: 2.4rem;
+  font-weight: bold;
+  color: var(--ink);
+  margin-bottom: 0.2rem;
+  letter-spacing: -0.01em;
+}
+
+.feast-name-es {
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  color: var(--ink-soft);
+  margin-bottom: 1rem;
+  font-style: italic;
+  opacity: 0.85;
+}
+
+.feast-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  font-size: 0.88rem;
+  color: #555;
+}
+
+.feast-meta strong { color: var(--rubric); }
+
+/* ── OMISSION NOTES ───────────────────────────────────────────────────────── */
+.omission-notes {
+  background: #fff8f8;
+  border-left: 5px solid var(--rubric);
+  padding: 0.8rem 1.5rem;
+  margin: 0;
+}
+
+.omission-notes h3 {
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+  color: var(--rubric);
+}
+
+.omission-notes ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+
+.omission-notes li {
+  font-size: 0.88rem;
+  color: var(--rubric);
+  font-style: italic;
+  margin-bottom: 0.2rem;
+}
+
+/* ── MASS SECTIONS ────────────────────────────────────────────────────────── */
+.mass-section {
+  padding: 1.4rem 2rem;
+  border-bottom: 1px solid var(--parchment-dark);
+}
+
+.mass-section:last-child { border-bottom: none; }
+
+/* Section titles */
+.section-title {
+  font-family: var(--font-title);
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--rubric);
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid rgba(204,0,0,0.2);
+  font-weight: 600;
+}
+
+.section-title.main-section {
+  font-size: 0.95rem;
+  letter-spacing: 0.2em;
+  border-bottom: 2px solid var(--rubric);
+  margin-bottom: 1.2rem;
+}
+
+.section-title.gospel-title {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
+/* Rubric (red italic) */
+.rubric {
+  color: var(--rubric);
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+/* Pre-formatted liturgical text */
+.liturgical-text {
+  white-space: pre-wrap;
+  font-family: var(--font-liturgy);
+  font-size: 0.97rem;
+  line-height: 1.85;
+  color: var(--ink);
+  background: rgba(255,255,255,0.55);
+  border-left: 3px solid var(--gold);
+  padding: 1rem 1.4rem;
+  margin: 0.6rem 0;
+}
+
+.liturgical-text-block {
+  font-family: var(--font-liturgy);
+  font-size: 0.97rem;
+  line-height: 1.85;
+  color: var(--ink);
+  background: rgba(255,255,255,0.55);
+  border-left: 3px solid var(--gold);
+  padding: 1rem 1.4rem;
+  margin: 0.6rem 0;
+}
+
+/* Prayer / collect text */
+.prayer-text {
+  font-family: var(--font-liturgy);
+  font-size: 1rem;
+  line-height: 2;
+  color: var(--ink);
+  padding: 0.9rem 1.4rem;
+  border: 1px solid var(--parchment-dark);
+  background: rgba(255,255,255,0.6);
+  margin: 0.6rem 0;
+  white-space: pre-wrap;
+}
+
+.collect-text {
+  font-style: italic;
+  font-size: 1.02rem;
+}
+
+/* ── DIÁLOGO LITÚRGICO ────────────────────────────────────────────────────── */
+/* Cada línea de diálogo: etiqueta en negrita + texto */
+.lit-line {
+  display: flex;
+  gap: 0.6rem;
+  margin: 0.1rem 0;
+  align-items: flex-start;
+  line-height: 1.4;
+}
+
+.lit-line .lit-label {
+  font-weight: bold;
+  min-width: 1.8rem;
+  flex-shrink: 0;
+  color: #1a1208;
+}
+
+/* Sacerdote */
+.lit-line.sacerdote .lit-label  { color: #1a1208; }
+/* Pueblo */
+.lit-line.pueblo    .lit-label  { color: #8b0000; }
+/* Ministros */
+.lit-line.ministros .lit-label  { color: #1a1208; }
+/* Lector */
+.lit-line.lector    .lit-label  { color: #1a5c1a; }
+/* Todos juntos */
+.lit-line.todos     .lit-label  { color: #8b0000; font-style: italic; }
+
+/* Negritas para el pueblo y ministros (como pidió el usuario) */
+.lit-line.pueblo .lit-text,
+.lit-line.todos .lit-text,
+.lit-line.ministros .lit-text {
+  font-weight: bold;
+}
+
+/* Rúbrica dentro del bloque litúrgico */
+.lit-rubric {
+  color: #8b0000;
+  font-style: italic;
+  font-size: 0.88rem;
+  margin: 0.15rem 0 0.15rem 0.3rem;
+  display: block;
+}
+
+/* Título dentro del bloque (e.g. "PALABRAS DE LA INSTITUCIÓN") */
+.lit-title {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  margin: 0.9rem 0 0.3rem;
+  color: #1a1208;
+  display: block;
+}
+
+/* Texto de institución / consagración */
+.lit-consecracion {
+  font-weight: bold;
+  font-size: 1.05rem;
+  text-align: center;
+  margin: 0.6rem 1rem;
+  line-height: 1.9;
+  display: block;
+}
+
+/* Texto corrido (oraciones sin etiqueta de diálogo) */
+.lit-prayer {
+  margin: 0.15rem 0;
+  line-height: 1.45;
+  display: block;
+}
+
+/* ── READINGS ─────────────────────────────────────────────────────────────── */
+.reading {
+  margin-bottom: 1.8rem;
+  padding-bottom: 1.4rem;
+  border-bottom: 1px dashed var(--parchment-dark);
+}
+
+.reading:last-child { border-bottom: none; }
+
+.scripture-text {
+  font-family: var(--font-liturgy);
+  font-size: 1.02rem;
+  line-height: 2;
+  color: var(--ink);
+  background: rgba(255,255,255,0.7);
+  padding: 1.1rem 1.5rem;
+  border: 1px solid var(--parchment-dark);
+  border-left: 4px solid var(--gold);
+  margin: 0.7rem 0;
+  text-align: justify;
+}
+
+.gospel-reading .scripture-text {
+  border-left: 4px solid var(--ink);
+  background: rgba(255,255,255,0.85);
+  font-size: 1.05rem;
+}
+
+sup.verse-num {
+  font-size: 0.6em;
+  color: var(--rubric);
+  vertical-align: super;
+  margin-right: 2px;
+}
+
+.response {
+  font-family: var(--font-liturgy);
+  font-size: 0.92rem;
+  color: var(--rubric);
+  font-style: italic;
+  margin-top: 0.4rem;
+}
+
+/* ── PSALM ────────────────────────────────────────────────────────────────── */
+.psalm-antiphon {
+  font-style: italic;
+  font-size: 0.97rem;
+  color: var(--rubric);
+  margin: 0.5rem 0;
+  padding: 0.5rem 1rem;
+  border-left: 3px solid #c06080;
+  background: rgba(192,96,128,0.06);
+}
+
+/* ── INTERCESSIONS ────────────────────────────────────────────────────────── */
+.petition {
+  margin-bottom: 1rem;
+  padding: 0.7rem 1.1rem;
+  background: rgba(255,255,255,0.5);
+  border-left: 3px solid var(--gold);
+}
+
+.petition-intro {
+  font-size: 0.82rem;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+  color: var(--rubric);
+}
+
+.petition-text {
+  font-family: var(--font-liturgy);
+  font-size: 0.97rem;
+  line-height: 1.8;
+  color: var(--ink);
+}
+
+/* ── INTERCESSIONS: LIBRITO ──────────────────────────────────────────────── */
+.librito-petition {
+  background: rgba(255,255,255,0.5);
+  padding: 0.6rem 1rem;
+  border-left: 3px solid var(--gold);
+  margin: 0.5rem 0;
+}
+
+.librito-petition-text {
+  font-family: var(--font-liturgy);
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+/* ── EMBOLISM BOX ─────────────────────────────────────────────────────────── */
+.embolism-box {
+  background: #fffbe8;
+  border: 1.5px solid var(--gold);
+  padding: 0.9rem 1.4rem;
+  margin: 0.8rem 0;
+}
+
+.embolism-box h4 { margin-bottom: 0.4rem; }
+
+/* ── FOOTER ───────────────────────────────────────────────────────────────── */
+.liturgy-footer {
+  background: var(--parchment-mid);
+  border-top: 3px double var(--gold);
+  text-align: center;
+  padding: 1.4rem;
+  font-family: var(--font-title);
+  font-size: 1rem;
+  color: var(--gold-dark);
+  letter-spacing: 0.1em;
+}
+
+.footer-note {
+  font-size: 0.82rem;
+  color: #636363; /* antes #888 — 3.13:1 sobre el pie, bajo el mínimo AA de 4.5:1 */
+  font-style: italic;
+  margin-top: 0.4rem;
+  letter-spacing: 0.04em;
+}
+
+/* ── ERROR ────────────────────────────────────────────────────────────────── */
+.error {
+  color: var(--rubric);
+  padding: 2rem;
+  text-align: center;
+  font-size: 1rem;
+  font-style: italic;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   PRINT STYLES
+   ══════════════════════════════════════════════════════════════════════════ */
+@media print {
+  /* !important: sin esto, body.dark-mode (más específico) gana y el "Modo Altar"
+     se imprime con fondo casi negro si no se desactivó antes de imprimir. */
+  body { background: white !important; font-size: 10.5pt; }
+
+  .app-header, .controls, .liturgy-info, .loading { display: none !important; }
+
+  .liturgy-output { max-width: 100%; margin: 0; padding: 0; }
+  .liturgy-document { box-shadow: none; border: none; background: white; }
+
+  .color-band { display: none; }
+  .feast-header { padding: 0.8cm 1cm 0.5cm; background: white !important; }
+
+  .mass-section { padding: 0.35cm 1cm; }
+  .scripture-text, .liturgical-text, .prayer-text { break-inside: avoid; background: white !important; }
+  .section-title.main-section { page-break-before: always; }
+
+  sup.verse-num { color: #444; }
+  .rubric { color: #600; }
+
+  @page { margin: 2cm; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 680px) {
+  .app-header h1 { font-size: 1.4rem; }
+  .controls { padding: 1rem; flex-direction: column; align-items: stretch; }
+  .generate-btn, .print-btn, .docx-btn { width: 100%; text-align: center; }
+  .mass-section { padding: 1rem 1.1rem; }
+  .feast-name-en { font-size: 1.3rem; }
+  .scripture-text { font-size: 0.93rem; padding: 0.8rem 1rem; }
+  .liturgical-text-block { font-size: 0.88rem; padding: 0.7rem 1rem; }
+
+  /* Portada: en el Misal original solo .app-header h1 se reducía — el
+     título de la portada (.cover-title) se desbordaba horizontalmente
+     en móvil porque nunca tuvo su propia regla responsive. */
+  .cover-cross { font-size: 3.2rem; }
+  .cover-title { font-size: 1.9rem; letter-spacing: 0.05em; }
+  .cover-feast { font-size: 1.4rem; }
+  .cover-date { font-size: 1rem; }
+  .cover-quote .quote-text { font-size: 1.05rem; }
+  .cover-page { padding: 2.5rem 1.2rem; min-height: 60vh; }
+
+  .feast-header { padding: 1.2rem 1.2rem 1rem; }
+  .feast-meta { gap: 0.6rem 1rem; font-size: 0.8rem; }
+
+  .lit-line { flex-wrap: wrap; }
+  .lit-line .lit-label { min-width: 2.4rem; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   MANUAL DEL SACERDOTE
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.manual-btn {
+  padding: 0.7rem 1.4rem;
+  font-family: var(--font-title);
+  font-size: 0.95rem;
+  font-weight: bold;
+  background: #6b2d1a !important;
+  color: #f5e8c0 !important;
+  border: 2px solid #4a1f10 !important;
+  border-radius: 3px !important;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: background 0.2s;
+}
+.manual-btn:hover { background: #4a1f10 !important; color: #f5e8c0 !important; }
+
+.manual-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 9999;
+  overflow-y: auto;
+  padding: 2rem 1rem;
+}
+
+.manual-modal {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: var(--parchment);
+  border: 3px solid var(--gold-dark);
+  border-radius: 6px;
+  padding: 2rem;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+.manual-controls {
+  position: sticky;
+  top: 0;
+  background: var(--parchment);
+  padding: 0.5rem 0 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--gold);
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  z-index: 10;
+}
+
+.manual-close-btn,
+.manual-print-btn {
+  padding: 0.5rem 1rem;
+  font-family: var(--font-title);
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.manual-close-btn {
+  background: #8b0000;
+  color: #fff;
+  border: 2px solid #5a0000;
+}
+.manual-close-btn:hover { background: #5a0000; }
+
+.manual-print-btn {
+  background: var(--parchment-mid);
+  color: var(--gold-dark);
+  border: 2px solid var(--gold-dark);
+}
+.manual-print-btn:hover { background: var(--parchment-dark); }
+
+.manual-document {
+  font-family: var(--font-liturgy);
+  color: var(--ink);
+  line-height: 1.7;
+}
+
+.manual-header-block {
+  text-align: center;
+  padding: 1.5rem 0 2rem;
+  border-bottom: 3px double var(--gold-dark);
+  margin-bottom: 2rem;
+}
+
+.manual-cross {
+  font-size: 2.5rem;
+  color: var(--gold-dark);
+}
+
+.manual-header-block h2 {
+  font-family: var(--font-title);
+  font-size: 2rem;
+  color: var(--header-bg);
+  letter-spacing: 0.1em;
+  margin: 0.5rem 0;
+}
+
+.manual-subtitle {
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+}
+
+.manual-tradition {
+  font-size: 0.85rem;
+  color: var(--gold-dark);
+  margin-top: 0.5rem;
+}
+
+.manual-toc {
+  background: var(--parchment-mid);
+  padding: 1.2rem 1.5rem;
+  border-left: 4px solid var(--gold-dark);
+  margin-bottom: 2rem;
+  border-radius: 3px;
+}
+
+.manual-toc h3 {
+  color: var(--header-bg);
+  margin-bottom: 0.6rem;
+  font-family: var(--font-title);
+}
+
+.manual-toc ol {
+  margin-left: 1.5rem;
+  columns: 2;
+  column-gap: 2rem;
+}
+
+.manual-toc li {
+  padding: 0.2rem 0;
+}
+
+.manual-toc a {
+  color: var(--rubric);
+  text-decoration: none;
+}
+.manual-toc a:hover { text-decoration: underline; }
+
+.manual-section {
+  margin: 2.5rem 0;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--parchment-dark);
+}
+
+.manual-section h2 {
+  font-family: var(--font-title);
+  color: var(--header-bg);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 2px solid var(--gold);
+}
+
+.manual-section h3 {
+  font-family: var(--font-title);
+  color: var(--rubric);
+  font-size: 1.15rem;
+  margin: 1.2rem 0 0.6rem;
+}
+
+.manual-section h3.warning-title {
+  background: #8b0000;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  text-align: center;
+  letter-spacing: 0.1em;
+}
+
+.manual-section ul,
+.manual-section ol {
+  margin: 0.5rem 0 1rem 2rem;
+}
+
+.manual-section li {
+  margin: 0.3rem 0;
+}
+
+.manual-section ul ul,
+.manual-section ol ul {
+  margin-top: 0.3rem;
+}
+
+.manual-section .rubric {
+  color: var(--rubric);
+  font-style: italic;
+}
+
+.manual-section .rubric.warning {
+  background: #ffebee;
+  border-left: 4px solid #8b0000;
+  padding: 0.6rem 1rem;
+  margin: 0.8rem 0;
+  font-style: normal;
+}
+
+.manual-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.manual-table th,
+.manual-table td {
+  border: 1px solid var(--parchment-dark);
+  padding: 0.6rem 0.8rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.manual-table th {
+  background: var(--header-bg);
+  color: var(--header-text);
+  font-family: var(--font-title);
+  letter-spacing: 0.05em;
+}
+
+.manual-table tr:nth-child(even) td {
+  background: var(--parchment-mid);
+}
+
+.manual-table small {
+  color: var(--ink-soft);
+  font-style: italic;
+  display: block;
+  margin-top: 0.2rem;
+}
+
+.manual-footer {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 3px double var(--gold-dark);
+}
+
+.manual-footer p {
+  margin: 0.3rem 0;
+  color: var(--gold-dark);
+}
+
+.manual-footer .manual-note {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 768px) {
+  .manual-modal { padding: 1rem; }
+  .manual-header-block h2 { font-size: 1.4rem; }
+  .manual-toc ol { columns: 1; }
+  .manual-table { font-size: 0.85rem; }
+  .manual-table th, .manual-table td { padding: 0.4rem; }
+}
+
+@media print {
+  .manual-overlay {
+    position: static;
+    background: none;
+    padding: 0;
+  }
+  .manual-modal {
+    border: none;
+    box-shadow: none;
+    padding: 0;
+  }
+  .manual-controls { display: none; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   LIBRITO DEL PUEBLO
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.librito-btn {
+  padding: 0.7rem 1.4rem;
+  font-family: var(--font-title);
+  font-size: 0.95rem;
+  font-weight: bold;
+  background: #1a4d3a !important;
+  color: #f5e8c0 !important;
+  border: 2px solid #0d2f24 !important;
+  border-radius: 3px !important;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: background 0.2s;
+}
+.librito-btn:hover { background: #0d2f24 !important; color: #f5e8c0 !important; }
+
+.librito-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 9999;
+  overflow-y: auto;
+  padding: 2rem 1rem;
+}
+
+.librito-modal {
+  max-width: 950px;
+  margin: 0 auto;
+  background: var(--parchment);
+  border: 3px solid #1a4d3a;
+  border-radius: 6px;
+  padding: 2rem;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+.librito-controls {
+  position: sticky;
+  top: 0;
+  background: var(--parchment);
+  padding: 0.5rem 0 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #1a4d3a;
+  display: flex;
+  gap: 0.8rem;
+  justify-content: flex-end;
+  z-index: 10;
+}
+
+.librito-close-btn,
+.librito-print-btn,
+.librito-docx-btn {
+  padding: 0.5rem 1rem;
+  font-family: var(--font-title);
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.librito-close-btn {
+  background: #8b0000;
+  color: #fff;
+  border: 2px solid #5a0000;
+}
+.librito-close-btn:hover { background: #5a0000; }
+
+.librito-print-btn {
+  background: var(--parchment-mid);
+  color: var(--gold-dark);
+  border: 2px solid var(--gold-dark);
+}
+.librito-print-btn:hover { background: var(--parchment-dark); }
+
+.librito-docx-btn {
+  background: #1a3a5c;
+  color: #f0e8d8;
+  border: 2px solid #0f2640;
+}
+.librito-docx-btn:hover { background: #0f2640; }
+
+.librito-document {
+  font-family: var(--font-liturgy);
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.librito-document p {
+  margin: 0.25rem 0;
+}
+
+.librito-credo p {
+  margin: 0.3rem 0;
+}
+
+.librito-reading p {
+  margin: 0.4rem 0;
+}
+
+.librito-header {
+  text-align: center;
+  padding: 1.5rem 0 2rem;
+  border-bottom: 3px double #1a4d3a;
+  margin-bottom: 2rem;
+}
+
+.librito-cross {
+  font-size: 2rem;
+  color: #1a4d3a;
+}
+
+.librito-header h2 {
+  font-family: var(--font-title);
+  font-size: 2rem;
+  color: #1a4d3a;
+  letter-spacing: 0.1em;
+  margin: 0.5rem 0;
+}
+
+.librito-subtitle {
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+}
+
+.librito-date {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  margin-top: 0.5rem;
+}
+
+.librito-feast {
+  font-family: var(--font-title);
+  font-size: 1.3rem;
+  color: #1a4d3a;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+.librito-meta {
+  font-size: 0.85rem;
+  color: var(--gold-dark);
+  margin-top: 0.5rem;
+}
+
+.librito-section {
+  margin: 2rem 0;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--parchment-dark);
+}
+
+.librito-section h2 {
+  font-family: var(--font-title);
+  color: #1a4d3a;
+  font-size: 1.4rem;
+  margin-bottom: 0.8rem;
+  padding: 0.5rem 0;
+  border-bottom: 2px solid #1a4d3a;
+}
+
+.librito-section h3 {
+  font-family: var(--font-title);
+  color: #2a6b54;
+  font-size: 1.1rem;
+  margin: 1rem 0 0.6rem;
+  font-weight: bold;
+}
+
+.librito-section.warning {
+  background: #f0fdf4;
+  border-left: 4px solid #1a4d3a;
+  padding: 1rem;
+  border-radius: 3px;
+}
+
+.librito-section.warning h2 {
+  background: none;
+  color: #1a4d3a;
+  border: none;
+  padding: 0;
+}
+
+.librito-instruction {
+  background: #f8f4e8;
+  padding: 0.45rem 0.9rem;
+  border-left: 3px solid #1a4d3a;
+  margin: 0.4rem 0;
+  font-size: 0.95rem;
+}
+
+.librito-instruction.warning {
+  background: #fff3e0;
+  border-left-color: #8b0000;
+}
+
+.librito-instruction.warning p {
+  margin: 0.3rem 0;
+}
+
+.librito-instruction strong {
+  color: #1a4d3a;
+}
+
+.librito-response {
+  background: #f9f6f0;
+  border: 2px solid #1a4d3a;
+  padding: 0.6rem 0.9rem;
+  margin: 0.4rem 0;
+  border-radius: 3px;
+  font-family: var(--font-liturgy);
+}
+
+.librito-response p {
+  margin: 0.2rem 0;
+  font-style: italic;
+}
+
+.librito-response small {
+  color: var(--ink-soft);
+  font-style: normal;
+  display: block;
+  margin-top: 0.3rem;
+}
+
+.librito-response .rubric {
+  color: var(--rubric);
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+.librito-text {
+  padding: 1rem;
+  background: var(--parchment-mid);
+  border-radius: 3px;
+  margin: 0.8rem 0;
+}
+
+.librito-text p {
+  margin: 0.4rem 0;
+  text-align: center;
+}
+
+.librito-text .rubric {
+  color: var(--rubric);
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+.librito-gospel {
+  background: #faf8f3;
+  padding: 1rem;
+  border: 2px solid #1a4d3a;
+  border-radius: 3px;
+  margin: 0.8rem 0;
+}
+
+.librito-gospel .gospel-ref {
+  text-align: center;
+  font-weight: bold;
+  color: #1a4d3a;
+  margin-bottom: 0.5rem;
+}
+
+.librito-gospel .rubric {
+  color: var(--rubric);
+  font-style: italic;
+}
+
+.librito-gospel .gospel-hint {
+  font-style: italic;
+  color: var(--ink-soft);
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.librito-footer {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 3px double #1a4d3a;
+}
+
+.librito-footer p {
+  margin: 0.3rem 0;
+  color: #1a4d3a;
+  font-family: var(--font-title);
+}
+
+.librito-footer p:last-child {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.librito-footer p em {
+  font-style: italic;
+}
+
+.highlight {
+  color: #8b0000;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .librito-modal { padding: 1rem; }
+  .librito-controls { flex-direction: column; gap: 0.5rem; }
+  .librito-header h2 { font-size: 1.5rem; }
+  .librito-section h2 { font-size: 1.2rem; }
+}
+
+@media print {
+  .librito-overlay {
+    position: static;
+    background: none;
+    padding: 0;
+  }
+  .librito-modal {
+    border: none;
+    box-shadow: none;
+    padding: 0;
+  }
+  .librito-controls { display: none; }
+}
+
+/* Estilos para las lecturas en el librito */
+.librito-reading {
+  background: #faf8f3;
+  padding: 1rem;
+  border: 1px solid #1a4d3a;
+  border-radius: 3px;
+  margin: 0.8rem 0;
+}
+
+.librito-reading .reading-ref,
+.librito-gospel .gospel-ref {
+  color: #1a4d3a;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 0.8rem;
+}
+
+.librito-reading .reading-ref-small,
+.librito-gospel .reading-ref-small {
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  text-align: center;
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+
+.librito-reading .reading-text,
+.librito-gospel .reading-text {
+  color: var(--ink);
+  line-height: 1.8;
+  font-size: 0.95rem;
+  text-align: justify;
+}
+
+.librito-gospel {
+  background: #faf8f3;
+  padding: 1rem;
+  border: 2px solid #1a4d3a;
+  border-radius: 3px;
+  margin: 0.8rem 0;
+}
+
+/* Estilos para el Salmo Responsorial en el librito */
+.librito-psalm {
+  background: #f9f6f0;
+  padding: 1rem;
+  border: 1px solid #1a4d3a;
+  border-radius: 3px;
+  margin: 0.8rem 0;
+}
+
+.librito-psalm .rubric {
+  color: var(--rubric);
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 0.8rem;
+}
+
+.psalm-verse {
+  margin: 0.6rem 0;
+  line-height: 1.6;
+}
+
+.psalm-verse p {
+  margin: 0.3rem 0;
+}
+
+.psalm-verse .verse-num {
+  color: #1a4d3a;
+  font-weight: bold;
+  margin-right: 0.3rem;
+}
+
+.psalm-response {
+  text-align: center;
+  color: #1a4d3a;
+  font-weight: bold;
+  margin: 0.5rem 0;
+  font-style: italic;
+}
+
+/* Estilos para el Credo en el librito */
+.librito-credo {
+  background: #faf8f3;
+  padding: 1.2rem;
+  border: 2px solid #1a4d3a;
+  border-radius: 3px;
+  margin: 0.8rem 0;
+  line-height: 1.9;
+  font-size: 0.98rem;
+}
+
+.librito-credo p {
+  margin: 0.6rem 0;
+  text-align: center;
+}
+
+.librito-credo strong {
+  color: #1a4d3a;
+}
+
+.credo-incline {
+  background: #fff3e0;
+  border-left: 4px solid #8b0000;
+  padding: 0.8rem;
+  margin: 0.8rem 0;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.credo-incline p {
+  margin: 0.3rem 0;
+}
+
+.credo-incline p:first-child,
+.credo-incline p:last-child {
+  color: #8b0000;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+
+.credo-incline em {
+  font-style: italic;
+  color: var(--ink);
+}
+
+/* --------------------------------------------------------------------------
+   PREMIUM ALTAR MISSAL ENHANCEMENTS
+   -------------------------------------------------------------------------- */
+
+/* Two-column layout for the Canon on large screens */
+@media (min-width: 1024px) {
+  .canon-section {
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .canon-section .liturgical-text-block {
+    column-count: 2;
+    column-gap: 3rem;
+    column-rule: 1px solid var(--parchment-dark);
+    text-align: justify;
+    padding: 1.5rem 2rem;
+    background: rgba(255, 255, 255, 0.4);
+  }
+}
+
+/* Drop Caps (Letras Capitulares) for major prayers */
+.mass-section .section-title.main-section + .liturgical-text-block::first-letter,
+.mass-section .section-title.main-section + .prayer-text::first-letter {
+  float: left;
+  font-size: 3.8rem;
+  line-height: 0.85;
+  padding-top: 4px;
+  padding-right: 8px;
+  padding-left: 3px;
+  font-weight: bold;
+  color: var(--rubric);
+  font-family: var(--font-title);
+  text-transform: uppercase;
+}
+
+/* Refined Rubrics */
+.rubric, .lit-rubric {
+  color: var(--rubric);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* Visual Separation */
+.mass-section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Golden border for the main document */
+.liturgy-document {
+  border: 2px solid var(--gold);
+  outline: 8px solid var(--parchment);
+  outline-offset: -10px;
+}
+
+/* Premium Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--parchment-mid);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gold-dark);
+  border: 2px solid var(--parchment-mid);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+/* Print optimizations for 2-column Canon */
+@media print {
+  .canon-section .liturgical-text-block {
+    column-count: 2 !important;
+    column-gap: 1.5cm;
+    column-rule: 0.5pt solid #ddd;
+    font-size: 11pt;
+  }
+  .liturgy-document {
+    outline: none;
+    border: none;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   CONMEMORACIONES
+   -------------------------------------------------------------------------- */
+
+.commemoration-section {
+  background: linear-gradient(135deg, #fff8f0 0%, #fdf5e8 100%);
+  border-left: 6px solid var(--gold);
+  padding: 1.5rem 2rem;
+}
+
+.commemoration-title {
+  color: var(--gold-dark) !important;
+  border-bottom-color: var(--gold) !important;
+  font-style: italic;
+}
+
+.commemoration-rubric {
+  color: var(--rubric);
+  font-style: italic;
+  font-size: 0.88rem;
+  margin-top: 1rem;
+  display: block;
+}
+
+.commemoration-block {
+  margin-top: 1.2rem;
+  padding: 1rem 1.4rem;
+  background: rgba(255,255,255,0.7);
+  border: 1px dashed var(--gold);
+  border-radius: 3px;
+}
+
+.commemoration-block + .commemoration-block {
+  margin-top: 1.5rem;
+  border-top: 2px solid var(--parchment-dark);
+}
+
+.commemoration-collect,
+.commemoration-secret,
+.commemoration-postcommunion {
+  margin-top: 0.3rem;
+  margin-bottom: 0.8rem;
+  font-size: 0.97rem;
+}
+
+@media print {
+  .commemoration-section {
+    border-left: 4pt solid #c5a059;
+    background: white !important;
+  }
+  .commemoration-block {
+    border: 0.5pt dashed #c5a059;
+    background: white !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   LIBRITO PRAYERS
+   -------------------------------------------------------------------------- */
+.librito-prayer {
+  background: var(--parchment-dark);
+  padding: 1rem 1.2rem;
+  border-radius: 4px;
+  border-left: 3px solid var(--gold);
+  margin: 0.8rem 0;
+  font-family: var(--font-liturgy); /* antes var(--font-body), variable indefinida — se ignoraba en silencio */
+  font-size: 1.05rem;
+  line-height: 1.5;
+  font-style: italic;
+  color: var(--ink-soft);
+  text-align: center;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
+}
+.librito-prayer p {
+  margin: 0;
+}
+
+.special-embolism {
+  background: var(--parchment-dark);
+  padding: 1rem;
+  border-radius: 4px;
+  border-left: 3px solid var(--gold);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * MODO ALTAR (OSCURO PARA IPAD/TABLET)
+ * ══════════════════════════════════════════════════════════════════════════ */
+body.dark-mode {
+  color-scheme: dark;
+  --parchment: #121212;
+  --parchment-mid: #1e1e1e;
+  --parchment-dark: #2a2a2a;
+  --ink: #e0e0e0;
+  --ink-soft: #a0a0a0;
+  --rubric: #ff5555;
+  --gold: #d4af37;
+  background-color: #0a0a0a;
+}
+
+body.dark-mode .app-header {
+  background-color: #000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  color: var(--gold);
+}
+
+body.dark-mode .app-title { color: var(--gold); }
+body.dark-mode .app-subtitle { color: var(--ink-soft); }
+
+body.dark-mode .controls {
+  background: #1a1a1a;
+  border-color: #333;
+}
+
+body.dark-mode .control-group select, 
+body.dark-mode .control-group input {
+  background: #2a2a2a;
+  color: #fff;
+  border-color: #444;
+}
+
+body.dark-mode .liturgy-document {
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  border: 1px solid #333;
+}
+
+body.dark-mode .feast-header {
+  background: linear-gradient(to bottom, #111, #1a1a1a);
+  border-color: #333;
+}
+
+body.dark-mode .liturgical-text-block, 
+body.dark-mode .reading, 
+body.dark-mode .canon-section {
+  background-color: transparent;
+}
+
+body.dark-mode img {
+  filter: invert(1) hue-rotate(180deg) opacity(0.8) !important;
+}
+
+/* Modo Oscuro para Neumorfismo */
+body.dark-mode .controls.neu-panel {
+  background-color: #1a1a1a !important;
+}
+
+body.dark-mode .neu-input,
+body.dark-mode .neu-btn {
+  background: #1a1a1a !important;
+  color: #a0aec0 !important;
+  box-shadow: 5px 5px 10px #0b0b0b, 
+              -5px -5px 10px #292929 !important;
+}
+
+body.dark-mode .neu-input {
+  box-shadow: inset 5px 5px 10px #0b0b0b,
+              inset -5px -5px 10px #292929 !important;
+}
+
+body.dark-mode .neu-input:focus {
+  box-shadow: inset 5px 5px 10px #0b0b0b,
+              inset -5px -5px 10px #292929,
+              0 0 0 3px rgba(255,85,85,0.5) !important;
+}
+
+body.dark-mode .neu-btn:active {
+  box-shadow: inset 4px 4px 8px #0b0b0b, 
+              inset -4px -4px 8px #292929 !important;
+}
+
+body.dark-mode .primary-neu-btn {
+  color: #ff6b6b !important;
+}
+
+body.dark-mode .control-group label {
+  color: #718096 !important;
+}
+
+/* ── DISEÑO BILINGÜE PARALELO (LATÍN / ESPAÑOL) ───────────────────────────── */
+.lit-bilingual-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 0.5rem 0;
+  border-bottom: 1px dotted var(--parchment-dark);
+  padding-bottom: 0.5rem;
+}
+
+.lit-bilingual-row:last-child {
+  border-bottom: none;
+}
+
+.lit-column-la {
+  border-right: 1px solid var(--parchment-dark);
+  padding-right: 1rem;
+}
+
+.lit-column-es {
+  padding-left: 1rem;
+}
+
+/* Modo responsivo: apilar en pantallas pequeñas */
+@media (max-width: 768px) {
+  .lit-bilingual-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .lit-column-la {
+    border-right: none;
+    border-bottom: 1px dashed var(--parchment-dark);
+    padding-right: 0;
+    padding-bottom: 0.8rem;
+  }
+  .lit-column-es {
+    padding-left: 0;
+  }
+}

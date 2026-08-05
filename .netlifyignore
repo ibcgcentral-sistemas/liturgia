@@ -1,0 +1,11 @@
+node_modules/
+.git/
+.claude/
+.netlify/
+test-logic.js
+lect_dump.json
+verify-fix.html
+package.json
+package-lock.json
+VERIFICACION.md
+bcp2019/VERIFICACION-BCP2019.md

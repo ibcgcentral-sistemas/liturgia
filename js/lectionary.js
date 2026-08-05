@@ -1,0 +1,524 @@
+/**
+ * lectionary.js — Complete Revised Common Lectionary
+ * Sunday Cycles A, B, C  |  Weekday Cycles I, II
+ * References for Biblia de Jerusalén
+ */
+
+const Lectionary = (() => {
+
+  // ── SUNDAY LECTIONARY ────────────────────────────────────────────────────
+  // Format: { first, psalm, second, gospel, psalmAntiphon }
+  const SUNDAY = {
+
+    // ═══════════════════════════════════════════════════════
+    //  ADVENT
+    // ═══════════════════════════════════════════════════════
+    advent1: {
+      A: { first:'Isaiah 2:1-5',    psalm:'Psalm 122:1-9',      second:'Romans 13:11-14',    gospel:'Matthew 24:36-44',  psalmAnt:'Vayamos con alegría a la casa del Señor.' },
+      B: { first:'Isaiah 64:1-9',   psalm:'Psalm 80:1-7,17-19', second:'1 Corinthians 1:3-9', gospel:'Mark 13:24-37',     psalmAnt:'Señor, muéstranos tu rostro y nos salvaremos.' },
+      C: { first:'Jeremiah 33:14-16',psalm:'Psalm 25:1-10',     second:'1 Thessalonians 3:9-13',gospel:'Luke 21:25-36',  psalmAnt:'A ti, Señor, elevo mi alma.' },
+    },
+    advent2: {
+      A: { first:'Isaiah 11:1-10',  psalm:'Psalm 72:1-7,18-19', second:'Romans 15:4-13',     gospel:'Matthew 3:1-12',    psalmAnt:'En sus días florecerá la justicia y la plenitud de la paz.' },
+      B: { first:'Isaiah 40:1-11',  psalm:'Psalm 85:1-2,8-13',  second:'2 Peter 3:8-15',     gospel:'Mark 1:1-8',        psalmAnt:'Señor, muéstranos tu misericordia y danos tu salvación.' },
+      C: { first:'Baruch 5:1-9',    psalm:'Psalm 126:1-6',      second:'Philippians 1:3-11', gospel:'Luke 3:1-6',        psalmAnt:'El Señor ha estado grande con nosotros y estamos llenos de alegría.' },
+    },
+    advent3: {
+      A: { first:'Isaiah 35:1-10',  psalm:'Psalm 146:5-10',     second:'James 5:7-10',       gospel:'Matthew 11:2-11',   psalmAnt:'Señor, ven a salvarnos.' },
+      B: { first:'Isaiah 61:1-4,8-11',psalm:'Psalm 126:1-6',   second:'1 Thessalonians 5:16-24',gospel:'John 1:6-8,19-28',psalmAnt:'Mi alma se regocija en mi Dios.' },
+      C: { first:'Zephaniah 3:14-20',psalm:'Isaiah 12:2-6',     second:'Philippians 4:4-7',  gospel:'Luke 3:10-18',      psalmAnt:'Gritad con alegría: grande en medio de vosotros es el Santo de Israel.' },
+    },
+    advent4: {
+      A: { first:'Isaiah 7:10-16',  psalm:'Psalm 80:1-7,17-19', second:'Romans 1:1-7',       gospel:'Matthew 1:18-25',   psalmAnt:'Señor, muéstranos tu rostro y nos salvaremos.' },
+      B: { first:'2 Samuel 7:1-11,16',psalm:'Luke 1:46-55',    second:'Romans 16:25-27',    gospel:'Luke 1:26-38',      psalmAnt:'Cantaré eternamente las misericordias del Señor.' },
+      C: { first:'Micah 5:2-5',     psalm:'Psalm 80:1-7',       second:'Hebrews 10:5-10',    gospel:'Luke 1:39-45',      psalmAnt:'Señor, muéstranos tu rostro y nos salvaremos.' },
+    },
+
+    // ═══════════════════════════════════════════════════════
+    //  CHRISTMAS
+    // ═══════════════════════════════════════════════════════
+    christmas: {
+      // Three Masses of Christmas; we use Midnight Mass (Proper I) as default
+      A: { first:'Isaiah 9:2-7',    psalm:'Psalm 96:1-13',      second:'Titus 2:11-14',      gospel:'Luke 2:1-14',       psalmAnt:'Hoy nos ha nacido el Salvador, Cristo el Señor.' },
+      B: { first:'Isaiah 9:2-7',    psalm:'Psalm 96:1-13',      second:'Titus 2:11-14',      gospel:'Luke 2:1-14',       psalmAnt:'Hoy nos ha nacido el Salvador, Cristo el Señor.' },
+      C: { first:'Isaiah 9:2-7',    psalm:'Psalm 96:1-13',      second:'Titus 2:11-14',      gospel:'Luke 2:1-14',       psalmAnt:'Hoy nos ha nacido el Salvador, Cristo el Señor.' },
+    },
+    christmasSunday: {
+      A: { first:'Isaiah 63:7-9',   psalm:'Psalm 148:1-14',     second:'Hebrews 2:10-18',    gospel:'Matthew 2:13-23',   psalmAnt:'Alaben todos el nombre del Señor.' },
+      B: { first:'Isaiah 61:10-62:3',psalm:'Psalm 148:1-14',   second:'Galatians 4:4-7',    gospel:'Luke 2:22-40',      psalmAnt:'Alaben todos el nombre del Señor.' },
+      C: { first:'1 Samuel 2:18-20,26',psalm:'Psalm 148:1-14', second:'Colossians 3:12-17', gospel:'Luke 2:41-52',      psalmAnt:'Alaben todos el nombre del Señor.' },
+    },
+    circumcision: {
+      A: { first:'Numbers 6:22-27', psalm:'Psalm 8:1-9',        second:'Galatians 4:4-7',    gospel:'Luke 2:15-21',      psalmAnt:'¡Cuán glorioso es tu nombre, Señor Dios nuestro, en toda la tierra!' },
+      B: { first:'Numbers 6:22-27', psalm:'Psalm 8:1-9',        second:'Galatians 4:4-7',    gospel:'Luke 2:15-21',      psalmAnt:'¡Cuán glorioso es tu nombre, Señor Dios nuestro, en toda la tierra!' },
+      C: { first:'Numbers 6:22-27', psalm:'Psalm 8:1-9',        second:'Galatians 4:4-7',    gospel:'Luke 2:15-21',      psalmAnt:'¡Cuán glorioso es tu nombre, Señor Dios nuestro, en toda la tierra!' },
+    },
+
+    // ═══════════════════════════════════════════════════════
+    //  EPIPHANY
+    // ═══════════════════════════════════════════════════════
+    epiphany: {
+      A: { first:'Isaiah 60:1-6',   psalm:'Psalm 72:1-7,10-14', second:'Ephesians 3:1-12',   gospel:'Matthew 2:1-12',    psalmAnt:'Señor, todos los pueblos de la tierra te adorarán.' },
+      B: { first:'Isaiah 60:1-6',   psalm:'Psalm 72:1-7,10-14', second:'Ephesians 3:1-12',   gospel:'Matthew 2:1-12',    psalmAnt:'Señor, todos los pueblos de la tierra te adorarán.' },
+      C: { first:'Isaiah 60:1-6',   psalm:'Psalm 72:1-7,10-14', second:'Ephesians 3:1-12',   gospel:'Matthew 2:1-12',    psalmAnt:'Señor, todos los pueblos de la tierra te adorarán.' },
+    },
+    baptismLord: {
+      A: { first:'Isaiah 42:1-9',   psalm:'Psalm 29:1-11',      second:'Acts 10:34-43',      gospel:'Matthew 3:13-17',   psalmAnt:'El Señor bendecirá a su pueblo con la paz.' },
+      B: { first:'Genesis 1:1-5',   psalm:'Psalm 29:1-11',      second:'Acts 19:1-7',        gospel:'Mark 1:4-11',       psalmAnt:'El Señor bendecirá a su pueblo con la paz.' },
+      C: { first:'Isaiah 43:1-7',   psalm:'Psalm 29:1-11',      second:'Acts 8:14-17',       gospel:'Luke 3:15-17,21-22',psalmAnt:'El Señor bendecirá a su pueblo con la paz.' },
+    },
+    epi1: {
+      A: { first:'Isaiah 49:1-7',   psalm:'Psalm 40:1-11',      second:'1 Corinthians 1:1-9', gospel:'John 1:29-42',     psalmAnt:'Aquí estoy, Señor; vengo a hacer tu voluntad.' },
+      B: { first:'1 Samuel 3:1-10', psalm:'Psalm 139:1-6,13-18',second:'1 Corinthians 6:12-20',gospel:'John 1:43-51',   psalmAnt:'Aquí estoy, Señor; vengo a hacer tu voluntad.' },
+      C: { first:'Isaiah 62:1-5',   psalm:'Psalm 36:5-10',      second:'1 Corinthians 12:1-11',gospel:'John 2:1-11',    psalmAnt:'Proclamad sus maravillas a todos los pueblos.' },
+    },
+    epi2: {
+      A: { first:'Isaiah 9:1-4',    psalm:'Psalm 27:1,4-9',     second:'1 Corinthians 1:10-18',gospel:'Matthew 4:12-23',psalmAnt:'El Señor es mi luz y mi salvación.' },
+      B: { first:'Jonah 3:1-5,10',  psalm:'Psalm 62:5-12',      second:'1 Corinthians 7:29-31',gospel:'Mark 1:14-20',  psalmAnt:'Descansa en Dios solo, alma mía.' },
+      C: { first:'Nehemiah 8:1-3,5-6,8-10',psalm:'Psalm 19:7-14',second:'1 Corinthians 12:12-31',gospel:'Luke 4:14-21',psalmAnt:'Tus palabras, Señor, son espíritu y vida.' },
+    },
+    epi3: {
+      A: { first:'Micah 6:1-8',     psalm:'Psalm 15:1-5',       second:'1 Corinthians 1:18-31',gospel:'Matthew 5:1-12', psalmAnt:'Los que obran la justicia vivirán en la presencia del Señor.' },
+      B: { first:'Deuteronomy 18:15-20',psalm:'Psalm 111:1-10', second:'1 Corinthians 8:1-13', gospel:'Mark 1:21-28',  psalmAnt:'El Señor habla con autoridad.' },
+      C: { first:'Jeremiah 1:4-10', psalm:'Psalm 71:1-6',       second:'1 Corinthians 13:1-13',gospel:'Luke 4:21-30',  psalmAnt:'Mi boca proclamará tu alabanza.' },
+    },
+    epi4: {
+      A: { first:'Isaiah 58:1-9',   psalm:'Psalm 112:1-9',      second:'1 Corinthians 2:1-12',gospel:'Matthew 5:13-20',psalmAnt:'El justo es luz en las tinieblas para los rectos.' },
+      B: { first:'Isaiah 40:21-31', psalm:'Psalm 147:1-11',     second:'1 Corinthians 9:16-23',gospel:'Mark 1:29-39',  psalmAnt:'Alabad al Señor que sana los corazones destrozados.' },
+      C: { first:'Isaiah 6:1-8',    psalm:'Psalm 138:1-8',      second:'1 Corinthians 15:1-11',gospel:'Luke 5:1-11',   psalmAnt:'Ante los ángeles cantaré tus alabanzas, Señor.' },
+    },
+    epi5: {
+      A: { first:'Deuteronomy 30:15-20',psalm:'Psalm 119:1-8', second:'1 Corinthians 3:1-9',gospel:'Matthew 5:21-37', psalmAnt:'¡Dichosos los que caminan en la ley del Señor!' },
+      B: { first:'2 Kings 5:1-14',  psalm:'Psalm 30:1-12',      second:'1 Corinthians 9:24-27',gospel:'Mark 1:40-45', psalmAnt:'Te alabo, Señor, porque me has librado.' },
+      C: { first:'Jeremiah 17:5-10',psalm:'Psalm 1:1-6',        second:'1 Corinthians 15:12-20',gospel:'Luke 6:17-26',psalmAnt:'Dichosos los que esperan en el Señor.' },
+    },
+    epi6: {
+      A: { first:'Leviticus 19:1-2,9-18',psalm:'Psalm 119:33-40',second:'1 Corinthians 3:10-11,16-23',gospel:'Matthew 5:38-48',psalmAnt:'Enséñame tus caminos, Señor.' },
+      B: { first:'Isaiah 43:18-25', psalm:'Psalm 41:1-13',      second:'2 Corinthians 1:18-22',gospel:'Mark 2:1-12',  psalmAnt:'Señor, sana mi alma, pues he pecado contra ti.' },
+      C: { first:'Genesis 45:3-11,15',psalm:'Psalm 37:1-11,39-40',second:'1 Corinthians 15:35-38,42-50',gospel:'Luke 6:27-38',psalmAnt:'Confía en el Señor y aguárdale.' },
+    },
+    epi7: {
+      A: { first:'Isaiah 49:8-16',  psalm:'Psalm 131:1-3',      second:'1 Corinthians 4:1-5', gospel:'Matthew 6:24-34', psalmAnt:'En ti, Señor, he encontrado mi paz.' },
+      B: { first:'Hosea 2:14-20',   psalm:'Psalm 103:1-13',     second:'2 Corinthians 3:1-6', gospel:'Mark 2:13-22',   psalmAnt:'El Señor es compasivo y misericordioso.' },
+      C: { first:'Isaiah 55:10-13', psalm:'Psalm 92:1-4,12-15', second:'1 Corinthians 15:51-58',gospel:'Luke 6:39-49',psalmAnt:'Señor, qué bueno es darte gracias.' },
+    },
+    epi8: {
+      A: { first:'Exodus 24:12-18', psalm:'Psalm 2:6-11',       second:'2 Peter 1:16-21',    gospel:'Matthew 17:1-9',  psalmAnt:'El Señor es rey, el más alto sobre toda la tierra.' },
+      B: { first:'2 Kings 2:1-12',  psalm:'Psalm 50:1-6',       second:'2 Corinthians 4:3-6', gospel:'Mark 9:2-9',     psalmAnt:'Nuestro Dios viene y no callará.' },
+      C: { first:'Exodus 34:29-35', psalm:'Psalm 99:1-9',       second:'2 Corinthians 3:12-4:2',gospel:'Luke 9:28-36',psalmAnt:'El Señor es rey; tiemblan los pueblos.' },
+    },
+
+    // ═══════════════════════════════════════════════════════
+    //  PRE-LENT (Traditional Anglican)
+    // ═══════════════════════════════════════════════════════
+    septuagesima: {
+      A: { first:'Genesis 2:15-17,3:1-7',psalm:'Psalm 19:7-14', second:'Romans 5:12-19',     gospel:'Matthew 20:1-16', psalmAnt:'La ley del Señor es perfecta; da vida al alma.' },
+      B: { first:'Genesis 9:8-17',  psalm:'Psalm 25:1-10',      second:'1 Peter 3:18-22',    gospel:'Mark 1:9-15',     psalmAnt:'Tus caminos, Señor, son amor y verdad.' },
+      C: { first:'Deuteronomy 26:1-11',psalm:'Psalm 91:1-2,9-16',second:'Romans 10:8-13',   gospel:'Luke 4:1-13',     psalmAnt:'Señor, acompáñame en la tribulación.' },
+    },
+    sexagesima: {
+      A: { first:'Genesis 12:1-4',  psalm:'Psalm 121:1-8',      second:'Romans 4:1-5,13-17', gospel:'John 3:1-17',     psalmAnt:'Nuestro auxilio viene del Señor, que hizo el cielo y la tierra.' },
+      B: { first:'Genesis 17:1-7,15-16',psalm:'Psalm 22:23-31', second:'Romans 4:13-25',     gospel:'Mark 8:31-38',    psalmAnt:'Los que buscan al Señor le alabarán.' },
+      C: { first:'Genesis 15:1-12,17-18',psalm:'Psalm 27:1-14', second:'Philippians 3:17-4:1',gospel:'Luke 13:31-35', psalmAnt:'El Señor es mi luz y mi salvación.' },
+    },
+    quinquagesima: {
+      A: { first:'Isaiah 35:1-10',  psalm:'Psalm 146:1-10',     second:'1 Corinthians 13:1-13',gospel:'Matthew 11:2-11',psalmAnt:'Señor, ven a salvarnos.' },
+      B: { first:'Exodus 20:1-17',  psalm:'Psalm 19:7-14',      second:'1 Corinthians 1:18-25',gospel:'John 2:13-22',  psalmAnt:'Tus palabras, Señor, son espíritu y vida.' },
+      C: { first:'Joel 2:1-2,12-17',psalm:'Psalm 51:1-17',     second:'2 Corinthians 5:20-6:10',gospel:'Matthew 6:1-6,16-21',psalmAnt:'Ten misericordia, Señor, porque hemos pecado.' },
+    },
+
+    // ═══════════════════════════════════════════════════════
+    //  LENT
+    // ═══════════════════════════════════════════════════════
+    ashWednesday: {
+      A: { first:'Joel 2:1-2,12-17',psalm:'Psalm 51:1-17',      second:'2 Corinthians 5:20-6:10',gospel:'Matthew 6:1-6,16-21',psalmAnt:'Ten misericordia, Señor, porque hemos pecado.' },
+      B: { first:'Joel 2:1-2,12-17',psalm:'Psalm 51:1-17',      second:'2 Corinthians 5:20-6:10',gospel:'Matthew 6:1-6,16-21',psalmAnt:'Ten misericordia, Señor, porque hemos pecado.' },
+      C: { first:'Joel 2:1-2,12-17',psalm:'Psalm 51:1-17',      second:'2 Corinthians 5:20-6:10',gospel:'Matthew 6:1-6,16-21',psalmAnt:'Ten misericordia, Señor, porque hemos pecado.' },
+    },
+    lent1: {
+      A: { first:'Genesis 2:15-17,3:1-7',psalm:'Psalm 32:1-11', second:'Romans 5:12-19',    gospel:'Matthew 4:1-11',  psalmAnt:'Señor, acompáñame en la tribulación.' },
+      B: { first:'Genesis 9:8-17',  psalm:'Psalm 25:1-10',      second:'1 Peter 3:18-22',    gospel:'Mark 1:9-15',     psalmAnt:'Tus caminos, Señor, son amor y verdad.' },
+      C: { first:'Deuteronomy 26:1-11',psalm:'Psalm 91:1-2,9-16',second:'Romans 10:8-13',   gospel:'Luke 4:1-13',     psalmAnt:'Señor, acompáñame en la tribulación.' },
+    },
+    lent2: {
+      A: { first:'Genesis 12:1-4',  psalm:'Psalm 121:1-8',      second:'Romans 4:1-5,13-17', gospel:'John 3:1-17',     psalmAnt:'Nuestro auxilio viene del Señor, que hizo el cielo y la tierra.' },
+      B: { first:'Genesis 17:1-7,15-16',psalm:'Psalm 22:23-31', second:'Romans 4:13-25',     gospel:'Mark 8:31-38',    psalmAnt:'Tus caminos, Señor, son amor y verdad.' },
+      C: { first:'Genesis 15:1-12,17-18',psalm:'Psalm 27:1-14', second:'Philippians 3:17-4:1',gospel:'Luke 13:31-35', psalmAnt:'El Señor es mi luz y mi salvación.' },
+    },
+    lent3: {
+      A: { first:'Exodus 17:1-7',   psalm:'Psalm 95:1-9',       second:'Romans 5:1-11',      gospel:'John 4:5-42',     psalmAnt:'Si escucháis hoy su voz, no endurezcáis vuestros corazones.' },
+      B: { first:'Exodus 20:1-17',  psalm:'Psalm 19:7-14',      second:'1 Corinthians 1:18-25',gospel:'John 2:13-22',  psalmAnt:'Señor, tú tienes palabras de vida eterna.' },
+      C: { first:'Exodus 3:1-15',   psalm:'Psalm 63:1-8',       second:'1 Corinthians 10:1-13',gospel:'Luke 13:1-9',   psalmAnt:'Mi alma tiene sed de ti, Señor Dios mío.' },
+    },
+    lent4: {
+      A: { first:'1 Samuel 16:1-13',psalm:'Psalm 23:1-6',       second:'Ephesians 5:8-14',   gospel:'John 9:1-41',     psalmAnt:'El Señor es mi pastor, nada me falta.' },
+      B: { first:'Numbers 21:4-9',  psalm:'Psalm 107:1-3,17-22',second:'Ephesians 2:1-10',   gospel:'John 3:14-21',    psalmAnt:'Dad gracias al Señor, su misericordia es eterna.' },
+      C: { first:'Joshua 5:9-12',   psalm:'Psalm 32:1-11',      second:'2 Corinthians 5:16-21',gospel:'Luke 15:1-3,11-32',psalmAnt:'Gustad y ved qué bueno es el Señor.' },
+    },
+    lent5: {
+      A: { first:'Ezekiel 37:1-14', psalm:'Psalm 130:1-8',      second:'Romans 8:6-11',      gospel:'John 11:1-45',    psalmAnt:'En el Señor hay misericordia y plena redención.' },
+      B: { first:'Jeremiah 31:31-34',psalm:'Psalm 51:1-12',     second:'Hebrews 5:5-10',     gospel:'John 12:20-33',   psalmAnt:'Crea en mí, oh Dios, un corazón limpio.' },
+      C: { first:'Isaiah 43:16-21', psalm:'Psalm 126:1-6',      second:'Philippians 3:4-14',  gospel:'John 12:1-8',    psalmAnt:'El Señor ha estado grande con nosotros y estamos llenos de alegría.' },
+    },
+
+    // ═══════════════════════════════════════════════════════
+    //  HOLY WEEK
+    // ═══════════════════════════════════════════════════════
+    palmSunday: {
+      A: { first:'Isaiah 50:4-9',   psalm:'Psalm 31:9-16',      second:'Philippians 2:5-11', gospel:'Matthew 26:14-27:66',psalmAnt:'Dios mío, Dios mío, ¿por qué me has abandonado?' },
+      B: { first:'Isaiah 50:4-9',   psalm:'Psalm 31:9-16',      second:'Philippians 2:5-11', gospel:'Mark 14:1-15:47',  psalmAnt:'Dios mío, Dios mío, ¿por qué me has abandonado?' },
+      C: { first:'Isaiah 50:4-9',   psalm:'Psalm 31:9-16',      second:'Philippians 2:5-11', gospel:'Luke 19:28-40',    psalmAnt:'Dios mío, Dios mío, ¿por qué me has abandonado?' },
+    },
+    maundyThursday: {
+      A: { first:'Exodus 12:1-4,11-14',psalm:'Psalm 116:1-2,12-19',second:'1 Corinthians 11:23-26',gospel:'John 13:1-17,31-35',psalmAnt:'El cáliz de bendición es comunión con la Sangre de Cristo.' },
+      B: { first:'Exodus 12:1-4,11-14',psalm:'Psalm 116:1-2,12-19',second:'1 Corinthians 11:23-26',gospel:'John 13:1-17,31-35',psalmAnt:'El cáliz de bendición es comunión con la Sangre de Cristo.' },
+      C: { first:'Exodus 12:1-4,11-14',psalm:'Psalm 116:1-2,12-19',second:'1 Corinthians 11:23-26',gospel:'John 13:1-17,31-35',psalmAnt:'El cáliz de bendición es comunión con la Sangre de Cristo.' },
+    },
+    goodFriday: {
+      A: { first:'Isaiah 52:13-53:12',psalm:'Psalm 22:1-31',    second:'Hebrews 4:14-16,5:7-9',gospel:'John 18:1-19:42',psalmAnt:'Padre, en tus manos encomiendo mi espíritu.' },
+      B: { first:'Isaiah 52:13-53:12',psalm:'Psalm 22:1-31',    second:'Hebrews 4:14-16,5:7-9',gospel:'John 18:1-19:42',psalmAnt:'Padre, en tus manos encomiendo mi espíritu.' },
+      C: { first:'Isaiah 52:13-53:12',psalm:'Psalm 22:1-31',    second:'Hebrews 4:14-16,5:7-9',gospel:'John 18:1-19:42',psalmAnt:'Padre, en tus manos encomiendo mi espíritu.' },
+    },
+    holySaturday: {
+      A: { first:'Job 14:1-14',     psalm:'Psalm 31:1-4,15-16', second:'1 Peter 4:1-8',      gospel:'Matthew 27:57-66',psalmAnt:'En tus manos, Señor, encomiendo mi espíritu.' },
+      B: { first:'Job 14:1-14',     psalm:'Psalm 31:1-4,15-16', second:'1 Peter 4:1-8',      gospel:'Matthew 27:57-66',psalmAnt:'En tus manos, Señor, encomiendo mi espíritu.' },
+      C: { first:'Job 14:1-14',     psalm:'Psalm 31:1-4,15-16', second:'1 Peter 4:1-8',      gospel:'Matthew 27:57-66',psalmAnt:'En tus manos, Señor, encomiendo mi espíritu.' },
+    },
+
+    // ═══════════════════════════════════════════════════════
+    //  EASTER
+    // ═══════════════════════════════════════════════════════
+    easter: {
+      A: { first:'Acts 10:34-43',   psalm:'Psalm 118:1-2,14-24',second:'Colossians 3:1-4',   gospel:'John 20:1-18',    psalmAnt:'Este es el día que hizo el Señor; alegrémonos y regocijémonos. Aleluya.' },
+      B: { first:'Acts 10:34-43',   psalm:'Psalm 118:1-2,14-24',second:'1 Corinthians 15:1-11',gospel:'John 20:1-18', psalmAnt:'Este es el día que hizo el Señor; alegrémonos y regocijémonos. Aleluya.' },
+      C: { first:'Acts 10:34-43',   psalm:'Psalm 118:1-2,14-24',second:'1 Corinthians 15:19-26',gospel:'John 20:1-18',psalmAnt:'Este es el día que hizo el Señor; alegrémonos y regocijémonos. Aleluya.' },
+    },
+    easter2: {
+      A: { first:'Acts 2:14,22-32', psalm:'Psalm 16:5-11',      second:'1 Peter 1:3-9',      gospel:'John 20:19-31',   psalmAnt:'Dad gracias al Señor porque es bueno, su misericordia es eterna. Aleluya.' },
+      B: { first:'Acts 4:32-35',    psalm:'Psalm 133:1-3',      second:'1 John 1:1-2:2',     gospel:'John 20:19-31',   psalmAnt:'Dad gracias al Señor porque es bueno, su misericordia es eterna. Aleluya.' },
+      C: { first:'Acts 5:27-32',    psalm:'Psalm 118:14-29',    second:'Revelation 1:4-8',    gospel:'John 20:19-31',   psalmAnt:'Dad gracias al Señor porque es bueno, su misericordia es eterna. Aleluya.' },
+    },
+    easter3: {
+      A: { first:'Acts 2:14,36-41', psalm:'Psalm 116:1-4,12-19',second:'1 Peter 1:17-23',    gospel:'Luke 24:13-35',   psalmAnt:'Caminaré en presencia del Señor en el país de la vida. Aleluya.' },
+      B: { first:'Acts 3:12-19',    psalm:'Psalm 4:1-8',        second:'1 John 3:1-7',        gospel:'Luke 24:36-48',   psalmAnt:'Señor, haz brillar tu rostro sobre nosotros. Aleluya.' },
+      C: { first:'Acts 9:1-6,7-20', psalm:'Psalm 30:1-12',      second:'Revelation 5:11-14',  gospel:'John 21:1-19',   psalmAnt:'Te alabo, Señor, porque me has librado. Aleluya.' },
+    },
+    easter4: {
+      A: { first:'Acts 2:42-47',    psalm:'Psalm 23:1-6',       second:'1 Peter 2:19-25',     gospel:'John 10:1-10',   psalmAnt:'El Señor es mi pastor, nada me falta. Aleluya.' },
+      B: { first:'Acts 4:5-12',     psalm:'Psalm 23:1-6',       second:'1 John 3:16-24',      gospel:'John 10:11-18',  psalmAnt:'El Señor es mi pastor, nada me falta. Aleluya.' },
+      C: { first:'Acts 9:36-43',    psalm:'Psalm 23:1-6',       second:'Revelation 7:9-17',   gospel:'John 10:22-30',  psalmAnt:'El Señor es mi pastor, nada me falta. Aleluya.' },
+    },
+    easter5: {
+      A: { first:'Acts 7:55-60',    psalm:'Psalm 31:1-5,15-16', second:'1 Peter 2:2-10',      gospel:'John 14:1-14',   psalmAnt:'Señor, haz brillar tu rostro sobre nosotros. Aleluya.' },
+      B: { first:'Acts 8:26-40',    psalm:'Psalm 22:25-31',     second:'1 John 4:7-21',       gospel:'John 15:1-8',    psalmAnt:'Te alabaré, Señor, en la asamblea de tu pueblo. Aleluya.' },
+      C: { first:'Acts 11:1-18',    psalm:'Psalm 148:1-14',     second:'Revelation 21:1-6',   gospel:'John 13:31-35',  psalmAnt:'Bendeciré tu nombre eternamente, rey mío y Dios mío. Aleluya.' },
+    },
+    easter6: {
+      A: { first:'Acts 17:22-31',   psalm:'Psalm 66:8-20',      second:'1 Peter 3:13-22',     gospel:'John 14:15-21',  psalmAnt:'Aclamad a Dios con júbilo, tierra entera. Aleluya.' },
+      B: { first:'Acts 10:44-48',   psalm:'Psalm 98:1-4',       second:'1 John 5:1-6',        gospel:'John 15:9-17',   psalmAnt:'El Señor reveló a las naciones su salvación. Aleluya.' },
+      C: { first:'Acts 16:9-15',    psalm:'Psalm 67:1-7',       second:'Revelation 21:10,22-22:5',gospel:'John 14:23-29',psalmAnt:'¡Que los pueblos te alaben, Señor! Aleluya.' },
+    },
+    ascension: {
+      A: { first:'Acts 1:1-11',     psalm:'Psalm 47:1-9',       second:'Ephesians 1:15-23',   gospel:'Luke 24:44-53',  psalmAnt:'Dios asciende entre aclamaciones; el Señor, al son de trompetas. Aleluya.' },
+      B: { first:'Acts 1:1-11',     psalm:'Psalm 47:1-9',       second:'Ephesians 1:15-23',   gospel:'Luke 24:44-53',  psalmAnt:'Dios asciende entre aclamaciones; el Señor, al son de trompetas. Aleluya.' },
+      C: { first:'Acts 1:1-11',     psalm:'Psalm 47:1-9',       second:'Ephesians 1:15-23',   gospel:'Luke 24:44-53',  psalmAnt:'Dios asciende entre aclamaciones; el Señor, al son de trompetas. Aleluya.' },
+    },
+    easter7: {
+      A: { first:'Acts 1:6-14',     psalm:'Psalm 68:1-10,32-35',second:'1 Peter 4:12-14,5:6-11',gospel:'John 17:1-11',psalmAnt:'Cantad a Dios, reinos de la tierra. Aleluya.' },
+      B: { first:'Acts 1:15-17,21-26',psalm:'Psalm 1:1-6',     second:'1 John 5:9-13',       gospel:'John 17:6-19',   psalmAnt:'El Señor es rey, el más alto sobre toda la tierra. Aleluya.' },
+      C: { first:'Acts 16:16-34',   psalm:'Psalm 97:1-12',      second:'Revelation 22:12-14,16-17,20-21',gospel:'John 17:20-26',psalmAnt:'El Señor es rey, el más alto sobre toda la tierra. Aleluya.' },
+    },
+    pentecost: {
+      A: { first:'Acts 2:1-21',     psalm:'Psalm 104:24-34',    second:'1 Corinthians 12:3-13',gospel:'John 20:19-23', psalmAnt:'Señor, envía tu Espíritu y renueva la faz de la tierra. Aleluya.' },
+      B: { first:'Acts 2:1-21',     psalm:'Psalm 104:24-34',    second:'Romans 8:22-27',      gospel:'John 15:26-27,16:4-15',psalmAnt:'Señor, envía tu Espíritu y renueva la faz de la tierra. Aleluya.' },
+      C: { first:'Acts 2:1-21',     psalm:'Psalm 104:24-34',    second:'Romans 8:14-17',      gospel:'John 14:8-17,25-27',psalmAnt:'Señor, envía tu Espíritu y renueva la faz de la tierra. Aleluya.' },
+    },
+
+    // ═══════════════════════════════════════════════════════
+    //  TRINITY / ORDINARY TIME
+    // ═══════════════════════════════════════════════════════
+    trinity: {
+      A: { first:'Isaiah 40:12-17,27-31',psalm:'Psalm 8:1-9',  second:'2 Corinthians 13:11-13',gospel:'Matthew 28:16-20',psalmAnt:'¡Oh Señor, Dios nuestro, qué admirable es tu nombre en toda la tierra!' },
+      B: { first:'Isaiah 6:1-8',    psalm:'Psalm 29:1-11',      second:'Romans 8:12-17',     gospel:'John 3:1-17',     psalmAnt:'Dad al Señor gloria y honor.' },
+      C: { first:'Proverbs 8:1-4,22-31',psalm:'Psalm 8:1-9',   second:'Romans 5:1-5',        gospel:'John 16:12-15',   psalmAnt:'¡Oh Señor, Dios nuestro, qué admirable es tu nombre en toda la tierra!' },
+    },
+    corpusChristi: {
+      A: { first:'Deuteronomy 8:2-3,14-16',psalm:'Psalm 147:12-20',second:'1 Corinthians 10:16-17',gospel:'John 6:51-58',psalmAnt:'Les dio pan del cielo; el hombre comió pan de ángeles. Aleluya.' },
+      B: { first:'Exodus 24:3-8',   psalm:'Psalm 116:12-13,15-18',second:'Hebrews 9:11-15',  gospel:'Mark 14:12-16,22-26',psalmAnt:'Les dio pan del cielo; el hombre comió pan de ángeles. Aleluya.' },
+      C: { first:'Genesis 14:18-20',psalm:'Psalm 110:1-4',      second:'1 Corinthians 11:23-26',gospel:'Luke 9:11-17', psalmAnt:'Les dio pan del cielo; el hombre comió pan de ángeles. Aleluya.' },
+    },
+    sacredHeart: {
+      A: { first:'Deuteronomy 7:6-11',psalm:'Psalm 103:1-4,8-10,17-18',second:'1 John 4:7-16',gospel:'Matthew 11:25-30',psalmAnt:'La misericordia del Señor es eterna para los que le temen.' },
+      B: { first:'Hosea 11:1,3-4,8-9',psalm:'Isaiah 12:2-6',   second:'Ephesians 3:8-12,14-19',gospel:'John 19:31-37',psalmAnt:'Sacaréis aguas con gozo de las fuentes de la salvación.' },
+      C: { first:'Ezekiel 34:11-16',psalm:'Psalm 23:1-6',       second:'Romans 5:5-11',      gospel:'Luke 15:3-7',     psalmAnt:'El Señor es mi pastor, nada me falta.' },
+    },
+
+    // Sundays after Trinity 1-28
+    trinity1: {
+      A: { first:'Genesis 6:9-22,7:24,8:14-19',psalm:'Psalm 46:1-11',second:'Romans 1:16-17,3:22-28',gospel:'Matthew 7:21-29',psalmAnt:'El Señor de los ejércitos está con nosotros; el Dios de Jacob es nuestro alcázar.' },
+      B: { first:'1 Samuel 3:1-10', psalm:'Psalm 139:1-6,13-18',second:'2 Corinthians 4:5-12',gospel:'Mark 2:23-3:6',psalmAnt:'Señor, tú me sondeas y me conoces.' },
+      C: { first:'1 Kings 18:20-21,30-39',psalm:'Psalm 96:1-13',second:'Galatians 1:1-12',  gospel:'Luke 7:1-10',     psalmAnt:'Proclamad sus maravillas a todos los pueblos.' },
+    },
+    trinity2: {
+      A: { first:'Genesis 12:1-9',  psalm:'Psalm 33:1-12',      second:'Romans 4:13-25',     gospel:'Matthew 9:9-13,18-26',psalmAnt:'La tierra está llena de la bondad del Señor.' },
+      B: { first:'1 Samuel 8:4-11,16-20',psalm:'Psalm 138:1-8', second:'2 Corinthians 4:13-5:1',gospel:'Mark 3:20-35',psalmAnt:'Señor, tu amor es eterno; no abandones la obra de tus manos.' },
+      C: { first:'1 Kings 17:8-16,17-24',psalm:'Psalm 146:1-10',second:'Galatians 1:11-24',  gospel:'Luke 7:11-17',  psalmAnt:'¡Alaba al Señor, alma mía!' },
+    },
+    trinity3: {
+      A: { first:'Genesis 18:1-15,21:1-7',psalm:'Psalm 116:1-2,12-19',second:'Romans 5:1-8',gospel:'Matthew 9:35-10:8',psalmAnt:'Caminaré en presencia del Señor en el país de la vida.' },
+      B: { first:'1 Samuel 15:34-16:13',psalm:'Psalm 20:1-9',  second:'2 Corinthians 5:6-10,14-17',gospel:'Mark 4:26-34',psalmAnt:'Señor, respóndenos cuando te invocamos.' },
+      C: { first:'1 Kings 21:1-10,15-21',psalm:'Psalm 5:1-8',  second:'Galatians 2:15-21',  gospel:'Luke 7:36-8:3',  psalmAnt:'Señor, guíame en tu justicia.' },
+    },
+    trinity4: {
+      A: { first:'Genesis 21:8-21', psalm:'Psalm 86:1-10,16-17',second:'Romans 6:1-11',      gospel:'Matthew 10:24-39',psalmAnt:'Señor, eres bueno y clemente.' },
+      B: { first:'1 Samuel 17:32-49',psalm:'Psalm 9:9-20',     second:'2 Corinthians 6:1-13', gospel:'Mark 4:35-41',  psalmAnt:'El Señor juzgará al mundo con justicia.' },
+      C: { first:'1 Kings 19:1-4,8-15',psalm:'Psalm 42-43',    second:'Galatians 3:23-29',   gospel:'Luke 8:26-39',   psalmAnt:'Como el ciervo desea las corrientes de agua, así mi alma te desea a ti, Dios mío.' },
+    },
+    trinity5: {
+      A: { first:'Genesis 22:1-14', psalm:'Psalm 13:1-6',      second:'Romans 6:12-23',      gospel:'Matthew 10:40-42',psalmAnt:'Señor, mira y respóndeme.' },
+      B: { first:'2 Samuel 1:1,17-27',psalm:'Psalm 130:1-8',   second:'2 Corinthians 8:7-15', gospel:'Mark 5:21-43',  psalmAnt:'Desde lo hondo a ti grito, Señor.' },
+      C: { first:'1 Kings 19:15-16,19-21',psalm:'Psalm 16:1-11',second:'Galatians 5:1,13-25',gospel:'Luke 9:51-62',  psalmAnt:'¡Tú, Señor, eres mi heredad!' },
+    },
+    trinity6: {
+      A: { first:'Genesis 24:34-38,42-49,58-67',psalm:'Psalm 45:10-17',second:'Romans 7:15-25',gospel:'Matthew 11:16-19,25-30',psalmAnt:'Escúchame, hija; mira e inclina tu oído.' },
+      B: { first:'2 Samuel 5:1-5,9-10',psalm:'Psalm 48:1-14',  second:'2 Corinthians 12:2-10',gospel:'Mark 6:1-13',  psalmAnt:'Grande es el Señor y muy laudable en la ciudad de nuestro Dios.' },
+      C: { first:'1 Kings 19:15-16,19-21',psalm:'Psalm 16:1-11',second:'Galatians 5:1,13-25',gospel:'Luke 10:1-11,16-20',psalmAnt:'¡Tú, Señor, eres mi heredad!' },
+    },
+    trinity7: {
+      A: { first:'Genesis 25:19-34',psalm:'Psalm 119:105-112', second:'Romans 8:1-11',       gospel:'Matthew 13:1-9,18-23',psalmAnt:'Tu palabra es una lámpara para mis pasos y una luz en mi sendero.' },
+      B: { first:'2 Samuel 6:1-5,12-19',psalm:'Psalm 24:1-10', second:'Ephesians 1:3-14',    gospel:'Mark 6:14-29',  psalmAnt:'Señor, este es el pueblo que anhela ver tu rostro.' },
+      C: { first:'Amos 7:7-17',     psalm:'Psalm 82:1-8',      second:'Colossians 1:1-14',    gospel:'Luke 10:25-37', psalmAnt:'Levántate, Dios, juzga la tierra.' },
+    },
+    trinity8: {
+      A: { first:'Genesis 28:10-19',psalm:'Psalm 139:1-12,23-24',second:'Romans 8:12-25',   gospel:'Matthew 13:24-30,36-43',psalmAnt:'Te alabo porque soy una maravilla.' },
+      B: { first:'2 Samuel 7:1-14', psalm:'Psalm 89:20-37',    second:'Ephesians 2:11-22',   gospel:'Mark 6:30-34,53-56',psalmAnt:'Cantaré eternamente las misericordias del Señor.' },
+      C: { first:'Amos 8:1-12',     psalm:'Psalm 52:1-9',      second:'Colossians 1:15-28',   gospel:'Luke 10:38-42', psalmAnt:'Confío en la misericordia de Dios por siempre jamás.' },
+    },
+    trinity9: {
+      A: { first:'Genesis 29:15-28',psalm:'Psalm 128:1-6',     second:'Romans 8:26-39',      gospel:'Matthew 13:31-33,44-52',psalmAnt:'Dichosos los que temen al Señor.' },
+      B: { first:'2 Samuel 11:1-15',psalm:'Psalm 14:1-7',      second:'Ephesians 3:14-21',   gospel:'John 6:1-21',   psalmAnt:'El necio dice en su corazón: «No hay Dios».' },
+      C: { first:'Hosea 1:2-10',    psalm:'Psalm 85:1-13',     second:'Colossians 2:6-15,16-19',gospel:'Luke 11:1-13',psalmAnt:'Muéstranos, Señor, tu misericordia; danos tu salvación.' },
+    },
+    trinity10: {
+      A: { first:'Genesis 32:22-31',psalm:'Psalm 17:1-7,15',   second:'Romans 9:1-5',        gospel:'Matthew 14:13-21',psalmAnt:'Yo, en mi justicia, veré tu rostro, Señor.' },
+      B: { first:'2 Samuel 11:26-12:13',psalm:'Psalm 51:1-12', second:'Ephesians 4:1-16',    gospel:'John 6:24-35',  psalmAnt:'Crea en mí, oh Dios, un corazón limpio.' },
+      C: { first:'Hosea 11:1-11',   psalm:'Psalm 107:1-9,43',  second:'Colossians 3:1-11',    gospel:'Luke 12:13-21', psalmAnt:'Dad gracias al Señor porque es bueno, su misericordia es eterna.' },
+    },
+    trinity11: {
+      A: { first:'Genesis 37:1-4,12-28',psalm:'Psalm 105:1-6,16-22',second:'Romans 10:5-15',gospel:'Matthew 14:22-33',psalmAnt:'Recordad las maravillas que hizo el Señor.' },
+      B: { first:'2 Samuel 18:5-9,15,31-33',psalm:'Psalm 130:1-8',second:'Ephesians 4:25-5:2',gospel:'John 6:35,41-51',psalmAnt:'Desde lo hondo a ti grito, Señor.' },
+      C: { first:'Isaiah 1:1,10-20',psalm:'Psalm 50:1-8,22-23', second:'Hebrews 11:1-3,8-16', gospel:'Luke 12:32-40', psalmAnt:'A los rectos les mostraré el poder salvador de Dios.' },
+    },
+    trinity12: {
+      A: { first:'Genesis 45:1-15', psalm:'Psalm 133:1-3',     second:'Romans 11:1-2,29-32', gospel:'Matthew 15:10-20,21-28',psalmAnt:'¡Qué dulce y qué agradable es que los hermanos vivan unidos!' },
+      B: { first:'1 Kings 2:10-12,3:3-14',psalm:'Psalm 111:1-10',second:'Ephesians 5:15-20', gospel:'John 6:51-58', psalmAnt:'El temor del Señor es el principio de la sabiduría.' },
+      C: { first:'Jeremiah 23:23-29',psalm:'Psalm 82:1-8',     second:'Hebrews 11:29-12:2',  gospel:'Luke 12:49-56', psalmAnt:'Levántate, Dios, juzga la tierra.' },
+    },
+    trinity13: {
+      A: { first:'Exodus 1:8-2:10', psalm:'Psalm 124:1-8',     second:'Romans 12:1-8',       gospel:'Matthew 16:13-20',psalmAnt:'Nuestro socorro está en el nombre del Señor.' },
+      B: { first:'1 Kings 8:1,6,10-11,22-30,41-43',psalm:'Psalm 84:1-12',second:'Ephesians 6:10-20',gospel:'John 6:56-69',psalmAnt:'Cuán amables son tus moradas, Señor de los ejércitos.' },
+      C: { first:'Isaiah 58:9-14',  psalm:'Psalm 103:1-8',     second:'Hebrews 12:18-29',     gospel:'Luke 13:10-17', psalmAnt:'El Señor es compasivo y misericordioso.' },
+    },
+    trinity14: {
+      A: { first:'Exodus 3:1-15',   psalm:'Psalm 105:1-6,23-26',second:'Romans 12:9-21',     gospel:'Matthew 16:21-28',psalmAnt:'Dad gracias al Señor, invocad su nombre.' },
+      B: { first:'Song of Songs 2:8-13',psalm:'Psalm 45:1-2,6-9',second:'James 1:17-27',    gospel:'Mark 7:1-8,14-15,21-23',psalmAnt:'Escúchame, hija; mira e inclina tu oído.' },
+      C: { first:'Proverbs 25:6-7', psalm:'Psalm 112:1-9',     second:'Hebrews 13:1-8,15-16', gospel:'Luke 14:1,7-14', psalmAnt:'Los justos brillarán como el sol en el reino de su Padre.' },
+    },
+    trinity15: {
+      A: { first:'Exodus 12:1-14',  psalm:'Psalm 149:1-9',     second:'Romans 13:8-14',      gospel:'Matthew 18:15-20',psalmAnt:'El Señor se complace en su pueblo.' },
+      B: { first:'Proverbs 22:1-2,8-9,22-23',psalm:'Psalm 125:1-5',second:'James 2:1-10,14-17',gospel:'Mark 7:24-37',psalmAnt:'Los que confían en el Señor son como el monte Sión.' },
+      C: { first:'Deuteronomy 30:15-20',psalm:'Psalm 1:1-6',   second:'Philemon 1-21',        gospel:'Luke 14:25-33', psalmAnt:'Dichosos los que esperan en el Señor.' },
+    },
+    trinity16: {
+      A: { first:'Exodus 14:19-31', psalm:'Psalm 114:1-8',     second:'Romans 14:1-12',      gospel:'Matthew 18:21-35',psalmAnt:'Aleluya. Cuando salió Israel de Egipto.' },
+      B: { first:'Proverbs 1:20-33',psalm:'Psalm 19:7-14',     second:'James 3:1-12',        gospel:'Mark 8:27-38',   psalmAnt:'Señor, tú tienes palabras de vida eterna.' },
+      C: { first:'Exodus 32:7-14',  psalm:'Psalm 51:1-10',     second:'1 Timothy 1:12-17',   gospel:'Luke 15:1-10',   psalmAnt:'Me levantaré e iré a mi padre.' },
+    },
+    trinity17: {
+      A: { first:'Exodus 16:2-15',  psalm:'Psalm 105:1-6,37-45',second:'Philippians 1:21-30',gospel:'Matthew 20:1-16',psalmAnt:'Dad gracias al Señor, invocad su nombre.' },
+      B: { first:'Wisdom 1:16-2:1,12-22',psalm:'Psalm 54:1-7', second:'James 3:13-4:3,7-8', gospel:'Mark 9:30-37',   psalmAnt:'El Señor sostiene mi vida.' },
+      C: { first:'Amos 8:4-7',      psalm:'Psalm 113:1-8',     second:'1 Timothy 2:1-7',     gospel:'Luke 16:1-13',   psalmAnt:'Alabad al Señor que levanta al pobre.' },
+    },
+    trinity18: {
+      A: { first:'Exodus 17:1-7',   psalm:'Psalm 78:1-4,12-16',second:'Philippians 2:1-13',  gospel:'Matthew 21:23-32',psalmAnt:'El Señor les dio pan del cielo.' },
+      B: { first:'Numbers 11:4-6,10-16,24-29',psalm:'Psalm 19:7-14',second:'James 5:13-20',gospel:'Mark 9:38-50',   psalmAnt:'Señor, tú tienes palabras de vida eterna.' },
+      C: { first:'Jeremiah 32:1-3,6-15',psalm:'Psalm 91:1-6,14-16',second:'1 Timothy 6:6-19',gospel:'Luke 16:19-31',psalmAnt:'En ti, Señor, me refugio; no me defraudes nunca.' },
+    },
+    trinity19: {
+      A: { first:'Exodus 20:1-4,7-9,12-20',psalm:'Psalm 19:7-14',second:'Philippians 3:4-14',gospel:'Matthew 21:33-46',psalmAnt:'Señor, tú tienes palabras de vida eterna.' },
+      B: { first:'Genesis 2:18-24', psalm:'Psalm 8:1-9',       second:'Hebrews 1:1-4,2:5-12',gospel:'Mark 10:2-16',  psalmAnt:'¡Cuán glorioso es tu nombre, Señor Dios nuestro, en toda la tierra!' },
+      C: { first:'Lamentations 1:1-6',psalm:'Psalm 137:1-9',   second:'2 Timothy 1:1-14',    gospel:'Luke 17:5-10',   psalmAnt:'¡No olvidéis las obras del Señor!' },
+    },
+    trinity20: {
+      A: { first:'Exodus 32:1-14',  psalm:'Psalm 106:1-6,19-23',second:'Philippians 4:1-9',  gospel:'Matthew 22:1-14',psalmAnt:'Dad gracias al Señor, porque es bueno.' },
+      B: { first:'Amos 5:6-7,10-15',psalm:'Psalm 90:12-17',    second:'Hebrews 4:12-16',     gospel:'Mark 10:17-31',  psalmAnt:'¡Colmanos de tu amor, Señor, y cantaremos de alegría!' },
+      C: { first:'2 Kings 5:1-3,7-15',psalm:'Psalm 111:1-10',  second:'2 Timothy 2:8-15',    gospel:'Luke 17:11-19',  psalmAnt:'El temor del Señor es el principio de la sabiduría.' },
+    },
+    trinity21: {
+      A: { first:'Exodus 33:12-23', psalm:'Psalm 99:1-9',      second:'1 Thessalonians 1:1-10',gospel:'Matthew 22:15-22',psalmAnt:'El Señor es rey; tiemblan los pueblos.' },
+      B: { first:'Isaiah 53:4-12',  psalm:'Psalm 91:9-16',     second:'Hebrews 5:1-10',       gospel:'Mark 10:35-45', psalmAnt:'Señor, acompáñame en la tribulación.' },
+      C: { first:'Genesis 32:22-31',psalm:'Psalm 121:1-8',     second:'2 Timothy 3:14-4:5',   gospel:'Luke 18:1-8',   psalmAnt:'Nuestro auxilio viene del Señor, que hizo el cielo y la tierra.' },
+    },
+    trinity22: {
+      A: { first:'Deuteronomy 34:1-12',psalm:'Psalm 90:1-6,13-17',second:'1 Thessalonians 2:1-8',gospel:'Matthew 22:34-46',psalmAnt:'En todas las edades, Señor, has sido nuestro refugio.' },
+      B: { first:'Jeremiah 31:7-9', psalm:'Psalm 126:1-6',     second:'Hebrews 7:23-28',      gospel:'Mark 10:46-52', psalmAnt:'El Señor ha estado grande con nosotros y estamos llenos de alegría.' },
+      C: { first:'Joel 2:23-32',    psalm:'Psalm 65:1-13',     second:'2 Timothy 4:6-8,16-18',gospel:'Luke 18:9-14',  psalmAnt:'La semilla que cae en buena tierra dará abundante cosecha.' },
+    },
+    trinity23: {
+      A: { first:'Joshua 3:7-17',   psalm:'Psalm 107:1-7,33-37',second:'1 Thessalonians 2:9-13',gospel:'Matthew 23:1-12',psalmAnt:'Dad gracias al Señor, porque es bueno.' },
+      B: { first:'Ruth 1:1-18',     psalm:'Psalm 146:1-10',    second:'Hebrews 9:11-14',     gospel:'Mark 12:28-34',  psalmAnt:'¡Alaba al Señor, alma mía!' },
+      C: { first:'Habakkuk 1:1-4,2:1-4',psalm:'Psalm 119:137-144',second:'2 Thessalonians 1:1-4,11-12',gospel:'Luke 19:1-10',psalmAnt:'Señor, eres justo y rectas son tus sentencias.' },
+    },
+    trinity24: {
+      A: { first:'Joshua 24:1-3,14-25',psalm:'Psalm 78:1-7',   second:'1 Thessalonians 4:13-18',gospel:'Matthew 25:1-13',psalmAnt:'No olvidéis las obras del Señor.' },
+      B: { first:'Ruth 3:1-5,4:13-17',psalm:'Psalm 127:1-5',   second:'Hebrews 9:24-28',     gospel:'Mark 12:38-44',  psalmAnt:'Si el Señor no construye la casa, en vano trabajan los constructores.' },
+      C: { first:'Haggai 1:15-2:9', psalm:'Psalm 145:1-5,17-21',second:'2 Thessalonians 2:1-5,13-17',gospel:'Luke 20:27-38',psalmAnt:'El Señor es fiel en todas sus palabras.' },
+    },
+    trinity25: {
+      A: { first:'Judges 4:1-7',    psalm:'Psalm 123:1-4',     second:'1 Thessalonians 5:1-11',gospel:'Matthew 25:14-30',psalmAnt:'Nuestros ojos están puestos en el Señor hasta que se apiade de nosotros.' },
+      B: { first:'1 Samuel 1:4-20', psalm:'1 Samuel 2:1-10',   second:'Hebrews 10:11-14,19-25',gospel:'Mark 13:1-8',  psalmAnt:'Mi corazón se regocija en el Señor, mi Salvador.' },
+      C: { first:'Isaiah 65:17-25', psalm:'Isaiah 12:2-6',     second:'2 Thessalonians 3:6-13',gospel:'Luke 21:5-19', psalmAnt:'Gritad con alegría: grande en medio de vosotros es el Santo de Israel.' },
+    },
+    trinity26: {
+      A: { first:'Ezekiel 34:11-16,20-24',psalm:'Psalm 100:1-5',second:'Ephesians 1:15-23',  gospel:'Matthew 25:31-46',psalmAnt:'Somos su pueblo, el rebaño de su pasto.' },
+      B: { first:'2 Samuel 23:1-7', psalm:'Psalm 132:1-12',    second:'Revelation 1:4-8',     gospel:'John 18:33-37',  psalmAnt:'El Señor es rey, se ha vestido de majestad.' },
+      C: { first:'Jeremiah 23:1-6', psalm:'Psalm 46:1-11',     second:'Colossians 1:11-20',   gospel:'Luke 23:33-43',  psalmAnt:'El Señor es rey, se ha vestido de majestad.' },
+    },
+    // 27°/28° Domingo después de la Trinidad: solo ocurren con Pascua muy temprana
+    // (p.ej. 2035, 2046, 2062 — calendar.js permite hasta sunN=28). Se repiten las
+    // lecturas del 26° en vez de dejar el domingo sin Evangelio.
+    trinity27: {
+      A: { first:'Ezekiel 34:11-16,20-24',psalm:'Psalm 100:1-5',second:'Ephesians 1:15-23',  gospel:'Matthew 25:31-46',psalmAnt:'Somos su pueblo, el rebaño de su pasto.' },
+      B: { first:'2 Samuel 23:1-7', psalm:'Psalm 132:1-12',    second:'Revelation 1:4-8',     gospel:'John 18:33-37',  psalmAnt:'El Señor es rey, se ha vestido de majestad.' },
+      C: { first:'Jeremiah 23:1-6', psalm:'Psalm 46:1-11',     second:'Colossians 1:11-20',   gospel:'Luke 23:33-43',  psalmAnt:'El Señor es rey, se ha vestido de majestad.' },
+    },
+    trinity28: {
+      A: { first:'Ezekiel 34:11-16,20-24',psalm:'Psalm 100:1-5',second:'Ephesians 1:15-23',  gospel:'Matthew 25:31-46',psalmAnt:'Somos su pueblo, el rebaño de su pasto.' },
+      B: { first:'2 Samuel 23:1-7', psalm:'Psalm 132:1-12',    second:'Revelation 1:4-8',     gospel:'John 18:33-37',  psalmAnt:'El Señor es rey, se ha vestido de majestad.' },
+      C: { first:'Jeremiah 23:1-6', psalm:'Psalm 46:1-11',     second:'Colossians 1:11-20',   gospel:'Luke 23:33-43',  psalmAnt:'El Señor es rey, se ha vestido de majestad.' },
+    },
+
+    // ═══════════════════════════════════════════════════════
+    //  FIXED FEASTS
+    // ═══════════════════════════════════════════════════════
+    '01-06': {
+      all: { first:'Isaiah 60:1-6', psalm:'Psalm 72:1-7,10-14', second:'Ephesians 3:1-12',  gospel:'Matthew 2:1-12',  psalmAnt:'Señor, todos los pueblos de la tierra te adorarán.' },
+    },
+    '02-02': {
+      all: { first:'Malachi 3:1-4', psalm:'Psalm 24:7-10', second:'Hebrews 2:14-18', gospel:'Luke 2:22-40', psalmAnt:'¿Quién es este Rey de la gloria? El Señor de los ejércitos.' },
+    },
+    // San Matías — único apóstol sin lecturas en esta tabla (calendar.js sí lo
+    // reconoce como fiesta fija; faltaba aquí). Epístola: el propio relato de su
+    // elección. Evangelio: el asignado tradicionalmente a esta fiesta en el Misal Romano.
+    '02-24': {
+      all: { first:'Acts 1:15-26', psalm:'Psalm 19:1-4', second:null, gospel:'Matthew 11:25-30', psalmAnt:'A toda la tierra alcanza su pregón.' },
+    },
+    '03-19': {
+      all: { first:'2 Samuel 7:4-5,12-14,16', psalm:'Psalm 89:2-5,27,29', second:'Romans 4:13,16-18,22', gospel:'Matthew 1:16,18-21,24', psalmAnt:'Su linaje será perpetuo.' },
+    },
+    '03-25': {
+      all: { first:'Isaiah 7:10-14', psalm:'Psalm 40:7-11', second:'Hebrews 10:4-10', gospel:'Luke 1:26-38', psalmAnt:'Aquí estoy, Señor; vengo a hacer tu voluntad.' },
+    },
+    '04-25': {
+      all: { first:'1 Peter 5:5-14', psalm:'Psalm 89:2-3,6-7,16-17', second:null, gospel:'Mark 16:15-20', psalmAnt:'Cantaré eternamente las misericordias del Señor.' },
+    },
+    '05-01': {
+      all: { first:'Wisdom 5:1-5', psalm:'Psalm 19:1-4', second:null, gospel:'John 14:1-14', psalmAnt:'A toda la tierra alcanza su pregón.' },
+    },
+    '06-11': {
+      all: { first:'Acts 11:21-26,13:1-3', psalm:'Psalm 98:1-6', second:null, gospel:'Matthew 10:7-13', psalmAnt:'El Señor da a conocer su victoria.' },
+    },
+    '06-24': {
+      all: { first:'Isaiah 49:1-6', psalm:'Psalm 139:1-3,13-15', second:'Acts 13:22-26', gospel:'Luke 1:57-66,80', psalmAnt:'Te doy gracias porque me has formado portentosamente.' },
+    },
+    '06-29': {
+      all: { first:'Acts 12:1-11', psalm:'Psalm 34:2-9', second:'2 Timothy 4:6-8,17-18', gospel:'Matthew 16:13-19', psalmAnt:'El Señor me libró de todas mis ansias.' },
+    },
+    '07-25': {
+      all: { first:'Acts 11:27-12:3', psalm:'Psalm 67:2-8', second:'2 Corinthians 4:7-15', gospel:'Matthew 20:20-28', psalmAnt:'Oh Dios, que te alaben los pueblos.' },
+    },
+    '08-06': {
+      all: { first:'Daniel 7:9-10,13-14', psalm:'Psalm 97:1-2,5-6,9', second:'2 Peter 1:16-19', gospel:'Matthew 17:1-9', psalmAnt:'El Señor reina, altísimo sobre toda la tierra.' },
+    },
+    '08-15': {
+      all: { first:'Revelation 11:19,12:1-6,10', psalm:'Psalm 45:10-16', second:'1 Corinthians 15:20-27', gospel:'Luke 1:39-56', psalmAnt:'De pie a tu derecha está la reina.' },
+    },
+    '08-24': {
+      all: { first:'Acts 5:12-16', psalm:'Psalm 145:10-13,17-18', second:null, gospel:'Luke 6:12-16', psalmAnt:'Que tus fieles, Señor, proclamen la gloria de tu reinado.' },
+    },
+    '09-08': {
+      all: { first:'Micah 5:1-4', psalm:'Psalm 13:6', second:null, gospel:'Matthew 1:1-16,18-23', psalmAnt:'Me alegro con tu salvación, Señor.' },
+    },
+    '09-14': {
+      all: { first:'Numbers 21:4-9', psalm:'Psalm 78:1-2,34-38', second:'Philippians 2:6-11', gospel:'John 3:13-17', psalmAnt:'No olvidéis las obras del Señor.' },
+    },
+    '09-21': {
+      all: { first:'Ephesians 4:1-7,11-13', psalm:'Psalm 19:1-4', second:null, gospel:'Matthew 9:9-13', psalmAnt:'A toda la tierra alcanza su pregón.' },
+    },
+    '09-29': {
+      all: { first:'Revelation 12:7-12', psalm:'Psalm 103:19-22', second:null, gospel:'Matthew 18:1-5,10', psalmAnt:'Bendecid al Señor, todos sus ángeles.' },
+    },
+    '10-18': {
+      all: { first:'2 Timothy 4:10-17', psalm:'Psalm 145:10-13,17-18', second:null, gospel:'Luke 10:1-9', psalmAnt:'Que tus fieles, Señor, proclamen la gloria de tu reinado.' },
+    },
+    '10-28': {
+      all: { first:'Ephesians 2:19-22', psalm:'Psalm 19:1-4', second:null, gospel:'Luke 6:12-16', psalmAnt:'A toda la tierra alcanza su pregón.' },
+    },
+    '11-01': {
+      all: { first:'Revelation 7:9-17',psalm:'Psalm 34:1-10',  second:'1 John 3:1-3',        gospel:'Matthew 5:1-12',  psalmAnt:'Del Señor es la tierra y cuanto la llena.' },
+    },
+    '11-02': {
+      all: { first:'Wisdom 3:1-9',   psalm:'Psalm 23:1-6',     second:'Romans 8:14-23',      gospel:'John 11:17-27',   psalmAnt:'Dales el descanso eterno, Señor.' },
+    },
+    '11-30': {
+      all: { first:'Romans 10:9-18', psalm:'Psalm 19:1-4', second:null, gospel:'Matthew 4:18-22', psalmAnt:'A toda la tierra alcanza su pregón.' },
+    },
+    '12-21': {
+      all: { first:'Ephesians 2:19-22', psalm:'Psalm 117:1-2', second:null, gospel:'John 20:24-29', psalmAnt:'Alabad al Señor, todas las naciones.' },
+    },
+    '12-26': {
+      all: { first:'Acts 6:8-10,7:54-60', psalm:'Psalm 31:3-4,6,8,16-17', second:null, gospel:'Matthew 10:17-22', psalmAnt:'A tus manos, Señor, encomiendo mi espíritu.' },
+    },
+    '12-27': {
+      all: { first:'1 John 1:1-4', psalm:'Psalm 97:1-2,5-6,11-12', second:null, gospel:'John 20:2-8', psalmAnt:'Alegraos, justos, en el Señor.' },
+    },
+    '12-28': {
+      all: { first:'1 John 1:5-2:2', psalm:'Psalm 124:2-5,7-8', second:null, gospel:'Matthew 2:13-18', psalmAnt:'Nuestro auxilio es el nombre del Señor.' },
+    },
+  };
+
+  // ── WEEKDAY LECTIONARY (Selected key weeks — full structure) ─────────────
+  // Format: key = "week_dow_cycle"  dow: 1=Mon…6=Sat
+  const WEEKDAY = {
+    // Advent weekdays — fixed sequence regardless of year
+    advent_w1_mon: { I:'Isaiah 2:1-5 / Matthew 8:5-11', II:'Isaiah 2:1-5 / Matthew 8:5-11' },
+    advent_w1_tue: { I:'Isaiah 11:1-10 / Luke 10:21-24', II:'Isaiah 11:1-10 / Luke 10:21-24' },
+    advent_w1_wed: { I:'Isaiah 25:6-10 / Matthew 15:29-37', II:'Isaiah 25:6-10 / Matthew 15:29-37' },
+    advent_w1_thu: { I:'Isaiah 26:1-6 / Matthew 7:21,24-27', II:'Isaiah 26:1-6 / Matthew 7:21,24-27' },
+    advent_w1_fri: { I:'Isaiah 29:17-24 / Matthew 9:27-31', II:'Isaiah 29:17-24 / Matthew 9:27-31' },
+    advent_w1_sat: { I:'Isaiah 30:19-21,23-26 / Matthew 9:35-10:1,6-8', II:'Isaiah 30:19-21,23-26 / Matthew 9:35-10:1,6-8' },
+    // (Additional weekday entries would continue for all weeks)
+  };
+
+  // ── PUBLIC API ───────────────────────────────────────────────────────────
+  function getSundayReadings(key, cycle) {
+    const entry = SUNDAY[key];
+    if (!entry) return null;
+    // Some feasts same for all cycles
+    if (entry.all) return entry.all;
+    if (entry[cycle]) return entry[cycle];
+    // Fall back to A if cycle not found
+    return entry.A || null;
+  }
+
+  function getWeekdayReadings(week, dow, cycle) {
+    const k = `${week}_${dow}`;
+    const entry = WEEKDAY[k];
+    if (!entry) return null;
+    return entry[cycle] || null;
+  }
+
+  function getAllSundayKeys() { return Object.keys(SUNDAY); }
+
+  return { getSundayReadings, getWeekdayReadings, getAllSundayKeys, SUNDAY };
+})();

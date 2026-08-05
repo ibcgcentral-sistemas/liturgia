@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light only">
+  <meta name="theme-color" content="#2a1808">
+  <title>Misal Anglicano — Liturgia Anglo-Católica Completa</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✠</text></svg>">
+
+  <!-- ═══════════════ PWA ═══════════════ -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="img/icon-192.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Misal Anglicano">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=5">
+</head>
+<body>
+
+  <!-- ═══════════════════════ HEADER ═══════════════════════ -->
+  <header class="app-header">
+    <div class="header-cross">✠</div>
+    <h1>MISAL ANGLICANO</h1>
+    <p class="subtitle">Generador de Liturgia Anglo-Católica Completa</p>
+    <p class="subtitle" style="font-size:0.85rem; margin-top:0.3rem; opacity:0.7;">
+      Ciclos A · B · C (Domingos) &nbsp;·&nbsp; Ciclos I · II (Ferias) &nbsp;·&nbsp; Misal Anglicano · BCP 1662 · BCP 1928
+    </p>
+    <a href="/bcp2019/index.html" style="display:inline-block; margin-top:1rem; color:#c9ad76; font-size:0.85rem; text-decoration:underline; opacity:0.85;">Libro de Oración Común (2019, ACNA) →</a>
+  </header>
+
+  <!-- ═══════════════════════ CONTROLS ═══════════════════════ -->
+  <div class="controls neu-panel">
+    <!-- Fila de selectores -->
+    <div class="inputs-grid">
+      <div class="control-group">
+        <label for="date-picker">Fecha Litúrgica</label>
+        <input type="date" id="date-picker" class="neu-input" value="">
+      </div>
+      <div class="control-group">
+        <label for="canon-select">Rito / Canon</label>
+        <select id="canon-select" class="neu-input">
+          <option value="roman">Misal Anglicano (Canon Romano)</option>
+          <option value="1549">Libro de Oración Común (1549)</option>
+          <option value="1662">Libro de Oración Común (1662)</option>
+          <option value="1928">Libro de Oración Común (1928 — EE. UU.)</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <label for="lang-select">Idioma del Ordinario</label>
+        <select id="lang-select" class="neu-input">
+          <option value="es">Español</option>
+          <option value="latin-es">Bilingüe (Latín / Español)</option>
+          <option value="la">Latín</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <label for="votive-select">Misa Votiva</label>
+        <select id="votive-select" class="neu-input">
+          <option value="none">Ninguna (Misa del Día)</option>
+          <option value="requiem">Misa de Réquiem (Difuntos)</option>
+          <option value="holySpirit">Misa Votiva del Espíritu Santo</option>
+          <option value="bvm">Misa Votiva de Santa María</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Botón Principal -->
+    <button id="generate-btn" class="generate-btn neu-btn primary-neu-btn">✠ GENERAR LITURGIA COMPLETA</button>
+
+    <!-- Fila de Acciones Secundarias -->
+    <div class="buttons-grid">
+      <button class="print-btn neu-btn" onclick="window.print()">⬡ Imprimir</button>
+      <button id="docx-btn" class="docx-btn neu-btn" onclick="downloadDocx()">⬇ DOCX</button>
+      <button id="manual-btn" class="manual-btn neu-btn" onclick="PriestManual.show()">📖 Manual</button>
+      <button id="librito-btn" class="librito-btn neu-btn" onclick="openLibritoPueblo()">📕 Librito</button>
+      <button id="dark-mode-btn" class="dark-mode-btn neu-btn" onclick="toggleDarkMode()">🌙 Modo Altar</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ DAY INFO ═══════════════════════ -->
+  <div id="liturgy-info" class="liturgy-info hidden">
+    <div id="feast-name"></div>
+    <div id="season-info"></div>
+    <div id="cycle-info"></div>
+  </div>
+
+  <!-- ═══════════════════════ LOADING ═══════════════════════ -->
+  <div id="loading" class="loading hidden">
+    <span class="cross-spinner">✠</span>
+    <p>Preparando la liturgia completa&hellip;<br>
+    <small style="opacity:0.6">Obteniendo las lecturas completas de las Sagradas Escrituras…</small></p>
+  </div>
+
+  <!-- ═══════════════════════ OUTPUT ═══════════════════════ -->
+  <div id="liturgy-output" class="liturgy-output hidden"></div>
+
+  <!-- ═══════════════════════ SCRIPTS ═══════════════════════ -->
+  <!-- Biblia de Jerusalén local -->
+  <script src="js/lib/biblia-loader.js"></script>
+  <script src="js/lib/biblia-wrapper.js"></script>
+
+  <script src="js/calendar.js?v=23"></script>
+  <script src="js/lectionary.js?v=23"></script>
+  <script src="js/propers.js?v=23"></script>
+  <script src="js/commemorations.js?v=23"></script>
+  <script src="js/canon.js?v=23"></script>
+  <script src="js/intercessions.js?v=23"></script>
+  <script src="js/utils.js?v=23"></script>
+  <script src="js/app.js?v=23"></script>
+  <script src="js/manual.js?v=23"></script>
+  <script src="js/librito-pueblo.js?v=23"></script>
+
+  <!-- DOCX export -->
+  <script src="js/lib/docx.iife.js"></script>
+  <script src="js/lib/FileSaver.min.js"></script>
+  <script src="js/docx-export.js?v=23"></script>
+
+  <!-- PWA: registro del Service Worker (scope raíz) -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch((e) => console.warn('SW no registrado:', e));
+      });
+    }
+  </script>
+
+</body>
+</html>

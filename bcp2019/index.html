@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light only">
+  <meta name="theme-color" content="#16233a">
+  <title>Libro de Oración Común (2019) — Santa Eucaristía</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✠</text></svg>">
+
+  <!-- ═══════════════ PWA ═══════════════ -->
+  <link rel="manifest" href="/bcp2019/manifest.json">
+  <link rel="apple-touch-icon" href="/bcp2019/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/bcp2019/img/icon-192.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="BCP 2019">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/bcp2019/css/style.css?v=2">
+</head>
+<body>
+
+  <!-- ═══════════════════════ HEADER ═══════════════════════ -->
+  <header class="app-header">
+    <div class="header-cross">✠</div>
+    <h1>LIBRO DE ORACIÓN COMÚN</h1>
+    <p class="subtitle">Santa Eucaristía · Texto Estándar Anglicano · ACNA (2019)</p>
+    <p class="subtitle" style="font-size:0.85rem; margin-top:0.3rem; opacity:0.7;">
+      Ciclo Dominical A · B · C &nbsp;·&nbsp; Domingos después de Pentecostés (Leccionario Común Revisado)
+    </p>
+    <a class="nav-link" href="/index.html">← Volver al Misal Anglicano</a>
+  </header>
+
+  <!-- ═══════════════════════ CONTROLS ═══════════════════════ -->
+  <div class="controls neu-panel">
+    <div class="inputs-grid">
+      <div class="control-group">
+        <label for="date-picker">Fecha Litúrgica</label>
+        <input type="date" id="date-picker" class="neu-input" value="">
+      </div>
+    </div>
+
+    <button id="generate-btn" class="generate-btn neu-btn primary-neu-btn">✠ GENERAR LA SANTA EUCARISTÍA</button>
+
+    <div class="buttons-grid">
+      <button class="print-btn neu-btn" onclick="window.print()">⬡ Imprimir</button>
+      <button id="docx-btn" class="docx-btn neu-btn" onclick="BCPDocxExport.downloadDocx()">⬇ DOCX</button>
+      <button id="manual-btn" class="manual-btn neu-btn" onclick="BCPManual.show()">📖 Manual</button>
+      <button id="librito-btn" class="librito-btn neu-btn" onclick="openLibrito()">📕 Librito</button>
+      <button id="dark-mode-btn" class="dark-mode-btn neu-btn" onclick="toggleDarkMode()">🌙 Modo Noche</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ DAY INFO ═══════════════════════ -->
+  <div id="liturgy-info" class="liturgy-info hidden">
+    <div id="feast-name"></div>
+    <div id="season-info"></div>
+    <div id="cycle-info"></div>
+  </div>
+
+  <!-- ═══════════════════════ LOADING ═══════════════════════ -->
+  <div id="loading" class="loading hidden">
+    <span class="cross-spinner">✠</span>
+    <p>Preparando la liturgia&hellip;<br>
+    <small style="opacity:0.6">Obteniendo las lecturas de las Sagradas Escrituras…</small></p>
+  </div>
+
+  <!-- ═══════════════════════ OUTPUT ═══════════════════════ -->
+  <div id="liturgy-output" class="liturgy-output hidden"></div>
+
+  <!-- ═══════════════════════ SCRIPTS ═══════════════════════ -->
+  <!-- Biblia de Jerusalén (compartida con el Misal Anglicano) -->
+  <script src="/js/lib/biblia-loader.js"></script>
+  <script src="/js/lib/biblia-wrapper.js"></script>
+
+  <script src="/bcp2019/js/calendar.js?v=1"></script>
+  <script src="/bcp2019/js/lectionary.js?v=1"></script>
+  <script src="/bcp2019/js/propers.js?v=1"></script>
+  <script src="/bcp2019/js/eucharist.js?v=1"></script>
+  <script src="/bcp2019/js/utils.js?v=1"></script>
+  <script src="/bcp2019/js/app.js?v=1"></script>
+  <script src="/bcp2019/js/manual.js?v=1"></script>
+  <script src="/bcp2019/js/librito-pueblo.js?v=1"></script>
+
+  <!-- Exportación a Word (librería compartida con el Misal Anglicano) -->
+  <script src="/js/lib/docx.iife.js"></script>
+  <script src="/js/lib/FileSaver.min.js"></script>
+  <script src="/bcp2019/js/docx-export.js?v=1"></script>
+
+  <!-- PWA: registro del Service Worker (scope /bcp2019/) -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/bcp2019/sw.js', { scope: '/bcp2019/' }).catch((e) => console.warn('SW no registrado:', e));
+      });
+    }
+  </script>
+
+</body>
+</html>

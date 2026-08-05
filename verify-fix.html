@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Verificar Fix - Domingos después de Trinidad</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    .test { margin: 20px 0; padding: 10px; border: 1px solid #ccc; }
+    .pass { background: #e8f5e9; color: #2e7d32; }
+    .fail { background: #ffebee; color: #c62828; }
+    table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+  </style>
+</head>
+<body>
+  <h1>✠ Verificación del Fix - Trinity Sundays</h1>
+  <p>Probando que los Domingos después de la Trinidad se etiqueten correctamente.</p>
+  
+  <div id="results"></div>
+
+  <script src="js/calendar.js"></script>
+  <script>
+    // Test cases para verificar que el fix funciona
+    // Easter 2026 = April 5, so:
+    // Trinity Sunday 2026 = April 5 + 56 days = May 31 (Sunday)
+    // 1st Sunday after Trinity = June 7
+    // 2nd Sunday after Trinity = June 14
+    // 3rd Sunday after Trinity = June 21
+    
+    const tests = [
+      { date: '2026-05-31', expected: 'Trinity Sunday', desc: 'Trinity Sunday 2026' },
+      { date: '2026-06-07', expected: 'First Sunday after Trinity', desc: '1er Domingo después de Trinidad' },
+      { date: '2026-06-14', expected: 'Second Sunday after Trinity', desc: '2do Domingo después de Trinidad (TEST DEL FIX)' },
+      { date: '2026-06-21', expected: 'Third Sunday after Trinity', desc: '3er Domingo después de Trinidad' },
+      { date: '2026-06-28', expected: 'Fourth Sunday after Trinity', desc: '4to Domingo después de Trinidad' },
+    ];
+
+    const results = [];
+    
+    tests.forEach(test => {
+      const dateObj = new Date(test.date + 'T12:00:00');
+      const dayInfo = LiturgicalCalendar.getDay(dateObj);
+      const isCorrect = dayInfo.name.includes(test.expected);
+      const status = isCorrect ? 'CORRECTO ✓' : 'ERROR ✗';
+      const rowClass = isCorrect ? 'pass' : 'fail';
+      
+      results.push({
+        date: test.date,
+        desc: test.desc,
+        expected: test.expected,
+        actual: dayInfo.name,
+        isCorrect,
+        status,
+        rowClass
+      });
+    });
+
+    // Mostrar resultados
+    let html = '<table>';
+    html += '<tr><th>Fecha</th><th>Descripción</th><th>Esperado</th><th>Actual</th><th>Resultado</th></tr>';
+    
+    results.forEach(r => {
+      html += `<tr class="${r.rowClass}">
+        <td>${r.date}</td>
+        <td>${r.desc}</td>
+        <td>${r.expected}</td>
+        <td><strong>${r.actual}</strong></td>
+        <td>${r.status}</td>
+      </tr>`;
+    });
+    
+    html += '</table>';
+    
+    const allPass = results.every(r => r.isCorrect);
+    html += `<div class="test ${allPass ? 'pass' : 'fail'}">
+      <strong>${allPass ? '✓ TODOS LOS TESTS PASARON' : '✗ ALGUNOS TESTS FALLARON'}</strong>
+    </div>`;
+    
+    document.getElementById('results').innerHTML = html;
+  </script>
+</body>
+</html>
