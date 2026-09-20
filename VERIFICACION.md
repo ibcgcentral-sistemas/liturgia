@@ -323,8 +323,15 @@ Dos copias de las mismas 28 entradas, sin nada que garantizara que se mantuviera
 ### Mejora: control de versiones
 El proyecto no era un repositorio git. **Fix:** `git init` + `.gitignore` (excluye `node_modules/`). No se creó ningún commit — eso queda a criterio del usuario.
 
-### Sin resolver: optimización de imágenes
-Los tres grabados en `img/` (675-875 KB cada uno) seguían sin comprimir — no se pudo continuar: este entorno no tiene ImageMagick, cwebp, pngquant ni ninguna librería de imágenes de Node instalada. Requiere una herramienta externa que el asistente no tenía disponible.
+### ✅ Resuelto (2026-09-20): optimización de imágenes
+Los tres grabados en `img/` estaban a 1024×1024 px sin comprimir (669, 660 y
+855 KB), unas diez veces más grandes que su mayor tamaño de uso real: 85-110 px
+tanto en pantalla (`app.js`, `librito-pueblo.js`) como en la exportación a Word
+(`docx-export.js`, `transformation: {width, height}` de 85 a 110). **Fix:**
+redimensionados a 384×384 px (más del triple del mayor uso, holgura suficiente
+para pantallas de alta densidad y para impresión) y cuantizados a 128 colores
+con dithering Floyd-Steinberg. Resultado: 2,13 MB → 241 KB, un 89% menos, sin
+cambio visible en el grabado. El proyecto pasa de 8,8 MB a 7,0 MB.
 
 **Validación:** `node --check` limpio en los 6 archivos JS tocados en esta ronda; balance de llaves de `style.css` verificado (299/299); `test-logic.js` sigue en 6/6; simulación de 77 años sin regresiones; los fixes visuales/interactivos (botón deshabilitado, colores de botones, `color-scheme`, contraste, Doble Aleluya, inclinación de cabeza, estilo de peticiones) verificados en vivo en el navegador con estilos computados, no solo por lectura de código.
 
