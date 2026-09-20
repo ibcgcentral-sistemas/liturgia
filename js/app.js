@@ -42,7 +42,13 @@ const DIRECT_LECTIONARY_KEYS = new Set([
   'septuagesima', 'sexagesima', 'quinquagesima',
   'ashWednesday',
   'lent1', 'lent2', 'lent3', 'lent4', 'lent5',
-  'palmSunday', 'maundyThursday', 'goodFriday', 'holySaturday',
+  'palmSunday',
+  // Lunes, Martes y Miércoles Santos: lectionary.js sirve ahora propios para los
+  // tres. Antes no figuraban aquí y resolveLectionaryKey() los cortaba en seco,
+  // de modo que eran los únicos días del año que se generaban sin Lectura ni
+  // Evangelio.
+  'mondayHolyWeek', 'tuesdayHolyWeek', 'wednesdayHolyWeek',
+  'maundyThursday', 'goodFriday', 'holySaturday',
   'easter', 'easter2', 'easter3', 'easter4', 'easter5', 'easter6',
   'ascension', 'easter7', 'pentecost',
   'trinity', 'corpusChristi', 'sacredHeart',
@@ -58,9 +64,9 @@ function getLectionaryKey(dayInfo) {
 
 // Ferias sin lecturas propias: se repiten las del Domingo precedente —
 // la práctica anterior a la reforma del leccionario de dos años, y más
-// razonable que no mostrar ninguna lectura. Se excluyen el Lunes, Martes
-// y Miércoles Santos: de otro modo repetirían días seguidos la Pasión
-// completa del Domingo de Ramos.
+// razonable que no mostrar ninguna lectura. El Lunes, Martes y Miércoles
+// Santos ya no necesitan excepción alguna: tienen lecturas propias en
+// lectionary.js y no llegan nunca al préstamo dominical.
 function getPreviousSunday(date) {
   const d = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12, 0, 0);
   d.setDate(d.getDate() - d.getDay());
@@ -85,7 +91,6 @@ function resolveCollectKey(dayInfo, date) {
 function resolveLectionaryKey(dayInfo, date) {
   const direct = getLectionaryKey(dayInfo);
   if (direct) return { key: direct, borrowedFromSunday: false };
-  if (dayInfo.key && dayInfo.key.endsWith('HolyWeek')) return { key: null, borrowedFromSunday: false };
   const prevKey = getLectionaryKey(LiturgicalCalendar.getDay(getPreviousSunday(date)));
   return prevKey ? { key: prevKey, borrowedFromSunday: true } : { key: null, borrowedFromSunday: false };
 }
@@ -100,17 +105,58 @@ const SEASON_MAP = {
   trinity: 'trinity', corpusChristi: 'trinity', sacredHeart: 'trinity',
 };
 
-const PREFIX_SEASONS = {
-  advent: 'advent', epi: 'epiphany', lent: 'lent', easter: 'easter', trinity: 'trinity', pentecostFeria: 'pentecost'
-};
+// El orden importa: 'christmasSunday'/'christmasFeria' antes que 'christmas',
+// 'pentecostFeria' antes que 'pentecost', 'preLent' antes que 'lent'.
+// Cubre todas las familias de claves que emite calendar.js, incluidas las
+// nuevas (christmasFeria_N, epiOctave_N, epiFeria{N}_{dow}, lentFeriaAsh_{dow},
+// ordinaryFeria{N}_{dow}).
+const PREFIX_SEASONS = [
+  ['advent',        'advent'],
+  ['christmas',     'christmas'],
+  ['circumcision',  'christmas'],
+  ['epi',           'epiphany'],
+  ['baptismLord',   'epiphany'],
+  ['preLent',       'preLent'],
+  ['lent',          'lent'],
+  ['easter',        'easter'],
+  ['ascension',     'easter'],
+  ['pentecostFeria','pentecost'],
+  ['pentecost',     'pentecost'],
+  ['trinity',       'trinity'],
+  ['ordinaryFeria', 'trinity'],
+];
 
 function getSeasonFromKey(dayKey) {
   if (!dayKey) return 'ordinary';
   if (SEASON_MAP[dayKey]) return SEASON_MAP[dayKey];
-  for (const [prefix, season] of Object.entries(PREFIX_SEASONS)) {
+  for (const [prefix, season] of PREFIX_SEASONS) {
     if (dayKey.startsWith(prefix)) return season;
   }
   return 'ordinary';
+}
+
+// calendar.js clasifica la temporada por FECHA y la adjunta a cada día
+// (day.season): es la fuente correcta, y la única que acierta con las fiestas
+// fijas, cuya clave es 'MM-DD' y no dice nada del tiempo litúrgico. Aquí solo
+// se traduce su vocabulario al que usan propers.js e intercessions.js.
+//  · 'passiontide' (Domingo de Pasión → Jueves Santo) no existe como clave de
+//    propios: el Tiempo de Pasión toma los del tiempo de Cuaresma.
+//  · getSeasonFromKey() queda como red de seguridad para las misas votivas y
+//    para cualquier objeto de día antiguo que no traiga `season`.
+const CALENDAR_SEASONS = {
+  advent: 'advent', christmas: 'christmas', epiphany: 'epiphany',
+  preLent: 'preLent', lent: 'lent', passiontide: 'lent', triduum: 'triduum',
+  easter: 'easter', pentecost: 'pentecost', trinity: 'trinity',
+};
+
+function resolveSeason(dayInfo, date) {
+  // Los días con clave propia conservan su clasificación explícita: es la que
+  // distingue el Triduo (Jueves Santo incluido) dentro del Tiempo de Pasión.
+  if (dayInfo && SEASON_MAP[dayInfo.key]) return SEASON_MAP[dayInfo.key];
+  const cal = (dayInfo && dayInfo.season) ||
+              (date && typeof LiturgicalCalendar !== 'undefined' ? LiturgicalCalendar.getSeason(date) : null);
+  if (cal && CALENDAR_SEASONS[cal]) return CALENDAR_SEASONS[cal];
+  return getSeasonFromKey(dayInfo && dayInfo.key);
 }
 
 // ══════════════════════════════════════════════════════════════════════════
@@ -137,21 +183,59 @@ async function generateLiturgy(date, canonType = 'roman', votiveType = 'none', l
   }
 
   const cycle = dayInfo.cycle;
-  const wcycle = dayInfo.wcycle;
-  const season = getSeasonFromKey(dayInfo.key);
+  // El ciclo ferial (I/II) ya no se anuncia: este misal no sirve leccionario
+  // ferial propio — las ferias repiten las lecturas del Domingo precedente —,
+  // de modo que rotular un ciclo ferial prometía una distinción que ninguna
+  // página llegaba a aplicar. El ciclo dominical A/B/C sí es real y se mantiene.
+  const season = resolveSeason(dayInfo, date);
   const { key: lKey, borrowedFromSunday } = resolveLectionaryKey(dayInfo, date);
   const readings = lKey ? Lectionary.getSundayReadings(lKey, cycle) : null;
   const key = dayInfo.key;
 
-  // Propios
-  const collect = Propers.getCollect(resolveCollectKey(dayInfo, date));
-  const preface = Propers.getPreface(key, season);
-  const introit = Propers.getIntroit(key, season);
-  const gradual = Propers.getGradual(key, season);
-  const offertory = Propers.getOffertory(key, season);
-  const communion = Propers.getCommunion(key, season);
-  const secret = Propers.getSecret(key, season);
-  const postcommunion = Propers.getPostcommunion(key, season);
+  // Propios. propers.js señala con `supplied: true` (más la temporada) los
+  // textos que no son los propios del día sino los del tiempo; takeProper()
+  // recoge esa señal en `suppliedProperNotes` y devuelve el texto en la misma
+  // forma de siempre, de modo que el motor funciona igual si propers.js aún no
+  // expone la señal.
+  const suppliedProperNotes = [];
+  const takeProper = (value, part, keepObject) => {
+    if (value && typeof value === 'object' && value.supplied === true) {
+      suppliedProperNotes.push({ part, season: value.season || season });
+      if (!keepObject && typeof value.text === 'string') return value.text;
+    }
+    return value;
+  };
+
+  // Los getters antiguos de propers.js devuelven solo el valor y pierden los
+  // metadatos, así que se consulta getProper() cuando está disponible: trae
+  // `supplied`, `rubric` y `omitted` junto al texto. Si no existiera (versión
+  // anterior de propers.js), se cae a los getters de siempre.
+  // propers.js nombra las piezas en inglés; la interfaz las rotula en español.
+  const PART_LABELS = {
+    collect: 'Colecta', preface: 'Prefacio', introit: 'Introito', gradual: 'Gradual',
+    offertory: 'Ofertorio', communion: 'Antífona de Comunión', secret: 'Secreta',
+    postcommunion: 'Poscomunión',
+  };
+  const proper = (part, k, getter) => {
+    if (typeof Propers.getProper === 'function') {
+      const r = Propers.getProper(part, k, season) || {};
+      if (r.supplied === true || r.omitted === true) {
+        suppliedProperNotes.push({ part: PART_LABELS[part] || part, season: r.from || r.season || season, rubric: r.rubric, omitted: r.omitted === true, note: r.note || null });
+      }
+      if (r.value !== undefined && r.value !== null) return r.value;
+    }
+    return getter();
+  };
+
+  const collectKey = resolveCollectKey(dayInfo, date);
+  const collect = proper('collect', collectKey, () => Propers.getCollect(collectKey)) || 'Colecta no disponible para este día.';
+  const preface = proper('preface', key, () => Propers.getPreface(key, season));
+  const introit = proper('introit', key, () => Propers.getIntroit(key, season)) || { ant:'' };
+  const gradual = proper('gradual', key, () => Propers.getGradual(key, season)) || null;
+  const offertory = proper('offertory', key, () => Propers.getOffertory(key, season)) || '';
+  const communion = proper('communion', key, () => Propers.getCommunion(key, season)) || '';
+  const secret = proper('secret', key, () => Propers.getSecret(key, season)) || '';
+  const postcommunion = proper('postcommunion', key, () => Propers.getPostcommunion(key, season)) || '';
 
   // Omisiones
   const omitGloria = omissions.some(o => o.part === 'gloria');
@@ -201,6 +285,7 @@ async function generateLiturgy(date, canonType = 'roman', votiveType = 'none', l
   // Conmemoraciones: detectar colisión con fiestas fijas desplazadas
   const occurrence = Commemorations.resolveOccurrence(dayInfo, date);
   const commemorations = occurrence.commemorations;
+  const omittedFeasts = occurrence.omitted || [];
 
   // Capturar el estado exacto de esta liturgia para que el Librito del Pueblo
   // (botón "📕 Librito") corresponda siempre a lo que se acaba de generar.
@@ -210,11 +295,11 @@ async function generateLiturgy(date, canonType = 'roman', votiveType = 'none', l
     omitGloria, omitCreed, omitAlleluia, canonType, intercessions, lang,
     secret, preface, postcommunion, omitJudica, season,
     commemorations, hancIgitur, useBenoedicamus, votiveType,
-    omissions, borrowedFromSunday,
+    omissions, borrowedFromSunday, omittedFeasts, suppliedProperNotes,
   };
 
   return buildLiturgyHTML({
-    date, dayInfo, cycle, wcycle, season, key, omissions,
+    date, dayInfo, cycle, season, key, omissions, omittedFeasts, suppliedProperNotes,
     readings, firstReading, psalmVerses, psalmAnt, secondReading, gospel,
     collect, preface, introit, gradualText, offertory, communion, secret, postcommunion,
     omitGloria, omitAlleluia, omitCreed, omitJudica, useBenoedicamus, veiled,
@@ -238,7 +323,7 @@ function buildLiturgyHTML(d) {
   const colorClass = `color-${d.dayInfo.color}`;
   const colorName = getColorName(d.dayInfo.color);
   const rankName = getRankName(d.dayInfo.rank);
-  const cycleInfo = `Ciclo dominical ${d.cycle} · Ciclo ferial ${d.wcycle}`;
+  const cycleInfo = `Ciclo dominical ${d.cycle}`;
 
   const fmtReading = (ref, data, label, type) => {
     if (!data) return '';
@@ -302,6 +387,50 @@ function buildLiturgyHTML(d) {
     return html;
   };
 
+  // ── RÚBRICAS DE TRASLACIÓN ─────────────────────────────────────────────
+  // calendar.js traslada las fiestas de I clase impedidas (Semana Santa,
+  // Triduo, Octava de Pascua, Miércoles de Ceniza, Octava de Navidad).
+  // Se anuncia en los dos extremos: en la fecha propia, adónde va la fiesta;
+  // en la fecha de destino, de dónde viene y qué cede el día.
+  const fmtDay = (v) => {
+    if (!v) return '';
+    const dt = (v instanceof Date) ? v : new Date(String(v) + 'T12:00:00');
+    return isNaN(dt.getTime()) ? String(v) : formatLiturgyDate(dt);
+  };
+  const tf = d.dayInfo.translatedFeast;
+  const translationHTML = [
+    tf ? `<p class="rubric">✠ La fiesta de ${tf.nameEs || tf.name}, impedida hoy, ${
+      (tf.to || tf.toISO)
+        ? `se traslada al ${fmtDay(tf.to || tf.toISO)}`
+        : 'se omite este año por no hallarse día libre'}.</p>` : '',
+    d.dayInfo.isTranslated
+      ? `<p class="rubric">✠ Fiesta trasladada${d.dayInfo.translatedFromISO ? ` desde el ${fmtDay(d.dayInfo.translatedFromISO)}` : ''}, por haber estado impedida en su fecha propia.${
+        d.dayInfo.displacedDay && d.dayInfo.displacedDay.nameEs
+          ? ` Hoy cede ante ella ${d.dayInfo.displacedDay.nameEs}.` : ''}</p>` : '',
+    (d.omittedFeasts || []).filter(f => f.reason === 'privileged').map(f =>
+      `<p class="rubric">✠ La fiesta de ${f.name} cede hoy ante el día privilegiado y no se conmemora.</p>`).join(''),
+  ].join('');
+
+  // Textos servidos del tiempo, no propios del día (señal `supplied` de
+  // propers.js). Se marcan uno a uno, con una rúbrica discreta junto al texto:
+  // «(Secreta del tiempo)», «(Introito del tiempo)»…
+  // Una pieza OMITIDA (`omitted: true` — p. ej. el Ofertorio y la Secreta del
+  // Viernes Santo, que la Misa de los Presantificados no tiene) no es una pieza
+  // suplida: no debe llevar la rúbrica «del tiempo» sino la nota que explica por
+  // qué no hay texto. Antes ambas señales se mezclaban y el Viernes Santo salía
+  // con «(Ofertorio del tiempo)» seguido de «[Antífona de ofertorio no
+  // disponible]», y con la Secreta en blanco y sin explicación.
+  const suppliedParts = new Set((d.suppliedProperNotes || [])
+    .filter(n => !n.omitted).map(n => n.part));
+  const omittedNotes = new Map((d.suppliedProperNotes || [])
+    .filter(n => n.omitted).map(n => [n.part, n.note]));
+  const suppliedMark = (part) => suppliedParts.has(part)
+    ? ` <em class="rubric">(${part} del tiempo)</em>` : '';
+  // Texto a mostrar en lugar de una pieza que este día no tiene. La nota la
+  // redacta propers.js; aquí no se inventa ninguna.
+  const omittedText = (part) => omittedNotes.has(part)
+    ? `<em class="rubric">${omittedNotes.get(part) || `[Hoy no se dice ${part}.]`}</em>` : null;
+
   const omissionHTML = d.omissions.length ?
     `<div class="omission-notes">
       <h3>✠ NOTAS DE OMISIONES Y VARIACIONES:</h3>
@@ -335,6 +464,8 @@ function buildLiturgyHTML(d) {
       </div>
     </div>
 
+    ${translationHTML}
+
     ${omissionHTML}
 
     <!-- ═══════════════ RITOS INICIALES ═══════════════ -->
@@ -363,7 +494,7 @@ function buildLiturgyHTML(d) {
 
     <!-- INTROITO -->
     <div class="mass-section">
-      <h3 class="section-title">✠ INTROITO</h3>
+      <h3 class="section-title">✠ INTROITO</h3>${suppliedMark('Introito')}
       <p class="rubric">(El Sacerdote impone y bendice el incienso, y turifica el altar)</p>
       <p class="rubric">Se canta o dice al llegar al altar.</p>
       <div class="liturgical-text-block">${d.introit ? d.introit.ant : '<em class="rubric">[Introito propio no disponible — usar el del Común]</em>'}</div>
@@ -388,7 +519,7 @@ function buildLiturgyHTML(d) {
 
     <!-- COLECTA + CONMEMORACIÓN -->
     <div class="mass-section">
-      <h3 class="section-title">✠ COLECTA DEL DÍA</h3>
+      <h3 class="section-title">✠ COLECTA DEL DÍA</h3>${suppliedMark('Colecta')}
       <div class="liturgical-text-block">${Canon.SALUTATION}</div>
       <div class="prayer-text collect-text">${withJesusBow(d.collect)}</div>
     </div>
@@ -409,7 +540,7 @@ function buildLiturgyHTML(d) {
 
       <!-- GRADUAL / ALELUYA / TRACTO -->
       <div class="gradual-section">
-        <h3 class="section-title">✠ ${d.omitAlleluia ? 'GRADUAL / TRACTO' : 'GRADUAL / ALELUYA'}</h3>
+        <h3 class="section-title">✠ ${d.omitAlleluia ? 'GRADUAL / TRACTO' : 'GRADUAL / ALELUYA'}</h3>${suppliedMark('Gradual')}
         ${d.omitAlleluia ?
       '<p class="rubric">El Aleluya no se canta desde Septuagésima hasta la Vigilia Pascual. Se usa el Tracto.</p>' :
       '<p class="rubric">Se canta el Aleluya con su versículo: <em>Aleluya, aleluya. V. ' + (function(g){ if(!g || !g.text) return 'Muéstranos, Señor, tu misericordia y danos tu salvación.'; let t = g.text.replace(/<[^>]*>?/gm, '').trim(); t = t.replace(/^\s*\d+[\s\-\.]*/, ''); t = t.replace(/^En aquel tiempo,\s*/i, ''); let m = t.match(/^([^.?!;]+[.?!;])/); return m ? m[1].trim() : t.substring(0, 80).trim() + '...'; })(d.gospel) + ' Aleluya.</em></p>'}
@@ -437,14 +568,14 @@ function buildLiturgyHTML(d) {
     <!-- ═══════════════ LITURGIA EUCARÍSTICA ═══════════════ -->
     <div class="mass-section">
       <h3 class="section-title main-section">✠ LITURGIA EUCARÍSTICA — OFERTORIO</h3>
-      <h4 class="section-title">ANTÍFONA DE OFERTORIO</h4>
+      <h4 class="section-title">ANTÍFONA DE OFERTORIO</h4>${suppliedMark('Ofertorio')}
       <p class="rubric">(El Sacerdote impone y bendice el incienso, y turifica el altar)</p>
-      <div class="liturgical-text-block">${d.offertory || '<em class="rubric">[Antífona de ofertorio no disponible]</em>'}</div>
+      <div class="liturgical-text-block">${d.offertory || omittedText('Ofertorio') || '<em class="rubric">[Antífona de ofertorio no disponible]</em>'}</div>
 
       <div class="liturgical-text-block">${Canon.OFFERTORY}</div>
 
-      <h4 class="section-title">ORACIÓN SOBRE LAS OFRENDAS (Secreta)</h4>
-      <div class="prayer-text">${d.secret}</div>
+      <h4 class="section-title">ORACIÓN SOBRE LAS OFRENDAS (Secreta)</h4>${suppliedMark('Secreta')}
+      <div class="prayer-text">${d.secret || omittedText('Secreta') || ''}</div>
     </div>
 
     ${d.canonType === '1662' ? `
@@ -518,7 +649,7 @@ function buildLiturgyHTML(d) {
       <h3 class="section-title">✠ SAGRADA COMUNIÓN</h3>
       <div class="liturgical-text-block">${Canon.COMMUNION_PREP}</div>
 
-      <h4 class="section-title">ANTÍFONA DE COMUNIÓN</h4>
+      <h4 class="section-title">ANTÍFONA DE COMUNIÓN</h4>${suppliedMark('Antífona de Comunión')}
       <div class="liturgical-text-block">${d.communion || ''}</div>
 
       <div class="liturgical-text-block">${Canon.ABLUTIONS}</div>
@@ -574,7 +705,7 @@ function buildLiturgyHTML(d) {
 
     <!-- POSCOMUNIÓN -->
     <div class="mass-section">
-      <h3 class="section-title">✠ ORACIÓN DE POSCOMUNIÓN</h3>
+      <h3 class="section-title">✠ ORACIÓN DE POSCOMUNIÓN</h3>${suppliedMark('Poscomunión')}
       <div class="prayer-text">${d.postcommunion}</div>
     </div>
 
@@ -609,7 +740,7 @@ function buildLiturgyHTML(d) {
     <!-- PIE -->
     <div class="liturgy-footer">
       <p>✠ Laus Deo Semper ✠</p>
-      <p class="footer-note">Generado según el Misal Anglicano · Ciclo ${d.cycle} · Año ferial ${d.wcycle}</p>
+      <p class="footer-note">Generado según el Misal Anglicano · Ciclo dominical ${d.cycle}</p>
     </div>
 
   </div>`;
@@ -640,7 +771,7 @@ function updateDayInfo() {
   document.getElementById('feast-name').textContent = dayInfo.nameEs || dayInfo.name;
   const colorName = getColorName(dayInfo.color);
   document.getElementById('season-info').textContent = `Color: ${colorName} · Rango: ${getRankName(dayInfo.rank)}`;
-  document.getElementById('cycle-info').textContent = `Ciclo dominical: ${dayInfo.cycle} · Ciclo ferial: ${dayInfo.wcycle}`;
+  document.getElementById('cycle-info').textContent = `Ciclo dominical: ${dayInfo.cycle}`;
 }
 
 async function handleGenerate() {

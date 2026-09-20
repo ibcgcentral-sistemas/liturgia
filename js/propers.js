@@ -1,6 +1,62 @@
 /**
  * propers.js — Colectas, Prefacios, Introitos, Graduales, Ofertorios, Comuniones
  * Todo en español — tradición del Misal Anglicano
+ *
+ * ══════════════════════════════════════════════════════════════════════════
+ *  CADENA DE RESPALDO POR TIEMPO  ·  CÓMO CONSUMIR LA SEÑAL `supplied`
+ * ══════════════════════════════════════════════════════════════════════════
+ *  Ningún propio se resuelve ya al texto de la Trinidad «por descarte». El
+ *  orden de búsqueda para TODA pieza (introito, gradual, ofertorio, comunión,
+ *  colecta, secreta, poscomunión, prefacio) es:
+ *
+ *     1. clave exacta del día  (p. ej. 'lent1', '11-02', 'easter3')
+ *     2. común de la fiesta    (Virgen María, Difuntos… ver FEAST_COMMON)
+ *     3. propio DEL TIEMPO     (Adviento, Navidad, Epifanía, Pre-Cuaresma,
+ *                               Cuaresma, Pasión, Pascua, Pentecostés, Trinidad)
+ *     4. texto genérico del Común (último recurso)
+ *
+ *  API CON METADATOS (la que debe usar app.js para poder imprimir la rúbrica):
+ *
+ *     Propers.getProper(part, dayKey, season)
+ *       part ∈ 'introit'|'gradual'|'offertory'|'communion'|'collect'|
+ *              'secret'|'postcommunion'|'preface'
+ *       season: el `season` que devuelve LiturgicalCalendar.getDay(date).season
+ *               ('advent'|'christmas'|'epiphany'|'preLent'|'lent'|'passiontide'|
+ *                'triduum'|'easter'|'pentecost'|'trinity'). Se puede omitir: en
+ *               ese caso se deduce de la clave del día. OJO: app.js pasa hoy el
+ *               resultado de su propio getSeasonFromKey(), que devuelve
+ *               'ordinary' para las fiestas fijas 'MM-DD'; ese valor se ignora
+ *               y se usa la deducción interna. Pasar dayInfo.season es mejor,
+ *               porque permite dar a una fiesta fija el propio del tiempo en
+ *               que cae.
+ *
+ *     Devuelve SIEMPRE un objeto:
+ *       {
+ *         value:    <el texto/objeto tal como lo devolvía la API antigua>,
+ *         supplied: true|false,      // true = NO es el propio del día
+ *         source:   'proper'|'common'|'season'|'generic'|'none',
+ *         from:     'lent' | 'bvm' | 'requiem' | null,   // de dónde se tomó
+ *         rubric:   '(Secreta del tiempo de Cuaresma, suplida)' | null,
+ *         omitted:  true            // solo cuando el día NO tiene esa pieza
+ *         note:     '…'             // motivo de la omisión
+ *       }
+ *
+ *     Uso previsto en app.js:
+ *         const s = Propers.getProper('secret', key, dayInfo.season);
+ *         html += s.omitted
+ *           ? `<em class="rubric">${s.note}</em>`
+ *           : `<div class="prayer-text">${s.value}</div>` +
+ *             (s.supplied ? `<em class="rubric">${s.rubric}</em>` : '');
+ *
+ *  API ANTIGUA (getIntroit, getSecret, …): intacta y con las MISMAS formas de
+ *  retorno de siempre (string, {ant}, {type,text}, {title,intro}); ahora se
+ *  limita a devolver `getProper(...).value`, de modo que app.js sigue
+ *  funcionando sin cambios hasta que se adapte.
+ *
+ *  REGLA ABSOLUTA: en este archivo NO se redacta ningún texto litúrgico nuevo.
+ *  Donde el Misal impreso haría falta y no hay texto, la cadena cae al genérico
+ *  y se marca `supplied`. Las piezas que faltan están listadas en
+ *  MISSING_TEXTS, al final del archivo, y expuestas como Propers.MISSING_TEXTS.
  */
 
 const Propers = (() => {
@@ -31,14 +87,30 @@ const Propers = (() => {
 
     baptismLord: `Oh Padre Eterno, que en el Bautismo de Jesús lo revelaste como tu Hijo, ungiéndolo con el Espíritu Santo; concede a todos los bautizados en su Nombre que, muriendo al pecado, resuciten a la justicia, y siendo sepultados con él en una muerte semejante a la suya, conozcan también el poder de su resurrección; que vive y reina contigo, en la unidad del mismo Espíritu Santo, un solo Dios, por los siglos de los siglos. Amén.`,
 
-    epi1: `Oh Señor, te suplicamos que recibas misericordiosamente las oraciones de tu pueblo que te invoca; y concede que conozcan y entiendan las cosas que deben hacer, y tengan gracia y poder para cumplirlas fielmente; por Jesucristo nuestro Señor. Amén.`,
-    epi2: `Dios Todopoderoso y Eterno, que gobiernas todas las cosas en el cielo y en la tierra; escucha misericordiosamente las súplicas de tu pueblo, y concédenos tu paz todos los días de nuestra vida; por Jesucristo nuestro Señor. Amén.`,
-    epi3: `Dios Todopoderoso y Eterno, mira misericordiosamente nuestras debilidades, y en todos nuestros peligros y necesidades extiende tu diestra para ayudarnos y defendernos; por Jesucristo nuestro Señor. Amén.`,
-    epi4: `Oh Dios, que sabes que estamos puestos en medio de tantos y tan grandes peligros, que por la fragilidad de nuestra naturaleza no podemos estar siempre firmes; concédenos tal fortaleza y protección que nos sostenga en todos los peligros y nos lleve a través de todas las tentaciones; por Jesucristo nuestro Señor. Amén.`,
-    epi5: `Oh Señor, te suplicamos que guardes tu Iglesia y familia continuamente en tu verdadera religión; para que los que se apoyan sólo en la esperanza de tu gracia celestial sean siempre defendidos por tu poderoso auxilio; por Jesucristo nuestro Señor. Amén.`,
-    epi6: `Oh Dios, cuyo bendito Hijo fue manifestado para destruir las obras del diablo y hacernos hijos de Dios y herederos de la vida eterna; concédenos, te suplicamos, que teniendo esta esperanza, nos purifiquemos como él es puro; para que cuando aparezca de nuevo con poder y gran gloria, seamos hechos semejantes a él en su reino eterno y glorioso; donde contigo, oh Padre, y contigo, oh Espíritu Santo, vive y reina, un solo Dios, por los siglos de los siglos. Amén.`,
-    epi7: `Oh Señor, que nos enseñas que sin caridad todo lo que hacemos nada vale; envía tu Espíritu Santo y derrama en nuestros corazones aquel excelentísimo don de la caridad, vínculo de la paz y de todas las virtudes, sin la cual quienquiera que vive es contado por muerto ante ti; concede esto por tu único Hijo Jesucristo. Amén.`,
-    epi8: `Oh Dios, que antes de la pasión de tu Hijo Unigénito revelaste su gloria en el santo monte; concede a nosotros tus siervos que, contemplando por la fe la luz de su rostro, seamos fortalecidos para llevar nuestra cruz y ser transformados a su semejanza, de gloria en gloria; por el mismo Jesucristo nuestro Señor. Amén.`,
+    // ── DESFASE DE EPIFANÍA (corregido) ─────────────────────────────────────
+    // calendar.js reserva el PRIMER domingo después de la Epifanía para el
+    // Bautismo del Señor y numera los siguientes epi1..epi5, titulándolos
+    // «Segundo…Sexto Domingo después de Epifanía»; lectionary.js les asigna
+    // coherentemente las lecturas del 2°…6°. Antes, epi1 llevaba la colecta del
+    // PRIMER Domingo después de la Epifanía del BCP: el desfase de un puesto se
+    // arrastraba toda la temporada y la colecta del último domingo (BCP VI)
+    // nunca se alcanzaba. Ahora epiN lleva la colecta BCP del (N+1)° domingo:
+    //   epi1 → BCP II   epi2 → BCP III   epi3 → BCP IV
+    //   epi4 → BCP V    epi5 → BCP VI
+    // Barrido 2024-2060: epi5 («Sexto Domingo después de Epifanía») es el
+    // máximo que el calendario puede emitir, de modo que las seis colectas
+    // BCP quedan cubiertas sin sobrar ni faltar ninguna.
+    epi1: `Dios Todopoderoso y Eterno, que gobiernas todas las cosas en el cielo y en la tierra; escucha misericordiosamente las súplicas de tu pueblo, y concédenos tu paz todos los días de nuestra vida; por Jesucristo nuestro Señor. Amén.`,
+    epi2: `Dios Todopoderoso y Eterno, mira misericordiosamente nuestras debilidades, y en todos nuestros peligros y necesidades extiende tu diestra para ayudarnos y defendernos; por Jesucristo nuestro Señor. Amén.`,
+    epi3: `Oh Dios, que sabes que estamos puestos en medio de tantos y tan grandes peligros, que por la fragilidad de nuestra naturaleza no podemos estar siempre firmes; concédenos tal fortaleza y protección que nos sostenga en todos los peligros y nos lleve a través de todas las tentaciones; por Jesucristo nuestro Señor. Amén.`,
+    epi4: `Oh Señor, te suplicamos que guardes tu Iglesia y familia continuamente en tu verdadera religión; para que los que se apoyan sólo en la esperanza de tu gracia celestial sean siempre defendidos por tu poderoso auxilio; por Jesucristo nuestro Señor. Amén.`,
+    epi5: `Oh Dios, cuyo bendito Hijo fue manifestado para destruir las obras del diablo y hacernos hijos de Dios y herederos de la vida eterna; concédenos, te suplicamos, que teniendo esta esperanza, nos purifiquemos como él es puro; para que cuando aparezca de nuevo con poder y gran gloria, seamos hechos semejantes a él en su reino eterno y glorioso; donde contigo, oh Padre, y contigo, oh Espíritu Santo, vive y reina, un solo Dios, por los siglos de los siglos. Amén.`,
+    // Colecta del PRIMER Domingo después de la Epifanía del BCP. Su domingo lo
+    // ocupa ahora el Bautismo del Señor (que tiene colecta propia), así que en
+    // vez de suprimirla se conserva como COLECTA DEL TIEMPO de la Epifanía:
+    // es el eslabón «del tiempo» de la cadena de respaldo para cualquier feria
+    // o fiesta de Epifanía sin colecta propia. No es texto inventado.
+    epiphanySeason: `Oh Señor, te suplicamos que recibas misericordiosamente las oraciones de tu pueblo que te invoca; y concede que conozcan y entiendan las cosas que deben hacer, y tengan gracia y poder para cumplirlas fielmente; por Jesucristo nuestro Señor. Amén.`,
 
     septuagesima: `Oh Señor, te suplicamos que oigas favorablemente las oraciones de tu pueblo; para que nosotros, que somos justamente castigados por nuestras ofensas, seamos misericordiosamente librados por tu bondad, para gloria de tu Nombre; por Jesucristo nuestro Salvador. Amén.`,
     sexagesima: `Oh Señor Dios, que ves que no ponemos nuestra confianza en cosa alguna que hagamos; concede misericordiosamente que por tu poder seamos defendidos contra toda adversidad; por Jesucristo nuestro Señor. Amén.`,
@@ -355,55 +427,358 @@ const Propers = (() => {
   };
 
   // ══════════════════════════════════════════════════════════════════════════
-  //  FUNCIONES DE BÚSQUEDA
+  //  TEXTOS QUE FALTAN (para transcribir del Misal impreso)
   // ══════════════════════════════════════════════════════════════════════════
-  function getPreface(dayKey, season) {
-    if (dayKey === 'goodFriday' || dayKey === 'holySaturday' || dayKey === 'lent5' || dayKey === 'palmSunday' || (dayKey && dayKey.endsWith('HolyWeek')) || dayKey === 'maundyThursday') return PREFACES.holyWeek;
-    if (dayKey === 'christmas' || dayKey === 'christmasSunday' || dayKey === 'circumcision') return PREFACES.christmas;
-    if (dayKey === 'epiphany' || dayKey === 'baptismLord' || (dayKey && dayKey.startsWith('epi'))) return PREFACES.epiphany;
-    if (dayKey === 'ascension') return PREFACES.ascension;
-    if (dayKey === 'easter' || (dayKey && dayKey.startsWith('easter'))) return PREFACES.easter;
-    if (dayKey === 'pentecost' || (dayKey && dayKey.startsWith('pentecostFeria'))) return PREFACES.pentecost;
-    if (dayKey === 'trinity') return PREFACES.trinity;
-    if (dayKey === 'corpusChristi') return PREFACES.corpusChristi;
-    if (dayKey === 'sacredHeart') return PREFACES.sacredHeart;
-    if (dayKey === '11-01') return PREFACES.allSaints;
-    if (dayKey === '11-02') return PREFACES.requiem;
-    if (dayKey === '08-15' || dayKey === '03-25') return PREFACES.bvm;
-    if (dayKey && dayKey.startsWith('advent')) return PREFACES.advent;
-    if (dayKey === 'ashWednesday' || (dayKey && dayKey.startsWith('lent'))) return PREFACES.lent;
-    if (dayKey === 'septuagesima' || dayKey === 'sexagesima' || dayKey === 'quinquagesima' || (dayKey && dayKey.startsWith('preLent'))) return PREFACES.common;
-    if (dayKey && dayKey.startsWith('trinity')) return PREFACES.trinity;
-    const apostleFeasts = ['06-29','11-30','12-21','07-25','08-24','02-24','05-01','06-11','09-21','10-28','04-25','10-18'];
-    if (apostleFeasts.includes(dayKey)) return PREFACES.apostles;
-    return PREFACES.common;
-  }
+  // Inventario explícito de las piezas para las que el archivo NO tiene texto
+  // propio ni del tiempo y, por tanto, caen al genérico del Común marcadas con
+  // `supplied`. NO se han redactado: se declaran aquí para que puedan
+  // transcribirse del Misal Anglicano impreso.
+  const MISSING_TEXTS = [
+    { part: 'secret',        need: 'Secreta del tiempo de Epifanía' },
+    { part: 'secret',        need: 'Secreta del tiempo de Pre-Cuaresma (Septuagésima)' },
+    { part: 'secret',        need: 'Secreta del tiempo de Cuaresma' },
+    { part: 'secret',        need: 'Secreta del Tiempo de Pasión y de la Semana Santa' },
+    { part: 'secret',        need: 'Secreta del Miércoles de Ceniza' },
+    { part: 'secret',        need: 'Secretas propias de los 28 Domingos después de la Trinidad' },
+    { part: 'secret',        need: 'Secreta de Corpus Christi y del Sagrado Corazón' },
+    { part: 'secret',        need: 'Secretas de las fiestas fijas no marianas (Apóstoles, Evangelistas, Todos los Santos, Transfiguración, Santa Cruz, San Miguel, comites Christi)' },
+    { part: 'postcommunion', need: 'Poscomunión del tiempo de Epifanía' },
+    { part: 'postcommunion', need: 'Poscomunión del tiempo de Pre-Cuaresma (Septuagésima)' },
+    { part: 'postcommunion', need: 'Poscomunión del tiempo de Cuaresma' },
+    { part: 'postcommunion', need: 'Poscomunión del Tiempo de Pasión y de la Semana Santa' },
+    { part: 'postcommunion', need: 'Poscomunión del Miércoles de Ceniza' },
+    { part: 'postcommunion', need: 'Oración sobre el pueblo del Viernes Santo (super populum)' },
+    { part: 'postcommunion', need: 'Poscomuniones propias de los 28 Domingos después de la Trinidad' },
+    { part: 'postcommunion', need: 'Poscomunión de Corpus Christi y del Sagrado Corazón' },
+    { part: 'postcommunion', need: 'Poscomuniones de las fiestas fijas no marianas' },
+    { part: 'introit',       need: 'Introito del tiempo de Pre-Cuaresma (Circumdederunt / Exsurge / Esto mihi)' },
+    { part: 'introit',       need: 'Introitos propios de los 28 Domingos después de la Trinidad' },
+    { part: 'introit',       need: 'Introitos de las fiestas fijas no marianas (incl. Todos los Santos, San José, Apóstoles)' },
+    { part: 'introit',       need: 'Introito del Jueves Santo, Viernes Santo y Sábado Santo' },
+    { part: 'gradual',       need: 'Graduales propios de los 28 Domingos después de la Trinidad' },
+    { part: 'gradual',       need: 'Graduales/Tractos de las fiestas fijas no marianas' },
+    { part: 'offertory',     need: 'Ofertorio del tiempo de Pre-Cuaresma' },
+    { part: 'offertory',     need: 'Ofertorios propios de Adviento II-IV, Cuaresma II-V y de los Domingos después de la Trinidad' },
+    { part: 'offertory',     need: 'Ofertorios de las fiestas fijas no marianas' },
+    { part: 'communion',     need: 'Comunión del tiempo de Pre-Cuaresma' },
+    { part: 'communion',     need: 'Comuniones propias de Adviento II-III, Cuaresma II-V y de los Domingos después de la Trinidad' },
+    { part: 'communion',     need: 'Comuniones de las fiestas fijas no marianas' },
+    { part: 'collect',       need: 'Colectas propias de las ferias de Cuaresma, Adviento y Tiempo de Navidad (hoy toman la del domingo precedente, uso admitido)' },
+  ];
 
-  function getFallback(map, key, season) {
-    if (map[key]) return map[key];
-    if (season && map[season]) return map[season];
-    // Only match by prefix if the key ends with a digit (e.g. 'trinity1' matches 'trinity')
-    // Avoid false positives like 'easterFeria3_1' matching 'easter'
-    if (key) {
-      const numSuffix = key.match(/^([a-zA-Z]+?)(\d+)$/);
-      if (numSuffix) {
-        if (map[numSuffix[1]]) return map[numSuffix[1]];
-        // Try generic fallback (e.g. trinityGeneric)
-        if (map[numSuffix[1] + 'Generic']) return map[numSuffix[1] + 'Generic'];
-      }
-    }
+  // ══════════════════════════════════════════════════════════════════════════
+  //  DEDUCCIÓN DEL TIEMPO LITÚRGICO A PARTIR DE LA CLAVE DEL DÍA
+  // ══════════════════════════════════════════════════════════════════════════
+  // Cubre las 420 claves que emite calendar.js (barrido 2024-2060). Devuelve
+  // null para las claves votivas (requiem, holySpirit, bvm), para las fiestas
+  // fijas 'MM-DD' —cuyo tiempo depende del año y solo lo sabe calendar.js— y
+  // para la clave de seguridad 'feria'.
+  const SEASON_RULES = [
+    [/^advent([1-4])?$/,                'advent'],
+    [/^adventFeria\d+_\d+$/,            'advent'],
+    [/^christmas$/,                     'christmas'],
+    [/^christmasSunday2?$/,             'christmas'],
+    [/^christmasFeria_\d+$/,            'christmas'],
+    [/^circumcision$/,                  'christmas'],
+    [/^epiphany$/,                      'epiphany'],
+    [/^baptismLord$/,                   'epiphany'],
+    [/^epi\d+$/,                        'epiphany'],
+    [/^epiOctave_\d+$/,                 'epiphany'],
+    [/^epiFeria\d+_\d+$/,               'epiphany'],
+    [/^(septuagesima|sexagesima|quinquagesima)$/, 'preLent'],
+    [/^preLentFeria_\d+$/,              'preLent'],
+    // Tiempo de Pasión ANTES que Cuaresma: lent5 (Domingo de Pasión) y toda la
+    // Semana de Pasión (lentFeria5_*, redefinida por calendar.js) pertenecen al
+    // Tiempo de Pasión, igual que la Semana Santa y el Jueves Santo.
+    [/^lent5$/,                         'passiontide'],
+    [/^lentFeria5_\d+$/,                'passiontide'],
+    [/^palmSunday$/,                    'passiontide'],
+    [/HolyWeek$/,                       'passiontide'],
+    [/^maundyThursday$/,                'passiontide'],
+    [/^(goodFriday|holySaturday)$/,     'triduum'],
+    [/^ashWednesday$/,                  'lent'],
+    [/^lent[1-4]$/,                     'lent'],
+    [/^lentFeria[1-4]_\d+$/,            'lent'],
+    [/^lentFeriaAsh_\d+$/,              'lent'],
+    [/^easter\d*$/,                     'easter'],
+    [/^easterFeria\d+_\d+$/,            'easter'],
+    [/^ascension$/,                     'easter'],
+    [/^pentecost$/,                     'pentecost'],
+    [/^pentecostFeria_\d+$/,            'pentecost'],
+    [/^trinity\d*$/,                    'trinity'],
+    [/^ordinaryFeria\d*(_\d+)?$/,       'trinity'],
+    [/^(corpusChristi|sacredHeart)$/,   'trinity'],
+  ];
+  const VALID_SEASONS = ['advent','christmas','epiphany','preLent','lent',
+                         'passiontide','triduum','easter','pentecost','trinity'];
+
+  function seasonOfKey(key) {
+    if (!key) return null;
+    for (const [re, s] of SEASON_RULES) if (re.test(key)) return s;
     return null;
   }
 
+  // El tiempo efectivo: la deducción por clave manda (es exacta para las 393
+  // claves temporales); si la clave no la da —fiestas fijas 'MM-DD'— se acepta
+  // el `season` que pase quien llama, siempre que sea uno de los reconocidos.
+  // app.js pasa hoy 'ordinary', que no lo es y por tanto se descarta.
+  // Fiestas fijas cuya fecha cae SIEMPRE en el mismo tiempo litúrgico, sea cual
+  // sea el año: sirven de red cuando quien llama no pasa un `season` válido
+  // (como hoy hace app.js, que pasa 'ordinary' para toda clave 'MM-DD').
+  // El resto de las fiestas fijas cambia de tiempo según el año y solo puede
+  // resolverse pasando dayInfo.season.
+  const FEAST_SEASON_FIXED = {
+    '12-21': 'advent',
+    '12-26': 'christmas',
+    '12-27': 'christmas',
+    '12-28': 'christmas',
+  };
+
+  function effectiveSeason(key, season) {
+    return seasonOfKey(key) ||
+           (VALID_SEASONS.indexOf(season) >= 0 ? season : null) ||
+           FEAST_SEASON_FIXED[key] || null;
+  }
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  COMÚN DE LAS FIESTAS FIJAS
+  // ══════════════════════════════════════════════════════════════════════════
+  // Antes ninguna clave 'MM-DD' aparecía en INTROITS/GRADUALS/OFFERTORIES/
+  // COMMUNIONS y getSeasonFromKey('11-01') devolvía 'ordinary' (que tampoco es
+  // clave): Todos los Santos, la Asunción, la Candelaria y San José cantaban
+  // los propios de la Trinidad. Las fiestas de la Virgen y la de los Fieles
+  // Difuntos tienen ya en este archivo los textos del Común correspondiente
+  // ('bvm', 'requiem'), así que se enlazan aquí. Para los Apóstoles solo existe
+  // el Prefacio; el resto de sus piezas sigue faltando (ver MISSING_TEXTS).
+  const FEAST_COMMON = {
+    '02-02': 'bvm',      // Purificación (Candelaria)
+    '03-25': 'bvm',      // Anunciación
+    '08-15': 'bvm',      // Asunción
+    '09-08': 'bvm',      // Natividad de la B.V.M.
+    '11-02': 'requiem',  // Fieles Difuntos
+  };
+  const APOSTLE_FEASTS = ['02-24','04-25','05-01','06-11','06-29','07-25',
+                          '08-24','09-21','10-18','10-28','11-30','12-21','12-27'];
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  CADENAS DE RESPALDO POR PIEZA
+  // ══════════════════════════════════════════════════════════════════════════
+  // Para cada pieza: el mapa de textos, qué clave usar como propio DEL TIEMPO
+  // y cuál como genérico del Común. Un tiempo ausente de `bySeason` significa
+  // que NO hay texto propio de ese tiempo en el archivo: la cadena salta al
+  // genérico y la pieza queda anotada en MISSING_TEXTS. No se inventa nada.
+  const CHAINS = {
+    introit: {
+      map: INTROITS, label: 'Introito', gender: 'm', generic: 'trinity',
+      bySeason: { advent:'advent1', christmas:'christmas', epiphany:'epiphany',
+                  lent:'lent1', passiontide:'lent5', triduum:'lent5',
+                  easter:'easter', pentecost:'pentecost', trinity:'trinity' },
+    },
+    gradual: {
+      map: GRADUALS, label: 'Gradual', gender: 'm', generic: 'trinityGeneric',
+      bySeason: { advent:'advent1', christmas:'christmas', epiphany:'epiphany',
+                  preLent:'septuagesima', lent:'lent1', passiontide:'lent5',
+                  triduum:'lent5', easter:'easter', pentecost:'pentecost',
+                  trinity:'trinityGeneric' },
+    },
+    offertory: {
+      map: OFFERTORIES, label: 'Ofertorio', gender: 'm', generic: 'trinity1',
+      bySeason: { advent:'advent1', christmas:'christmas', epiphany:'epiphany',
+                  lent:'lent1', passiontide:'lent1', triduum:'lent1',
+                  easter:'easter', pentecost:'pentecost', trinity:'trinity1' },
+    },
+    communion: {
+      map: COMMUNIONS, label: 'Comunión', gender: 'f', generic: 'trinity1',
+      bySeason: { advent:'advent1', christmas:'christmas', epiphany:'epiphany',
+                  lent:'lent1', passiontide:'lent1', triduum:'lent1',
+                  easter:'easter', pentecost:'pentecost', trinity:'trinity1' },
+    },
+    collect: {
+      map: COLLECTS, label: 'Colecta', gender: 'f', generic: 'trinity1',
+      bySeason: { advent:'advent1', christmas:'christmas',
+                  epiphany:'epiphanySeason', preLent:'septuagesima',
+                  lent:'lent1', passiontide:'lent5', triduum:'holySaturday',
+                  easter:'easter', pentecost:'pentecost', trinity:'trinity1' },
+    },
+    secret: {
+      map: SECRETS, label: 'Secreta', gender: 'f', generic: 'trinity',
+      // Faltan: epiphany, preLent, lent, passiontide, triduum.
+      bySeason: { advent:'advent1', christmas:'christmas', easter:'easter',
+                  pentecost:'pentecost', trinity:'trinity' },
+    },
+    postcommunion: {
+      map: POSTCOMMUNIONS, label: 'Poscomunión', gender: 'f', generic: 'trinity',
+      // Faltan: epiphany, preLent, lent, passiontide, triduum.
+      bySeason: { advent:'advent1', christmas:'christmas', easter:'easter',
+                  pentecost:'pentecost', trinity:'trinity' },
+    },
+  };
+
+  const SEASON_LABEL = {
+    advent:     'del tiempo de Adviento',
+    christmas:  'del tiempo de Navidad',
+    epiphany:   'del tiempo de Epifanía',
+    preLent:    'del tiempo de Pre-Cuaresma',
+    lent:       'del tiempo de Cuaresma',
+    passiontide:'del Tiempo de Pasión',
+    triduum:    'del Triduo Sacro',
+    easter:     'del tiempo de Pascua',
+    pentecost:  'del tiempo de Pentecostés',
+    trinity:    'del tiempo después de la Trinidad',
+  };
+  const COMMON_LABEL = {
+    bvm:     'del Común de la Santísima Virgen',
+    requiem: 'de la Misa de Difuntos',
+  };
+
+  function rubricFor(part, source, from) {
+    const c = CHAINS[part];
+    if (!c || source === 'proper') return null;
+    const suf = (c.gender === 'f') ? 'suplida' : 'suplido';
+    if (source === 'common')  return `(${c.label} ${COMMON_LABEL[from] || 'del Común'}, ${suf})`;
+    if (source === 'season')  return `(${c.label} ${SEASON_LABEL[from] || 'del tiempo'}, ${suf})`;
+    return `(${c.label} del Común, ${suf})`;
+  }
+
+  // ── Piezas que el día NO tiene ───────────────────────────────────────────
+  // El Viernes Santo se celebra la Misa de los Presantificados: no hay
+  // Ofertorio ni Secreta (ni Canon ni Prefacio). Antes rezaba la Secreta del
+  // tiempo de la Trinidad por puro descarte.
+  const OMITTED = {
+    goodFriday: {
+      offertory: 'La Misa de los Presantificados del Viernes Santo no tiene Ofertorio.',
+      secret:    'La Misa de los Presantificados del Viernes Santo no tiene Secreta: no hay ofrenda ni Canon.',
+    },
+  };
+
+  function none(part, key) {
+    const note = OMITTED[key] && OMITTED[key][part];
+    return { value: (part === 'introit') ? { ant:'' } : (part === 'gradual' ? null : ''),
+             supplied: false, source: 'none', from: null, rubric: null,
+             omitted: true, note: note || null };
+  }
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  RESOLUCIÓN GENERAL: clave exacta → Común de la fiesta → tiempo → genérico
+  // ══════════════════════════════════════════════════════════════════════════
+  function resolve(part, dayKey, season) {
+    if (part === 'preface') return resolvePreface(dayKey, season);
+    const c = CHAINS[part];
+    if (!c) throw new Error('Propers: pieza desconocida «' + part + '»');
+    if (OMITTED[dayKey] && OMITTED[dayKey][part]) return none(part, dayKey);
+
+    const map = c.map;
+    const hit = (k, source, from) => ({
+      value: map[k], supplied: source !== 'proper', source, from,
+      rubric: rubricFor(part, source, from), omitted: false, note: null,
+    });
+
+    // 1) clave exacta del día
+    if (dayKey && map[dayKey] !== undefined) return hit(dayKey, 'proper', null);
+
+    // 1 bis) alias histórico de calendar.js para las ferias del Tiempo Ordinario
+    if (dayKey && /^ordinaryFeria\d+_\d+$/.test(dayKey) && map['ordinaryFeria'] !== undefined) {
+      return hit('ordinaryFeria', 'proper', null);
+    }
+
+    // 2) Común de la fiesta fija (Virgen, Difuntos…)
+    const common = FEAST_COMMON[dayKey];
+    if (common && map[common] !== undefined) return hit(common, 'common', common);
+
+    // 3) propio del tiempo
+    const s = effectiveSeason(dayKey, season);
+    if (s && c.bySeason[s] && map[c.bySeason[s]] !== undefined) {
+      return hit(c.bySeason[s], 'season', s);
+    }
+
+    // 4) genérico del Común
+    if (map[c.generic] !== undefined) return hit(c.generic, 'generic', null);
+    return none(part, dayKey);
+  }
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  PREFACIO
+  // ══════════════════════════════════════════════════════════════════════════
+  // Antes la lista comparaba por igualdad exacta contra christmas /
+  // christmasSunday / circumcision, de modo que christmasSunday2, el 26, 27 y
+  // 28 de diciembre y las ferias christmasFeria_* de la Octava se quedaban con
+  // el Prefacio Común. Ahora el despacho es: fiesta concreta → tiempo deducido
+  // de la clave (que cubre las 420 claves de calendar.js) → Común.
+  // NOTA: un prefacio tomado del tiempo NO es una suplencia: el prefacio propio
+  // de un día de Adviento ES el de Adviento. Por eso `supplied` es siempre
+  // false para esta pieza y no lleva rúbrica.
+  const PREFACE_BY_SEASON = {
+    advent:     'advent',
+    christmas:  'christmas',
+    epiphany:   'epiphany',
+    preLent:    'common',
+    lent:       'lent',
+    passiontide:'holyWeek',
+    triduum:    'holyWeek',
+    easter:     'easter',
+    pentecost:  'pentecost',
+    trinity:    'trinity',
+  };
+  const PREFACE_BY_KEY = {
+    ascension: 'ascension',
+    trinity: 'trinity',
+    corpusChristi: 'corpusChristi',
+    sacredHeart: 'sacredHeart',
+    requiem: 'requiem',
+    holySpirit: 'pentecost',
+    bvm: 'bvm',
+    '11-01': 'allSaints',
+    '11-02': 'requiem',
+    '02-02': 'bvm',
+    '03-25': 'bvm',
+    '08-15': 'bvm',
+    '09-08': 'bvm',
+    // Los comites Christi (26, 27 y 28 de diciembre) caen dentro de la Octava
+    // de Navidad y llevan el Prefacio de la Natividad, no el de Apóstoles.
+    '12-26': 'christmas',
+    '12-27': 'christmas',
+    '12-28': 'christmas',
+  };
+  function resolvePreface(dayKey, season) {
+    const wrap = (name, source, from) => ({
+      value: PREFACES[name], supplied: false, source, from,
+      rubric: null, omitted: false, note: null,
+    });
+    if (dayKey && PREFACE_BY_KEY[dayKey]) return wrap(PREFACE_BY_KEY[dayKey], 'proper', null);
+    if (APOSTLE_FEASTS.indexOf(dayKey) >= 0) return wrap('apostles', 'proper', null);
+    // El Prefacio de la Santísima Trinidad se dice en los DOMINGOS del tiempo
+    // después de la Trinidad que no tienen prefacio propio; las ferias de ese
+    // tiempo (ordinaryFeria*) llevan el Prefacio Común. Se conserva así el
+    // comportamiento anterior, que en este punto era el correcto.
+    if (/^ordinaryFeria/.test(dayKey || '')) return wrap('common', 'season', 'trinity');
+    const s = effectiveSeason(dayKey, season);
+    if (s && PREFACE_BY_SEASON[s]) return wrap(PREFACE_BY_SEASON[s], 'season', s);
+    return wrap('common', 'generic', null);
+  }
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  API PÚBLICA
+  // ══════════════════════════════════════════════════════════════════════════
+  // getProper() devuelve texto + metadatos (`supplied`, `source`, `from`,
+  // `rubric`, `omitted`). Los getters antiguos devuelven solo el valor, con las
+  // mismas formas de retorno de siempre, para no romper app.js.
+  function getProper(part, dayKey, season) {
+    return resolve(part, dayKey, season);
+  }
+  const valueOf = (part, key, season) => resolve(part, key, season).value;
+
   return {
-    getCollect:      (key)         => COLLECTS[key] || COLLECTS['trinity15'] || 'Colecta no disponible para este día.',
-    getPreface:      (key, season) => getPreface(key, season),
-    getIntroit:      (key, season) => getFallback(INTROITS, key, season) || INTROITS['trinity'] || { ant:'' },
-    getGradual:      (key, season) => getFallback(GRADUALS, key, season) || GRADUALS['trinityGeneric'] || null,
-    getOffertory:    (key, season) => getFallback(OFFERTORIES, key, season) || OFFERTORIES['trinity1'] || '',
-    getCommunion:    (key, season) => getFallback(COMMUNIONS, key, season) || COMMUNIONS['trinity1'] || '',
-    getSecret:       (key, season) => getFallback(SECRETS, key, season) || SECRETS['trinity'] || '',
-    getPostcommunion:(key, season) => getFallback(POSTCOMMUNIONS, key, season) || POSTCOMMUNIONS['trinity'] || '',
-    PREFACES, COLLECTS,
+    getProper,
+    getCollect:      (key, season) => valueOf('collect', key, season) || 'Colecta no disponible para este día.',
+    getPreface:      (key, season) => valueOf('preface', key, season),
+    getIntroit:      (key, season) => valueOf('introit', key, season) || { ant:'' },
+    getGradual:      (key, season) => valueOf('gradual', key, season) || null,
+    getOffertory:    (key, season) => valueOf('offertory', key, season) || '',
+    getCommunion:    (key, season) => valueOf('communion', key, season) || '',
+    getSecret:       (key, season) => valueOf('secret', key, season) || '',
+    getPostcommunion:(key, season) => valueOf('postcommunion', key, season) || '',
+    seasonOfKey,
+    PREFACES, COLLECTS, INTROITS, GRADUALS, OFFERTORIES, COMMUNIONS,
+    SECRETS, POSTCOMMUNIONS, FEAST_COMMON, MISSING_TEXTS,
   };
 })();

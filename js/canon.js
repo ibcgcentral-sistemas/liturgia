@@ -420,7 +420,16 @@ const Canon = (() => {
     if (!dayKey) return null;
     if (COMMUNICANTES_EMBOLISMS_DATA[dayKey]) return dayKey;
     if (dayKey === 'christmasSunday' || dayKey === 'circumcision') return 'christmas';
+    // Las Octavas llevan su Communicantes propio durante toda la octava, no solo
+    // el día de la fiesta. calendar.js etiqueta ahora esas ferias con claves
+    // propias (christmasFeria_N para la Octava de Navidad, epiOctave_N para la de
+    // Epifanía), que no estaban mapeadas aquí: 546 días de 2024-2060 caían al
+    // Communicantes ordinario. pentecostFeria_N ya se trataba como octava en
+    // getHancIgitur(), pero no aquí.
     if (dayKey.startsWith('easterFeria1_')) return 'easter';
+    if (dayKey.startsWith('christmasFeria_')) return 'christmas';
+    if (dayKey.startsWith('epiOctave_')) return 'epiphany';
+    if (dayKey.startsWith('pentecostFeria')) return 'pentecost';
     return null;
   }
 
@@ -638,14 +647,17 @@ const Canon = (() => {
     return zip(data);
   }
 
-  // Ferias entre el Domingo de Pasión y el Domingo de Ramos: lunes-miércoles quedan
-  // etiquetados como lentFeria5_{1,2,3} (misma "semana" que el jueves-sábado ANTERIOR
-  // al Domingo de Pasión, que NO es Semana de Pasión) y jueves-sábado como lentFeria6_{4,5,6}.
+  // Ferias entre el Domingo de Pasión y el Domingo de Ramos. calendar.js numera
+  // ahora las semanas de Cuaresma a partir del Domingo que las abre, de modo que
+  // la Semana de Pasión ENTERA (lunes a sábado) es lentFeria5_{1..6}; la clave
+  // lentFeria6_* ya no se emite. Antes esta función esperaba el reparto anterior
+  // (lentFeria5_{1,2,3} + lentFeria6_{4,5,6}) y dejaba fuera el jueves, viernes y
+  // sábado de la Semana de Pasión — 105 días en 2024-2060 que conservaban el
+  // Judica me debiendo omitirlo.
   function isPassionWeekFeria(dayKey) {
     const m = dayKey && dayKey.match(/^lentFeria(\d+)_(\d+)$/);
     if (!m) return false;
-    const week = Number(m[1]), dow = Number(m[2]);
-    return (week === 5 && dow <= 3) || (week === 6 && dow >= 4);
+    return Number(m[1]) === 5;
   }
 
   function omitJudica(dayKey, color) {

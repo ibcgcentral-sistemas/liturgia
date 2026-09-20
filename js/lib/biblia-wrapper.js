@@ -38,7 +38,9 @@
     'Psalms':'Salmos','Psalm':'Salmos','Ps':'Salmos',
     'Proverbs':'Proverbios','Pr':'Proverbios',
     'Ecclesiastes':'Eclesiastés','Ec':'Eclesiastés',
-    'Song of Songs':'Cantar de los Cantares','Song':'Cantar de los Cantares',
+    // El libro se llama 'Cantar' (no 'Cantar de los Cantares') en la edición
+    // de la Biblia de Jerusalén que carga la app.
+    'Song of Songs':'Cantar','Song':'Cantar',
     'Wisdom':'Sabiduría','Wis':'Sabiduría',
     'Sirach':'Eclesiástico','Sir':'Eclesiástico',
     'Baruch':'Baruc','Bar':'Baruc',
@@ -54,7 +56,7 @@
     'Obadiah':'Abdías',
     'Jonah':'Jonás','Jon':'Jonás',
     'Micah':'Miqueas','Mic':'Miqueas',
-    'Nahum':'Nahúm','Na':'Nahúm',
+    'Nahum':'Nahún','Na':'Nahún',   // grafía real en la Biblia cargada: 'Nahún'
     'Habakkuk':'Habacuc','Hab':'Habacuc',
     'Zephaniah':'Sofonías','Zep':'Sofonías',
     'Haggai':'Ageo','Hag':'Ageo',
@@ -78,7 +80,7 @@
     '1 Timothy':'I Timoteo','1Ti':'I Timoteo','1 Tim':'I Timoteo',
     '2 Timothy':'II Timoteo','2Ti':'II Timoteo','2 Tim':'II Timoteo',
     'Titus':'Tito','Tit':'Tito',
-    'Philemon':'Filemón','Phm':'Filemón',
+    'Philemon':'Filemon','Phm':'Filemon',   // sin tilde en la Biblia cargada
     'Hebrews':'Hebreos','Heb':'Hebreos',
     'James':'Santiago','Jam':'Santiago','Jas':'Santiago',
     '1 Peter':'I Pedro','1Pe':'I Pedro','1 Pet':'I Pedro',
@@ -155,7 +157,18 @@
       } else if (verseOnly && lastChapter) {
         // Continuación de capítulo anterior: "22-26" → same chapter
         ranges.push({ chapter: lastChapter, verseStart: parseInt(verseOnly[1]), verseEnd: parseInt(verseOnly[2]) });
+      } else if (chOnly && lastChapter !== null) {
+        // Número suelto DESPUÉS de un segmento "cap:ver": es un VERSÍCULO del
+        // último capítulo citado, no un capítulo nuevo.
+        //   "Matthew 1:16,18-21,24"  →  1:16, 1:18-21, 1:24
+        // Antes, "24" caía en la rama de capítulo suelto y devolvía el capítulo
+        // 24 ENTERO, y además reasignaba lastChapter, contaminando todos los
+        // segmentos posteriores ("Psalm 31:3-4,6,8,16-17" → 6 entero, 8 entero,
+        // y luego 8:16-17). NO se toca lastChapter aquí.
+        const v = parseInt(chOnly[1]);
+        ranges.push({ chapter: lastChapter, verseStart: v, verseEnd: v });
       } else if (chOnly) {
+        // Capítulo suelto sin contexto previo ("Philemon 1"): capítulo entero.
         lastChapter = parseInt(chOnly[1]);
         ranges.push({ chapter: lastChapter, verseStart: 1, verseEnd: 999 });
       }

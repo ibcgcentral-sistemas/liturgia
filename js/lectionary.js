@@ -118,20 +118,43 @@ const Lectionary = (() => {
     // ═══════════════════════════════════════════════════════
     //  PRE-LENT (Traditional Anglican)
     // ═══════════════════════════════════════════════════════
+    // Los tres domingos de Pre-Cuaresma tienen PROPIOS FIJOS en el Misal
+    // tradicional: no se reparten en ciclo A/B/C, de modo que los tres ciclos
+    // llevan aquí deliberadamente el mismo contenido.
+    //   Epístola y Evangelio son los clásicos del Misal (Sarum / BCP / Romano):
+    //     Septuagésima  1 Co 9,24-27  ·  Mt 20,1-16 (los obreros de la viña)
+    //     Sexagésima    2 Co 11,19-33; 12,1-9  ·  Lc 8,4-15 (el sembrador)
+    //     Quincuagésima 1 Co 13,1-13  ·  Lc 18,31-43 (el ciego de Jericó)
+    //   Primera lectura y salmo se han añadido aquí (el Misal tradicional no
+    //   los prevé): el salmo es el del Introito propio de cada domingo, y la
+    //   primera lectura, la perícopa del AT que glosa el Evangelio del día.
+    //   La antífona cita literalmente el versículo del salmo correspondiente.
+    // ANTES este bloque era una copia literal de Cuaresma (sexagesima = lent2,
+    // septuagesima B/C = lent1, quinquagesima B = lent3, quinquagesima C =
+    // ashWednesday), lo que borraba por completo los propios de Pre-Cuaresma.
     septuagesima: {
-      A: { first:'Genesis 2:15-17,3:1-7',psalm:'Psalm 19:7-14', second:'Romans 5:12-19',     gospel:'Matthew 20:1-16', psalmAnt:'La ley del Señor es perfecta; da vida al alma.' },
-      B: { first:'Genesis 9:8-17',  psalm:'Psalm 25:1-10',      second:'1 Peter 3:18-22',    gospel:'Mark 1:9-15',     psalmAnt:'Tus caminos, Señor, son amor y verdad.' },
-      C: { first:'Deuteronomy 26:1-11',psalm:'Psalm 91:1-2,9-16',second:'Romans 10:8-13',   gospel:'Luke 4:1-13',     psalmAnt:'Señor, acompáñame en la tribulación.' },
+      // Introito: Ps 17(18),5-7 «Circumdederunt me gemitus mortis».
+      // Primera lectura: Is 55,6-9, «mis caminos no son vuestros caminos»,
+      // glosa del salario igual de Mt 20,1-16.
+      A: { first:'Isaiah 55:6-9',   psalm:'Psalm 18:2-7',       second:'1 Corinthians 9:24-27',gospel:'Matthew 20:1-16',psalmAnt:'Señor, roca mía y baluarte mío, mi liberador, mi Dios.' },
+      B: { first:'Isaiah 55:6-9',   psalm:'Psalm 18:2-7',       second:'1 Corinthians 9:24-27',gospel:'Matthew 20:1-16',psalmAnt:'Señor, roca mía y baluarte mío, mi liberador, mi Dios.' },
+      C: { first:'Isaiah 55:6-9',   psalm:'Psalm 18:2-7',       second:'1 Corinthians 9:24-27',gospel:'Matthew 20:1-16',psalmAnt:'Señor, roca mía y baluarte mío, mi liberador, mi Dios.' },
     },
     sexagesima: {
-      A: { first:'Genesis 12:1-4',  psalm:'Psalm 121:1-8',      second:'Romans 4:1-5,13-17', gospel:'John 3:1-17',     psalmAnt:'Nuestro auxilio viene del Señor, que hizo el cielo y la tierra.' },
-      B: { first:'Genesis 17:1-7,15-16',psalm:'Psalm 22:23-31', second:'Romans 4:13-25',     gospel:'Mark 8:31-38',    psalmAnt:'Los que buscan al Señor le alabarán.' },
-      C: { first:'Genesis 15:1-12,17-18',psalm:'Psalm 27:1-14', second:'Philippians 3:17-4:1',gospel:'Luke 13:31-35', psalmAnt:'El Señor es mi luz y mi salvación.' },
+      // Introito: Ps 43(44),23-26 «Exsurge, quare obdormis, Domine».
+      // Primera lectura: Is 55,10-11, la palabra que baja como la lluvia y
+      // hace germinar la semilla — glosa directa de la parábola del sembrador.
+      A: { first:'Isaiah 55:10-11', psalm:'Psalm 44:23-26',     second:'2 Corinthians 11:19-33,12:1-9',gospel:'Luke 8:4-15',psalmAnt:'¡Despierta ya! ¿Por qué duermes, Señor? ¡Levántate!' },
+      B: { first:'Isaiah 55:10-11', psalm:'Psalm 44:23-26',     second:'2 Corinthians 11:19-33,12:1-9',gospel:'Luke 8:4-15',psalmAnt:'¡Despierta ya! ¿Por qué duermes, Señor? ¡Levántate!' },
+      C: { first:'Isaiah 55:10-11', psalm:'Psalm 44:23-26',     second:'2 Corinthians 11:19-33,12:1-9',gospel:'Luke 8:4-15',psalmAnt:'¡Despierta ya! ¿Por qué duermes, Señor? ¡Levántate!' },
     },
     quinquagesima: {
-      A: { first:'Isaiah 35:1-10',  psalm:'Psalm 146:1-10',     second:'1 Corinthians 13:1-13',gospel:'Matthew 11:2-11',psalmAnt:'Señor, ven a salvarnos.' },
-      B: { first:'Exodus 20:1-17',  psalm:'Psalm 19:7-14',      second:'1 Corinthians 1:18-25',gospel:'John 2:13-22',  psalmAnt:'Tus palabras, Señor, son espíritu y vida.' },
-      C: { first:'Joel 2:1-2,12-17',psalm:'Psalm 51:1-17',     second:'2 Corinthians 5:20-6:10',gospel:'Matthew 6:1-6,16-21',psalmAnt:'Ten misericordia, Señor, porque hemos pecado.' },
+      // Introito: Ps 30(31),3-4 «Esto mihi in Deum protectorem».
+      // Primera lectura: Is 35,3-6, «se abrirán los ojos de los ciegos» —
+      // glosa de la curación del ciego de Jericó (Lc 18,35-43).
+      A: { first:'Isaiah 35:3-6',   psalm:'Psalm 31:2-6',       second:'1 Corinthians 13:1-13',gospel:'Luke 18:31-43', psalmAnt:'Sé para mí una roca de refugio, alcázar fuerte que me salve.' },
+      B: { first:'Isaiah 35:3-6',   psalm:'Psalm 31:2-6',       second:'1 Corinthians 13:1-13',gospel:'Luke 18:31-43', psalmAnt:'Sé para mí una roca de refugio, alcázar fuerte que me salve.' },
+      C: { first:'Isaiah 35:3-6',   psalm:'Psalm 31:2-6',       second:'1 Corinthians 13:1-13',gospel:'Luke 18:31-43', psalmAnt:'Sé para mí una roca de refugio, alcázar fuerte que me salve.' },
     },
 
     // ═══════════════════════════════════════════════════════
@@ -176,6 +199,37 @@ const Lectionary = (() => {
       B: { first:'Isaiah 50:4-9',   psalm:'Psalm 31:9-16',      second:'Philippians 2:5-11', gospel:'Mark 14:1-15:47',  psalmAnt:'Dios mío, Dios mío, ¿por qué me has abandonado?' },
       C: { first:'Isaiah 50:4-9',   psalm:'Psalm 31:9-16',      second:'Philippians 2:5-11', gospel:'Luke 19:28-40',    psalmAnt:'Dios mío, Dios mío, ¿por qué me has abandonado?' },
     },
+    // Lunes, Martes y Miércoles Santos. Faltaban por completo: calendar.js genera
+    // los tres días (mondayHolyWeek / tuesdayHolyWeek / wednesdayHolyWeek) y
+    // app.js excluye expresamente la Semana Santa del préstamo de lecturas del
+    // domingo precedente, de modo que se imprimían sin ninguna lectura.
+    // Se usa la forma `all:` (como las fiestas fijas) porque son propios fijos
+    // sin ciclo A/B/C. Sin epístola (second:null): el Misal tradicional asigna a
+    // estas ferias una sola lección profética más el Evangelio.
+    // El salmo es el del Introito propio y la antífona cita su versículo.
+    mondayHolyWeek: {
+      // Introito: Ps 34(35),1-3 «Iudica, Domine, nocentes me».
+      all: { first:'Isaiah 50:5-10', psalm:'Psalm 35:1-3', second:null, gospel:'John 12:1-9', psalmAnt:'Ataca, Señor, a los que me atacan; combate a quienes me combaten.' },
+    },
+    tuesdayHolyWeek: {
+      // Introito: Ps 66(67),2 (tras Gál 6,14 «Nos autem gloriari»).
+      // El Misal asigna aquí la Pasión según San Marcos (Mc 14-15) completa; se
+      // prefiere Jn 13,21-38 porque Mc 14,1-15,47 ya se lee íntegra el Domingo
+      // de Ramos del ciclo B (palmSunday.B) y repetirla no añadiría nada,
+      // mientras que el anuncio de la traición de Jn 13 no se lee ningún otro
+      // día de la Semana Santa (Jn 13,1-17.31-35 el Jueves Santo omite 21-30).
+      all: { first:'Jeremiah 11:18-20', psalm:'Psalm 67:1-2', second:null, gospel:'John 13:21-38', psalmAnt:'Dios nos tenga piedad y nos bendiga; haga brillar su rostro sobre nosotros.' },
+    },
+    wednesdayHolyWeek: {
+      // Introito: Ps 101(102),2 (tras Flp 2,10 «In nomine Iesu»).
+      // Aquí SÍ se conserva la Pasión completa (según San Lucas), al contrario
+      // que el Martes: Lucas no se lee entera en ningún otro día — el Domingo de
+      // Ramos del ciclo C (palmSunday.C) sólo trae la entrada en Jerusalén
+      // (Lc 19,28-40) —, y la estructura del archivo ya admite perícopas de esta
+      // extensión (cf. goodFriday: 'John 18:1-19:42').
+      all: { first:'Isaiah 62:11-63:7', psalm:'Psalm 102:1-2', second:null, gospel:'Luke 22:39-71,23:1-53', psalmAnt:'Señor, escucha mi oración; llegue hasta ti mi grito.' },
+    },
+
     maundyThursday: {
       A: { first:'Exodus 12:1-4,11-14',psalm:'Psalm 116:1-2,12-19',second:'1 Corinthians 11:23-26',gospel:'John 13:1-17,31-35',psalmAnt:'El cáliz de bendición es comunión con la Sangre de Cristo.' },
       B: { first:'Exodus 12:1-4,11-14',psalm:'Psalm 116:1-2,12-19',second:'1 Corinthians 11:23-26',gospel:'John 13:1-17,31-35',psalmAnt:'El cáliz de bendición es comunión con la Sangre de Cristo.' },
@@ -279,7 +333,10 @@ const Lectionary = (() => {
     trinity4: {
       A: { first:'Genesis 21:8-21', psalm:'Psalm 86:1-10,16-17',second:'Romans 6:1-11',      gospel:'Matthew 10:24-39',psalmAnt:'Señor, eres bueno y clemente.' },
       B: { first:'1 Samuel 17:32-49',psalm:'Psalm 9:9-20',     second:'2 Corinthians 6:1-13', gospel:'Mark 4:35-41',  psalmAnt:'El Señor juzgará al mundo con justicia.' },
-      C: { first:'1 Kings 19:1-4,8-15',psalm:'Psalm 42-43',    second:'Galatians 3:23-29',   gospel:'Luke 8:26-39',   psalmAnt:'Como el ciervo desea las corrientes de agua, así mi alma te desea a ti, Dios mío.' },
+      // El RCL pide «Salmos 42 y 43» (un solo poema en el hebreo). 'Psalm 42-43'
+      // no lo entiende parseRef (rango de capítulos sin ':'); se cita capítulo a
+      // capítulo para conservar el texto completo de ambos.
+      C: { first:'1 Kings 19:1-4,8-15',psalm:'Psalm 42:1-12,43:1-5',second:'Galatians 3:23-29',   gospel:'Luke 8:26-39',   psalmAnt:'Como el ciervo desea las corrientes de agua, así mi alma te desea a ti, Dios mío.' },
     },
     trinity5: {
       A: { first:'Genesis 22:1-14', psalm:'Psalm 13:1-6',      second:'Romans 6:12-23',      gospel:'Matthew 10:40-42',psalmAnt:'Señor, mira y respóndeme.' },
@@ -304,7 +361,9 @@ const Lectionary = (() => {
     trinity9: {
       A: { first:'Genesis 29:15-28',psalm:'Psalm 128:1-6',     second:'Romans 8:26-39',      gospel:'Matthew 13:31-33,44-52',psalmAnt:'Dichosos los que temen al Señor.' },
       B: { first:'2 Samuel 11:1-15',psalm:'Psalm 14:1-7',      second:'Ephesians 3:14-21',   gospel:'John 6:1-21',   psalmAnt:'El necio dice en su corazón: «No hay Dios».' },
-      C: { first:'Hosea 1:2-10',    psalm:'Psalm 85:1-13',     second:'Colossians 2:6-15,16-19',gospel:'Luke 11:1-13',psalmAnt:'Muéstranos, Señor, tu misericordia; danos tu salvación.' },
+      // Os 1:10 de la numeración inglesa es Os 2:1 en la Biblia de Jerusalén
+      // (Oseas 1 sólo tiene 9 versículos). Se cita a caballo para no perder texto.
+      C: { first:'Hosea 1:2-2:1',   psalm:'Psalm 85:1-13',     second:'Colossians 2:6-15,16-19',gospel:'Luke 11:1-13',psalmAnt:'Muéstranos, Señor, tu misericordia; danos tu salvación.' },
     },
     trinity10: {
       A: { first:'Genesis 32:22-31',psalm:'Psalm 17:1-7,15',   second:'Romans 9:1-5',        gospel:'Matthew 14:13-21',psalmAnt:'Yo, en mi justicia, veré tu rostro, Señor.' },
@@ -313,7 +372,10 @@ const Lectionary = (() => {
     },
     trinity11: {
       A: { first:'Genesis 37:1-4,12-28',psalm:'Psalm 105:1-6,16-22',second:'Romans 10:5-15',gospel:'Matthew 14:22-33',psalmAnt:'Recordad las maravillas que hizo el Señor.' },
-      B: { first:'2 Samuel 18:5-9,15,31-33',psalm:'Psalm 130:1-8',second:'Ephesians 4:25-5:2',gospel:'John 6:35,41-51',psalmAnt:'Desde lo hondo a ti grito, Señor.' },
+      // 2 S 18,33 de la numeración inglesa es 19,1 en la Biblia de Jerusalén
+      // (2 Samuel 18 sólo tiene 32 versículos): el llanto de David por Absalón
+      // se perdía. Se cita a caballo de los dos capítulos.
+      B: { first:'2 Samuel 18:5-9,15,18:31-19:1',psalm:'Psalm 130:1-8',second:'Ephesians 4:25-5:2',gospel:'John 6:35,41-51',psalmAnt:'Desde lo hondo a ti grito, Señor.' },
       C: { first:'Isaiah 1:1,10-20',psalm:'Psalm 50:1-8,22-23', second:'Hebrews 11:1-3,8-16', gospel:'Luke 12:32-40', psalmAnt:'A los rectos les mostraré el poder salvador de Dios.' },
     },
     trinity12: {
@@ -334,7 +396,9 @@ const Lectionary = (() => {
     trinity15: {
       A: { first:'Exodus 12:1-14',  psalm:'Psalm 149:1-9',     second:'Romans 13:8-14',      gospel:'Matthew 18:15-20',psalmAnt:'El Señor se complace en su pueblo.' },
       B: { first:'Proverbs 22:1-2,8-9,22-23',psalm:'Psalm 125:1-5',second:'James 2:1-10,14-17',gospel:'Mark 7:24-37',psalmAnt:'Los que confían en el Señor son como el monte Sión.' },
-      C: { first:'Deuteronomy 30:15-20',psalm:'Psalm 1:1-6',   second:'Philemon 1-21',        gospel:'Luke 14:25-33', psalmAnt:'Dichosos los que esperan en el Señor.' },
+      // Filemón tiene un solo capítulo: hay que citarlo como '1:1-21' para que
+      // parseRef lo reconozca ('Philemon 1-21' no casaba con ningún patrón).
+      C: { first:'Deuteronomy 30:15-20',psalm:'Psalm 1:1-6',   second:'Philemon 1:1-21',      gospel:'Luke 14:25-33', psalmAnt:'Dichosos los que esperan en el Señor.' },
     },
     trinity16: {
       A: { first:'Exodus 14:19-31', psalm:'Psalm 114:1-8',     second:'Romans 14:1-12',      gospel:'Matthew 18:21-35',psalmAnt:'Aleluya. Cuando salió Israel de Egipto.' },
@@ -369,7 +433,9 @@ const Lectionary = (() => {
     trinity22: {
       A: { first:'Deuteronomy 34:1-12',psalm:'Psalm 90:1-6,13-17',second:'1 Thessalonians 2:1-8',gospel:'Matthew 22:34-46',psalmAnt:'En todas las edades, Señor, has sido nuestro refugio.' },
       B: { first:'Jeremiah 31:7-9', psalm:'Psalm 126:1-6',     second:'Hebrews 7:23-28',      gospel:'Mark 10:46-52', psalmAnt:'El Señor ha estado grande con nosotros y estamos llenos de alegría.' },
-      C: { first:'Joel 2:23-32',    psalm:'Psalm 65:1-13',     second:'2 Timothy 4:6-8,16-18',gospel:'Luke 18:9-14',  psalmAnt:'La semilla que cae en buena tierra dará abundante cosecha.' },
+      // Jl 2:28-32 de la numeración inglesa es Jl 3:1-5 en la Biblia de Jerusalén
+      // (Joel 2 sólo tiene 27 versículos). Se cita a caballo para no perder texto.
+      C: { first:'Joel 2:23-3:5',   psalm:'Psalm 65:1-13',     second:'2 Timothy 4:6-8,16-18',gospel:'Luke 18:9-14',  psalmAnt:'La semilla que cae en buena tierra dará abundante cosecha.' },
     },
     trinity23: {
       A: { first:'Joshua 3:7-17',   psalm:'Psalm 107:1-7,33-37',second:'1 Thessalonians 2:9-13',gospel:'Matthew 23:1-12',psalmAnt:'Dad gracias al Señor, porque es bueno.' },
@@ -410,6 +476,14 @@ const Lectionary = (() => {
     // ═══════════════════════════════════════════════════════
     '01-06': {
       all: { first:'Isaiah 60:1-6', psalm:'Psalm 72:1-7,10-14', second:'Ephesians 3:1-12',  gospel:'Matthew 2:1-12',  psalmAnt:'Señor, todos los pueblos de la tierra te adorarán.' },
+    },
+    // 1 de enero. Existe ya la clave 'circumcision', pero calendar.js resuelve
+    // este día por su fecha fija ('01-01') antes de llegar a esa rama, de modo
+    // que los 1 de enero se imprimían SIN lecturas (27 días en 2024-2050).
+    // Se replica aquí el propio de la Circuncisión bajo la clave de fecha para
+    // que funcione con cualquiera de las dos resoluciones.
+    '01-01': {
+      all: { first:'Numbers 6:22-27', psalm:'Psalm 8:1-9', second:'Galatians 4:4-7', gospel:'Luke 2:15-21', psalmAnt:'¡Cuán glorioso es tu nombre, Señor Dios nuestro, en toda la tierra!' },
     },
     '02-02': {
       all: { first:'Malachi 3:1-4', psalm:'Psalm 24:7-10', second:'Hebrews 2:14-18', gospel:'Luke 2:22-40', psalmAnt:'¿Quién es este Rey de la gloria? El Señor de los ejércitos.' },
