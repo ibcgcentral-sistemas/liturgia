@@ -40,6 +40,19 @@ function resolveLectionaryKey(dayInfo, date) {
   return { key: null, borrowedFromSunday: false };
 }
 
+// La Colecta del Día toma prestada la del Domingo/fiesta precedente cuando la
+// feria no tiene una propia — a diferencia de resolveLectionaryKey(), esto NO
+// excluye la Semana Santa: repetir la Colecta de Ramos el Lunes/Martes/
+// Miércoles Santo es correcto (a diferencia de repetir la Pasión completa).
+// Sin esto, BCPPropers.getCollect() caía siempre a "Proper 11" en cualquier
+// feria de cualquier época del año — Adviento, Cuaresma, Navidad, Pascua...
+function resolveCollectKey(dayInfo, date) {
+  if (BCPPropers.COLLECTS[dayInfo.key]) return dayInfo.key;
+  const prevInfo = BCPCalendar.getDay(getPreviousSunday(date));
+  if (BCPPropers.COLLECTS[prevInfo.key]) return prevInfo.key;
+  return dayInfo.key;
+}
+
 // ══════════════════════════════════════════════════════════════════════════
 //  GENERACIÓN DE LA LITURGIA
 // ══════════════════════════════════════════════════════════════════════════
@@ -48,7 +61,7 @@ async function generateLiturgy(date) {
   const { key: lKey, borrowedFromSunday, cycle: borrowedCycle } = resolveLectionaryKey(dayInfo, date);
   const readings = lKey ? BCPLectionary.getSundayReadings(lKey, borrowedCycle || dayInfo.cycle) : null;
 
-  const collect = BCPPropers.getCollect(dayInfo.key);
+  const collect = BCPPropers.getCollect(resolveCollectKey(dayInfo, date));
   const preface = BCPPropers.getPreface(dayInfo.key, dayInfo.season);
 
   let firstReading = null, psalmVerses = [], secondReading = null, gospel = null, psalmAnt = '';
@@ -237,7 +250,7 @@ function buildLiturgyHTML(d) {
 
     <div class="mass-section">
       <h3 class="section-title">✠ LA FRACCIÓN</h3>
-      <div class="liturgical-text-block">${BCPEucharist.FRACTION}</div>
+      <div class="liturgical-text-block">${isLent ? BCPEucharist.FRACTION_LENT : BCPEucharist.FRACTION}</div>
       <h4 class="section-title">ORACIÓN DE HUMILDE ACCESO</h4>
       <div class="liturgical-text-block">${BCPEucharist.HUMBLE_ACCESS}</div>
       <h4 class="section-title">EL AGNUS DEI</h4>

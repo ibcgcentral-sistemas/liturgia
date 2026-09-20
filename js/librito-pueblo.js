@@ -75,7 +75,7 @@ const LibritoPueblo = (() => {
         <div class="librito-instruction">
           <p><strong>Se levanta.</strong> El Sacerdote asperja al pueblo con agua bendita mientras se canta:</p>
         </div>
-        <div class="liturgical-text-block">${Canon.ASPERGES_ME}</div>
+        <div class="liturgical-text-block">${Canon.getAspergesMe(key)}</div>
       </section>
         `
       })() : ''}

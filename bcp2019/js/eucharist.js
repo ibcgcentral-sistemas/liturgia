@@ -207,12 +207,18 @@ const BCPEucharist = (() => {
     { type: 'TODOS', text: 'Padre Nuestro que estás en el cielo, santificado sea tu Nombre, venga tu reino, hágase tu voluntad, en la tierra como en el cielo. Danos hoy nuestro pan de cada día. Perdona nuestras ofensas, como también nosotros perdonamos a los que nos ofenden. No nos dejes caer en tentación y líbranos del mal. Porque tuyo es el reino, tuyo es el poder, y tuya es la gloria, ahora y por siempre. Amén.' },
   ];
 
-  // ── LA FRACCIÓN ───────────────────────────────────────────────────────────
+  // ── LA FRACCIÓN (con variante de Cuaresma, sin Aleluya) ─────────────────
   const FRACTION_DATA = [
     { type: 'R', text: 'Si el Pan consagrado no se partió antes, el Celebrante lo parte ahora. Se guarda un período de silencio.' },
     { type: 'CEL', text: '[Aleluya.] Cristo, nuestra Pascua, es sacrificado por nosotros.' },
     { type: 'PUEBLO', text: 'Celebremos la fiesta. [Aleluya.]' },
     { type: 'R', text: 'En Cuaresma se omite el Aleluya, y puede omitirse en otros momentos excepto en Pascua.' },
+  ];
+  const FRACTION_LENT_DATA = [
+    { type: 'R', text: 'Si el Pan consagrado no se partió antes, el Celebrante lo parte ahora. Se guarda un período de silencio.' },
+    { type: 'CEL', text: 'Cristo, nuestra Pascua, es sacrificado por nosotros.' },
+    { type: 'PUEBLO', text: 'Celebremos la fiesta.' },
+    { type: 'R', text: 'En Cuaresma se omite el Aleluya.' },
   ];
 
   // ── ORACIÓN DE HUMILDE ACCESO ────────────────────────────────────────────
@@ -280,6 +286,7 @@ const BCPEucharist = (() => {
     PRAYER_OF_CONSECRATION: render(PRAYER_OF_CONSECRATION_DATA),
     LORDS_PRAYER: render(LORDS_PRAYER_DATA),
     FRACTION: render(FRACTION_DATA),
+    FRACTION_LENT: render(FRACTION_LENT_DATA),
     HUMBLE_ACCESS: render(HUMBLE_ACCESS_DATA),
     AGNUS_DEI: render(AGNUS_DEI_DATA),
     ADMINISTRATION: render(ADMINISTRATION_DATA),

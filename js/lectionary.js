@@ -48,6 +48,13 @@ const Lectionary = (() => {
       B: { first:'Isaiah 61:10-62:3',psalm:'Psalm 148:1-14',   second:'Galatians 4:4-7',    gospel:'Luke 2:22-40',      psalmAnt:'Alaben todos el nombre del Señor.' },
       C: { first:'1 Samuel 2:18-20,26',psalm:'Psalm 148:1-14', second:'Colossians 3:12-17', gospel:'Luke 2:41-52',      psalmAnt:'Alaben todos el nombre del Señor.' },
     },
+    // Segundo Domingo después de Navidad: lectura fija del RCL, no varía por
+    // ciclo (solo existe en años con dos domingos entre Navidad y Epifanía).
+    christmasSunday2: {
+      A: { first:'Jeremiah 31:7-14', psalm:'Psalm 84:1-8', second:'Ephesians 1:3-14', gospel:'John 1:1-18', psalmAnt:'Cuán amable es tu morada, Señor de los ejércitos.' },
+      B: { first:'Jeremiah 31:7-14', psalm:'Psalm 84:1-8', second:'Ephesians 1:3-14', gospel:'John 1:1-18', psalmAnt:'Cuán amable es tu morada, Señor de los ejércitos.' },
+      C: { first:'Jeremiah 31:7-14', psalm:'Psalm 84:1-8', second:'Ephesians 1:3-14', gospel:'John 1:1-18', psalmAnt:'Cuán amable es tu morada, Señor de los ejércitos.' },
+    },
     circumcision: {
       A: { first:'Numbers 6:22-27', psalm:'Psalm 8:1-9',        second:'Galatians 4:4-7',    gospel:'Luke 2:15-21',      psalmAnt:'¡Cuán glorioso es tu nombre, Señor Dios nuestro, en toda la tierra!' },
       B: { first:'Numbers 6:22-27', psalm:'Psalm 8:1-9',        second:'Galatians 4:4-7',    gospel:'Luke 2:15-21',      psalmAnt:'¡Cuán glorioso es tu nombre, Señor Dios nuestro, en toda la tierra!' },

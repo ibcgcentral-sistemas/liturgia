@@ -318,8 +318,8 @@ const Canon = (() => {
     { type: 'SP', es: 'Rocíame, Señor, con hisopo, y quedaré limpio; lávame, y quedaré más blanco que la nieve.', la: 'Asperges me, Domine, hyssopo, et mundabor: lavabis me, et super nivem dealbabor.' },
     { type: 'S', es: 'Salmo 50. Ten piedad de mí, oh Dios, según tu gran misericordia.', la: 'Miserere mei, Deus, secundum magnam misericordiam tuam.' },
     { type: 'R', es: 'Durante el Tiempo de Pasión (desde el Domingo de Pasión hasta el Miércoles Santo) se omite el Gloria al Padre.', la: 'In Tempore Passionis omittitur Gloria Patri.' },
-    { type: 'S', es: 'Gloria al Padre, y al Hijo, y al Espíritu Santo.', la: 'Gloria Patri, et Filio, et Spiritui Sancto.' },
-    { type: 'P', es: 'Como era en el principio, ahora y siempre, por los siglos de los siglos. Amén.', la: 'Sicut erat in principio, et nunc, et semper: et in saecula saeculorum. Amen.' },
+    { type: 'S', es: 'Gloria al Padre, y al Hijo, y al Espíritu Santo.', la: 'Gloria Patri, et Filio, et Spiritui Sancto.', omitInPassiontide: true },
+    { type: 'P', es: 'Como era en el principio, ahora y siempre, por los siglos de los siglos. Amén.', la: 'Sicut erat in principio, et nunc, et semper: et in saecula saeculorum. Amen.', omitInPassiontide: true },
     { type: 'SP', es: 'Rocíame, Señor, con hisopo, y quedaré limpio; lávame, y quedaré más blanco que la nieve.', la: 'Asperges me, Domine, hyssopo, et mundabor: lavabis me, et super nivem dealbabor.' },
     { type: 'S', es: 'Muéstranos, Señor, tu misericordia.', la: 'Ostende nobis, Domine, misericordiam tuam.' },
     { type: 'P', es: 'Y danos tu salvación.', la: 'Et salutare tuum da nobis.' },
@@ -655,11 +655,20 @@ const Canon = (() => {
       isPassionWeekFeria(dayKey);  // Semana de Pasión (ferias entre Dom. de Pasión y Dom. de Ramos)
   }
 
+  // El Asperges solo se reza en domingo, así que el único par de domingos que cae
+  // dentro del Tiempo de Pasión (Dom. de Pasión → Miércoles Santo) es este.
+  function getAspergesMe(dayKey) {
+    const inPassiontide = dayKey === 'lent5' || dayKey === 'palmSunday';
+    const data = inPassiontide ? ASPERGES_ME_DATA.filter(item => !item.omitInPassiontide) : ASPERGES_ME_DATA;
+    return zip(data);
+  }
+
   const CanonInterface = {
     setLanguage,
     getCommunicantesEmbolism,
     getHancIgitur,
     omitJudica,
+    getAspergesMe,
     CANON_1549,
     CANON_1662,
     CHURCH_MILITANT_1662,
@@ -689,7 +698,6 @@ const Canon = (() => {
     'LAST_GOSPEL': LAST_GOSPEL_DATA,
     'LEONINE': LEONINE_DATA,
     'LEONINE_PASCHALTIDE': LEONINE_PASCHALTIDE_DATA,
-    'ASPERGES_ME': ASPERGES_ME_DATA,
     'VIDI_AQUAM': VIDI_AQUAM_DATA
   };
 

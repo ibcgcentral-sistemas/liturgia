@@ -7,7 +7,7 @@
  * de archivos con su número de versión exacto.
  */
 
-const CACHE_NAME = 'misal-anglicano-v1';
+const CACHE_NAME = 'misal-anglicano-v2';
 const PRECACHE_URLS = [
   '/index.html',
   '/manifest.json',

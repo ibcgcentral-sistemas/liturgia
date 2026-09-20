@@ -20,6 +20,10 @@ const Propers = (() => {
     christmas: `Dios Todopoderoso, que nos has dado a tu Hijo Unigénito para que tomara nuestra naturaleza, y como en este tiempo naciera de una Virgen pura; concede que nosotros, regenerados y hechos tus hijos por adopción y gracia, seamos renovados cada día por tu Espíritu Santo; por el mismo nuestro Señor Jesucristo, que vive y reina contigo y el mismo Espíritu, un solo Dios, por los siglos de los siglos. Amén.`,
 
     christmasSunday: `Dios Todopoderoso, que nos has dado a tu Hijo Unigénito para que tomara nuestra naturaleza; concede que, regenerados y hechos tus hijos por adopción y gracia, seamos renovados cada día por tu Espíritu Santo; por el mismo Jesucristo nuestro Señor. Amén.`,
+    // Reutiliza la colecta de christmasSunday: mismo tiempo litúrgico, mismo tema
+    // (la Encarnación); no existe un texto clásico 1549/1662 propio de este
+    // segundo domingo, que es una adición posterior del leccionario.
+    christmasSunday2: `Dios Todopoderoso, que nos has dado a tu Hijo Unigénito para que tomara nuestra naturaleza; concede que, regenerados y hechos tus hijos por adopción y gracia, seamos renovados cada día por tu Espíritu Santo; por el mismo Jesucristo nuestro Señor. Amén.`,
 
     circumcision: `Dios Todopoderoso, que hiciste que tu Hijo bendito fuera circuncidado y obediente a la ley, por el hombre; concédenos la verdadera circuncisión del Espíritu; para que, mortificados nuestros corazones y todos nuestros miembros de toda concupiscencia mundana y carnal, obedezcamos en todo tu santa voluntad; por el mismo tu Hijo Jesucristo nuestro Señor. Amén.`,
 

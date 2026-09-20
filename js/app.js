@@ -36,7 +36,7 @@ async function fetchScripture(ref) {
 
 const DIRECT_LECTIONARY_KEYS = new Set([
   'advent1', 'advent2', 'advent3', 'advent4',
-  'christmas', 'christmasSunday', 'circumcision',
+  'christmas', 'christmasSunday', 'christmasSunday2', 'circumcision',
   'epiphany', 'baptismLord',
   'epi1', 'epi2', 'epi3', 'epi4', 'epi5', 'epi6', 'epi7', 'epi8',
   'septuagesima', 'sexagesima', 'quinquagesima',
@@ -65,6 +65,21 @@ function getPreviousSunday(date) {
   const d = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12, 0, 0);
   d.setDate(d.getDate() - d.getDay());
   return d;
+}
+
+// La Colecta del Día toma prestada la del Domingo/fiesta precedente cuando la
+// feria no tiene una propia — a diferencia de resolveLectionaryKey(), esto NO
+// excluye la Semana Santa: repetir la Colecta de Ramos el Lunes/Martes/
+// Miércoles Santo es correcto (a diferencia de repetir la Pasión completa).
+// Sin esto, Propers.getCollect() caía siempre a la del 15° Domingo después de
+// la Trinidad en cualquier feria de cualquier época del año — confirmado por
+// simulación: 7.619 de 7.646 ferias (99,6%) en 2024-2050, incluidas 915 de
+// Cuaresma y 535 de Adviento.
+function resolveCollectKey(dayInfo, date) {
+  if (Propers.COLLECTS[dayInfo.key]) return dayInfo.key;
+  const prevInfo = LiturgicalCalendar.getDay(getPreviousSunday(date));
+  if (Propers.COLLECTS[prevInfo.key]) return prevInfo.key;
+  return dayInfo.key;
 }
 
 function resolveLectionaryKey(dayInfo, date) {
@@ -129,7 +144,7 @@ async function generateLiturgy(date, canonType = 'roman', votiveType = 'none', l
   const key = dayInfo.key;
 
   // Propios
-  const collect = Propers.getCollect(key);
+  const collect = Propers.getCollect(resolveCollectKey(dayInfo, date));
   const preface = Propers.getPreface(key, season);
   const introit = Propers.getIntroit(key, season);
   const gradual = Propers.getGradual(key, season);
@@ -331,7 +346,7 @@ function buildLiturgyHTML(d) {
         ? `<h4 class="section-title">RITO DE ASPERSIÓN — VIDI AQUAM</h4>
            <div class="liturgical-text-block">${Canon.VIDI_AQUAM}</div>`
         : `<h4 class="section-title">RITO DE ASPERSIÓN — ASPERGES ME</h4>
-           <div class="liturgical-text-block">${Canon.ASPERGES_ME}</div>`
+           <div class="liturgical-text-block">${Canon.getAspergesMe(d.key)}</div>`
     ) : ''}
 
       ${!d.omitJudica ? `

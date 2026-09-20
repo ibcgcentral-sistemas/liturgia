@@ -327,3 +327,29 @@ ambos generadores se instalen como apps independientes en el mismo dispositivo.
 
 **Verificado por:** Claude Code Assistant
 **Fecha de verificación:** 2026-08-05
+
+---
+
+## ✠ Séptima entrega — 2026-09-06 (Auditoría: fiestas fijas invisibles y colecta de las ferias)
+
+Revisión de extremo a extremo a pedido del usuario, con el mismo método de simulación multi-año ya usado en las auditorías del Misal Anglicano. Se encontraron y corrigieron 4 bugs reales; no se tocó ningún archivo del Misal Anglicano (`../js`, `../css`).
+
+### BUG encontrado y corregido: 16 de las 30 fiestas fijas del santoral eran invisibles el 47% de las veces
+`js/calendar.js` — `FIXED_FEASTS` se revisaba **después** de los bloques de feria genérica de cada tiempo (Adviento, Navidad, Epifanía, Cuaresma, Semana Santa, Pascua), así que cualquier fiesta fija que cayera dentro de esos tiempos quedaba tapada por la feria genérica — el mismo defecto ya documentado como corregido en el Misal Anglicano (`VERIFICACION.md`, BUG #12), reintroducido aquí de forma independiente. Simulé 2024-2050 (694 apariciones en día de semana de las 30 fiestas): solo 369 (53%) se mostraban. **Fix:** cada uno de los 7 bloques de feria genérica ahora exige `!FIXED_FEASTS[md]`, cediendo el paso a la fiesta fija — sin mover ningún bloque de lugar. Re-verificado: 692/694 (99,7%); las 2 excepciones restantes son la Anunciación cayendo exactamente en Jueves Santo (dos años en todo el rango) — ahí gana la Semana Santa correctamente, mismo criterio que ya usa el Misal Anglicano para ese mismo choque.
+
+### BUG encontrado y corregido: la Colecta del Día en cualquier feria caía siempre a "Propio 11", sin importar la época del año
+`js/propers.js` (`getCollect`) no tenía ningún mecanismo de sustitución por temporada — a diferencia de las lecturas (que sí toman prestadas las del domingo precedente vía `resolveLectionaryKey`), la Colecta de una feria de Adviento, Cuaresma, Navidad o Pascua mostraba siempre la misma colecta genérica de Tiempo Ordinario. **Fix:** nueva función `resolveCollectKey()` en `js/app.js`, mismo patrón que ya existía para las lecturas — si la feria no tiene colecta propia, toma la del Domingo o fiesta precedente. A diferencia de las lecturas, aquí **no** se excluye la Semana Santa (repetir la Colecta de Ramos el Lunes/Martes/Miércoles Santo es litúrgicamente correcto, a diferencia de repetir la Pasión completa). Verificado en vivo: un jueves cualquiera de la primera semana de Cuaresma pasó de mostrar la colecta de "Propio 11" a la de la Transfiguración (el domingo previo real).
+
+### BUG encontrado y corregido: 1 de enero en domingo cae al fallback genérico "Feria"
+`js/calendar.js` — el chequeo de "Primer Domingo después de Navidad" cubre 26-31 dic., y el de "Segundo Domingo después de Navidad" cubre 2-5 ene.; el propio 1 de enero queda en la grieta entre ambos rangos, y como las fiestas fijas exigen día de semana, un domingo que cayera justo ese día no coincidía con nada. Ocurre en 2034, entre otros años. **Fix:** el rango del "Primer Domingo después de Navidad" ahora incluye explícitamente el 1 de enero.
+
+### Detalle corregido: clave rota "properFerianull_N" en los últimos días antes de Adviento
+`getProperNumber()` no cubría el hueco entre el 26 de noviembre (fin de la tabla `PROPER_RANGES`) y el Adviento I real (que puede caer hasta el 3 de diciembre) — esos días de semana generaban una clave con "null" literal, sin colecta propia. **Fix:** el rango del Propio 29 se extendió hasta el 3 de diciembre; no afecta ningún domingo real (Adviento I ya se intercepta antes, con su propio chequeo exacto).
+
+### Detalle corregido: la Fracción del documento principal no distinguía Cuaresma (el Librito sí)
+`js/eucharist.js` (`FRACTION_DATA`) es un texto fijo con "[Aleluya]" entre corchetes y una nota de rúbrica pidiendo omitirlo en Cuaresma — pero `js/app.js` lo mostraba siempre igual, sin aplicar la omisión. `js/librito-pueblo.js`, en cambio, ya tenía la lógica correcta (con el texto repetido a mano). **Fix:** nueva variante `FRACTION_LENT` en `eucharist.js`, usada por `app.js` según `isLent` — mismo patrón que ya usa `ACCLAMATION`/`ACCLAMATION_LENT`. El Librito no se tocó (su lógica ya era correcta).
+
+**Validación:** `node --check` limpio en los 9 archivos JS; simulación de 2024-2100 (28.124 días): 0 colectas faltantes, 0 lecturas faltantes tras el fallback (antes: ~230 claves con colecta faltante). Los 5 fixes se reprodujeron en vivo en el navegador con las fechas exactas de cada hallazgo. Se revisó también `css/style.css`, `js/docx-export.js`, `js/manual.js` y `js/librito-pueblo.js` completos sin encontrar problemas nuevos — ya incorporan las correcciones de contraste, `color-scheme`, especificidad de botones y `innerText` vs. `textContent` documentadas en las auditorías del Misal Anglicano.
+
+**Verificado por:** Claude Code Assistant
+**Fecha de verificación:** 2026-09-06

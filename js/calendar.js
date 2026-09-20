@@ -241,6 +241,14 @@ const LiturgicalCalendar = (() => {
     if (dow === 0 && mmdd >= '12-26' && mmdd <= '12-31') {
       return mk('Sunday within the Octave of Christmas', 'Domingo en la Octava de Navidad', 'white', 'doubleSecondClass', false, false, 'christmasSunday', cycle, wcycle);
     }
+    // Segundo Domingo después de Navidad: solo existe en años donde caben dos
+    // domingos entre Navidad y Epifanía (este cae entre el 2 y el 5 de enero).
+    // Sin este bloque, un domingo en ese rango no coincidía con ningún chequeo
+    // (ni con las fiestas fijas, que exigen día de semana) y caía al fallback
+    // final 'Feria' — con rank 'feria', omitiendo incorrectamente el Credo un domingo.
+    if (dow === 0 && mmdd >= '01-02' && mmdd <= '01-05') {
+      return mk('The Second Sunday after Christmas Day', 'Segundo Domingo después de Navidad', 'white', 'doubleSecondClass', false, false, 'christmasSunday2', cycle, wcycle);
+    }
     // Holy Name / New Year
     if (mmdd === '01-01') return mk('The Circumcision of Christ', 'La Circuncisión del Señor', 'white', 'doubleFirstClass', false, false, 'circumcision', cycle, wcycle);
 

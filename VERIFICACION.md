@@ -420,3 +420,64 @@ desde el navegador móvil (Android/iOS), con icono propio en la pantalla de inic
 
 **Verificado por:** Claude Code Assistant
 **Fecha de verificación:** 2026-08-05
+
+---
+
+## ✠ Octava Auditoría — 2026-09-06 (Colecta de ferias y Domingo faltante 2-5 de enero)
+
+A raíz de una revisión del generador BCP 2019 hermano (donde se había detectado y
+corregido el mismo problema), se auditó si el Misal Anglicano principal sufría el
+mismo defecto: **las ferias sin Colecta propia no heredaban la del Domingo/fiesta
+precedente**, sino que caían siempre a `Propers.getCollect(dayInfo.key)` directo,
+que para la inmensa mayoría de ferias no existe.
+
+### Bug #1 — Colecta de ferias incorrecta (99.6% de los días)
+Simulación sobre 2024–2100 (28.124 días): de 7.646 ferias sin Colecta propia,
+**7.619 (99,6%)** resolvían a una clave inexistente en `Propers.COLLECTS`, cayendo
+silenciosamente a un valor por defecto fuera de temporada en vez de heredar la
+Colecta del Domingo anterior — a diferencia de `resolveLectionaryKey()`, que sí
+implementaba ese préstamo para las lecturas desde una corrección anterior.
+
+**Corrección:** se añadió `resolveCollectKey(dayInfo, date)` en [js/app.js](js/app.js),
+análoga a `resolveLectionaryKey()` pero **sin excluir la Semana Santa** (la Colecta,
+a diferencia de las lecturas, sí puede heredarse esos días). `generateLiturgy` ahora
+llama `Propers.getCollect(resolveCollectKey(dayInfo, date))` en vez de pasar la
+clave directa.
+
+### Bug #2 — Domingo entre el 2 y el 5 de enero, no reconocido (Credo omitido)
+Al verificar la corrección anterior, quedaron 270 fallos residuales (de 21.812
+días no-feriales). Investigación día por día reveló la causa real: en años donde
+caben **dos** Domingos entre Navidad y Epifanía, el segundo (2–5 de enero) no
+coincidía con ningún chequeo de [js/calendar.js](js/calendar.js) — ni Navidad, ni
+Epifanía, ni fiesta fija (que exige día de semana fijo) — y caía al fallback final
+`'Feria'` con `rank: 'feria'`. Consecuencia real: `getOmissions()` omitía
+incorrectamente el Credo Niceno en un **Domingo** auténtico.
+
+**Corrección** (mismo patrón que el generador BCP 2019, adaptado al calendario
+propio y al leccionario romano/RCL del Misal):
+- [js/calendar.js](js/calendar.js): nuevo chequeo `christmasSunday2` para
+  `dow===0 && mmdd` entre `01-02` y `01-05`, con rango `doubleSecondClass`
+  (Fiesta de II Clase, color blanco) — ubicado junto al chequeo existente de
+  Domingo en la Octava de Navidad (26–31 dic).
+- [js/lectionary.js](js/lectionary.js): entrada `christmasSunday2` en `SUNDAY`
+  (Jeremías 31:7-14 / Salmo 84:1-8 / Efesios 1:3-14 / Juan 1:1-18 — RCL, misma
+  lectura en los tres ciclos A/B/C).
+- [js/propers.js](js/propers.js): entrada `christmasSunday2` en `COLLECTS`,
+  reutilizando el texto de `christmasSunday` (mismo tiempo litúrgico y tema; no
+  existe texto propio 1549/1662 para este segundo domingo, adición posterior
+  del leccionario).
+- [js/app.js](js/app.js): `'christmasSunday2'` añadido a `DIRECT_LECTIONARY_KEYS`.
+
+### Validación
+- **Simulación** (2024–2100, 28.124 días): 0 fallos de resolución de Colecta
+  (antes: 7.619). Las 45 ocurrencias de Domingo en el rango 2–5 de enero dentro
+  del rango simulado resuelven todas a `christmasSunday2` con
+  `rank: 'doubleSecondClass'` (antes: `feria`).
+- **`node --check`** sobre los 4 archivos modificados: sin errores de sintaxis.
+- **Navegador en vivo** (domingo 3 de enero de 2027, el próximo caso real):
+  título "Segundo Domingo después de Navidad", Color Blanco, Rango "Fiesta de
+  II Clase", Ciclo B — se renderiza el Gloria, el Credo Niceno completo (antes
+  se habría omitido) y las lecturas/Colecta esperadas, sin errores en consola.
+
+**Verificado por:** Claude Code Assistant
+**Fecha de verificación:** 2026-09-06

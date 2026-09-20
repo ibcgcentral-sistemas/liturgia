@@ -136,8 +136,13 @@ const BCPCalendar = (() => {
     [18, [9, 4], [9, 10]], [19, [9, 11], [9, 17]], [20, [9, 18], [9, 24]],
     [21, [9, 25], [10, 1]], [22, [10, 2], [10, 8]], [23, [10, 9], [10, 15]],
     [24, [10, 16], [10, 22]], [25, [10, 23], [10, 29]], [26, [10, 30], [11, 5]],
-    [27, [11, 6], [11, 12]], [28, [11, 13], [11, 19]], [29, [11, 20], [11, 26]],
+    [27, [11, 6], [11, 12]], [28, [11, 13], [11, 19]], [29, [11, 20], [12, 3]],
   ];
+  // El Propio 29 se extiende hasta el 3 de diciembre (no el 26 de noviembre):
+  // Adviento I puede caer hasta esa fecha (cuando Navidad cae en lunes), y sin
+  // esta extensión los días entre el 27 nov. y esa fecha quedaban sin Propio
+  // (getProperNumber devolvía null, produciendo una clave rota "properFerianull_N").
+  // No afecta ningún domingo real: el chequeo de Adviento I ya lo intercepta antes.
 
   function getProperNumber(date) {
     const m = date.getMonth() + 1, d = date.getDate();
@@ -219,7 +224,7 @@ const BCPCalendar = (() => {
     if (sameDay(date, F.holySaturday))   return mk('Holy Saturday', 'Sábado Santo', 'violet', 'holyDay', 'holySaturday', 'holyWeek', cycle);
     if (sameDay(date, F.maundyThursday)) return mk('Maundy Thursday', 'Jueves Santo', 'white', 'holyDay', 'maundyThursday', 'holyWeek', cycle);
     if (sameDay(date, F.palmSunday))     return mk('Palm Sunday', 'Domingo de Ramos', 'red', 'sunday', 'palmSunday', 'holyWeek', cycle);
-    if (date > F.palmSunday && date < F.maundyThursday && dow !== 0) {
+    if (date > F.palmSunday && date < F.maundyThursday && dow !== 0 && !FIXED_FEASTS[md]) {
       return mk(`${DAY_NAMES_EN[dow]} in Holy Week`, `${DAY_NAMES_ES[dow]} Santo`, 'violet', 'feria', `holyWeekFeria_${dow}`, 'holyWeek', cycle);
     }
 
@@ -233,7 +238,7 @@ const BCPCalendar = (() => {
     if (sameDay(date, F.ascension))  return mk('Ascension Day', 'La Ascensión del Señor', 'white', 'principal', 'ascension', 'easter', cycle);
     if (sameDay(date, F.easter7))    return mk('Easter VII (Sunday after Ascension)', 'Séptimo Domingo de Pascua', 'white', 'sunday', 'easter7', 'easter', cycle);
     if (sameDay(date, F.pentecost))  return mk('The Day of Pentecost', 'Día de Pentecostés', 'red', 'principal', 'pentecost', 'pentecost', cycle);
-    if (date > F.easter && date < F.pentecost && dow !== 0) {
+    if (date > F.easter && date < F.pentecost && dow !== 0 && !FIXED_FEASTS[md]) {
       const week = Math.ceil(diffDays(F.easter, date) / 7);
       return mk(`${DAY_NAMES_EN[dow]} of Easter Week ${week}`, `${DAY_NAMES_ES[dow]} de Pascua (semana ${week})`, 'white', 'feria', `easterFeria${week}_${dow}`, 'easter', cycle);
     }
@@ -248,7 +253,7 @@ const BCPCalendar = (() => {
     if (sameDay(date, F.lent3))        return mk('Lent III', 'Tercer Domingo de Cuaresma', 'violet', 'sunday', 'lent3', 'lent', cycle);
     if (sameDay(date, F.lent4))        return mk('Lent IV (Laetare)', 'Cuarto Domingo de Cuaresma (Laetare)', 'rose', 'sunday', 'lent4', 'lent', cycle);
     if (sameDay(date, F.lent5))        return mk('Lent V (Passion Sunday)', 'Quinto Domingo de Cuaresma (Domingo de Pasión)', 'violet', 'sunday', 'lent5', 'lent', cycle);
-    if (date >= F.ashWednesday && date < F.palmSunday && dow !== 0) {
+    if (date >= F.ashWednesday && date < F.palmSunday && dow !== 0 && !FIXED_FEASTS[md]) {
       const week = Math.ceil(diffDays(F.ashWednesday, date) / 7);
       return mk(`${DAY_NAMES_EN[dow]} in Lent Week ${week}`, `${DAY_NAMES_ES[dow]} de Cuaresma (semana ${week})`, 'violet', 'feria', `lentFeria${week}_${dow}`, 'lent', cycle);
     }
@@ -258,14 +263,19 @@ const BCPCalendar = (() => {
     if (sameDay(date, F.advent2)) return mk('Advent II', 'Segundo Domingo de Adviento', 'violet', 'sunday', 'advent2', 'advent', cycle);
     if (sameDay(date, F.advent3)) return mk('Advent III', 'Tercer Domingo de Adviento (Gaudete)', 'rose', 'sunday', 'advent3', 'advent', cycle);
     if (sameDay(date, F.advent4)) return mk('Advent IV', 'Cuarto Domingo de Adviento', 'violet', 'sunday', 'advent4', 'advent', cycle);
-    if (date >= advent1 && date < new Date(y, 11, 25) && dow !== 0) {
+    if (date >= advent1 && date < new Date(y, 11, 25) && dow !== 0 && !FIXED_FEASTS[md]) {
       const week = Math.ceil(diffDays(advent1, date) / 7);
       return mk(`${DAY_NAMES_EN[dow]} of Advent Week ${week}`, `${DAY_NAMES_ES[dow]} de Adviento (semana ${week})`, 'violet', 'feria', `adventFeria${week}_${dow}`, 'advent', cycle);
     }
 
     // ── NAVIDAD ──
     if (md === '12-25') return mk('The Nativity of Our Lord (Christmas Day)', 'Natividad del Señor', 'white', 'principal', 'christmas', 'christmas', cycle);
-    if (dow === 0 && md >= '12-26' && md <= '12-31') {
+    // "|| md === '01-01'": el 1 de enero cae justo en el hueco entre este rango
+    // (26-31 dic.) y el de "Segundo Domingo después de Navidad" (2-5 ene.) — sin
+    // este caso, un domingo que cayera exactamente el 1 de enero no coincidía
+    // con ningún chequeo de domingo ni con la fiesta fija (que exige día de
+    // semana), y caía hasta el fallback genérico final "Feria".
+    if (dow === 0 && ((md >= '12-26' && md <= '12-31') || md === '01-01')) {
       return mk('The First Sunday after Christmas Day', 'Domingo en la Octava de Navidad', 'white', 'sunday', 'christmasSunday', 'christmas', cycle);
     }
     // Segundo Domingo después de Navidad: solo ocurre en años donde caben dos
@@ -278,9 +288,9 @@ const BCPCalendar = (() => {
     if ((md >= '12-26' && md <= '12-31') || (md >= '01-01' && md <= '01-05')) {
       // Ferias de la Octava de Navidad (26-31 dic) y antes de Epifanía (1-5 ene),
       // salvo que una fiesta fija del santoral (26,27,28,01-01 ene) tenga
-      // precedencia — ver bloque FIXED_FEASTS más abajo, que se evalúa antes
-      // de este fallback porque esas fechas quedan cubiertas ahí.
-      if (dow !== 0) {
+      // precedencia — de ahí el "!FIXED_FEASTS[md]": sin él, este fallback se
+      // disparaba primero y la fiesta fija (más abajo) nunca se alcanzaba.
+      if (dow !== 0 && !FIXED_FEASTS[md]) {
         return mk(`${DAY_NAMES_EN[dow]} in Christmastide`, `${DAY_NAMES_ES[dow]} de Navidad`, 'white', 'feria', 'christmasFeria', 'christmas', cycle);
       }
     }
@@ -298,17 +308,21 @@ const BCPCalendar = (() => {
       const weeks = Math.round(diffDays(F.baptismOfLord, date) / 7);
       return mk(`Epiphany ${weeks + 1}`, `${weeks + 1}° Domingo después de Epifanía`, 'green', 'sunday', `epiphany${weeks + 1}`, 'epiphany', cycle);
     }
-    if (date > F.baptismOfLord && date < F.ashWednesday && dow !== 0) {
+    if (date > F.baptismOfLord && date < F.ashWednesday && dow !== 0 && !FIXED_FEASTS[md]) {
       return mk(`${DAY_NAMES_EN[dow]} after Epiphany`, `${DAY_NAMES_ES[dow]} después de Epifanía`, 'green', 'feria', 'epiphanyFeria', 'epiphany', cycle);
     }
-    if (md > '01-06' && md < '01-13' && dow !== 0 && date < F.baptismOfLord) {
+    if (md > '01-06' && md < '01-13' && dow !== 0 && date < F.baptismOfLord && !FIXED_FEASTS[md]) {
       return mk(`${DAY_NAMES_EN[dow]} after Epiphany`, `${DAY_NAMES_ES[dow]} después de Epifanía`, 'white', 'feria', 'epiphanyOctaveFeria', 'epiphany', cycle);
     }
 
     // ── FIESTAS FIJAS DEL SANTORAL — antes del bloque genérico de Propios ──
-    // (para que una fiesta en día de semana no quede invisible bajo la feria
-    // genérica; en domingo, el domingo siempre prevalece — no se implementan
-    // reglas de desplazamiento en esta fase).
+    // (los bloques de feria de cada tiempo, arriba, ahora ceden el paso con
+    // "!FIXED_FEASTS[md]" — sin eso, la fiesta fija nunca se alcanzaba: 16 de
+    // las 30 fiestas fijas quedaban invisibles siempre que caían en Adviento,
+    // Navidad, Epifanía, Cuaresma, Semana Santa o Pascua — el 47% de sus
+    // apariciones reales en día de semana, verificado simulando 2024-2050.
+    // En domingo, el domingo siempre prevalece — no se implementan reglas de
+    // desplazamiento en esta fase).
     if (dow !== 0 && FIXED_FEASTS[md]) {
       const ff = FIXED_FEASTS[md];
       return { name: ff.name, nameEs: ff.nameEs, color: ff.color, rank: 'holyDay', key: md, season: seasonForDate(date, F, advent1), cycle, isFixed: true };
