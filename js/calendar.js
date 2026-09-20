@@ -66,10 +66,15 @@ const LiturgicalCalendar = (() => {
   }
 
   // ── WEEKDAY CYCLE I / II ─────────────────────────────────────────────────
-  // Odd calendar years = Year I, Even = Year II
+  // El ciclo ferial se designa por el año civil en que TERMINA el año litúrgico
+  // (el año en que cae la mayor parte de él), no por el año en que comienza:
+  // año civil final impar = Ciclo I, par = Ciclo II.
+  // Ej.: Adviento 2024 – noviembre 2025 → termina en 2025 (impar) → Ciclo I.
+  //      Adviento 2023 – noviembre 2024 → termina en 2024 (par)   → Ciclo II.
   function getWeekdayCycle(date) {
-    const start = getLiturgicalYearStart(date);
-    return (start % 2 !== 0) ? 'I' : 'II';
+    const start = getLiturgicalYearStart(date);   // año civil del Adviento I
+    const end   = start + 1;                      // año civil en que termina
+    return (end % 2 !== 0) ? 'I' : 'II';
   }
 
   // ── MOVEABLE FEAST DATES FOR A GIVEN YEAR ────────────────────────────────

@@ -66,8 +66,11 @@ console.log('\n✠ TEST 3: Ciclos Feriales (I/II)');
 console.log('─'.repeat(60));
 
 const weekcycleTests = [
-  { date: '2024-11-15', wcycle: 'I', desc: '2024 es año impar → Ciclo I' },
-  { date: '2025-11-15', wcycle: 'II', desc: '2025 es año par → Ciclo II' },
+  // El ciclo se designa por el año civil en que TERMINA el año litúrgico.
+  { date: '2024-11-15', wcycle: 'II', desc: 'nov 2024 (año litúrgico Adv 2023–nov 2024, termina en 2024 par) → Ciclo II' },
+  { date: '2025-11-15', wcycle: 'I',  desc: 'nov 2025 (año litúrgico Adv 2024–nov 2025, termina en 2025 impar) → Ciclo I' },
+  { date: '2025-01-15', wcycle: 'I',  desc: 'ene 2025 (mismo año litúrgico que nov 2025) → Ciclo I' },
+  { date: '2026-01-15', wcycle: 'II', desc: 'ene 2026 (año litúrgico Adv 2025–nov 2026, termina en 2026 par) → Ciclo II' },
 ];
 
 weekcycleTests.forEach(test => {

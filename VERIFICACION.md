@@ -27,9 +27,20 @@ Se realizó una verificación exhaustiva de la lógica de la aplicación **Misal
   - 2027-2028: Ciclo C ✓
 
 ### ✅ Ciclos Feriales (I/II)
-- **Estado:** CORRECTO
-- **Lógica:** Años impares = Ciclo I, Años pares = Ciclo II
-- **Validación:** 2024 (I), 2025 (II), 2026 (I) ✓
+- **Estado:** CORREGIDO (2026-09-20)
+- **Bug:** el ciclo se calculaba con el año civil en que COMIENZA el año
+  litúrgico (Adviento I), desfasando un año el resultado. La verificación de
+  abril de 2026 dio por buena esa fórmula ("2024 (I), 2025 (II), 2026 (I)") y
+  las etiquetas de `test-logic.js` repetían el mismo error, por lo que los
+  tests pasaban contra una expectativa equivocada.
+- **Lógica correcta:** el ciclo se designa por el año civil en que TERMINA el
+  año litúrgico (donde cae la mayor parte de él): final impar = Ciclo I,
+  final par = Ciclo II.
+- **Fix:** `getWeekdayCycle()` en `js/calendar.js` usa `start + 1`.
+- **Validación:** nov 2024 (II), ene 2025 (I), nov 2025 (I), ene 2026 (II) ✓
+- **Alcance:** `wcycle` hoy solo alimenta las etiquetas de pantalla y del pie
+  ("Ciclo ferial I/II"); las lecturas feriales no dependen de él, porque desde
+  el BUG #14 reutilizan las del Domingo precedente.
 
 ### ✅ Calendario Litúrgico Movible
 - Adviento (4 Domingos)
