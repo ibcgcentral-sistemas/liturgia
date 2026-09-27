@@ -164,8 +164,14 @@ const BCPPropers = (() => {
   // ══════════════════════════════════════════════════════════════════════
   //  FUNCIONES DE BÚSQUEDA
   // ══════════════════════════════════════════════════════════════════════
+  // Si no hay colecta para la clave, se AVISA — antes se devolvía en silencio
+  // la del Propio 11, de modo que cualquier día sin colecta propia mostraba un
+  // texto litúrgico ajeno sin que nada lo indicara. app.js ya resuelve la
+  // colecta del Domingo precedente para las ferias (resolveCollectKey), así que
+  // en el barrido 2024-2060 este aviso no se dispara ningún día: sólo existe
+  // para que un hueco futuro sea visible en vez de silencioso.
   function getCollect(key) {
-    return COLLECTS[key] || COLLECTS['proper11'] || 'Colecta no disponible para este día.';
+    return COLLECTS[key] || 'Colecta no disponible para este día.';
   }
 
   function getPreface(key, season) {
@@ -173,7 +179,11 @@ const BCPPropers = (() => {
     if (key === 'maundyThursday') return PREFACES.maundyThursday;
     if (key === 'christmas' || key === 'christmasSunday' || key === 'christmasSunday2' || key === 'circumcision' || (key && key.startsWith('christmasFeria'))) return PREFACES.christmas;
     if (key === 'epiphany' || key === 'epiphany1' || (key && key.startsWith('epiphany'))) return PREFACES.epiphany;
-    if (key === 'transfiguration' || key === '02-02' || key === '03-25') return PREFACES.transfiguration;
+    // '08-06' es la Transfiguración del santoral fijo (6 de agosto): faltaba,
+    // de modo que la propia fiesta de la Transfiguración recibía el Prefacio
+    // Común mientras que el Último Domingo después de Epifanía (clave
+    // 'transfiguration'), que sólo la conmemora, sí recibía el suyo.
+    if (key === 'transfiguration' || key === '02-02' || key === '03-25' || key === '08-06') return PREFACES.transfiguration;
     if (key === 'ascension') return PREFACES.ascension;
     if (key === 'easter' || (key && key.startsWith('easter'))) return PREFACES.easter;
     if (key === 'pentecost') return PREFACES.pentecost;

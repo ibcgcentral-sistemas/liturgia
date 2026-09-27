@@ -16,7 +16,7 @@ async function downloadDocx() {
   try {
     const {
       Document, Packer, Paragraph, TextRun, AlignmentType, BorderStyle, TabStopType, ImageRun, Header, Footer, PageNumber,
-      Table, TableRow, TableCell, WidthType, ShadingType, VerticalAlign
+      Table, TableRow, TableCell, WidthType, ShadingType, VerticalAlign, HeadingLevel
     } = window.docx;
 
     // ── Precarga de Imágenes EN PARALELO ────────────────────────────────────
@@ -68,6 +68,26 @@ async function downloadDocx() {
       return String(t).replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');
     }
 
+    /**
+     * Texto visible de un nodo, respetando los <br> y los bloques internos.
+     * `textContent` los ignora y pega las líneas («…Laus Deo Semper ✠Generado
+     * según…»); `innerText` sí los respeta. Regla general del conversor: para
+     * leer texto de un nodo se usa SIEMPRE esta función, nunca `.textContent`.
+     * Devuelve el texto ya saneado para XML; `oneLine` colapsa los saltos en
+     * espacios cuando el destino es un único párrafo (títulos, etiquetas).
+     */
+    function nodeText(el, oneLine = true) {
+      if (!el) return '';
+      const raw = (typeof el.innerText === 'string' && el.innerText) || el.textContent || '';
+      const t = sanitizeText(raw);
+      return oneLine ? t.replace(/\s+/g, ' ').trim() : t.replace(/[ \t]+/g, ' ').trim();
+    }
+
+    /** Líneas visibles de un nodo (una por <br> o por bloque interno). */
+    function nodeLines(el) {
+      return nodeText(el, false).split('\n').map(l => l.trim()).filter(Boolean);
+    }
+
     function buildRuns(node, opts = {}) {
       const { bold = false, italic = false, color = C_INK, size = SZ } = opts;
       const runs = [];
@@ -81,8 +101,12 @@ async function downloadDocx() {
           const tag = child.tagName;
 
           if (cls.contains('lit-rubric') || cls.contains('rubric') || (tag === 'EM' && cls.contains('rubric'))) {
-            const t = sanitizeText(child.textContent);
-            if (t.trim()) runs.push(new TextRun({ text: t, italics: true, color: C_RUB, size: SZ_SM, font: FONT }));
+            // Recursión (no .textContent): una rúbrica inline puede llevar <br>
+            // o <strong>, y con textContent los renglones se pegaban y se perdía
+            // el resalte.
+            if (child.textContent && child.textContent.trim()) {
+              runs.push(...buildRuns(child, { bold, italic: true, color: C_RUB, size: SZ_SM }));
+            }
           } else if (tag === 'SUP' && cls.contains('verse-num')) {
             runs.push(new TextRun({ text: sanitizeText(child.textContent), superScript: true, size: 16, color: '777777', font: FONT }));
           } else if (tag === 'BR') {
@@ -101,6 +125,28 @@ async function downloadDocx() {
 
     // ── Recolector de párrafos ────────────────────────────────────────────────
     let paras = [];
+
+    // ── Nivel de esquema de los encabezados ──────────────────────────────────
+    // Word arma el panel de navegación y el índice con estos niveles, así que un
+    // salto deja huecos en el esquema. Los bloques `main-section` abren
+    // HEADING_1 y los <h4> que cuelgan de ellos («RITO DE ASPERSIÓN» bajo
+    // «RITOS INICIALES», «ANTÍFONA DE OFERTORIO» bajo «LITURGIA EUCARÍSTICA»)
+    // pedían HEADING_3 sin un HEADING_2 por medio: H1 → H3. Aquí se limita cada
+    // encabezado a un nivel por debajo del anterior, como mucho. No cambia el
+    // aspecto del documento: el tamaño, el color y la negrita de cada título van
+    // explícitos en su TextRun, no heredados del estilo de encabezado.
+    const H_LEVELS = [null, HeadingLevel.HEADING_1, HeadingLevel.HEADING_2,
+                      HeadingLevel.HEADING_3, HeadingLevel.HEADING_4];
+    let lastHeadingLevel = 0;
+    function H(level) {
+      const lvl = lastHeadingLevel ? Math.min(level, lastHeadingLevel + 1) : 1;
+      lastHeadingLevel = lvl;
+      return H_LEVELS[lvl];
+    }
+    // Título y fecha que irán al encabezado de cada página (los rellena la
+    // cabecera de la Misa al recorrerla).
+    let runningTitle = '';
+    let runningDate  = '';
 
     // ── Procesador principal de elementos ────────────────────────────────────
     function walkElement(el) {
@@ -207,11 +253,11 @@ async function downloadDocx() {
       // 1. Portada del Misal Premium
       if (cls.contains('cover-page')) {
         // innerText (no textContent) para que el <br> entre "MISSALE" y "ANGLICANUM" se respete como espacio
-        const title    = el.querySelector('.cover-title')?.innerText?.trim().replace(/\s+/g, ' ') || 'MISSALE ANGLICANUM';
-        const feast    = el.querySelector('.cover-feast')?.textContent?.trim() || '';
-        const date     = el.querySelector('.cover-date')?.textContent?.trim() || '';
-        const quote    = el.querySelector('.quote-text')?.textContent?.trim() || '';
-        const author   = el.querySelector('.quote-author')?.textContent?.trim() || '';
+        const title    = nodeText(el.querySelector('.cover-title')) || 'MISSALE ANGLICANUM';
+        const feast    = nodeText(el.querySelector('.cover-feast'));
+        const date     = nodeText(el.querySelector('.cover-date'));
+        const quote    = nodeText(el.querySelector('.quote-text'));
+        const author   = nodeText(el.querySelector('.quote-author'));
 
         paras.push(new Paragraph({
           alignment: AlignmentType.CENTER,
@@ -244,9 +290,12 @@ async function downloadDocx() {
         }));
 
         if (quote) {
+          // La cita del HTML ya viene entrecomillada («…»): no volver a envolverla,
+          // o sale «« … »» en el documento.
+          const quoteText = /^[«"“].*[»"”]$/.test(quote) ? quote : `« ${quote} »`;
           paras.push(new Paragraph({
             alignment: AlignmentType.CENTER,
-            children: [new TextRun({ text: `« ${quote} »`, italics: true, size: 24, color: C_INK, font: FONT })],
+            children: [new TextRun({ text: quoteText, italics: true, size: 24, color: C_INK, font: FONT })],
             border: {
               top: { style: BorderStyle.SINGLE, size: 4, color: C_GOLD, space: 10 },
               bottom: { style: BorderStyle.SINGLE, size: 4, color: C_GOLD, space: 10 }
@@ -271,10 +320,11 @@ async function downloadDocx() {
 
       // 2. Cabecera Elegante de la Misa
       if (cls.contains('feast-header')) {
-        const name  = el.querySelector('.feast-name-en')?.textContent?.trim() || '';
-        const date  = el.querySelector('.feast-date')?.textContent?.trim() || '';
+        const name  = nodeText(el.querySelector('.feast-name-en'));
+        const date  = nodeText(el.querySelector('.feast-date'));
         const spans = el.querySelectorAll('.feast-meta span');
-        const meta  = Array.from(spans).map(s => s.textContent.trim()).join('   ·   ');
+        const meta  = Array.from(spans).map(s => nodeText(s)).filter(Boolean).join('   ·   ');
+        runningTitle = name; runningDate = date;
 
         paras.push(new Paragraph({
           alignment: AlignmentType.CENTER,
@@ -302,7 +352,23 @@ async function downloadDocx() {
 
       // 3. Rúbricas y advertencias litúrgicas
       if (cls.contains('omission-notes')) {
-        el.querySelectorAll('li').forEach(li => paras.push(rubricPara('⚬ ' + li.textContent.trim(), 180)));
+        // El encabezado del bloque («✠ NOTAS DE OMISIONES Y VARIACIONES:») se
+        // perdía: sólo se copiaban los <li>, y las notas quedaban sueltas y sin
+        // título en el documento del altar.
+        const head = el.querySelector('h3, h4, .section-title');
+        const headText = nodeText(head);
+        if (headText) {
+          paras.push(new Paragraph({
+            children: [new TextRun({ text: headText.toUpperCase(), bold: true, size: SZ_MD, color: C_INK, font: FONT })],
+            heading: H(3),
+            keepNext: true,
+            spacing: { before: 300, after: 120 },
+          }));
+        }
+        el.querySelectorAll('li').forEach(li => {
+          const t = nodeText(li);
+          if (t) paras.push(rubricPara('⚬ ' + t, 180));
+        });
         paras.push(emptyLine(120));
         return;
       }
@@ -336,9 +402,12 @@ async function downloadDocx() {
       // 6. Título Principal de Sección (e.g. CANON, LITURGIA DE LA PALABRA)
       if (cls.contains('section-title') && cls.contains('main-section')) {
         paras.push(emptyLine(200));
-        let pageBreakBefore = el.textContent.includes('CANON') || el.textContent.includes('PUEBLO') || el.textContent.includes('MANUAL');
+        const titleText = nodeText(el);
+        let pageBreakBefore = /CANON|PUEBLO|MANUAL/.test(titleText);
         paras.push(new Paragraph({
-          children: [new TextRun({ text: sanitizeText(el.textContent.trim()).toUpperCase(), bold: true, size: SZ_LG, color: C_RUB, font: FONT })],
+          children: [new TextRun({ text: titleText.toUpperCase(), bold: true, size: SZ_LG, color: C_RUB, font: FONT })],
+          heading: H(1),
+          keepNext: true,
           border: {
             top: { style: BorderStyle.SINGLE, size: 6, color: C_GOLD, space: 6 },
             bottom: { style: BorderStyle.SINGLE, size: 6, color: C_GOLD, space: 6 }
@@ -352,8 +421,12 @@ async function downloadDocx() {
 
       // 7. Subtítulos y rúbricas estructurales
       if (cls.contains('section-title') || tag === 'H3' || tag === 'H4') {
+        const t = nodeText(el);
+        if (!t) return;
         paras.push(new Paragraph({
-          children: [new TextRun({ text: el.textContent.trim().toUpperCase(), bold: true, size: SZ_MD, color: C_INK, font: FONT })],
+          children: [new TextRun({ text: t.toUpperCase(), bold: true, size: SZ_MD, color: C_INK, font: FONT })],
+          heading: H((tag === 'H4' || cls.contains('commemoration-title')) ? 3 : 2),
+          keepNext: true,
           spacing: { before: 300, after: 120 },
         }));
         return;
@@ -449,7 +522,7 @@ async function downloadDocx() {
       if (cls.contains('petition')) {
         const intro = el.querySelector('.petition-intro');
         const body  = el.querySelector('.petition-text');
-        if (intro) paras.push(rubricPara(intro.textContent.trim(), 180));
+        if (intro) { const t = nodeText(intro); if (t) paras.push(rubricPara(t, 180)); }
         if (body) {
           paras.push(new Paragraph({
             children: buildRuns(body),
@@ -463,13 +536,19 @@ async function downloadDocx() {
 
       // 14. Pie del Documento Misal
       if (cls.contains('liturgy-footer')) {
+        // El pie tiene dos líneas («✠ Laus Deo Semper ✠» y la nota de
+        // generación). Con .textContent se pegaban en un solo renglón; se
+        // emiten una por línea visible.
         paras.push(emptyLine(200));
-        paras.push(new Paragraph({
-          alignment: AlignmentType.CENTER,
-          children: [new TextRun({ text: el.textContent.trim().replace(/\s+/g, ' '), italics: true, size: 18, color: C_META, font: FONT })],
-          border: { top: { style: BorderStyle.SINGLE, size: 6, color: C_GOLD, space: 12 } },
-          spacing: { before: 200, after: 0 },
-        }));
+        const lines = nodeLines(el);
+        (lines.length ? lines : ['']).forEach((line, i) => {
+          paras.push(new Paragraph({
+            alignment: AlignmentType.CENTER,
+            children: [new TextRun({ text: line, italics: true, size: 18, color: C_META, font: FONT })],
+            border: i === 0 ? { top: { style: BorderStyle.SINGLE, size: 6, color: C_GOLD, space: 12 } } : undefined,
+            spacing: { before: i === 0 ? 200 : 0, after: 0 },
+          }));
+        });
         return;
       }
 
@@ -497,15 +576,20 @@ async function downloadDocx() {
 
       // Rúbrica autónoma
       if (cls.contains('lit-rubric')) {
-        const t = span.textContent.trim();
-        if (t) paras.push(rubricPara(t, 180));
+        // Una rúbrica puede llevar <br>: una línea por renglón visible.
+        const lines = nodeLines(span);
+        lines.forEach(l => paras.push(rubricPara(l, 180)));
         return;
       }
 
       // Título litúrgico de fragmentos del canon
       if (cls.contains('lit-title')) {
+        const t = nodeText(span);
+        if (!t) return;
         paras.push(new Paragraph({
-          children: [new TextRun({ text: sanitizeText(span.textContent.trim()).toUpperCase(), bold: true, size: SZ, color: C_RUB, font: FONT })],
+          children: [new TextRun({ text: t.toUpperCase(), bold: true, size: SZ, color: C_RUB, font: FONT })],
+          heading: H(4),
+          keepNext: true,
           spacing: { before: 180, after: 60 },
         }));
         return;
@@ -546,7 +630,7 @@ async function downloadDocx() {
 
       // Línea de Diálogo o Canto alternado (Sacerdote/Pueblo)
       if (cls.contains('lit-line')) {
-        const label   = span.querySelector('.lit-label')?.textContent?.trim() ?? '';
+        const label   = nodeText(span.querySelector('.lit-label'));
         const textEl  = span.querySelector('.lit-text');
         if (!textEl) return;
 
@@ -585,9 +669,32 @@ async function downloadDocx() {
     walkChildren(docContainer);
 
     // ── Nombre del archivo ────────────────────────────────────────────────────
-    const feastName = outputEl.querySelector('.feast-name-en')?.textContent?.trim() || 'Liturgia';
+    const feastName = nodeText(outputEl.querySelector('.feast-name-en')) || 'Liturgia';
     const safeName  = feastName.replace(/[^\wáéíóúñÁÉÍÓÚÑ\s]/g, '').trim().substring(0, 40);
     const filename  = ('Misal-' + safeName + '.docx').replace(/\s+/g, '-');
+
+    // ── Encabezado corriente y numeración de páginas ─────────────────────────
+    // Un misal de altar necesita saber en qué página va y de qué Misa se trata:
+    // el documento salía sin encabezado ni número de página.
+    const headerLine = [runningTitle || feastName, runningDate].filter(Boolean).join('  ·  ');
+    const runningHeaderPara = new Paragraph({
+      alignment: AlignmentType.CENTER,
+      children: [new TextRun({ text: headerLine, italics: true, size: 16, color: C_META, font: FONT })],
+      border: { bottom: { style: BorderStyle.SINGLE, size: 4, color: C_GOLD, space: 6 } },
+      spacing: { before: 0, after: 120 },
+    });
+    const pageNumberPara = new Paragraph({
+      alignment: AlignmentType.CENTER,
+      children: [
+        new TextRun({ text: '✠  ', size: 16, color: C_GOLD, font: FONT }),
+        new TextRun({ children: [PageNumber.CURRENT], size: 16, color: C_META, font: FONT }),
+        new TextRun({ text: ' / ', size: 16, color: C_META, font: FONT }),
+        new TextRun({ children: [PageNumber.TOTAL_PAGES], size: 16, color: C_META, font: FONT }),
+        new TextRun({ text: '  ✠', size: 16, color: C_GOLD, font: FONT }),
+      ],
+      border: { top: { style: BorderStyle.SINGLE, size: 4, color: C_GOLD, space: 6 } },
+      spacing: { before: 120, after: 0 },
+    });
 
     // ── Ensamblado del Documento Word Premium ───
     const wordDoc = new Document({
@@ -603,6 +710,16 @@ async function downloadDocx() {
             size:   { width: 11906, height: 16838 }, // Formato A4 estándar
             margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 }, // Márgenes elegantes de 1 pulgada (2.54 cm)
           },
+          // La portada no lleva encabezado ni numeración.
+          titlePage: true,
+        },
+        headers: {
+          default: new Header({ children: [runningHeaderPara] }),
+          first:   new Header({ children: [new Paragraph({ children: [new TextRun({ text: '', font: FONT, size: SZ_SM })] })] }),
+        },
+        footers: {
+          default: new Footer({ children: [pageNumberPara] }),
+          first:   new Footer({ children: [new Paragraph({ children: [new TextRun({ text: '', font: FONT, size: SZ_SM })] })] }),
         },
         children: paras,
       }],

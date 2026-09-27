@@ -219,7 +219,16 @@ const BCPDocxExport = (() => {
       }
 
       // Subtítulos (documento principal y Librito)
-      if (cls.contains('section-title') || tag === 'H3' || tag === 'H4' || (tag === 'H2' && cls.contains('librito-section'))) {
+      // El <h2> del Librito NO lleva la clase .librito-section (la lleva su
+      // <section> padre), así que la condición anterior "tag === 'H2' &&
+      // cls.contains('librito-section')" no se cumplía nunca: TODOS los
+      // encabezados de sección del Librito ("✠ RITOS INICIALES", "✠ LA COLECTA
+      // DEL DÍA", "✠ LA ORACIÓN DE CONSAGRACIÓN"…) caían al fallback
+      // walkChildren(), que sobre un <h2> sin hijos-elemento no emite nada: se
+      // perdían en silencio al exportar a Word. Los <h2> del documento
+      // principal y de las portadas ya se atienden antes, en las ramas
+      // .cover-page / .feast-header / .librito-header, con return propio.
+      if (cls.contains('section-title') || tag === 'H3' || tag === 'H4' || tag === 'H2') {
         paras.push(new Paragraph({
           children: [new TextRun({ text: el.textContent.trim().toUpperCase(), bold: true, size: SZ_MD, color: tag === 'H2' ? '1A5C42' : C_INK, font: FONT })],
           spacing: { before: 300, after: 120 },

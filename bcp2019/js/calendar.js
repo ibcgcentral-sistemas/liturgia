@@ -128,6 +128,7 @@ const BCPCalendar = (() => {
   // 7 días del calendario civil (estándar ecuménico del Leccionario Común
   // Revisado). Proper 29 = Cristo Rey, siempre el domingo antes de Adviento.
   const PROPER_RANGES = [
+    [1, [5, 8], [5, 14]], [2, [5, 15], [5, 21]],
     [3, [5, 22], [5, 28]], [4, [5, 29], [6, 4]], [5, [6, 5], [6, 11]],
     [6, [6, 12], [6, 18]], [7, [6, 19], [6, 25]], [8, [6, 26], [7, 2]],
     [9, [7, 3], [7, 9]], [10, [7, 10], [7, 16]], [11, [7, 17], [7, 23]],
@@ -138,6 +139,13 @@ const BCPCalendar = (() => {
     [24, [10, 16], [10, 22]], [25, [10, 23], [10, 29]], [26, [10, 30], [11, 5]],
     [27, [11, 6], [11, 12]], [28, [11, 13], [11, 19]], [29, [11, 20], [12, 3]],
   ];
+  // Los Propios 1 y 2 (8-21 de mayo) completan la tabla del RCL por el extremo
+  // inferior. Ningún DOMINGO los alcanza nunca (el domingo más temprano después
+  // de Trinidad es el 24 de mayo, con Pascua el 22 de marzo), pero sí las
+  // FERIAS: cuando Pascua es muy temprana, Trinidad cae el 17-20 de mayo y los
+  // días hábiles siguientes quedaban fuera de la tabla. getProperNumber()
+  // devolvía null y se generaba la clave rota "properFerianull_N"
+  // (verificado: 21 de mayo de 2035 y de 2046 en el barrido 2024-2060).
   // El Propio 29 se extiende hasta el 3 de diciembre (no el 26 de noviembre):
   // Adviento I puede caer hasta esa fecha (cuando Navidad cae en lunes), y sin
   // esta extensión los días entre el 27 nov. y esa fecha quedaban sin Propio
@@ -191,6 +199,43 @@ const BCPCalendar = (() => {
     '12-28': { name: 'The Holy Innocents', nameEs: 'Los Santos Inocentes', color: 'red' },
   };
 
+  // ── TRASLADO DE FIESTAS FIJAS EN SEMANA SANTA Y SEMANA DE PASCUA ────────
+  // Regla del BCP 2019 ("Concerning the Calendar"): una Fiesta fija que cae
+  // dentro de la Semana Santa o de la Semana de Pascua se traslada a la semana
+  // que sigue al Segundo Domingo de Pascua. Sin esto, la fiesta fija se imponía
+  // sobre el día de Semana Santa o de la Octava de Pascua: en el barrido
+  // 2024-2060 ocurría 11 veces (p.ej. la Anunciación el Lunes Santo de 2024 y
+  // San Marcos el Viernes de la Octava de Pascua de 2025).
+  // Las fiestas que caen en DOMINGO dentro de esa ventana siguen cediendo ante
+  // el domingo, igual que en el resto del año (no se implementa traslado
+  // dominical en esta fase).
+  const _transferCache = new Map();
+  function getTransferredFeasts(year) {
+    if (_transferCache.has(year)) return _transferCache.get(year);
+    const F = getFeastDates(year);
+    const from = new Map();   // 'MM-DD' origen  → fecha destino
+    const to = new Map();     // 'MM-DD' destino → 'MM-DD' origen
+    const pending = [];
+    for (const md of Object.keys(FIXED_FEASTS)) {
+      const [mm, dd] = md.split('-').map(Number);
+      const d = new Date(year, mm - 1, dd);
+      if (d >= F.palmSunday && d <= F.easter2 && d.getDay() !== 0) pending.push({ md, d });
+    }
+    pending.sort((a, b) => a.d - b.d);
+    let cursor = new Date(F.easter2.getTime() + 86400000); // lunes tras Pascua II
+    for (const { md } of pending) {
+      while (cursor.getDay() === 0 || FIXED_FEASTS[mmdd(cursor)]) {
+        cursor = new Date(cursor.getTime() + 86400000);
+      }
+      from.set(md, new Date(cursor));
+      to.set(mmdd(cursor), md);
+      cursor = new Date(cursor.getTime() + 86400000);
+    }
+    const res = { from, to };
+    _transferCache.set(year, res);
+    return res;
+  }
+
   // ── FÁBRICA DEL OBJETO "DÍA" ─────────────────────────────────────────────
   function mk(name, nameEs, color, rank, key, season, cycle, isFixed = false) {
     return { name, nameEs, color, rank, key, season, cycle, isFixed };
@@ -218,13 +263,21 @@ const BCPCalendar = (() => {
     const md = mmdd(date);
     const cycle = getSundayCycle(date);
     const advent1 = getAdvent1(y);
+    const TRANSFER = getTransferredFeasts(y);
+    // Una fiesta fija trasladada ya no se celebra en su fecha de origen…
+    const movedAway = TRANSFER.from.has(md);
+    // …y el día de destino la recibe (clave: la mmdd original, para que
+    // lecturas, colecta y prefacio propios se resuelvan sin cambio alguno).
+    const movedHere = TRANSFER.to.get(md);
+    // Vale en un día concreto sólo si ese día es realmente el destino calculado.
+    const isTransferTarget = movedHere && sameDay(date, TRANSFER.from.get(movedHere));
 
     // ── SEMANA SANTA Y TRIDUO ──
     if (sameDay(date, F.goodFriday))     return mk('Good Friday', 'Viernes Santo', 'red', 'holyDay', 'goodFriday', 'holyWeek', cycle);
     if (sameDay(date, F.holySaturday))   return mk('Holy Saturday', 'Sábado Santo', 'violet', 'holyDay', 'holySaturday', 'holyWeek', cycle);
     if (sameDay(date, F.maundyThursday)) return mk('Maundy Thursday', 'Jueves Santo', 'white', 'holyDay', 'maundyThursday', 'holyWeek', cycle);
     if (sameDay(date, F.palmSunday))     return mk('Palm Sunday', 'Domingo de Ramos', 'red', 'sunday', 'palmSunday', 'holyWeek', cycle);
-    if (date > F.palmSunday && date < F.maundyThursday && dow !== 0 && !FIXED_FEASTS[md]) {
+    if (date > F.palmSunday && date < F.maundyThursday && dow !== 0 && (!FIXED_FEASTS[md] || movedAway)) {
       return mk(`${DAY_NAMES_EN[dow]} in Holy Week`, `${DAY_NAMES_ES[dow]} Santo`, 'violet', 'feria', `holyWeekFeria_${dow}`, 'holyWeek', cycle);
     }
 
@@ -238,7 +291,14 @@ const BCPCalendar = (() => {
     if (sameDay(date, F.ascension))  return mk('Ascension Day', 'La Ascensión del Señor', 'white', 'principal', 'ascension', 'easter', cycle);
     if (sameDay(date, F.easter7))    return mk('Easter VII (Sunday after Ascension)', 'Séptimo Domingo de Pascua', 'white', 'sunday', 'easter7', 'easter', cycle);
     if (sameDay(date, F.pentecost))  return mk('The Day of Pentecost', 'Día de Pentecostés', 'red', 'principal', 'pentecost', 'pentecost', cycle);
-    if (date > F.easter && date < F.pentecost && dow !== 0 && !FIXED_FEASTS[md]) {
+    // Fiesta fija trasladada desde la Semana Santa o la Semana de Pascua: se
+    // celebra aquí con su clave original (lecturas, colecta y prefacio propios).
+    if (isTransferTarget) {
+      const ff = FIXED_FEASTS[movedHere];
+      return { name: `${ff.name} (transferred)`, nameEs: `${ff.nameEs} (trasladada)`, color: ff.color,
+               rank: 'holyDay', key: movedHere, season: 'easter', cycle, isFixed: true, isTransferred: true };
+    }
+    if (date > F.easter && date < F.pentecost && dow !== 0 && (!FIXED_FEASTS[md] || movedAway)) {
       const week = Math.ceil(diffDays(F.easter, date) / 7);
       return mk(`${DAY_NAMES_EN[dow]} of Easter Week ${week}`, `${DAY_NAMES_ES[dow]} de Pascua (semana ${week})`, 'white', 'feria', `easterFeria${week}_${dow}`, 'easter', cycle);
     }
@@ -323,9 +383,21 @@ const BCPCalendar = (() => {
     // apariciones reales en día de semana, verificado simulando 2024-2050.
     // En domingo, el domingo siempre prevalece — no se implementan reglas de
     // desplazamiento en esta fase).
-    if (dow !== 0 && FIXED_FEASTS[md]) {
+    if (dow !== 0 && FIXED_FEASTS[md] && !movedAway) {
       const ff = FIXED_FEASTS[md];
       return { name: ff.name, nameEs: ff.nameEs, color: ff.color, rank: 'holyDay', key: md, season: seasonForDate(date, F, advent1), cycle, isFixed: true };
+    }
+
+    // ── FERIAS DE LA SEMANA ENTRE PENTECOSTÉS Y LA TRINIDAD ────────────────
+    // Estos seis días no los cubría ningún bloque: el de Pascua termina en
+    // Pentecostés y el de Propios empieza después de Trinidad, así que caían
+    // hasta el fallback genérico final y se mostraban como "Feria", sin
+    // identidad ni tiempo litúrgico (206 días en el barrido 2024-2060).
+    // Toman lecturas y colecta prestadas del Domingo precedente (Pentecostés),
+    // igual que cualquier otra feria.
+    if (date > F.pentecost && date < F.trinitySunday && dow !== 0) {
+      return mk(`${DAY_NAMES_EN[dow]} after Pentecost`, `${DAY_NAMES_ES[dow]} después de Pentecostés`,
+                'green', 'feria', `pentecostFeria_${dow}`, 'pentecost', cycle);
     }
 
     // ── DOMINGOS Y FERIAS DESPUÉS DE PENTECOSTÉS (sistema de Propios RCL) ──
@@ -359,6 +431,7 @@ const BCPCalendar = (() => {
     getSundayCycle,
     getFeastDates,
     getProperNumber,
+    getTransferredFeasts,
     getSundaysAfterPentecostLabel,
     computeEaster,
     FIXED_FEASTS,

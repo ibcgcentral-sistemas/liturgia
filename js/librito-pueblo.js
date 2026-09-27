@@ -9,8 +9,9 @@ const LibritoPueblo = (() => {
   function generateLibrito(date, dayInfo, readings, cycle, firstReading, secondReading, gospel, psalmVerses, psalmAnt, collect, introit, offertory, communion, omitGloria, omitCreed, omitAlleluia, canonType = 'roman', intercessions = null, lang = 'es', extras = {}) {
     const dateStr = formatLiturgyDate(date);
     const colorName = getColorName(dayInfo.color);
-    const { secret, preface, postcommunion, omitJudica, season, commemorations, hancIgitur, useBenoedicamus, votiveType, omissions, borrowedFromSunday } = extras;
+    const { secret, preface, postcommunion, omitJudica, season, commemorations, hancIgitur, useBenoedicamus, votiveType, omissions, borrowedFromSunday, omittedFeasts, suppliedProperNotes, gradualText } = extras;
     const key = dayInfo.key || '';
+    const rankName = getRankName(dayInfo.rank);
 
     const omissionHTML = (omissions && omissions.length) ? `
       <div class="omission-notes">
@@ -18,10 +19,48 @@ const LibritoPueblo = (() => {
         <ul>${omissions.map(o => `<li>${o.part.toUpperCase()}: ${o.reason || o.note || ''}</li>`).join('')}</ul>
       </div>` : '';
 
+    // ── RÚBRICAS DE TRASLACIÓN ─────────────────────────────────────────────
+    // Mismas señales que imprime el Misal (app.js) a partir de los campos
+    // `translatedFeast`, `isTranslated` / `displacedDay` de calendar.js y de
+    // `omittedFeasts` de commemorations.js. El Librito las callaba: el pueblo
+    // veía una fiesta trasladada sin explicación alguna.
+    const fmtDay = (v) => {
+      if (!v) return '';
+      const dt = (v instanceof Date) ? v : new Date(String(v) + 'T12:00:00');
+      return isNaN(dt.getTime()) ? String(v) : formatLiturgyDate(dt);
+    };
+    const tf = dayInfo.translatedFeast;
+    const translationHTML = [
+      tf ? `<p class="rubric">✠ La fiesta de ${tf.nameEs || tf.name}, impedida hoy, ${
+        (tf.to || tf.toISO)
+          ? `se traslada al ${fmtDay(tf.to || tf.toISO)}`
+          : 'se omite este año por no hallarse día libre'}.</p>` : '',
+      dayInfo.isTranslated
+        ? `<p class="rubric">✠ Fiesta trasladada${dayInfo.translatedFromISO ? ` desde el ${fmtDay(dayInfo.translatedFromISO)}` : ''}, por haber estado impedida en su fecha propia.${
+          dayInfo.displacedDay && dayInfo.displacedDay.nameEs
+            ? ` Hoy cede ante ella ${dayInfo.displacedDay.nameEs}.` : ''}</p>` : '',
+      (omittedFeasts || []).filter(f => f.reason === 'privileged').map(f =>
+        `<p class="rubric">✠ La fiesta de ${f.name} cede hoy ante el día privilegiado y no se conmemora.</p>`).join(''),
+    ].join('');
+
+    // ── TEXTOS SUPLIDOS DEL TIEMPO Y PIEZAS OMITIDAS ───────────────────────
+    // Señal `supplied` / `omitted` que devuelve propers.js. Se marcan igual que
+    // en el Misal para que ambos documentos digan lo mismo. Una pieza OMITIDA
+    // (p. ej. el Ofertorio y la Secreta del Viernes Santo) lleva la nota que
+    // explica por qué no hay texto, no el marcador «no disponible».
+    const suppliedParts = new Set((suppliedProperNotes || [])
+      .filter(n => !n.omitted).map(n => n.part));
+    const omittedNotes = new Map((suppliedProperNotes || [])
+      .filter(n => n.omitted).map(n => [n.part, n.note]));
+    const suppliedMark = (part) => suppliedParts.has(part)
+      ? ` <em class="rubric">(${part} del tiempo)</em>` : '';
+    const omittedText = (part) => omittedNotes.has(part)
+      ? `<em class="rubric">${omittedNotes.get(part) || `[Hoy no se dice ${part}.]`}</em>` : null;
+
     // Sincroniza el Ordinario (Canon.js) con el idioma de la liturgia recién generada,
     // para que el Kyrie, Gloria, Credo, Sanctus, Padre Nuestro, etc. salgan en el
     // mismo formato bilingüe (Español|Latín) que el Misal principal.
-    Canon.setLanguage(lang, dayInfo.key);
+    Canon.setLanguage(lang, dayInfo.key, date);
 
     const html = `
     <div class="librito-document">
@@ -44,9 +83,11 @@ const LibritoPueblo = (() => {
         <p class="librito-date">${dateStr}</p>
         <p class="librito-feast">${dayInfo.nameEs || dayInfo.name}</p>
         <p class="librito-meta">
-          Color: <strong>${colorName}</strong> · Ciclo: <strong>${cycle}</strong>
+          Color: <strong>${colorName}</strong> · Rango: <strong>${rankName}</strong> · Ciclo: <strong>${cycle}</strong>
         </p>
       </div>
+
+      ${translationHTML}
 
       ${omissionHTML}
 
@@ -58,9 +99,13 @@ const LibritoPueblo = (() => {
         </div>
       </section>
 
-      ${(date.getDay() === 0 && !['requiem', 'holySpirit', 'bvm'].includes(dayInfo.key)) ? (() => {
-        const k = dayInfo.key || '';
-        const isEasterSeason = k === 'easter' || k.startsWith('easter') || k === 'pentecost' || k === 'ascension';
+      ${(date.getDay() === 0 && (votiveType || 'none') === 'none') ? (() => {
+        // Mismo criterio que el Misal: la elección Vidi Aquam / Asperges Me
+        // depende del TIEMPO litúrgico (campo `season` de calendar.js), no del
+        // prefijo de la clave del día — una fiesta fija (clave «MM-DD») que
+        // caiga en un domingo de Pascua daba Asperges Me en el Librito y Vidi
+        // Aquam en el Misal.
+        const isEasterSeason = (season === 'easter' || key === 'pentecost');
         return isEasterSeason ? `
       <section class="librito-section">
         <h2>✠ RITO DE ASPERSIÓN (VIDI AQUAM)</h2>
@@ -107,12 +152,12 @@ const LibritoPueblo = (() => {
         </div>
         <div class="liturgical-text-block">${Canon.ASCENT_PUEBLO}</div>
 
-        <h3>INTROITO</h3>
+        <h3>INTROITO</h3>${suppliedMark('Introito')}
         <div class="librito-instruction">
           <p><strong>Se levanta.</strong> Se canta o recita el Introito del día.</p>
         </div>
         <div class="librito-prayer">
-          <p>${introit ? introit.ant : '[Introito no disponible]'}</p>
+          <p>${introit ? introit.ant : (omittedText('Introito') || '[Introito no disponible]')}</p>
           ${introit && introit.psalm ? `<p><em>Salmo:</em> ${translateBibleReference(introit.psalm)}</p>
           <p>Gloria al Padre, y al Hijo, y al Espíritu Santo. Como era en el principio, ahora y siempre, por los siglos de los siglos. Amén.</p>
           <p><em>(Se repite la antífona)</em> ${introit.ant}</p>` : ''}
@@ -124,7 +169,11 @@ const LibritoPueblo = (() => {
 
       <!-- GLORIA -->
       <section class="librito-section">
-        ${omitGloria ? `
+        ${(canonType === '1662' || canonType === '1928') ? `
+        <div class="librito-instruction">
+          <p><strong>Nota:</strong> En el rito de ${canonType}, el Gloria in excelsis se dice al final de la Misa, después de la Comunión. Véase el final de este librito.</p>
+        </div>
+        ` : omitGloria ? `
         <div class="librito-instruction">
           <p><strong>Nota:</strong> Se omite el Gloria en Adviento, Cuaresma y Misas de Réquiem.</p>
         </div>
@@ -139,7 +188,7 @@ const LibritoPueblo = (() => {
 
       <!-- COLECTA -->
       <section class="librito-section">
-        <h2>✠ COLECTA DEL DÍA</h2>
+        <h2>✠ COLECTA DEL DÍA</h2>${suppliedMark('Colecta')}
         <div class="librito-instruction">
           <p><strong>Se levanta.</strong> El Sacerdote saluda y dice la Colecta:</p>
         </div>
@@ -226,10 +275,21 @@ const LibritoPueblo = (() => {
         </div>
         ` : ''}
 
-        <h3>${omitAlleluia ? 'TRACTO (Cuaresma)' : 'ALELUYA'}</h3>
+        <!-- GRADUAL. app.js lo guarda ya en currentMassState y lo pasa por
+             extras, de modo que el Librito imprime el mismo texto que el Misal
+             sin recalcular propios. Lleva su marca de texto suplido del tiempo:
+             el pueblo veía el Gradual del tiempo sin anunciarlo. -->
+        ${gradualText ? `
+        <h3>${omitAlleluia ? 'GRADUAL / TRACTO' : 'GRADUAL'}</h3>${suppliedMark('Gradual')}
+        <div class="librito-reading">
+          <p class="reading-text">${gradualText}</p>
+        </div>
+        ` : ''}
+
+        <h3>${omitAlleluia ? 'TRACTO' : 'ALELUYA'}</h3>
         ${omitAlleluia ? `
         <div class="librito-instruction">
-          <p>Se omite el Aleluya y en su lugar se canta el Tracto.</p>
+          <p>El Aleluya no se canta desde Septuagésima hasta la Vigilia Pascual. Se usa el Tracto.</p>
         </div>
         ` : `
         <div class="librito-response">
@@ -281,7 +341,7 @@ const LibritoPueblo = (() => {
       <section class="librito-section">
         ${omitCreed ? `
         <div class="librito-instruction">
-          <p><strong>Nota:</strong> Se omite el Credo en ferias simples del Tiempo Ordinario sin rango especial.</p>
+          <p><strong>Nota:</strong> Se omite hoy el Credo Niceno por ser feria sin rango especial.</p>
         </div>
         ` : `
         <h2>✠ CREDO NICENO</h2>
@@ -299,13 +359,14 @@ const LibritoPueblo = (() => {
           <p><strong>Se levanta.</strong> El Diácono o Sacerdote presenta las intenciones. Después de cada una, el pueblo responde:</p>
         </div>
         ${intercessions ? `
+        ${intercessions.header ? `<div class="liturgical-text-block">${intercessions.header}</div>` : ''}
         <div class="librito-response" style="margin-bottom:1.2rem;">
           <p><strong>R/. Señor, escucha nuestra oración.</strong></p>
         </div>
         ${intercessions.petitions.map(p => `
         <div class="librito-petition">
           <p class="rubric" style="font-style:italic; color:#8b1a1a; font-size:0.9em; margin-bottom:0.3rem;">${p.intro}</p>
-          <p class="librito-petition-text">${p.body.replace('<strong>R/. Señor, escucha nuestra oración.</strong>', '<strong>R/. Señor, escucha nuestra oración.</strong>')}</p>
+          <p class="librito-petition-text">${p.body}</p>
         </div>
         `).join('')}
         <div class="librito-instruction" style="margin-top:1rem; border-top:1px solid #c8b87a; padding-top:0.8rem;">
@@ -326,28 +387,34 @@ const LibritoPueblo = (() => {
 
       <!-- OFERTORIO -->
       <section class="librito-section">
-        <h2>✠ OFERTORIO</h2>
+        <h2>✠ OFERTORIO</h2>${suppliedMark('Ofertorio')}
         <div class="librito-instruction">
           <p><strong>Se levanta.</strong> Se canta la Antífona de Ofertorio. El Sacerdote prepara las ofrendas en el altar.</p>
         </div>
         <div class="librito-prayer" style="margin-top: 0.5rem; text-align: justify; font-style: normal;">
-          <p><em>${offertory ? offertory : '[Antífona de Ofertorio no disponible]'}</em></p>
+          <p>${offertory ? `<em>${offertory}</em>` : (omittedText('Ofertorio') || '<em>[Antífona de Ofertorio no disponible]</em>')}</p>
         </div>
         <div class="librito-instruction">
           <p><strong>Se sientan.</strong> El Sacerdote reza las oraciones del Ofertorio:</p>
         </div>
         <div class="liturgical-text-block">${Canon.OFFERTORY_PUEBLO}</div>
 
-        <h3>ORACIÓN SOBRE LAS OFRENDAS (Secreta)</h3>
+        <h3>ORACIÓN SOBRE LAS OFRENDAS (Secreta)</h3>${suppliedMark('Secreta')}
+        ${secret ? `
         <div class="librito-instruction">
           <p>El Sacerdote reza en secreto la Oración sobre las Ofrendas:</p>
         </div>
         <div class="librito-prayer" style="margin-top: 0.5rem; text-align: justify; font-style: normal;">
-          <p><em>${secret || '[Secreta no disponible]'}</em></p>
+          <p><em>${secret}</em></p>
         </div>
         <div class="librito-response">
           <p><strong>R/. Amén.</strong></p>
         </div>
+        ` : `
+        <div class="librito-instruction">
+          <p>${omittedText('Secreta') || '[Secreta no disponible]'}</p>
+        </div>
+        `}
       </section>
 
       ${canonType === '1662' ? `
@@ -372,7 +439,7 @@ const LibritoPueblo = (() => {
 
       <!-- PREFACIO -->
       <section class="librito-section">
-        <h2>✠ PREFACIO${preface ? ': ' + preface.title.toUpperCase() : ''}</h2>
+        <h2>✠ PREFACIO: ${(preface && preface.title) ? preface.title.toUpperCase() : 'PREFACIO COMÚN'}</h2>
         <div class="librito-instruction">
           <p><strong>Se levanta.</strong> El Sacerdote saluda:</p>
         </div>
@@ -411,6 +478,12 @@ const LibritoPueblo = (() => {
           <p><strong>Se adora en silencio profundo.</strong> Es el momento más sagrado de la Misa. Muchos fieles hacen un acto de contrición.</p>
           <p style="margin-top: 1rem;"><strong>Se toca la campanilla nuevamente. El cáliz con la Preciosa Sangre es elevado.</strong></p>
           <p><strong>Se adora nuevamente en profundo recogimiento.</strong></p>
+        </div>
+        <div class="librito-instruction">
+          <p>El Sacerdote termina el Canon con la doxología final. Es la única respuesta del pueblo dentro del Canon:</p>
+        </div>
+        <div class="librito-response">
+          <p><strong>R/. Amén.</strong></p>
         </div>
       </section>
 
@@ -451,10 +524,10 @@ const LibritoPueblo = (() => {
           <strong>R/. Amén.</strong></p>
         </div>
         <div class="librito-instruction">
-          <p><strong>Al terminar, se canta la Antífona de Comunión:</strong></p>
+          <p><strong>Al terminar, se canta la Antífona de Comunión:</strong></p>${suppliedMark('Antífona de Comunión')}
         </div>
         <div class="librito-prayer" style="margin-top: 0.5rem; text-align: justify; font-style: normal;">
-          <p><em>${communion ? communion : '[Antífona de Comunión no disponible]'}</em></p>
+          <p>${communion ? `<em>${communion}</em>` : (omittedText('Antífona de Comunión') || '<em>[Antífona de Comunión no disponible]</em>')}</p>
         </div>
         <div class="librito-instruction">
           <p><strong>Después de comulgar:</strong> Se levanta y vuelve a su lugar. Reza en silencio una acción de gracias:</p>
@@ -472,7 +545,7 @@ const LibritoPueblo = (() => {
 
       <!-- POSCOMUNIÓN -->
       <section class="librito-section">
-        <h2>✠ ORACIÓN DE POSCOMUNIÓN</h2>
+        <h2>✠ ORACIÓN DE POSCOMUNIÓN</h2>${suppliedMark('Poscomunión')}
         <div class="librito-instruction">
           <p><strong>Se levanta.</strong> El Sacerdote saluda:</p>
         </div>
@@ -541,6 +614,16 @@ const LibritoPueblo = (() => {
           <p>Según el rito de 1662, el Padre Nuestro se reza después de la Comunión.</p>
         </div>
         <div class="liturgical-text-block">${Canon.PATER_NOSTER_PUEBLO}</div>
+      </section>
+
+      <!-- ORACIÓN DE OBLACIÓN (RITO DE 1662) — la reza el Sacerdote en nombre
+           de todos («nosotros, tus humildes siervos»): el pueblo la sigue.
+           Texto tomado literalmente del Misal (app.js); no se ha redactado aquí. -->
+      <section class="librito-section">
+        <h2>✠ ORACIÓN DE OBLACIÓN (1662)</h2>
+        <div class="librito-prayer" style="margin-top: 0.5rem; text-align: justify; font-style: normal;">
+          <p>Oh Señor y Padre celestial, nosotros, tus humildes siervos, deseamos enteramente que tu paternal bondad acepte misericordiosamente este nuestro sacrificio de alabanza y acción de gracias; suplicándote humildísimamente que nos concedas, por los méritos y muerte de tu Hijo Jesucristo, y por la fe en su Sangre, a nosotros y a toda tu Iglesia, la remisión de nuestros pecados, y todos los demás beneficios de su Pasión. Y aquí nos ofrecemos y presentamos a ti, oh Señor, nosotros mismos, nuestras almas y cuerpos, para ser un sacrificio razonable, santo y vivo ante ti; suplicándote humildemente que todos cuantos hemos sido partícipes de esta santa Comunión seamos llenos de tu gracia y bendición celestial. Y aunque somos indignos, por nuestros muchos pecados, de ofrecerte sacrificio alguno, te rogamos sin embargo que aceptes este nuestro deber y servicio obligado; no pesando nuestros méritos, sino perdonando nuestras ofensas; por Jesucristo nuestro Señor, por quien, y con quien, en la unidad del Espíritu Santo, todo honor y gloria sea a ti, oh Padre Todopoderoso, por los siglos de los siglos. Amén.</p>
+        </div>
       </section>
 
       <!-- GLORIA AL FINAL (RITO DE 1662) -->
@@ -936,6 +1019,41 @@ async function downloadLibritoDOCX(feastName) {
       }
     }
 
+    // ── Rúbricas de traslación y notas de omisiones ──────────────────────────
+    // Cuelgan de .librito-document, no de una .librito-section, y el recorrido
+    // de abajo sólo mira las secciones: el bloque entero — el título y todas las
+    // notas («GLORIA: se omite…», «VELOS: …», «INCIENSO: …») — se perdía al
+    // exportar el Librito a Word, mientras que el Misal sí lo lleva. Eran las
+    // únicas notas que el pueblo no recibía en su copia impresa.
+    for (const el of libritoDoc.children) {
+      if (el.tagName === 'P' && el.classList.contains('rubric')) {
+        const t = el.textContent.trim();
+        if (t) paras.push(new Paragraph({
+          children: [new TextRun({ text: t, italics: true, color: C_RUB, size: SZ_SM, font: FONT })],
+          spacing: { before: 60, after: 60 },
+        }));
+        continue;
+      }
+      if (!el.classList.contains('omission-notes')) continue;
+      const head = el.querySelector('h3, h4');
+      if (head && head.textContent.trim()) {
+        paras.push(new Paragraph({
+          children: [new TextRun({ text: head.textContent.trim().toUpperCase(), bold: true, size: SZ, color: C_INK, font: FONT })],
+          keepNext: true,
+          spacing: { before: 240, after: 120 },
+        }));
+      }
+      el.querySelectorAll('li').forEach(li => {
+        const t = li.textContent.trim();
+        if (!t) return;
+        paras.push(new Paragraph({
+          children: [new TextRun({ text: '• ' + t, italics: true, color: C_RUB, size: SZ_SM, font: FONT })],
+          indent: { left: 360 },
+          spacing: { before: 40, after: 40 },
+        }));
+      });
+    }
+
     // ── Procesar secciones ───────────────────────────────────────────────────
     const sections = libritoDoc.querySelectorAll('.librito-section');
     sections.forEach(section => {
@@ -1052,12 +1170,32 @@ async function downloadLibritoDOCX(feastName) {
               }));
             }
           });
-        } else if (el.tagName === 'P') {
-          // Párrafos sueltos directamente dentro de section
+          // Marcas sueltas DENTRO del contenedor, fuera de todo <p>: la del
+          // Ofertorio y la de la Antífona de Comunión cuelgan de un
+          // .librito-instruction, no de la sección. Recorrerlo por <p> las
+          // dejaba fuera del .docx.
+          for (const loose of el.children) {
+            if (loose.tagName !== 'EM' && loose.tagName !== 'SPAN') continue;
+            const lt = loose.textContent.trim();
+            if (!lt) continue;
+            paras.push(new Paragraph({
+              children: buildRuns(loose, { italic: true, color: C_RUB, size: SZ_SM }),
+              spacing: { before: 30, after: 30 },
+            }));
+          }
+        } else if (el.tagName === 'P' || el.tagName === 'EM' || el.tagName === 'SPAN') {
+          // Párrafos y marcas sueltos directamente dentro de la sección.
+          // Las marcas de texto suplido del tiempo — « (Introito del tiempo) » —
+          // son un <em class="rubric"> suelto que sigue al <h3>, sin <p> dentro:
+          // esta rama sólo miraba los <p>, así que las seis marcas del día se
+          // imprimían en el Librito en pantalla y desaparecían al exportarlo a
+          // Word, mientras el Misal sí las llevaba. Verificado: 6/6 marcas
+          // perdidas antes, 6/6 conservadas después.
           const text = el.textContent.trim();
           if (text) {
+            const isRubric = el.tagName === 'EM' || el.classList.contains('rubric');
             paras.push(new Paragraph({
-              children: buildRuns(el),
+              children: buildRuns(el, isRubric ? { italic: true, color: C_RUB, size: SZ_SM } : {}),
               spacing: { before: 30, after: 30 },
             }));
           }

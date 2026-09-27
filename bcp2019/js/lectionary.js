@@ -157,12 +157,12 @@ const BCPLectionary = (() => {
       C: { first: 'Acts 10:34-43', psalm: 'Psalm 118:1-2', second: '1 Corinthians 15:19-26', gospel: 'Luke 24:1-12', psalmAnt: 'Este es el día que hizo el Señor: alegrémonos y gocemos en él.' },
     },
     easter2: {
-      A: { first: 'Acts 2:14', psalm: 'Psalm 16', second: '1 Peter 1:3-9', gospel: 'John 20:19-31' },
+      A: { first: 'Acts 2:14,22-32', psalm: 'Psalm 16', second: '1 Peter 1:3-9', gospel: 'John 20:19-31' },
       B: { first: 'Acts 4:32-35', psalm: 'Psalm 133', second: '1 John 1:1-2:2', gospel: 'John 20:19-31' },
       C: { first: 'Acts 5:27-32', psalm: 'Psalm 118:14-29', second: 'Revelation 1:4-8', gospel: 'John 20:19-31' },
     },
     easter3: {
-      A: { first: 'Acts 2:14', psalm: 'Psalm 116:1-4', second: '1 Peter 1:17-23', gospel: 'Luke 24:13-35' },
+      A: { first: 'Acts 2:14,36-41', psalm: 'Psalm 116:1-4', second: '1 Peter 1:17-23', gospel: 'Luke 24:13-35' },
       B: { first: 'Acts 3:12-19', psalm: 'Psalm 4', second: '1 John 3:1-7', gospel: 'Luke 24:36-48' },
       C: { first: 'Acts 9:1-6', psalm: 'Psalm 30', second: 'Revelation 5:11-14', gospel: 'John 21:1-19' },
     },
@@ -179,11 +179,11 @@ const BCPLectionary = (() => {
     easter6: {
       A: { first: 'Acts 17:22-31', psalm: 'Psalm 66:7-18', second: '1 Peter 3:13-22', gospel: 'John 14:15-21' },
       B: { first: 'Acts 10:44-48', psalm: 'Psalm 98', second: '1 John 5:1-6', gospel: 'John 15:9-17' },
-      C: { first: 'Acts 16:9-15', psalm: 'Psalm 67', second: 'Revelation 21:10', gospel: 'John 14:23-29' },
+      C: { first: 'Acts 16:9-15', psalm: 'Psalm 67', second: 'Revelation 21:10,21:22-22:5', gospel: 'John 14:23-29' },
     },
     easter7: {
       A: { first: 'Acts 1:6-14', psalm: 'Psalm 68:1-10', second: '1 Peter 4:12-14', gospel: 'John 17:1-11' },
-      B: { first: 'Acts 1:15-17', psalm: 'Psalm 1', second: '1 John 5:9-13', gospel: 'John 17:6-19' },
+      B: { first: 'Acts 1:15-17,21-26', psalm: 'Psalm 1', second: '1 John 5:9-13', gospel: 'John 17:6-19' },
       C: { first: 'Acts 16:16-34', psalm: 'Psalm 97', second: 'Revelation 22:12-14', gospel: 'John 17:20-26' },
     },
     ascension: {
@@ -228,7 +228,7 @@ const BCPLectionary = (() => {
     },
     proper8: {
       A: { first: 'Genesis 22:1-14', psalm: 'Psalm 13', second: 'Romans 6:12-23', gospel: 'Matthew 10:40-42' },
-      B: { first: '2 Samuel 1:1', psalm: 'Psalm 130', second: '2 Corinthians 8:7-15', gospel: 'Mark 5:21-43' },
+      B: { first: '2 Samuel 1:1,17-27', psalm: 'Psalm 130', second: '2 Corinthians 8:7-15', gospel: 'Mark 5:21-43' },
       C: { first: '1 Kings 19:15-16', psalm: 'Psalm 16', second: 'Galatians 5:1-25', gospel: 'Luke 9:51-62' },
     },
     proper9: {
@@ -254,7 +254,7 @@ const BCPLectionary = (() => {
     proper13: {
       A: { first: 'Genesis 32:22-31', psalm: 'Psalm 17:1-7', second: 'Romans 9:1-5', gospel: 'Matthew 14:13-21' },
       B: { first: '2 Samuel 11:26-12:13', psalm: 'Psalm 51:1-13', second: 'Ephesians 4:1-16', gospel: 'John 6:24-35' },
-      C: { first: 'Ecclesiastes 1:2', psalm: 'Psalm 49:1-11', second: 'Colossians 3:1-11', gospel: 'Luke 12:13-21' },
+      C: { first: 'Ecclesiastes 1:2,12-14,2:18-23', psalm: 'Psalm 49:1-11', second: 'Colossians 3:1-11', gospel: 'Luke 12:13-21' },
     },
     proper14: {
       A: { first: 'Genesis 37:1-4', psalm: 'Psalm 105:1-6', second: 'Romans 10:5-15', gospel: 'Matthew 14:22-33' },
@@ -274,7 +274,7 @@ const BCPLectionary = (() => {
     proper17: {
       A: { first: 'Exodus 3:1-15', psalm: 'Psalm 105:1-6', second: 'Romans 12:9-21', gospel: 'Matthew 16:21-28' },
       B: { first: 'Deuteronomy 4:1-9', psalm: 'Psalm 15', second: 'James 1:17-27', gospel: 'Mark 7:1-8' },
-      C: { first: 'Jeremiah 2:4-13', psalm: 'Psalm 81:1', second: 'Hebrews 13:1-8', gospel: 'Luke 14:1-14' },
+      C: { first: 'Jeremiah 2:4-13', psalm: 'Psalm 81:1,10-16', second: 'Hebrews 13:1-8', gospel: 'Luke 14:1-14' },
     },
     proper18: {
       A: { first: 'Exodus 12:1-14', psalm: 'Psalm 149', second: 'Romans 13:8-14', gospel: 'Matthew 18:15-20' },
@@ -298,13 +298,13 @@ const BCPLectionary = (() => {
     },
     proper22: {
       A: { first: 'Exodus 20:1-4', psalm: 'Psalm 19', second: 'Philippians 3:4-14', gospel: 'Matthew 21:33-46' },
-      B: { first: 'Job 1:1', psalm: 'Psalm 26', second: 'Hebrews 1:1-4', gospel: 'Mark 10:2-16' },
+      B: { first: 'Job 1:1,2:1-10', psalm: 'Psalm 26', second: 'Hebrews 1:1-4', gospel: 'Mark 10:2-16' },
       C: { first: 'Lamentations 1:1-6', psalm: 'Psalm 137', second: '2 Timothy 1:1-14', gospel: 'Luke 17:5-10' },
     },
     proper23: {
       A: { first: 'Exodus 32:1-14', psalm: 'Psalm 106:1-6', second: 'Philippians 4:1-9', gospel: 'Matthew 22:1-14' },
       B: { first: 'Job 23:1-9', psalm: 'Psalm 22:1-15', second: 'Hebrews 4:12-16', gospel: 'Mark 10:17-31' },
-      C: { first: 'Jeremiah 29:1', psalm: 'Psalm 66:1-11', second: '2 Timothy 2:8-15', gospel: 'Luke 17:11-19' },
+      C: { first: 'Jeremiah 29:1,4-7', psalm: 'Psalm 66:1-11', second: '2 Timothy 2:8-15', gospel: 'Luke 17:11-19' },
     },
     proper24: {
       A: { first: 'Exodus 33:12-23', psalm: 'Psalm 99', second: '1 Thessalonians 1:1-10', gospel: 'Matthew 22:15-22' },
@@ -314,7 +314,7 @@ const BCPLectionary = (() => {
     proper25: {
       A: { first: 'Deuteronomy 34:1-12', psalm: 'Psalm 90:1-6', second: '1 Thessalonians 2:1-8', gospel: 'Matthew 22:34-46' },
       B: { first: 'Job 42:1-6', psalm: 'Psalm 34:1-8', second: 'Hebrews 7:23-28', gospel: 'Mark 10:46-52' },
-      C: { first: 'Joel 2:23-32', psalm: 'Psalm 65', second: '2 Timothy 4:6-8', gospel: 'Luke 18:9-14' },
+      C: { first: 'Joel 2:23-27,3:1-5', psalm: 'Psalm 65', second: '2 Timothy 4:6-8', gospel: 'Luke 18:9-14' },
     },
     proper26: {
       A: { first: 'Joshua 3:7-17', psalm: 'Psalm 107:1-7', second: '1 Thessalonians 2:9-13', gospel: 'Matthew 23:1-12' },

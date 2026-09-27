@@ -8,6 +8,9 @@ const Canon = (() => {
 
   let currentLang = 'es';
   let currentDayKey = null;
+  // Fecha del día activo. Sólo la usan las octavas que la clave no distingue
+  // (Octava de la Epifanía); es opcional y su ausencia no cambia nada.
+  let currentDayDate = null;
 
   // ── Helpers para construir líneas de diálogo ──────────────────────────────
   const S  = (txt) => `<span class="lit-line sacerdote"><span class="lit-label">S.</span><span class="lit-text">${txt}</span></span>`;
@@ -74,7 +77,11 @@ const Canon = (() => {
     } else if (currentLang === 'la') {
       return arr.map(item => {
         const text = item.la || item.es;
-        if (item.type === 'R') return R(text);
+        // Las rúbricas van SIEMPRE en español, en los tres modos: son
+        // instrucciones para quien celebra, no texto que se reza. Antes el modo
+        // latín las servía en latín (45 rúbricas por generación) y el modo
+        // bilingüe las imprimía dos veces, una en cada columna.
+        if (item.type === 'R') return R(item.es);
         if (item.type === 'T') return T(text);
         if (item.type === 'C') return C(text);
         if (item.type === 'O') return O(text);
@@ -87,11 +94,15 @@ const Canon = (() => {
       }).join('');
     } else { // 'latin-es' (Bilingüe paralelo)
       return arr.map(item => {
-        if (item.type === 'R') {
-          return `<div class="lit-bilingual-row"><div class="lit-column-la">${R(item.la || item.es)}</div><div class="lit-column-es">${R(item.es)}</div></div>`;
-        }
+        // Rúbrica: una sola vez, en español y a todo el ancho (no es texto que
+        // se rece, así que no le corresponde columna latina paralela).
+        if (item.type === 'R') return R(item.es);
         if (item.type === 'T') {
-          return `<div class="lit-bilingual-row"><div class="lit-column-la">${T(item.la || item.es)}</div><div class="lit-column-es">${T(item.es)}</div></div>`;
+          // Muchos títulos son el propio incipit latino («TE IGITUR», «AGNUS
+          // DEI»…): en esos casos las dos columnas salían idénticas.
+          const laT = item.la || item.es;
+          if (laT === item.es) return T(item.es);
+          return `<div class="lit-bilingual-row"><div class="lit-column-la">${T(laT)}</div><div class="lit-column-es">${T(item.es)}</div></div>`;
         }
         if (item.type === 'C') {
           return `<div class="lit-bilingual-row"><div class="lit-column-la">${C(item.la || item.es)}</div><div class="lit-column-es">${C(item.es)}</div></div>`;
@@ -206,7 +217,11 @@ const Canon = (() => {
     { type: 'T', es: 'IN SPIRITU HUMILITATIS', la: 'IN SPIRITU HUMILITATIS' },
     { type: 'O', secret: true, es: 'Con espíritu humilde y corazón contrito seamos acogidos por ti, Señor; y así sea nuestro sacrificio ofrecido hoy en tu presencia, que te sea agradable, Señor Dios.', la: 'In spiritu humilitatis, et in animo contrito suscipiamur a te, Domine: et sic fiat sacrificium nostrum in conspectu tuo hodie, ut placeat tibi, Domine Deus.' },
     { type: 'T', es: 'LAVABO — Salmo 26', la: 'LAVABO — Psalmus 25' },
-    { type: 'O', es: 'Lavaré en inocencia mis manos, y así andaré alrededor de tu altar, oh Señor; para proclamar con voz de acción de gracias, y contar todas tus maravillas. Señor, he amado la morada de tu casa, y el lugar donde habita tu gloria. No arrebates con los pecadores mi alma, ni mi vida con hombres sanguinarios, en cuyas manos hay perversidad, y cuya diestra está llena de sobornos. Mas yo andaré en mi integridad; redímeme y ten misericordia de mí. Mi pie está en camino recto; en las congregaciones bendeciré al Señor. Gloria al Padre, y al Hijo, y al Espíritu Santo. Como era en el principio, ahora y siempre, por los siglos de los siglos. Amén.', la: 'Lavabo inter innocentes manus meas: et circumdabo altare tuum, Domine: Ut audiam vocem laudis, et enarrem universa mirabilia tua. Domine, dilexi decorem domus tuae, et locum habitationis gloriae tuae. Ne perdas cum impiis, Deus, animam meam, et cum viris sanguinum vitam meam: In quorum manibus iniquitates sunt: dextera eorum repleta est muneribus. Ego autem in innocentia mea ingressus sum: redime me, et miserere mei. Pes meus stetit in directo: in ecclesiis benedicam te, Domine. Gloria Patri, et Filio, et Spiritui Sancto. Sicut erat in principio, et nunc, et semper: et in saecula saeculorum. Amen.' },
+    // El Lavabo lo reza el Sacerdote en voz baja mientras se lava las manos:
+    // es oración privada suya, como las cuatro del Ofertorio que la preceden.
+    // Sin la marca `secret` era la única que reduceForPueblo() dejaba pasar, y
+    // el Librito del Pueblo imprimía un texto que el pueblo no dice ni oye.
+    { type: 'O', secret: true, es: 'Lavaré en inocencia mis manos, y así andaré alrededor de tu altar, oh Señor; para proclamar con voz de acción de gracias, y contar todas tus maravillas. Señor, he amado la morada de tu casa, y el lugar donde habita tu gloria. No arrebates con los pecadores mi alma, ni mi vida con hombres sanguinarios, en cuyas manos hay perversidad, y cuya diestra está llena de sobornos. Mas yo andaré en mi integridad; redímeme y ten misericordia de mí. Mi pie está en camino recto; en las congregaciones bendeciré al Señor. Gloria al Padre, y al Hijo, y al Espíritu Santo. Como era en el principio, ahora y siempre, por los siglos de los siglos. Amén.', la: 'Lavabo inter innocentes manus meas: et circumdabo altare tuum, Domine: Ut audiam vocem laudis, et enarrem universa mirabilia tua. Domine, dilexi decorem domus tuae, et locum habitationis gloriae tuae. Ne perdas cum impiis, Deus, animam meam, et cum viris sanguinum vitam meam: In quorum manibus iniquitates sunt: dextera eorum repleta est muneribus. Ego autem in innocentia mea ingressus sum: redime me, et miserere mei. Pes meus stetit in directo: in ecclesiis benedicam te, Domine. Gloria Patri, et Filio, et Spiritui Sancto. Sicut erat in principio, et nunc, et semper: et in saecula saeculorum. Amen.' },
     { type: 'T', es: 'ORATE FRATRES', la: 'ORATE FRATRES' },
     { type: 'S', es: 'Orad, hermanos, para que mi sacrificio y el vuestro sea agradable a Dios Padre Todopoderoso.', la: 'Orate, fratres: ut meum ac vestrum sacrificium acceptabile fiat apud Deum Patrem omnipotentem.' },
     { type: 'P', es: 'El Señor reciba de tus manos este sacrificio, para alabanza y gloria de su Nombre, así como para nuestro bien y el de toda su santa Iglesia.', la: 'Suscipiat Dominus sacrificium de manibus tuis ad laudem et gloriam nominis sui, ad utilitatem quoque nostram, totiusque Ecclesiae suae sanctae.' }
@@ -286,8 +301,14 @@ const Canon = (() => {
     { type: 'P', es: 'Demos gracias a Dios.', la: 'Deo gratias.' }
   ];
 
-  // Despedida propia del Tiempo Pascual: "Ite missa est" / "Deo gratias" con
-  // doble Aleluya, según la rúbrica tradicional (usada de Pascua a Pentecostés).
+  // Despedida con doble Aleluya en el "Ite missa est" / "Deo gratias".
+  // OJO: la rúbrica tradicional la reserva a la OCTAVA de Pascua (hasta el
+  // sábado in albis) y al día de Pentecostés con su Octava; el resto del Tiempo
+  // Pascual dice el "Ite missa est" simple. Quien elige entre este bloque y
+  // DISMISSAL es el llamador (app.js y librito-pueblo.js, con la condición
+  // `season === 'easter' || season === 'pentecost'`), de modo que hoy el doble
+  // Aleluya se imprime en todo el Tiempo Pascual. Corregirlo exige tocar esos
+  // dos módulos, no este.
   const DISMISSAL_PASCHALTIDE_DATA = [
     { type: 'S', es: 'El Señor sea con vosotros.', la: 'Dominus vobiscum.' },
     { type: 'P', es: 'Y con tu espíritu.', la: 'Et cum spiritu tuo.' },
@@ -416,10 +437,35 @@ const Canon = (() => {
 
   // Días que comparten el embolismo especial de una fiesta mayor por caer dentro
   // de su Octava (Navidad: 26 dic.-1 ene.; Pascua: Lunes-Sábado de Pascua).
-  function resolveEmbolismKey(dayKey) {
+  function resolveEmbolismKey(dayKey, date) {
     if (!dayKey) return null;
     if (COMMUNICANTES_EMBOLISMS_DATA[dayKey]) return dayKey;
     if (dayKey === 'christmasSunday' || dayKey === 'circumcision') return 'christmas';
+    // San Esteban, San Juan y los Santos Inocentes son el 2.º, 3.er y 4.º día
+    // DENTRO de la Octava de Navidad: llevan el Communicantes de la Natividad
+    // igual que christmasFeria_5/6/7 (29-31 dic.). calendar.js los etiqueta con
+    // su clave de fiesta fija, así que no los alcanzaba ninguna regla: 94 días
+    // de 2024-2060 rezaban el Communicantes ordinario dentro de la Octava.
+    if (dayKey === '12-26' || dayKey === '12-27' || dayKey === '12-28') return 'christmas';
+    // El Segundo Domingo después de Navidad cae entre el 2 y el 5 de enero, los
+    // mismos días que christmasFeria_9..12, que sí reciben el embolismo de
+    // Navidad. Sin esta línea el domingo rezaba uno distinto del de los días
+    // entre semana que lo rodean (22 días).
+    if (dayKey === 'christmasSunday2') return 'christmas';
+    // El Bautismo del Señor cae en el Domingo dentro de la Octava de la
+    // Epifanía (7-13 de enero), rodeado de epiOctave_{dow}, que sí llevan el
+    // embolismo de la Epifanía (37 días).
+    if (dayKey === 'baptismLord') return 'epiphany';
+    // Desde la Ascensión hasta el viernes anterior a Pentecostés se dice el
+    // Communicantes de la Ascensión. El día de la Ascensión es easterFeria6_4
+    // (jueves) y lo cubre la clave propia 'ascension'; los días siguientes
+    // caían todos al Communicantes ordinario: 295 días de 2024-2060.
+    if (dayKey === 'easter7' ||
+        dayKey === 'easterFeria6_5' || dayKey === 'easterFeria6_6' ||
+        /^easterFeria7_[1-5]$/.test(dayKey)) return 'ascension';
+    // El sábado de la semana 7 de Pascua es la Vigilia de Pentecostés, que
+    // lleva ya el Communicantes (y el Hanc igitur) de Pentecostés.
+    if (dayKey === 'easterFeria7_6') return 'pentecost';
     // Las Octavas llevan su Communicantes propio durante toda la octava, no solo
     // el día de la fiesta. calendar.js etiqueta ahora esas ferias con claves
     // propias (christmasFeria_N para la Octava de Navidad, epiOctave_N para la de
@@ -430,6 +476,16 @@ const Canon = (() => {
     if (dayKey.startsWith('christmasFeria_')) return 'christmas';
     if (dayKey.startsWith('epiOctave_')) return 'epiphany';
     if (dayKey.startsWith('pentecostFeria')) return 'pentecost';
+    // Octava de la Epifanía (6-13 de enero). calendar.js rotula epiOctave_N los
+    // días que van del 7 de enero al Bautismo del Señor, y a partir de ahí pasa
+    // a epiFeria1_N — que sigue cayendo DENTRO de la octava hasta el día 13. La
+    // clave sola no lo distingue (epiFeria1_3 puede ser el 10 de enero, dentro,
+    // o el 16, fuera): hace falta la fecha. Sin ella, 109 días de 2024-2060
+    // rezaban el Communicantes ordinario dentro de la Octava de la Epifanía.
+    // La regla se limita a las claves del tiempo de Epifanía, de modo que una
+    // misa votiva (requiem, bvm, holySpirit) celebrada esos días no la alcanza.
+    if (/^epi/.test(dayKey) && date instanceof Date &&
+        date.getMonth() === 0 && date.getDate() >= 7 && date.getDate() <= 13) return 'epiphany';
     return null;
   }
 
@@ -437,7 +493,7 @@ const Canon = (() => {
     let esEmb = 'En comunión con toda la Iglesia, y venerando la memoria';
     let laEmb = 'Communicantes, et memoriam venerantes';
 
-    const embKey = resolveEmbolismKey(currentDayKey);
+    const embKey = resolveEmbolismKey(currentDayKey, currentDayDate);
     if (embKey) {
       esEmb = COMMUNICANTES_EMBOLISMS_DATA[embKey].es;
       laEmb = COMMUNICANTES_EMBOLISMS_DATA[embKey].la;
@@ -625,13 +681,29 @@ const Canon = (() => {
   ].join('');
 
   // ── API pública con getters dinámicos ──────────────────────────────────────
-  function setLanguage(lang, dayKey = null) {
+  // El día se REASIGNA siempre, también cuando llega nulo. Con `if (dayKey)` el
+  // día de la generación anterior se quedaba pegado al módulo: una segunda
+  // llamada sin clave (o con clave nula) seguía sirviendo el Communicantes del
+  // día anterior. Verificado: tras setLanguage('es','christmas'), un
+  // setLanguage('es') dejaba el embolismo de la Natividad en CANON_TEXT.
+  function setLanguage(lang, dayKey = null, date = null) {
     currentLang = lang || 'es';
-    if (dayKey) currentDayKey = dayKey;
+    currentDayKey = dayKey || null;
+    currentDayDate = (date instanceof Date) ? date : null;
   }
 
-  function getCommunicantesEmbolism(dayKey) {
-    const data = COMMUNICANTES_EMBOLISMS_DATA[resolveEmbolismKey(dayKey)];
+  // Además de devolver el embolismo, sincroniza el día activo del módulo. Los
+  // llamadores consultan esta función con la clave DEFINITIVA del día (ya
+  // sustituida por la de la misa votiva, si la hay), mientras que setLanguage()
+  // recibe la clave del calendario antes de esa sustitución: sin esta
+  // sincronización, una Misa de Réquiem votiva el día de Navidad imprimía en
+  // CANON_TEXT el Communicantes de la Natividad. Verificado.
+  // `date` es opcional y sólo sirve para las octavas que la clave no distingue
+  // (ver resolveEmbolismKey). Sin ella el resultado es el de siempre.
+  function getCommunicantesEmbolism(dayKey, date) {
+    if (dayKey !== undefined) currentDayKey = dayKey || null;
+    currentDayDate = (date instanceof Date) ? date : null;
+    const data = COMMUNICANTES_EMBOLISMS_DATA[resolveEmbolismKey(dayKey, currentDayDate)];
     if (!data) return null;
     if (currentLang === 'es') return data.es;
     if (currentLang === 'la') return data.la;
@@ -642,7 +714,11 @@ const Canon = (() => {
     // Forma especial (menciona a los recién bautizados) usada durante toda la Octava
     // de Pascua y también durante Pentecostés y su Octava (bautismos también en esa Vigilia).
     const isEasterOctave = dayKey === 'easter' || dayKey === 'easter2' || (dayKey && dayKey.startsWith('easterFeria1_'));
-    const isPentecostOctave = dayKey === 'pentecost' || (dayKey && dayKey.startsWith('pentecostFeria'));
+    // La Vigilia de Pentecostés (sábado de la semana 7 de Pascua) es el otro día
+    // de bautismos solemnes del año: lleva el Hanc igitur de los recién
+    // bautizados, igual que la Vigilia Pascual. Son 37 días de 2024-2060.
+    const isPentecostOctave = dayKey === 'pentecost' || dayKey === 'easterFeria7_6' ||
+      (dayKey && dayKey.startsWith('pentecostFeria'));
     const data = (isEasterOctave || isPentecostOctave) ? HANC_IGITUR_EASTER_DATA : HANC_IGITUR_NORMAL_DATA;
     return zip(data);
   }

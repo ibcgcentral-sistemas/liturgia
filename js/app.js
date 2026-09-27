@@ -166,9 +166,6 @@ async function generateLiturgy(date, canonType = 'roman', votiveType = 'none', l
   let dayInfo = LiturgicalCalendar.getDay(date);
   let omissions = LiturgicalCalendar.getOmissions(dayInfo);
 
-  // Inicializar idioma y día en Canon
-  Canon.setLanguage(lang, dayInfo.key);
-
   if (votiveType !== 'none') {
     if (votiveType === 'requiem') {
       dayInfo = { ...dayInfo, name: 'Misa de Réquiem (Fieles Difuntos)', nameEs: 'Misa de Réquiem (Fieles Difuntos)', color: 'black', rank: 'double', key: 'requiem' };
@@ -181,6 +178,12 @@ async function generateLiturgy(date, canonType = 'roman', votiveType = 'none', l
       omissions = omissions.filter(o => o.part !== 'aleluya');
     }
   }
+
+  // Idioma y día en Canon. Se fija DESPUÉS de resolver la misa votiva para que
+  // la clave que recibe canon.js sea la definitiva (p. ej. 'requiem'), no la del
+  // calendario: con la clave del calendario, una Misa de Réquiem votiva el día
+  // de Navidad imprimía el Communicantes de la Natividad.
+  Canon.setLanguage(lang, dayInfo.key, date);
 
   const cycle = dayInfo.cycle;
   // El ciclo ferial (I/II) ya no se anuncia: este misal no sirve leccionario
@@ -246,7 +249,9 @@ async function generateLiturgy(date, canonType = 'roman', votiveType = 'none', l
   const veiled = omissions.some(o => o.part === 'velos' || o.part === 'crucifixVeiled');
 
   // Embolismos
-  const communicantesEmbolism = Canon.getCommunicantesEmbolism(key);
+  // La fecha distingue las octavas que la clave sola no resuelve (la Octava de
+  // la Epifanía: epiFeria1_3 puede ser el 10 o el 16 de enero).
+  const communicantesEmbolism = Canon.getCommunicantesEmbolism(key, date);
   const hancIgitur = Canon.getHancIgitur(key);
 
   // Escritura — con timeout, nunca bloquea
@@ -296,7 +301,17 @@ async function generateLiturgy(date, canonType = 'roman', votiveType = 'none', l
     secret, preface, postcommunion, omitJudica, season,
     commemorations, hancIgitur, useBenoedicamus, votiveType,
     omissions, borrowedFromSunday, omittedFeasts, suppliedProperNotes,
+    gradualText, gradual,
   };
+
+  // canon.js guarda el idioma y el día en estado de módulo, y sus getters
+  // (GLORIA, CREDO, CANON_TEXT…) lo leen en el momento de la lectura. Entre el
+  // setLanguage() de arriba y esta línea hay un `await` de la Escritura, así que
+  // una segunda generación concurrente en otro idioma puede haber reescrito ese
+  // estado mientras tanto: la que pidió español salía en latín. Se vuelve a
+  // fijar aquí, inmediatamente antes de construir la plantilla, que es síncrona
+  // y por tanto ya no puede intercalarse con otra generación.
+  Canon.setLanguage(lang, dayInfo.key, date);
 
   return buildLiturgyHTML({
     date, dayInfo, cycle, season, key, omissions, omittedFeasts, suppliedProperNotes,
@@ -830,6 +845,11 @@ function openLibritoPueblo() {
       omitJudica: s.omitJudica, season: s.season, commemorations: s.commemorations,
       hancIgitur: s.hancIgitur, useBenoedicamus: s.useBenoedicamus, votiveType: s.votiveType,
       omissions: s.omissions, borrowedFromSunday: s.borrowedFromSunday,
+      // librito-pueblo.js desestructura estas tres de `extras`: sin ellas su
+      // suppliedMark() no marcaba NUNCA un texto suplido del tiempo y la rúbrica
+      // de las fiestas omitidas por día privilegiado no se imprimía jamás.
+      omittedFeasts: s.omittedFeasts, suppliedProperNotes: s.suppliedProperNotes,
+      gradualText: s.gradualText,
     });
 }
 
