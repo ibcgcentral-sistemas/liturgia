@@ -92,6 +92,9 @@
     'Revelation':'Apocalipsis','Rev':'Apocalipsis','Ap':'Apocalipsis',
   };
 
+  // Libros de un solo capítulo (nombre canónico en la Biblia de Jerusalén).
+  const SINGLE_CHAPTER_BOOKS = new Set(['Abdías', 'Filemon', 'II Juan', 'III Juan', 'Judas']);
+
   /**
    * Parsea una referencia tipo "Isaiah 52:13-53:12" o "Psalm 22:1-31" o "Matthew 5:1-12"
    * Retorna { book, ranges: [{chapter, verseStart, verseEnd}] }
@@ -157,6 +160,19 @@
       } else if (verseOnly && lastChapter) {
         // Continuación de capítulo anterior: "22-26" → same chapter
         ranges.push({ chapter: lastChapter, verseStart: parseInt(verseOnly[1]), verseEnd: parseInt(verseOnly[2]) });
+      } else if (verseOnly) {
+        // Rango sin capítulo previo ni "cap:ver" ("Psalm 42-43", "Philemon 1-21").
+        // En los libros de un solo capítulo son versículos del capítulo 1; en el
+        // resto (Salmos, etc.) son capítulos enteros. Antes devolvía vacío.
+        const n1 = parseInt(verseOnly[1]);
+        const n2 = parseInt(verseOnly[2]);
+        if (SINGLE_CHAPTER_BOOKS.has(bookName)) {
+          lastChapter = 1;
+          ranges.push({ chapter: 1, verseStart: n1, verseEnd: n2 });
+        } else if (n2 >= n1 && n2 - n1 <= 5) {
+          for (let ch = n1; ch <= n2; ch++) ranges.push({ chapter: ch, verseStart: 1, verseEnd: 999 });
+          lastChapter = n2;
+        }
       } else if (chOnly && lastChapter !== null) {
         // Número suelto DESPUÉS de un segmento "cap:ver": es un VERSÍCULO del
         // último capítulo citado, no un capítulo nuevo.
@@ -175,6 +191,87 @@
     }
 
     return ranges.length > 0 ? { bookName, ranges } : null;
+  }
+
+  // ── Desfase de versículos en los Salmos ──────────────────────────────────
+  // Los leccionarios (js/lectionary.js y bcp2019/js/lectionary.js) citan los
+  // salmos con la numeración de las Biblias inglesas / litúrgicas, donde el
+  // título ("Del maestro de coro. Salmo de David") NO se numera. La Biblia de
+  // Jerusalén cargada sigue la numeración hebrea, que cuenta el título como
+  // versículo(s) 1 (o 1-2). PSALM_TITLE_OFFSET da, por salmo, cuántos versículos
+  // iniciales son SOLO título (d): el versículo n de la cita equivale al
+  // versículo n+d de la Biblia. Los salmos que no figuran tienen d=0: o no
+  // llevan título numerado, o éste va fundido en el v.1 con el comienzo del
+  // cuerpo (p. ej. 23, 100, 130).
+  //
+  // Tabla verificada contra el texto real (v.1 solo título y v.(d+1) arranca el
+  // cuerpo) y contra la versificación hebrea↔inglesa estándar; coinciden en los
+  // 150 salmos. Irregularidad conocida: en el Sal 13 el v.6 hebreo equivale a
+  // 5-6 inglés (la cita 13:6 sola se acota al último versículo).
+  const PSALM_TITLE_OFFSET = {
+    3:1, 4:1, 5:1, 6:1, 7:1, 8:1, 9:1, 12:1, 13:1,
+    18:1, 19:1, 20:1, 21:1, 22:1, 30:1, 31:1, 34:1, 36:1,
+    38:1, 39:1, 40:1, 41:1, 42:1, 44:1, 45:1, 46:1, 47:1, 48:1, 49:1,
+    51:2, 52:2, 53:1, 54:2, 55:1, 56:1, 57:1, 58:1, 59:1, 60:2,
+    61:1, 62:1, 63:1, 64:1, 65:1, 67:1, 68:1, 69:1, 70:1,
+    75:1, 76:1, 77:1, 80:1, 81:1, 83:1, 84:1, 85:1, 88:1, 89:1,
+    92:1, 102:1, 108:1, 140:1, 142:1,
+  };
+
+  // CONTRATO DE NUMERACIÓN (idempotencia): getPassage/getVerses reciben SIEMPRE
+  // numeración inglesa/litúrgica y aplican el desfase una sola vez, aquí.
+  // Nadie debe pasarles números ya desplazados (hebreos). Cada versículo
+  // devuelto es {v, h, content}: `v` es la etiqueta que se muestra al lector
+  // (numeración inglesa = hebrea − d, coherente con la cita impresa en el
+  // encabezado, p. ej. "Salmo 51:1-13"); `h` es el número real en la Biblia de
+  // Jerusalén. Quien consume solo usa `v` y `content`.
+
+  /** Versículos iniciales de título del salmo `chapter` (0 si no lo hay). */
+  function psalmTitleOffset(bookName, chapter) {
+    return bookName === 'Salmos' ? (PSALM_TITLE_OFFSET[chapter] || 0) : 0;
+  }
+
+  /**
+   * Resuelve los rangos de una referencia a una lista de {v, h, content}.
+   * Para los Salmos traduce de numeración inglesa a hebrea (+d, por capítulo).
+   * Una cita sin versículos ("Psalm 96", rango 1-999) empieza tras el título.
+   */
+  function resolveVerses(book, bookName, ranges, ctx) {
+    const out = [];
+    for (const range of ranges) {
+      try {
+        // En los datos de la Biblia de Jerusalén el Eclesiástico (Sirácida)
+        // trae el Prólogo como PRIMER elemento del arreglo de capítulos, así que
+        // el capítulo N está en el índice N (no N-1). Sin esto, «Sirach 24:9-11»
+        // imprimía el capítulo 23. Se detecta por el contenido para no depender
+        // del orden si los datos se corrigen.
+        let chIdx = range.chapter - 1;
+        if (bookName === 'Eclesiástico' && book.chapters[0] && book.chapters[0].verses &&
+            /Muchas e importantes lecciones/.test(String(book.chapters[0].verses['1'] || ''))) {
+          chIdx = range.chapter;
+        }
+        const chapter = book.chapters[chIdx];
+        if (!chapter || !chapter.verses) continue;
+        const d = psalmTitleOffset(bookName, range.chapter);
+        let hStart = range.verseStart + d;
+        let hEnd = range.verseEnd >= 999 ? range.verseEnd : range.verseEnd + d;
+        if (d > 0) {
+          // Si la cita cae más allá del final hebreo (Sal 13:6), se acota al
+          // último versículo en vez de devolver un rango vacío.
+          const keys = Object.keys(chapter.verses).map(Number).filter(n => !isNaN(n));
+          const last = keys.length ? Math.max.apply(null, keys) : 0;
+          if (hStart > last) hStart = last;
+          if (hEnd > last) hEnd = last;
+        }
+        for (let h = hStart; h <= hEnd; h++) {
+          const verseText = chapter.verses[h.toString()];
+          if (verseText) out.push({ v: (h - d).toString(), h: h.toString(), content: verseText });
+        }
+      } catch (e) {
+        console.warn(ctx, bookName, range, e);
+      }
+    }
+    return out;
   }
 
   /**
@@ -202,23 +299,7 @@
       };
     }
 
-    let allVerses = [];
-
-    for (const range of ranges) {
-      try {
-        const chapter = book.chapters[range.chapter - 1];
-        if (!chapter || !chapter.verses) continue;
-
-        for (let vNum = range.verseStart; vNum <= range.verseEnd; vNum++) {
-          const verseText = chapter.verses[vNum.toString()];
-          if (verseText) {
-            allVerses.push({ v: vNum.toString(), content: verseText });
-          }
-        }
-      } catch (e) {
-        console.warn('BibliaJerusalen error:', bookName, range, e);
-      }
-    }
+    const allVerses = resolveVerses(book, bookName, ranges, 'BibliaJerusalen error:');
 
     if (allVerses.length === 0) {
       return {
@@ -235,7 +316,7 @@
   }
 
   /**
-   * Igual que getPassage pero retorna el array de versos {v, content} sin unir.
+   * Igual que getPassage pero retorna el array de versos {v, h, content} sin unir.
    * Usado para formateo responsorial por estrofas.
    */
   function getVerses(ref) {
@@ -250,23 +331,10 @@
     const book = bible.getBook(bookName);
     if (!book) return [];
 
-    let allVerses = [];
-    for (const range of ranges) {
-      try {
-        const chapter = book.chapters[range.chapter - 1];
-        if (!chapter || !chapter.verses) continue;
-        for (let vNum = range.verseStart; vNum <= range.verseEnd; vNum++) {
-          const verseText = chapter.verses[vNum.toString()];
-          if (verseText) allVerses.push({ v: vNum.toString(), content: verseText });
-        }
-      } catch (e) {
-        console.warn('getVerses error:', bookName, range, e);
-      }
-    }
-    return allVerses;
+    return resolveVerses(book, bookName, ranges, 'getVerses error:');
   }
 
   // Exponer globalmente
-  window.BibliaJerusalen = { getPassage, getVerses, parseRef, BOOK_MAP };
+  window.BibliaJerusalen = { getPassage, getVerses, parseRef, BOOK_MAP, PSALM_TITLE_OFFSET };
 
 })();

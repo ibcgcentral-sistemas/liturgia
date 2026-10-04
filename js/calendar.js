@@ -110,14 +110,16 @@ const LiturgicalCalendar = (() => {
   // ── MOVEABLE FEAST DATES FOR A GIVEN YEAR ────────────────────────────────
   function getFeastDates(year) {
     const easter        = computeEaster(year);
-    const easterMs      = easter.getTime();
-    const add = n => new Date(easterMs + n * 86400000);
+    // Aritmética de calendario (no de milisegundos): con horario de verano,
+    // sumar n*86400000 a una fecha local a medianoche puede caer a las 23:00
+    // del día anterior y romper sameDay().
+    const add = n => addDays(easter, n);
 
     return {
       advent1:          getAdvent1(year),
-      advent2:          new Date(getAdvent1(year).getTime() + 7*86400000),
-      advent3:          new Date(getAdvent1(year).getTime() + 14*86400000),
-      advent4:          new Date(getAdvent1(year).getTime() + 21*86400000),
+      advent2:          addDays(getAdvent1(year), 7),
+      advent3:          addDays(getAdvent1(year), 14),
+      advent4:          addDays(getAdvent1(year), 21),
       christmas:        new Date(year, 11, 25),
       epiphany:         new Date(year, 0, 6),
       baptismOfLord:    getBaptismOfLord(year),
@@ -320,8 +322,12 @@ const LiturgicalCalendar = (() => {
     if (FIXED_FEASTS[mmdd]) {
       const ff = FIXED_FEASTS[mmdd];
       const ffRank = rankOf(ff.rank);
-      // On Sundays, only allow doubleFirstClass feasts to override
-      if (dow !== 0 || ffRank <= 1) {
+      // On Sundays, only allow doubleFirstClass feasts to override.
+      // Entre el Domingo de Ramos y el II de Pascua (Semana Santa y Octava de
+      // Pascua) solo las fiestas de I clase prevalecen; las demás ('double' y
+      // menores) ceden ante la octava (p. ej. San Marcos el 25-abr en la Octava).
+      const inEasterOctave = dnum(date) >= dnum(F.palmSunday) && dnum(date) <= dnum(F.easter2);
+      if ((dow !== 0 || ffRank <= 1) && !(inEasterOctave && ffRank > 1)) {
         return {
           ...ff,
           key: mmdd,

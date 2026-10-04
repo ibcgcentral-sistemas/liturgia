@@ -21,7 +21,7 @@ const BCPLectionary = (() => {
     // ═══════════════ ADVIENTO ═══════════════
     advent1: {
       A: { first: 'Isaiah 2:1-5', psalm: 'Psalm 122', second: 'Romans 13:8-14', gospel: 'Matthew 24:29-44' },
-      B: { first: 'Isaiah 64:1-9', psalm: 'Psalm 80:1-7', second: '1 Corinthians 1:1-9', gospel: 'Mark 13:24-37' },
+      B: { first: 'Isaiah 63:19,64:1-8', psalm: 'Psalm 80:1-7', second: '1 Corinthians 1:1-9', gospel: 'Mark 13:24-37' },
       C: { first: 'Jeremiah 33:14-16', psalm: 'Psalm 25:1-9', second: '1 Thessalonians 3:9-13', gospel: 'Luke 21:25-36' },
     },
     advent2: {
@@ -37,12 +37,12 @@ const BCPLectionary = (() => {
     advent4: {
       A: { first: 'Isaiah 7:10-16', psalm: 'Psalm 80:1-7', second: 'Romans 1:1-7', gospel: 'Matthew 1:18-25' },
       B: { first: '2 Samuel 7:1-11', psalm: 'Luke 1:46-55', second: 'Romans 16:25-27', gospel: 'Luke 1:26-38' },
-      C: { first: 'Micah 5:2-5', psalm: 'Luke 1:46-55', second: 'Hebrews 10:5-10', gospel: 'Luke 1:39-45' },
+      C: { first: 'Micah 5:1-4', psalm: 'Luke 1:46-55', second: 'Hebrews 10:5-10', gospel: 'Luke 1:39-45' },
     },
 
     // ═══════════════ NAVIDAD Y EPIFANÍA ═══════════════
     christmas: {
-      all: { first: 'Isaiah 9:2-7', psalm: 'Psalm 96', second: 'Titus 2:11-14', gospel: 'Luke 2:1-20', psalmAnt: 'Hoy nos ha nacido un Salvador.' },
+      all: { first: 'Isaiah 9:1-6', psalm: 'Psalm 96', second: 'Titus 2:11-14', gospel: 'Luke 2:1-20', psalmAnt: 'Hoy nos ha nacido un Salvador.' },
     },
     christmasSunday: {
       A: { first: 'Isaiah 63:7-9', psalm: 'Psalm 148', second: 'Hebrews 2:10-18', gospel: 'Matthew 2:13-23' },
@@ -69,7 +69,7 @@ const BCPLectionary = (() => {
       C: { first: 'Isaiah 62:1-5', psalm: 'Psalm 36:5-10', second: '1 Corinthians 12:1-11', gospel: 'John 2:1-11' },
     },
     epiphany3: {
-      A: { first: 'Isaiah 9:1-4', psalm: 'Psalm 27:1-9', second: '1 Corinthians 1:10-18', gospel: 'Matthew 4:12-23' },
+      A: { first: 'Isaiah 8:23-9:3', psalm: 'Psalm 27:1-9', second: '1 Corinthians 1:10-18', gospel: 'Matthew 4:12-23' },
       B: { first: 'Jonah 3:1-5', psalm: 'Psalm 62:5-12', second: '1 Corinthians 7:29-31', gospel: 'Mark 1:14-20' },
       C: { first: 'Nehemiah 8:1-10', psalm: 'Psalm 19', second: '1 Corinthians 12:12-31', gospel: 'Luke 4:14-21' },
     },
@@ -95,7 +95,7 @@ const BCPLectionary = (() => {
     },
     epiphany8: {
       A: { first: 'Isaiah 49:8-16', psalm: 'Psalm 131', second: '1 Corinthians 4:1-13', gospel: 'Matthew 6:24-34' },
-      B: { first: 'Hosea 2:14-20', psalm: 'Psalm 103:1-13', second: '2 Corinthians 3:1-6', gospel: 'Mark 2:18-22' },
+      B: { first: 'Hosea 2:16-22', psalm: 'Psalm 103:1-13', second: '2 Corinthians 3:1-6', gospel: 'Mark 2:18-22' },
       C: { first: 'Isaiah 55:10-13', psalm: 'Psalm 92:1-4', second: '1 Corinthians 15:50-58', gospel: 'Luke 6:39-49' },
     },
     transfiguration: {
@@ -139,6 +139,21 @@ const BCPLectionary = (() => {
       A: { first: 'Isaiah 50:4-9', psalm: 'Psalm 31:9-16', second: 'Philippians 2:5-11', gospel: 'Matthew 26:14-27:66' },
       B: { first: 'Isaiah 50:4-9', psalm: 'Psalm 31:9-16', second: 'Philippians 2:5-11', gospel: 'Mark 14:1-15:47' },
       C: { first: 'Isaiah 50:4-9', psalm: 'Psalm 31:9-16', second: 'Philippians 2:5-11', gospel: 'Luke 22:14-23:56' },
+    },
+    // Lunes, Martes y Miércoles Santos (calendar.js los emite como
+    // holyWeekFeria_1/2/3). El BCP 2019 no asigna lecturas propias a estos
+    // tres días: estas tres entradas NO provienen del leccionario del BCP 2019
+    // sino del MISAL ROMANO, por decisión expresa del usuario, y se copiaron
+    // de js/lectionary.js (Misal Anglicano de la raíz) SOLO como referencias
+    // bíblicas. No llevan antífona de salmo (no se copia texto litúrgico).
+    holyWeekFeria_1: {
+      all: { first: 'Isaiah 50:5-10', psalm: 'Psalm 35:1-3', second: null, gospel: 'John 12:1-9' },
+    },
+    holyWeekFeria_2: {
+      all: { first: 'Jeremiah 11:18-20', psalm: 'Psalm 67:1-2', second: null, gospel: 'John 13:21-38' },
+    },
+    holyWeekFeria_3: {
+      all: { first: 'Isaiah 62:11-63:7', psalm: 'Psalm 102:1-2', second: null, gospel: 'Luke 22:39-71,23:1-53' },
     },
     maundyThursday: {
       all: { first: 'Exodus 12:1-14', psalm: 'Psalm 116:1-2', second: '1 Corinthians 11:23-26', gospel: 'John 13:1-17' },
@@ -203,7 +218,7 @@ const BCPLectionary = (() => {
     // ═══════════════ TIEMPO DESPUÉS DE PENTECOSTÉS — PROPIOS (RCL) ═══════════════
     proper3: {
       A: { first: 'Isaiah 49:8-16', psalm: 'Psalm 131', second: '1 Corinthians 4:1-5', gospel: 'Matthew 6:24-34' },
-      B: { first: 'Hosea 2:14-20', psalm: 'Psalm 103:1-13', second: '2 Corinthians 3:1-6', gospel: 'Mark 2:13-22' },
+      B: { first: 'Hosea 2:16-22', psalm: 'Psalm 103:1-13', second: '2 Corinthians 3:1-6', gospel: 'Mark 2:13-22' },
       C: { first: 'Sirach 27:4-7', psalm: 'Psalm 92:1-4', second: '1 Corinthians 15:51-58', gospel: 'Luke 6:39-49' },
     },
     proper4: {
@@ -252,7 +267,7 @@ const BCPLectionary = (() => {
       C: { first: 'Genesis 18:20-32', psalm: 'Psalm 138', second: 'Colossians 2:6-19', gospel: 'Luke 11:1-13' },
     },
     proper13: {
-      A: { first: 'Genesis 32:22-31', psalm: 'Psalm 17:1-7', second: 'Romans 9:1-5', gospel: 'Matthew 14:13-21' },
+      A: { first: 'Genesis 32:23-32', psalm: 'Psalm 17:1-7', second: 'Romans 9:1-5', gospel: 'Matthew 14:13-21' },
       B: { first: '2 Samuel 11:26-12:13', psalm: 'Psalm 51:1-13', second: 'Ephesians 4:1-16', gospel: 'John 6:24-35' },
       C: { first: 'Ecclesiastes 1:2,12-14,2:18-23', psalm: 'Psalm 49:1-11', second: 'Colossians 3:1-11', gospel: 'Luke 12:13-21' },
     },

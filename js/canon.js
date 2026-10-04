@@ -268,6 +268,24 @@ const Canon = (() => {
     { type: 'P', es: 'Y con tu espíritu.', la: 'Et cum spiritu tuo.' }
   ];
 
+  // Solo el Padrenuestro (introducción, oración y «y líbranos del mal»): los tres
+  // primeros ítems de PATER_NOSTER_DATA, sin reescribir nada. 1662 lo reza
+  // DESPUÉS de la Comunión y 1928 inmediatamente después de la Consagración y
+  // ANTES de comulgar; en ninguno de los dos hay embolismo, «La paz del Señor»,
+  // Agnus Dei ni Paz del Ordinario romano.
+  const PATER_NOSTER_ONLY_DATA = PATER_NOSTER_DATA.slice(0, 3);
+
+  // Frase de introducción del rito de 1549 (sustituye por completo a la del
+  // Misal romano en el Padrenuestro). El latín no tiene equivalente en el
+  // archivo y no se inventa: en modo latín la introducción sigue siendo la romana.
+  const PATER_NOSTER_1549_INTRO_ES = 'Como nuestro Salvador Cristo nos ha mandado y enseñado, nos atrevemos a decir:';
+
+  // Introducción del Padrenuestro en el BCP 1928 («And now, as our Saviour
+  // Christ hath taught us, we are bold to say»; texto inglés cotejado con el BCP
+  // 1928). Traducción propia. En 1928 el Padrenuestro se dice tras la
+  // Consagración y ANTES de la Comunión.
+  const PATER_NOSTER_1928_INTRO_ES = 'Y ahora, como nuestro Salvador Cristo nos ha enseñado, nos atrevemos a decir:';
+
   const COMMUNION_PREP_DATA = [
     { type: 'T', es: 'PREPARACIÓN PARA LA SAGRADA COMUNIÓN', la: 'PRAEPARATIO AD SANCTAM COMMUNIONEM' },
     { type: 'R', es: 'Tres oraciones privadas del Sacerdote:', la: 'Tres orationes privatae Sacerdotis:' },
@@ -329,7 +347,15 @@ const Canon = (() => {
     { type: 'O', es: 'En el principio existía la Palabra y la Palabra estaba con Dios, y la Palabra era Dios. Ella estaba en el principio con Dios. Todo se hizo por ella y sin ella no se hizo nada de cuanto existe. En ella estaba la vida y la vida era la luz de los hombres, y la luz brilla en las tinieblas, y las tinieblas no la vencieron.', la: 'In principio erat Verbum, et Verbum erat apud Deum, et Deus erat Verbum. Hoc erat in principio apud Deum. Omnia per ipsum facta sunt: et sine ipso factum est nihil, quod factum est. In ipso vita erat, et vita erat lux hominum: et lux in tenebris lucet, et tenebrae eam non comprehenderunt.' },
     { type: 'O', es: 'Hubo un hombre, enviado por Dios: se llamaba Juan. Este vino para un testimonio, para dar testimonio de la luz, para que todos creyeran por él. No era él la luz, sino quien debía dar testimonio de la luz.', la: 'Fuit homo missus a Deo, cui nomen erat Ioannes. Hic venit in testimonium, ut testimonium perhiberet de lumine, ut omnes crederent per illum. Non erat ille lux, sed ut testimonium perhiberet de lumine.' },
     { type: 'O', es: 'La Palabra era la luz verdadera que ilumina a todo hombre que viene a este mundo. En el mundo estaba, y el mundo fue hecho por ella, y el mundo no la conoció. Vino a su casa, y los suyos no la recibieron. Pero a todos los que la recibieron les dio poder de hacerse hijos de Dios, a los que creen en su nombre; la cual no nació de sangre, ni de deseo de hombre, sino que nació de Dios.', la: 'Erat lux vera, quae illuminat omnem hominem venientem in hunc mundum. In mundo erat, et mundus per ipsum factus est, et mundus eum non cognovit. In propria venit, et sui eum non receperunt. Quotquot autem receperunt eum, dedit eis potestatem filios Dei fieri, his, qui credunt in nomine eius: qui non ex sanguinibus, neque ex voluntate carnis, neque ex voluntate viri, sed ex Deo nati sunt.' },
-    { type: 'R', es: 'todos se arrodillan y la Palabra se hizo carne, todos se levantan y puso su Morada entre nosotros, y hemos contemplado su gloria, gloria que recibe del Padre como Hijo único, lleno de gracia y de verdad.', la: 'Hic genuflectitur: Et Verbum caro factum est, surgitur: et habitavit in nobis: et vidimus gloriam eius, gloriam quasi Unigeniti a Patre, plenum gratiae et veritatis.' },
+    // Jn 1,14 dividido para que el texto del versículo sea texto (O) y solo las
+    // genuflexiones sean rúbrica: como una sola rúbrica en bloque, el modo latín
+    // imprimía el versículo en español entre paréntesis y perdía el latín. Las
+    // palabras son exactamente las del ítem original; solo se corta por las
+    // genuflexiones y se pone mayúscula inicial al comienzo de cada fragmento.
+    { type: 'R', es: 'Todos se arrodillan', la: 'Hic genuflectitur' },
+    { type: 'O', es: 'Y la Palabra se hizo carne,', la: 'Et Verbum caro factum est,' },
+    { type: 'R', es: 'Todos se levantan', la: 'Surgitur' },
+    { type: 'O', es: 'y puso su Morada entre nosotros, y hemos contemplado su gloria, gloria que recibe del Padre como Hijo único, lleno de gracia y de verdad.', la: 'et habitavit in nobis: et vidimus gloriam eius, gloriam quasi Unigeniti a Patre, plenum gratiae et veritatis.' },
     { type: 'P', es: 'Demos gracias a Dios.', la: 'Deo gratias.' }
   ];
 
@@ -623,13 +649,15 @@ const Canon = (() => {
   // el uso americano de 1928 añade una petición explícita de "crecimiento
   // continuo" en el amor y servicio de Dios para los fieles difuntos —una
   // restauración parcial de la intercesión por los muertos que 1662 había
-  // suavizado— y sustituye la mención del Rey por la del Presidente de los
-  // Estados Unidos.
+  // suavizado— y la oración por los gobernantes es genérica (sin nombrar al
+  // Rey ni al Presidente).
+  // Texto inglés cotejado con el BCP 1928 (aocinternational.org, "Order for
+  // the Administration of the Lord's Supper"); traducción al español propia.
   // ══════════════════════════════════════════════════════════════════════════
   const CHURCH_MILITANT_1928 = [
     T('ORACIÓN POR TODA LA IGLESIA (BCP 1928)'),
     O('Dios Todopoderoso y siempre viviente, que por tu santo Apóstol nos enseñaste a hacer oraciones y súplicas, y a dar gracias, por todos los hombres: te suplicamos humildemente que aceptes nuestras limosnas y oblaciones, y recibas estas nuestras oraciones, que ofrecemos a tu Divina Majestad; rogándote que inspires continuamente a la Iglesia Universal con el espíritu de verdad, unidad y concordia; y concede que todos los que confiesan tu santo Nombre convengan en la verdad de tu santa Palabra, y vivan en unidad y en piadoso amor.'),
-    O('Te suplicamos también que dirijas y dispongas los corazones de todos los que gobiernan cristianamente, para que administren verdadera e imparcialmente la justicia, para castigo de la maldad y el vicio, y para el mantenimiento de tu verdadera religión y virtud. Especialmente te rogamos por el Presidente de los Estados Unidos y por todos los demás constituidos en autoridad.'),
+    O('Te suplicamos también que dirijas y dispongas de tal modo los corazones de todos los Gobernantes cristianos, que administren verdadera e imparcialmente la justicia, para castigo de la maldad y el vicio, y para el mantenimiento de tu verdadera religión y virtud.'),
     O('Da gracia, oh Padre celestial, a todos los Obispos y demás Ministros, para que tanto con su vida como con su doctrina muestren tu verdadera y vivificante Palabra, y administren recta y debidamente tus Santos Sacramentos.'),
     O('Y a todo tu pueblo da tu gracia celestial; y especialmente a esta congregación aquí presente; para que, con corazón manso y debida reverencia, oigan y reciban tu santa Palabra; sirviéndote verdaderamente en santidad y justicia todos los días de su vida.'),
     O('Y te suplicamos humildísimamente, oh Señor, que de tu bondad consueles y socorras a todos aquellos que, en esta vida transitoria, están en tribulación, tristeza, necesidad, enfermedad, o cualquier otra adversidad.'),
@@ -646,7 +674,13 @@ const Canon = (() => {
   // la Invocación del Espíritu Santo sobre el pan y el vino —restaurando así
   // una estructura afín a la del rito escocés no-jurante, en el que se basó
   // la revisión americana—. Por ello, en 1928 no existe una "Plegaria de
-  // Oblación" separada después de la Comunión, como en 1662.
+  // Oblación" separada después de la Comunión, como en 1662. Además, en 1928
+  // el Padrenuestro se dice inmediatamente DESPUÉS de la Consagración y ANTES
+  // de la Comunión (en 1662 va después de comulgar).
+  // Texto inglés cotejado con el BCP 1928 (aocinternational.org, "Order for
+  // the Administration of the Lord's Supper", p. 80 ss.). La versión española
+  // es traducción propia de ese texto; conviene que la revise quien use el
+  // rito (ver Propers.MISSING_TEXTS).
   // ══════════════════════════════════════════════════════════════════════════
   const CANON_1928 = [
     T('LA PLEGARIA DE CONSAGRACIÓN (BCP 1928)'),
@@ -658,25 +692,28 @@ const Canon = (() => {
     C('BEBED TODOS DE ÉL; PORQUE ÉSTA ES MI SANGRE DEL NUEVO TESTAMENTO, QUE ES DERRAMADA POR VOSOTROS Y POR MUCHOS PARA LA REMISIÓN DE LOS PECADOS:<br>HACED ESTO, CUANTAS VECES LO BEBIEREIS, EN MEMORIA MÍA.'),
     R('El Sacerdote eleva el Cáliz.'),
     T('LA OBLACIÓN'),
-    O('Por lo cual, oh Señor y Padre celestial, según la institución de tu muy amado Hijo, nuestro Salvador Jesucristo, nosotros, tus humildes siervos, celebramos y hacemos aquí, ante tu Divina Majestad, con estos tus santos dones, el memorial que tu Hijo nos ha mandado hacer; teniendo en memoria su bendita pasión y preciosa muerte, su poderosa resurrección y gloriosa ascensión; y rindiéndote las más sinceras gracias por los innumerables beneficios que por las mismas nos has procurado.'),
+    O('Por lo cual, oh Señor y Padre celestial, según la institución de tu muy amado Hijo, nuestro Salvador Jesucristo, nosotros, tus humildes siervos, celebramos y hacemos aquí, ante tu Divina Majestad, con estos tus santos dones, que ahora te ofrecemos, el memorial que tu Hijo nos ha mandado hacer; teniendo en memoria su bendita pasión y preciosa muerte, su poderosa resurrección y gloriosa ascensión; y rindiéndote las más sinceras gracias por los innumerables beneficios que por las mismas nos has procurado.'),
     T('LA INVOCACIÓN'),
-    O('Y te suplicamos humildísimamente, oh Padre misericordioso, que nos escuches; y que, de tu infinita bondad, te dignes bendecir ✠ y santificar ✠, con tu Palabra y Espíritu Santo, estos tus dones y criaturas de pan y vino; para que nosotros, recibiéndolos según la santa institución de tu Hijo nuestro Salvador Jesucristo, en memoria de su muerte y pasión, seamos partícipes de su sacrosanto Cuerpo y Sangre.'),
-    O('Y deseamos que tu paternal bondad acepte este nuestro deber y servicio obligado; y que concedas que nosotros, y todos los demás que participemos de esta Santa Comunión, recibamos dignamente el preciosísimo Cuerpo y Sangre de tu Hijo Jesucristo, seamos llenos de tu gracia y bendición celestial, y hechos un solo cuerpo con él, para que él more en nosotros, y nosotros en él. Y aunque somos indignos, por nuestros muchos pecados, de ofrecerte sacrificio alguno, te suplicamos, sin embargo, que aceptes este nuestro deber y servicio obligado; no pesando nuestros méritos, sino perdonando nuestras ofensas, por Jesucristo nuestro Señor; por quien, y con quien, en la unidad del Espíritu Santo, todo honor y gloria sea a ti, oh Padre Todopoderoso, por los siglos de los siglos.'),
+    O('Y te suplicamos humildísimamente, oh Padre misericordioso, que nos escuches; y que, de tu omnipotente bondad, te dignes bendecir ✠ y santificar ✠, con tu Palabra y Espíritu Santo, estos tus dones y criaturas de pan y vino; para que nosotros, recibiéndolos según la santa institución de tu Hijo nuestro Salvador Jesucristo, en memoria de su muerte y pasión, seamos partícipes de su sacrosanto Cuerpo y Sangre.'),
+    O('Y deseamos que tu paternal bondad acepte misericordiosamente este nuestro sacrificio de alabanza y acción de gracias; suplicándote humildísimamente que nos concedas, por los méritos y muerte de tu Hijo Jesucristo, y por la fe en su Sangre, a nosotros y a toda tu Iglesia, la remisión de nuestros pecados y todos los demás beneficios de su Pasión. Y aquí nos ofrecemos y presentamos a ti, oh Señor, nosotros mismos, nuestras almas y cuerpos, para ser un sacrificio razonable, santo y vivo ante ti; suplicándote humildemente que nosotros, y todos los demás que seamos partícipes de esta Santa Comunión, recibamos dignamente el preciosísimo Cuerpo y Sangre de tu Hijo Jesucristo, seamos llenos de tu gracia y bendición celestial, y hechos un solo cuerpo con él, para que él more en nosotros, y nosotros en él. Y aunque somos indignos, por nuestros muchos pecados, de ofrecerte sacrificio alguno, te suplicamos, sin embargo, que aceptes este nuestro deber y servicio obligado; no pesando nuestros méritos, sino perdonando nuestras ofensas, por Jesucristo nuestro Señor; por quien, y con quien, en la unidad del Espíritu Santo, todo honor y gloria sea a ti, oh Padre Todopoderoso, por los siglos de los siglos.'),
     P('Amén.'),
-    R('Sigue inmediatamente la Comunión del Sacerdote y del Pueblo. Después de la Comunión, se reza el Padre Nuestro y la Oración de Acción de Gracias.')
+    R('Sigue el Padrenuestro y, a continuación, la Comunión del Sacerdote y del Pueblo. Después de la Comunión se dice la Oración de Acción de Gracias.')
   ].join('');
 
   // ══════════════════════════════════════════════════════════════════════════
-  // ORACIÓN DE ACCIÓN DE GRACIAS (1928) — única oración postcomunión de
-  // autoofrecimiento; a diferencia de 1662, el rito americano de 1928 no
-  // ofrece dos formas alternativas (Acción de Gracias / Oblación), sino una
-  // sola forma fija que se dice siempre después del Padre Nuestro.
+  // ORACIÓN DE ACCIÓN DE GRACIAS (1928) — se dice después de la Comunión
+  // ("Then shall the Priest say, Let us pray. Almighty and everliving God…") y
+  // precede al Gloria in excelsis. La primera versión de esta constante
+  // repetía el autoofrecimiento de la Plegaria de Consagración (que en 1928 ya
+  // lo contiene) y salía dos veces en la misma Misa; se sustituyó por la
+  // oración que el BCP 1928 realmente da en este lugar.
+  // Texto inglés cotejado con el BCP 1928 (aocinternational.org); traducción
+  // al español propia.
   // ══════════════════════════════════════════════════════════════════════════
   const THANKSGIVING_1928 = [
     T('ORACIÓN DE ACCIÓN DE GRACIAS (BCP 1928)'),
-    O('Oh Señor y Padre celestial, nosotros, tus humildes siervos, deseamos enteramente que tu paternal bondad acepte misericordiosamente este nuestro sacrificio de alabanza y acción de gracias; suplicándote humildísimamente que nos concedas, por los méritos y muerte de tu Hijo Jesucristo, y por la fe en su Sangre, a nosotros y a toda tu Iglesia, la remisión de nuestros pecados, y todos los demás beneficios de su Pasión.'),
-    O('Y aquí nos ofrecemos y presentamos a ti, oh Señor, nosotros mismos, nuestras almas y cuerpos, para ser un sacrificio razonable, santo y vivo ante ti; suplicándote humildemente que todos cuantos seamos partícipes de esta Santa Comunión seamos llenos de tu gracia y bendición celestial, y hechos un solo cuerpo con tu Hijo Jesucristo, para que él more en nosotros, y nosotros en él.'),
-    O('Y aunque somos indignos, por nuestros muchos pecados, de ofrecerte sacrificio alguno, te rogamos, sin embargo, que aceptes este nuestro deber y servicio obligado; no pesando nuestros méritos, sino perdonando nuestras ofensas; por Jesucristo nuestro Señor, por quien, y con quien, en la unidad del Espíritu Santo, todo honor y gloria sea a ti, oh Padre Todopoderoso, por los siglos de los siglos.'),
+    O('Oremos.'),
+    O('Dios Todopoderoso y siempre viviente, te damos gracias de todo corazón porque te dignas alimentarnos, a quienes hemos recibido debidamente estos santos misterios, con el alimento espiritual del preciosísimo Cuerpo y Sangre de tu Hijo, nuestro Salvador Jesucristo; y con ello nos aseguras tu favor y tu bondad hacia nosotros; y que somos verdaderamente miembros incorporados en el cuerpo místico de tu Hijo, que es la bienaventurada compañía de todos los fieles; y que somos también herederos, por la esperanza, de tu reino eterno, por los méritos de su preciosísima muerte y pasión. Y te suplicamos humildemente, oh Padre celestial, que nos asistas de tal modo con tu gracia, que perseveremos en esa santa comunión y hagamos todas las buenas obras que has preparado para que andemos en ellas; por Jesucristo nuestro Señor, a quien, contigo y con el Espíritu Santo, sea todo honor y gloria, por los siglos de los siglos.'),
     P('Amén.'),
   ].join('');
 
@@ -751,12 +788,32 @@ const Canon = (() => {
     return zip(data);
   }
 
+  // Padrenuestro del Ordinario con Embolismo, Paz y Agnus Dei (Misal romano y
+  // 1549). En 1549 se sustituye la frase COMPLETA de introducción por la del
+  // rito (antes se reemplazaba solo el comienzo y el resto de la frase romana
+  // quedaba pegado: «…nos atrevemos a decir: y siguiendo su divina enseñanza…»).
+  // `pueblo` elige la variante del Librito.
+  function getPaterNoster(rite, pueblo = false) {
+    const html = zip(PATER_NOSTER_DATA, pueblo);
+    return rite === '1549' ? html.replace(PATER_NOSTER_DATA[0].es, PATER_NOSTER_1549_INTRO_ES) : html;
+  }
+
+  // Solo el Padrenuestro, sin Embolismo, Paz ni Agnus Dei. En 1928 (antes de la
+  // Comunión) lleva la introducción propia del rito; en 1662 (después de
+  // comulgar) queda la del Ordinario. `pueblo` elige la variante del Librito.
+  function getPaterNosterOnly(rite, pueblo = false) {
+    const html = zip(PATER_NOSTER_ONLY_DATA, pueblo);
+    return rite === '1928' ? html.replace(PATER_NOSTER_ONLY_DATA[0].es, PATER_NOSTER_1928_INTRO_ES) : html;
+  }
+
   const CanonInterface = {
     setLanguage,
+    getPaterNosterOnly,
     getCommunicantesEmbolism,
     getHancIgitur,
     omitJudica,
     getAspergesMe,
+    getPaterNoster,
     CANON_1549,
     CANON_1662,
     CHURCH_MILITANT_1662,
@@ -779,6 +836,7 @@ const Canon = (() => {
     'SANCTUS': SANCTUS_DATA,
     'CANON_CONTINUED': CANON_CONTINUED_DATA,
     'PATER_NOSTER': PATER_NOSTER_DATA,
+    'PATER_NOSTER_ONLY': PATER_NOSTER_ONLY_DATA,
     'COMMUNION_PREP': COMMUNION_PREP_DATA,
     'ABLUTIONS': ABLUTIONS_DATA,
     'DISMISSAL': DISMISSAL_DATA,

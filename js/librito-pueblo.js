@@ -12,6 +12,11 @@ const LibritoPueblo = (() => {
     const { secret, preface, postcommunion, omitJudica, season, commemorations, hancIgitur, useBenoedicamus, votiveType, omissions, borrowedFromSunday, omittedFeasts, suppliedProperNotes, gradualText } = extras;
     const key = dayInfo.key || '';
     const rankName = getRankName(dayInfo.rank);
+    // Viernes Santo: rito del Misal (holyweek.js), el mismo que imprime el Misal
+    // (app.js): Colecta del Día, lecturas, Colectas Solemnes, antífonas ante la
+    // cruz, comunión con el Sacramento reservado y oración final. Con una misa
+    // votiva dayInfo.key es la del votivo y la liturgia sale completa.
+    const presanctified = key === 'goodFriday';
 
     const omissionHTML = (omissions && omissions.length) ? `
       <div class="omission-notes">
@@ -48,12 +53,15 @@ const LibritoPueblo = (() => {
     // en el Misal para que ambos documentos digan lo mismo. Una pieza OMITIDA
     // (p. ej. el Ofertorio y la Secreta del Viernes Santo) lleva la nota que
     // explica por qué no hay texto, no el marcador «no disponible».
-    const suppliedParts = new Set((suppliedProperNotes || [])
-      .filter(n => !n.omitted).map(n => n.part));
+    // La rúbrica es la que redacta propers.js según el origen real del texto
+    // (Común de la Virgen, de Difuntos, genérico, del tiempo…); si no la trae, se
+    // cae a «(X del tiempo)». Igual que en el Misal (app.js).
+    const suppliedParts = new Map((suppliedProperNotes || [])
+      .filter(n => !n.omitted).map(n => [n.part, n.rubric || null]));
     const omittedNotes = new Map((suppliedProperNotes || [])
       .filter(n => n.omitted).map(n => [n.part, n.note]));
     const suppliedMark = (part) => suppliedParts.has(part)
-      ? ` <em class="rubric">(${part} del tiempo)</em>` : '';
+      ? ` <em class="rubric">${suppliedParts.get(part) || `(${part} del tiempo)`}</em>` : '';
     const omittedText = (part) => omittedNotes.has(part)
       ? `<em class="rubric">${omittedNotes.get(part) || `[Hoy no se dice ${part}.]`}</em>` : null;
 
@@ -91,7 +99,9 @@ const LibritoPueblo = (() => {
 
       ${omissionHTML}
 
-      <!-- RÚBRICA INICIAL -->
+      ${presanctified ? HolyWeek.goodFridayLibritoHTML({
+        collect, readings, firstReading, psalmVerses, secondReading, gospel,
+      }) : `<!-- RÚBRICA INICIAL -->
       <section class="librito-section">
         <h2>✠ ANTES DE COMENZAR</h2>
         <div class="librito-instruction">
@@ -218,13 +228,13 @@ const LibritoPueblo = (() => {
       <!-- LITURGIA DE LA PALABRA -->
       <section class="librito-section">
         <h2>✠ LITURGIA DE LA PALABRA</h2>
-        ${borrowedFromSunday ? `
+        ${(borrowedFromSunday && !(readings && readings.votive)) ? `
         <div class="librito-instruction">
           <p><em>Esta feria no tiene lecturas propias asignadas: se repiten las del Domingo precedente.</em></p>
         </div>
         ` : ''}
 
-        <h3>PRIMERA LECTURA</h3>
+        ${(readings && readings.votive && !readings.first) ? '' : `<h3>PRIMERA LECTURA</h3>
         <div class="librito-instruction">
           <p><strong>Se sientan.</strong> Se lee la Primera Lectura (Epístola):</p>
         </div>
@@ -236,9 +246,9 @@ const LibritoPueblo = (() => {
         <div class="librito-response">
           <p>Palabra de Dios. <strong>R/. Te alabamos, Señor.</strong></p>
         </div>
-        ` : '<div class="librito-instruction"><p><em>No hay lectura asignada para este día.</em></p></div>'}
+        ` : '<div class="librito-instruction"><p><em>No hay lectura asignada para este día.</em></p></div>'}`}
 
-        <h3>SALMO RESPONSORIAL</h3>
+        ${(readings && readings.votive && !readings.psalm) ? '' : `<h3>SALMO RESPONSORIAL</h3>
         <div class="librito-instruction">
           <p>Se canta o recita el Salmo del día, respondiendo al Salmista con la antífona:</p>
         </div>
@@ -259,12 +269,12 @@ const LibritoPueblo = (() => {
             `).join('')}
           </div>
           `;
-        })() : ''}
+        })() : ''}`}
 
         ${secondReading ? `
-        <h3>SEGUNDA LECTURA</h3>
+        <h3>${(readings && readings.votive && !readings.first) ? 'EPÍSTOLA' : 'SEGUNDA LECTURA'}</h3>
         <div class="librito-instruction">
-          <p>Se lee la Segunda Lectura:</p>
+          <p>${(readings && readings.votive && !readings.first) ? '<strong>Se sientan.</strong> Se lee la Epístola:' : 'Se lee la Segunda Lectura:'}</p>
         </div>
         <div class="librito-reading">
           <p class="reading-ref"><strong>${readings && readings.second ? translateBibleReference(readings.second) : 'Segunda Lectura'}</strong></p>
@@ -292,10 +302,8 @@ const LibritoPueblo = (() => {
           <p>El Aleluya no se canta desde Septuagésima hasta la Vigilia Pascual. Se usa el Tracto.</p>
         </div>
         ` : `
-        <div class="librito-response">
-          <p><strong>R/. Aleluya, aleluya.</strong><br>
-          <em>V. ${(function(g){ if(!g || !g.text) return 'Muéstranos, Señor, tu misericordia y danos tu salvación.'; let t = g.text.replace(/<[^>]*>?/gm, '').trim(); t = t.replace(/^\s*\d+[\s\-\.]*/, ''); t = t.replace(/^En aquel tiempo,\s*/i, ''); let m = t.match(/^([^.?!;]+[.?!;])/); return m ? m[1].trim() : t.substring(0, 80).trim() + '...'; })(gospel)}</em><br>
-          <strong>R/. Aleluya, aleluya.</strong></p>
+        <div class="librito-instruction">
+          <p>Se canta el Aleluya con su versículo propio.</p>
         </div>
         `}
       </section>
@@ -496,16 +504,17 @@ const LibritoPueblo = (() => {
           <p>En el rito de 1662, el Padre Nuestro se reza después de la Comunión. El Sacerdote procede directamente a la fracción del Pan.</p>
         </div>
         ` : canonType === '1928' ? `
-        <h2>✠ FRACCIÓN DEL PAN</h2>
+        <h2>✠ PADRENUESTRO</h2>
         <div class="librito-instruction">
-          <p>En el rito de 1928, el Padre Nuestro se reza después de la Comunión. El Sacerdote procede directamente a la fracción del Pan.</p>
+          <p>En el rito de 1928, el Padre Nuestro se dice inmediatamente después de la Consagración y antes de la Comunión. Todos juntos:</p>
         </div>
+        <div class="liturgical-text-block">${Canon.getPaterNosterOnly('1928', true)}</div>
         ` : `
         <h2>✠ PADRE NUESTRO Y AGNUS DEI</h2>
         <div class="librito-instruction">
           <p>El Sacerdote introduce el Padre Nuestro. Todos recitan o cantan:</p>
         </div>
-        <div class="liturgical-text-block">${canonType === '1549' ? Canon.PATER_NOSTER_PUEBLO.replace('Oremos. Fieles a la recomendación del Salvador', 'Como nuestro Salvador Cristo nos ha mandado y enseñado, nos atrevemos a decir:') : Canon.PATER_NOSTER_PUEBLO}</div>
+        <div class="liturgical-text-block">${Canon.getPaterNoster(canonType, true)}</div>
         `}
       </section>
 
@@ -542,6 +551,57 @@ const LibritoPueblo = (() => {
         </div>
         <div class="liturgical-text-block">${Canon.ABLUTIONS_PUEBLO}</div>
       </section>
+
+      ${canonType === '1662' ? `
+      <!-- PADRE NUESTRO POST-COMUNIÓN (RITO DE 1662) -->
+      <section class="librito-section">
+        <h2>✠ PADRENUESTRO (DESPUÉS DE LA COMUNIÓN)</h2>
+        <div class="librito-instruction">
+          <p>Según el rito de 1662, el Padre Nuestro se reza después de la Comunión.</p>
+        </div>
+        <div class="liturgical-text-block">${Canon.PATER_NOSTER_ONLY_PUEBLO}</div>
+      </section>
+
+      <!-- ORACIÓN DE OBLACIÓN (RITO DE 1662) — la reza el Sacerdote en nombre
+           de todos («nosotros, tus humildes siervos»): el pueblo la sigue.
+           Texto tomado literalmente del Misal (app.js); no se ha redactado aquí. -->
+      <section class="librito-section">
+        <h2>✠ ORACIÓN DE OBLACIÓN (1662)</h2>
+        <div class="librito-prayer" style="margin-top: 0.5rem; text-align: justify; font-style: normal;">
+          <p>Oh Señor y Padre celestial, nosotros, tus humildes siervos, deseamos enteramente que tu paternal bondad acepte misericordiosamente este nuestro sacrificio de alabanza y acción de gracias; suplicándote humildísimamente que nos concedas, por los méritos y muerte de tu Hijo Jesucristo, y por la fe en su Sangre, a nosotros y a toda tu Iglesia, la remisión de nuestros pecados, y todos los demás beneficios de su Pasión. Y aquí nos ofrecemos y presentamos a ti, oh Señor, nosotros mismos, nuestras almas y cuerpos, para ser un sacrificio razonable, santo y vivo ante ti; suplicándote humildemente que todos cuantos hemos sido partícipes de esta santa Comunión seamos llenos de tu gracia y bendición celestial. Y aunque somos indignos, por nuestros muchos pecados, de ofrecerte sacrificio alguno, te rogamos sin embargo que aceptes este nuestro deber y servicio obligado; no pesando nuestros méritos, sino perdonando nuestras ofensas; por Jesucristo nuestro Señor, por quien, y con quien, en la unidad del Espíritu Santo, todo honor y gloria sea a ti, oh Padre Todopoderoso, por los siglos de los siglos. Amén.</p>
+        </div>
+      </section>
+
+      <!-- GLORIA AL FINAL (RITO DE 1662) -->
+      <section class="librito-section">
+        ${omitGloria ?
+        '<div class="librito-instruction"><p>✠ <strong>GLORIA IN EXCELSIS DEO — OMITIDO</strong> por estar en tiempo penitencial.</p></div>' :
+        `<h2>✠ GLORIA IN EXCELSIS DEO</h2>
+        <div class="librito-instruction">
+          <p>En el rito de 1662, el Gloria se dice al final de la Misa.</p>
+        </div>
+        <div class="liturgical-text-block">${Canon.GLORIA}</div>`}
+      </section>
+      ` : ''}
+
+      ${canonType === '1928' ? `
+      <!-- ORACIÓN DE ACCIÓN DE GRACIAS (1928) — el Padrenuestro ya se dijo antes de la Comunión -->
+      <section class="librito-section">
+        <h2>✠ ORACIÓN DE ACCIÓN DE GRACIAS (1928)</h2>
+        <div class="liturgical-text-block">${Canon.THANKSGIVING_1928}</div>
+      </section>
+
+      <!-- GLORIA AL FINAL (RITO DE 1928) -->
+      <section class="librito-section">
+        ${omitGloria ?
+        '<div class="librito-instruction"><p>✠ <strong>GLORIA IN EXCELSIS DEO — OMITIDO</strong> por estar en tiempo penitencial.</p></div>' :
+        `<h2>✠ GLORIA IN EXCELSIS DEO</h2>
+        <div class="librito-instruction">
+          <p>En el rito de 1928, el Gloria se dice al final de la Misa.</p>
+        </div>
+        <div class="liturgical-text-block">${Canon.GLORIA}</div>`}
+      </section>
+      ` : ''}
 
       <!-- POSCOMUNIÓN -->
       <section class="librito-section">
@@ -582,7 +642,7 @@ const LibritoPueblo = (() => {
 
       <!-- ÚLTIMO EVANGELIO -->
       <section class="librito-section">
-        ${(key === 'goodFriday' || key === 'holySaturday' || key === 'palmSunday' || key === 'easter' || key === 'easter2' || (key && key.startsWith('easterFeria1_'))) ?
+        ${(key === 'holySaturday' || key === 'palmSunday' || key === 'easter' || key === 'easter2' || (key && key.startsWith('easterFeria1_'))) ?
         `<div class="librito-instruction">
           <p>✠ El Último Evangelio se <strong>omite</strong> hoy.</p>
         </div>` :
@@ -606,66 +666,6 @@ const LibritoPueblo = (() => {
         )}</div>
       </section>
 
-      ${canonType === '1662' ? `
-      <!-- PADRE NUESTRO POST-COMUNIÓN (RITO DE 1662) -->
-      <section class="librito-section">
-        <h2>✠ PADRENUESTRO (DESPUÉS DE LA COMUNIÓN)</h2>
-        <div class="librito-instruction">
-          <p>Según el rito de 1662, el Padre Nuestro se reza después de la Comunión.</p>
-        </div>
-        <div class="liturgical-text-block">${Canon.PATER_NOSTER_PUEBLO}</div>
-      </section>
-
-      <!-- ORACIÓN DE OBLACIÓN (RITO DE 1662) — la reza el Sacerdote en nombre
-           de todos («nosotros, tus humildes siervos»): el pueblo la sigue.
-           Texto tomado literalmente del Misal (app.js); no se ha redactado aquí. -->
-      <section class="librito-section">
-        <h2>✠ ORACIÓN DE OBLACIÓN (1662)</h2>
-        <div class="librito-prayer" style="margin-top: 0.5rem; text-align: justify; font-style: normal;">
-          <p>Oh Señor y Padre celestial, nosotros, tus humildes siervos, deseamos enteramente que tu paternal bondad acepte misericordiosamente este nuestro sacrificio de alabanza y acción de gracias; suplicándote humildísimamente que nos concedas, por los méritos y muerte de tu Hijo Jesucristo, y por la fe en su Sangre, a nosotros y a toda tu Iglesia, la remisión de nuestros pecados, y todos los demás beneficios de su Pasión. Y aquí nos ofrecemos y presentamos a ti, oh Señor, nosotros mismos, nuestras almas y cuerpos, para ser un sacrificio razonable, santo y vivo ante ti; suplicándote humildemente que todos cuantos hemos sido partícipes de esta santa Comunión seamos llenos de tu gracia y bendición celestial. Y aunque somos indignos, por nuestros muchos pecados, de ofrecerte sacrificio alguno, te rogamos sin embargo que aceptes este nuestro deber y servicio obligado; no pesando nuestros méritos, sino perdonando nuestras ofensas; por Jesucristo nuestro Señor, por quien, y con quien, en la unidad del Espíritu Santo, todo honor y gloria sea a ti, oh Padre Todopoderoso, por los siglos de los siglos. Amén.</p>
-        </div>
-      </section>
-
-      <!-- GLORIA AL FINAL (RITO DE 1662) -->
-      <section class="librito-section">
-        ${omitGloria ?
-        '<div class="librito-instruction"><p>✠ <strong>GLORIA IN EXCELSIS DEO — OMITIDO</strong> por estar en tiempo penitencial.</p></div>' :
-        `<h2>✠ GLORIA IN EXCELSIS DEO</h2>
-        <div class="librito-instruction">
-          <p>En el rito de 1662, el Gloria se dice al final de la Misa.</p>
-        </div>
-        <div class="liturgical-text-block">${Canon.GLORIA}</div>`}
-      </section>
-      ` : ''}
-
-      ${canonType === '1928' ? `
-      <!-- PADRE NUESTRO POST-COMUNIÓN (RITO DE 1928) -->
-      <section class="librito-section">
-        <h2>✠ PADRENUESTRO (DESPUÉS DE LA COMUNIÓN)</h2>
-        <div class="librito-instruction">
-          <p>Según el rito de 1928, el Padre Nuestro se reza después de la Comunión.</p>
-        </div>
-        <div class="liturgical-text-block">${Canon.PATER_NOSTER_PUEBLO}</div>
-      </section>
-
-      <!-- ORACIÓN DE ACCIÓN DE GRACIAS (1928) -->
-      <section class="librito-section">
-        <h2>✠ ORACIÓN DE ACCIÓN DE GRACIAS (1928)</h2>
-        <div class="liturgical-text-block">${Canon.THANKSGIVING_1928}</div>
-      </section>
-
-      <!-- GLORIA AL FINAL (RITO DE 1928) -->
-      <section class="librito-section">
-        ${omitGloria ?
-        '<div class="librito-instruction"><p>✠ <strong>GLORIA IN EXCELSIS DEO — OMITIDO</strong> por estar en tiempo penitencial.</p></div>' :
-        `<h2>✠ GLORIA IN EXCELSIS DEO</h2>
-        <div class="librito-instruction">
-          <p>En el rito de 1928, el Gloria se dice al final de la Misa.</p>
-        </div>
-        <div class="liturgical-text-block">${Canon.GLORIA}</div>`}
-      </section>
-      ` : ''}
-
       <!-- ACCIÓN DE GRACIAS FINAL -->
       <section class="librito-section">
         <h2>✠ ACCIÓN DE GRACIAS FINAL</h2>
@@ -678,7 +678,7 @@ const LibritoPueblo = (() => {
         <div class="librito-instruction">
           <p><strong>La Misa ha terminado.</strong> <em>"Laus Deo semper."</em> — Alabanza a Dios siempre.</p>
         </div>
-      </section>
+      </section>`}
 
       <div class="librito-footer">
         <p>✠ Gloria a Dios en las alturas ✠</p>
@@ -705,15 +705,25 @@ const LibritoPueblo = (() => {
       <div class="librito-modal">
         <div class="librito-controls">
           <button class="librito-print-btn" onclick="window.print()">⬡ Imprimir Librito</button>
-          <button class="librito-docx-btn" onclick="downloadLibritoDOCX('${dayInfo.nameEs || dayInfo.name}')">⬇ Descargar DOCX</button>
+          <button class="librito-docx-btn" type="button">⬇ Descargar DOCX</button>
           <button class="librito-close-btn" onclick="LibritoPueblo.hide()">✕ Cerrar</button>
         </div>
         ${html}
       </div>
     `;
 
+    // El nombre de la fiesta nunca se interpola en un onclick="…('…')": una
+    // comilla en el nombre (p. ej. «Santa María d'…») rompía el atributo. Se
+    // engancha el manejador aquí, con el valor en una variable.
+    const feastName = dayInfo.nameEs || dayInfo.name;
+    const docxBtn = overlay.querySelector('.librito-docx-btn');
+    if (docxBtn) docxBtn.addEventListener('click', () => downloadLibritoDOCX(feastName));
+
     document.body.appendChild(overlay);
     document.body.style.overflow = 'hidden';
+    // Marca que hay un overlay a pantalla completa: en @media print el CSS oculta
+    // entonces el Misal de fondo y solo se imprime el Librito.
+    document.body.classList.add('overlay-open');
 
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) hide();
@@ -724,6 +734,7 @@ const LibritoPueblo = (() => {
     const overlay = document.getElementById('librito-overlay');
     if (overlay) overlay.remove();
     document.body.style.overflow = '';
+    document.body.classList.remove('overlay-open');
   }
 
   return { show, hide, generateLibrito };
@@ -815,6 +826,22 @@ async function downloadLibritoDOCX(feastName) {
 
     function convertLiturgicalBlock(container) {
       const out = [];
+
+      // Bloque de texto plano con renglones separados por <br> (las antífonas del
+      // Viernes Santo, de holyweek.js): no lleva spans lit-*, y el recorrido de
+      // abajo solo mira elementos hijos, de modo que el texto se perdía entero al
+      // exportar a Word. Se marca con .lit-plain para no alterar el resto de
+      // bloques del Ordinario.
+      if (container.classList.contains('lit-plain')) {
+        if (container.textContent.trim()) {
+          out.push(new Paragraph({
+            children: buildRuns(container, { italic: false }),
+            indent: { left: 360, right: 360 },
+            spacing: { before: 80, after: 80, line: 276 },
+          }));
+        }
+        return out;
+      }
 
       function walkEl(el) {
         const cls = el.classList;
@@ -973,7 +1000,7 @@ async function downloadLibritoDOCX(feastName) {
     // ── Procesar la cabecera ─────────────────────────────────────────────────
     const header = libritoDoc.querySelector('.librito-header');
     if (header) {
-      const headerTitle = header.querySelector('h1')?.textContent?.trim() || '';
+      const headerTitle = header.querySelector('h2')?.textContent?.trim() || '';
       const headerSubtitle = header.querySelector('.librito-subtitle:first-of-type')?.textContent?.trim() || '';
       const headerDate = header.querySelector('.librito-date')?.textContent?.trim() || '';
       const headerFeast = header.querySelector('.librito-feast')?.textContent?.trim() || '';
@@ -1105,6 +1132,38 @@ async function downloadLibritoDOCX(feastName) {
               spacing: { before: 240, after: 240 }
             }));
           }
+          continue;
+        }
+
+        // Conmemoraciones (Commemorations.buildCommemorationHTML): el bloque lleva
+        // títulos (h3, h4), rúbricas (p) y las oraciones en div.prayer-text, que
+        // no es un <p>. Recorrerlo solo por <p> exportaba las rúbricas y perdía
+        // los títulos y TODAS las oraciones (Colecta, Secreta, Poscomunión).
+        if (el.classList.contains('commemoration-section')) {
+          el.querySelectorAll('h3, h4, p, .prayer-text').forEach(node => {
+            const text = node.textContent.trim();
+            if (!text) return;
+            if (node.tagName === 'P' && node.closest('.prayer-text')) return;
+            if (node.tagName === 'H3' || node.tagName === 'H4') {
+              paras.push(new Paragraph({
+                children: [new TextRun({ text: sanitizeText(text), bold: true, size: SZ, color: C_INK, font: FONT })],
+                keepNext: true,
+                spacing: { before: 200, after: 80 },
+              }));
+            } else if (node.classList.contains('prayer-text')) {
+              paras.push(new Paragraph({
+                children: buildRuns(node, { italic: true, size: SZ, color: C_INK }),
+                indent: { left: 180, right: 180 },
+                alignment: AlignmentType.JUSTIFIED,
+                spacing: { before: 60, after: 120, line: 300 },
+              }));
+            } else {
+              paras.push(new Paragraph({
+                children: buildRuns(node, { italic: true, color: C_RUB, size: SZ_SM }),
+                spacing: { before: 60, after: 60 },
+              }));
+            }
+          });
           continue;
         }
 

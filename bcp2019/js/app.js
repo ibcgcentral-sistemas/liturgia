@@ -96,7 +96,9 @@ function buildLiturgyHTML(d) {
   const colorClass = `color-${d.dayInfo.color}`;
   const colorName = getColorName(d.dayInfo.color);
   const rankName = getRankName(d.dayInfo.rank);
-  const isLent = d.dayInfo.season === 'lent';
+  // Semana Santa (season 'holyWeek') es parte de la Cuaresma para la aclamación
+  // penitencial y la Fracción sin Aleluya.
+  const isLent = d.dayInfo.season === 'lent' || d.dayInfo.season === 'holyWeek';
   const isEaster = d.dayInfo.season === 'easter' || d.dayInfo.key === 'pentecost';
 
   const fmtReading = (ref, data, type) => {
@@ -104,7 +106,7 @@ function buildLiturgyHTML(d) {
     let header = '';
     if (type === 'first') header = `<h3 class="section-title">✠ PRIMERA LECTURA</h3><p class="rubric">Lectura de <em>${ref}</em></p>`;
     if (type === 'second') header = `<h3 class="section-title">✠ SEGUNDA LECTURA</h3><p class="rubric">Lectura de <em>${ref}</em></p>`;
-    if (type === 'gospel') header = `<h3 class="section-title gospel-title">✠ SANTO EVANGELIO</h3><p class="rubric">Lectura del Santo Evangelio según ${getGospelAuthor(ref)}</p>`;
+    if (type === 'gospel') header = `<h3 class="section-title gospel-title">✠ SANTO EVANGELIO</h3><p class="rubric">Lectura del Santo Evangelio${getGospelAuthor(ref) ? ' según ' + getGospelAuthor(ref) : ''}</p>`;
     return `
       <div class="reading ${type}-reading">
         ${header}
@@ -175,7 +177,9 @@ function buildLiturgyHTML(d) {
       <div class="liturgical-text-block">${BCPEucharist.KYRIE}</div>
 
       <h4 class="section-title">GLORIA IN EXCELSIS</h4>
-      <div class="liturgical-text-block">${BCPEucharist.GLORIA}</div>
+      ${shouldOmitGloria(d.dayInfo)
+        ? `<p class="rubric">${GLORIA_OMITTED_RUBRIC}</p>`
+        : `<div class="liturgical-text-block">${BCPEucharist.GLORIA}</div>`}
     </div>
 
     <!-- COLECTA DEL DÍA -->
@@ -285,8 +289,11 @@ function buildLiturgyHTML(d) {
 //  CONTROLADOR UI
 // ══════════════════════════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
+  // Fecha local (toISOString() usa UTC y por la tarde/noche en América da el
+  // día siguiente).
   const today = new Date();
-  document.getElementById('date-picker').value = today.toISOString().split('T')[0];
+  const pad = n => String(n).padStart(2, '0');
+  document.getElementById('date-picker').value = `${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}`;
   document.getElementById('date-picker').addEventListener('change', updateDayInfo);
   updateDayInfo();
   document.getElementById('generate-btn').addEventListener('click', handleGenerate);
@@ -296,6 +303,7 @@ function updateDayInfo() {
   const val = document.getElementById('date-picker').value;
   if (!val) return;
   const date = new Date(val + 'T12:00:00');
+  if (isNaN(date.getTime())) return;
   const dayInfo = BCPCalendar.getDay(date);
   const infoEl = document.getElementById('liturgy-info');
   infoEl.classList.remove('hidden');
@@ -308,6 +316,7 @@ async function handleGenerate() {
   const val = document.getElementById('date-picker').value;
   if (!val) { alert('Por favor selecciona una fecha.'); return; }
   const date = new Date(val + 'T12:00:00');
+  if (isNaN(date.getTime())) { alert('La fecha no es válida. Por favor selecciona una fecha.'); return; }
 
   const loading = document.getElementById('loading');
   const output = document.getElementById('liturgy-output');
@@ -327,7 +336,7 @@ async function handleGenerate() {
     output.scrollIntoView({ behavior: 'smooth' });
   } catch (e) {
     console.error('Error generando liturgia:', e);
-    output.innerHTML = `<div class="liturgy-document" style="padding:2rem"><p class="error">Error al generar la liturgia: ${e.message}</p><pre style="font-size:0.8rem;color:#666">${e.stack || ''}</pre></div>`;
+    output.innerHTML = `<div class="liturgy-document" style="padding:2rem"><p class="error">Error al generar la liturgia: ${escapeHtml(e.message)}</p><pre style="font-size:0.8rem;color:#666">${escapeHtml(e.stack || '')}</pre></div>`;
     output.classList.remove('hidden');
   } finally {
     loading.classList.add('hidden');

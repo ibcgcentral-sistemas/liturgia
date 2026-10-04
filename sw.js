@@ -7,7 +7,7 @@
  * de archivos con su número de versión exacto.
  */
 
-const CACHE_NAME = 'misal-anglicano-v2';
+const CACHE_NAME = 'misal-anglicano-v3';
 const PRECACHE_URLS = [
   '/index.html',
   '/manifest.json',
@@ -35,6 +35,24 @@ self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   const url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
+
+  // Navegaciones y documentos HTML: red primero, cache solo como respaldo sin
+  // conexión. Con cache-primero, tras un despliegue la primera visita servía el
+  // index.html viejo (con los ?v= viejos) y los usuarios veían la página rota.
+  if (event.request.mode === 'navigate' || event.request.destination === 'document') {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          if (response && response.status === 200) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+          }
+          return response;
+        })
+        .catch(() => caches.match(event.request).then((cached) => cached || caches.match('/index.html')))
+    );
+    return;
+  }
 
   event.respondWith(
     caches.match(event.request).then((cached) => {

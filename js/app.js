@@ -14,11 +14,37 @@ const TRUNCATE_AT = 22000;
 // para garantizar que siempre corresponda a lo que está en pantalla.
 let currentMassState = null;
 
+// La Biblia de Jerusalén cargada trae el Prólogo del Eclesiástico como primer
+// elemento del arreglo de capítulos, de modo que js/lib/biblia-wrapper.js
+// (`chapters[capítulo - 1]`) devuelve el capítulo N-1 de ese libro: «Sirach 24:9-11»
+// imprimía el cap. 23. Mientras el wrapper no se corrija, aquí se compensa SOLO
+// para ese libro; la detección es por el contenido (el v. 1 del «cap. 1» es el
+// Prólogo), de modo que si el wrapper se arregla el desplazamiento pasa a 0 solo.
+// La cita que ve el lector (encabezado) sigue siendo la del leccionario.
+let sirachShift = null;
+function getSirachShift() {
+  if (sirachShift !== null) return sirachShift;
+  sirachShift = 0;
+  try {
+    const v = window.BibliaJerusalen && window.BibliaJerusalen.getVerses('Sirach 1:1');
+    if (v && v.length && /Muchas e importantes lecciones/.test(v[0].content)) sirachShift = 1;
+  } catch (e) { /* sin compensación */ }
+  return sirachShift;
+}
+function scriptureLookupRef(ref) {
+  if (typeof ref === 'string' && /^(Sirach|Sir)\s/.test(ref) && getSirachShift()) {
+    return ref.replace(/\d+(?=:)/g, n => String(parseInt(n, 10) + getSirachShift()));
+  }
+  return ref;
+}
+
 async function fetchScripture(ref) {
   if (!ref) return { text: '<em class="rubric">[Lectura no especificada]</em>', reference: '' };
 
   if (window.BibliaJerusalen) {
-    const result = window.BibliaJerusalen.getPassage(ref);
+    const lookupRef = scriptureLookupRef(ref);
+    const result = window.BibliaJerusalen.getPassage(lookupRef);
+    if (lookupRef !== ref) result.reference = ref;
     if (result.text && result.text.length > MAX_READING_LENGTH) {
       console.warn(`Lectura sospechosamente larga para ${ref}: ${result.text.length} caracteres`);
       return {
@@ -92,7 +118,11 @@ function resolveLectionaryKey(dayInfo, date) {
   const direct = getLectionaryKey(dayInfo);
   if (direct) return { key: direct, borrowedFromSunday: false };
   const prevKey = getLectionaryKey(LiturgicalCalendar.getDay(getPreviousSunday(date)));
-  return prevKey ? { key: prevKey, borrowedFromSunday: true } : { key: null, borrowedFromSunday: false };
+  // Un domingo no «repite el Domingo precedente»: el «precedente» de un domingo es
+  // él mismo (getPreviousSunday devuelve la misma fecha), así que la rúbrica
+  // «Esta feria no tiene lecturas propias…» sería inexacta. Solo se declara
+  // préstamo cuando el día no es domingo.
+  return prevKey ? { key: prevKey, borrowedFromSunday: date.getDay() !== 0 } : { key: null, borrowedFromSunday: false };
 }
 
 const SEASON_MAP = {
@@ -166,16 +196,48 @@ async function generateLiturgy(date, canonType = 'roman', votiveType = 'none', l
   let dayInfo = LiturgicalCalendar.getDay(date);
   let omissions = LiturgicalCalendar.getOmissions(dayInfo);
 
+  // El Viernes Santo no se dice el Credo (ni hay Ofertorio, Prefacio ni Canon:
+  // el día sigue el rito de holyweek.js). calendar.js no declara esta omisión
+  // —solo omite el Credo de las ferias—, y el Viernes Santo es rango «ayuno»;
+  // queda anotada en las notas de omisiones.
+  // De las notas que trae calendar.js para el día solo se conservan las que
+  // siguen siendo verdad en el rito del Misal (Gloria y Credo): el Aleluya/Tracto,
+  // el Ite missa est, el incienso de «los Presantificados» y los velos son
+  // piezas o ceremonias de la Misa que ese rito no trae.
+  if (dayInfo.key === 'goodFriday' && votiveType === 'none') {
+    omissions = omissions.filter(o => o.part === 'gloria' || o.part === 'credo' || o.part === 'creed');
+    if (!omissions.some(o => o.part === 'credo' || o.part === 'creed')) {
+      omissions = omissions.concat([{ part: 'credo', reason: 'El Credo no se dice el Viernes Santo.' }]);
+    }
+  }
+
+  // El Salmo 43 (Judica me) se omite en el Tiempo de Pasión y en la Semana
+  // Santa. Canon.omitJudica() decide por la clave y el color del día, y para una
+  // misa votiva la clave y el color se sobrescriben abajo ('holySpirit', 'bvm'):
+  // se perdía así la información del día real y la Misa votiva del Espíritu
+  // Santo o de la Virgen rezaba el Judica en la Semana de Pasión. Se calcula
+  // aquí, con la clave del día calendario ORIGINAL; la Misa de Réquiem lo omite
+  // siempre. En una misa votiva no se pasa el color del día original: el color
+  // negro (Fieles Difuntos) es del propio día de difuntos, no de la semana de
+  // Pasión, y un votivo del Espíritu Santo o de la Virgen no es misa de difuntos.
+  const omitJudicaCalendar = Canon.omitJudica(dayInfo.key, votiveType === 'none' ? dayInfo.color : null);
+
+  // Clave del día calendario ORIGINAL: las lecturas votivas la necesitan (el
+  // Réquiem del 2 de noviembre lleva las de Fieles Difuntos) y se sobrescribe abajo.
+  const calendarDayKey = dayInfo.key;
+
   if (votiveType !== 'none') {
     if (votiveType === 'requiem') {
       dayInfo = { ...dayInfo, name: 'Misa de Réquiem (Fieles Difuntos)', nameEs: 'Misa de Réquiem (Fieles Difuntos)', color: 'black', rank: 'double', key: 'requiem' };
       omissions = [{ part: 'gloria', reason: 'Misa de Réquiem' }, { part: 'credo', reason: 'Misa de Réquiem' }, { part: 'aleluya', reason: 'Se usa el Tracto' }, { part: 'judica', reason: 'Se omite en misas de difuntos' }];
     } else if (votiveType === 'holySpirit') {
       dayInfo = { ...dayInfo, name: 'Misa Votiva del Espíritu Santo', nameEs: 'Misa Votiva del Espíritu Santo', color: 'red', key: 'holySpirit' };
-      omissions = omissions.filter(o => o.part !== 'aleluya' && o.part !== 'gloria');
+      // Las omisiones del día original se RESPETAN: una misa votiva en tiempo
+      // penitencial (Adviento, Septuagésima–Sábado Santo) no dice Gloria ni
+      // Aleluya. Antes se filtraban aquí y ambos se rezaban en plena Cuaresma.
     } else if (votiveType === 'bvm') {
       dayInfo = { ...dayInfo, name: 'Misa Votiva de Santa María Virgen', nameEs: 'Misa Votiva de Santa María Virgen', color: 'white', key: 'bvm' };
-      omissions = omissions.filter(o => o.part !== 'aleluya');
+      // Ídem: se conservan las omisiones de Gloria y Aleluya del día original.
     }
   }
 
@@ -191,9 +253,34 @@ async function generateLiturgy(date, canonType = 'roman', votiveType = 'none', l
   // de modo que rotular un ciclo ferial prometía una distinción que ninguna
   // página llegaba a aplicar. El ciclo dominical A/B/C sí es real y se mantiene.
   const season = resolveSeason(dayInfo, date);
-  const { key: lKey, borrowedFromSunday } = resolveLectionaryKey(dayInfo, date);
-  const readings = lKey ? Lectionary.getSundayReadings(lKey, cycle) : null;
+  // Misas votivas: Epístola y Evangelio PROPIOS del Misal Romano (lectionary.js,
+  // getVotiveReadings); no se toma ninguna lectura del Domingo precedente, de modo
+  // que tampoco hay rúbrica de préstamo ni clave de leccionario para las
+  // intenciones específicas de un domingo (lKey = null: las intercesiones se
+  // arman por el tema del Evangelio votivo).
+  let lKey, borrowedFromSunday, readings;
+  if (votiveType !== 'none') {
+    lKey = null;
+    borrowedFromSunday = false;
+    readings = Lectionary.getVotiveReadings(votiveType, { date, season, dayKey: calendarDayKey });
+  } else {
+    ({ key: lKey, borrowedFromSunday } = resolveLectionaryKey(dayInfo, date));
+    readings = lKey ? Lectionary.getSundayReadings(lKey, cycle) : null;
+  }
   const key = dayInfo.key;
+
+  // Viernes Santo: se celebra el rito del Misal impreso (holyweek.js), que no
+  // es la Misa ordinaria sin Canon sino otra liturgia (Colecta del Día,
+  // lecturas, Colectas Solemnes, antífonas ante la cruz, comunión con el
+  // Sacramento reservado y oración final). Con una misa votiva `key` ya es la
+  // del votivo y la liturgia sale completa.
+  const isGoodFriday = key === 'goodFriday';
+  if (isGoodFriday) {
+    // Las lecturas se corrigen donde contradicen al Misal (Epístola, final de
+    // la Pasión, salmo): ver HolyWeek.goodFridayReadings().
+    readings = HolyWeek.goodFridayReadings(readings);
+    borrowedFromSunday = false;
+  }
 
   // Propios. propers.js señala con `supplied: true` (más la temporada) los
   // textos que no son los propios del día sino los del tiempo; takeProper()
@@ -221,7 +308,9 @@ async function generateLiturgy(date, canonType = 'roman', votiveType = 'none', l
   };
   const proper = (part, k, getter) => {
     if (typeof Propers.getProper === 'function') {
-      const r = Propers.getProper(part, k, season) || {};
+      // `date` solo lo usa el Prefacio (octavas de la Epifanía y de Todos los Santos,
+      // que la clave del día no delimita); las demás piezas lo ignoran.
+      const r = Propers.getProper(part, k, season, date) || {};
       if (r.supplied === true || r.omitted === true) {
         suppliedProperNotes.push({ part: PART_LABELS[part] || part, season: r.from || r.season || season, rubric: r.rubric, omitted: r.omitted === true, note: r.note || null });
       }
@@ -231,20 +320,37 @@ async function generateLiturgy(date, canonType = 'roman', votiveType = 'none', l
   };
 
   const collectKey = resolveCollectKey(dayInfo, date);
-  const collect = proper('collect', collectKey, () => Propers.getCollect(collectKey)) || 'Colecta no disponible para este día.';
-  const preface = proper('preface', key, () => Propers.getPreface(key, season));
-  const introit = proper('introit', key, () => Propers.getIntroit(key, season)) || { ant:'' };
-  const gradual = proper('gradual', key, () => Propers.getGradual(key, season)) || null;
-  const offertory = proper('offertory', key, () => Propers.getOffertory(key, season)) || '';
-  const communion = proper('communion', key, () => Propers.getCommunion(key, season)) || '';
-  const secret = proper('secret', key, () => Propers.getSecret(key, season)) || '';
-  const postcommunion = proper('postcommunion', key, () => Propers.getPostcommunion(key, season)) || '';
+  let collect = proper('collect', collectKey, () => Propers.getCollect(collectKey)) || 'Colecta no disponible para este día.';
+  let preface = proper('preface', key, () => Propers.getPreface(key, season, date));
+  let introit = proper('introit', key, () => Propers.getIntroit(key, season)) || { ant:'' };
+  let gradual = proper('gradual', key, () => Propers.getGradual(key, season)) || null;
+  let offertory = proper('offertory', key, () => Propers.getOffertory(key, season)) || '';
+  let communion = proper('communion', key, () => Propers.getCommunion(key, season)) || '';
+  let secret = proper('secret', key, () => Propers.getSecret(key, season)) || '';
+  let postcommunion = proper('postcommunion', key, () => Propers.getPostcommunion(key, season)) || '';
+
+  // El rito del Viernes Santo no tiene Introito, Gradual, Ofertorio, Prefacio,
+  // Secreta, Antífona de Comunión ni Poscomunión (su oración final está en
+  // holyweek.js), y la Colecta del Día es la del Misal impreso. Se vacían aquí,
+  // en el estado, para que Misal, Librito y Word digan lo mismo y no queden
+  // propios «suplidos» que ninguna página imprime.
+  if (isGoodFriday) {
+    collect = HolyWeek.GOOD_FRIDAY.collect;
+    preface = null;
+    introit = { ant: '' };
+    gradual = null;
+    offertory = '';
+    communion = '';
+    secret = '';
+    postcommunion = '';
+    suppliedProperNotes.length = 0;
+  }
 
   // Omisiones
   const omitGloria = omissions.some(o => o.part === 'gloria');
   const omitAlleluia = omissions.some(o => o.part === 'aleluya' || o.part === 'alleluia');
   const omitCreed = omissions.some(o => o.part === 'credo' || o.part === 'creed');
-  const omitJudica = Canon.omitJudica(key, dayInfo.color);
+  const omitJudica = votiveType === 'requiem' || omitJudicaCalendar;
   const useBenoedicamus = omissions.some(o => o.part === 'ite missa est' || o.part === 'iteMissaEst');
   const veiled = omissions.some(o => o.part === 'velos' || o.part === 'crucifixVeiled');
 
@@ -260,7 +366,8 @@ async function generateLiturgy(date, canonType = 'roman', votiveType = 'none', l
   if (readings) {
     try {
       [firstReading, secondReading, gospel] = await Promise.all([
-        fetchScripture(readings.first),
+        // Misa votiva: sin Primera Lectura (la Epístola va en `second`).
+        (readings.votive && !readings.first) ? Promise.resolve(null) : fetchScripture(readings.first),
         readings.second ? fetchScripture(readings.second) : Promise.resolve(null),
         fetchScripture(readings.gospel),
       ]);
@@ -279,30 +386,31 @@ async function generateLiturgy(date, canonType = 'roman', votiveType = 'none', l
   // Intercesiones
   const gospelRef = readings ? readings.gospel : '';
   const gospelText = gospel ? gospel.text : '';
-  const intercessions = Intercessions.generateIntercessions(gospelRef, dayInfo.name, season, cycle, gospelText, lKey);
+  // El Viernes Santo no lleva la Oración de los Fieles genérica: la sustituyen
+  // las Colectas Solemnes del Misal (holyweek.js).
+  const intercessions = isGoodFriday
+    ? null
+    : Intercessions.generateIntercessions(gospelRef, dayInfo.name, season, cycle, gospelText, lKey, dayInfo.key);
 
   // Gradual / Aleluya / Tracto
   let gradualText = '';
   if (gradual) {
     gradualText = gradual.text || '';
   }
+  // Misa votiva en tiempo penitencial: el Aleluya se calla y el Misal pone en su
+  // lugar el Tracto. Los propios de la Misa votiva del Espíritu Santo solo traen
+  // el verso del Aleluya (type 'alleluia'); imprimirlo bajo el rótulo «Tracto»
+  // sería decir el Aleluya en Cuaresma. El Tracto no está en el proyecto (ver
+  // Propers.MISSING_TEXTS) y NO se inventa: se declara la falta.
+  if (votiveType !== 'none' && omitAlleluia && gradual && gradual.type === 'alleluia') {
+    gradualText = '<em class="rubric">[El Tracto propio de esta Misa votiva no está disponible en este misal; en este tiempo no se dice el Aleluya.]</em>';
+  }
 
   // Conmemoraciones: detectar colisión con fiestas fijas desplazadas
   const occurrence = Commemorations.resolveOccurrence(dayInfo, date);
-  const commemorations = occurrence.commemorations;
+  // El rito del Viernes Santo del Misal no admite conmemoraciones.
+  const commemorations = isGoodFriday ? [] : occurrence.commemorations;
   const omittedFeasts = occurrence.omitted || [];
-
-  // Capturar el estado exacto de esta liturgia para que el Librito del Pueblo
-  // (botón "📕 Librito") corresponda siempre a lo que se acaba de generar.
-  currentMassState = {
-    date, dayInfo, readings, cycle, firstReading, secondReading, gospel,
-    psalmVerses, psalmAnt, collect, introit, offertory, communion,
-    omitGloria, omitCreed, omitAlleluia, canonType, intercessions, lang,
-    secret, preface, postcommunion, omitJudica, season,
-    commemorations, hancIgitur, useBenoedicamus, votiveType,
-    omissions, borrowedFromSunday, omittedFeasts, suppliedProperNotes,
-    gradualText, gradual,
-  };
 
   // canon.js guarda el idioma y el día en estado de módulo, y sus getters
   // (GLORIA, CREDO, CANON_TEXT…) lo leen en el momento de la lectura. Entre el
@@ -313,7 +421,7 @@ async function generateLiturgy(date, canonType = 'roman', votiveType = 'none', l
   // y por tanto ya no puede intercalarse con otra generación.
   Canon.setLanguage(lang, dayInfo.key, date);
 
-  return buildLiturgyHTML({
+  const html = buildLiturgyHTML({
     date, dayInfo, cycle, season, key, omissions, omittedFeasts, suppliedProperNotes,
     readings, firstReading, psalmVerses, psalmAnt, secondReading, gospel,
     collect, preface, introit, gradualText, offertory, communion, secret, postcommunion,
@@ -321,6 +429,30 @@ async function generateLiturgy(date, canonType = 'roman', votiveType = 'none', l
     communicantesEmbolism, hancIgitur, intercessions, commemorations, canonType, votiveType,
     borrowedFromSunday,
   });
+
+  // Capturar el estado exacto de esta liturgia para que el Librito del Pueblo
+  // (botón "📕 Librito") corresponda siempre a lo que se acaba de generar.
+  // Se asigna DESPUÉS de construir el HTML con éxito: si buildLiturgyHTML lanzaba,
+  // el estado ya apuntaba a una liturgia que nunca llegó a la pantalla y el botón
+  // abría un Librito distinto de lo que se veía.
+  currentMassState = {
+    date, dayInfo, readings, cycle, firstReading, secondReading, gospel,
+    psalmVerses, psalmAnt, collect, introit, offertory, communion,
+    omitGloria, omitCreed, omitAlleluia, canonType, intercessions, lang,
+    secret, preface, postcommunion, omitJudica, season,
+    commemorations, hancIgitur, useBenoedicamus, votiveType,
+    omissions, borrowedFromSunday, omittedFeasts, suppliedProperNotes,
+    gradualText, gradual,
+  };
+
+  return html;
+}
+
+// Escapa texto para insertarlo como HTML (mensajes de error, nombres de fiesta).
+function escapeHtml(s) {
+  return String(s === undefined || s === null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
 // ══════════════════════════════════════════════════════════════════════════
@@ -335,16 +467,26 @@ function withJesusBow(html) {
 // ══════════════════════════════════════════════════════════════════════════
 function buildLiturgyHTML(d) {
   const dateStr = formatLiturgyDate(d.date);
+  // Viernes Santo: no es la Misa ordinaria. Se imprime el rito del Misal
+  // (holyweek.js): Colecta del Día, lecturas, Sermón, Colectas Solemnes,
+  // antífonas ante la cruz, comunión con las especies reservadas el Jueves
+  // Santo y oración final; sin Introito, Kyrie, Gloria, Credo, Ofertorio,
+  // Prefacio, Canon, bendición ni despedida. Con una misa votiva `d.key` ya no
+  // es 'goodFriday' (es la clave del votivo) y la liturgia sale completa.
+  const presanctified = d.key === 'goodFriday';
   const colorClass = `color-${d.dayInfo.color}`;
   const colorName = getColorName(d.dayInfo.color);
   const rankName = getRankName(d.dayInfo.rank);
   const cycleInfo = `Ciclo dominical ${d.cycle}`;
+  const epistleOnly = !!(d.readings && d.readings.votive && !d.readings.first);
 
   const fmtReading = (ref, data, label, type) => {
     if (!data) return '';
     let header = '';
     if (type === 'first') header = `<h3 class="section-title">✠ PRIMERA LECTURA</h3><p class="rubric">Lectura de <em>${ref}</em></p>`;
-    if (type === 'second') header = `<h3 class="section-title">✠ SEGUNDA LECTURA</h3><p class="rubric">Lectura de <em>${ref}</em></p>`;
+    // Misa votiva: la Epístola es la única lectura antes del Evangelio, y se
+    // rotula así, no «Segunda lectura».
+    if (type === 'second') header = `<h3 class="section-title">✠ ${epistleOnly ? 'EPÍSTOLA' : 'SEGUNDA LECTURA'}</h3><p class="rubric">Lectura de <em>${ref}</em></p>`;
     if (type === 'gospel') header = `<div style="text-align:center; margin-bottom:1.5rem;"><img src="img/woodcut-gospel.png" alt="Evangeliario" style="max-height:85px; opacity:0.85; filter: contrast(1.2) sepia(0.3) hue-rotate(-15deg);"></div><h3 class="section-title gospel-title">✠ SANTO EVANGELIO</h3><p class="rubric gospel-incensation">(El Sacerdote o Diácono inciensa el Evangeliario tres veces y hace la señal de la cruz ✠ sobre la frente, labios y pecho)</p><p class="rubric">Lectura del Santo Evangelio según <em>${ref}</em></p>`;
     return `
       <div class="reading ${type}-reading">
@@ -435,12 +577,18 @@ function buildLiturgyHTML(d) {
   // qué no hay texto. Antes ambas señales se mezclaban y el Viernes Santo salía
   // con «(Ofertorio del tiempo)» seguido de «[Antífona de ofertorio no
   // disponible]», y con la Secreta en blanco y sin explicación.
-  const suppliedParts = new Set((d.suppliedProperNotes || [])
-    .filter(n => !n.omitted).map(n => n.part));
+  // La rúbrica la redacta propers.js según de dónde salió realmente el texto
+  // («(Secreta del Común de la Santísima Virgen, suplida)», «(Secreta del Común,
+  // suplida)», «(Poscomunión del tiempo de Adviento, suplida)»…). Antes se
+  // descartaba y se imprimía siempre «(X del tiempo)», lo cual era falso cuando el
+  // texto venía del genérico de la Trinidad o del Común de la Virgen o de
+  // Difuntos. Si propers.js no trae rúbrica, se cae a la fórmula anterior.
+  const suppliedParts = new Map((d.suppliedProperNotes || [])
+    .filter(n => !n.omitted).map(n => [n.part, n.rubric || null]));
   const omittedNotes = new Map((d.suppliedProperNotes || [])
     .filter(n => n.omitted).map(n => [n.part, n.note]));
   const suppliedMark = (part) => suppliedParts.has(part)
-    ? ` <em class="rubric">(${part} del tiempo)</em>` : '';
+    ? ` <em class="rubric">${suppliedParts.get(part) || `(${part} del tiempo)`}</em>` : '';
   // Texto a mostrar en lugar de una pieza que este día no tiene. La nota la
   // redacta propers.js; aquí no se inventa ninguna.
   const omittedText = (part) => omittedNotes.has(part)
@@ -483,7 +631,10 @@ function buildLiturgyHTML(d) {
 
     ${omissionHTML}
 
-    <!-- ═══════════════ RITOS INICIALES ═══════════════ -->
+    ${presanctified ? HolyWeek.goodFridayMisalHTML({
+      collect: d.collect, readings: d.readings, firstReading: d.firstReading,
+      psalmVerses: d.psalmVerses, secondReading: d.secondReading, gospel: d.gospel,
+    }) : `<!-- ═══════════════ RITOS INICIALES ═══════════════ -->
     <div class="mass-section">
       <h3 class="section-title main-section">✠ RITOS INICIALES</h3>
 
@@ -545,9 +696,9 @@ function buildLiturgyHTML(d) {
     <div class="mass-section">
       <h3 class="section-title main-section">✠ LITURGIA DE LA PALABRA</h3>
 
-      ${d.borrowedFromSunday ? '<p class="rubric">✠ Esta feria no tiene lecturas propias asignadas: se repiten las del Domingo precedente, según la práctica tradicional.</p>' : ''}
+      ${(d.borrowedFromSunday && !d.readings?.votive) ? '<p class="rubric">✠ Esta feria no tiene lecturas propias asignadas: se repiten las del Domingo precedente, según la práctica tradicional.</p>' : ''}
 
-      ${d.firstReading && d.readings ? fmtReading(translateBibleReference(d.readings.first), d.firstReading, '', 'first') : '<p class="rubric">[Primera lectura no especificada para este día]</p>'}
+      ${d.firstReading && d.readings ? fmtReading(translateBibleReference(d.readings.first), d.firstReading, '', 'first') : (epistleOnly ? '' : '<p class="rubric">[Primera lectura no especificada para este día]</p>')}
 
       ${d.psalmVerses && d.psalmVerses.length && d.readings ? fmtPsalm(translateBibleReference(d.readings.psalm), d.psalmVerses, d.psalmAnt) : ''}
 
@@ -558,7 +709,7 @@ function buildLiturgyHTML(d) {
         <h3 class="section-title">✠ ${d.omitAlleluia ? 'GRADUAL / TRACTO' : 'GRADUAL / ALELUYA'}</h3>${suppliedMark('Gradual')}
         ${d.omitAlleluia ?
       '<p class="rubric">El Aleluya no se canta desde Septuagésima hasta la Vigilia Pascual. Se usa el Tracto.</p>' :
-      '<p class="rubric">Se canta el Aleluya con su versículo: <em>Aleluya, aleluya. V. ' + (function(g){ if(!g || !g.text) return 'Muéstranos, Señor, tu misericordia y danos tu salvación.'; let t = g.text.replace(/<[^>]*>?/gm, '').trim(); t = t.replace(/^\s*\d+[\s\-\.]*/, ''); t = t.replace(/^En aquel tiempo,\s*/i, ''); let m = t.match(/^([^.?!;]+[.?!;])/); return m ? m[1].trim() : t.substring(0, 80).trim() + '...'; })(d.gospel) + ' Aleluya.</em></p>'}
+      '<p class="rubric">Se canta el Aleluya con su versículo propio.</p>'}
         <div class="liturgical-text-block">${d.gradualText || '<em class="rubric">[Gradual propio no disponible]</em>'}</div>
       </div>
 
@@ -646,15 +797,12 @@ function buildLiturgyHTML(d) {
         <h3 class="section-title">✠ FRACCIÓN DEL PAN</h3>
         <p class="rubric">En el rito de 1662, el Padre Nuestro se reza después de la Comunión. El Sacerdote procede directamente a la fracción del Pan.</p>
       ` : d.canonType === '1928' ? `
-        <h3 class="section-title">✠ FRACCIÓN DEL PAN</h3>
-        <p class="rubric">En el rito de 1928, el Padre Nuestro se reza después de la Comunión. El Sacerdote procede directamente a la fracción del Pan.</p>
+        <h3 class="section-title">✠ PADRENUESTRO</h3>
+        <p class="rubric">En el rito de 1928, el Padre Nuestro se dice inmediatamente después de la Consagración y antes de la Comunión.</p>
+        <div class="liturgical-text-block">${Canon.getPaterNosterOnly('1928')}</div>
       ` : `
         <h3 class="section-title">✠ PADRENUESTRO, FRACCIÓN Y PAZ</h3>
-        ${d.canonType === '1549' ? `
-          <div class="liturgical-text-block">${Canon.PATER_NOSTER.replace('Oremos. Fieles a la recomendación del Salvador', 'Como nuestro Salvador Cristo nos ha mandado y enseñado, nos atrevemos a decir:')}</div>
-        ` : `
-          <div class="liturgical-text-block">${Canon.PATER_NOSTER}</div>
-        `}
+        <div class="liturgical-text-block">${Canon.getPaterNoster(d.canonType)}</div>
       `}
     </div>
 
@@ -675,7 +823,7 @@ function buildLiturgyHTML(d) {
     <div class="mass-section">
       <h3 class="section-title">✠ PADRENUESTRO (DESPUÉS DE LA COMUNIÓN)</h3>
       <p class="rubric">Según el rito de 1662, el Padre Nuestro se reza después de la Comunión.</p>
-      <div class="liturgical-text-block">${Canon.PATER_NOSTER}</div>
+      <div class="liturgical-text-block">${Canon.PATER_NOSTER_ONLY}</div>
     </div>
 
     <!-- ORACIÓN DE OBLACIÓN O ACCIÓN DE GRACIAS (1662) -->
@@ -695,14 +843,7 @@ function buildLiturgyHTML(d) {
     ` : ''}
 
     ${d.canonType === '1928' ? `
-    <!-- PADRE NUESTRO POST-COMUNIÓN (RITO DE 1928) -->
-    <div class="mass-section">
-      <h3 class="section-title">✠ PADRENUESTRO (DESPUÉS DE LA COMUNIÓN)</h3>
-      <p class="rubric">Según el rito de 1928, el Padre Nuestro se reza después de la Comunión.</p>
-      <div class="liturgical-text-block">${Canon.PATER_NOSTER}</div>
-    </div>
-
-    <!-- ORACIÓN DE ACCIÓN DE GRACIAS (1928) -->
+    <!-- ORACIÓN DE ACCIÓN DE GRACIAS (1928) — el Padrenuestro ya se dijo antes de la Comunión -->
     <div class="mass-section">
       <h3 class="section-title">✠ ORACIÓN DE ACCIÓN DE GRACIAS (1928)</h3>
       <div class="liturgical-text-block">${Canon.THANKSGIVING_1928}</div>
@@ -737,7 +878,7 @@ function buildLiturgyHTML(d) {
 
     <!-- ÚLTIMO EVANGELIO -->
     <div class="mass-section">
-      ${(d.key === 'goodFriday' || d.key === 'holySaturday' || d.key === 'palmSunday' || d.key === 'easter' || d.key === 'easter2' || (d.key && d.key.startsWith('easterFeria1_'))) ?
+      ${(d.key === 'holySaturday' || d.key === 'palmSunday' || d.key === 'easter' || d.key === 'easter2' || (d.key && d.key.startsWith('easterFeria1_'))) ?
       '<p class="rubric">✠ El Último Evangelio se <strong>omite</strong> hoy.</p>' :
       `<h3 class="section-title">✠ ÚLTIMO EVANGELIO</h3><div class="liturgical-text-block">${Canon.LAST_GOSPEL}</div>`}
     </div>
@@ -750,7 +891,7 @@ function buildLiturgyHTML(d) {
           ? Canon.LEONINE_PASCHALTIDE
           : Canon.LEONINE
       )}</div>
-    </div>
+    </div>`}
 
     <!-- PIE -->
     <div class="liturgy-footer">
@@ -765,8 +906,11 @@ function buildLiturgyHTML(d) {
 //  CONTROLADOR UI
 // ══════════════════════════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
+  // Fecha LOCAL: toISOString() da la fecha en UTC y por la noche (en América)
+  // proponía el día siguiente.
   const today = new Date();
-  const iso = today.toISOString().split('T')[0];
+  const pad2 = (n) => String(n).padStart(2, '0');
+  const iso = `${today.getFullYear()}-${pad2(today.getMonth() + 1)}-${pad2(today.getDate())}`;
   document.getElementById('date-picker').value = iso;
 
   document.getElementById('date-picker').addEventListener('change', updateDayInfo);
@@ -777,11 +921,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function updateDayInfo() {
   const val = document.getElementById('date-picker').value;
-  if (!val) return;
-  const date = new Date(val + 'T12:00:00');
+  const infoEl = document.getElementById('liturgy-info');
+  const date = val ? new Date(val + 'T12:00:00') : null;
+  // Fecha vacía o inválida: se oculta el panel y se vacía, en vez de dejar el
+  // día anterior a la vista como si fuera el de la fecha elegida.
+  if (!date || isNaN(date.getTime())) {
+    infoEl.classList.add('hidden');
+    document.getElementById('feast-name').textContent = '';
+    document.getElementById('season-info').textContent = '';
+    document.getElementById('cycle-info').textContent = '';
+    return;
+  }
   const dayInfo = LiturgicalCalendar.getDay(date);
 
-  const infoEl = document.getElementById('liturgy-info');
   infoEl.classList.remove('hidden');
   document.getElementById('feast-name').textContent = dayInfo.nameEs || dayInfo.name;
   const colorName = getColorName(dayInfo.color);
@@ -793,6 +945,7 @@ async function handleGenerate() {
   const val = document.getElementById('date-picker').value;
   if (!val) { alert('Por favor selecciona una fecha.'); return; }
   const date = new Date(val + 'T12:00:00');
+  if (isNaN(date.getTime())) { alert('La fecha elegida no es válida. Por favor selecciona otra.'); return; }
 
   const canonTypeEl = document.getElementById('canon-select');
   const canonType = canonTypeEl ? canonTypeEl.value : 'roman';
@@ -824,7 +977,7 @@ async function handleGenerate() {
     output.scrollIntoView({ behavior: 'smooth' });
   } catch (e) {
     console.error('Error generando liturgia:', e);
-    output.innerHTML = `<div class="liturgy-document" style="padding:2rem"><p class="error">Error al generar la liturgia: ${e.message}</p><pre style="font-size:0.8rem;color:#666">${e.stack || ''}</pre></div>`;
+    output.innerHTML = `<div class="liturgy-document" style="padding:2rem"><p class="error">Error al generar la liturgia: ${escapeHtml(e && e.message)}</p><pre style="font-size:0.8rem;color:#666">${escapeHtml(e && e.stack)}</pre></div>`;
     output.classList.remove('hidden');
   } finally {
     loading.classList.add('hidden');

@@ -60,10 +60,45 @@ function formatLiturgyDate(date) {
 //  DETECCIÓN DE AUTOR DEL EVANGELIO
 // ══════════════════════════════════════════════════════════════════════════
 
+// Acepta la referencia en inglés ("Matthew 4:1-11") o ya traducida
+// ("Mateo 4:1-11"): app.js y librito-pueblo.js pasan la traducida. Devuelve ''
+// si no reconoce el libro, para que el llamador omita el autor en vez de
+// atribuir un Evangelio equivocado.
 function getGospelAuthor(gospelRef) {
-  if (!gospelRef) return 'San Juan';
-  if (gospelRef.includes('Matthew')) return 'San Mateo';
-  if (gospelRef.includes('Mark')) return 'San Marcos';
-  if (gospelRef.includes('Luke')) return 'San Lucas';
-  return 'San Juan';
+  if (!gospelRef) return '';
+  const ref = String(gospelRef).trim();
+  if (/^(Matthew|Mateo)(?![A-Za-z])/.test(ref)) return 'San Mateo';
+  if (/^(Mark|Marcos)(?![A-Za-z])/.test(ref)) return 'San Marcos';
+  if (/^(Luke|Lucas)(?![A-Za-z])/.test(ref)) return 'San Lucas';
+  if (/^(John|Juan)(?![A-Za-z])/.test(ref)) return 'San Juan';
+  return '';
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+//  GLORIA IN EXCELSIS: DÍAS EN QUE SE OMITE
+// ══════════════════════════════════════════════════════════════════════════
+
+// Misma regla que el Misal Anglicano de la raíz (Calendar.getOmissions): el
+// Gloria se omite en el oficio de los tiempos penitenciales —aquí Adviento,
+// Cuaresma y Semana Santa (season 'advent', 'lent' y 'holyWeek', domingos
+// incluidos; el Domingo de Ramos queda omitido)— salvo el Jueves Santo, donde
+// sí se dice. No se omite en las FIESTAS fijas del santoral (dayInfo.isFixed)
+// que caen dentro de esos tiempos (San Matías, San José, la Anunciación, San
+// Andrés, Santo Tomás). Navidad, Epifanía, Pascua y el tiempo ordinario no
+// cambian. Lo usan app.js y librito-pueblo.js, así que ambos concuerdan.
+function shouldOmitGloria(dayInfo) {
+  if (!dayInfo) return false;
+  if (dayInfo.key === 'maundyThursday') return false;
+  if (dayInfo.isFixed === true) return false;
+  return dayInfo.season === 'advent' || dayInfo.season === 'lent' || dayInfo.season === 'holyWeek';
+}
+
+const GLORIA_OMITTED_RUBRIC = 'El Gloria in excelsis se omite en Adviento y Cuaresma.';
+
+// ══════════════════════════════════════════════════════════════════════════
+//  ESCAPE DE HTML (para mensajes de error inyectados con innerHTML)
+// ══════════════════════════════════════════════════════════════════════════
+
+function escapeHtml(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }

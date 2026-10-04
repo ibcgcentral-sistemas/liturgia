@@ -6,7 +6,7 @@
  * absolutas por bcp2019/index.html).
  */
 
-const CACHE_NAME = 'bcp2019-v1';
+const CACHE_NAME = 'bcp2019-v2';
 const PRECACHE_URLS = [
   '/bcp2019/index.html',
   '/bcp2019/manifest.json',
@@ -34,6 +34,22 @@ self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   const url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
+
+  // Navegaciones y documentos HTML: red primero (ver ../sw.js).
+  if (event.request.mode === 'navigate' || event.request.destination === 'document') {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          if (response && response.status === 200) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+          }
+          return response;
+        })
+        .catch(() => caches.match(event.request).then((cached) => cached || caches.match('/bcp2019/index.html')))
+    );
+    return;
+  }
 
   event.respondWith(
     caches.match(event.request).then((cached) => {

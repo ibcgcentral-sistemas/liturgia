@@ -36,8 +36,18 @@ const BCPCalendar = (() => {
     return new Date(year, month - 1, day);
   }
 
+  // Diferencia en días de calendario. Se compara la hora "de pared" como si
+  // fuera UTC, de modo que el cambio de horario de verano no desplace el
+  // resultado (una resta directa de Date da 23 h o 25 h en esos días).
   function diffDays(d1, d2) {
-    return Math.round((d2 - d1) / 86400000);
+    const wall = d => Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(),
+                               d.getHours(), d.getMinutes(), d.getSeconds());
+    return Math.round((wall(d2) - wall(d1)) / 86400000);
+  }
+
+  // Suma n días de calendario (no milisegundos): inmune al horario de verano.
+  function addDays(d, n) {
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
   }
 
   function sameDay(a, b) {
@@ -90,13 +100,12 @@ const BCPCalendar = (() => {
   // ── FECHAS MÓVILES DE UN AÑO ─────────────────────────────────────────────
   function getFeastDates(year) {
     const easter = computeEaster(year);
-    const easterMs = easter.getTime();
-    const add = n => new Date(easterMs + n * 86400000);
+    const add = n => addDays(easter, n);
     return {
       advent1: getAdvent1(year),
-      advent2: new Date(getAdvent1(year).getTime() + 7 * 86400000),
-      advent3: new Date(getAdvent1(year).getTime() + 14 * 86400000),
-      advent4: new Date(getAdvent1(year).getTime() + 21 * 86400000),
+      advent2: addDays(getAdvent1(year), 7),
+      advent3: addDays(getAdvent1(year), 14),
+      advent4: addDays(getAdvent1(year), 21),
       christmas: new Date(year, 11, 25),
       epiphany: new Date(year, 0, 6),
       baptismOfLord: getBaptismOfLord(year),
@@ -222,14 +231,14 @@ const BCPCalendar = (() => {
       if (d >= F.palmSunday && d <= F.easter2 && d.getDay() !== 0) pending.push({ md, d });
     }
     pending.sort((a, b) => a.d - b.d);
-    let cursor = new Date(F.easter2.getTime() + 86400000); // lunes tras Pascua II
+    let cursor = addDays(F.easter2, 1); // lunes tras Pascua II
     for (const { md } of pending) {
       while (cursor.getDay() === 0 || FIXED_FEASTS[mmdd(cursor)]) {
-        cursor = new Date(cursor.getTime() + 86400000);
+        cursor = addDays(cursor, 1);
       }
       from.set(md, new Date(cursor));
       to.set(mmdd(cursor), md);
-      cursor = new Date(cursor.getTime() + 86400000);
+      cursor = addDays(cursor, 1);
     }
     const res = { from, to };
     _transferCache.set(year, res);
@@ -360,7 +369,7 @@ const BCPCalendar = (() => {
     if (sameDay(date, F.baptismOfLord)) return mk('The Baptism of Our Lord (Epiphany I)', 'El Bautismo del Señor', 'white', 'sunday', 'epiphany1', 'epiphany', cycle);
 
     // Domingo de la Transfiguración: el último domingo antes de Cuaresma
-    const lastEpiphanySunday = new Date(F.ashWednesday.getTime() - 3 * 86400000); // domingo anterior a Miércoles de Ceniza
+    const lastEpiphanySunday = addDays(F.ashWednesday, -3); // domingo anterior a Miércoles de Ceniza
     if (dow === 0 && date > F.baptismOfLord && sameDay(date, lastEpiphanySunday)) {
       return mk('The Last Sunday after the Epiphany (Transfiguration)', 'Último Domingo después de Epifanía (Transfiguración)', 'white', 'sunday', 'transfiguration', 'epiphany', cycle);
     }

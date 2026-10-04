@@ -677,6 +677,8 @@ const PriestManual = (() => {
     `;
     document.body.appendChild(overlay);
     document.body.style.overflow = 'hidden';
+    // En @media print el CSS oculta el Misal de fondo mientras haya overlay.
+    document.body.classList.add('overlay-open');
 
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) hide();
@@ -687,6 +689,7 @@ const PriestManual = (() => {
     const overlay = document.getElementById('manual-overlay');
     if (overlay) overlay.remove();
     document.body.style.overflow = '';
+    document.body.classList.remove('overlay-open');
   }
 
   return { show, hide };

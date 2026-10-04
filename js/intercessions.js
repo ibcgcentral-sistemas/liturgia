@@ -833,93 +833,12 @@ const Intercessions = (() => {
       "closing": "Señor, que el rostro de Moisés resplandeció al bajar del Sinaí y que te transfiguraste hablando de tu éxodo en Jerusalén, transfórmanos de gloria en gloria según tu propia imagen; concede que no temamos el camino que lleva de la montaña a la cruz. Tú que vives y reinas por los siglos de los siglos."
     }
   },
-  "septuagesima": {
-    "A": {
-      "church": "Que la Iglesia, tentada tantas veces como Eva ante el árbol codiciable a los ojos, discierna la voz del engañador y enseñe a sus hijos a distinguir la serpiente de la Palabra de Dios.",
-      "world": "Que los gobernantes no midan la justicia como el dueño de la viña midió el jornal, sino con la generosidad que hace iguales al primero y al último.",
-      "parish": "Que esta parroquia acoja a quienes llegan a la hora undécima como si hubieran trabajado desde el alba, sin murmurar como los obreros de la parábola.",
-      "suffering": "Que los que sufren el peso y el calor del día encuentren en Cristo al dueño de la viña que paga con misericordia y no según sus méritos.",
-      "dead": "Que los difuntos, marcados por el pecado que entró por un solo hombre, hayan recibido por Cristo la abundancia de la gracia que sobreabunda sobre la culpa.",
-      "gospel": "Que aprendamos del dueño de la viña a no envidiar la bondad de Dios hacia otros, sabiendo que también nosotros fuimos llamados por pura gracia.",
-      "closing": "Señor de la viña, que llamas a obreros a toda hora del día; líbranos de la envidia de los primeros y danos la alegría de los últimos. Por Jesucristo nuestro Señor."
-    },
-    "B": {
-      "church": "Que la Iglesia sea signo del arco iris tendido sobre las nubes, señal de la alianza que Dios no romperá jamás con ningún ser viviente.",
-      "world": "Que las naciones recuerden, como Noé al salir del arca, que Dios ha puesto su arco en las nubes como promesa de paz entre todas las criaturas de la tierra.",
-      "parish": "Que esta comunidad, como Jesús recién bautizado, escuche la voz que la llama hija amada y salga fortalecida al desierto de cada semana.",
-      "suffering": "Que los que atraviesan su propio desierto, rodeados de fieras como Cristo, sean servidos por ángeles enviados por el Padre.",
-      "dead": "Que los difuntos, salvados por el agua que prefiguró el arca de Noé, hayan pasado ya del diluvio de la muerte a la orilla de la vida.",
-      "gospel": "Que, como Jesús tras su bautismo, sepamos entrar resueltos en el tiempo de prueba proclamando que el reino de Dios está cerca.",
-      "closing": "Dios de la alianza, que pusiste tu arco en las nubes como señal de paz para Noé; guarda tu promesa sobre nosotros y llévanos de las aguas del diluvio a la tierra firme de tu reino. Por Jesucristo nuestro Señor."
-    },
-    "C": {
-      "church": "Que la Iglesia enseñe a ofrecer las primicias como el israelita ante el altar, reconociendo que todo lo que tenemos proviene de la mano que nos sacó de la esclavitud.",
-      "world": "Que los pueblos recuerden, con las palabras del Deuteronomio, que fueron extranjeros y peregrinos antes de poseer tierra alguna.",
-      "parish": "Que esta parroquia confiese con los labios lo que cree en el corazón, sabiendo que quien invoca el nombre del Señor será salvo.",
-      "suffering": "Que los que sufren se refugien bajo las alas del Altísimo, como canta el salmo, seguros de que sus ángeles los llevarán en sus manos.",
-      "dead": "Que los difuntos, liberados ya de toda tentación, descansen en la tierra que mana leche y miel prometida a los peregrinos de la fe.",
-      "gospel": "Que resistamos las tentaciones del desierto —el pan fácil, el poder sin Dios, la prueba soberbia— con la misma Escritura que Jesús opuso al tentador.",
-      "closing": "Señor, acompáñame en la tribulación como acompañaste a tu Hijo en el desierto; líbrame de toda tentación y hazme decir con fe que tu palabra está cerca de mí, en mi boca y en mi corazón. Por Jesucristo nuestro Señor."
-    }
-  },
-  "sexagesima": {
-    "A": {
-      "church": "Que la Iglesia salga de su tierra y de la casa de su padre como Abram, confiando en la sola promesa de Dios de hacerla bendición para todas las familias de la tierra.",
-      "world": "Que los gobernantes alcen los ojos a los montes de donde viene el auxilio, y no confíen únicamente en sus propias fuerzas.",
-      "parish": "Que esta comunidad, como Nicodemo, se atreva a buscar a Cristo aunque sea de noche, y no tema nacer de nuevo del agua y del Espíritu.",
-      "suffering": "Que el Señor que no duerme ni dormita guarde de todo mal a los enfermos, y sea su sombra protectora a la diestra.",
-      "dead": "Que los difuntos, justificados por la fe como Abraham antes de la circuncisión, hayan nacido ya del todo al Espíritu que da la vida eterna.",
-      "gospel": "Que no juzguemos a Cristo por lo humano, como Nicodemo al principio, sino que reconozcamos en él al que fue levantado para dar vida a quien cree.",
-      "closing": "Dios que llamaste a Abram a dejar su tierra por una promesa, llámanos también a nosotros a nacer de nuevo del agua y del Espíritu. Por Jesucristo nuestro Señor."
-    },
-    "B": {
-      "church": "Que la Iglesia, como Abraham al recibir un nombre nuevo, sea signo de la alianza eterna que Dios establece de generación en generación.",
-      "world": "Que las naciones aprendan de Abraham y Sara que ningún pueblo es demasiado viejo o pequeño para recibir la bendición de Dios.",
-      "parish": "Que esta parroquia no se avergüence de la cruz, sino que tome sobre sí la palabra de Cristo: quien pierda su vida por el Evangelio la salvará.",
-      "suffering": "Que los que cargan una cruz de enfermedad o dolor encuentren fuerza en Cristo, que anunció su pasión sin ocultar el costo del seguimiento.",
-      "dead": "Que los difuntos, sellados con el nuevo nombre que Dios dio a Abraham, hereden la multitud de naciones prometida a la fe de los patriarcas.",
-      "gospel": "Que no pensemos, como Pedro, según los criterios de los hombres, sino que aceptemos que el Hijo del hombre debía padecer para entrar en su gloria.",
-      "closing": "Dios que cambiaste el nombre de Abraham y de Sara para sellar tu alianza, danos ánimo para tomar nuestra cruz y seguir a tu Hijo sin vergüenza. Por Jesucristo nuestro Señor."
-    },
-    "C": {
-      "church": "Que la Iglesia, como Abram entre los animales partidos, sea testigo de la alianza sellada por el fuego que pasó en la noche sin que él tuviera que hacer nada más que creer.",
-      "world": "Que los pueblos aspiren a la ciudadanía celestial de la que habla San Pablo, y no pongan su gloria en lo que es vergüenza.",
-      "parish": "Que esta comunidad recemos, con Cristo llorando sobre Jerusalén, para que ningún corazón rechace al que quiere reunirnos como la gallina junta a sus polluelos.",
-      "suffering": "Que el Señor, luz y salvación del salmista, sea la fortaleza de los que sufren, para que no teman a nadie.",
-      "dead": "Que los difuntos, cuyo cuerpo humilde Cristo transformará en cuerpo glorioso, descansen ya en la alianza sellada por el fuego que pasó entre las víctimas de Abram.",
-      "gospel": "Que como Cristo, decididos a seguir nuestro camino hoy, mañana y pasado mañana, no nos desviemos por amenaza alguna de nuestra misión.",
-      "closing": "El Señor es mi luz y mi salvación: aparta de nosotros todo temor, como apartaste el miedo de Abram bajo las estrellas, y llévanos a la patria donde reina tu gloria. Por Jesucristo nuestro Señor."
-    }
-  },
-  "quinquagesima": {
-    "A": {
-      "church": "Que la Iglesia anuncie, como Isaías, que el desierto y la estepa florecerán, y que los ojos de los ciegos se abrirán y los oídos de los sordos se despejarán.",
-      "world": "Que las naciones fortalezcan las manos cansadas y afiancen las rodillas vacilantes, en vez de abandonar al débil y al medroso.",
-      "parish": "Que esta parroquia viva la caridad que todo lo excusa, todo lo cree, todo lo espera, sin la cual de nada sirven la elocuencia ni el conocimiento.",
-      "suffering": "Que los cojos salten como ciervos y la lengua del mudo cante de júbilo, y que quienes hoy sufren en su carne vean cumplida esta promesa de Isaías.",
-      "dead": "Que los difuntos caminen ya por la calzada santa que Isaías anuncia, donde no pasará ningún impuro y los rescatados por el Señor volverán con cánticos de alegría eterna.",
-      "gospel": "Que no nos escandalicemos de Cristo como pudo escandalizarse Juan desde la cárcel, sino que reconozcamos en sus obras al que había de venir.",
-      "closing": "Señor, ven a salvarnos: abre los ojos de los ciegos y las orejas de los sordos, y haz florecer el desierto de nuestra vida con la caridad que nunca se acaba. Por Jesucristo nuestro Señor."
-    },
-    "B": {
-      "church": "Que la Iglesia, custodia de los diez mandamientos dados en el Sinaí, predique sin miedo la sabiduría de la cruz que a los griegos parece locura.",
-      "world": "Que los gobernantes no antepongan otros dioses ni se fabriquen ídolos, sino que reconozcan en la ley del Sinaí un camino de libertad y no de esclavitud.",
-      "parish": "Que este templo, como el de Jerusalén purificado por Cristo, no se convierta en mercado, sino en casa de oración limpia de todo interés propio.",
-      "suffering": "Que los que sufren hallen consuelo en unos mandamientos dados no para oprimir sino para dar vida al alma, más dulces que la miel que destila el panal.",
-      "dead": "Que los difuntos, purificados como el templo que Cristo limpió con el látigo de cuerdas, hayan entrado en la casa del Padre convertidos en templo vivo de su gloria.",
-      "gospel": "Que no confundamos el celo de Cristo al volcar las mesas de los cambistas con violencia estéril, sino que ardamos con el mismo celo por la pureza de su casa.",
-      "closing": "Tus palabras, Señor, son espíritu y vida: graba en nosotros los mandamientos del Sinaí y limpia el templo de nuestro corazón de todo comercio indigno. Por Jesucristo nuestro Señor."
-    },
-    "C": {
-      "church": "Que la Iglesia convoque a la asamblea santa, como el profeta Joel, para que también los ancianos y los niños de pecho participen del ayuno y la conversión de todo el pueblo.",
-      "world": "Que los pueblos rasguen su corazón y no sus vestiduras, volviendo al Señor que es clemente y misericordioso, lento a la cólera y rico en piedad.",
-      "parish": "Que esta comunidad practique la limosna, la oración y el ayuno en secreto, para que el Padre que ve en lo escondido la recompense sin ostentación alguna.",
-      "suffering": "Que los enfermos y necesitados sean, para esta parroquia, el rostro de Cristo al que servimos en la limosna hecha sin trompetas ni cara sombría.",
-      "dead": "Que los difuntos, embajadores ya reconciliados con Dios por Cristo, hayan encontrado el día de salvación del que habla San Pablo a los Corintios.",
-      "gospel": "Que perfumemos nuestra cabeza y lavemos nuestro rostro al ayunar, evitando la ostentación de los hipócritas que buscan ser vistos por los hombres.",
-      "closing": "Ten misericordia, Señor, porque hemos pecado: rasga nuestro corazón como pides por boca de Joel y renuévanos con un espíritu firme. Por Jesucristo nuestro Señor."
-    }
-  },
+  // Septuagésima, Sexagésima y Quincuagésima: SIN entrada propia. Las que había
+  // (tres ciclos cada una) mezclaban peticiones de otros domingos — Eva y el arco
+  // iris, Abram y Nicodemo, Joel y el templo purificado — que no corresponden a las
+  // lecturas que sirve lectionary.js (Mt 20,1-16; Lc 8,4-15; Lc 18,31-43), de modo
+  // que se rezaba por temas ajenos al Evangelio del día. Sin entrada, estos días
+  // caen al mecanismo de respaldo por tema (detectThemeKey sobre el Evangelio).
   "ashWednesday": {
     "A": {
       "church": "Que la Iglesia, ministra de la reconciliación, repita hoy con Joel el llamado urgente: convertíos de todo corazón, con ayuno, llanto y lamento.",
@@ -2610,11 +2529,20 @@ const Intercessions = (() => {
   // ══════════════════════════════════════════════════════════════════════════
   //  GENERACIÓN DINÁMICA DE INTERCESIONES
   // ══════════════════════════════════════════════════════════════════════════
-  function generateIntercessions(gospelRef, dayName, season, cycle, gospelText, lKey) {
+  // `dayKey` (opcional) es la clave del día de calendar.js. Hace falta además de
+  // `lKey` porque las ferias que siguen a la Trinidad toman prestadas las
+  // lecturas del Domingo (lKey === 'trinity') sin ser la solemnidad.
+  function generateIntercessions(gospelRef, dayName, season, cycle, gospelText, lKey, dayKey) {
     const themeKey = detectThemeKey(gospelRef, gospelText);
     const themeDesc = THEME_DESCRIPTIONS[themeKey] || THEME_DESCRIPTIONS['fe'];
     const response = '<strong>R/. Señor, escucha nuestra oración.</strong>';
-    const seasonal = getSeasonalIntention(season);
+    // La intención «Al celebrar el misterio de la Santísima Trinidad» es propia de
+    // la solemnidad (clave 'trinity'), no del tiempo después de la Trinidad: con
+    // season === 'trinity' se rezaba en los ~6.600 domingos y ferias de todo ese
+    // tiempo. Fuera de la solemnidad no se añade intención estacional. Si quien
+    // llama no pasa dayKey, se decide por lKey como antes.
+    const isTrinitySolemnity = (dayKey !== undefined && dayKey !== null) ? dayKey === 'trinity' : lKey === 'trinity';
+    const seasonal = (season === 'trinity' && !isTrinitySolemnity) ? null : getSeasonalIntention(season);
     const specific = getSpecificPetitions(lKey, cycle);
 
     const header = `<span class="lit-rubric">(El Sacerdote o Diácono introduce las oraciones:)</span>
@@ -2667,7 +2595,8 @@ ${response}`,
 
     // 7. Petición del Evangelio (específica del domingo, o por tema si no hay entrada)
     petitions.push({
-      intro: `En el espíritu del Evangelio de hoy (${gospelRef || 'del día'}):`,
+      // La referencia llega en inglés («Matthew 21:23-32»): solo el rótulo se traduce.
+      intro: `En el espíritu del Evangelio de hoy (${gospelRef ? (typeof translateBibleReference === 'function' ? translateBibleReference(gospelRef) : gospelRef) : 'del día'}):`,
       body: `${(specific && specific.gospel) || GOSPEL_PETITIONS[themeKey] || GOSPEL_PETITIONS['fe']} Roguemos al Señor.
 ${response}`,
     });

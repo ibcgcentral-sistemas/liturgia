@@ -17,7 +17,9 @@
  *
  *  API CON METADATOS (la que debe usar app.js para poder imprimir la rúbrica):
  *
- *     Propers.getProper(part, dayKey, season)
+ *     Propers.getProper(part, dayKey, season, date)
+ *       date: opcional, un Date. Solo lo usa el Prefacio, para las octavas que la
+ *             clave del día no delimita (Epifanía, Todos los Santos).
  *       part ∈ 'introit'|'gradual'|'offertory'|'communion'|'collect'|
  *              'secret'|'postcommunion'|'preface'
  *       season: el `season` que devuelve LiturgicalCalendar.getDay(date).season
@@ -64,234 +66,286 @@ const Propers = (() => {
   // ══════════════════════════════════════════════════════════════════════════
   //  COLECTAS
   // ══════════════════════════════════════════════════════════════════════════
+  // FUENTE: «Misal Anglicano para la Provincia Católica de Rito Anglicano en
+  // América Latina» (Sociedad Sacerdotal Corpus Christi, 2013), sección
+  // «COLECTAS» (pp. 57-103): Adviento a Trinidad, días santos y solemnidades.
+  // Los textos están transcritos tal como los imprime ese Misal (su ortografía
+  // incluida: «fué», «substancia», «El» sin tilde); solo se corrigieron
+  // artefactos de la extracción (letra capital partida, palabras cortadas,
+  // r+n leída como m, tildes de mayúsculas, espacios y puntos espurios).
+  // NO figuran en ese Misal, y por eso conservan el texto anterior, sin
+  // verificar contra él: baptismLord, 03-19, 09-14, 11-02, requiem, holySpirit,
+  // bvm y trinity26-28 (ver MISSING_TEXTS al final del archivo).
+  // Cuando el Misal da varias colectas para un día (Pascua, Pentecostés, Viernes
+  // Santo, Purificación, Anunciación…) aquí va la principal de la sección
+  // «COLECTAS»; las alternativas no se han cargado.
   const COLLECTS = {
-    advent1: `Dios Todopoderoso, danos gracia para que desechemos las obras de las tinieblas y nos revistamos con las armas de la luz, ahora en el tiempo de esta vida mortal, en la cual tu Hijo Jesucristo vino a visitarnos en gran humildad; para que en el último día, cuando venga de nuevo en su gloriosa Majestad a juzgar a vivos y muertos, resucitemos a la vida inmortal, por medio de Aquel que vive y reina contigo y el Espíritu Santo, ahora y siempre. Amén.`,
+    advent1: `Dios Todopoderoso, concédenos que echemos de nosotros las obras de las tinieblas, y nos revistamos con las armas de luz en esta vida mortal, a la cual Jesucristo tu Hijo, con grande humildad vino a visitarnos; para que en el día postrero, cuando vuelva con Majestad gloriosa a juzgar a los vivos y a los muertos, resucitemos a la vida inmortal, por el mismo Jesucristo, que vive y reina contigo y el Espíritu Santo, ahora y por siempre. Amén.`,
 
-    advent2: `Señor misericordioso, que hiciste escribir todas las Santas Escrituras para nuestra enseñanza; concédenos que de tal modo las oigamos, leamos, meditemos, aprendamos e interioricemos, que por la paciencia y el consuelo de tu santa Palabra, abracemos y retengamos siempre la esperanza bienaventurada de la vida eterna, que nos has dado en nuestro Salvador Jesucristo. Amén.`,
+    advent2: `Bendito Señor, que hiciste que las Santas Escrituras se escribiesen para nuestra enseñanza; Concede que de tal manera las oigamos, las leamos, las consideremos, las aprendamos y las examinemos cuidadosamente, que podamos asimilarlas en nuestro interior, para que por medio de la paciencia, y del consuelo de tu santa Palabra, abracemos y conservemos hasta el fin, la esperanza bendita de la vida eterna, que Tú nos has dado en Jesucristo nuestro Salvador. Amén.`,
 
-    advent3: `Oh Señor Jesucristo, que en tu primera venida enviaste a tu mensajero a preparar tu camino delante de ti; concede que los ministros y dispensadores de tus misterios preparen y dispongan también tu camino, convirtiendo los corazones de los desobedientes a la sabiduría de los justos, para que en tu segunda venida a juzgar al mundo nos encuentres como pueblo aceptable ante tus ojos; tú que vives y reinas con el Padre y el Espíritu Santo, un solo Dios, por los siglos de los siglos. Amén.`,
+    advent3: `Oh Señor Jesucristo, que en tu primera venida enviaste tu mensajero a preparar tu camino delante de ti; Concede que los ministros y dispensadores de tus misterios preparen también, y dispongan tu camino, volviendo los corazones de los desobedientes a la sabiduría de los justos, para que en tu segunda venida a juzgar al mundo encuentres que somos un pueblo agradable a tus ojos; Tú que vives y reinas con el Padre y el Espíritu Santo siempre, Dios, por los siglos de los siglos. Amén.`,
 
-    advent4: `Señor, levanta tu poder, te lo suplicamos, y ven a nosotros, y con gran fortaleza socórrenos; para que lo que por nuestros pecados y maldades nos es impedido y estorbado para correr la carrera que nos ha sido propuesta, tu bondadosa gracia y misericordia nos ayude y libre prontamente; por la satisfacción de tu Hijo nuestro Señor, a quien contigo y el Espíritu Santo sea honor y gloria, por los siglos de los siglos. Amén.`,
+    advent4: `Oh Señor, te rogamos que exaltes tu poder, y vengas a socorrernos con tu gran potencia y ya que por nuestros pecados y maldades nos hallamos abrumados e inhábiles para contender en la carrera que se nos propone, que tu gracia y tu misericordia abundantes prontamente nos libren y ayuden; mediante Jesucristo nuestro Señor, a quien, contigo y el Espíritu Santo, sean dadas honra y gloria eternamente. Amén.`,
 
-    christmas: `Dios Todopoderoso, que nos has dado a tu Hijo Unigénito para que tomara nuestra naturaleza, y como en este tiempo naciera de una Virgen pura; concede que nosotros, regenerados y hechos tus hijos por adopción y gracia, seamos renovados cada día por tu Espíritu Santo; por el mismo nuestro Señor Jesucristo, que vive y reina contigo y el mismo Espíritu, un solo Dios, por los siglos de los siglos. Amén.`,
+    christmas: `Omnipotente Dios, que nos diste a tu unigénito Hijo para que tomase sobre sí nuestra naturaleza, y naciese en un tiempo como éste de una virgen pura; Concede, que siendo regenerados y hechos tus hijos por adopción y gracia, seamos cada día renovados con tu Santo Espíritu; mediante el mismo nuestro Señor Jesucristo, que vive y reina contigo y el mismo Espíritu siempre, Dios, por los siglos de los siglos. Amén.`,
 
-    christmasSunday: `Dios Todopoderoso, que nos has dado a tu Hijo Unigénito para que tomara nuestra naturaleza; concede que, regenerados y hechos tus hijos por adopción y gracia, seamos renovados cada día por tu Espíritu Santo; por el mismo Jesucristo nuestro Señor. Amén.`,
-    // Reutiliza la colecta de christmasSunday: mismo tiempo litúrgico, mismo tema
-    // (la Encarnación); no existe un texto clásico 1549/1662 propio de este
-    // segundo domingo, que es una adición posterior del leccionario.
-    christmasSunday2: `Dios Todopoderoso, que nos has dado a tu Hijo Unigénito para que tomara nuestra naturaleza; concede que, regenerados y hechos tus hijos por adopción y gracia, seamos renovados cada día por tu Espíritu Santo; por el mismo Jesucristo nuestro Señor. Amén.`,
+    christmasSunday: `Omnipotente Dios, que nos diste a tu unigénito Hijo para que tomase sobre sí nuestra naturaleza, y naciese en un tiempo como éste de una virgen pura; Concede que siendo regenerados y hechos tus hijos por adopción y gracia, seamos cada día renovados con tu Santo Espíritu; mediante el mismo nuestro Señor Jesucristo, que contigo y el mismo Espíritu siempre es un solo Dios, y vive y reina por los siglos de los siglos. Amén.`,
+    // «Segunda Domínica después de la Natividad»: el Misal le da colecta propia
+    // (antes se repetía la de christmasSunday).
+    christmasSunday2: `Dios Omnipotente, que has derramado sobre nosotros la nueva luz del Verbo encarnado; Concede que esa misma luz encendida en nuestros corazones pueda también brillar en nuestras vidas; mediante Jesucristo nuestro Señor. Amén.`,
 
-    circumcision: `Dios Todopoderoso, que hiciste que tu Hijo bendito fuera circuncidado y obediente a la ley, por el hombre; concédenos la verdadera circuncisión del Espíritu; para que, mortificados nuestros corazones y todos nuestros miembros de toda concupiscencia mundana y carnal, obedezcamos en todo tu santa voluntad; por el mismo tu Hijo Jesucristo nuestro Señor. Amén.`,
+    circumcision: `Dios Todopoderoso, que permitiste que tu bendito Hijo fuese circuncidado, y sujeto a la ley de los hombres; Otórganos la verdadera circuncisión del Espíritu; para que teniendo nuestros corazones y cuerpos mortificados para todo deseo mundano y carnal, te obedezcamos en todo y por todo según tu santa voluntad; mediante el mismo Jesucristo tu Hijo, nuestro Señor. Amén.`,
 
-    epiphany: `Oh Dios, que por la guía de una estrella manifestaste a tu Hijo Unigénito a los gentiles; concede misericordiosamente que nosotros, que ahora te conocemos por la fe, después de esta vida tengamos la fruición de tu gloriosa divinidad; por Cristo nuestro Señor. Amén.`,
+    epiphany: `Oh Dios, que por medio de una estrella manifestaste tu unigénito Hijo a los Gentiles; Concede por tu misericordia que nosotros que ahora te conocemos por medio de la fe, después de esta vida tengamos la fruición de tu Gloriosa Deidad; mediante Jesucristo nuestro Señor. Amén.`,
 
+    // El Misal Anglicano 2013 no trae la fiesta del Bautismo del Señor: texto
+    // anterior, sin verificar. Su domingo es, en el Misal, la «Primera Domínica
+    // después de Epifanía» (colecta en epiphanySeason).
     baptismLord: `Oh Padre Eterno, que en el Bautismo de Jesús lo revelaste como tu Hijo, ungiéndolo con el Espíritu Santo; concede a todos los bautizados en su Nombre que, muriendo al pecado, resuciten a la justicia, y siendo sepultados con él en una muerte semejante a la suya, conozcan también el poder de su resurrección; que vive y reina contigo, en la unidad del mismo Espíritu Santo, un solo Dios, por los siglos de los siglos. Amén.`,
 
     // ── DESFASE DE EPIFANÍA (corregido) ─────────────────────────────────────
     // calendar.js reserva el PRIMER domingo después de la Epifanía para el
     // Bautismo del Señor y numera los siguientes epi1..epi5, titulándolos
     // «Segundo…Sexto Domingo después de Epifanía»; lectionary.js les asigna
-    // coherentemente las lecturas del 2°…6°. Antes, epi1 llevaba la colecta del
-    // PRIMER Domingo después de la Epifanía del BCP: el desfase de un puesto se
-    // arrastraba toda la temporada y la colecta del último domingo (BCP VI)
-    // nunca se alcanzaba. Ahora epiN lleva la colecta BCP del (N+1)° domingo:
-    //   epi1 → BCP II   epi2 → BCP III   epi3 → BCP IV
-    //   epi4 → BCP V    epi5 → BCP VI
+    // coherentemente las lecturas del 2°…6°. Por eso epiN lleva la colecta del
+    // (N+1)° domingo después de Epifanía del Misal:
+    //   epi1 → 2ª   epi2 → 3ª   epi3 → 4ª   epi4 → 5ª   epi5 → 6ª
     // Barrido 2024-2060: epi5 («Sexto Domingo después de Epifanía») es el
-    // máximo que el calendario puede emitir, de modo que las seis colectas
-    // BCP quedan cubiertas sin sobrar ni faltar ninguna.
-    epi1: `Dios Todopoderoso y Eterno, que gobiernas todas las cosas en el cielo y en la tierra; escucha misericordiosamente las súplicas de tu pueblo, y concédenos tu paz todos los días de nuestra vida; por Jesucristo nuestro Señor. Amén.`,
-    epi2: `Dios Todopoderoso y Eterno, mira misericordiosamente nuestras debilidades, y en todos nuestros peligros y necesidades extiende tu diestra para ayudarnos y defendernos; por Jesucristo nuestro Señor. Amén.`,
-    epi3: `Oh Dios, que sabes que estamos puestos en medio de tantos y tan grandes peligros, que por la fragilidad de nuestra naturaleza no podemos estar siempre firmes; concédenos tal fortaleza y protección que nos sostenga en todos los peligros y nos lleve a través de todas las tentaciones; por Jesucristo nuestro Señor. Amén.`,
-    epi4: `Oh Señor, te suplicamos que guardes tu Iglesia y familia continuamente en tu verdadera religión; para que los que se apoyan sólo en la esperanza de tu gracia celestial sean siempre defendidos por tu poderoso auxilio; por Jesucristo nuestro Señor. Amén.`,
-    epi5: `Oh Dios, cuyo bendito Hijo fue manifestado para destruir las obras del diablo y hacernos hijos de Dios y herederos de la vida eterna; concédenos, te suplicamos, que teniendo esta esperanza, nos purifiquemos como él es puro; para que cuando aparezca de nuevo con poder y gran gloria, seamos hechos semejantes a él en su reino eterno y glorioso; donde contigo, oh Padre, y contigo, oh Espíritu Santo, vive y reina, un solo Dios, por los siglos de los siglos. Amén.`,
-    // Colecta del PRIMER Domingo después de la Epifanía del BCP. Su domingo lo
-    // ocupa ahora el Bautismo del Señor (que tiene colecta propia), así que en
-    // vez de suprimirla se conserva como COLECTA DEL TIEMPO de la Epifanía:
-    // es el eslabón «del tiempo» de la cadena de respaldo para cualquier feria
-    // o fiesta de Epifanía sin colecta propia. No es texto inventado.
-    epiphanySeason: `Oh Señor, te suplicamos que recibas misericordiosamente las oraciones de tu pueblo que te invoca; y concede que conozcan y entiendan las cosas que deben hacer, y tengan gracia y poder para cumplirlas fielmente; por Jesucristo nuestro Señor. Amén.`,
+    // máximo que el calendario puede emitir.
+    epi1: `Omnipotente y Eterno Dios, que gobiernas todas las cosas en el cielo y en la tierra; Oye misericordiosamente las súplicas de tu pueblo, y concédenos tu paz todos los días de nuestra vida; mediante Jesucristo nuestro Señor. Amén.`,
+    epi2: `Omnipotente y eterno Dios, mira misericordiosamente nuestra fragilidad, y en todos nuestros peligros y necesidades extiende tu diestra para ayudarnos y defendernos: mediante Jesucristo nuestro Señor. Amén.`,
+    epi3: `Oh Dios, que sabes nos hallamos rodeados de tantos y tan grandes peligros, que a causa de la fragilidad de nuestra naturaleza no podemos estar siempre firmes en lo justo; Concédenos la fortaleza y la protección necesarias para sostenernos en todo peligro, y triunfar de toda tentación; mediante Jesucristo nuestro Señor. Amén.`,
+    epi4: `Oh Señor, te suplicamos guardes continuamente a tu Iglesia y Familia en tu verdadera religión; para que quienes confían solo en la esperanza de tu gracia celestial, sean defendidos siempre por tu gran poder; mediante Jesucristo, nuestro Señor. Amén.`,
+    epi5: `Oh Dios, cuyo bendito Hijo fué manifestado para que destruyese las obras del diablo, y nos hiciese hijos de Dios, y herederos de vida eterna; Concédenos, te suplicamos, que, teniendo esta esperanza, imitemos su pureza; para que cuando aparezca otra vez con poder y grande gloria, seamos hechos semejantes a El en su eterno y glorioso reino; donde contigo, oh Padre, y contigo, oh Espíritu Santo, El vive y reina siempre, Dios, por los siglos de los siglos. Amén.`,
+    // Colecta de la «Primera Domínica después de Epifanía» del Misal. Su domingo
+    // lo ocupa en calendar.js el Bautismo del Señor (que el Misal no trae), así
+    // que se conserva como COLECTA DEL TIEMPO de la Epifanía: es el eslabón «del
+    // tiempo» de la cadena de respaldo para cualquier feria o fiesta de Epifanía
+    // sin colecta propia.
+    epiphanySeason: `Oh Señor, suplicámoste que por tu gran clemencia recibas los ruegos de tu pueblo que te invoca; y concedas que conozca y comprenda lo que le es conveniente hacer, y que tu gracia y virtud le muevan a cumplirlo fielmente; mediante Jesucristo nuestro Señor. Amén.`,
 
-    septuagesima: `Oh Señor, te suplicamos que oigas favorablemente las oraciones de tu pueblo; para que nosotros, que somos justamente castigados por nuestras ofensas, seamos misericordiosamente librados por tu bondad, para gloria de tu Nombre; por Jesucristo nuestro Salvador. Amén.`,
-    sexagesima: `Oh Señor Dios, que ves que no ponemos nuestra confianza en cosa alguna que hagamos; concede misericordiosamente que por tu poder seamos defendidos contra toda adversidad; por Jesucristo nuestro Señor. Amén.`,
-    quinquagesima: `Oh Señor, que nos has enseñado que sin caridad todo lo que hacemos nada vale; envía tu Espíritu Santo y derrama en nuestros corazones aquel excelentísimo don de la caridad, vínculo de la paz y de todas las virtudes; concede esto por tu único Hijo Jesucristo. Amén.`,
+    septuagesima: `Suplicámoste Señor, oigas benignamente los ruegos de tu pueblo; para que los que justamente somos castigados por nuestras culpas, seamos por tu bondad misericordiosamente librados, para gloria de tu Nombre; mediante Jesucristo nuestro Salvador, quien siendo un solo Dios contigo y el Espíritu Santo, vive y reina, por los siglos de los siglos. Amén.`,
+    sexagesima: `Señor Dios, que conoces que no podemos confiar en nada de lo que hacemos; Otorga misericordiosamente, que seamos por tu poder librados de toda adversidad; mediante Jesucristo nuestro Señor. Amén.`,
+    quinquagesima: `Oh Señor, que nos has enseñado que todas nuestras obras sin caridad son de ningún valor; de tal modo que los que viven sin ella están muertos para ti; Auxílianos con tu Espíritu Santo, y derrama en nuestros corazones el don excelentísimo de la caridad, que es el verdadero vínculo de la paz y de todas las virtudes. Haz esto por amor de tu Hijo único Jesucristo. Amén.`,
 
-    ashWednesday: `Dios Todopoderoso y Eterno, que no aborreces nada de lo que has hecho, y perdonas los pecados de todos los que son penitentes; crea y forma en nosotros corazones nuevos y contritos, para que, lamentando dignamente nuestros pecados y reconociendo nuestra miseria, obtengamos de ti, Dios de toda misericordia, perfecto perdón y remisión; por Jesucristo nuestro Señor. Amén.`,
+    ashWednesday: `Omnipotente y Eterno Dios, que no sientes aversión por nada de lo que has creado, y que perdonas a los que, con verdadera fe se arrepienten; Crea en nosotros contritos corazones, y concédenos perfecto perdón ¡oh Dios de toda misericordia! a los que lamentamos nuestros pecados y reconocemos nuestra miseria; por Jesucristo nuestro Señor. Amén.`,
 
-    lent1: `Oh Señor, que por nosotros ayunaste cuarenta días y cuarenta noches; danos gracia para usar tal abstinencia, que nuestra carne, sometida al Espíritu, obedezca siempre tus santas inspiraciones en justicia y verdadera santidad, para tu honor y gloria; tú que vives y reinas con el Padre y el Espíritu Santo, un solo Dios, por los siglos de los siglos. Amén.`,
-    lent2: `Dios Todopoderoso, que ves que no tenemos poder por nosotros mismos para ayudarnos; guárdanos tanto exteriormente en nuestros cuerpos como interiormente en nuestras almas; para que seamos defendidos de toda adversidad que pueda acontecer al cuerpo, y de todo mal pensamiento que pueda asaltar y dañar el alma; por Jesucristo nuestro Señor. Amén.`,
-    lent3: `Te suplicamos, Dios Todopoderoso, mira los fervientes deseos de tus humildes siervos, y extiende la diestra de tu Majestad, para ser nuestra defensa contra todos nuestros enemigos; por Jesucristo nuestro Señor. Amén.`,
-    lent4: `Concede, te suplicamos, Dios Todopoderoso, que nosotros, que por nuestras malas obras merecemos justamente ser castigados, por el consuelo de tu gracia seamos misericordiosamente aliviados; por nuestro Señor y Salvador Jesucristo. Amén.`,
-    lent5: `Te suplicamos, Dios Todopoderoso, mira misericordiosamente a tu pueblo; para que por tu gran bondad sea gobernado y preservado siempre, tanto en cuerpo como en alma; por Jesucristo nuestro Señor. Amén.`,
+    lent1: `Oh Señor, que por amor nuestro ayunaste cuarenta días y cuarenta noches; Concédenos que vivamos con tal abstinencia, que, estando nuestra carne sujeta al Espíritu, obedezcamos siempre tus divinas inspiraciones en verdadera justicia y santidad, para honra y gloria tuya, que siendo un solo Dios con el Padre y el Espíritu Santo, vives y reinas por los siglos de los siglos. Amén.`,
+    lent2: `Dios Todopoderoso, que sabes bien que no hay en nosotros poder alguno para defendernos; Guárdanos exteriormente en nuestros cuerpos, e interiormente en nuestras almas; para que seamos librados de todas las adversidades que puedan molestar al cuerpo, y de los malos pensamientos que puedan ofender y dañar al alma; por Jesucristo nuestro Señor. Amén.`,
+    lent3: `Te suplicamos, Omnipotente Dios, que atiendas a los vivos deseos de tus humildes siervos, y extiendas la diestra de tu Majestad, para que sea nuestra defensa contra todos nuestros enemigos; mediante Jesucristo nuestro Señor. Amén.`,
+    lent4: `Concede, suplicámoste, Omnipotente Dios, que aunque por nuestras malas obras merecemos, en justicia, ser castigados, por tu gracia misericordiosa obtengamos el perdón; mediante nuestro Señor y Redentor Jesucristo. Amén.`,
+    lent5: `Suplicámoste, Omnipotente Dios, que mires misericordiosamente a tu pueblo; para que por tu gran bondad sea gobernado y preservado siempre, en cuerpo y alma; mediante Jesucristo nuestro Señor. Amén.`,
 
-    palmSunday: `Dios Todopoderoso y Eterno, que por tu tierno amor hacia el género humano enviaste a tu Hijo nuestro Salvador Jesucristo a tomar nuestra carne y a sufrir muerte en la cruz, para que todo el género humano siguiese el ejemplo de su gran humildad; concede misericordiosamente que sigamos el ejemplo de su paciencia y seamos hechos partícipes de su resurrección; por el mismo Jesucristo nuestro Señor. Amén.`,
+    palmSunday: `Dios Eterno y Todopoderoso, que, por tu tierno amor al género humano, enviaste a tu Hijo, nuestro Salvador Jesucristo, a revestirse con nuestra carne, y a sufrir muerte en la cruz, para que todo el género humano siguiese el ejemplo de su grande humildad; Concédenos, por tu misericordia, que imitemos el dechado de su paciencia, y seamos partícipes de su resurrección; mediante el mismo Jesucristo nuestro Señor. Amén.`,
 
-    maundyThursday: `Señor Jesucristo, que en tu Última Cena, la noche en que fuiste entregado, instituiste el misterio de tu Cuerpo y Sangre; concede misericordiosamente que nosotros, no indignos receptores, recibamos tu santo Cuerpo y Sangre como remedio salvador para la salud del cuerpo y del alma, y como memorial perpetuo de tu Pasión; tú que vives y reinas con el Padre y el Espíritu Santo, un solo Dios, por los siglos de los siglos. Amén.`,
+    mondayHolyWeek: `Dios Todopoderoso, cuyo muy querido Hijo tuvo que padecer antes de subir al cielo, y ser crucificado antes de entrar en la gloria; Concede misericordiosamente que nosotros siguiendo la vía de la cruz, comprendamos que ella es la senda de vida y paz; mediante el mismo tu Hijo Jesucristo nuestro Señor. Amén.`,
 
-    goodFriday: `Dios Todopoderoso, te suplicamos que mires con bondad a esta tu familia, por la cual nuestro Señor Jesucristo se dignó ser entregado en manos de hombres malvados y sufrir muerte en la cruz; que ahora vive y reina contigo y el Espíritu Santo, un solo Dios, por los siglos de los siglos. Amén.`,
+    tuesdayHolyWeek: `Oh Señor Dios, cuyo bendito Hijo, nuestro Salvador, entregó sus espaldas a los sayones y no escondió su rostro ante la ignominia; Concédenos gracia para aceptar resignadamente los sufrimientos de esta vida, en la completa seguridad de la gloria que ha de ser revelada; mediante el mismo tu Hijo Jesucristo nuestro Señor. Amén.`,
 
-    holySaturday: `Concede, oh Señor, que así como somos bautizados en la muerte de tu Hijo bendito nuestro Salvador Jesucristo, así por la continua mortificación de nuestras corruptas afecciones seamos sepultados con él; y que por la puerta de la muerte pasemos a nuestra gozosa resurrección; por los méritos de Aquel que murió, fue sepultado y resucitó por nosotros. Amén.`,
+    wednesdayHolyWeek: `Asístenos misericordiosamente con tu ayuda, Oh Señor Dios de nuestra salvación; para que podamos dedicarnos con gozo a la meditación de estos grandiosos acontecimientos, por medio de los cuales nos has dado vida e inmortalidad; mediante Jesucristo nuestro Señor. Amén.`,
 
-    easter: `Dios Todopoderoso, que por tu Hijo Unigénito Jesucristo has vencido la muerte y nos has abierto la puerta de la vida eterna; te suplicamos humildemente que, así como por tu gracia especial que nos previene pones en nuestras mentes buenos deseos, así por tu continua ayuda los llevemos a buen efecto; por Jesucristo nuestro Señor, que vive y reina contigo y el Espíritu Santo, un solo Dios, por los siglos de los siglos. Amén.`,
+    maundyThursday: `Padre Omnipotente, cuyo querido Hijo, en la noche antes de padecer, instituyó el Sacramento de su Cuerpo y Sangre; Concede misericordiosamente que podamos recibir con gratitud este Sacramento en memoria de El, que en estos santos misterios nos da una prenda de vida eterna; por el mismo tu Hijo Jesucristo nuestro Señor, que contigo y el Espíritu Santo es un solo Dios y vive y reina ahora y por los siglos de los siglos. Amén.`,
 
-    easter2: `Padre Todopoderoso, que has dado a tu Hijo Unigénito para morir por nuestros pecados y resucitar para nuestra justificación; concédenos que de tal manera apartemos la levadura de malicia y maldad, que siempre te sirvamos en pureza de vida y verdad; por los méritos del mismo tu Hijo Jesucristo nuestro Señor. Amén.`,
-    easter3: `Dios Todopoderoso, que muestras a los que están en error la luz de tu verdad para que puedan volver al camino de la justicia; concede a todos los que son admitidos en la comunión de la Religión de Cristo, que eviten lo que es contrario a su profesión y sigan lo que es conforme a ella; por nuestro Señor Jesucristo. Amén.`,
-    easter4: `Dios Todopoderoso, que has preparado para los que te aman bienes tales que superan todo entendimiento humano; derrama en nuestros corazones tal amor hacia ti, que amándote en todas las cosas y sobre todas las cosas, obtengamos tus promesas, que exceden todo cuanto podemos desear; por Jesucristo nuestro Señor. Amén.`,
-    easter5: `Oh Señor, de quien provienen todos los bienes; concede a nosotros, tus humildes siervos, que por tu santa inspiración pensemos lo que es bueno, y por tu guía misericordiosa lo realicemos; por nuestro Señor Jesucristo. Amén.`,
-    easter6: `Oh Dios, Rey de gloria, que has exaltado a tu Hijo Unigénito Jesucristo con gran triunfo a tu Reino en el cielo; te suplicamos, no nos dejes desamparados, sino envíanos tu Espíritu Santo para consolarnos y exaltarnos al mismo lugar adonde nuestro Salvador Cristo nos ha precedido. Amén.`,
+    holySaturday: `Concede, oh Señor, que los que estamos bautizados en la muerte de tu bendito Hijo, nuestro Salvador Jesucristo, podamos ser sepultados con El por la continua mortificación de nuestras malas inclinaciones; para que, después de pasar por el sepulcro y las puertas de la muerte, lleguemos a una resurrección llena de alegría; por los méritos del que murió, fué sepultado y resucitó por nosotros, tu Hijo Jesucristo nuestro Señor. Amén.`,
 
-    ascension: `Concede, te suplicamos, Dios Todopoderoso, que así como creemos que tu Hijo Unigénito nuestro Señor Jesucristo ascendió a los cielos, así también nosotros ascendamos allí con el corazón y la mente, y moremos continuamente con él; que vive y reina contigo y el Espíritu Santo, un solo Dios, por los siglos de los siglos. Amén.`,
+    easter: `Dios Todopoderoso, que por tu unigénito Hijo Jesucristo triunfaste de la muerte, y nos abriste la puerta de la vida eterna; Suplicámoste humildemente que, así como por medio de tu gracia especial, nos inspiras buenos deseos, así también con tu continuo auxilio podamos llevarlos a debido efecto; mediante Jesucristo nuestro Señor, que contigo y el Espíritu Santo es siempre un solo Dios, que vive y reina por los siglos de los siglos. Amén.`,
 
-    easter7: `Oh Dios, Rey de gloria, que has exaltado a tu Hijo Unigénito Jesucristo con gran triunfo a tu Reino en el cielo; te suplicamos, no nos dejes desamparados, sino envíanos tu Espíritu Santo para consolarnos. Amén.`,
+    easterFeria1_1: `Oh Dios, cuyo bendito Hijo se manifestó a sus discípulos al partir el pan; Abre, te suplicamos, los ojos de nuestra fe, para que podamos reconocerte en todas tus obras; mediante el mismo tu Hijo Jesucristo nuestro Señor. Amén.`,
 
-    pentecost: `Dios, que como en este tiempo enseñaste los corazones de tu pueblo fiel enviándoles la luz de tu Espíritu Santo; concédenos por el mismo Espíritu tener recto juicio en todas las cosas y gozar siempre de su santo consuelo; por los méritos de Jesucristo nuestro Salvador, que vive y reina contigo, en la unidad del mismo Espíritu, un solo Dios, por los siglos de los siglos. Amén.`,
+    easterFeria1_2: `Concede, te suplicamos, Dios Todopoderoso, que los que celebramos con reverencia la fiesta de Pascua, seamos dignos de alcanzar el gozo eterno; mediante Jesucristo nuestro Señor. Amén.`,
 
-    trinity: `Dios Todopoderoso y Eterno, que nos has dado a nosotros tus siervos la gracia de reconocer la gloria de la eterna Trinidad por la confesión de la verdadera fe, y de adorar la Unidad en el poder de la Divina Majestad; te suplicamos nos guardes firmes en esta fe y nos defiendas siempre de toda adversidad; tú que vives y reinas, un solo Dios, por los siglos de los siglos. Amén.`,
+    easter2: `Padre Omnipotente, que diste a tu Hijo unigénito para morir por nuestros pecados, y resucitar para nuestra justificación; Concede que apartando de nosotros la levadura de malicia e iniquidad, te sirvamos siempre en pureza de vida y verdad; por los méritos del mismo tu Hijo Jesucristo nuestro Señor. Amén.`,
+    easter3: `Dios Todopoderoso, que nos has dado a tu único Hijo para que sea sacrificio por el pecado, y dechado de santidad de vida; Danos gracia para que recibamos este inestimable beneficio con perpetuo agradecimiento, y que nos esforcemos cada día a seguir los sagrados pasos de su santísima vida; mediante el mismo Jesucristo nuestro Señor. Amén.`,
+    easter4: `Dios Todopoderoso, que manifiestas la luz de tu verdad a los que se hallan en error, para que puedan volver al camino de la justicia; Concede que todos los que son recibidos en la comunión de la Fe Cristiana, eviten todo lo que es contrario a su profesión, y sigan lo que es conforme a ella; mediante nuestro Señor Jesucristo. Amén.`,
+    easter5: `Dios Todopoderoso, que eres el único que puede gobernar las voluntades y afectos rebeldes de los pecadores; Concede a tu pueblo la gracia de que ame tus mandatos, y aspire a tus promesas; para que de este modo, en medio de los varios y numerosos acontecimientos y mudanzas de este mundo, nuestras almas miren hacia la sola mansión de la verdadera felicidad; mediante Jesucristo nuestro Señor. Amén.`,
+    easter6: `Oh Señor, de quien procede todo lo bueno; Concede a tus humildes siervos, que por medio de tu santa inspiración pensemos en lo bueno, y por tu dirección misericordiosa lo ejecutemos; mediante nuestro Señor Jesucristo. Amén.`,
 
-    corpusChristi: `Oh Dios, que en este admirable Sacramento nos dejaste el memorial de tu Pasión; concédenos, te suplicamos, venerar de tal modo los sagrados misterios de tu Cuerpo y Sangre, que percibamos siempre en nosotros el fruto de tu redención; tú que vives y reinas con el Padre y el Espíritu Santo, un solo Dios, por los siglos de los siglos. Amén.`,
+    ascension: `Otórganos, suplicámoste, oh Dios Omnipotente, que así como creemos que tu unigénito Hijo Jesucristo nuestro Señor subió a los cielos; así también ascendamos allá con nuestro corazón y nuestra mente, y habitemos siempre con El, quien contigo, y el Espíritu Santo es un solo Dios, y vive y reina por los siglos de los siglos. Amén.`,
 
-    sacredHeart: `Oh Señor Jesucristo, que inflamaste los corazones de tus santos con amor por ti y deseas que seamos consumidos por la caridad hacia Dios y hacia los hombres; concede, te suplicamos, que el ardor de aquella dulcísima caridad sea encendido en nuestros corazones, de modo que todo frío de corazón sea enteramente consumido y nos unamos a ti, Señor y Dios nuestro, con todo nuestro corazón; tú que vives y reinas con el Padre y el Espíritu Santo, un solo Dios, por los siglos de los siglos. Amén.`,
+    easter7: `Oh Dios, Rey de la Gloria, que exaltaste con gran triunfo a Jesucristo tu único Hijo a tu reino celestial; Suplicámoste que no nos dejes desconsolados; antes bien auxílianos con tu Santo Espíritu, para que nos consuele, y dirija al mismo lugar adonde nuestro Salvador Cristo nos ha precedido; quien contigo, y el mismo Espíritu Santo, es un solo Dios, que vive y reina por los siglos de los siglos. Amén.`,
 
-    trinity1: `Oh Dios, fortaleza de todos los que en ti confían; acepta misericordiosamente nuestras oraciones; y porque por la debilidad de nuestra naturaleza mortal nada bueno podemos hacer sin ti, concédenos la ayuda de tu gracia, para que guardando tus mandamientos te agrademos tanto en la voluntad como en las obras; por Jesucristo nuestro Señor. Amén.`,
-    trinity2: `Oh Señor, haz que tengamos perpetuo amor y reverencia a tu santo Nombre; porque nunca dejas de ayudar y gobernar a aquellos a quienes educas en tu firme temor y amor; por Jesucristo nuestro Señor. Amén.`,
-    trinity3: `Oh Señor, te suplicamos que nos oigas misericordiosamente; y concede que nosotros, a quienes has dado ferviente deseo de orar, seamos por tu poderoso auxilio defendidos y consolados en todos los peligros y adversidades; por Jesucristo nuestro Señor. Amén.`,
-    trinity4: `Oh Dios, protector de todos los que en ti confían, sin quien nada es fuerte, nada es santo; acrecienta y multiplica sobre nosotros tu misericordia; para que, siendo tú nuestro rector y guía, de tal modo pasemos por los bienes temporales que finalmente no perdamos los eternos; concede esto, oh Padre celestial, por amor de Jesucristo nuestro Señor. Amén.`,
-    trinity5: `Concede, oh Señor, te suplicamos, que el curso de este mundo sea tan pacíficamente ordenado por tu gobierno, que tu Iglesia te sirva con gozo en toda santa quietud; por Jesucristo nuestro Señor. Amén.`,
-    trinity6: `Oh Dios, que has preparado para los que te aman bienes tales que superan todo entendimiento humano; derrama en nuestros corazones tal amor hacia ti, que amándote sobre todas las cosas, obtengamos tus promesas que exceden todo cuanto podemos desear; por Jesucristo nuestro Señor. Amén.`,
-    trinity7: `Señor de todo poder y fortaleza, que eres autor y dador de todos los bienes; injerta en nuestros corazones el amor de tu Nombre, acrecienta en nosotros la verdadera religión, aliméntanos con toda bondad, y por tu gran misericordia guárdanos en ella; por Jesucristo nuestro Señor. Amén.`,
-    trinity8: `Oh Dios, cuya providencia nunca falla y ordena todas las cosas en el cielo y en la tierra; te suplicamos humildemente que apartes de nosotros todo lo dañoso y nos des lo que nos es provechoso; por Jesucristo nuestro Señor. Amén.`,
-    trinity9: `Concédenos, Señor, te suplicamos, el espíritu de pensar y hacer siempre lo que es justo; para que nosotros, que no podemos hacer nada bueno sin ti, seamos habilitados por ti para vivir según tu voluntad; por Jesucristo nuestro Señor. Amén.`,
-    trinity10: `Que tus misericordiosos oídos, oh Señor, estén abiertos a las oraciones de tus humildes siervos; y para que obtengan sus peticiones, haz que pidan lo que te agrada; por Jesucristo nuestro Señor. Amén.`,
-    trinity11: `Oh Dios, que declaras tu poder todopoderoso principalmente mostrando misericordia y piedad; concédenos misericordiosamente tal medida de tu gracia, que corriendo por el camino de tus mandamientos, obtengamos tus bondadosas promesas y seamos hechos partícipes de tu tesoro celestial; por Jesucristo nuestro Señor. Amén.`,
-    trinity12: `Dios Todopoderoso y Eterno, que siempre estás más pronto a oír que nosotros a orar, y acostumbras dar más de lo que deseamos o merecemos; derrama sobre nosotros la abundancia de tu misericordia; perdonándonos aquellas cosas de las cuales nuestra conciencia tiene temor, y dándonos aquellos bienes que no somos dignos de pedir sino por los méritos y mediación de Jesucristo, tu Hijo, nuestro Señor. Amén.`,
-    trinity13: `Dios Todopoderoso y misericordioso, de cuyo solo don viene que tu pueblo fiel te rinda verdadero y laudable servicio; concédenos, te suplicamos, que te sirvamos tan fielmente en esta vida, que finalmente no dejemos de alcanzar tus promesas celestiales; por los méritos de Jesucristo nuestro Señor. Amén.`,
-    trinity14: `Oh Dios, pues sin ti no somos capaces de agradarte; concede misericordiosamente que tu Espíritu Santo en todas las cosas dirija y gobierne nuestros corazones; por Jesucristo nuestro Señor. Amén.`,
-    trinity15: `Guarda, te suplicamos, oh Señor, tu Iglesia con tu perpetua misericordia; y porque la fragilidad del hombre sin ti no puede sino caer, guárdanos siempre por tu ayuda de todo lo dañoso y condúcenos a todo lo que es provechoso para nuestra salvación; por Jesucristo nuestro Señor. Amén.`,
-    trinity16: `Oh Señor, te suplicamos que tu continua misericordia limpie y defienda tu Iglesia; y porque sin tu socorro no puede continuar en seguridad, consérvala siempre por tu ayuda y bondad; por Jesucristo nuestro Señor. Amén.`,
-    trinity17: `Señor, te rogamos que tu gracia nos prevenga y nos siga siempre, y nos haga continuamente dedicados a todas las buenas obras; por Jesucristo nuestro Señor. Amén.`,
-    trinity18: `Señor, te suplicamos, concede a tu pueblo gracia para resistir las tentaciones del mundo, la carne y el diablo, y con corazones y mentes puros seguirte a ti, el único Dios; por Jesucristo nuestro Señor. Amén.`,
-    trinity19: `Oh Dios, pues sin ti no somos capaces de agradarte; concede misericordiosamente que tu Espíritu Santo en todas las cosas dirija y gobierne nuestros corazones; por Jesucristo nuestro Señor. Amén.`,
-    trinity20: `Dios Todopoderoso y misericordiosísimo, concede, te suplicamos, a nosotros que nos hemos desviado, la gracia de tu Espíritu Santo, para que, corregidos de nuestras errantes andanzas, permanezcamos firmes en el camino de la salvación; por Jesucristo nuestro Señor. Amén.`,
-    trinity21: `Concede, te suplicamos, Señor misericordioso, a tu pueblo fiel perdón y paz, para que sea limpiado de todos sus pecados y te sirva con ánimo tranquilo; por Jesucristo nuestro Señor. Amén.`,
-    trinity22: `Señor, te suplicamos que guardes tu familia la Iglesia en continua piedad; para que por tu protección esté libre de toda adversidad, y devotamente dedicada a servirte en buenas obras, para gloria de tu Nombre; por Jesucristo nuestro Señor. Amén.`,
-    trinity23: `Oh Dios, nuestro refugio y fortaleza, autor de toda piedad; está pronto, te suplicamos, a oír las devotas oraciones de tu Iglesia; y concede que lo que pedimos fielmente, lo obtengamos efectivamente; por Jesucristo nuestro Señor. Amén.`,
-    trinity24: `Oh Señor, te suplicamos, absuelve a tu pueblo de sus ofensas; para que por tu bondadosa generosidad seamos todos librados de las ataduras de aquellos pecados que por nuestra fragilidad hemos cometido; concede esto, oh Padre celestial, por amor de Jesucristo, nuestro bendito Señor y Salvador. Amén.`,
-    trinity25: `Despierta, te suplicamos, oh Señor, las voluntades de tu pueblo fiel; para que, produciendo abundantemente el fruto de buenas obras, sean de ti abundantemente recompensados; por Jesucristo nuestro Señor. Amén.`,
+    pentecost: `Oh Dios, que como en un tiempo como éste instruíste los corazones de tus fieles, enviándoles la luz de tu Espíritu Santo; Concédenos por medio del mismo Espíritu un juicio acertado en todo, y el gozo constante en su santo consuelo; por los méritos de Cristo Jesús nuestro Salvador, que vive y reina, en unidad contigo y el Espíritu Santo, un solo Dios, por los siglos de los siglos. Amén.`,
+
+    pentecostFeria_1: `Envía, te suplicamos, Omnipotente Dios, tu Santo Espíritu a nuestros corazones, a fin de que pueda dirigirnos y gobernarnos según tu voluntad, consolarnos en todas nuestras aflicciones, defendernos de todo error, y guiarnos a toda verdad; mediante Jesucristo nuestro Señor, quien contigo y el mismo Espíritu Santo es un solo Dios, que vive y reina por los siglos de los siglos. Amén.`,
+
+    pentecostFeria_2: `Concede, te suplicamos, Dios misericordioso, que tu Iglesia, siendo congregada en unidad por tu Santo Espíritu, pueda manifestar tu poder entre todas las naciones, para gloria de tu nombre; mediante Jesucristo nuestro Señor, quien contigo y el mismo Espíritu es un solo Dios, que vive y reina por los siglos de los siglos. Amén.`,
+
+    trinity: `Dios Omnipotente y Eterno, que has concedido a tus siervos la gracia de reconocer, por la confesión de la verdadera fe, la gloria de la Eterna Trinidad, y en el poder de la Majestad Divina adorar la Unidad; Te suplicamos nos conserves firmes en esta fe, y nos defiendas siempre de toda adversidad, Tú que vives y reinas, un solo Dios, por los siglos de los siglos. Amén.`,
+
+    corpusChristi: `Oh Dios que bajo un Sacramento admirable, nos dejaste el memorial de tu Pasión; Pedímoste, Señor, nos concedas celebrar de tal manera los Sagrados Misterios de tu Cuerpo y Sangre que sintamos constantemente en nosotros el fruto de tu Redención. Que vives y reinas. Amén.`,
+
+    sacredHeart: `Oh Dios, que te dignas prodigarnos misericordiosamente los infinitos tesoros de tu amor en el Corazón de tu Hijo herido por nuestros pecados. Te pedimos nos concedas que, al ofrecerle el devoto obsequio de nuestra piedad, cumplamos con el deber de una digna reparación. Por el mismo Jesucristo Nuestro Señor. Amén.`,
+
+    trinity1: `Oh Dios que eres la fortaleza de cuantos ponen su confianza en ti; Recibe misericordiosamente nuestras súplicas; y puesto que a causa de la fragilidad de nuestra naturaleza mortal nada bueno podemos hacer sin ti, concédenos el auxilio de tu gracia, para que guardando tus mandamientos podamos agradarte tanto de corazón como de obra; mediante Jesucristo nuestro Señor. Amén.`,
+    trinity2: `Oh Señor, que nunca dejas de ayudar y dirigir a los que enseñas a amarte y reverenciarte; Consérvanos, suplicámoste, bajo el amparo de tu benigna providencia, y haz que amemos y reverenciemos sin cesar tu Santo Nombre; mediante Jesucristo nuestro Señor. Amén.`,
+    trinity3: `Oh Señor, suplicámoste nos oigas misericordiosamente; y concedas a los que nos has dado un ferviente deseo de orar, que por tu poderoso auxilio seamos defendidos y consolados en todos los peligros y adversidades; por Jesucristo nuestro Señor. Amén.`,
+    trinity4: `Oh Dios, defensor de los que en ti confían, sin quien nada es fuerte, nada santo; Acrecienta y multiplica tu misericordia para con nosotros; a fin de que siendo Tú nuestro director y guía, pasemos de tal modo por las cosas temporales, que no perdamos finalmente las eternas. Concédenos esto, ¡oh! Padre celestial, por amor de Jesucristo nuestro Señor. Amén.`,
+    trinity5: `Concede, oh Señor, te suplicamos, que el curso de este mundo sea tan pacíficamente ordenado por tu poder, que tu Iglesia pueda servirte alegremente en completa y piadosa tranquilidad; mediante Jesucristo nuestro Señor. Amén.`,
+    trinity6: `Oh Dios, que has preparado para los que te aman cosas tan buenas que sobrepasan la inteligencia humana; Infunde en nuestros corazones tal amor hacia ti, que amándote sobre todas las cosas logremos tus promesas, que exceden a cuanto podamos desear; por Jesucristo nuestro Señor. Amén.`,
+    trinity7: `Oh Señor de todo poder y fuerza, Autor y Dador de todo bien; Injerta en nuestros corazones el amor a tu Nombre, aumenta en nosotros la verdadera religión, nútrenos de toda bondad, y por tu gran misericordia guárdanos en la misma; mediante Jesucristo nuestro Señor. Amén.`,
+    trinity8: `Oh Dios, cuya infalible providencia ordena todas las cosas en el cielo y en la tierra; Suplicámoste humildemente, que te dignes apartar de nosotros todas las cosas nocivas, y otorgarnos las que sean provechosas; mediante Jesucristo nuestro Señor. Amén.`,
+    trinity9: `Suplicámoste, Señor, nos concedas, el espíritu de pensar y hacer siempre lo que es justo; para que nosotros, que sin ti nada bueno podemos hacer, seamos por ti capaces de vivir según tu santa voluntad; mediante Jesucristo nuestro Señor. Amén.`,
+    trinity10: `Escucha, oh Señor, las oraciones de tus humildes siervos; y, para que puedan obtener sus peticiones, haz que pidan las cosas que sean de tu agrado; mediante Jesucristo nuestro Señor. Amén.`,
+    trinity11: `Oh Dios, que manifiestas tu poder supremo principalmente mostrando piedad y misericordia; Concédenos misericordiosamente tu gracia en tal medida que siguiendo el camino de tus mandamientos, logremos tus bondadosas promesas, y seamos partícipes de tu tesoro celestial; por Jesucristo nuestro Señor. Amén.`,
+    trinity12: `Omnipotente y eterno Dios, que estás siempre más dispuesto para oírnos que nosotros para pedirte, y que acostumbras darnos más de lo que deseamos y merecemos; Derrama sobre nosotros la abundancia de tu misericordia; perdonándonos todo aquello por lo que nuestras conciencias están temerosas, y dándonos las cosas buenas que no somos dignos de pedirte, sino por los méritos y mediación de Jesucristo, tu Hijo, nuestro Señor. Amén.`,
+    trinity13: `Dios Omnipotente y misericordioso, de quien solamente proviene el don de que tu pueblo fiel sea capaz de servirte sincera y laudablemente; Suplicámoste nos concedas que podamos servirte tan fielmente en esta vida, que obtengamos al fin tus promesas celestiales; por los méritos de Jesucristo nuestro Señor. Amén.`,
+    trinity14: `Poderoso y Eterno Dios, danos el aumento de la fe, de la esperanza y de la caridad; y, para que obtengamos lo que prometes, haz que amemos lo que mandas; mediante Jesucristo nuestro Señor. Amén.`,
+    trinity15: `Suplicámoste, oh Señor, que con tu perpetua misericordia guardes a tu Iglesia; y puesto que la fragilidad humana sin ti no puede menos que caer, defiéndenos siempre con tu auxilio de cuanto nos pueda dañar, y dirígenos a cuanto conduzca a nuestra salvación; mediante Jesucristo nuestro Señor. Amén.`,
+    trinity16: `Oh Señor, te suplicamos, que con tu continua piedad purifiques y defiendas a tu Iglesia; y, por cuanto ella no puede continuar en seguridad sin tu socorro, presérvala siempre con tu ayuda y bondad; mediante Jesucristo nuestro Señor. Amén.`,
+    trinity17: `Señor, suplicámoste, que tu gracia nos prevenga y acompañe siempre, haciendo que nos empleemos continuamente en buenas obras; mediante Jesucristo nuestro Señor. Amén.`,
+    trinity18: `Señor, te suplicamos, concedas gracia a tu pueblo para resistir las tentaciones del mundo, de la carne y del diablo, y para seguirte con corazones y ánimos puros, a ti el único Dios; mediante Jesucristo nuestro Señor. Amén.`,
+    trinity19: `Oh Dios, puesto que sin ti no podemos complacerte; Concede misericordiosamente, que tu Santo Espíritu dirija y gobierne nuestros corazones en todas las cosas; mediante Jesucristo nuestro Señor. Amén.`,
+    trinity20: `Dios Omnipotente y muy misericordioso, suplicámoste que por tu generosa bondad nos preserves de todas las cosas que puedan hacernos daño; para que, estando dispuestos en cuerpo y alma cumplamos alegremente con todo lo que mandas; por Jesucristo nuestro Señor. Amén.`,
+    trinity21: `Suplicámoste, oh misericordioso Señor, que concedas a tus fieles perdón y paz, para que sean limpios de todos sus pecados, y te sirvan con ánimo tranquilo; mediante Jesucristo nuestro Señor. Amén.`,
+    trinity22: `Señor, te suplicamos, conserves a tu familia, la Iglesia, en continua piedad; para que por tu protección esté libre de todas las adversidades, y se consagre devotamente a servirte con buenas obras, para gloria de tu Nombre; por Jesucristo nuestro Señor. Amén.`,
+    trinity23: `Oh Dios, nuestro refugio y fortaleza, que eres autor de toda piedad; Te suplicamos que estés siempre dispuesto a escuchar los humildes ruegos de tu Iglesia, y a conceder que lo que te pedimos con verdadera fe, lo obtengamos efectivamente; mediante Jesucristo nuestro Señor. Amén.`,
+    trinity24: `Oh Señor, suplicámoste, que absuelvas a tu pueblo de sus ofensas; para que por tu benignidad seamos libres de las ataduras de los pecados, que por nuestra fragilidad hemos cometido. Concédenos esto, ¡oh Padre Celestial!, por amor de Jesucristo nuestro bendito Señor y Salvador. Amén.`,
+    // «Domínica antes de Adviento» del Misal. OJO: el Misal manda, en los años con
+    // 26 o 27 domingos después de la Trinidad, decir en el 25° (y 26°) el Oficio de
+    // la 6ª (y 5ª) Domínica después de Epifanía, y reservar esta colecta para el
+    // último domingo del año. Como la clave trinityN no sabe cuántos domingos tiene
+    // el año, aquí queda solo en trinity25: aplicar la rúbrica exige que calendar.js
+    // o app.js pasen el total de domingos del año (pendiente de decisión).
+    trinity25: `Te suplicamos, ¡oh Señor! muevas la voluntad de tu pueblo fiel, y concédele para que produciendo abundantemente los frutos de buenos obras, reciba de ti abundante premio; mediante Jesucristo nuestro Señor. Amén.`,
+    // trinity26-28: texto anterior, NO figura en el Misal Anglicano 2013 (su
+    // «Fiesta de Cristo Rey» trae otra colecta). Se conserva sin verificar.
     trinity26: `Oh Señor Jesucristo, que eres el Rey de reyes y Señor de señores; concede que todos los reinos de este mundo sean el reino de nuestro Señor y de su Cristo; para que bajo tu suave yugo todas las naciones encuentren su verdadera paz, y así te rindan el homenaje de sus corazones y sus vidas; tú que vives y reinas con el Padre y el Espíritu Santo, un solo Dios, por los siglos de los siglos. Amén.`,
 
     // 27°/28° Domingo después de la Trinidad: solo ocurren cuando Pascua cae muy
-    // temprano (p.ej. 2035, 2046, 2062). El Libro de Oración Común clásico no
-    // define colectas propias más allá del 25°/26°; siguiendo el espíritu de su
-    // rúbrica (reutilizar propios ya aprobados en vez de dejar el domingo sin
-    // colecta), se repite aquí la del 26°.
+    // temprano (p.ej. 2035, 2046, 2062). Se repite aquí el texto de trinity26.
     trinity27: `Oh Señor Jesucristo, que eres el Rey de reyes y Señor de señores; concede que todos los reinos de este mundo sean el reino de nuestro Señor y de su Cristo; para que bajo tu suave yugo todas las naciones encuentren su verdadera paz, y así te rindan el homenaje de sus corazones y sus vidas; tú que vives y reinas con el Padre y el Espíritu Santo, un solo Dios, por los siglos de los siglos. Amén.`,
     trinity28: `Oh Señor Jesucristo, que eres el Rey de reyes y Señor de señores; concede que todos los reinos de este mundo sean el reino de nuestro Señor y de su Cristo; para que bajo tu suave yugo todas las naciones encuentren su verdadera paz, y así te rindan el homenaje de sus corazones y sus vidas; tú que vives y reinas con el Padre y el Espíritu Santo, un solo Dios, por los siglos de los siglos. Amén.`,
 
-    // Colectas de fiestas fijas — copiadas de SAINT_COLLECTS en commemorations.js
-    // (que hasta ahora solo se usaban cuando la fiesta se conmemora, nunca cuando
-    // ES la celebración principal del día). Sin esta entrada, Propers.getCollect()
-    // caía al 15° Domingo después de la Trinidad en cualquier año en que la fiesta
-    // cayera en feria — es decir, la mayoría de las veces.
-    '02-02': `Dios Todopoderoso y Eterno, te suplicamos humildemente que, así como tu Hijo Unigénito fue presentado este día en el Templo en nuestra carne, así nosotros seamos presentados ante ti con corazones puros y limpios; por el mismo tu Hijo Jesucristo nuestro Señor. Amén.`,
-    '02-24': `Dios Todopoderoso, que en el lugar del traidor Judas elegiste a tu fiel siervo Matías para que fuera del número de los doce Apóstoles; concede que tu Iglesia, libre de ministros falsos, sea siempre gobernada y santificada por siervos suyos fieles y verídicos; por Jesucristo nuestro Señor. Amén.`,
+    // Colectas de fiestas fijas. Fuente única: commemorations.js (SAINT_COLLECTS)
+    // las deriva de aquí cuando la fiesta se conmemora. 03-19, 09-14 y 11-02 NO
+    // figuran en el Misal Anglicano 2013 y conservan su texto anterior.
+    // 06-29: el Misal solo trae la colecta de San Pedro (29 de junio).
+    '02-02': `Omnipotente y Eterno Dios, humildemente suplicamos a tu Majestad, que, como tu unigénito Hijo fué en un tiempo como éste presentado en el templo en la substancia de nuestra carne, así seamos presentados a ti con corazones puros y limpios; por el mismo tu Hijo Jesucristo nuestro Señor. Amén.`,
+    '02-24': `Dios Omnipotente, que escogiste en lugar de Judas el traidor, a tu fiel siervo Matías, para que fuese contado entre los doce Apóstoles; Concede que tu Iglesia preservada siempre de falsos apóstoles, sea gobernada y dirigida por fieles, y verdaderos pastores; mediante Jesucristo nuestro Señor. Amén.`,
     '03-19': `Oh Dios, que escogiste al bienaventurado José para ser esposo de tu Santísima Madre; concédenos, te suplicamos, que así como la veneramos como nuestro protector en la tierra, así merezcamos tenerle como intercesor en los cielos; que vive y reina contigo, por los siglos de los siglos. Amén.`,
-    '03-25': `Derrama tu gracia sobre nuestros corazones, te suplicamos, Señor; para que así como por el mensaje de un Ángel hemos conocido la Encarnación de tu Hijo Jesucristo, así por su Pasión y Cruz, seamos llevados a la gloria de su Resurrección; por el mismo Jesucristo nuestro Señor. Amén.`,
-    '04-25': `Oh Dios Todopoderoso, que inspiraste a tu Evangelista San Marcos a registrar en el sagrado Evangelio el glorioso Evangelio de tu Hijo; concédenos que, andando en conformidad con él, seamos llenos de los dones del Espíritu Santo; por Jesucristo nuestro Señor. Amén.`,
-    '05-01': `Oh Dios Todopoderoso, que en la fiesta de los Santos Apóstoles Felipe y Jacobo nos has dado una santa alegría; concede que tengamos parte en el gozo eterno de aquéllos cuya intercesión imploramos; por Jesucristo nuestro Señor. Amén.`,
-    '06-11': `Oh Señor Dios Todopoderoso, que enriqueciste con grandes dones a tu bienaventurado Apóstol Bernabé; concede a tu Iglesia que siempre ame lo que él amó y enseñe lo que él enseñó; por Jesucristo nuestro Señor. Amén.`,
-    '06-24': `Dios Todopoderoso, por cuya providencia el precursor de tu Hijo, San Juan Bautista, nació en el tiempo señalado, y fue martirizado por la verdad; concede que sigamos sus doctrinas y santos ejemplos, y que busquemos la verdad que él proclamó; por Jesucristo nuestro Señor. Amén.`,
-    '06-29': `Oh Dios Todopoderoso, que diste a tus Apóstoles Pedro y Pablo la gracia de morir mártires por el amor de tu Hijo; fortalece a tu Iglesia por su doctrina y ejemplo, y otórgale esa unidad y paz que no puede el mundo dar; por Jesucristo nuestro Señor. Amén.`,
-    '07-25': `Oh Graciosa Dios, cuyo siervo Santiago, dejando a su padre y todas las cosas que tenía, sin tardanza obedeció la llamada de tu Hijo Jesucristo y le siguió; concede gracia a todos nosotros para que, abandonando todos los cuidados y estudios mundanos, podamos con prontitud y presto obedecer los sagrados mandamientos de Jesucristo nuestro Salvador; tú que vives y reinas con el Padre y el Espíritu Santo, un solo Dios, por los siglos de los siglos. Amén.`,
-    '08-06': `Oh Dios, que en la gloriosa Transfiguración de tu Hijo Unigénito confirmaste los misterios de la fe por el testimonio de Moisés y Elías, y que por una voz celestial maravillosamente prefiguraste la perfecta adopción de nosotros tus hijos; concede misericordiosamente que, escuchando la voz de tu amado Hijo, seamos hechos coherederos con él; por el mismo Jesucristo nuestro Señor. Amén.`,
-    '08-15': `Oh Dios, que tomaste para ti la Gloriosa Siempre-Virgen María, Madre de tu Hijo, con cuerpo y alma a la gloria celestial; concede que, mirando siempre a las cosas de lo alto, merezcamos participar de su gloria; por Jesucristo nuestro Señor. Amén.`,
-    '08-24': `Oh Dios Todopoderoso y Eterno, que diste a tu Apóstol Bartolomé la gracia de creer verdaderamente en tu Hijo y predicar su Evangelio; concede, te suplicamos, que tu Iglesia ame lo que él creyó y predique lo que él enseñó; por Jesucristo nuestro Señor. Amén.`,
-    '09-08': `Infunde, Señor, en nuestras almas, la gracia de tu Espíritu; para que así como anunciamos al pueblo la natividad de la bienaventurada Virgen María, por su tierna intercesión nos veamos libres de las calamidades que merecemos nuestros pecados; por Jesucristo nuestro Señor. Amén.`,
+    '03-25': `Suplicámoste, oh Señor, difundas tu gracia en nuestros corazones; para que como por el mensaje de un ángel hemos conocido la Encarnación de tu Hijo Jesucristo, así por su cruz y pasión seamos llevados a la gloria de su Resurrección; mediante el mismo Jesucristo nuestro Señor. Amén.`,
+    '04-25': `Dios Todopoderoso, que has instruído a tu Santa Iglesia con la celestial doctrina de tu Evangelista San Marcos; Danos gracia para que no seamos como niños movidos por cualquier soplo de vana doctrina, sino que permanezcamos firmes en la verdad de tu Santo Evangelio; mediante Jesucristo nuestro Señor. Amén.`,
+    '05-01': `Dios Todopoderoso, a quien conocer verdaderamente es vida eterna; Concede que conozcamos perfectamente que tu Hijo Jesucristo es el camino, la verdad y la vida; para que, siguiendo los pasos de tus Santos Apóstoles, San Felipe y Santiago, recorramos con perseverancia el camino que conduce a la vida eterna; mediante el mismo tu Hijo Jesucristo nuestro Señor. Amén.`,
+    '06-11': `Oh Señor Dios Todopoderoso, que investiste a tu Santo Apóstol Bernabé con dones excelentes del Espíritu Santo; No permitas que seamos desprovistos de la abundancia de tus dones, ni de la gracia de usarlos para tu honra y gloria; mediante Jesucristo nuestro Señor. Amén.`,
+    '06-24': `Dios Todopoderoso, por cuya providencia tu siervo Juan Bautista nació milagrosamente, y fué enviado a preparar el camino de tu Hijo, nuestro Salvador, predicando el arrepentimiento; Concede que sigamos de tal manera su santa vida y doctrina, que de acuerdo con su predicación nos arrepintamos verdaderamente; y que a ejemplo suyo hablemos la verdad constantemente, reprochemos con denuedo los vicios y suframos con toda paciencia por causa de la verdad; mediante Jesucristo nuestro Señor. Amén.`,
+    '06-29': `Dios Todopoderoso, que por tu Hijo Jesucristo dotaste de excelentes dones a tu Apóstol San Pedro, y le ordenaste apacentar con todo empeño tu rebaño; Te suplicamos que concedas a todos los obispos y pastores la gracia de predicar diligentemente tu santa palabra, y al pueblo el deseo de cumplirla obedientemente, a fin de que pueda recibir la corona de la gloria eterna; mediante Jesucristo nuestro Señor. Amén.`,
+    '07-25': `Oh Dios misericordioso, concede, que como tu Apóstol Santiago, dejando a su padre y todo lo que tenía, sin tardanza alguna obedeció el llamamiento de tu Hijo Jesucristo, y le siguió; así nosotros abandonemos nuestros afectos mundanos y carnales y estemos siempre dispuestos a seguir tus santos mandamientos; mediante Jesucristo nuestro Señor. Amén.`,
+    '08-06': `Oh Dios, que en el monte revelaste ante escogidos testigos a tu unigénito Hijo maravillosamente transfigurado, con vestiduras blancas y resplandecientes; Concede misericordiosamente que, siendo libertados de las inquietudes de este mundo, podamos contemplar al Rey en toda su hermosura, quien contigo, Oh Padre, y contigo, Oh Espíritu Santo, es un solo Dios, que vive y reina, por los siglos de los siglos. Amén.`,
+    '08-15': `Oh Dios Eterno, que en este día tomaste para ti a la Bienaventurada Virgen María, Madre de tu Hijo único: Concede que nosotros los redimidos por la sangre del Cristo, seamos partícipes de la gloria de su madre en el reino eterno; por Jesucristo tu Hijo, Nuestro Señor, que vive y reina contigo y el Espíritu Santo, un solo Dios, ahora y por siempre. Amén.`,
+    '08-24': `Dios Eterno y Todopoderoso, que concediste a tu Apóstol Bartolomé la gracia de creer verdaderamente y predicar tu Palabra; Te suplicamos concedas a tu Iglesia, que ame esa misma Palabra, la reciba y la predique; mediante Jesucristo nuestro Señor. Amén.`,
+    '09-08': `Dios Todopoderoso, que revestiste de gracia a la Bendita Virgen María, la Madre de nuestro Señor: Te suplicamos que santifiques nuestros cuerpos en la pureza, y nuestras almas en la humildad y el amor. Por el mismo Jesucristo nuestros Señor y Salvador. Amén.`,
     '09-14': `Oh Dios, que en la Exaltación de la Santa Cruz quisiste alejar de nosotros la antigua herida del maligno; concede que, gozando de la gracia de su redención en este mundo, nos sea dada la salvación eterna en el cielo; por Jesucristo nuestro Señor. Amén.`,
-    '09-21': `Oh Dios Todopoderoso, que por tu bienaventurado Hijo llamaste a San Mateo, el publicano, del manejo de las monedas mundanas, a entrar en el servicio de tu economía celestial; síguenos llamando desde cosas viles y esclavas a las más altas riquezas de tu gracia; por Jesucristo nuestro Señor. Amén.`,
-    '09-29': `Oh Dios Eterno, que ordenaste y estableciste los ministerios de los Ángeles y de los Hombres en orden maravilloso; concede misericordiosamente que los que siempre te sirven en el cielo, así también en todo tiempo nos socorran y defiendan en la tierra; por Jesucristo nuestro Señor. Amén.`,
-    '10-18': `Dios Todopoderoso, que llamaste a tu siervo Lucas el Médico, cuya alabanza está en el Evangelio, para ser Evangelista y Médico del alma; concede que, por la medicina del Evangelio y los Hechos de los Apóstoles, todas las enfermedades de nuestras almas sean sanadas; por la virtud de tu Santo Nombre; por Jesucristo nuestro Señor. Amén.`,
-    '10-28': `Oh Dios Todopoderoso, que entre los Apóstoles de tu Hijo edificaste a tu bienaventurada Iglesia sobre el fundamento de los Santos Simón y Judas; concede que por su intercesión tu Iglesia sea siempre preservada de los errores y guardada en toda verdad; por Jesucristo nuestro Señor. Amén.`,
-    '11-30': `Dios Todopoderoso, que diste a tu Apóstol Andrés la gracia de obedecer prontamente la llamada de tu Hijo Jesucristo y de traer a su hermano consigo; danos a nosotros la misma gracia de llamar a los que son queridos para nosotros para que vengan a tu servicio; por el mismo Jesucristo nuestro Señor. Amén.`,
-    '12-21': `Dios Todopoderoso, que diste a tu Apóstol Tomás la voluntad de dudar, para que por su duda pudiéramos ser fortalecidos en la fe; concede que, no dudando más, creamos en tu Hijo Jesucristo, tanto como Señor como Dios; quien vive y reina contigo, en la unidad del Espíritu Santo, un solo Dios, ahora y por los siglos de los siglos. Amén.`,
-    '12-26': `Concede, Señor, que en todos nuestros sufrimientos por la verdad y la justicia tengamos con nosotros ese mismo espíritu que hizo a tu primer mártir San Esteban orar por sus perseguidores; por Jesucristo nuestro Señor. Amén.`,
-    '12-27': `Señor Misericordioso, que permitiste a tu Apóstol y Evangelista San Juan beber de la copa de tus sufrimientos en este mundo; concédenos, que también nosotros, fortalecidos por su ejemplo, y fieles a tu verdad, podamos beber de la misma copa y ser bautizados con el mismo bautismo; por Jesucristo nuestro Señor. Amén.`,
-    '12-28': `Dios Todopoderoso, que desde la boca de los niños de pecho perfeccionaste la alabanza; confunde las maquinaciones de los crueles y descarta la soberbia de los malvados; pues los Santos Inocentes en este día confiesan y alaban tu Majestad con su muerte; por Jesucristo nuestro Señor. Amén.`,
-    '11-01': `Oh Dios Todopoderoso, que has unido a tus elegidos en una sola comunión y hermandad en el Cuerpo Místico de tu Hijo Cristo nuestro Señor; concédenos gracia para seguir a tus bienaventurados Santos en toda vida virtuosa y piadosa, para que lleguemos a aquellos gozos inefables que has preparado para los que te aman sin fingimiento; por Jesucristo nuestro Señor. Amén.`,
+    '09-21': `Oh Todopoderoso Dios, que por la boca de tu bendito Hijo llamaste a San Mateo, del banco de los tributos, para que de publicano se convirtiese en Apóstol y Evangelista; Danos gracia para renunciar a toda avaricia, y desordenado deseo de riquezas, y para seguir al mismo Jesucristo tu Hijo, que en unidad del Espíritu Santo vive y reina contigo eternamente. Amén.`,
+    '09-29': `Oh Dios Eterno, que has ordenado y constituido los servicios de los Angeles y de los hombres en orden maravilloso; Otorga misericordiosamente que, como tus santos Angeles te sirven siempre en el cielo, así, por tu mandato, nos socorran y defiendan en la tierra; mediante Jesucristo nuestro Señor. Amén.`,
+    '10-18': `Omnipotente Dios, que inspiraste a tu siervo San Lucas el Médico, a manifestar en el Evangelio el amor y el poder sanativo de tu Hijo; Demuestra en tu Iglesia el mismo poder y amor, para salud de nuestros cuerpos y salvación de nuestras almas; mediante tu Hijo Jesucristo nuestro Señor. Amén.`,
+    '10-28': `Dios Todopoderoso, que edificaste tu Iglesia sobre el fundamento de los Apóstoles y Profetas, siendo Jesucristo la principal piedra angular; Concede que estemos tan estrechamente unidos en espíritu, por medio de su doctrina, que seamos hechos un templo santo y aceptable a ti; mediante Jesucristo, nuestro Señor. Amén.`,
+    '11-30': `Dios Todopoderoso, que por tu gracia hiciste que tu Santo Apóstol Andrés obedeciese prestamente al llamamiento de tu Hijo Jesucristo, y a El siguiese sin dilación alguna; Danos también gracia a todos nosotros, para que, siendo llamados por tu santa Palabra, nos entreguemos sin tardanza a cumplir obedientemente tus santos mandamientos; mediante el mismo Jesucristo nuestro Señor. Amén.`,
+    '12-21': `Dios Eterno y Todopoderoso, que, para mayor confirmación de la fe, permitiste que tu Apóstol Santo Tomás dudase de la resurrección de tu Hijo; Concede que creamos tan indubitable y perfectamente en tu Hijo Jesucristo, que nuestra fe ante ti sea irreprensible. Óyenos oh Señor; mediante el mismo Jesucristo, a quién contigo y el Espíritu Santo, sea todo honor y gloria ahora y por siempre. Amén.`,
+    '12-26': `Concede, oh Señor, que, en todos nuestros padecimientos aquí en la tierra por atestiguar tu verdad, fijemos nuestra vista en el Cielo, y por medio de la fe contemplemos la gloria que nos ha de ser revelada; y que, llenos del Espíritu Santo, aprendamos a amar y bendecir a nuestros perseguidores, según el ejemplo de tu primer Mártir San Esteban, quien te rogó por sus verdugos, oh bendito Jesús, Tú que estás a la diestra de Dios para socorrer a todos los que sufren por ti, nuestro solo Mediador y Abogado. Amén.`,
+    '12-27': `Misericordioso Señor, te suplicamos que derrames sobre tu Iglesia los brillantes rayos de tu luz, para que, siendo iluminada con la doctrina de tu bendito Apóstol y Evangelista San Juan, camine de tal modo a la luz de tu verdad, que finalmente alcance la vida celestial; mediante Jesucristo nuestro Señor. Amén.`,
+    '12-28': `Omnipotente Dios, que por boca de los pequeñuelos y de los niños de pecho fundaste la fortaleza e hiciste que los parvulitos te glorificaran con su muerte; Mortifica y destruye en nosotros todo género de vicios y fortalécenos con tu gracia, para que por la inocencia de nuestras vidas, y por la constancia de nuestra fe aun hasta la muerte, glorifiquemos tu Santo Nombre; mediante Jesucristo nuestro Señor. Amén.`,
+    '11-01': `Dios Todopoderoso, que en el cuerpo místico de tu Hijo, Cristo nuestro Señor, has reunido a todos tus escogidos en una sola comunión y hermandad; Danos gracia para que imitemos a tus benditos santos en toda virtuosa y santa vida, y que lleguemos a los indecibles gozos que tú has preparado para los que te aman sinceramente; mediante Jesucristo nuestro Señor. Amén.`,
     '11-02': `Oh Dios misericordioso, Padre de nuestro Señor Jesucristo, que es la resurrección y la vida; te suplicamos humildemente, oh Padre, que nos resucites de la muerte del pecado a la vida de la justicia; para que cuando partamos de esta vida, descansemos en él; y que en la resurrección general del último día seamos hallados aceptos ante tus ojos; por Jesucristo nuestro Señor. Amén.`,
+    // requiem, holySpirit y bvm: no están en la sección «COLECTAS» del Misal 2013
+    // (solo trae una «Colecta General de la Bendita Virgen María» con un hueco
+    // para la advocación, y colectas de entierro). Texto anterior, sin verificar.
     requiem: `Oh Dios, Creador y Redentor de todos los fieles, concede a las almas de tus siervos y siervas la remisión de todos sus pecados; para que, mediante nuestras piadosas súplicas, obtengan el perdón que siempre han deseado; tú que vives y reinas con el Padre y el Espíritu Santo, un solo Dios, por los siglos de los siglos. Amén.`,
     holySpirit: `Oh Dios, que iluminaste los corazones de tus fieles con la luz del Espíritu Santo; concédenos que por el mismo Espíritu saboreemos la rectitud y nos gocemos siempre en su consuelo; por Jesucristo nuestro Señor, que vive y reina contigo, en la unidad del mismo Espíritu Santo, un solo Dios, por los siglos de los siglos. Amén.`,
     bvm: `Te suplicamos, Señor, que derrames tu gracia en nuestras almas; para que los que hemos conocido, por el anuncio del ángel, la Encarnación de tu Hijo Jesucristo, por su Pasión y su Cruz seamos llevados a la gloria de su Resurrección; por el mismo Jesucristo nuestro Señor. Amén.`,
   };
 
+  // Octava de la Ascensión. El Misal manda decir la colecta de la Ascensión
+  // «durante la Octava»; son los mismos días a los que PREFACE_BY_KEY da el
+  // Prefacio de la Ascensión y canon.js el Communicantes de la Ascensión. Antes
+  // llevaban la colecta del domingo precedente (Rogación o Domínica después de
+  // la Ascensión).
+  const ASCENSION_OCTAVE_KEYS = ['easterFeria6_5', 'easterFeria6_6', 'easterFeria7_1',
+    'easterFeria7_2', 'easterFeria7_3', 'easterFeria7_4', 'easterFeria7_5'];
+  ASCENSION_OCTAVE_KEYS.forEach(k => { COLLECTS[k] = COLLECTS.ascension; });
+
   // ══════════════════════════════════════════════════════════════════════════
   //  PREFACIOS PROPIOS
   // ══════════════════════════════════════════════════════════════════════════
+  // FUENTE: Misal Anglicano 2013 (Sociedad Sacerdotal Corpus Christi), sección
+  // «PREFACIOS PROPIOS (Del libro de Oración Común de 1928)», l. 3403-3617, y
+  // «LA GRAN PLEGARIA EUCARÍSTICA», l. 3622-3654 (numeración de la herramienta
+  // Read sobre misal_utf8.txt). Textos transcritos tal como los imprime el Misal,
+  // con su ortografía («El» sin tilde, «substancia», mayúsculas tras punto y coma);
+  // solo se corrigieron artefactos de extracción (palabras partidas por el salto de
+  // línea: «enseñar les», «presidir lo»; tilde perdida: «cesó»). Texto sospechoso
+  // que se deja COMO LO IMPRIME el Misal: «nos da la virtud» (Cuaresma, probable
+  // «nos das»), «cambia más no termina» (Difuntos, probable «mas»).
+  //
+  // ESTRUCTURA DEL MISAL: tras el Sursum corda el celebrante dice la APERTURA fija
+  // («Es verdaderamente digno, justo y de nuestro deber… Omnipotente y eterno
+  // Dios.»), después el prefacio propio («Aquí se dirá el prefacio Propio según el
+  // tiempo o la fiesta») y cierra con «Por tanto, con los Ángeles y Arcángeles…»
+  // (cada prefacio propio termina en el Misal con «Por tanto, con Ángeles, etc.»).
+  // framed() arma el texto completo apertura + cláusula propia + cierre; así el
+  // Misal, el Librito y el Word imprimen lo mismo sin tocar canon.js (cuyo Sursum
+  // corda termina en «Es justo y necesario» y no se modifica).
+  // El Prefacio Común (más abajo) NO es del Misal y trae su propia apertura y cierre.
+  const PREFACE_OPENING = `Es verdaderamente digno, justo y de nuestro deber, que en todo tiempo y en todo lugar, te demos gracias, oh Señor, Santo Padre, Omnipotente y eterno Dios.`;
+  const PREFACE_CLOSING = `Por tanto, con los Ángeles y Arcángeles, y con toda la compañía del cielo, alabamos y magnificamos tu glorioso Nombre; ensalzándote siempre y diciendo:`;
+  const framed = (title, proper) => ({ title, intro: `${PREFACE_OPENING} ${proper} ${PREFACE_CLOSING}` });
+  const bvmPreface = (phrase) => framed('Prefacio de la Bienaventurada Virgen María',
+    `Y alabar, bendecir y proclamar tu gloria ${phrase} de Santa María, siempre Virgen; porque ella concibió a tu único hijo por obra del Espíritu Santo, y sin perder la gloria de su virginidad, derramó sobre el mundo la luz eterna, Jesucristo Nuestro Señor.`);
   const PREFACES = {
+    // Prefacio Común. NO es del Misal: el Misal no trae un prefacio «común» sino
+    // los tres «De Dios Padre / Hijo / Espíritu Santo» (ver MISSING_TEXTS). Es el
+    // texto romano que el proyecto ya tenía; lleva su propia apertura y cierre.
     common: {
       title: 'Prefacio Común',
       text: `En verdad es justo y necesario, es nuestro deber y salvación, darte gracias siempre y en todo lugar, Señor, Padre Santo, Dios Todopoderoso y Eterno. Por eso, con los Ángeles y Arcángeles, y con toda la corte celestial, alabamos y magnificamos tu glorioso Nombre; siempre alabándote y diciendo:`,
       intro: `En verdad es justo y necesario, es nuestro deber y salvación, darte gracias siempre y en todo lugar, Señor, Padre Santo, Dios Todopoderoso y Eterno. Por eso, con los Ángeles y Arcángeles, y con toda la corte celestial, alabamos y magnificamos tu glorioso Nombre; siempre alabándote y diciendo:`,
     },
-    advent: {
-      title: 'Prefacio de Adviento',
-      intro: `Porque tu Hijo, nuestro Señor Jesucristo, en su primera venida se humilló y tomó la forma de siervo, para librarnos de la esclavitud del pecado; y vendrá de nuevo en la majestad de tu gloria, para presentarte un reino eterno y universal: reino de verdad y vida, de santidad y gracia, de justicia, amor y paz. Por eso, con los Ángeles y Arcángeles, y con toda la corte celestial, alabamos y magnificamos tu glorioso Nombre; siempre alabándote y diciendo:`,
-    },
-    christmas: {
-      title: 'Prefacio de la Natividad',
-      intro: `Porque diste a Jesucristo tu Hijo Unigénito para nacer como en este tiempo por nosotros; quien por obra del Espíritu Santo fue hecho verdadero hombre de la sustancia de la Virgen María su madre; y esto sin mancha de pecado, para limpiarnos de todo pecado. Por eso, con los Ángeles y Arcángeles, y con toda la corte celestial, alabamos y magnificamos tu glorioso Nombre; siempre alabándote y diciendo:`,
-    },
-    epiphany: {
-      title: 'Prefacio de la Epifanía',
-      intro: `Por Jesucristo nuestro Señor; quien en la sustancia de nuestra carne mortal manifestó su gloria, para sacarnos de las tinieblas a su luz admirable. Por eso, con los Ángeles y Arcángeles, y con toda la corte celestial, alabamos y magnificamos tu glorioso Nombre; siempre alabándote y diciendo:`,
-    },
-    lent: {
-      title: 'Prefacio de Cuaresma',
-      intro: `Por Jesucristo nuestro Señor; que fue tentado en todo como nosotros, pero sin pecado; que ayunó cuarenta días y cuarenta noches en el desierto; y nos ha mandado negarnos a nosotros mismos, tomar nuestra cruz y seguirle; para que, siguiendo su santo ejemplo, obtengamos gracia para mortificar nuestras malas pasiones y obedecer su santa voluntad. Por eso, con los Ángeles y Arcángeles, y con toda la corte celestial, alabamos y magnificamos tu glorioso Nombre; siempre alabándote y diciendo:`,
-    },
-    holyWeek: {
-      title: 'Prefacio de la Pasión',
-      intro: `Por Jesucristo nuestro Señor; quien en el árbol de la Cruz dio la salvación al género humano; para que de donde vino la muerte, de allí surgiera también la vida; y el que por un árbol venció, por un árbol fuera también vencido; por Cristo nuestro Señor. Por eso, con los Ángeles y Arcángeles, y con toda la corte celestial, alabamos y magnificamos tu glorioso Nombre; siempre alabándote y diciendo:`,
-    },
-    easter: {
-      title: 'Prefacio de Pascua',
-      intro: `Pero principalmente estamos obligados a alabarte por la gloriosa Resurrección de tu Hijo Jesucristo nuestro Señor; porque él es el verdadero Cordero Pascual que fue ofrecido por nosotros y ha quitado el pecado del mundo; quien por su muerte ha destruido la muerte, y resucitando a la vida nos ha devuelto la vida eterna. Por eso, con los Ángeles y Arcángeles, y con toda la corte celestial, alabamos y magnificamos tu glorioso Nombre; siempre alabándote y diciendo:`,
-    },
-    ascension: {
-      title: 'Prefacio de la Ascensión',
-      intro: `Por tu amadísimo Hijo Jesucristo nuestro Señor; quien después de su gloriosísima Resurrección se manifestó a todos sus Apóstoles, y a la vista de ellos ascendió al cielo para prepararnos un lugar; para que donde él está, allí ascendamos también nosotros y reinemos con él en la gloria. Por eso, con los Ángeles y Arcángeles, y con toda la corte celestial, alabamos y magnificamos tu glorioso Nombre; siempre alabándote y diciendo:`,
-    },
-    pentecost: {
-      title: 'Prefacio de Pentecostés',
-      intro: `Por Jesucristo nuestro Señor; conforme a cuya verdadera promesa, el Espíritu Santo descendió como en este tiempo del cielo con un estruendo repentino y grande, como de un viento impetuoso, en forma de lenguas de fuego, posándose sobre los Apóstoles, para enseñarles y conducirles a toda verdad; dándoles el don de diversas lenguas y también osadía con ferviente celo para predicar constantemente el Evangelio a todas las naciones. Por eso, con los Ángeles y Arcángeles, y con toda la corte celestial, alabamos y magnificamos tu glorioso Nombre; siempre alabándote y diciendo:`,
-    },
-    trinity: {
-      title: 'Prefacio de la Santísima Trinidad',
-      intro: `Que eres un solo Dios, un solo Señor; no una sola Persona, sino tres Personas en una sola Sustancia. Porque lo que creemos de la gloria del Padre, lo mismo creemos del Hijo y del Espíritu Santo, sin ninguna diferencia ni desigualdad. Por eso, con los Ángeles y Arcángeles, y con toda la corte celestial, alabamos y magnificamos tu glorioso Nombre; siempre alabándote y diciendo:`,
-    },
-    apostles: {
-      title: 'Prefacio de los Apóstoles',
-      intro: `Por el gran pastor de tus ovejas, Jesucristo nuestro Señor; quien después de su Resurrección envió a sus Apóstoles a predicar el Evangelio a todas las naciones y a congregar para sí una Iglesia santa y sin mancha, edificada sobre el fundamento de los Apóstoles y Profetas, siendo Cristo mismo la piedra angular. Por eso, con los Ángeles y Arcángeles, y con toda la corte celestial, alabamos y magnificamos tu glorioso Nombre; siempre alabándote y diciendo:`,
-    },
-    bvm: {
-      title: 'Prefacio de la Bienaventurada Virgen María',
-      intro: `Y darte gracias por la Virgen Madre María; de la cual nació Jesucristo, nuestro Señor y Dios. Quien por obra del Espíritu Santo fue concebido en su vientre virginal; y permaneciendo siempre Virgen, dio a luz al mundo la Luz eterna, Jesucristo nuestro Señor. Por eso, con los Ángeles y Arcángeles, y con toda la corte celestial, alabamos y magnificamos tu glorioso Nombre; siempre alabándote y diciendo:`,
-    },
-    requiem: {
-      title: 'Prefacio de Difuntos',
-      intro: `Por Jesucristo nuestro Señor; en quien la esperanza de la bienaventurada resurrección ha brillado sobre nosotros, para que aquellos que se entristecen por la certeza de morir sean consolados por la promesa de la inmortalidad futura. Porque para tus fieles, Señor, la vida no termina, se transforma; y al deshacerse nuestra morada terrenal, adquirimos una mansión eterna en el cielo. Por eso, con los Ángeles y Arcángeles, y con toda la corte celestial, alabamos y magnificamos tu glorioso Nombre; siempre alabándote y diciendo:`,
-    },
-    corpusChristi: {
-      title: 'Prefacio del Corpus Christi',
-      intro: `Por Jesucristo nuestro Señor; quien la víspera de su Pasión tomó el pan en sus santas y venerables manos, y elevando los ojos hacia ti, Dios su Padre Todopoderoso, dándote gracias, lo bendijo, lo partió y lo dio a sus discípulos diciendo: Tomad y comed todos de él, porque éste es mi Cuerpo. Por eso, con los Ángeles y Arcángeles, y con toda la corte celestial, alabamos y magnificamos tu glorioso Nombre; siempre alabándote y diciendo:`,
-    },
-    sacredHeart: {
-      title: 'Prefacio del Sagrado Corazón',
-      intro: `Por Jesucristo tu Hijo, nuestro Señor; quien levantado en la Cruz abrió las corrientes de tu misericordia, y de su costado traspasado derramó Sangre y Agua, fuentes de la gracia sacramental; y abierto su corazón para nosotros, se convirtió en puerta de la salvación eterna. Por eso, con los Ángeles y Arcángeles, y con toda la corte celestial, alabamos y magnificamos tu glorioso Nombre; siempre alabándote y diciendo:`,
-    },
-    allSaints: {
-      title: 'Prefacio de Todos los Santos',
-      intro: `Que en la multitud de tus Santos nos has rodeado con tan gran nube de testigos, para que, gozándonos en su compañía, corramos con perseverancia la carrera que nos ha sido propuesta; y juntamente con ellos recibamos la corona de gloria que no se marchita. Por eso, con los Ángeles y Arcángeles, y con toda la corte celestial, alabamos y magnificamos tu glorioso Nombre; siempre alabándote y diciendo:`,
-    },
+    // Misal 2013, PREFACIO DE ADVIENTO, l. 3494-3499
+    advent: framed('Prefacio de Adviento', `Porque enviaste a tu amado Hijo para redimirnos del pecado y de la muerte, y para hacernos en él herederos de la vida eterna; para que, cuando vuelva en poder y gran triunfo a juzgar el mundo, nos gocemos contemplando su manifestación, sin temor ni vergüenza.`),
+    // Misal 2013, NAVIDAD, l. 3421-3428
+    christmas: framed('Prefacio de la Natividad', `Porque nos diste a tu Hijo único, Jesucristo, para que naciese por nosotros en un tiempo como éste; Quien, por obra del Espíritu Santo, fue hecho verdadero hombre, de la substancia de su bendita madre, la Virgen María; y esto sin mancha de pecado, para que nos limpiase de todo pecado.`),
+    // Misal 2013, EPIFANÍA, l. 3431-3435
+    epiphany: framed('Prefacio de la Epifanía', `Por Jesucristo nuestro Señor; Quien, en la substancia de nuestra carne mortal, manifestó su gloria; para poder traernos de las tinieblas a su luz gloriosa.`),
+    // Misal 2013, PURIFICACIÓN, ANUNCIACIÓN Y TRANSFIGURACIÓN, l. 3436-3442
+    incarnationWord: framed('Prefacio de la Purificación, la Anunciación y la Transfiguración', `Porque en el Misterio del Verbo hecho carne, creaste nueva luz para iluminar nuestros corazones, y darnos el conocimiento de tu gloria en la faz de tu Hijo, Jesucristo nuestro Señor.`),
+    // Misal 2013, CUARESMA, l. 3483-3486
+    lent: framed('Prefacio de Cuaresma', `Que por el ayuno corporal refrenas nuestras pasiones, elevas nuestra mente y espíritu, nos da la virtud y el premio, por Jesucristo nuestro Señor.`),
+    // Misal 2013, PREFACIO DE SEMANA SANTA, l. 3489-3493
+    holyWeek: framed('Prefacio de Semana Santa', `Por nuestro Señor Jesucristo. Por nuestros pecados fue levantado sobre la cruz, para que pudiera atraer hacia él a todo el mundo; y, por su sufrimiento y muerte, llegó a ser la fuente de salvación eterna para cuantos confían en él.`),
+    // Misal 2013, PASCUA DE RESURRECCIÓN, l. 3443-3450
+    easter: framed('Prefacio de Pascua', `Más principalmente estamos obligados a bendecirte por la gloriosa Resurrección de tu Hijo Jesucristo nuestro Señor: porque El es el verdadero Cordero Pascual, que se ofreció por nosotros, y ha quitado los pecados del mundo; El que por su muerte ha destruido la muerte, y por su Resurrección nos ha restaurado a la vida eterna.`),
+    // Misal 2013, ASCENSIÓN, l. 3451-3458
+    ascension: framed('Prefacio de la Ascensión', `Por tu amadísimo Hijo Jesucristo nuestro Señor; Quien, después de su gloriosísima Resurrección, apareció claramente a todos sus Apóstoles, y en su presencia ascendió a los cielos, a preparar un lugar para nosotros; para que podamos también ascender a donde El está, y reinar con El en gloria.`),
+    // Misal 2013, PENTECOSTÉS, l. 3461-3470
+    pentecost: framed('Prefacio de Pentecostés', `Por Jesucristo nuestro Señor; conforme a cuya fiel promesa, el Espíritu Santo descendió del cielo, en un tiempo como éste, reposando sobre los Discípulos, para enseñarles, y guiarles a toda verdad; dándoles valor para que con ferviente celo predicasen constantemente el Evangelio a todas las naciones; por cuyo medio hemos sido sacados de tinieblas y error a la luz clara y al conocimiento verdadero de ti, y de tu Hijo Jesucristo.`),
+    // Misal 2013, DOMÍNICA DE LA TRINIDAD, l. 3471-3477 (primera forma; la segunda, «O éste», l. 3478-3482, no se usa: ver MISSING_TEXTS)
+    trinity: framed('Prefacio de la Santísima Trinidad', `Que, con tu Unigénito Hijo, y el Espíritu Santo, eres un solo Dios, un solo Señor, en Trinidad de Personas y en Unidad de Substancia. Porque lo que creemos de tu gloria, oh Padre, lo mismo creemos del Hijo, y del Espíritu Santo, sin ninguna diferencia de desigualdad.`),
+    // Misal 2013, APÓSTOLES Y ORDENACIONES, l. 3528-3532
+    apostles: framed('Prefacio de los Apóstoles y Ordenaciones', `Por el gran pastor de tu rebaño, nuestro Señor Jesucristo; quien, después de su resurrección, envió a sus apóstoles a predicar el Evangelio y enseñar a todas las naciones; y prometió estar con ellos siempre, hasta el fin de los siglos.`),
+    // Misal 2013, CONMEMORACIÓN DE LOS FIELES DIFUNTOS, l. 3588-3594
+    requiem: framed('Prefacio de Difuntos', `Por nuestro Señor Jesucristo; quien se levantó victorioso de la muerte, y nos fortalece con la bendita esperanza de la vida eterna. Pues, para tu pueblo fiel, oh Señor, la vida cambia más no termina; y cuando nuestro cuerpo mortal yazca en muerte, haya preparada para nosotros una morada eterna en el cielo.`),
+    // Misal 2013, PREFACIO DEL SAGRADO CORAZÓN, l. 3554-3561
+    sacredHeart: framed('Prefacio del Sagrado Corazón', `Porque has querido que tu hijo único clavado en la Cruz, fuera traspasado por la lanza del soldado, para que su corazón abierto, santuario de la generosidad divina, derramara sobre nosotros torrentes de gracia y perdón; y ya que nunca cesó de arder por amor nuestro, fuera descanso para los que te aman, y para los que se arrepienten refugio siempre abierto de Salvación.`),
+    // Misal 2013, TODOS LOS SANTOS, l. 3506-3512
+    allSaints: framed('Prefacio de Todos los Santos', `Que, en la multitud de tus santos, nos has rodeado con una nube tan grande de testigos para que, regocijándonos en su comunión, podamos correr con paciencia la carrera que nos es propuesta, y, junto con ellos, recibir la inmarcesible corona de gloria.`),
+    // Misal 2013, PREFACIO DE LA CRUZ, l. 3549-3553
+    cross: framed('Prefacio de la Cruz', `Que pusiste la salvación del género humano en el árbol de la Cruz, para que de donde salió la muerte, de allí renaciese la vida, y el que en un árbol venció, en un árbol fuese vencido por Cristo Nuestro Señor.`),
+    // Misal 2013, PREFACIO DE SAN JOSÉ, l. 3564-3570
+    stJoseph: framed('Prefacio de San José', `Y el glorificarte, bendecirte y ensalzarte con las debidas alabanzas en la Festividad de San José. Este fue el varón justo que diste por Esposo a la Virgen Madre de Dios; constituyéndole fiel servidor y prudente sobre tu Familia, para que guardase con paternal solicitud a tu Unigénito Jesucristo, Señor nuestro, concebido por obra del Espíritu Santo.`),
+    // Misal 2013, PREFACIO DE CRISTO REY, l. 3577-3585 — SIN ASIGNAR: calendar.js no emite clave para esa fiesta
+    christKing: framed('Prefacio de Cristo Rey', `Porque consagraste sacerdote eterno y Rey del Universo, a tu único hijo, nuestro Señor Jesucristo ungiéndolo con óleo de alegría, para que ofreciéndose a sí mismo, como víctima perfecta y pacificadora en el Altar de la Cruz, consumara el misterio de la redención humana; y sometiendo a su poder la creación eterna, entregara a tu Majestad infinita un reino eterno y universal; el Reino de la verdad y la vida el reino de la santidad y la gracia, el reino de la justicia, el amor y la paz.`),
+    // Prefacio de la Santísima Virgen (l. 3595-3600) con la palabra variable de las
+    // l. 3601-3617: el Misal imprime «en la +++ de Santa María» y manda poner
+    // «Festividad» (regla general) o la voz propia de cada fiesta.
+    bvmFestividad:   bvmPreface('en la Festividad'),
+    bvmAnnunciation: bvmPreface('en la Anunciación'),   // 25 de marzo
+    bvmDormition:    bvmPreface('en la Dormición'),     // 15 de agosto
+    bvmNativity:     bvmPreface('en el Nacimiento'),    // 8 de septiembre
+    bvm:             bvmPreface('en la Veneración'),    // «Misas de los Sábados y Votivas»
+    // Del proyecto, NO del Misal (el Misal 2013 no trae prefacio de Corpus Christi);
+    // sin fuente cotejada (ver MISSING_TEXTS). Se enmarca con la apertura y el cierre
+    // del Misal como los demás.
+    corpusChristi: framed('Prefacio del Corpus Christi', `Por Jesucristo nuestro Señor; quien la víspera de su Pasión tomó el pan en sus santas y venerables manos, y elevando los ojos hacia ti, Dios su Padre Todopoderoso, dándote gracias, lo bendijo, lo partió y lo dio a sus discípulos diciendo: Tomad y comed todos de él, porque éste es mi Cuerpo.`),
   };
 
   // ══════════════════════════════════════════════════════════════════════════
@@ -434,6 +488,7 @@ const Propers = (() => {
   // `supplied`. NO se han redactado: se declaran aquí para que puedan
   // transcribirse del Misal Anglicano impreso.
   const MISSING_TEXTS = [
+    { part: 'canon1928',     need: 'Revisar la traducción española del BCP 1928 (Canon.CANON_1928, CHURCH_MILITANT_1928, THANKSGIVING_1928 y la introducción del Padrenuestro): el texto inglés está cotejado con el BCP 1928, pero la versión española es traducción propia, no de una edición impresa en español' },
     { part: 'secret',        need: 'Secreta del tiempo de Epifanía' },
     { part: 'secret',        need: 'Secreta del tiempo de Pre-Cuaresma (Septuagésima)' },
     { part: 'secret',        need: 'Secreta del tiempo de Cuaresma' },
@@ -455,6 +510,16 @@ const Propers = (() => {
     { part: 'introit',       need: 'Introitos propios de los 28 Domingos después de la Trinidad' },
     { part: 'introit',       need: 'Introitos de las fiestas fijas no marianas (incl. Todos los Santos, San José, Apóstoles)' },
     { part: 'introit',       need: 'Introito del Jueves Santo, Viernes Santo y Sábado Santo' },
+    // Prefacios (Misal 2013, «PREFACIOS PROPIOS», l. 3403-3617). Los textos que
+    // trae el Misal ya están transcritos en Propers.PREFACES; esto es lo que queda.
+    { part: 'preface',       need: 'Prefacio de Corpus Christi: el Misal 2013 NO trae prefacio propio de esa fiesta. El texto que se sirve (narración de la Institución, «quien la víspera de su Pasión tomó el pan…») es del proyecto y no tiene fuente cotejada; no es un prefacio sino texto del Canon. Sin cotejar: sustituir por el que indique el Misal impreso o dejar el que corresponda al tiempo' },
+    { part: 'preface',       need: 'Prefacio de Cristo Rey: el texto del Misal (l. 3577-3585) está en PREFACES.christKing, pero calendar.js no emite una clave para la Fiesta de Cristo Rey («Último Domingo de Octubre», l. 2845), de modo que no se imprime nunca. Falta la clave en calendar.js' },
+    { part: 'preface',       need: 'Domingos y ferias ordinarios (después de la Trinidad, de la Epifanía y de Pascua, Pre-Cuaresma, 2 a 5 de enero y días fuera de octava): el Misal da tres prefacios «De Dios Padre / De Dios Hijo / De Dios Espíritu Santo» (l. 3408-3420), unidos por «o éste», sin decir cuál va cada día. Se sirve el Prefacio Común, que es texto romano del proyecto y NO está en el Misal. Decisión pendiente: cuál de los tres, o cuál regla de rotación' },
+    { part: 'preface',       need: 'Purificación (02-02) y Anunciación (03-25): el Misal las nombra a la vez en el prefacio «Purificación, Anunciación y Transfiguración» (l. 3436-3442) y, la Anunciación, en la tabla de variantes del prefacio de la Virgen (l. 3601-3617). Conflicto entre dos rúbricas; se conserva el de la Virgen. Decisión pendiente' },
+    { part: 'preface',       need: 'Domingo de Pasión y Semana de Pasión (lent5, lentFeria5_*): el Misal llama «Semana Santa» a la que empieza el Domingo de Ramos (l. 110, 124, 3489) y no dice qué prefacio va antes. Conservan el de Semana Santa, como antes; podría corresponderles el de Cuaresma. Decisión pendiente' },
+    { part: 'preface',       need: 'Octava de la Ascensión: la rúbrica (l. 3452) da «siete días después», que acaba el jueves easterFeria7_4; el viernes easterFeria7_5 conserva Communicantes y Colecta de la Ascensión (canon.js, COLLECTS) pero ya no el prefacio. Decisión pendiente: si la octava llega al viernes, ampliar la regla' },
+    { part: 'preface',       need: 'Prefacios del Misal sin día asignado en el calendario: «De Dios Padre/Hijo/Espíritu Santo», Encarnación (l. 3500), Un santo (tres formas, l. 3515-3527), Apóstoles y Evangelistas (l. 3571, segunda redacción; se usa «Apóstoles y Ordenaciones»), Dedicación de una iglesia, Bautismo, Matrimonio y el de la Misa Crismal (l. 1178). Trinidad: la segunda forma («O éste», l. 3478-3482) no se usa. No hay rúbrica que las vincule a un día; los santos no apostólicos llevan hoy el Prefacio Común' },
+    { part: 'preface',       need: 'Erratas probables del Misal, transcritas como están impresas: «nos da la virtud y el premio» (Cuaresma, ¿«nos das»?), «cambia más no termina» (Difuntos, ¿«mas»?), comas que faltan en Cristo Rey y Apóstoles y Evangelistas, y «hijo» en minúscula en varios prefacios. Decidir si se corrigen' },
     { part: 'gradual',       need: 'Graduales propios de los 28 Domingos después de la Trinidad' },
     { part: 'gradual',       need: 'Graduales/Tractos de las fiestas fijas no marianas' },
     { part: 'offertory',     need: 'Ofertorio del tiempo de Pre-Cuaresma' },
@@ -464,6 +529,23 @@ const Propers = (() => {
     { part: 'communion',     need: 'Comuniones propias de Adviento II-III, Cuaresma II-V y de los Domingos después de la Trinidad' },
     { part: 'communion',     need: 'Comuniones de las fiestas fijas no marianas' },
     { part: 'collect',       need: 'Colectas propias de las ferias de Cuaresma, Adviento y Tiempo de Navidad (hoy toman la del domingo precedente, uso admitido)' },
+    // Cotejo de las colectas con el Misal Anglicano 2013 (Sociedad Sacerdotal
+    // Corpus Christi; sección «COLECTAS», pp. 57-103). Ese Misal NO trae secretas,
+    // poscomuniones, introitos ni graduales por día (dice que el Introito «se toma
+    // del Prayer Book o del Misal Anglicano»), así que esas entradas siguen
+    // faltando. Lo que sigue es lo que de las COLECTAS no se pudo cotejar:
+    { part: 'collect',       need: 'Colectas sin cotejar porque el Misal Anglicano 2013 no las trae (conservan el texto anterior): Bautismo del Señor, San José (03-19), Exaltación de la Santa Cruz (09-14), Fieles Difuntos (11-02), misas votivas de Réquiem, del Espíritu Santo y de Santa María, y los Domingos 26°-28° después de la Trinidad (Cristo Rey)' },
+    { part: 'collect',       need: 'Domingos 25° y 26° después de la Trinidad en años con 26 o 27 domingos: el Misal manda decir en ellos el Oficio de la 6ª y 5ª Domínica después de Epifanía y dejar la «Domínica antes de Adviento» para el último; requiere que calendar.js/app.js informen del total de domingos del año' },
+    { part: 'collect',       need: 'Colectas del Misal 2013 sin clave en calendar.js: Conversión de San Pablo (01-25), Visitación, Preciosísima Sangre (1 jul), Concepción de la B.V.M. (8 dic), Maternidad Divina (11 oct), Presentación de la B.V.M. (21 nov), Sagrada Familia, Cristo Rey, Témporas, Rogativas, Dedicación de una Iglesia, Independencia, Acción de Gracias, Conmemoración de un Santo, Matrimonio y Entierro' },
+    { part: 'collect',       need: 'Colectas alternativas del Misal 2013 que no se cargaron (el archivo guarda una sola por día): Pascua y Pentecostés (segunda colecta de la primera misa), Viernes Santo (otras dos), Purificación y Anunciación (versión de las solemnidades marianas, p. 100) y las redacciones de Miércoles de Ceniza, Domingo de Ramos, Jueves Santo y Viernes Santo del rito (pp. 18-39), distintas de las de la sección COLECTAS' },
+    { part: 'secret',        need: 'Conmemoraciones de santos (commemorations.js: SAINT_SECRETS.default y SAINT_POSTCOMMUNIONS.default): son fórmulas genéricas que no proceden de ningún misal; sustituirlas por las propias de cada fiesta cuando se transcriban' },
+    // Misas votivas (selector del Misal). Las LECTURAS propias ya están en
+    // lectionary.js (Lectionary.VOTIVE); lo que sigue son los propios cantados y
+    // las oraciones que esas misas piden y el proyecto no tiene.
+    { part: 'gradual',       need: 'Misa votiva del Espíritu Santo: Gradual (Beata gens / Verbo Domini) y Tracto de Septuagésima a Pascua. Hoy solo existe el verso del Aleluya; en tiempo penitencial no se imprime y se rotula la falta, porque no se puede decir el Aleluya' },
+    { part: 'gradual',       need: 'Misa votiva de Santa María: Aleluya con sus versos (Post partum / Virga Jesse) del Tiempo Pascual y Tracto de Septuagésima (Gaude Maria); hoy se sirve siempre el Gradual Benedicta et venerabilis' },
+    { part: 'bvm',           need: 'Misas votivas de Santa María de Adviento (Rorate caeli) y de Navidad a la Purificación (Vultum tuum): sus LECTURAS propias sí están, pero faltan introito, colecta, gradual, ofertorio, secreta, comunión y poscomunión propios; se sirven los de la Misa «Salve sancta parens»' },
+    { part: 'requiem',       need: 'Misa de Réquiem: Tracto Absolve y Secuencia Dies irae; colectas, secretas y poscomuniones propias de cada ocasión (día del entierro, tercer/séptimo/trigésimo día, aniversario, obispos y sacerdotes, hermanos y bienhechores). Cotejar con el Misal impreso la Secreta y la Poscomunión que hoy se sirven: la Colecta coincide con la de «Fieles Difuntos» (Fidelium Deus) pero la Poscomunión no coincide literalmente con la de esa Misa' },
   ];
 
   // ══════════════════════════════════════════════════════════════════════════
@@ -641,15 +723,13 @@ const Propers = (() => {
   }
 
   // ── Piezas que el día NO tiene ───────────────────────────────────────────
-  // El Viernes Santo se celebra la Misa de los Presantificados: no hay
-  // Ofertorio ni Secreta (ni Canon ni Prefacio). Antes rezaba la Secreta del
-  // tiempo de la Trinidad por puro descarte.
-  const OMITTED = {
-    goodFriday: {
-      offertory: 'La Misa de los Presantificados del Viernes Santo no tiene Ofertorio.',
-      secret:    'La Misa de los Presantificados del Viernes Santo no tiene Secreta: no hay ofrenda ni Canon.',
-    },
-  };
+  // Vacío a propósito: el Viernes Santo se celebra con js/holyweek.js (Misa de los
+  // Presantificados del Misal impreso), y app.js vacía allí Introito, Gradual,
+  // Ofertorio, Prefacio, Secreta, Comunión y Poscomunión y toma la Colecta de
+  // HolyWeek.GOOD_FRIDAY. Las entradas OMITTED.goodFriday y COLLECTS.goodFriday
+  // quedaron muertas y se retiraron; el mecanismo se conserva por si otro día
+  // careciera de alguna pieza: { claveDelDia: { pieza: 'nota' } }.
+  const OMITTED = {};
 
   function none(part, key) {
     const note = OMITTED[key] && OMITTED[key][part];
@@ -661,8 +741,8 @@ const Propers = (() => {
   // ══════════════════════════════════════════════════════════════════════════
   //  RESOLUCIÓN GENERAL: clave exacta → Común de la fiesta → tiempo → genérico
   // ══════════════════════════════════════════════════════════════════════════
-  function resolve(part, dayKey, season) {
-    if (part === 'preface') return resolvePreface(dayKey, season);
+  function resolve(part, dayKey, season, date) {
+    if (part === 'preface') return resolvePreface(dayKey, season, date);
     const c = CHAINS[part];
     if (!c) throw new Error('Propers: pieza desconocida «' + part + '»');
     if (OMITTED[dayKey] && OMITTED[dayKey][part]) return none(part, dayKey);
@@ -699,59 +779,120 @@ const Propers = (() => {
   // ══════════════════════════════════════════════════════════════════════════
   //  PREFACIO
   // ══════════════════════════════════════════════════════════════════════════
-  // Antes la lista comparaba por igualdad exacta contra christmas /
-  // christmasSunday / circumcision, de modo que christmasSunday2, el 26, 27 y
-  // 28 de diciembre y las ferias christmasFeria_* de la Octava se quedaban con
-  // el Prefacio Común. Ahora el despacho es: fiesta concreta → tiempo deducido
-  // de la clave (que cubre las 420 claves de calendar.js) → Común.
-  // NOTA: un prefacio tomado del tiempo NO es una suplencia: el prefacio propio
-  // de un día de Adviento ES el de Adviento. Por eso `supplied` es siempre
-  // false para esta pieza y no lleva rúbrica.
+  // ASIGNACIÓN DE PREFACIOS. Cada regla cita la rúbrica del Misal Anglicano 2013
+  // (l. = línea según la herramienta Read sobre misal_utf8.txt). Solo se aplica lo
+  // que el Misal dice sin ambigüedad; el resto cae al Prefacio Común (ver
+  // MISSING_TEXTS, entradas «preface»).
+  //
+  //   Navidad       l. 3422  «En el Día de Navidad, y siete días después»
+  //                          → 25 dic.–1 ene. (christmas, 12-26/27/28, christmasSunday,
+  //                          christmasFeria_5..7, circumcision). Del 2 al 5 de enero: Común.
+  //   Epifanía      l. 3432  «En la Epifanía, y siete días después» → 6–13 ene.
+  //                          (epiphany, baptismLord, epiOctave_*, y epiFeria1_* si la
+  //                          fecha es ≤ 13 ene.). Pasado el 13: Común.
+  //   Pascua        l. 3444  «En el día de Pascua de Resurrección, y siete días
+  //                          después» → easter, easterFeria1_* y easter2 (Domingo II,
+  //                          octavo día). Del lunes de la 2ª semana a la Vigilia de
+  //                          Pentecostés: Común (salvo la octava de la Ascensión).
+  //   Ascensión     l. 3452  «En el día de la Ascensión, y siete días después» →
+  //                          jueves de la Ascensión + 7 días: easterFeria6_5, 6_6,
+  //                          easter7, easterFeria7_1..7_4. OJO: el viernes
+  //                          easterFeria7_5 (octavo día) NO lleva ya este prefacio,
+  //                          aunque canon.js y COLLECTS le siguen dando el
+  //                          Communicantes y la Colecta de la Ascensión.
+  //   Pentecostés   l. 3462  «En la Dominica de Pentecostés, y los seis días
+  //                          siguientes» → pentecost y pentecostFeria_1..6. La Vigilia
+  //                          (easterFeria7_6) no está en esa rúbrica: Común.
+  //   Trinidad      l. 3472  «En la Fiesta de la Trinidad solamente» → solo la clave
+  //                          'trinity'. Los domingos y ferias después de la Trinidad
+  //                          ya NO llevan el Prefacio de la Trinidad (antes sí: 28
+  //                          domingos por año).
+  //   Todos los S.  l. 3507  «En el día de Todos los Santos, y siete días después» →
+  //                          1–8 nov. (por fecha; el 2 de nov. manda el de Difuntos).
+  //   Transfiguración l. 3438 «En las Fiestas de la Purificación, la Anunciación y la
+  //                          Transfiguración» → 08-06. La Purificación (02-02) y la
+  //                          Anunciación (03-25) también las nombra la tabla de
+  //                          variantes del prefacio de la Virgen (l. 3601-3617:
+  //                          «25 de marzo: …en la Anunciación…»): dos reglas del
+  //                          Misal en conflicto, no se resuelve y se conserva el de la
+  //                          Virgen (con su variante).
+  //   Virgen        l. 3601-3617 variantes de «Festividad» (ver PREFACES.bvm*).
+  //   Cruz / San José: l. 3549 y 3564, sin rúbrica de fecha → 14 sep. y 19 mar.
+  //   Adviento / Cuaresma / Semana Santa: l. 3494, 3483, 3489, sin rúbrica de
+  //                          rango; se asignan al tiempo que nombran. Semana Santa:
+  //                          Domingo de Ramos a Sábado Santo. El Domingo y la Semana
+  //                          de Pasión (lent5, lentFeria5_*) conservan el mismo texto
+  //                          que antes (el de Semana Santa): el Misal no los nombra.
+  //
+  // Las fiestas fijas con prefacio propio ganan a las octavas (como antes).
+  // NOTA: un prefacio tomado del tiempo NO es una suplencia: el prefacio propio de
+  // un día de Adviento ES el de Adviento. Por eso `supplied` es siempre false para
+  // esta pieza y no lleva rúbrica.
   const PREFACE_BY_SEASON = {
-    advent:     'advent',
-    christmas:  'christmas',
-    epiphany:   'epiphany',
-    preLent:    'common',
-    lent:       'lent',
-    passiontide:'holyWeek',
-    triduum:    'holyWeek',
-    easter:     'easter',
-    pentecost:  'pentecost',
-    trinity:    'trinity',
+    advent:      'advent',
+    lent:        'lent',
+    passiontide: 'holyWeek',
+    triduum:     'holyWeek',
   };
   const PREFACE_BY_KEY = {
     ascension: 'ascension',
     trinity: 'trinity',
-    corpusChristi: 'corpusChristi',
+    corpusChristi: 'corpusChristi',   // sin fuente en el Misal (ver MISSING_TEXTS)
     sacredHeart: 'sacredHeart',
     requiem: 'requiem',
-    holySpirit: 'pentecost',
-    bvm: 'bvm',
+    holySpirit: 'pentecost',          // misa votiva: decisión previa del proyecto
+    bvm: 'bvm',                       // misa votiva: «…en la Veneración…» (l. 3617)
     '11-01': 'allSaints',
     '11-02': 'requiem',
-    '02-02': 'bvm',
-    '03-25': 'bvm',
-    '08-15': 'bvm',
-    '09-08': 'bvm',
+    '02-02': 'bvmFestividad',
+    '03-25': 'bvmAnnunciation',
+    '08-15': 'bvmDormition',
+    '09-08': 'bvmNativity',
+    '03-19': 'stJoseph',
+    '08-06': 'incarnationWord',
+    '09-14': 'cross',
     // Los comites Christi (26, 27 y 28 de diciembre) caen dentro de la Octava
     // de Navidad y llevan el Prefacio de la Natividad, no el de Apóstoles.
     '12-26': 'christmas',
     '12-27': 'christmas',
     '12-28': 'christmas',
   };
-  function resolvePreface(dayKey, season) {
+  // Ascensión + siete días: viernes, sábado, domingo (easter7) y lunes a jueves de
+  // la semana 7 de Pascua. Más corto que ASCENSION_OCTAVE_KEYS (que llega al viernes).
+  ['easterFeria6_5', 'easterFeria6_6', 'easter7', 'easterFeria7_1', 'easterFeria7_2',
+   'easterFeria7_3', 'easterFeria7_4'].forEach(k => { PREFACE_BY_KEY[k] = 'ascension'; });
+  // Octavas que la propia clave delimita.
+  const PREFACE_OCTAVE_KEYS = [
+    [/^(christmas|christmasSunday|circumcision)$/, 'christmas'],
+    [/^christmasFeria_[1-8]$/,                     'christmas'],
+    [/^(epiphany|baptismLord)$/,                   'epiphany'],
+    [/^epiOctave_\d+$/,                            'epiphany'],
+    [/^(easter|easter2)$/,                         'easter'],
+    [/^easterFeria1_\d+$/,                         'easter'],
+    [/^(pentecost|pentecostFeria_\d+)$/,           'pentecost'],
+  ];
+  function resolvePreface(dayKey, season, date) {
     const wrap = (name, source, from) => ({
       value: PREFACES[name], supplied: false, source, from,
       rubric: null, omitted: false, note: null,
     });
     if (dayKey && PREFACE_BY_KEY[dayKey]) return wrap(PREFACE_BY_KEY[dayKey], 'proper', null);
     if (APOSTLE_FEASTS.indexOf(dayKey) >= 0) return wrap('apostles', 'proper', null);
-    // El Prefacio de la Santísima Trinidad se dice en los DOMINGOS del tiempo
-    // después de la Trinidad que no tienen prefacio propio; las ferias de ese
-    // tiempo (ordinaryFeria*) llevan el Prefacio Común. Se conserva así el
-    // comportamiento anterior, que en este punto era el correcto.
-    if (/^ordinaryFeria/.test(dayKey || '')) return wrap('common', 'season', 'trinity');
+    for (const [re, name] of PREFACE_OCTAVE_KEYS) {
+      if (re.test(dayKey || '')) return wrap(name, 'proper', null);
+    }
     const s = effectiveSeason(dayKey, season);
+    // Octavas que la clave sola no delimita: hace falta la fecha. Sin ella (quien
+    // llama no la pasa) la Epifanía conserva el comportamiento anterior y la
+    // octava de Todos los Santos no se reconoce.
+    if (s === 'epiphany' && /^epiFeria\d+_\d+$/.test(dayKey || '')) {
+      if (!(date instanceof Date) || (date.getMonth() === 0 && date.getDate() <= 13)) {
+        return wrap('epiphany', 'proper', null);
+      }
+    }
+    if (date instanceof Date && date.getMonth() === 10 && date.getDate() >= 1 && date.getDate() <= 8) {
+      return wrap('allSaints', 'proper', null);
+    }
     if (s && PREFACE_BY_SEASON[s]) return wrap(PREFACE_BY_SEASON[s], 'season', s);
     return wrap('common', 'generic', null);
   }
@@ -762,15 +903,15 @@ const Propers = (() => {
   // getProper() devuelve texto + metadatos (`supplied`, `source`, `from`,
   // `rubric`, `omitted`). Los getters antiguos devuelven solo el valor, con las
   // mismas formas de retorno de siempre, para no romper app.js.
-  function getProper(part, dayKey, season) {
-    return resolve(part, dayKey, season);
+  function getProper(part, dayKey, season, date) {
+    return resolve(part, dayKey, season, date);
   }
-  const valueOf = (part, key, season) => resolve(part, key, season).value;
+  const valueOf = (part, key, season, date) => resolve(part, key, season, date).value;
 
   return {
     getProper,
     getCollect:      (key, season) => valueOf('collect', key, season) || 'Colecta no disponible para este día.',
-    getPreface:      (key, season) => valueOf('preface', key, season),
+    getPreface:      (key, season, date) => valueOf('preface', key, season, date),
     getIntroit:      (key, season) => valueOf('introit', key, season) || { ant:'' },
     getGradual:      (key, season) => valueOf('gradual', key, season) || null,
     getOffertory:    (key, season) => valueOf('offertory', key, season) || '',

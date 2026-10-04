@@ -329,13 +329,21 @@ const BCPDocxExport = (() => {
         const refSmall = el.querySelector('.reading-ref-small')?.textContent?.trim();
         if (ref) paras.push(new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: ref, bold: true, size: SZ_MD, color: '1A5C42', font: FONT })], spacing: { before: 120, after: 40 } }));
         if (refSmall) paras.push(new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: refSmall, italics: true, size: SZ_SM, color: C_META, font: FONT })], spacing: { after: 100 } }));
-        el.querySelectorAll('.librito-response').forEach(r => walkElement(r));
-        const textEl = el.querySelector('.reading-text');
-        if (textEl) paras.push(new Paragraph({
-          children: buildRuns(textEl), indent: { left: 450, right: 450 },
-          border: { left: { style: BorderStyle.SINGLE, size: 18, color: '1A5C42', space: 15 } },
-          spacing: { before: 100, after: 140, line: 300 }, alignment: AlignmentType.JUSTIFIED,
-        }));
+        // Hijos en orden de documento: el Evangelio lleva
+        // "Gloria a ti, Cristo Señor" ANTES del texto y "Te alabamos" DESPUÉS.
+        // (Antes se recorrían todos los .librito-response y luego el texto, y
+        // el .docx imprimía las dos respuestas antes de la lectura.)
+        for (const child of el.children) {
+          if (child.classList.contains('librito-response')) {
+            walkElement(child);
+          } else if (child.classList.contains('reading-text')) {
+            paras.push(new Paragraph({
+              children: buildRuns(child), indent: { left: 450, right: 450 },
+              border: { left: { style: BorderStyle.SINGLE, size: 18, color: '1A5C42', space: 15 } },
+              spacing: { before: 100, after: 140, line: 300 }, alignment: AlignmentType.JUSTIFIED,
+            }));
+          }
+        }
         return;
       }
       if (cls.contains('librito-psalm')) {
@@ -380,11 +388,33 @@ const BCPDocxExport = (() => {
   }
 
   async function buildAndDownload(rootEl, filenamePrefix, docTitle) {
-    const { Document, Packer } = window.docx;
+    const { Document, Packer, Paragraph, TextRun, AlignmentType, BorderStyle, Header, Footer, PageNumber } = window.docx;
 
     await preloadFonts();
 
     const paras = renderToParagraphs(rootEl);
+
+    // Encabezado corrido y numeración de página (la portada, primera página,
+    // va sin ninguno de los dos).
+    const blankPara = () => new Paragraph({ children: [new TextRun({ text: '', font: FONT, size: SZ_SM })] });
+    const runningHeaderPara = new Paragraph({
+      alignment: AlignmentType.CENTER,
+      children: [new TextRun({ text: docTitle, italics: true, size: 16, color: C_META, font: FONT })],
+      border: { bottom: { style: BorderStyle.SINGLE, size: 4, color: C_ACCENT, space: 6 } },
+      spacing: { before: 0, after: 120 },
+    });
+    const pageNumberPara = new Paragraph({
+      alignment: AlignmentType.CENTER,
+      children: [
+        new TextRun({ text: '✠  ', size: 16, color: C_ACCENT, font: FONT }),
+        new TextRun({ children: [PageNumber.CURRENT], size: 16, color: C_META, font: FONT }),
+        new TextRun({ text: ' / ', size: 16, color: C_META, font: FONT }),
+        new TextRun({ children: [PageNumber.TOTAL_PAGES], size: 16, color: C_META, font: FONT }),
+        new TextRun({ text: '  ✠', size: 16, color: C_ACCENT, font: FONT }),
+      ],
+      border: { top: { style: BorderStyle.SINGLE, size: 4, color: C_ACCENT, space: 6 } },
+      spacing: { before: 120, after: 0 },
+    });
 
     const wordDoc = new Document({
       creator: 'Libro de Oración Común (2019) — ACNA',
@@ -392,7 +422,18 @@ const BCPDocxExport = (() => {
       description: 'Generado por el generador del Libro de Oración Común (2019)',
       styles: { default: { document: { run: { font: FONT, size: SZ } } } },
       sections: [{
-        properties: { page: { size: { width: 11906, height: 16838 }, margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 } } },
+        properties: {
+          page: { size: { width: 11906, height: 16838 }, margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 } },
+          titlePage: true, // la portada no lleva encabezado ni numeración
+        },
+        headers: {
+          default: new Header({ children: [runningHeaderPara] }),
+          first:   new Header({ children: [blankPara()] }),
+        },
+        footers: {
+          default: new Footer({ children: [pageNumberPara] }),
+          first:   new Footer({ children: [blankPara()] }),
+        },
         children: paras,
       }],
     });

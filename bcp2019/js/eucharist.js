@@ -264,7 +264,24 @@ const BCPEucharist = (() => {
     { type: 'PUEBLO', text: 'Demos gracias a Dios, aleluya, aleluya.' },
   ];
 
+  // ── VERSIONES EN TEXTO PLANO ─────────────────────────────────────────────
+  // El Librito del Pueblo (librito-pueblo.js) necesita el texto sin el HTML de
+  // render(). Se derivan de los MISMOS arreglos *_DATA que la liturgia
+  // principal — nunca se copia ni se redacta nada aparte, de modo que Misal y
+  // Librito no pueden divergir. Cada pieza es una lista congelada de
+  // { type, text } (mismos tipos que render(): CEL, PUEBLO, TODOS, LECTOR, R,
+  // T, C, O); `text` no contiene HTML.
+  const plainOf = arr => Object.freeze(arr.map(({ type, text }) => Object.freeze({ type, text })));
+  const PLAIN = Object.freeze({
+    OFFERTORY_SENTENCE: plainOf(OFFERTORY_SENTENCE_DATA),
+    PRAYER_OF_CONSECRATION: plainOf(PRAYER_OF_CONSECRATION_DATA),
+    HUMBLE_ACCESS: plainOf(HUMBLE_ACCESS_DATA),
+    ADMINISTRATION: plainOf(ADMINISTRATION_DATA),
+    POST_COMMUNION: plainOf(POST_COMMUNION_DATA),
+  });
+
   return {
+    PLAIN,
     ACCLAMATION: render(ACCLAMATION_DATA),
     ACCLAMATION_LENT: render(ACCLAMATION_LENT_DATA),
     ACCLAMATION_EASTER: render(ACCLAMATION_EASTER_DATA),

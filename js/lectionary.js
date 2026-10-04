@@ -15,7 +15,7 @@ const Lectionary = (() => {
     // ═══════════════════════════════════════════════════════
     advent1: {
       A: { first:'Isaiah 2:1-5',    psalm:'Psalm 122:1-9',      second:'Romans 13:11-14',    gospel:'Matthew 24:36-44',  psalmAnt:'Vayamos con alegría a la casa del Señor.' },
-      B: { first:'Isaiah 64:1-9',   psalm:'Psalm 80:1-7,17-19', second:'1 Corinthians 1:3-9', gospel:'Mark 13:24-37',     psalmAnt:'Señor, muéstranos tu rostro y nos salvaremos.' },
+      B: { first:'Isaiah 63:19,64:1-8',   psalm:'Psalm 80:1-7,17-19', second:'1 Corinthians 1:3-9', gospel:'Mark 13:24-37',     psalmAnt:'Señor, muéstranos tu rostro y nos salvaremos.' },
       C: { first:'Jeremiah 33:14-16',psalm:'Psalm 25:1-10',     second:'1 Thessalonians 3:9-13',gospel:'Luke 21:25-36',  psalmAnt:'A ti, Señor, elevo mi alma.' },
     },
     advent2: {
@@ -31,7 +31,7 @@ const Lectionary = (() => {
     advent4: {
       A: { first:'Isaiah 7:10-16',  psalm:'Psalm 80:1-7,17-19', second:'Romans 1:1-7',       gospel:'Matthew 1:18-25',   psalmAnt:'Señor, muéstranos tu rostro y nos salvaremos.' },
       B: { first:'2 Samuel 7:1-11,16',psalm:'Luke 1:46-55',    second:'Romans 16:25-27',    gospel:'Luke 1:26-38',      psalmAnt:'Cantaré eternamente las misericordias del Señor.' },
-      C: { first:'Micah 5:2-5',     psalm:'Psalm 80:1-7',       second:'Hebrews 10:5-10',    gospel:'Luke 1:39-45',      psalmAnt:'Señor, muéstranos tu rostro y nos salvaremos.' },
+      C: { first:'Micah 5:1-4',     psalm:'Psalm 80:1-7',       second:'Hebrews 10:5-10',    gospel:'Luke 1:39-45',      psalmAnt:'Señor, muéstranos tu rostro y nos salvaremos.' },
     },
 
     // ═══════════════════════════════════════════════════════
@@ -39,9 +39,9 @@ const Lectionary = (() => {
     // ═══════════════════════════════════════════════════════
     christmas: {
       // Three Masses of Christmas; we use Midnight Mass (Proper I) as default
-      A: { first:'Isaiah 9:2-7',    psalm:'Psalm 96:1-13',      second:'Titus 2:11-14',      gospel:'Luke 2:1-14',       psalmAnt:'Hoy nos ha nacido el Salvador, Cristo el Señor.' },
-      B: { first:'Isaiah 9:2-7',    psalm:'Psalm 96:1-13',      second:'Titus 2:11-14',      gospel:'Luke 2:1-14',       psalmAnt:'Hoy nos ha nacido el Salvador, Cristo el Señor.' },
-      C: { first:'Isaiah 9:2-7',    psalm:'Psalm 96:1-13',      second:'Titus 2:11-14',      gospel:'Luke 2:1-14',       psalmAnt:'Hoy nos ha nacido el Salvador, Cristo el Señor.' },
+      A: { first:'Isaiah 9:1-6',    psalm:'Psalm 96:1-13',      second:'Titus 2:11-14',      gospel:'Luke 2:1-14',       psalmAnt:'Hoy nos ha nacido el Salvador, Cristo el Señor.' },
+      B: { first:'Isaiah 9:1-6',    psalm:'Psalm 96:1-13',      second:'Titus 2:11-14',      gospel:'Luke 2:1-14',       psalmAnt:'Hoy nos ha nacido el Salvador, Cristo el Señor.' },
+      C: { first:'Isaiah 9:1-6',    psalm:'Psalm 96:1-13',      second:'Titus 2:11-14',      gospel:'Luke 2:1-14',       psalmAnt:'Hoy nos ha nacido el Salvador, Cristo el Señor.' },
     },
     christmasSunday: {
       A: { first:'Isaiah 63:7-9',   psalm:'Psalm 148:1-14',     second:'Hebrews 2:10-18',    gospel:'Matthew 2:13-23',   psalmAnt:'Alaben todos el nombre del Señor.' },
@@ -80,7 +80,7 @@ const Lectionary = (() => {
       C: { first:'Isaiah 62:1-5',   psalm:'Psalm 36:5-10',      second:'1 Corinthians 12:1-11',gospel:'John 2:1-11',    psalmAnt:'Proclamad sus maravillas a todos los pueblos.' },
     },
     epi2: {
-      A: { first:'Isaiah 9:1-4',    psalm:'Psalm 27:1,4-9',     second:'1 Corinthians 1:10-18',gospel:'Matthew 4:12-23',psalmAnt:'El Señor es mi luz y mi salvación.' },
+      A: { first:'Isaiah 8:23-9:3',    psalm:'Psalm 27:1,4-9',     second:'1 Corinthians 1:10-18',gospel:'Matthew 4:12-23',psalmAnt:'El Señor es mi luz y mi salvación.' },
       B: { first:'Jonah 3:1-5,10',  psalm:'Psalm 62:5-12',      second:'1 Corinthians 7:29-31',gospel:'Mark 1:14-20',  psalmAnt:'Descansa en Dios solo, alma mía.' },
       C: { first:'Nehemiah 8:1-3,5-6,8-10',psalm:'Psalm 19:7-14',second:'1 Corinthians 12:12-31',gospel:'Luke 4:14-21',psalmAnt:'Tus palabras, Señor, son espíritu y vida.' },
     },
@@ -106,7 +106,7 @@ const Lectionary = (() => {
     },
     epi7: {
       A: { first:'Isaiah 49:8-16',  psalm:'Psalm 131:1-3',      second:'1 Corinthians 4:1-5', gospel:'Matthew 6:24-34', psalmAnt:'En ti, Señor, he encontrado mi paz.' },
-      B: { first:'Hosea 2:14-20',   psalm:'Psalm 103:1-13',     second:'2 Corinthians 3:1-6', gospel:'Mark 2:13-22',   psalmAnt:'El Señor es compasivo y misericordioso.' },
+      B: { first:'Hosea 2:16-22',   psalm:'Psalm 103:1-13',     second:'2 Corinthians 3:1-6', gospel:'Mark 2:13-22',   psalmAnt:'El Señor es compasivo y misericordioso.' },
       C: { first:'Isaiah 55:10-13', psalm:'Psalm 92:1-4,12-15', second:'1 Corinthians 15:51-58',gospel:'Luke 6:39-49',psalmAnt:'Señor, qué bueno es darte gracias.' },
     },
     epi8: {
@@ -236,9 +236,9 @@ const Lectionary = (() => {
       C: { first:'Exodus 12:1-4,11-14',psalm:'Psalm 116:1-2,12-19',second:'1 Corinthians 11:23-26',gospel:'John 13:1-17,31-35',psalmAnt:'El cáliz de bendición es comunión con la Sangre de Cristo.' },
     },
     goodFriday: {
-      A: { first:'Isaiah 52:13-53:12',psalm:'Psalm 22:1-31',    second:'Hebrews 4:14-16,5:7-9',gospel:'John 18:1-19:42',psalmAnt:'Padre, en tus manos encomiendo mi espíritu.' },
-      B: { first:'Isaiah 52:13-53:12',psalm:'Psalm 22:1-31',    second:'Hebrews 4:14-16,5:7-9',gospel:'John 18:1-19:42',psalmAnt:'Padre, en tus manos encomiendo mi espíritu.' },
-      C: { first:'Isaiah 52:13-53:12',psalm:'Psalm 22:1-31',    second:'Hebrews 4:14-16,5:7-9',gospel:'John 18:1-19:42',psalmAnt:'Padre, en tus manos encomiendo mi espíritu.' },
+      A: { first:'Isaiah 52:13-53:12',psalm:'Psalm 22:1-21',    second:'Hebrews 10:1-25',gospel:'John 18:1-19:37',psalmAnt:'Padre, en tus manos encomiendo mi espíritu.' },
+      B: { first:'Isaiah 52:13-53:12',psalm:'Psalm 22:1-21',    second:'Hebrews 10:1-25',gospel:'John 18:1-19:37',psalmAnt:'Padre, en tus manos encomiendo mi espíritu.' },
+      C: { first:'Isaiah 52:13-53:12',psalm:'Psalm 22:1-21',    second:'Hebrews 10:1-25',gospel:'John 18:1-19:37',psalmAnt:'Padre, en tus manos encomiendo mi espíritu.' },
     },
     holySaturday: {
       A: { first:'Job 14:1-14',     psalm:'Psalm 31:1-4,15-16', second:'1 Peter 4:1-8',      gospel:'Matthew 27:57-66',psalmAnt:'En tus manos, Señor, encomiendo mi espíritu.' },
@@ -366,7 +366,7 @@ const Lectionary = (() => {
       C: { first:'Hosea 1:2-2:1',   psalm:'Psalm 85:1-13',     second:'Colossians 2:6-15,16-19',gospel:'Luke 11:1-13',psalmAnt:'Muéstranos, Señor, tu misericordia; danos tu salvación.' },
     },
     trinity10: {
-      A: { first:'Genesis 32:22-31',psalm:'Psalm 17:1-7,15',   second:'Romans 9:1-5',        gospel:'Matthew 14:13-21',psalmAnt:'Yo, en mi justicia, veré tu rostro, Señor.' },
+      A: { first:'Genesis 32:23-32',psalm:'Psalm 17:1-7,15',   second:'Romans 9:1-5',        gospel:'Matthew 14:13-21',psalmAnt:'Yo, en mi justicia, veré tu rostro, Señor.' },
       B: { first:'2 Samuel 11:26-12:13',psalm:'Psalm 51:1-12', second:'Ephesians 4:1-16',    gospel:'John 6:24-35',  psalmAnt:'Crea en mí, oh Dios, un corazón limpio.' },
       C: { first:'Hosea 11:1-11',   psalm:'Psalm 107:1-9,43',  second:'Colossians 3:1-11',    gospel:'Luke 12:13-21', psalmAnt:'Dad gracias al Señor porque es bueno, su misericordia es eterna.' },
     },
@@ -428,7 +428,7 @@ const Lectionary = (() => {
     trinity21: {
       A: { first:'Exodus 33:12-23', psalm:'Psalm 99:1-9',      second:'1 Thessalonians 1:1-10',gospel:'Matthew 22:15-22',psalmAnt:'El Señor es rey; tiemblan los pueblos.' },
       B: { first:'Isaiah 53:4-12',  psalm:'Psalm 91:9-16',     second:'Hebrews 5:1-10',       gospel:'Mark 10:35-45', psalmAnt:'Señor, acompáñame en la tribulación.' },
-      C: { first:'Genesis 32:22-31',psalm:'Psalm 121:1-8',     second:'2 Timothy 3:14-4:5',   gospel:'Luke 18:1-8',   psalmAnt:'Nuestro auxilio viene del Señor, que hizo el cielo y la tierra.' },
+      C: { first:'Genesis 32:23-32',psalm:'Psalm 121:1-8',     second:'2 Timothy 3:14-4:5',   gospel:'Luke 18:1-8',   psalmAnt:'Nuestro auxilio viene del Señor, que hizo el cielo y la tierra.' },
     },
     trinity22: {
       A: { first:'Deuteronomy 34:1-12',psalm:'Psalm 90:1-6,13-17',second:'1 Thessalonians 2:1-8',gospel:'Matthew 22:34-46',psalmAnt:'En todas las edades, Señor, has sido nuestro refugio.' },
@@ -568,6 +568,84 @@ const Lectionary = (() => {
     },
   };
 
+  // ══════════════════════════════════════════════════════════════════════════
+  //  MISAS VOTIVAS — lecturas propias del Misal Romano tradicional
+  // ══════════════════════════════════════════════════════════════════════════
+  // Las tres misas votivas del selector (Réquiem, Espíritu Santo, Santa María)
+  // tienen Epístola y Evangelio PROPIOS; ya no leen el Domingo precedente. Misma
+  // estructura que los domingos tradicionales (Pre-Cuaresma, Semana Santa): la
+  // Epístola va en `second`, y `first`/`psalm` quedan en null porque el Misal
+  // tradicional no tiene Primera Lectura ni Salmo responsorial. `votive: true`
+  // le indica a app.js y librito-pueblo.js que la ausencia de `first` es
+  // intencional (rótulo «EPÍSTOLA», sin «Primera lectura no especificada»).
+  //
+  // Fuentes (cotejadas entre sí; las referencias, no los textos, son lo único
+  // que se toma de ellas; el texto impreso es el de la Biblia de Jerusalén):
+  //  · Divinum Officium (Missale Romanum): Sancti/11-02m1 y m3, y obsolete/missa/
+  //    Latin/Commune/C10, C10a, C10b, C10Pasc (Misa de Santa María en sábado, con
+  //    sus variantes por tiempo), y Francais/Votive/Defunctorum.
+  //  · The Holy Cross Missal (1920, misal anglo-católico), mammana.org/bcp/
+  //    holy_cross1920/departed.html y votive.html.
+  //  · Espíritu Santo: Holy Cross Missal (Hch 8,14 / Jn 14,23) y el Misal Romano
+  //    diario de 1962 (Hch 8,14-17 / Jn 14,23-31). Divinum Officium no trae esta misa.
+  //
+  // Correspondencia con los propios que ya tiene propers.js:
+  //  · requiem: Colecta «Fidelium Deus» (Holy Cross: «On All Souls' Day and for the
+  //    Faithful Departed»). Para los fieles difuntos en general el Misal da,
+  //    «en otros tiempos», Ap 14,13 / Jn 6,51-55; el 2 de noviembre, 1 Co 15,51 /
+  //    Jn 5,25-29.
+  //  · holySpirit: introito Spiritus Domini, colecta «Deus qui corda fidelium»,
+  //    ofertorio Confirma hoc, comunión Factus est repente.
+  //  · bvm: introito Salve sancta parens (Misa de Santa María «de la Purificación
+  //    a Adviento»): Eclo 24,9-11 (Vulgata 24,14-16) / Lc 11,27-28; en Tiempo
+  //    Pascual el Evangelio es Jn 19,25-27. Variantes: Adviento (Is 7,10-15 /
+  //    Lc 1,26-38) y de Navidad a la Purificación (Tit 3,4-7 / Lc 2,15-20).
+  //    OJO: de esas variantes solo se tienen las LECTURAS; los demás propios
+  //    (Rorate coeli, Vultum tuum…) faltan: ver Propers.MISSING_TEXTS.
+  // «Sirach 24:9-11» usa la numeración de la Biblia de Jerusalén (= Vulgata 24,14-16).
+  const votiveReadings = (epistle, gospel, variant) =>
+    ({ first: null, psalm: null, second: epistle, gospel, psalmAnt: '', votive: true, variant });
+
+  const VOTIVE = {
+    requiem: {
+      daily:    votiveReadings('Revelation 14:13',       'John 6:51-55',  'requiem-daily'),
+      allSouls: votiveReadings('1 Corinthians 15:51-57', 'John 5:25-29',  'requiem-allSouls'),
+    },
+    holySpirit: {
+      default:  votiveReadings('Acts 8:14-17',           'John 14:23-31', 'holySpirit'),
+    },
+    bvm: {
+      default:   votiveReadings('Sirach 24:9-11',  'Luke 11:27-28', 'bvm-default'),
+      paschal:   votiveReadings('Sirach 24:9-11',  'John 19:25-27', 'bvm-paschal'),
+      advent:    votiveReadings('Isaiah 7:10-15',  'Luke 1:26-38',  'bvm-advent'),
+      christmas: votiveReadings('Titus 3:4-7',     'Luke 2:15-20',  'bvm-christmas'),
+    },
+  };
+
+  // Elige la variante. `ctx`: { date, season, dayKey } del día calendario ORIGINAL
+  // (antes de sobrescribirlo con la clave votiva). `season` es el vocabulario de
+  // app.js ('advent','christmas','epiphany','easter','pentecost'…).
+  function getVotiveReadings(type, ctx) {
+    const set = VOTIVE[type];
+    if (!set) return null;
+    const c = ctx || {};
+    if (type === 'requiem') {
+      return c.dayKey === '11-02' ? set.allSouls : set.daily;
+    }
+    if (type === 'bvm') {
+      if (c.season === 'advent') return set.advent;
+      // «De la Natividad a la Purificación»: del 25 de dic. al 1 de feb., por fecha.
+      const d = c.date instanceof Date ? c.date : null;
+      if (d) {
+        const m = d.getMonth() + 1, day = d.getDate();
+        if ((m === 12 && day >= 25) || m === 1 || (m === 2 && day <= 1)) return set.christmas;
+      }
+      if (c.season === 'easter' || c.season === 'pentecost') return set.paschal;
+      return set.default;
+    }
+    return set.default;
+  }
+
   // ── WEEKDAY LECTIONARY (Selected key weeks — full structure) ─────────────
   // Format: key = "week_dow_cycle"  dow: 1=Mon…6=Sat
   const WEEKDAY = {
@@ -601,5 +679,5 @@ const Lectionary = (() => {
 
   function getAllSundayKeys() { return Object.keys(SUNDAY); }
 
-  return { getSundayReadings, getWeekdayReadings, getAllSundayKeys, SUNDAY };
+  return { getSundayReadings, getWeekdayReadings, getAllSundayKeys, getVotiveReadings, SUNDAY, VOTIVE };
 })();

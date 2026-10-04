@@ -1042,6 +1042,11 @@ sup.verse-num {
     padding: 0;
   }
   .manual-controls { display: none; }
+  /* "Imprimir Manual" imprimía antes todo el Misal de fondo: aquí el overlay
+     pasaba a `static` pero el documento seguía en el flujo. LibritoPueblo y
+     PriestManual marcan <body class="overlay-open"> mientras están abiertos. */
+  body.overlay-open #liturgy-output,
+  body.overlay-open .liturgy-info { display: none !important; }
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -1368,6 +1373,10 @@ sup.verse-num {
     padding: 0;
   }
   .librito-controls { display: none; }
+  /* Igual que en el Manual: sin esto "Imprimir Librito" imprimía el Misal
+     entero antes del Librito. Ver show() en librito-pueblo.js. */
+  body.overlay-open #liturgy-output,
+  body.overlay-open .liturgy-info { display: none !important; }
 }
 
 /* Estilos para las lecturas en el librito */
@@ -1678,9 +1687,10 @@ body.dark-mode {
   --parchment-mid: #1e1e1e;
   --parchment-dark: #2a2a2a;
   --ink: #e0e0e0;
-  --ink-soft: #a0a0a0;
-  --rubric: #ff5555;
+  --ink-soft: #b8b8b8;   /* antes #a0a0a0: ~6,4:1 sobre los paneles #1e1e1e */
+  --rubric: #ff9a9a;     /* antes #ff5555: ~6,0:1; ahora ≥ 7:1 también sobre paneles */
   --gold: #d4af37;
+  --gold-dark: #d9bd5f;  /* antes #8a6e1a, ilegible sobre fondo oscuro */
   background-color: #0a0a0a;
 }
 
@@ -1760,6 +1770,97 @@ body.dark-mode .primary-neu-btn {
 
 body.dark-mode .control-group label {
   color: #718096 !important;
+}
+
+/* ── MODO ALTAR: PANELES DE TEXTO LEGIBLES (contraste ≥ 7:1) ─────────────────
+ * Los paneles de oración, lecturas, peticiones, Librito y Manual tenían fondos
+ * CLAROS (rgba(255,255,255,.5-.85), #f8f4e8, #fff8f8…) y las reglas oscuras solo
+ * cambiaban el color del texto a #e0e0e0: texto claro sobre fondo claro (1,0-2,7:1).
+ * Y las etiquetas S./P./M./L. y los títulos del bloque litúrgico llevaban colores
+ * oscuros fijos (#1a1208, #8b0000, #1a5c1a) sobre #121212. Se envuelve en
+ * @media screen para que la impresión (fondo blanco) no herede nada de esto. */
+@media screen {
+  body.dark-mode .prayer-text,
+  body.dark-mode .scripture-text,
+  body.dark-mode .gospel-reading .scripture-text,
+  body.dark-mode .petition,
+  body.dark-mode .librito-petition,
+  body.dark-mode .liturgical-text,
+  body.dark-mode .cover-quote,
+  body.dark-mode .librito-instruction,
+  body.dark-mode .librito-response,
+  body.dark-mode .librito-reading,
+  body.dark-mode .librito-gospel,
+  body.dark-mode .librito-text,
+  body.dark-mode .embolism-box,
+  body.dark-mode .librito-psalm,
+  body.dark-mode .librito-credo,
+  body.dark-mode .commemoration-block {
+    background: rgba(255,255,255,0.06);
+    color: var(--ink);
+  }
+  body.dark-mode .commemoration-section { background: rgba(212,175,55,0.07); }
+  body.dark-mode .liturgy-info { background: rgba(212,175,55,0.08); }
+  body.dark-mode .credo-incline { background: rgba(255,170,70,0.12); }
+  body.dark-mode .credo-incline p:first-child,
+  body.dark-mode .credo-incline p:last-child { color: var(--rubric); }
+  body.dark-mode .librito-psalm,
+  body.dark-mode .librito-credo { border-color: #3f8f70; }
+  body.dark-mode .psalm-verse .verse-num,
+  body.dark-mode .psalm-response,
+  body.dark-mode .librito-credo strong { color: #92dfbc; }
+  body.dark-mode .prayer-text,
+  body.dark-mode .scripture-text { border-color: #3a3a3a; }
+
+  body.dark-mode .omission-notes,
+  body.dark-mode .manual-section .rubric.warning { background: rgba(255,110,110,0.10); }
+  body.dark-mode .librito-instruction.warning { background: rgba(255,170,70,0.12); }
+  body.dark-mode .librito-section.warning { background: rgba(120,210,170,0.08); }
+
+  /* Etiquetas de diálogo y títulos del bloque litúrgico */
+  body.dark-mode .lit-line .lit-label,
+  body.dark-mode .lit-title { color: var(--ink); }
+  body.dark-mode .lit-line.pueblo .lit-label,
+  body.dark-mode .lit-line.todos .lit-label { color: var(--rubric); }
+  body.dark-mode .lit-line.lector .lit-label { color: #9be29b; }
+  body.dark-mode .lit-rubric,
+  body.dark-mode .highlight { color: var(--rubric); }
+
+  /* Textos grises fijos del encabezado y del pie */
+  body.dark-mode .feast-date,
+  body.dark-mode .feast-meta,
+  body.dark-mode .footer-note { color: var(--ink-soft); }
+
+  /* Verdes del Librito (#1a4d3a, #2a6b54) → verdes claros */
+  body.dark-mode .librito-cross,
+  body.dark-mode .librito-header h2,
+  body.dark-mode .librito-feast,
+  body.dark-mode .librito-section h2,
+  body.dark-mode .librito-section.warning h2,
+  body.dark-mode .librito-section h3,
+  body.dark-mode .librito-instruction strong,
+  body.dark-mode .librito-gospel .gospel-ref,
+  body.dark-mode .librito-reading .reading-ref,
+  body.dark-mode .librito-footer p { color: #92dfbc; }
+  body.dark-mode .librito-section h2,
+  body.dark-mode .librito-header,
+  body.dark-mode .librito-footer { border-color: #3f8f70; }
+  body.dark-mode .librito-instruction { border-left-color: #3f8f70; }
+  body.dark-mode .librito-response,
+  body.dark-mode .librito-gospel,
+  body.dark-mode .librito-reading { border-color: #3f8f70; }
+  body.dark-mode .librito-footer p:last-child { color: var(--ink-soft); }
+
+  /* Títulos del Manual (#2a1808, marrón casi negro) */
+  body.dark-mode .manual-header-block h2,
+  body.dark-mode .manual-toc h3,
+  body.dark-mode .manual-section h2 { color: var(--gold); }
+
+  /* Estilos en línea que generan app.js / librito-pueblo.js (colores fijos
+     #8b1a1a, #cc0000, #2C1A0E): solo se pueden vencer con !important. */
+  body.dark-mode .librito-petition .rubric,
+  body.dark-mode .librito-document .lit-rubric { color: var(--rubric) !important; }
+  body.dark-mode .librito-petition .lit-label { color: var(--ink) !important; }
 }
 
 /* ── DISEÑO BILINGÜE PARALELO (LATÍN / ESPAÑOL) ───────────────────────────── */

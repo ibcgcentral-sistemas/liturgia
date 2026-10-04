@@ -12,16 +12,54 @@
  * Ordinario, incluida la Oración de Consagración, se dice en voz alta y es
  * audible para el pueblo. Este Librito añade rúbricas de postura dirigidas
  * al fiel en vez de instrucciones técnicas dirigidas al Celebrante.
+ *
+ * CRITERIO DE COMPLETITUD: nada se resume con "…". Todo lo que se dice en voz
+ * alta —lo que el pueblo reza o sigue con el oído— va ÍNTEGRO, tomado de
+ * BCPEucharist.PLAIN (los mismos arreglos de texto que imprime la liturgia
+ * principal): Ofertorio, Oración de Consagración, Humilde Acceso, fórmulas e
+ * invitación de la Comunión y Poscomunión (esta es oración "de Todos"). El
+ * Texto Estándar Anglicano no tiene oraciones secretas del sacerdote, así que
+ * a diferencia del Misal (SECRET_NOTE_ES) no hay nada que resumir con una
+ * rúbrica. Solo se omiten las rúbricas dirigidas al Celebrante, que el
+ * Librito reemplaza por indicaciones de postura para el fiel.
  */
 
 const BCPLibrito = (() => {
+
+  // Texto plano de una pieza de BCPEucharist.PLAIN, filtrado por tipo.
+  const plainItems = (piece, ...types) => BCPEucharist.PLAIN[piece].filter(i => types.includes(i.type));
+  const celLine = text => `<strong>Celebrante: ${text}</strong>`;
+  const puebloLine =text => `<strong>Pueblo: ${text}</strong>`;
+
+  // Oración de Consagración completa. Las palabras de la institución (tipo 'C')
+  // van precedidas de la indicación de silencio reverente, y el resto sigue en
+  // orden de fuente.
+  function consecrationHtml() {
+    let html = '', open = false, instructed = false;
+    for (const it of plainItems('PRAYER_OF_CONSECRATION', 'O', 'C')) {
+      if (it.type === 'C' && !instructed) {
+        if (open) html += '</div>';
+        html += `<div class="librito-instruction warning">
+          <p><strong>Al pronunciar las palabras de la institución sobre el pan y el cáliz</strong>, guardamos un silencio reverente. Muchos fieles se inclinan en este momento en adoración.</p>
+        </div>`;
+        open = false;
+        instructed = true;
+      }
+      if (!open) { html += '<div class="librito-text">'; open = true; }
+      html += `<p>${it.text}</p>`;
+    }
+    return html + (open ? '</div>' : '');
+  }
 
   function generateLibrito(state) {
     const { date, dayInfo, readings, firstReading, secondReading, gospel, psalmVerses, psalmAnt, collect, preface, borrowedFromSunday } = state;
     const dateStr = formatLiturgyDate(date);
     const colorName = getColorName(dayInfo.color);
-    const isLent = dayInfo.season === 'lent';
+    // Semana Santa (season 'holyWeek') cuenta como Cuaresma: aclamación
+    // penitencial y Fracción sin Aleluya (igual que app.js).
+    const isLent = dayInfo.season === 'lent' || dayInfo.season === 'holyWeek';
     const isEaster = dayInfo.season === 'easter' || dayInfo.key === 'pentecost';
+    const omitGloria = shouldOmitGloria(dayInfo);
 
     const fmtReading = (ref, data, label) => {
       if (!data) return '';
@@ -38,7 +76,7 @@ const BCPLibrito = (() => {
       return `
         <div class="librito-gospel">
           <p class="gospel-ref">✠ SANTO EVANGELIO</p>
-          <p class="reading-ref-small">Según ${getGospelAuthor(ref)}</p>
+          ${getGospelAuthor(ref) ? `<p class="reading-ref-small">Según ${getGospelAuthor(ref)}</p>` : ''}
           <div class="librito-response"><p>Sacerdote: El Santo Evangelio de nuestro Señor Jesucristo.<br><strong>Pueblo: Gloria a ti, Cristo Señor.</strong></p></div>
           <p class="reading-text">${data.text}</p>
           <div class="librito-response"><p>Sacerdote: El Evangelio del Señor.<br><strong>Pueblo: Te alabamos, Cristo Señor.</strong></p></div>
@@ -102,10 +140,12 @@ const BCPLibrito = (() => {
         </div>
 
         <h3>GLORIA IN EXCELSIS</h3>
-        <div class="librito-instruction"><p>Se omite en Adviento y Cuaresma. Cuando se dice, todos juntos:</p></div>
+        ${omitGloria
+          ? `<div class="librito-instruction"><p>${GLORIA_OMITTED_RUBRIC}</p></div>`
+          : `<div class="librito-instruction"><p>Todos juntos:</p></div>
         <div class="librito-text">
           <p>Gloria a Dios en el cielo, y paz en la tierra a quienes ama el Señor. Por tu inmensa gloria te alabamos, te bendecimos, te adoramos, te glorificamos, te damos gracias; Señor Dios, Rey celestial, Dios Padre Todopoderoso. Señor, Hijo único Jesucristo, Señor Dios, Cordero de Dios, Hijo del Padre: Tú que quitas el pecado del mundo, ten piedad de nosotros; Tú que quitas el pecado del mundo, atiende a nuestra súplica; Tú que estás sentado a la derecha del Padre, ten piedad de nosotros. Porque solo tú eres Santo, sólo tú Señor, sólo tú Altísimo, Jesucristo, con el Espíritu Santo, en la gloria de Dios Padre. Amén.</p>
-        </div>
+        </div>`}
       </section>
 
       <section class="librito-section">
@@ -165,7 +205,7 @@ const BCPLibrito = (() => {
       <section class="librito-section">
         <h2>✠ EL OFERTORIO</h2>
         <div class="librito-instruction"><p>Se presentan el pan, el vino y las ofrendas del pueblo.</p></div>
-        <div class="librito-response"><p><strong>Celebrante: Tuyos son, Señor, la grandeza y el poder, la gloria, la victoria y la majestad...</strong><br><strong>Pueblo: Y lo que te hemos dado, de Ti lo hemos recibido.</strong></p></div>
+        <div class="librito-response"><p>${celLine(plainItems('OFFERTORY_SENTENCE', 'CEL')[0].text)}<br>${puebloLine(plainItems('OFFERTORY_SENTENCE', 'PUEBLO')[0].text)}</p></div>
       </section>
 
       <section class="librito-section">
@@ -190,12 +230,7 @@ const BCPLibrito = (() => {
         <div class="librito-instruction warning">
           <p><strong>Nos arrodillamos en reverencia.</strong> A diferencia de otras tradiciones, en este rito la Plegaria se dice en voz alta y es compartida por toda la congregación — no hay partes secretas.</p>
         </div>
-        <div class="librito-text">
-          <p>Toda alabanza y gloria es tuya, oh Dios nuestro Padre celestial, porque en tu tierna misericordia, diste a tu único Hijo Jesucristo para que sufriera la muerte en la Cruz por nuestra redención...</p>
-        </div>
-        <div class="librito-instruction warning">
-          <p><strong>Al pronunciar las palabras de la institución sobre el pan y el cáliz</strong>, guardamos un silencio reverente. Muchos fieles se inclinan en este momento en adoración.</p>
-        </div>
+        ${consecrationHtml()}
       </section>
 
       <section class="librito-section">
@@ -209,6 +244,12 @@ const BCPLibrito = (() => {
           <p><strong>Celebrante: ${isLent ? 'Cristo, nuestra Pascua, es sacrificado por nosotros.' : '[Aleluya.] Cristo, nuestra Pascua, es sacrificado por nosotros.'}</strong><br><strong>Pueblo: Celebremos la fiesta.${isLent ? '' : ' [Aleluya.]'}</strong></p>
         </div>
 
+        <h3>ORACIÓN DE HUMILDE ACCESO</h3>
+        <div class="librito-instruction"><p>${plainItems('HUMBLE_ACCESS', 'R')[0].text}</p></div>
+        <div class="librito-text">
+          <p>${plainItems('HUMBLE_ACCESS', 'TODOS')[0].text}</p>
+        </div>
+
         <h3>EL AGNUS DEI</h3>
         <div class="librito-text">
           <p>Cordero de Dios, que quitas el pecado del mundo; ten misericordia de nosotros. Cordero de Dios, que quitas el pecado del mundo; ten misericordia de nosotros. Cordero de Dios, que quitas el pecado del mundo; danos tu paz.</p>
@@ -217,18 +258,26 @@ const BCPLibrito = (() => {
 
       <section class="librito-section">
         <h2>✠ LA SAGRADA COMUNIÓN</h2>
-        <div class="librito-instruction"><p>El Celebrante invita: <strong>"Los Dones de Dios para el Pueblo de Dios."</strong> Nos acercamos a recibir el Pan y el Cáliz.</p></div>
+        ${(() => {
+          // Invitación y fórmulas de distribución, íntegras: son las palabras
+          // que cada comulgante oye al recibir el Pan y el Cáliz.
+          const [invitation, ...formulas] = plainItems('ADMINISTRATION', 'CEL').map(i => i.text);
+          return `<div class="librito-response"><p>${celLine(invitation)}</p></div>
+        <div class="librito-instruction"><p>Nos acercamos a recibir el Pan y el Cáliz.</p></div>
         <div class="librito-response">
-          <p><strong>El Cuerpo de nuestro Señor Jesucristo... Amén.</strong><br><strong>La Sangre de nuestro Señor Jesucristo... Amén.</strong></p>
-        </div>
+          <p>${formulas.map(celLine).join('<br>')}</p>
+        </div>`;
+        })()}
         <div class="librito-instruction"><p><strong>Después de comulgar</strong>, volvemos a nuestro lugar y oramos en silencio.</p></div>
       </section>
 
       <section class="librito-section">
         <h2>✠ ORACIÓN DE POSCOMUNIÓN</h2>
-        <div class="librito-instruction"><p><strong>Nos ponemos de pie.</strong> Todos juntos:</p></div>
+        <div class="librito-instruction"><p><strong>Nos ponemos de pie.</strong></p></div>
+        <div class="librito-response"><p>${celLine(plainItems('POST_COMMUNION', 'CEL')[0].text)}</p></div>
+        <div class="librito-instruction"><p>Todos juntos:</p></div>
         <div class="librito-text">
-          <p>Omnipotente y Eterno Dios, Te damos gracias porque nos has nutrido en estos santos misterios, con el alimento espiritual del preciosísimo Cuerpo y Sangre de tu Hijo, nuestro Salvador Jesucristo... Amén.</p>
+          <p>${plainItems('POST_COMMUNION', 'TODOS')[0].text}</p>
         </div>
       </section>
 
@@ -272,6 +321,9 @@ const BCPLibrito = (() => {
 
     document.body.appendChild(overlay);
     document.body.style.overflow = 'hidden';
+    // @media print oculta la liturgia principal mientras hay un overlay abierto,
+    // para que "Imprimir Librito" no imprima antes toda la liturgia.
+    document.body.classList.add('overlay-open');
 
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) hide();
@@ -282,6 +334,7 @@ const BCPLibrito = (() => {
     const overlay = document.getElementById('librito-overlay');
     if (overlay) overlay.remove();
     document.body.style.overflow = '';
+    document.body.classList.remove('overlay-open');
   }
 
   return { show, hide, generateLibrito };

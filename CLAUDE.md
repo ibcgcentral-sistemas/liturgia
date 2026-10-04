@@ -62,7 +62,21 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=24`.
+   código viejo. Actualmente en `?v=29` (Misal) y `?v=5` (bcp2019).
+
+## Fuente litúrgica autorizada (2026-10-04)
+
+El usuario designó como fuente su **Misal Anglicano impreso** (Sociedad Sacerdotal
+Corpus Christi, 2013): `C:/Users/gonza/OneDrive/Desktop/MISAL ANGLICANO.pdf`.
+Contiene colectas de todo el año, prefacios, Semana Mayor, Plegarias Eucarísticas y
+el Canon Gregoriano. **No contiene secretas, poscomuniones, introitos ni graduales
+por día** (remite al Prayer Book / Misal Anglicano), así que esos textos de
+`Propers.MISSING_TEXTS` siguen sin fuente. Colectas, prefacios y Viernes Santo
+(`js/holyweek.js`) están transcritos de ese misal. Para convertirlo a texto usar
+`markitdown`, que en Windows lo guarda en cp1252: decodificar como cp1252.
+
+Rito de 1928: el texto inglés se cotejó con el BCP 1928 (aocinternational.org);
+la versión española es traducción propia y debe revisarse.
 
 ## Estado al 2026-09-20
 
