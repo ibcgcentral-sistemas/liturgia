@@ -499,16 +499,18 @@ const LibritoPueblo = (() => {
       <section class="librito-section">
         <div style="text-align:center; margin-bottom:1.5rem;"><img src="img/woodcut-agnus.png" alt="Agnus Dei" style="max-height:90px; opacity:0.85; filter: contrast(1.2) sepia(0.3) hue-rotate(-15deg);"></div>
         ${canonType === '1662' ? `
-        <h2>✠ FRACCIÓN DEL PAN</h2>
+        <h2>✠ FRACCIÓN DEL PAN, PAZ Y AGNUS DEI</h2>
         <div class="librito-instruction">
-          <p>En el rito de 1662, el Padre Nuestro se reza después de la Comunión. El Sacerdote procede directamente a la fracción del Pan.</p>
+          <p>En el rito de 1662, el Padre Nuestro se reza después de la Comunión. Antes de comulgar se conservan el embolismo, la paz y el Agnus Dei:</p>
         </div>
+        <div class="liturgical-text-block">${Canon.PATER_NOSTER_REST_PUEBLO}</div>
         ` : canonType === '1928' ? `
-        <h2>✠ PADRENUESTRO</h2>
+        <h2>✠ PADRENUESTRO, FRACCIÓN Y PAZ</h2>
         <div class="librito-instruction">
           <p>En el rito de 1928, el Padre Nuestro se dice inmediatamente después de la Consagración y antes de la Comunión. Todos juntos:</p>
         </div>
         <div class="liturgical-text-block">${Canon.getPaterNosterOnly('1928', true)}</div>
+        <div class="liturgical-text-block">${Canon.PATER_NOSTER_REST_PUEBLO}</div>
         ` : `
         <h2>✠ PADRE NUESTRO Y AGNUS DEI</h2>
         <div class="librito-instruction">

@@ -271,9 +271,16 @@ const Canon = (() => {
   // Solo el Padrenuestro (introducción, oración y «y líbranos del mal»): los tres
   // primeros ítems de PATER_NOSTER_DATA, sin reescribir nada. 1662 lo reza
   // DESPUÉS de la Comunión y 1928 inmediatamente después de la Consagración y
-  // ANTES de comulgar; en ninguno de los dos hay embolismo, «La paz del Señor»,
-  // Agnus Dei ni Paz del Ordinario romano.
+  // ANTES de comulgar.
   const PATER_NOSTER_ONLY_DATA = PATER_NOSTER_DATA.slice(0, 3);
+
+  // Embolismo, «La paz del Señor», Agnus Dei y Paz: el resto de
+  // PATER_NOSTER_DATA. Por el uso anglocatólico (ceremonial uniforme en los
+  // cuatro ritos, decisión del usuario) se conservan también en 1662 y 1928,
+  // siempre ANTES de la Comunión. En 1662, que reza el Padrenuestro después de
+  // comulgar, se colocan solos entre el Canon y la Comunión; en 1928 siguen al
+  // Padrenuestro.
+  const PATER_NOSTER_REST_DATA = PATER_NOSTER_DATA.slice(3);
 
   // Frase de introducción del rito de 1549 (sustituye por completo a la del
   // Misal romano en el Padrenuestro). El latín no tiene equivalente en el
@@ -837,6 +844,7 @@ const Canon = (() => {
     'CANON_CONTINUED': CANON_CONTINUED_DATA,
     'PATER_NOSTER': PATER_NOSTER_DATA,
     'PATER_NOSTER_ONLY': PATER_NOSTER_ONLY_DATA,
+    'PATER_NOSTER_REST': PATER_NOSTER_REST_DATA,
     'COMMUNION_PREP': COMMUNION_PREP_DATA,
     'ABLUTIONS': ABLUTIONS_DATA,
     'DISMISSAL': DISMISSAL_DATA,

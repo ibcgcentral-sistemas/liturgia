@@ -62,7 +62,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=29` (Misal) y `?v=5` (bcp2019).
+   código viejo. Actualmente en `?v=30` (Misal) y `?v=5` (bcp2019).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 

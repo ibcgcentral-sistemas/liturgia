@@ -794,12 +794,14 @@ function buildLiturgyHTML(d) {
     <!-- PADRENUESTRO Y PAZ -->
     <div class="mass-section">
       ${d.canonType === '1662' ? `
-        <h3 class="section-title">✠ FRACCIÓN DEL PAN</h3>
-        <p class="rubric">En el rito de 1662, el Padre Nuestro se reza después de la Comunión. El Sacerdote procede directamente a la fracción del Pan.</p>
+        <h3 class="section-title">✠ FRACCIÓN DEL PAN, PAZ Y AGNUS DEI</h3>
+        <p class="rubric">En el rito de 1662, el Padre Nuestro se reza después de la Comunión. Antes de comulgar se conservan, por el uso anglocatólico, el embolismo, la paz y el Agnus Dei.</p>
+        <div class="liturgical-text-block">${Canon.PATER_NOSTER_REST}</div>
       ` : d.canonType === '1928' ? `
-        <h3 class="section-title">✠ PADRENUESTRO</h3>
+        <h3 class="section-title">✠ PADRENUESTRO, FRACCIÓN Y PAZ</h3>
         <p class="rubric">En el rito de 1928, el Padre Nuestro se dice inmediatamente después de la Consagración y antes de la Comunión.</p>
         <div class="liturgical-text-block">${Canon.getPaterNosterOnly('1928')}</div>
+        <div class="liturgical-text-block">${Canon.PATER_NOSTER_REST}</div>
       ` : `
         <h3 class="section-title">✠ PADRENUESTRO, FRACCIÓN Y PAZ</h3>
         <div class="liturgical-text-block">${Canon.getPaterNoster(d.canonType)}</div>
