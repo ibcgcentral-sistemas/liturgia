@@ -1,6 +1,6 @@
 # CLAUDE.md — Misal Anglicano y generador BCP 2019
 
-Contexto de proyecto para Claude Code. Última actualización: 2026-09-20.
+Contexto de proyecto para Claude Code. Última actualización: 2026-10-10.
 
 ## Qué es
 
@@ -46,9 +46,10 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 2. **No confiar en los documentos de verificación.** `VERIFICACION.md` declaró
    correcta durante meses una fórmula equivocada del ciclo ferial, y
    `test-logic.js` repetía el mismo error, así que los tests pasaban en verde
-   contra una premisa falsa. Peor: `bcp2019/VERIFICACION-BCP2019.md` es citado
-   tres veces por el código como fuente de escrutinio y **no existe**. Verificar
-   ejecutando código, siempre.
+   contra una premisa falsa. Tampoco hay que fiarse de
+   `bcp2019/VERIFICACION-BCP2019.md`, que el código cita tres veces como fuente
+   de escrutinio (existe, en `bcp2019/`; `calendar.js` lo nombra sin ruta).
+   Verificar ejecutando código, siempre.
 3. **Verificar por simulación amplia, no por muestreo.** El método que funciona:
    cargar los módulos en un contexto `vm` de Node y barrer 2024-2060 (13.515
    días), generando la liturgia completa. Los fallos de este proyecto no lanzan
@@ -62,7 +63,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=30` (Misal) y `?v=5` (bcp2019).
+   código viejo. Actualmente en `?v=31` (Misal) y `?v=5` (bcp2019).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -90,36 +91,26 @@ Advertencia honesta: esto está verificado por simulación, **no por uso real en
 altar**. `calendar.js` pasó de 452 a 790 líneas en un solo día. Conviene generar
 liturgias concretas y cotejarlas con el Misal impreso antes de usarlas en público.
 
-## PRIMERA TAREA: cerrar el commit pendiente
+## Git y remoto
 
-El árbol de trabajo tiene 14 archivos modificados **sin confirmar**, todos
-verificados. El commit quedó bloqueado por un `.git/index.lock` residual que el
-entorno anterior no tenía permiso para borrar:
-
-```bash
-cd "C:\Users\gonza\OneDrive\Desktop\liturgia"
-del .git\index.lock          # o: rm -f .git/index.lock
-git add -A
-git commit -F mensaje.txt
-```
-
-El mensaje de commit sugerido está al final de este archivo. Conviene además
-fijar la identidad de una vez, porque el repositorio no tiene `user.name` ni
-`user.email` y los commits anteriores se hicieron pasando la autoría a mano:
-
-```bash
-git config user.name "Alexis González Matus"
-git config user.email "alexveo855@gmail.com"
-```
-
-No hay remoto configurado. Historial: `b6edf31` inicial, luego `2a26378`,
-`166bae7`, `35c0583`, `2ae466c`, `1f69308`.
+- **Remoto:** `origin` → <https://github.com/ibcgcentral-sistemas/liturgia>
+  (repositorio **privado**; contiene la Biblia de Jerusalén en `js/lib/`). Rama
+  `main`, con seguimiento de `origin/main`.
+- **Identidad** ya fijada en el propio repositorio (`user.name` Alexis González
+  Matus, `user.email` alexveo855@gmail.com): no hace falta pasarla a mano.
+- **`.claude/settings.json` no se versiona**: lleva una ruta absoluta local y un
+  hook que arranca un servidor en el puerto 8080. Aparece como archivo sin
+  seguimiento; es lo esperado.
+- **Historial:** nueve commits locales, de `b6edf31` (2026-08-05) a `415d7a6`
+  (2026-10-04); el «Initial commit» de GitHub (`4f89ea6`, solo `README.md`); el
+  merge `3e95e16` que los une, y `b03d4f9` (ritos 1662 y 1928). `git log` es la
+  fuente de verdad.
 
 ## Trabajo pendiente, por orden de valor
 
 ### 1. Textos litúrgicos que faltan (bloquea el uso real)
 
-Listados en `Propers.MISSING_TEXTS` (`js/propers.js:436`). Hoy se sirve el texto
+Listados en `Propers.MISSING_TEXTS` (`js/propers.js:490`). Hoy se sirve el texto
 del tiempo con una rúbrica que lo declara suplido, en vez de rezar calladamente la
 Secreta de la Trinidad el Jueves Santo. Faltan, y hay que transcribirlos del Misal
 impreso:
@@ -151,10 +142,12 @@ desfase cotejada con el salterio oficial.
   prestadas sí llevan rúbrica; la colecta no. Rotularla «(Colecta del tiempo)»
   sería falso, porque es la del domingo anterior: hace falta decidir la redacción.
 - `js/intercessions.js` no tiene intención estacional para Pre-Cuaresma (629 días).
-- Erratas en el latín de `canon.js`: `regnat` por *regnas* (l. 267); «Señor,
-  escucha **nuestra** oración» frente a *orationem **meam*** (l. 160-161); el
-  *Introibo* latino truncado respecto del español (l. 134); numeración de salmos
-  mezclando Vulgata y hebrea (l. 216, 333, 353).
+- Erratas en el latín de `canon.js`: ya corregidas `regnat` por *regnas*, «mi
+  oración» / «mi clamor» frente a *orationem meam* y el Salmo 51 del Asperges
+  (`425a258`). Queda por decidir el Lavabo, que dice «Salmo 26» en español y
+  «Psalmus 25» en latín (numeración hebrea frente a Vulgata, l. 219). El
+  *Introibo* (l. 141-142) figura completo en ambos idiomas, así que la nota
+  anterior de que estaba truncado no se pudo reproducir.
 - `bcp2019`: 165 supresiones de fiestas fijas en domingo, sin traslado ni
   conmemoración. El BCP 2019 permite ambas cosas; es criterio litúrgico, no error.
 - Código muerto inocuo: `takeProper()` en `app.js`, el alias `ordinaryFeria` en
@@ -174,6 +167,13 @@ No volver a plantearlas salvo que él las reabra:
   final impar es Ciclo I, final par es Ciclo II.
 - **Propios faltantes**: cadena de respaldo por tiempo con rúbrica visible, nunca
   inventar el texto.
+- **Ceremonial uniforme en los cuatro ritos** (uso anglocatólico): el Asperges me
+  / Vidi Aquam, el Salmo 43 (Judica me), las rúbricas de incienso y las
+  campanillas, tanto del Sanctus como de la elevación, no dependen del rito. En
+  1662 y 1928 se añadieron, por decisión del usuario, el embolismo, la paz y el
+  Agnus Dei antes de la Comunión (`b03d4f9`) y las campanillas de la elevación
+  (el Librito ya las anunciaba en todos los ritos), aunque esos libros históricos
+  no los traigan. No señalarlo como incoherencia.
 
 ## Historial de auditorías
 
@@ -182,38 +182,3 @@ bugs documentados. `AUDITORIA-2026-09-20.md` es la auditoría independiente que
 encontró 24 hallazgos adicionales confirmados por ejecución, todos ya corregidos,
 incluido el bug del ciclo ferial que las ocho auditorías previas habían dado por
 bueno. Ese documento vale sobre todo como advertencia de método.
-
----
-
-## Mensaje de commit sugerido para los 14 archivos pendientes
-
-```
-Auditoria y correccion de canon, librito, exportacion a Word y BCP 2019
-
-Canon: Communicantes propio ausente en 552 dias (comites Christi, Bautismo del
-Senor, Ascension, Vigilia de Pentecostes); Hanc Igitur bautismal en la Vigilia;
-condicion de carrera real en setLanguage; misas votivas que arrastraban el
-embolismo del dia; rubricas en latin y duplicadas en bilingue; Lavabo marcado
-como oracion privada del Sacerdote.
-
-Librito: rango del dia ausente en 13.106 dias; Gradual ausente en todos; Gloria
-duplicado en 1662 y 1928; Viernes Santo anunciando como fallo de datos una
-Secreta y un Ofertorio que esa Misa no tiene; Amen de la doxologia perdido;
-Oracion de Oblacion de 1662 ausente; cabecera de intercesiones perdida.
-
-Word: documentos sin numeracion de pagina (Header, Footer y PageNumber se
-importaban sin usarse), sin niveles de encabezado, titulo de las notas de
-omision perdido, pie aplastado en un renglon.
-
-BCP 2019: 206 dias sin cobertura entre Pentecostes y Trinidad; clave rota
-properFerianull_N con Pascua temprana; fiestas fijas aplastando la Semana Santa;
-8 pericopas reducidas a un solo versiculo; todos los encabezados del librito
-perdidos al exportar a Word.
-
-Integracion: librito-pueblo.js consumia tres senales que app.js no enviaba;
-carrera de idioma entre generaciones concurrentes; Gradual sin guardar en
-currentMassState.
-
-Simulacion final: 124.188 generaciones del Misal y 13.515 dias del BCP 2019,
-sin excepciones ni divergencias.
-```
