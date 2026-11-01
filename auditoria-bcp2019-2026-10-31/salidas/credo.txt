@@ -1,0 +1,6 @@
+Credo íntegro Librito == principal: true 907 907
+Gloria principal len 478 IGUAL (texto íntegro contenido)
+Confesion principal len 570 IGUAL (texto íntegro contenido)
+Padrenuestro principal len 304 IGUAL (texto íntegro contenido)
+Agnus principal len 174 IGUAL (texto íntegro contenido)
+Sanctus principal len 143 IGUAL (texto íntegro contenido)

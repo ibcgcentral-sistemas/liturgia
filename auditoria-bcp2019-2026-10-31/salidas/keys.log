@@ -1,0 +1,62 @@
+Claves distintas emitidas por getDay (2024-2060): 367
+
+## Claves emitidas SIN entrada en BCPLectionary.SUNDAY: 270
+  de tipo feria (toman lecturas del domingo precedente, esperado): 270
+  NO feria (debieran tener lectura propia): 0 -> 
+
+## Claves emitidas SIN colecta propia: 273
+  ferias: 273;  NO feria: 
+  familias de feria: christmasFeria, epiphanyFeria, lentFeriaN_N, holyWeekFeria_N, easterFeriaN_N, pentecostFeria_N, properFeriaN_N, adventFeriaN_N, epiphanyOctaveFeria
+
+## Prefacio resuelto por clave emitida (familias)
+  lordsDay (1 claves): 01-01
+  christmas (4 claves): christmasFeria, christmas, christmasSunday, christmasSunday2
+  epiphany (11 claves): epiphany, epiphany1, epiphanyFeria, epiphany2, epiphany3, epiphany4, epiphany5, epiphanyOctaveFeria, epiphany6, epiphany7, epiphany8
+  common (208 claves): 01-18, 01-25, 03-19, pentecostFeria_1, pentecostFeria_2, pentecostFeria_3, pentecostFeria_4, pentecostFeria_5, pentecostFeria_6, properFeria3_1, properFeria3_2, properFeria4_3, properFeria4_4, 05-31 …
+  transfiguration (4 claves): 02-02, transfiguration, 03-25, 08-06
+  lent (38 claves): ashWednesday, lentFeria1_4, lentFeria1_5, lentFeria1_6, lent1, lentFeria1_1, lentFeria1_2, lentFeria2_3, lentFeria2_4, lentFeria2_5, lent2, lentFeria2_1, lentFeria2_2, lentFeria3_3 …
+  apostles (12 claves): 02-24, 04-25, 05-01, 06-11, 06-29, 07-25, 08-24, 09-21, 10-18, 10-28, 11-30, 12-21
+  holyWeek (7 claves): lent5, palmSunday, holyWeekFeria_1, holyWeekFeria_2, holyWeekFeria_3, goodFriday, holySaturday
+  maundyThursday (1 claves): maundyThursday
+  easter (48 claves): easter, easterFeria1_1, easterFeria1_2, easterFeria1_3, easterFeria1_4, easterFeria1_5, easterFeria1_6, easter2, easterFeria2_2, easterFeria2_3, easterFeria2_4, easterFeria2_5, easterFeria2_6, easter3 …
+  ascension (1 claves): ascension
+  pentecost (1 claves): pentecost
+  trinity (1 claves): trinitySunday
+  allSaints (1 claves): 11-01
+  christTheKing (1 claves): proper29
+  advent (28 claves): advent1, adventFeria1_1, adventFeria1_2, adventFeria1_3, adventFeria1_4, adventFeria1_5, adventFeria1_6, advent2, adventFeria2_1, adventFeria2_2, adventFeria2_3, adventFeria2_4, adventFeria2_5, adventFeria2_6 …
+  PREFACES NUNCA devueltos por getPreface para ninguna clave emitida (código muerto o fallo de mapeo): dedication, baptism, marriage, burial, penitential, thanksgiving, martyr, missionary, pastor, teacher, religious, ecumenist, socialReformer, churchReformer, anyCommemoration
+
+## Claves de BCPLectionary.SUNDAY que nunca emite el calendario (2024-2060): circumcision
+## Claves de BCPPropers.COLLECTS que nunca emite el calendario: circumcision
+## Claves en COLLECTS sin lectura en SUNDAY: 
+## Claves en SUNDAY sin colecta: holyWeekFeria_1, holyWeekFeria_2, holyWeekFeria_3
+
+## Claves emitidas con null/undefined/NaN: ninguna
+## Todas las claves emitidas con su recuento:
+  01-01:33  01-18:31  01-25:31  02-02:31  02-24:32  03-19:32  03-25:32  04-25:31  05-01:33  05-31:31  06-11:32  06-24:32  06-29:31  07-22:32  07-25:31  08-06:32  08-15:31  08-24:31  09-14:31  09-21:31  09-29:31  10-18:32  10-23:33  10-28:32  11-01:32  11-30:31  12-21:31  12-26:31  12-27:32  12-28:31  advent1:37  advent2:37  advent3:37  advent4:37  adventFeria1_1:32  adventFeria1_2:31  adventFeria1_3:33  adventFeria1_4:37  adventFeria1_5:37  adventFeria1_6:37  adventFeria2_1:37  adventFeria2_2:37  adventFeria2_3:37  adventFeria2_4:37  adventFeria2_5:37  adventFeria2_6:37  adventFeria3_1:37  adventFeria3_2:37  adventFeria3_3:37  adventFeria3_4:32  adventFeria3_5:32  adventFeria3_6:31  adventFeria4_1:27  adventFeria4_2:21  adventFeria4_3:17  adventFeria4_4:15  adventFeria4_5:10  adventFeria4_6:4  ascension:37  ashWednesday:37  christmas:37  christmasFeria:221  christmasSunday:37  christmasSunday2:22  easter:37  easter2:37  easter3:37  easter4:37  easter5:37  easter6:37  easter7:37  easterFeria1_1:37  easterFeria1_2:37  easterFeria1_3:37  easterFeria1_4:37  easterFeria1_5:37  easterFeria1_6:37  easterFeria2_1:21  easterFeria2_2:35  easterFeria2_3:34  easterFeria2_4:34  easterFeria2_5:35  easterFeria2_6:34  easterFeria3_1:34  easterFeria3_2:35  easterFeria3_3:35  easterFeria3_4:35  easterFeria3_5:35  easterFeria3_6:34  easterFeria4_1:35  easterFeria4_2:35  easterFeria4_3:35  easterFeria4_4:34  easterFeria4_5:33  easterFeria4_6:35  easterFeria5_1:35  easterFeria5_2:35  easterFeria5_3:34  easterFeria5_4:36  easterFeria5_5:35  easterFeria5_6:35  easterFeria6_1:36  easterFeria6_2:35  easterFeria6_3:37  easterFeria6_5:34  easterFeria6_6:36  easterFeria7_1:34  easterFeria7_2:35  easterFeria7_3:36  easterFeria7_4:37  easterFeria7_5:34  easterFeria7_6:35  epiphany:37  epiphany1:37  epiphany2:37  epiphany3:37  epiphany4:37  epiphany5:30  epiphany6:20  epiphany7:12  epiphany8:3  epiphanyFeria:1248  epiphanyOctaveFeria:113  goodFriday:37  holySaturday:37  holyWeekFeria_1:37  holyWeekFeria_2:37  holyWeekFeria_3:37  lent1:37  lent2:37  lent3:37  lent4:37  lent5:37  lentFeria1_1:34  lentFeria1_2:35  lentFeria1_4:35  lentFeria1_5:35  lentFeria1_6:37  lentFeria2_1:35  lentFeria2_2:31  lentFeria2_3:37  lentFeria2_4:36  lentFeria2_5:34  lentFeria2_6:35  lentFeria3_1:34  lentFeria3_2:34  lentFeria3_3:35  lentFeria3_4:36  lentFeria3_5:34  lentFeria3_6:33  lentFeria4_1:35  lentFeria4_2:35  lentFeria4_3:35  lentFeria4_4:34  lentFeria4_5:35  lentFeria4_6:34  lentFeria5_1:35  lentFeria5_2:34  lentFeria5_3:35  lentFeria5_4:34  lentFeria5_5:35  lentFeria5_6:35  lentFeria6_3:33  lentFeria6_4:35  lentFeria6_5:35  lentFeria6_6:35  maundyThursday:37  palmSunday:37  pentecost:37  pentecostFeria_1:36  pentecostFeria_2:32  pentecostFeria_3:34  pentecostFeria_4:37  pentecostFeria_5:34  pentecostFeria_6:33  proper10:37  proper11:37  proper12:37  proper13:37  proper14:37  proper15:37  proper16:37  proper17:37  proper18:37  proper19:37  proper20:37  proper21:37  proper22:37  proper23:37  proper24:37  proper25:37  proper26:37  proper27:37  proper28:37  proper29:37  proper3:2  proper4:12  proper5:19  proper6:26  proper7:36  proper8:37  proper9:37  properFeria10_1:37  properFeria10_2:37  properFeria10_3:37  properFeria10_4:37  properFeria10_5:37  properFeria10_6:37  properFeria11_1:31  properFeria11_2:31  properFeria11_3:32  properFeria11_4:31  properFeria11_5:33  properFeria11_6:32  properFeria12_1:33  properFeria12_2:32  properFeria12_3:32  properFeria12_4:31  properFeria12_5:31  properFeria12_6:32  properFeria13_1:32  properFeria13_2:31  properFeria13_3:31  properFeria13_4:32  properFeria13_5:31  properFeria13_6:33  properFeria14_1:37  properFeria14_2:37  properFeria14_3:37  properFeria14_4:37  properFeria14_5:37  properFeria14_6:37  properFeria15_1:33  properFeria15_2:32  properFeria15_3:32  properFeria15_4:31  properFeria15_5:31  properFeria15_6:32  properFeria16_1:32  properFeria16_2:31  properFeria16_3:33  properFeria16_4:32  properFeria16_5:32  properFeria16_6:31  properFeria17_1:37  properFeria17_2:37  properFeria17_3:37  properFeria17_4:37  properFeria17_5:37  properFeria17_6:37  properFeria18_1:37  properFeria18_2:37  properFeria18_3:37  properFeria18_4:37  properFeria18_5:37  properFeria18_6:37  properFeria19_1:32  properFeria19_2:31  properFeria19_3:33  properFeria19_4:32  properFeria19_5:32  properFeria19_6:31  properFeria20_1:32  properFeria20_2:31  properFeria20_3:33  properFeria20_4:32  properFeria20_5:32  properFeria20_6:31  properFeria21_1:31  properFeria21_2:32  properFeria21_3:31  properFeria21_4:33  properFeria21_5:32  properFeria21_6:32  properFeria22_1:37  properFeria22_2:37  properFeria22_3:37  properFeria22_4:37  properFeria22_5:37  properFeria22_6:37  properFeria23_1:37  properFeria23_2:37  properFeria23_3:37  properFeria23_4:37  properFeria23_5:37  properFeria23_6:37  properFeria24_1:31  properFeria24_2:33  properFeria24_3:32  properFeria24_4:32  properFeria24_5:31  properFeria24_6:31  properFeria25_1:26  properFeria25_2:26  properFeria25_3:26  properFeria25_4:25  properFeria25_5:28  properFeria25_6:26  properFeria26_1:31  properFeria26_2:33  properFeria26_3:32  properFeria26_4:32  properFeria26_5:31  properFeria26_6:31  properFeria27_1:37  properFeria27_2:37  properFeria27_3:37  properFeria27_4:37  properFeria27_5:37  properFeria27_6:37  properFeria28_1:37  properFeria28_2:37  properFeria28_3:37  properFeria28_4:37  properFeria28_5:37  properFeria28_6:37  properFeria29_1:42  properFeria29_2:47  properFeria29_3:53  properFeria29_4:54  properFeria29_5:59  properFeria29_6:64  properFeria2_1:2  properFeria3_1:10  properFeria3_2:8  properFeria3_3:7  properFeria3_4:6  properFeria3_5:4  properFeria3_6:2  properFeria4_1:15  properFeria4_2:17  properFeria4_3:15  properFeria4_4:11  properFeria4_5:11  properFeria4_6:11  properFeria5_1:21  properFeria5_2:22  properFeria5_3:18  properFeria5_4:16  properFeria5_5:19  properFeria5_6:19  properFeria6_1:36  properFeria6_2:35  properFeria6_3:32  properFeria6_4:31  properFeria6_5:31  properFeria6_6:28  properFeria7_1:31  properFeria7_2:31  properFeria7_3:32  properFeria7_4:31  properFeria7_5:33  properFeria7_6:31  properFeria8_1:32  properFeria8_2:31  properFeria8_3:33  properFeria8_4:32  properFeria8_5:32  properFeria8_6:31  properFeria9_1:37  properFeria9_2:37  properFeria9_3:37  properFeria9_4:37  properFeria9_5:37  properFeria9_6:37  transfiguration:37  trinitySunday:37
+
+## Entradas de SUNDAY con ciclos incompletos: ninguna
+## psalmAnt (antífona/estribillo del salmo) definido en 10 entradas clave/ciclo: christmas/all, epiphany/all, ashWednesday/all, easter/A, easter/B, easter/C, ascension/all, proper29/A, proper29/B, proper29/C; ausente en 200
+   días con salmo y SIN antífona: 12823 de 13515
+
+## Lecturas prestadas con TEMPORADA distinta a la del domingo precedente
+   107  lent (lentFeriaN_N) -> epiphany (transfiguration)  p.ej. 2024-02-15, 2024-02-16, 2024-02-17
+    79  epiphany (epiphanyOctaveFeria) -> christmas (christmasSundayN)  p.ej. 2025-01-07, 2025-01-08, 2025-01-09
+    15  christmas (christmasFeria) -> advent (adventN)  p.ej. 2028-12-29, 2028-12-30, 2029-12-29
+     4  epiphany (epiphanyOctaveFeria) -> christmas (christmasSunday)  p.ej. 2034-01-07, 2040-01-07, 2045-01-07
+  total: 205
+
+## Lecturas prestadas cuyo ciclo difiere del ciclo del día: 0
+
+## Colectas con texto idéntico en varias claves: ninguna
+## Colectas casi idénticas (Jaccard de palabras > 0.8): epiphany8~proper17 (0.91); transfiguration~08-06 (0.84); proper17~proper23 (0.83)
+
+## Pares (primera lectura + evangelio) idénticos en entradas distintas: 3
+   Numbers 6:22-27|Luke 2:15-21  <-  circumcision/all, 01-01/all
+   Isaiah 49:8-16|Matthew 6:24-34  <-  epiphany8/A, proper3/A
+   Exodus 34:29-35|Luke 9:28-36  <-  transfiguration/C, 08-06/all
+## Mismo Evangelio repetido en 2 o más domingos DENTRO DEL MISMO CICLO: 3
+   all|Luke 2:15-21  <-  circumcision, 01-01
+   A|Matthew 6:24-34  <-  epiphany8, proper3
+   C|Luke 6:39-49  <-  epiphany8, proper3

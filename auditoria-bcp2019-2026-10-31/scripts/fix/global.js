@@ -1,0 +1,10 @@
+﻿const fs = require('fs');
+const sw = JSON.parse(fs.readFileSync(__dirname + '/out/sweep.json', 'utf8'));
+const withMarks = sw.filter(r => r.marks && (Array.isArray(r.marks) ? r.marks.length : Object.keys(r.marks).length));
+const noEu = sw.filter(r => r.key === 'goodFriday' || r.key === 'holySaturday');
+console.log('días:', sw.length);
+console.log('con marcas de fallo (17 patrones):', withMarks.length, withMarks.slice(0,3).map(r => r.d + ' ' + JSON.stringify(r.marks)));
+console.log('sin colecta propia ni respaldo (collectFound=false):', sw.filter(r => r.collectFound === false).length);
+console.log('sin prefacio (prefaceLen=0):', sw.filter(r => !r.prefaceLen).length);
+console.log('Viernes/Sábado Santo en el barrido:', noEu.length, '| con marcas:', noEu.filter(r => r.marks && (Array.isArray(r.marks) ? r.marks.length : Object.keys(r.marks).length)).length);
+console.log('días sin primera lectura en HTML:', sw.filter(r => r.htmlNoFirst).length, '| sin evangelio:', sw.filter(r => r.htmlNoGospel).length, '| de ellos Viernes/Sábado Santo:', sw.filter(r => (r.htmlNoFirst || r.htmlNoGospel) && (r.key === 'goodFriday' || r.key === 'holySaturday')).length);

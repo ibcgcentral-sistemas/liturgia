@@ -1,0 +1,71 @@
+## 1) Campos
+  app.js guarda: date, dayInfo, readings, firstReading, secondReading, gospel, psalmVerses, psalmAnt, collect, preface, borrowedFromSunday
+  librito-pueblo.js consume (desestructuración): date, dayInfo, readings, firstReading, secondReading, gospel, psalmVerses, psalmAnt, collect, preface, borrowedFromSunday
+  consumidos que app.js NO guarda: ninguno
+  guardados que el Librito NO consume: ninguno
+  apariciones de cada campo en generateLibrito (>1 = realmente usado): {"date":4,"dayInfo":12,"readings":10,"firstReading":3,"secondReading":3,"gospel":6,"psalmVerses":4,"psalmAnt":2,"collect":2,"preface":3,"borrowedFromSunday":2}
+
+## 2) Comparación Librito vs liturgia: 13515 días
+  SIN divergencias
+
+## 3) Bloques de texto fijo del Librito frente al Ordinario de la liturgia principal
+  [std 2026-07-05] bloques del Librito analizados=44; segmentos (≥12 chars) NO hallados en la liturgia principal: 14
+       · «dios todopoderoso, cuyo yugo es fácil y cuya carga es ligera: concédenos llevar el yugo de tu hijo j»
+       · «nos sentamos.»
+       · «el santo evangelio de nuestro señor jesucristo.»
+       · «gloria a ti, cristo señor.»
+       · «el evangelio del señor.»
+       · «te alabamos, cristo señor.»
+       · «✠ inclinación ✠»
+       · «un lector dirige las peticiones. después de cada una:»
+       · «nos arrodillamos si podemos. todos juntos:»
+       · «se presentan el pan, el vino y las ofrendas del pueblo.»
+       · «el celebrante da la bendición final.»
+       · «✠ soli deo gloria ✠»
+       credo (Librito sin marcas de inclinación) vs credo principal: DIFIERE (len 7541 vs 907)
+  [lent 2026-03-08] bloques del Librito analizados=43; segmentos (≥12 chars) NO hallados en la liturgia principal: 14
+       · «dios todopoderoso, que sabes que no tenemos poder alguno en nosotros mismos para ayudarnos a nosotro»
+       · «nos sentamos.»
+       · «el santo evangelio de nuestro señor jesucristo.»
+       · «gloria a ti, cristo señor.»
+       · «el evangelio del señor.»
+       · «te alabamos, cristo señor.»
+       · «✠ inclinación ✠»
+       · «un lector dirige las peticiones. después de cada una:»
+       · «nos arrodillamos si podemos. todos juntos:»
+       · «se presentan el pan, el vino y las ofrendas del pueblo.»
+       · «el celebrante da la bendición final.»
+       · «✠ soli deo gloria ✠»
+       credo (Librito sin marcas de inclinación) vs credo principal: DIFIERE (len 7527 vs 907)
+  [easter 2026-04-12] bloques del Librito analizados=44; segmentos (≥12 chars) NO hallados en la liturgia principal: 16
+       · «dios todopoderoso y siempre viviente, que en la solemnidad pascual restauraste a la humanidad a la v»
+       · «nos sentamos.»
+       · «el santo evangelio de nuestro señor jesucristo.»
+       · «gloria a ti, cristo señor.»
+       · «el evangelio del señor.»
+       · «te alabamos, cristo señor.»
+       · «✠ inclinación ✠»
+       · «un lector dirige las peticiones. después de cada una:»
+       · «nos arrodillamos si podemos. todos juntos:»
+       · «se presentan el pan, el vino y las ofrendas del pueblo.»
+       · «el celebrante da la bendición final.»
+       · «salgamos en el nombre de cristo. aleluya, aleluya.»
+       credo (Librito sin marcas de inclinación) vs credo principal: DIFIERE (len 7569 vs 907)
+  [advent 2026-12-06] bloques del Librito analizados=43; segmentos (≥12 chars) NO hallados en la liturgia principal: 14
+       · «dios bendito, que hiciste que todas las sagradas escrituras fuesen escritas para nuestra enseñanza: »
+       · «nos sentamos.»
+       · «el santo evangelio de nuestro señor jesucristo.»
+       · «gloria a ti, cristo señor.»
+       · «el evangelio del señor.»
+       · «te alabamos, cristo señor.»
+       · «✠ inclinación ✠»
+       · «un lector dirige las peticiones. después de cada una:»
+       · «nos arrodillamos si podemos. todos juntos:»
+       · «se presentan el pan, el vino y las ofrendas del pueblo.»
+       · «el celebrante da la bendición final.»
+       · «✠ soli deo gloria ✠»
+       credo (Librito sin marcas de inclinación) vs credo principal: DIFIERE (len 7541 vs 907)
+
+## 4) Despedida con Aleluya: texto exacto (Pascua)
+  principal: Salgamos en el Nombre de Cristo, aleluya, aleluya. Pueblo Demos gracias a Dios, aleluya, aleluya.
+  Librito:   Salgamos en el Nombre de Cristo. Aleluya, aleluya. Pueblo: Demos gracias a Dios. Aleluya, aleluya.

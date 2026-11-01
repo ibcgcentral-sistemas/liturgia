@@ -1,0 +1,18 @@
+{
+ "finMitadFrase(11 refs)": 567,
+ "versiculosAusentesBdJ(critico)": 316,
+ "Sal45:11-18": 84,
+ "Sal22(22-30,24-30)": 172,
+ "Sal146:4-9": 78,
+ "Sal13": 79,
+ "08-15 (salmo==evangelio)": 31,
+ "05-31 (evangelio solapa salmo)": 31,
+ "01-01 prefacio El Día del Señor": 33,
+ "12-26/27/28 prefacio común": 94,
+ "01-18/01-25 prefacio común": 62,
+ "Buen Viernes+Sábado Santo (Eucaristía completa)": 74,
+ "Pentecostés (acl. pascual con rúbrica \"hasta Víspera\")": 37,
+ "fiesta fija en Cuaresma con Gloria+aclam.penitencial": 77,
+ "pentecostFeria (sin Aleluya)": 206,
+ "borrowed total": 10277
+}

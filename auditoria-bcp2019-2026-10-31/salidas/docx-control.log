@@ -1,0 +1,12 @@
+CONTROL: psalm-verse y scripture-text desactivados en memoria
+Días exportados: 36 (cada uno a Word principal + Librito)
+Átomos de texto (nodos de texto >=4 alfanuméricos) liturgia principal: 9066; AUSENTES del .docx: 1252
+Átomos del Librito: 6126; AUSENTES del .docx: 327
+
+Ausentes por clase del nodo padre:
+    1252  main · scripture-text
+     327  lib · p
+
+Ejemplos:
+  [main · scripture-text] 2026-01-01: «Habló Yahveh a Moisés y le dijo:»
+  [lib · p] 2026-01-01: «¡Oh Yahveh, Señor nuestro, qué glorioso tu nombre por toda la tierra! Tú que exaltaste tu »

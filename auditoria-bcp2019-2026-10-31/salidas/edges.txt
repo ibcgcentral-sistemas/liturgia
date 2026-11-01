@@ -1,0 +1,120 @@
+## A) Pascua
+  computeEaster vs algoritmo de Oudin, años 1900-2100: discrepancias = 0
+  Pascua más temprana en 2024-2060: 2035-03-25; más tardía: 2038-04-25
+  Pascuas conocidas (control externo): 2025-04-20, 2026-04-05, 2027-03-28, 2038-04-25, 2035-03-25: 2025-04-20, 2026-04-05, 2027-03-28, 2038-04-25, 2035-03-25
+
+## B) Ciclo dominical
+  Adviento I (domingo 27-nov..3-dic) vs getFeastDates().advent1: discrepancias = 0
+  Días 2023-2061 cuyo ciclo difiere del cálculo independiente (A=Adviento 2022, 2025, ...): 0
+  Cambios de ciclo entre días consecutivos: 39; que NO caen en el 1.º domingo de Adviento: 0
+  Secuencia de cambios: 2023-12-03 A→B, 2024-12-01 B→C, 2025-11-30 C→A, 2026-11-29 A→B, 2027-11-28 B→C, 2028-12-03 C→A …
+  Ciclo en Adviento I (Misal vs BCP) 2025-11-30: A (esperado A); 2025-11-29: C (esperado C)
+  Ciclo el 2026-10-31 (hoy): A
+
+## C) Transiciones de temporada día a día (2024-2060)
+    37  christmas → epiphany  p.ej. 2024-01-06, 2025-01-06, 2026-01-06
+    37  epiphany → lent  p.ej. 2024-02-14, 2025-03-05, 2026-02-18
+    37  lent → holyWeek  p.ej. 2024-03-24, 2025-04-13, 2026-03-29
+    37  holyWeek → easter  p.ej. 2024-03-31, 2025-04-20, 2026-04-05
+    37  easter → pentecost  p.ej. 2024-05-19, 2025-06-08, 2026-05-24
+    37  pentecost → ordinary  p.ej. 2024-05-26, 2025-06-15, 2026-05-31
+    37  ordinary → advent  p.ej. 2024-12-01, 2025-11-30, 2026-11-29
+    37  advent → christmas  p.ej. 2024-12-25, 2025-12-25, 2026-12-25
+  Parpadeos de temporada (A→B→A en 1 día): 0
+  Trinidad: season="ordinary" (el día anterior es "pentecost")
+  Matriz temporada/color (días): advent/red:46  advent/rose:37  advent/violet:840  christmas/red:62  christmas/white:382  easter/red:65  easter/white:1748  epiphany/green:1424  epiphany/red:11  epiphany/white:317  holyWeek/red:74  holyWeek/violet:148  holyWeek/white:37  lent/red:21  lent/rose:37  lent/violet:1329  lent/white:56  ordinary/green:6096  ordinary/red:289  ordinary/white:237  pentecost/green:206  pentecost/red:47  pentecost/white:6
+  colores fuera de {white,red,violet,rose,green}: 0
+
+## D) Domingos
+  Domingos 2024-2060: 1930
+  Domingos cuyo rango no es sunday/principal: 0
+  Domingos con clave de feria: 0
+  Días NO domingo con rango sunday: 0
+  Claves de domingo repetidas dentro de un mismo año litúrgico: 0
+  Domingos por año litúrgico (años completos): min=52 máx=53
+  Secuencia 2025-26 (año A): advent1 advent2 advent3 advent4 christmasSunday christmasSunday2 epiphany1 epiphany2 epiphany3 epiphany4 epiphany5 transfiguration lent1 lent2 lent3 lent4 lent5 palmSunday easter easter2 easter3 easter4 easter5 easter6 easter7 pentecost trinitySunday proper5 proper6 proper7 proper8 proper9 proper10 proper11 proper12 proper13 proper14 proper15 proper16 proper17 proper18 proper19 proper20 proper21 proper22 proper23 proper24 proper25 proper26 proper27 proper28 proper29
+  Secuencia 2037-38 (Pascua 2038-04-25): advent1 advent2 advent3 advent4 christmasSunday christmasSunday2 epiphany1 epiphany2 epiphany3 epiphany4 epiphany5 epiphany6 epiphany7 epiphany8 transfiguration lent1 lent2 lent3 lent4 lent5 palmSunday easter easter2 easter3 easter4 easter5 easter6 easter7 pentecost trinitySunday proper8 proper9 proper10 proper11 proper12 proper13 proper14 proper15 proper16 proper17 proper18 proper19 proper20 proper21 proper22 proper23 proper24 proper25 proper26 proper27 proper28 proper29
+  Secuencia 2034-35 (Pascua 2035-03-25): advent1 advent2 advent3 advent4 christmasSunday epiphany1 epiphany2 epiphany3 epiphany4 transfiguration lent1 lent2 lent3 lent4 lent5 palmSunday easter easter2 easter3 easter4 easter5 easter6 easter7 pentecost trinitySunday proper3 proper4 proper5 proper6 proper7 proper8 proper9 proper10 proper11 proper12 proper13 proper14 proper15 proper16 proper17 proper18 proper19 proper20 proper21 proper22 proper23 proper24 proper25 proper26 proper27 proper28 proper29
+
+## E) Fiestas fijas (30 del santoral): destino en 2024-2060
+  celebradas en su fecha: 933; trasladadas (con destino verificado): 14; SUPRIMIDAS sin traslado: 163
+  causa de la supresión: {"domingo (properN)":82,"domingo (epiphanyN)":20,"domingo (adventN)":12,"domingo (christmasSunday)":21,"domingo (trinitySunday)":4,"domingo (easterN)":9,"domingo (lentN)":6,"domingo (palmSunday)":2,"domingo (easter)":3,"domingo (transfiguration)":3,"día no domingo (ascension)":1}
+  traslados (muestra): 2024 03-25→2024-04-08 (La Anunciación del Señ); 2025 04-25→2025-04-28 (San Marcos, Evangelist); 2027 03-25→2027-04-05 (La Anunciación del Señ); 2030 04-25→2030-04-29 (San Marcos, Evangelist); 2032 03-25→2032-04-05 (La Anunciación del Señ); 2035 03-19→2035-04-02 (San José, Esposo de la); 2038 05-01→2038-05-03 (SS. Felipe y Santiago,); 2041 04-25→2041-04-29 (San Marcos, Evangelist); 2043 03-25→2043-04-06 (La Anunciación del Señ); 2046 03-19→2046-04-02 (San José, Esposo de la); 2052 04-25→2052-04-29 (San Marcos, Evangelist); 2054 03-25→2054-04-06 (La Anunciación del Señ); 2057 04-25→2057-04-30 (San Marcos, Evangelist); 2059 03-25→2059-04-07 (La Anunciación del Señ)
+  Traslados cuyo destino NO devuelve la fiesta: 0
+  suprimidas por fiesta: 09-29:6 02-02:6 06-29:6 08-24:6 09-14:6 09-21:6 11-30:6 12-21:6 12-28:6 01-18:6 01-25:6 05-31:6 04-25:6 07-25:6 08-15:6 12-26:6 10-18:5 11-01:5 12-27:5 03-19:5 06-11:5 08-06:5 03-25:5 06-24:5 07-22:5 10-28:5 02-24:5 05-01:4 10-23:4 01-01:4
+  suprimidas en día NO domingo (y sin traslado): 1 → 2057 05-31 (jue) → ascension
+
+## F) Bisiestos y bordes
+  29-feb en bisiestos 2024,2028,2032,2036,2040,2044,2048,2052,2056,2060: anomalías = 0
+  29-feb-2024: {"name":"Thursday in Lent Week 3","nameEs":"Jueves de Cuaresma (semana 3)","color":"violet","rank":"feria","key":"lentFeria3_4","season":"lent","cycle":"B","isFixed":false}
+  1-ene en cada día de la semana → clave: 2024(lun)=01-01  2023(dom)=christmasSunday  2025(mié)=01-01  2026(jue)=01-01  2027(vie)=01-01  2028(sáb)=01-01  2029(lun)=01-01
+  31-dic en 2024-2060: claves distintas: christmasFeria, christmasSunday
+  25-dic en 2024-2060: christmas
+  6-ene (Epifanía) en 2024-2060: epiphany
+
+## G) Invariancia
+  base 12:00 local: 0cd2ec2699fa(13515)
+  hora 0:0:0 → 5018a850e808(13515)  <-- DIFIERE
+  hora 0:30:0 → 5018a850e808(13515)  <-- DIFIERE
+  hora 23:59:59 → 0cd2ec2699fa(13515) IGUAL
+  hora 6:0:0 → 5018a850e808(13515)  <-- DIFIERE
+  hora 18:0:0 → 0cd2ec2699fa(13515) IGUAL
+  días cuya clave/temporada cambia entre 12:00 y 00:00: 175  2024-02-21 lentFeria2_3→lentFeria1_3; 2024-02-28 lentFeria3_3→lentFeria2_3; 2024-03-06 lentFeria4_3→lentFeria3_3; 2024-03-13 lentFeria5_3→lentFeria4_3; 2024-03-20 lentFeria6_3→lentFeria5_3; 2025-03-12 lentFeria2_3→lentFeria1_3
+  días cuya clave/temporada cambia entre 12:00 y 23:59:59: 0
+
+## H) Nombres de ferias de Cuaresma (nameEs) — año 2026 (Pascua 2026-04-05)
+  02-18 mié: Miércoles de Ceniza
+  02-19 jue: Jueves de Cuaresma (semana 1)
+  02-20 vie: Viernes de Cuaresma (semana 1)
+  02-21 sáb: Sábado de Cuaresma (semana 1)
+  02-22 dom: Primer Domingo de Cuaresma
+  02-23 lun: Lunes de Cuaresma (semana 1)
+  02-24 mar: San Matías, Apóstol
+  02-25 mié: Miércoles de Cuaresma (semana 2)
+  02-26 jue: Jueves de Cuaresma (semana 2)
+  02-27 vie: Viernes de Cuaresma (semana 2)
+  02-28 sáb: Sábado de Cuaresma (semana 2)
+  03-01 dom: Segundo Domingo de Cuaresma
+  03-02 lun: Lunes de Cuaresma (semana 2)
+  03-03 mar: Martes de Cuaresma (semana 2)
+  03-04 mié: Miércoles de Cuaresma (semana 3)
+  03-05 jue: Jueves de Cuaresma (semana 3)
+  03-06 vie: Viernes de Cuaresma (semana 3)
+  03-07 sáb: Sábado de Cuaresma (semana 3)
+  03-08 dom: Tercer Domingo de Cuaresma
+  03-09 lun: Lunes de Cuaresma (semana 3)
+  03-10 mar: Martes de Cuaresma (semana 3)
+  03-11 mié: Miércoles de Cuaresma (semana 4)
+  03-12 jue: Jueves de Cuaresma (semana 4)
+  03-13 vie: Viernes de Cuaresma (semana 4)
+  03-14 sáb: Sábado de Cuaresma (semana 4)
+  03-15 dom: Cuarto Domingo de Cuaresma (Laetare)
+  03-16 lun: Lunes de Cuaresma (semana 4)
+  03-17 mar: Martes de Cuaresma (semana 4)
+  03-18 mié: Miércoles de Cuaresma (semana 5)
+  03-19 jue: San José, Esposo de la Virgen María
+  03-20 vie: Viernes de Cuaresma (semana 5)
+  03-21 sáb: Sábado de Cuaresma (semana 5)
+  03-22 dom: Quinto Domingo de Cuaresma (Domingo de Pasión)
+  03-23 lun: Lunes de Cuaresma (semana 5)
+  03-24 mar: Martes de Cuaresma (semana 5)
+  03-25 mié: La Anunciación del Señor
+  03-26 jue: Jueves de Cuaresma (semana 6)
+  03-27 vie: Viernes de Cuaresma (semana 6)
+  03-28 sáb: Sábado de Cuaresma (semana 6)
+  ferias de Cuaresma (lentFeria): 1144; con número de semana distinto del de la semana litúrgica real: 802  (70%)
+     · 2024-02-15 Jueves de Cuaresma (semana 1) (clave lentFeria1_4; correcto: semana tras Ceniza)
+     · 2024-02-16 Viernes de Cuaresma (semana 1) (clave lentFeria1_5; correcto: semana tras Ceniza)
+     · 2024-02-17 Sábado de Cuaresma (semana 1) (clave lentFeria1_6; correcto: semana tras Ceniza)
+     · 2024-02-21 Miércoles de Cuaresma (semana 2) (clave lentFeria2_3; correcto: semana 1)
+     · 2024-02-22 Jueves de Cuaresma (semana 2) (clave lentFeria2_4; correcto: semana 1)
+     · 2024-02-23 Viernes de Cuaresma (semana 2) (clave lentFeria2_5; correcto: semana 1)
+  control — ferias de Pascua con semana incorrecta: 0 de 1429
+  control — ferias de Adviento con semana incorrecta: 0 de 729
+  diffDays(ceniza 00:00, ceniza+1 a las 12:00) devuelto por el código (vía clave): ver Cal… no exportado; evidencia: lentFeria2_3 (miércoles tras 1.º dom.) = 2024-02-21
+
+## I) Propios (domingos tras Trinidad)
+  primer Propio tras Trinidad por año: 2024:P4 2025:P7 2026:P5 2027:P4 2028:P6 2029:P4 2030:P7 2031:P6 2032:P4 2033:P7 2034:P5 2035:P3 2036:P6 2037:P5 2038:P8 2039:P6 2040:P4 2041:P7 2042:P5 2043:P4 2044:P7 2045:P5 2046:P3 2047:P6 2048:P5 2049:P7 2050:P6 2051:P4 2052:P7 2053:P5 2054:P4 2055:P7 2056:P4 2057:P7 2058:P6 2059:P4 2060:P7
+  Propio 29 (Cristo Rey) que NO precede inmediatamente a Adviento I: 0
+  saltos/repeticiones en la numeración consecutiva de Propios dentro de un año: 0
+  domingo siguiente a Trinidad: {"proper4":10,"proper7":10,"proper5":7,"proper6":7,"proper3":2,"proper8":1}

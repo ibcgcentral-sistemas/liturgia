@@ -1,0 +1,7 @@
+Días exportados: 186 (cada uno a Word principal + Librito)
+Átomos de texto (nodos de texto >=4 alfanuméricos) liturgia principal: 45787; AUSENTES del .docx: 0
+Átomos del Librito: 30770; AUSENTES del .docx: 0
+
+Ausentes por clase del nodo padre:
+
+Ejemplos:

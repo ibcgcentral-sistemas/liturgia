@@ -1,0 +1,1241 @@
+=== PDF p.725 (libro p.717) colstart A=101.0471 B=184.9322 C=271.4713 width=387.0
+-- col L
+  y=  59 x= 45.0 purpose.The
+  y=  72 x= 45.0 a regular pattern
+  y=  85 x= 45.0 Sunday customary
+  y=  98 x= 45.0 alternate readings
+  y= 110 x= 45.0 of a Congregation
+  y= 123 x= 45.0 shortened or
+  y= 149 x= 45.0 Feasts of Dedication,
+  y= 162 x= 45.0 setting, or days
+  y= 174 x= 45.0 may employ
+  y= 187 x= 45.0 a given Sunday.
+  y= 218 x= 76.0 sunday,
+  y= 257 x= 38.7 day
+  y= 297 x= 38.7 the first
+  y= 308 x= 38.7 sunday in
+  y= 319 x= 38.7 advent
+  y= 341 x= 38.7 the second
+  y= 352 x= 38.7 sunday in
+  y= 363 x= 38.7 advent
+  y= 392 x= 38.7 the third
+  y= 403 x= 38.7 sunday in
+  y= 414 x= 38.7 advent
+  y= 438 x= 38.7 the fourth
+  y= 449 x= 38.7 sunday in
+  y= 460 x= 38.7 advent
+  y= 471 x= 38.7 Annunciation  [ITALIC]
+  y= 505 x= 42.7 sunday, holy
+-- col A
+  y=  59 x=104.6 Bishop of the Diocese
+  y=  72 x=123.7 of fewer than
+  y=  85 x=132.6 of a Congregation,
+  y=  98 x=129.2 or a “sermon
+  y= 110 x=131.6 may direct
+  y= 123 x=106.2 lengthened, provided
+  y= 149 x=144.8 special observances
+  y= 162 x=116.6 of national or provincial
+  y= 174 x=103.6 lessons other than
+  y= 218 x=127.4 holy day,
+  y= 233 x=146.0 l e c t
+  y= 257 x=101.0 year a
+  y= 275 x=170.9 advent
+  y= 293 x=101.0 Isa 2:1-5
+  y= 303 x=101.0 Ps 122
+  y= 313 x=101.0 Rom 13:8-14
+  y= 323 x=101.0 Matt 24:29-44
+  y= 338 x=101.0 Isa 11:1-10
+  y= 347 x=101.0 Ps 72:1-15(16-19)
+  y= 357 x=101.0 Rom 15:1-13
+  y= 367 x=101.0 Matt 3:1-12
+  y= 388 x=101.0 Isa 35:1-10
+  y= 398 x=101.0 Ps 146
+  y= 407 x=101.0 James 5:7-20
+  y= 417 x=101.0 Matt 11:2-19
+  y= 440 x=101.0 Isa 7:10-17
+  y= 450 x=101.0 Ps 24
+  y= 459 x=101.0 Rom 1:1-7
+  y= 469 x=101.0 Matt 1:18-25
+  y= 505 x=116.7 day, and commemoration  [ITALIC]
+-- col B
+  y=  59 x=209.7 is to be consulted
+  y=  72 x=187.9 four lessons is adopted
+  y=  85 x=221.4 or when a
+  y=  98 x=190.0 series” is proposed.
+  y= 110 x=182.8 that an appointed lesson
+  y= 123 x=205.9 the plain sense
+  y= 149 x=235.8 customary
+  y= 162 x=229.9 mourning
+  y= 174 x=189.6 those regularly established
+  y= 218 x=209.1 commemoration
+  y= 219 x=189.5 and  [ITALIC]
+  y= 233 x=185.1 i o n a r y
+  y= 257 x=184.9 year b
+  y= 293 x=184.9 Isa 64:1-9a
+  y= 302 x=233.8 v
+  y= 303 x=184.9 Ps 80 or 80:1-7  [ITALIC]
+  y= 313 x=184.9 1 Cor 1:1-9
+  y= 323 x=184.9 Mark 13:24-37
+  y= 338 x=184.9 Isa 40:1-11
+  y= 347 x=184.9 Ps 85
+  y= 357 x=184.9 2 Pet 3:8-18
+  y= 367 x=184.9 Mark 1:1-8
+  y= 383 x=184.9 Isa 65:17-25
+  y= 393 x=184.9 Ps 126
+  y= 403 x=184.9 1 Thess 5:12-28
+  y= 412 x=184.9 John 3:22-30 or  [ITALIC]
+  y= 422 x=184.9 John 1:19-28
+  y= 440 x=184.9 2 Sam 7:1-17
+  y= 450 x=184.9 Ps 132:(1-7) 8-19
+  y= 459 x=184.9 Rom 16:25-27
+  y= 469 x=184.9 Luke 1:26-38
+  y= 505 x=254.1 lectionary
+-- col C
+  y=  59 x=292.5 where
+  y=  72 x=294.8 as the
+  y=  85 x=269.8 pattern of
+  y=  98 x=277.7 The rector
+  y= 110 x=298.0 be
+  y= 123 x=276.4 is retained.
+  y= 149 x=286.3 in the local
+  y= 162 x=278.5 or celebration
+  y= 174 x=313.7 for
+  y= 257 x=271.5 year c
+  y= 293 x=271.5 Zech 14:(1-2)3-9
+  y= 303 x=271.5 Ps 50 or 50:1-6  [ITALIC]
+  y= 313 x=271.5 1 Thess 3:6-13
+  y= 323 x=271.5 Luke 21:25-33
+  y= 338 x=271.5 Mal 3:1-5
+  y= 347 x=271.5 Ps 126
+  y= 357 x=271.5 1 Cor 4:(1-7)8-21
+  y= 367 x=271.5 Luke 3:1-6
+  y= 388 x=271.5 Zeph 3:14-20
+  y= 398 x=271.5 Ps 85
+  y= 407 x=271.5 Phil 4:4-9
+  y= 417 x=271.5 Luke 3:7-20
+  y= 440 x=271.5 Mic 5:2-5a
+  y= 448 x=302.2 v
+  y= 450 x=271.5 Ps 80:1-7
+  y= 459 x=271.5 Heb 10:1-10
+  y= 469 x=271.5 Luke 1:39-56
+  y= 504 x=324.6 717
+=== PDF p.726 (libro p.718) colstart A=91.1671 B=175.0522 C=261.5912 width=387.0
+-- col L
+  y=  64 x= 28.8 day
+  y= 109 x= 28.8 christmas
+  y= 118 x= 28.8 day i
+  y= 153 x= 28.8 christmas
+  y= 162 x= 28.8 day ii
+  y= 197 x= 28.8 christmas
+  y= 206 x= 28.8 day iii
+  y= 237 x= 28.8 the first
+  y= 246 x= 28.8 sunday of
+  y= 255 x= 28.8 christmas
+  y= 276 x= 28.8 the
+  y= 285 x= 28.8 circumcision
+  y= 294 x= 28.8 & holy name
+  y= 303 x= 28.8 of our lord
+  y= 312 x= 28.8 jesus christ
+  y= 321 x= 28.8 January 1  [ITALIC]
+  y= 346 x= 28.8 the second
+  y= 355 x= 28.8 sunday of
+  y= 364 x= 28.8 christmas
+  y= 409 x= 28.8 the epiphany
+  y= 420 x= 28.8 of our lord
+  y= 431 x= 28.8 jesus christ
+  y= 442 x= 28.8 January 6  [ITALIC]
+  y= 483 x= 24.7 V
+  y= 485 x= 29.2 Psalm verse numbers  [ITALIC]
+  y= 504 x= 45.0 718
+  y= 505 x= 70.8 c a l
+-- col A
+  y=  64 x= 91.2 year a
+  y=  82 x=150.9 christmas
+  y=  98 x= 91.2 Isa 9:1-7
+  y= 108 x= 91.2 Ps 96
+  y= 118 x= 91.2 Titus 2:11-14
+  y= 128 x= 91.2 Luke 2:1-14(15-20)
+  y= 143 x= 91.2 Isa 62:6-12
+  y= 153 x= 91.2 Ps 97
+  y= 162 x= 91.2 Titus 3:4-7
+  y= 172 x= 91.2 Luke 2:(1-14)15-20
+  y= 187 x= 91.2 Isa 52:7-12
+  y= 197 x= 91.2 Ps 98
+  y= 207 x= 91.2 Heb 1:1-12
+  y= 216 x= 91.2 John 1:1-18
+  y= 231 x= 91.2 Isa 61:10—62:5
+  y= 239 x=133.9 v
+  y= 241 x= 91.2 Ps 147:12-20
+  y= 251 x= 91.2 Gal 3:23—4:7
+  y= 261 x= 91.2 John 1:1-18
+  y= 283 x= 91.2 Ex 34:1-9
+  y= 293 x= 91.2 Ps 8
+  y= 303 x= 91.2 Rom 1:1-7
+  y= 313 x= 91.2 Luke 2:15-21
+  y= 335 x= 91.2 Jer 31:7-14
+  y= 345 x= 91.2 Ps 84
+  y= 355 x= 91.2 Eph 1:3-14
+  y= 365 x= 91.2 Luke 2:41-52 or  [ITALIC]
+  y= 375 x= 91.2 Matt 2:1-12
+  y= 391 x=155.4 epiphany
+  y= 411 x= 91.2 Isa 60:1-9
+  y= 421 x= 91.2 Ps 72 or 72:1-11  [ITALIC]
+  y= 431 x= 91.2 Eph 3:1-13
+  y= 440 x= 91.2 Matt 2:1-12
+  y= 485 x= 93.6 correspond to the New Coverdale  [ITALIC]
+  y= 505 x= 92.4 e n da r s & l e c
+-- col B
+  y=  64 x=175.1 year b
+  y=  98 x=175.1 Isa 9:1-7
+  y= 108 x=175.1 Ps 96
+  y= 118 x=175.1 Titus 2:11-14
+  y= 128 x=175.1 Luke 2:1-14(15-20)
+  y= 143 x=175.1 Isa 62:6-12
+  y= 153 x=175.1 Ps 97
+  y= 162 x=175.1 Titus 3:4-7
+  y= 172 x=175.1 Luke 2:(1-14)15-20
+  y= 187 x=175.1 Isa 52:7-12
+  y= 197 x=175.1 Ps 98
+  y= 207 x=175.1 Heb 1:1-12
+  y= 216 x=175.1 John 1:1-18
+  y= 231 x=175.1 Isa 61:10—62:5
+  y= 239 x=217.8 v
+  y= 241 x=175.1 Ps 147:12-20
+  y= 251 x=175.1 Gal 3:23—4:7
+  y= 261 x=175.1 John 1:1-18
+  y= 283 x=175.1 Ex 34:1-9
+  y= 293 x=175.1 Ps 8
+  y= 303 x=175.1 Rom 1:1-7
+  y= 313 x=175.1 Luke 2:15-21
+  y= 335 x=175.1 Jer 31:7-14
+  y= 345 x=175.1 Ps 84
+  y= 355 x=175.1 Eph 1:3-14
+  y= 365 x=175.1 Matt 2:13-23 or  [ITALIC]
+  y= 375 x=175.1 Matt 2:1-12
+  y= 411 x=175.1 Isa 60:1-9
+  y= 421 x=175.1 Ps 72 or 72:1-11  [ITALIC]
+  y= 431 x=175.1 Eph 3:1-13
+  y= 440 x=175.1 Matt 2:1-12
+  y= 485 x=194.1 Psalter found in this book  [ITALIC]
+  y= 505 x=175.0 t i on a r i e s
+-- col C
+  y=  64 x=261.6 year c
+  y=  98 x=261.6 Isa 9:1-7
+  y= 108 x=261.6 Ps 96
+  y= 118 x=261.6 Titus 2:11-14
+  y= 128 x=261.6 Luke 2:1-14(15-20)
+  y= 143 x=261.6 Isa 62:6-12
+  y= 153 x=261.6 Ps 97
+  y= 162 x=261.6 Titus 3:4-7
+  y= 172 x=261.6 Luke 2:(1-14)15-20
+  y= 187 x=261.6 Isa 52:7-12
+  y= 197 x=261.6 Ps 98
+  y= 207 x=261.6 Heb 1:1-12
+  y= 216 x=261.6 John 1:1-18
+  y= 231 x=261.6 Isa 61:10—62:5
+  y= 239 x=304.4 v
+  y= 241 x=261.6 Ps 147:12-20
+  y= 251 x=261.6 Gal 3:23—4:7
+  y= 261 x=261.6 John 1:1-18
+  y= 283 x=261.6 Ex 34:1-9
+  y= 293 x=261.6 Ps 8
+  y= 303 x=261.6 Rom 1:1-7
+  y= 313 x=261.6 Luke 2:15-21
+  y= 335 x=261.6 Jer 31:7-14
+  y= 345 x=261.6 Ps 84
+  y= 355 x=261.6 Eph 1:3-14
+  y= 365 x=261.6 Luke 2:22-40 or  [ITALIC]
+  y= 375 x=261.6 Matt 2:1-12
+  y= 411 x=261.6 Isa 60:1-9
+  y= 421 x=261.6 Ps 72 or 72:1-11  [ITALIC]
+  y= 431 x=261.6 Eph 3:1-13
+  y= 440 x=261.6 Matt 2:1-12
+=== PDF p.727 (libro p.719) colstart A=111.1671 B=195.0522 C=281.5912 width=387.0
+-- col L
+  y=  62 x= 48.8 day
+  y=  78 x= 48.8 the first
+  y=  89 x= 48.8 sunday of
+  y= 100 x= 48.8 epiphany
+  y= 111 x= 48.8 Baptism of our  [ITALIC]
+  y= 122 x= 48.8 Lord  [ITALIC]
+  y= 142 x= 48.8 the second
+  y= 153 x= 48.8 sunday of
+  y= 164 x= 48.8 epiphany
+  y= 187 x= 48.8 the third
+  y= 198 x= 48.8 sunday of
+  y= 209 x= 48.8 epiphany
+  y= 232 x= 48.8 the fourth
+  y= 243 x= 48.8 sunday of
+  y= 254 x= 48.8 epiphany
+  y= 272 x= 48.8 presentation of
+  y= 283 x= 48.8 christ in
+  y= 294 x= 48.8 the temple
+  y= 305 x= 48.8 February 2  [ITALIC]
+  y= 329 x= 48.8 the fifth
+  y= 340 x= 48.8 sunday of
+  y= 351 x= 48.8 epiphany
+  y= 378 x= 48.8 the sixth
+  y= 389 x= 48.8 sunday of
+  y= 400 x= 48.8 epiphany
+  y= 422 x= 48.8 the seventh
+  y= 433 x= 48.8 sunday of
+  y= 444 x= 48.8 epiphany
+  y= 505 x= 42.8 sunday, holy
+-- col A
+  y=  62 x=111.2 year a
+  y=  81 x=111.2 Isa 42:1-9
+  y=  89 x=145.9 v
+  y=  91 x=111.2 Ps 89:1-29 or  [ITALIC]
+  y=  99 x=148.4 v
+  y= 100 x=119.2 89:20-29
+  y= 110 x=111.2 Acts 10:34-38
+  y= 120 x=111.2 Matt 3:13-17
+  y= 138 x=111.2 Ex 12:21-28
+  y= 147 x=145.9 v
+  y= 148 x=111.2 Ps 40:1-11
+  y= 158 x=111.2 1 Cor 1:1-9
+  y= 168 x=111.2 John 1:29-42
+  y= 184 x=111.2 Amos 3:1-11
+  y= 192 x=149.9 v
+  y= 193 x=111.2 Ps 139:1-18
+  y= 203 x=111.2 1 Cor 1:10-17
+  y= 213 x=111.2 Matt 4:12-22
+  y= 228 x=111.2 Mic 6:1-8
+  y= 236 x=145.9 v
+  y= 238 x=111.2 Ps 37:1-11
+  y= 248 x=111.2 1 Cor 1:18-31
+  y= 257 x=111.2 Matt 5:1-12
+  y= 274 x=111.2 Mal 3:1-4
+  y= 284 x=111.2 Ps 84
+  y= 294 x=111.2 Heb 2:14-18
+  y= 303 x=111.2 Luke 2:22-40
+  y= 325 x=111.2 2 Kings 22:8-20
+  y= 335 x=111.2 Ps 27
+  y= 345 x=111.2 1 Cor 2:1-16
+  y= 354 x=111.2 Matt 5:13-20
+  y= 374 x=111.2 Ecclesiasticus 15:11-20  [ITALIC]
+  y= 384 x=111.2 Ps 119:(1-8)9-16
+  y= 394 x=111.2 1 Cor 3:1-9
+  y= 404 x=111.2 Matt 5:21-37
+  y= 418 x=111.2 Lev 19:1-2,9-18
+  y= 427 x=168.0 v
+  y= 428 x=111.2 Ps 71 or 71:11-23  [ITALIC]
+  y= 438 x=111.2 1 Cor 3:10-23
+  y= 448 x=111.2 Matt 5:38-48
+  y= 505 x=116.8 day, and commemoration  [ITALIC]
+-- col B
+  y=  62 x=195.1 year b
+  y=  81 x=195.1 Isa 42:1-9
+  y=  89 x=229.8 v
+  y=  91 x=195.1 Ps 89:1-29 or  [ITALIC]
+  y=  99 x=232.3 v
+  y= 100 x=203.1 89:20-29
+  y= 110 x=195.1 Acts 10:34-38
+  y= 120 x=195.1 Mark 1:7-11
+  y= 138 x=195.1 1 Sam 3:1-20
+  y= 147 x=250.3 v
+  y= 148 x=195.1 Ps 63:1-9(10-12)
+  y= 158 x=195.1 1 Cor 6:9-20
+  y= 168 x=195.1 John 1:43-51
+  y= 184 x=195.1 Jer 3:19-4:4
+  y= 193 x=195.1 Ps 130
+  y= 203 x=195.1 1 Cor 7:17-24
+  y= 213 x=195.1 Mark 1:14-20
+  y= 228 x=195.1 Deut 18:15-22
+  y= 238 x=195.1 Ps 111
+  y= 248 x=195.1 1 Cor 8:1-13
+  y= 257 x=195.1 Mark 1:21-28
+  y= 274 x=195.1 Mal 3:1-4
+  y= 284 x=195.1 Ps 84
+  y= 294 x=195.1 Heb 2:14-18
+  y= 303 x=195.1 Luke 2:22-40
+  y= 320 x=195.1 2 Kings 4:8-21
+  y= 330 x=195.1 (22-31)32-37
+  y= 340 x=195.1 Ps 142
+  y= 349 x=195.1 1 Cor 9:16-23
+  y= 359 x=195.1 Mark 1:29-39
+  y= 374 x=195.1 2 Kings 5:1-15a
+  y= 384 x=195.1 Ps 42:1-7(8-15)
+  y= 394 x=195.1 1 Cor 9:24-27
+  y= 404 x=195.1 Mark 1:40-45
+  y= 418 x=195.1 Isa 43:18-25
+  y= 428 x=195.1 Ps 32
+  y= 438 x=195.1 2 Cor 1:18-22
+  y= 448 x=195.1 Mark 2:1-12
+  y= 505 x=254.2 lectionary
+-- col C
+  y=  62 x=281.6 year c
+  y=  81 x=281.6 Isa 42:1-9
+  y=  89 x=316.4 v
+  y=  91 x=281.6 Ps 89:1-29 or  [ITALIC]
+  y=  99 x=318.9 v
+  y= 100 x=289.6 89:20-29
+  y= 110 x=281.6 Acts 10:34-38
+  y= 120 x=281.6 Luke 3:15-22
+  y= 138 x=281.6 Isa 62:1-5
+  y= 148 x=281.6 Ps 96
+  y= 158 x=281.6 1 Cor 12:1-11
+  y= 168 x=281.6 John 2:1-11
+  y= 184 x=281.6 Neh 8:1-12
+  y= 193 x=281.6 Ps 113
+  y= 203 x=281.6 1 Cor 12:12-27
+  y= 213 x=281.6 Luke 4:14-21
+  y= 228 x=281.6 Jer 1:4-10
+  y= 236 x=320.4 v
+  y= 238 x=281.6 Ps 71:11-20
+  y= 248 x=281.6 1 Cor 14:12-25
+  y= 257 x=281.6 Luke 4:21-32
+  y= 274 x=281.6 Mal 3:1-4
+  y= 284 x=281.6 Ps 84
+  y= 294 x=281.6 Heb 2:14-18
+  y= 303 x=281.6 Luke 2:22-40
+  y= 325 x=281.6 Judg 6:11-24
+  y= 335 x=281.6 Ps 85
+  y= 345 x=281.6 1 Cor 15:1-11
+  y= 354 x=281.6 Luke 5:1-11
+  y= 374 x=281.6 Jer 17:5-10
+  y= 384 x=281.6 Ps 1
+  y= 394 x=281.6 1 Cor 15:12-20
+  y= 404 x=281.6 Luke 6:17-26
+  y= 418 x=281.6 Gen 45:3-11,21-28
+  y= 427 x=332.9 v
+  y= 428 x=281.6 Ps 37:(1-7)8-17
+  y= 438 x=281.6 1 Cor 15:35-49
+  y= 448 x=281.6 Luke 6:27-38
+  y= 504 x=324.7 719
+=== PDF p.728 (libro p.720) colstart A=91.1671 B=175.0522 C=261.5912 width=387.0
+-- col L
+  y=  60 x= 28.8 day
+  y=  79 x= 28.8 the eighth
+  y=  90 x= 28.8 sunday of
+  y= 101 x= 28.8 epiphany
+  y= 120 x= 28.8 the second to
+  y= 131 x= 28.8 last sunday
+  y= 142 x= 28.8 of epiphany
+  y= 151 x= 78.0 †
+  y= 153 x= 28.8 World Mission  [ITALIC]
+  y= 168 x= 28.8 the last
+  y= 179 x= 28.8 sunday of
+  y= 190 x= 28.8 epiphany
+  y= 201 x= 28.8 Transfiguration  [ITALIC]
+  y= 250 x= 28.8 ash
+  y= 261 x= 28.8 wednesday
+  y= 299 x= 28.8 the first
+  y= 310 x= 28.8 sunday in
+  y= 321 x= 28.8 lent
+  y= 348 x= 28.8 the second
+  y= 359 x= 28.8 sunday in
+  y= 370 x= 28.8 lent
+  y= 397 x= 28.8 the third
+  y= 408 x= 28.8 sunday in
+  y= 419 x= 28.8 lent
+  y= 463 x= 23.9 V
+  y= 464 x= 28.4 Psalm verse numbers  [ITALIC]
+  y= 481 x= 23.9 †
+  y= 482 x= 26.2 These lessons may be substituted  [ITALIC]
+  y= 504 x= 45.0 720
+  y= 505 x= 71.3 c a l
+-- col A
+  y=  60 x= 91.2 year a
+  y=  76 x= 91.2 Isa 49:8-18(19-23)
+  y=  85 x= 91.2 Ps 62
+  y=  95 x= 91.2 1 Cor 4:1-13
+  y= 105 x= 91.2 Matt 6:24-34
+  y= 122 x= 91.2 Isa 49:1-7
+  y= 132 x= 91.2 Ps 67
+  y= 142 x= 91.2 Acts 1:1-8
+  y= 151 x= 91.2 Matt 9:35-38
+  y= 170 x= 91.2 Ex 24:12-18
+  y= 180 x= 91.2 Ps 99
+  y= 190 x= 91.2 Phil 3:7-14
+  y= 199 x= 91.2 Matt 17:1-9
+  y= 218 x=169.1 lent
+  y= 236 x= 91.2 Joel 2:1-2, 12-17 or  [ITALIC]
+  y= 246 x= 99.2 Isa 58:1-12
+  y= 256 x= 91.2 Ps 103 or 103:8-14  [ITALIC]
+  y= 266 x= 91.2 2 Cor 5:20—6:10
+  y= 275 x= 91.2 Matt 6:1-6, 16-21
+  y= 290 x= 91.2 Gen 2:4-9, 15-17,
+  y= 300 x= 99.2 25—3:7
+  y= 308 x=153.5 v
+  y= 310 x= 91.2 Ps 51 or Ps 51:1-12  [ITALIC]
+  y= 320 x= 91.2 Rom 5:12-21
+  y= 330 x= 91.2 Matt 4:1-11
+  y= 344 x= 91.2 Gen 12:1-9
+  y= 353 x=129.9 v
+  y= 354 x= 91.2 Ps 33:12-21
+  y= 364 x= 91.2 Rom 4:1-5(6-12)13-17
+  y= 374 x= 91.2 John 3:1-16
+  y= 389 x= 91.2 Ex 17:1-7
+  y= 398 x= 91.2 Ps 95
+  y= 408 x= 91.2 Rom 1:16-32
+  y= 418 x= 91.2 John 4:5-26(27-38)
+  y= 428 x= 99.2 39-42
+  y= 464 x= 92.8 correspond to the New Coverdale  [ITALIC]
+  y= 482 x=121.6 for any Sunday of  [ITALIC]
+  y= 505 x= 92.9 e n da r s & l e c
+-- col B
+  y=  60 x=175.1 year b
+  y=  76 x=175.1 Hos 2:14-23
+  y=  85 x=175.1 Ps 103 or 103:1-14  [ITALIC]
+  y=  95 x=175.1 2 Cor 3:4-18
+  y= 105 x=175.1 Mark 2:18-22
+  y= 122 x=175.1 Gen 12:1-3
+  y= 132 x=175.1 Ps 86:8-13
+  y= 142 x=175.1 Rev 7:9-17
+  y= 151 x=175.1 Matt 28:16-20
+  y= 170 x=175.1 1 Kings 19:9-18
+  y= 180 x=175.1 Ps 27
+  y= 190 x=175.1 2 Pet 1:13-21
+  y= 199 x=175.1 Mark 9:2-9
+  y= 236 x=175.1 Joel 2:1-2, 12-17 or  [ITALIC]
+  y= 246 x=183.1 Isa 58:1-12
+  y= 256 x=175.1 Ps 103 or 103:8-14  [ITALIC]
+  y= 266 x=175.1 2 Cor 5:20—6:10
+  y= 275 x=175.1 Matt 6:1-6, 16-21
+  y= 295 x=175.1 Gen 9:8-17
+  y= 305 x=175.1 Ps 25 or 25:3-9  [ITALIC]
+  y= 315 x=175.1 1 Pet 3:18-22
+  y= 325 x=175.1 Mark 1:9-13
+  y= 344 x=175.1 Gen 22:1-14
+  y= 353 x=227.9 v
+  y= 354 x=175.1 Ps 16 or 16:6-12  [ITALIC]
+  y= 364 x=175.1 Rom 8:31-39
+  y= 374 x=175.1 Mark 8:31-38
+  y= 394 x=175.1 Ex 20:1-21
+  y= 403 x=175.1 Ps 19:7-14
+  y= 413 x=175.1 Rom 7:12-25
+  y= 423 x=175.1 John 2:13-22
+  y= 464 x=193.3 Psalter found in this book  [ITALIC]
+  y= 482 x=176.6 Epiphany, except the First or  [ITALIC]
+  y= 505 x=175.5 t i on a r i e s
+-- col C
+  y=  60 x=261.6 year c
+  y=  76 x=261.6 Jer 7:1-15
+  y=  85 x=261.6 Ps 92
+  y=  95 x=261.6 1 Cor 15:50-58
+  y= 105 x=261.6 Luke 6:39-49
+  y= 122 x=261.6 Isa 61:1-4
+  y= 132 x=261.6 Ps 96
+  y= 142 x=261.6 Rom 10:9-17
+  y= 151 x=261.6 John 20:19-31
+  y= 170 x=261.6 Ex 34:29-35
+  y= 180 x=261.6 Ps 99
+  y= 190 x=261.6 1 Cor 12:27—13:13
+  y= 199 x=261.6 Luke 9:28-36
+  y= 236 x=261.6 Joel 2:1-2, 12-17 or  [ITALIC]
+  y= 246 x=269.6 Isa 58:1-12
+  y= 256 x=261.6 Ps 103 or 103:8-14  [ITALIC]
+  y= 266 x=261.6 2 Cor 5:20—6:10
+  y= 275 x=261.6 Matt 6:1-6, 16-21
+  y= 295 x=261.6 Deut 26:(1-4)5-11
+  y= 305 x=261.6 Ps 91 or 91:9-16  [ITALIC]
+  y= 315 x=261.6 Rom 10:4-13
+  y= 325 x=261.6 Luke 4:1-13
+  y= 344 x=261.6 Gen 15:1-18
+  y= 353 x=314.4 v
+  y= 354 x=261.6 Ps 27 or 27:9-17  [ITALIC]
+  y= 364 x=261.6 Phil 3:17—4:1
+  y= 374 x=261.6 Luke 13:(22-30)31-35
+  y= 394 x=261.6 Ex 3:1-15
+  y= 403 x=261.6 Ps 103 or 103:1-12  [ITALIC]
+  y= 413 x=261.6 1 Cor 10:1-13
+  y= 423 x=261.6 Luke 13:1-9(10-17)
+  y= 482 x=265.3 the Last  [ITALIC]
+=== PDF p.729 (libro p.721) colstart A=110.0471 B=193.9322 C=280.4713 width=387.0
+-- col L
+  y=  64 x= 47.7 day
+  y=  88 x= 47.7 the fourth
+  y=  99 x= 47.7 sunday in
+  y= 110 x= 47.7 lent
+  y= 134 x= 47.7 the fifth
+  y= 145 x= 47.7 sunday in
+  y= 156 x= 47.7 lent
+  y= 167 x= 47.7 Passion Sunday  [ITALIC]
+  y= 201 x= 47.7 palm sunday:
+  y= 212 x= 47.7 liturgy of
+  y= 223 x= 47.7 the palms
+  y= 262 x= 47.7 palm sunday
+  y= 315 x= 47.7 monday in
+  y= 326 x= 47.7 holy week
+  y= 370 x= 47.7 tuesday in
+  y= 381 x= 47.7 holy week
+  y= 419 x= 47.7 wednesday in
+  y= 430 x= 47.7 holy week
+  y= 505 x= 42.8 sunday, holy
+-- col A
+  y=  64 x=110.0 year a
+  y=  80 x=110.0 1 Sam 16:1-13
+  y=  89 x=110.0 Ps 23
+  y=  99 x=110.0 Eph 5:1-14
+  y= 109 x=110.0 John 9:1-13, 28-38
+  y= 119 x=118.0 (39-41)
+  y= 136 x=110.0 Ezek 37:1-14
+  y= 145 x=110.0 Ps 130
+  y= 155 x=110.0 Rom 6:15-23
+  y= 165 x=110.0 John 11:(1-17)18-44
+  y= 183 x=169.9 holy
+  y= 207 x=110.0 Matt 21:1-11
+  y= 216 x=110.0 Ps 118:19-29
+  y= 237 x=110.0 Isa 52:13—53:12
+  y= 246 x=144.8 v
+  y= 247 x=110.0 Ps 22:1-21 or  [ITALIC]
+  y= 255 x=152.8 v
+  y= 257 x=118.0 Ps 22:1-11
+  y= 267 x=110.0 Phil 2:5-11
+  y= 277 x=110.0 Matt (26:36-75)
+  y= 286 x=110.0 27:1-54 (55-66)
+  y= 301 x=110.0 Isa 42:1-9
+  y= 311 x=110.0 Ps 36:5-10
+  y= 321 x=110.0 Heb 11:39—12:3
+  y= 331 x=110.0 John 12:1-11 or  [ITALIC]
+  y= 341 x=118.0 Mark 14:3-9
+  y= 355 x=110.0 Isa 49:1-6
+  y= 364 x=144.8 v
+  y= 365 x=110.0 Ps 71:1-11
+  y= 375 x=110.0 1 Cor 1:18-31
+  y= 385 x=110.0 John 12:37-38,42-50
+  y= 395 x=110.0 or Mark 11:15-19  [ITALIC]
+  y= 409 x=110.0 Isa 50:4-9
+  y= 418 x=166.1 v
+  y= 419 x=110.0 Ps 69:6-14,21-22
+  y= 429 x=110.0 Heb 9:11-28
+  y= 439 x=110.0 Matt 26:1-5,14-25
+  y= 505 x=116.9 day, and commemoration  [ITALIC]
+-- col B
+  y=  64 x=193.9 year b
+  y=  85 x=193.9 2 Chr 36:14-23
+  y=  94 x=193.9 Ps 122
+  y= 104 x=193.9 Eph 2:1-10
+  y= 114 x=193.9 John 6:1-15
+  y= 136 x=193.9 Jer 31:31-34
+  y= 144 x=250.8 v
+  y= 145 x=193.9 Ps 51 or 51:10-15  [ITALIC]
+  y= 155 x=193.9 Heb (4:14-16) 5:1-10
+  y= 165 x=193.9 John 12:20-33(34-36)
+  y= 183 x=204.0 week
+  y= 207 x=193.9 Mark 11:1-11a
+  y= 216 x=193.9 Ps 118:19-29
+  y= 237 x=193.9 Isa 52:13—53:12
+  y= 246 x=228.7 v
+  y= 247 x=193.9 Ps 22:1-11 or  [ITALIC]
+  y= 255 x=236.7 v
+  y= 257 x=201.9 Ps 22:1-21
+  y= 267 x=193.9 Phil 2:5-11
+  y= 277 x=193.9 Mark (14:32-72)
+  y= 286 x=193.9 15:1-39 (40-47)
+  y= 301 x=193.9 Isa 42:1-9
+  y= 311 x=193.9 Ps 36:5-10
+  y= 321 x=193.9 Heb 11:39—12:3
+  y= 331 x=193.9 John 12:1-11 or  [ITALIC]
+  y= 341 x=201.9 Mark 14:3-9
+  y= 355 x=193.9 Isa 49:1-6
+  y= 364 x=228.7 v
+  y= 365 x=193.9 Ps 71:1-11
+  y= 375 x=193.9 1 Cor 1:18-31
+  y= 385 x=193.9 John 12:37-38,42-50
+  y= 395 x=193.9 or Mark 11:15-19  [ITALIC]
+  y= 409 x=193.9 Isa 50:4-9
+  y= 418 x=250.0 v
+  y= 419 x=193.9 Ps 69:6-14,21-22
+  y= 429 x=193.9 Heb 9:11-28
+  y= 439 x=193.9 Matt 26:1-5,14-25
+  y= 505 x=254.2 lectionary
+-- col C
+  y=  64 x=280.5 year c
+  y=  80 x=280.5 Josh (4:19-24)
+  y=  89 x=288.5 5:1(2-8)9-12
+  y=  99 x=280.5 Ps 34 or 34:1-8  [ITALIC]
+  y= 109 x=280.5 2 Cor 5:17-21
+  y= 119 x=280.5 Luke 15:11-32
+  y= 136 x=280.5 Isa 43:16-21
+  y= 145 x=280.5 Ps 126
+  y= 155 x=280.5 Phil 3:7-16
+  y= 165 x=280.5 Luke 20:9-19
+  y= 207 x=280.5 Luke 19:29-40
+  y= 216 x=280.5 Ps 118:19-29
+  y= 237 x=280.5 Isa 52:13—53:12
+  y= 246 x=315.2 v
+  y= 247 x=280.5 Ps 22:1-11 or  [ITALIC]
+  y= 255 x=323.2 v
+  y= 257 x=288.5 Ps 22:1-21
+  y= 267 x=280.5 Phil 2:5-11
+  y= 277 x=280.5 Luke (22:39-71)
+  y= 286 x=280.5 23:1-49 (50-56)
+  y= 301 x=280.5 Isa 42:1-9
+  y= 311 x=280.5 Ps 36:5-10
+  y= 321 x=280.5 Heb 11:39—12:3
+  y= 331 x=280.5 John 12:1-11 or  [ITALIC]
+  y= 341 x=288.5 Mark 14:3-9
+  y= 355 x=280.5 Isa 49:1-6
+  y= 364 x=315.2 v
+  y= 365 x=280.5 Ps 71:1-11
+  y= 375 x=280.5 1 Cor 1:18-31
+  y= 385 x=280.5 John 12:37-38,42-50
+  y= 395 x=280.5 or Mark 11:15-19  [ITALIC]
+  y= 409 x=280.5 Isa 50:4-9
+  y= 418 x=336.5 v
+  y= 419 x=280.5 Ps 69:6-14,21-22
+  y= 429 x=280.5 Heb 9:11-28
+  y= 439 x=280.5 Matt 26:1-5,14-25
+  y= 504 x=324.7 721
+=== PDF p.730 (libro p.722) colstart A=91.1671 B=175.0522 C=261.5912 width=387.0
+-- col L
+  y=  64 x= 28.8 day
+  y=  94 x= 28.8 maundy
+  y= 105 x= 28.8 thursday
+  y= 163 x= 28.8 good friday
+  y= 227 x= 28.8 holy saturday
+  y= 341 x= 28.8 the great
+  y= 352 x= 28.8 vigil of
+  y= 363 x= 28.8 easter
+  y= 482 x= 25.7 V
+  y= 484 x= 30.2 Psalm verse numbers  [ITALIC]
+  y= 504 x= 45.0 722
+  y= 505 x= 70.9 c a l
+-- col A
+  y=  64 x= 91.2 year a
+  y=  80 x= 90.3 Ex 12:1-14
+  y=  88 x=129.0 v
+  y=  90 x= 90.3 Ps 78:15-26
+  y=  99 x= 90.3 1 Cor 11:23-26(27-34)
+  y= 109 x= 90.3 John 13:1-15 or  [ITALIC]
+  y= 119 x= 98.3 Luke 22:14-30
+  y= 134 x= 90.3 Gen 22:1-18 or  [ITALIC]
+  y= 144 x= 98.3 Isa 52:13—53:12
+  y= 152 x=149.5 v
+  y= 154 x= 90.3 Ps 22:1-11(12-21)
+  y= 162 x=133.1 v
+  y= 163 x= 90.3 or Ps 40:1-16  [ITALIC]
+  y= 171 x=133.1 v
+  y= 173 x= 90.3 or Ps 69:1-22  [ITALIC]
+  y= 183 x= 90.3 Heb 10:1-25
+  y= 193 x= 90.3 John (18:1-40) 19:1-37
+  y= 208 x= 91.2 Job 14:1-17
+  y= 216 x=144.0 v
+  y= 217 x= 91.2 Ps 130 or 31:1-6  [ITALIC]
+  y= 227 x= 91.2 1 Pet 4:1-8
+  y= 237 x= 91.2 Matt 27:57-66 or  [ITALIC]
+  y= 247 x= 99.2 John 19:38-42
+  y= 265 x=158.1 easter
+  y= 283 x= 91.2 Gen 1:1—2:3
+  y= 293 x= 91.2 Gen 3
+  y= 303 x= 91.2 Gen 7:1-5,11-18;
+  y= 313 x= 99.2 8:6-20; 9:8-13
+  y= 322 x= 91.2 Gen 22:1-18
+  y= 332 x= 91.2 Ex 14:10—15:1
+  y= 342 x= 91.2 Isa 4:2-6
+  y= 352 x= 91.2 Isa 55:1-11
+  y= 362 x= 91.2 Ezek 36:24-28
+  y= 371 x= 91.2 Ezek 37:1-14
+  y= 381 x= 91.2 Dan 3:1-28
+  y= 391 x= 91.2 Jonah 1:1—2:10
+  y= 401 x= 91.2 Zeph 3:12-20
+  y= 411 x= 91.2 Rom 6:3-11
+  y= 420 x= 91.2 Matt 28:1-10
+  y= 484 x= 94.6 correspond to the New Coverdale  [ITALIC]
+  y= 505 x= 92.4 e n da r s & l e c
+-- col B
+  y=  64 x=175.1 year b
+  y=  80 x=175.1 Ex 12:1-14
+  y=  88 x=213.8 v
+  y=  90 x=175.1 Ps 78:15-26
+  y=  99 x=175.1 1 Cor 11:23-26(27-34)
+  y= 109 x=175.1 John 13:1-15 or  [ITALIC]
+  y= 119 x=183.1 Luke 22:14-30
+  y= 134 x=175.1 Gen 22:1-18 or  [ITALIC]
+  y= 144 x=183.1 Isa 52:13—53:12
+  y= 152 x=234.3 v
+  y= 154 x=175.1 Ps 22:1-11(12-21)
+  y= 162 x=217.9 v
+  y= 163 x=175.1 or Ps 40:1-16  [ITALIC]
+  y= 171 x=217.9 v
+  y= 173 x=175.1 or Ps 69:1-22  [ITALIC]
+  y= 183 x=175.1 Heb 10:1-25
+  y= 193 x=175.1 John (18:1-40) 19:1-37
+  y= 208 x=175.1 Job 14:1-17
+  y= 216 x=227.9 v
+  y= 217 x=175.1 Ps 130 or 31:1-6  [ITALIC]
+  y= 227 x=175.1 1 Pet 4:1-8
+  y= 237 x=175.1 Matt 27:57-66 or  [ITALIC]
+  y= 247 x=183.1 John 19:38-42
+  y= 283 x=175.1 Gen 1:1—2:3
+  y= 293 x=175.1 Gen 3
+  y= 303 x=175.1 Gen 7:1-5,11-18;
+  y= 313 x=183.1 8:6-20; 9:8-13
+  y= 322 x=175.1 Gen 22:1-18
+  y= 332 x=175.1 Ex 14:10—15:1
+  y= 342 x=175.1 Isa 4:2-6
+  y= 352 x=175.1 Isa 55:1-11
+  y= 362 x=175.1 Ezek 36:24-28
+  y= 371 x=175.1 Ezek 37:1-14
+  y= 381 x=175.1 Dan 3:1-28
+  y= 391 x=175.1 Jonah 1:1—2:10
+  y= 401 x=175.1 Zeph 3:12-20
+  y= 411 x=175.1 Rom 6:3-11
+  y= 420 x=175.1 Matt 28:1-10
+  y= 484 x=195.1 Psalter found in this book  [ITALIC]
+  y= 505 x=175.1 t i on a r i e s
+-- col C
+  y=  64 x=261.6 year c
+  y=  80 x=261.6 Ex 12:1-14
+  y=  88 x=300.4 v
+  y=  90 x=261.6 Ps 78:15-26
+  y=  99 x=261.6 1 Cor 11:23-26(27-34)
+  y= 109 x=261.6 John 13:1-15 or  [ITALIC]
+  y= 119 x=269.6 Luke 22:14-30
+  y= 134 x=261.6 Gen 22:1-18 or  [ITALIC]
+  y= 144 x=269.6 Isa 52:13—53:12
+  y= 152 x=320.9 v
+  y= 154 x=261.6 Ps 22:1-11(12-21)
+  y= 162 x=304.4 v
+  y= 163 x=261.6 or Ps 40:1-16  [ITALIC]
+  y= 171 x=304.4 v
+  y= 173 x=261.6 or Ps 69:1-22  [ITALIC]
+  y= 183 x=261.6 Heb 10:1-25
+  y= 193 x=261.6 John (18:1-40) 19:1-37
+  y= 208 x=261.6 Job 14:1-17
+  y= 216 x=314.4 v
+  y= 217 x=261.6 Ps 130 or 31:1-6  [ITALIC]
+  y= 227 x=261.6 1 Pet 4:1-8
+  y= 237 x=261.6 Matt 27:57-66 or  [ITALIC]
+  y= 247 x=269.6 John 19:38-42
+  y= 283 x=261.6 Gen 1:1—2:3
+  y= 293 x=261.6 Gen 3
+  y= 303 x=261.6 Gen 7:1-5,11-18;
+  y= 313 x=269.6 8:6-20; 9:8-13
+  y= 322 x=261.6 Gen 22:1-18
+  y= 332 x=261.6 Ex 14:10—15:1
+  y= 342 x=261.6 Isa 4:2-6
+  y= 352 x=261.6 Isa 55:1-11
+  y= 362 x=261.6 Ezek 36:24-28
+  y= 371 x=261.6 Ezek 37:1-14
+  y= 381 x=261.6 Dan 3:1-28
+  y= 391 x=261.6 Jonah 1:1—2:10
+  y= 401 x=261.6 Zeph 3:12-20
+  y= 411 x=261.6 Rom 6:3-11
+  y= 420 x=261.6 Matt 28:1-10
+=== PDF p.731 (libro p.723) colstart A=111.1671 B=195.0522 C=281.5912 width=387.0
+-- col L
+  y=  64 x= 48.8 day
+  y=  99 x= 48.8 easter day:
+  y= 110 x= 48.8 early service
+  y= 162 x= 48.8 easter day:
+  y= 173 x= 48.8 principal
+  y= 184 x= 48.8 service
+  y= 221 x= 48.8 easter day:
+  y= 232 x= 48.8 evening
+  y= 243 x= 48.8 service
+  y= 266 x= 48.8 monday of
+  y= 277 x= 48.8 easter week
+  y= 301 x= 48.8 tuesday of
+  y= 312 x= 48.8 easter week
+  y= 335 x= 48.8 wednesday of
+  y= 346 x= 48.8 easter week
+  y= 370 x= 48.8 thursday of
+  y= 381 x= 48.8 easter week
+  y= 404 x= 48.8 friday of
+  y= 415 x= 48.8 easter week
+  y= 439 x= 48.8 saturday of
+  y= 450 x= 48.8 easter week
+  y= 505 x= 42.8 sunday, holy
+-- col A
+  y=  64 x=111.2 year a
+  y=  80 x=111.2 Use one of the Old  [ITALIC]
+  y=  90 x=111.2 Testament Lessons  [ITALIC]
+  y= 100 x=111.2 from the Vigil  [ITALIC]
+  y= 110 x=111.2 Ps 114
+  y= 119 x=111.2 Rom 6:3-11
+  y= 129 x=111.2 Matt 28:1-10
+  y= 144 x=111.2 Acts 10:34-43 or  [ITALIC]
+  y= 154 x=119.2 Ex 14:10-14,21-31
+  y= 164 x=111.2 Ps 118:14-17,22-24
+  y= 173 x=111.2 Col 3:1-4 or  [ITALIC]
+  y= 183 x=119.2 Acts 10:34-43
+  y= 193 x=111.2 John 20:1-10(11-18)
+  y= 203 x=111.2 or Matt 28:1-10  [ITALIC]
+  y= 218 x=111.2 Dan 12:1-3
+  y= 228 x=111.2 Ps 136
+  y= 237 x=111.2 1 Cor 5:6-8
+  y= 247 x=111.2 Luke 24:13-35
+  y= 262 x=111.2 Acts 2:14,22-32
+  y= 272 x=111.2 Ps 16
+  y= 282 x=111.2 Matt 28:9-15
+  y= 296 x=111.2 Acts 2:14,36-41
+  y= 305 x=149.9 v
+  y= 306 x=111.2 Ps 33:17-21
+  y= 316 x=111.2 John 20:11-18
+  y= 331 x=111.2 Acts 3:1-10
+  y= 339 x=145.9 v
+  y= 341 x=111.2 Ps 105:1-8
+  y= 351 x=111.2 Luke 24:13-35
+  y= 365 x=111.2 Acts 3:11-26
+  y= 375 x=111.2 Ps 8
+  y= 385 x=111.2 Luke 24:36-49
+  y= 400 x=111.2 1 Pet 1:3-9
+  y= 408 x=145.9 v
+  y= 410 x=111.2 Ps 116:1-9
+  y= 420 x=111.2 John 21:1-14
+  y= 434 x=111.2 Acts 4:1-22
+  y= 444 x=111.2 Ps 118:14-18
+  y= 454 x=111.2 Mark 16:9-20
+  y= 505 x=116.8 day, and commemoration  [ITALIC]
+-- col B
+  y=  64 x=195.1 year b
+  y=  80 x=195.1 Use one of the Old  [ITALIC]
+  y=  90 x=195.1 Testament Lessons  [ITALIC]
+  y= 100 x=195.1 from the Vigil  [ITALIC]
+  y= 110 x=195.1 Ps 114
+  y= 119 x=195.1 Rom 6:3-11
+  y= 129 x=195.1 Matt 28:1-10
+  y= 149 x=195.1 Acts 10:34-43 or  [ITALIC]
+  y= 159 x=203.1 Isa 25:6-9
+  y= 169 x=195.1 Ps 118:14-17,22-24
+  y= 178 x=195.1 Col 3:1-4 or  [ITALIC]
+  y= 188 x=203.1 Acts 10:34-43
+  y= 198 x=195.1 Mark 16:1-8
+  y= 218 x=195.1 Dan 12:1-3
+  y= 228 x=195.1 Ps 136
+  y= 237 x=195.1 1 Cor 5:6-8
+  y= 247 x=195.1 Luke 24:13-35
+  y= 262 x=195.1 Acts 2:14,22-32
+  y= 272 x=195.1 Ps 16
+  y= 282 x=195.1 Matt 28:9-15
+  y= 296 x=195.1 Acts 2:14,36-41
+  y= 305 x=233.8 v
+  y= 306 x=195.1 Ps 33:17-21
+  y= 316 x=195.1 John 20:11-18
+  y= 331 x=195.1 Acts 3:1-10
+  y= 339 x=229.8 v
+  y= 341 x=195.1 Ps 105:1-8
+  y= 351 x=195.1 Luke 24:13-35
+  y= 365 x=195.1 Acts 3:11-26
+  y= 375 x=195.1 Ps 8
+  y= 385 x=195.1 Luke 24:36-49
+  y= 400 x=195.1 1 Pet 1:3-9
+  y= 408 x=229.8 v
+  y= 410 x=195.1 Ps 116:1-9
+  y= 420 x=195.1 John 21:1-14
+  y= 434 x=195.1 Acts 4:1-22
+  y= 444 x=195.1 Ps 118:14-18
+  y= 454 x=195.1 Mark 16:9-20
+  y= 505 x=254.2 lectionary
+-- col C
+  y=  64 x=281.6 year c
+  y=  80 x=281.6 Use one of the Old  [ITALIC]
+  y=  90 x=281.6 Testament Lessons  [ITALIC]
+  y= 100 x=281.6 from the Vigil  [ITALIC]
+  y= 110 x=281.6 Ps 114
+  y= 119 x=281.6 Rom 6:3-11
+  y= 129 x=281.6 Matt 28:1-10
+  y= 149 x=281.6 Acts 10:34-43 or  [ITALIC]
+  y= 159 x=289.6 Isa 51:9-11
+  y= 169 x=281.6 Ps 118:14-17,22-24
+  y= 178 x=281.6 Col 3:1-4 or  [ITALIC]
+  y= 188 x=289.6 Acts 10:34-43
+  y= 198 x=281.6 Luke 24:1-12
+  y= 218 x=281.6 Dan 12:1-3
+  y= 228 x=281.6 Ps 136
+  y= 237 x=281.6 1 Cor 5:6-8
+  y= 247 x=281.6 Luke 24:13-35
+  y= 262 x=281.6 Acts 2:14,22-32
+  y= 272 x=281.6 Ps 16
+  y= 282 x=281.6 Matt 28:9-15
+  y= 296 x=281.6 Acts 2:14,36-41
+  y= 305 x=320.4 v
+  y= 306 x=281.6 Ps 33:17-21
+  y= 316 x=281.6 John 20:11-18
+  y= 331 x=281.6 Acts 3:1-10
+  y= 339 x=316.4 v
+  y= 341 x=281.6 Ps 105:1-8
+  y= 351 x=281.6 Luke 24:13-35
+  y= 365 x=281.6 Acts 3:11-26
+  y= 375 x=281.6 Ps 8
+  y= 385 x=281.6 Luke 24:36-49
+  y= 400 x=281.6 1 Pet 1:3-9
+  y= 408 x=316.4 v
+  y= 410 x=281.6 Ps 116:1-9
+  y= 420 x=281.6 John 21:1-14
+  y= 434 x=281.6 Acts 4:1-22
+  y= 444 x=281.6 Ps 118:14-18
+  y= 454 x=281.6 Mark 16:9-20
+  y= 504 x=324.7 723
+=== PDF p.732 (libro p.724) colstart A=91.1671 B=175.0522 C=261.5912 width=387.0
+-- col L
+  y=  63 x= 28.8 day
+  y=  87 x= 28.8 the second
+  y=  98 x= 28.8 sunday of
+  y= 109 x= 28.8 easter
+  y= 142 x= 28.8 the third
+  y= 153 x= 28.8 sunday of
+  y= 164 x= 28.8 easter
+  y= 190 x= 28.8 the fourth
+  y= 201 x= 28.8 sunday of
+  y= 212 x= 28.8 easter
+  y= 223 x= 28.8 Good Shepherd  [ITALIC]
+  y= 250 x= 28.8 the fifth
+  y= 261 x= 28.8 sunday of
+  y= 272 x= 28.8 easter
+  y= 298 x= 28.8 the sixth
+  y= 309 x= 28.8 sunday
+  y= 320 x= 28.8 of easter
+  y= 331 x= 28.8 Rogation  [ITALIC]
+  y= 342 x= 28.8 Sunday  [ITALIC]
+  y= 379 x= 28.8 ascension day
+  y= 422 x= 28.8 the sunday
+  y= 433 x= 28.8 after
+  y= 444 x= 28.8 ascension day
+  y= 481 x= 24.7 V
+  y= 483 x= 29.2 Psalm verse numbers  [ITALIC]
+  y= 504 x= 45.0 724
+  y= 505 x= 71.1 c a l
+-- col A
+  y=  63 x= 91.2 year a
+  y=  79 x= 91.2 Acts 2:14a,22-32
+  y=  89 x= 91.2 or Gen 8:6-16, 9:8-16  [ITALIC]
+  y=  98 x= 91.2 Ps. 111
+  y= 108 x= 91.2 1 Pet 1:3-9
+  y= 118 x= 91.2 John 20:19-31
+  y= 133 x= 91.2 Acts 2:14a,36-47 or  [ITALIC]
+  y= 143 x= 99.2 Isa 43:1-12
+  y= 151 x=133.9 v
+  y= 153 x= 91.2 Ps 116:11-16
+  y= 162 x= 91.2 1 Pet 1:13-25
+  y= 172 x= 91.2 Luke 24:13-35
+  y= 187 x= 91.2 Acts 6:1-9, 7:2a,51-60
+  y= 197 x= 91.2 or Neh 9:(1-3)6-15  [ITALIC]
+  y= 207 x= 91.2 Ps 23
+  y= 216 x= 91.2 1 Pet 2:13-25
+  y= 226 x= 91.2 John 10:1-10
+  y= 241 x= 91.2 Acts 17:1-15 or  [ITALIC]
+  y= 251 x= 91.2 Deut 6:20-25
+  y= 259 x=125.9 v v
+  y= 261 x= 91.2 Ps 66:1-11 or 66:1-8  [ITALIC]
+  y= 271 x= 91.2 1 Pet 2:1-12
+  y= 280 x= 91.2 John 14:1-14
+  y= 300 x= 91.2 Acts 17:(16-21)22-34
+  y= 310 x= 91.2 or Isa 41:17-20  [ITALIC]
+  y= 320 x= 91.2 Ps 148 or 148:7-14  [ITALIC]
+  y= 329 x= 91.2 1 Pet 3:8-18
+  y= 339 x= 91.2 John 15:1-11
+  y= 359 x= 91.2 Acts 1:1-11
+  y= 369 x= 91.2 Ps 47 or 110:1-5  [ITALIC]
+  y= 379 x= 91.2 Eph 1:15-23
+  y= 388 x= 91.2 Luke 24:44-53
+  y= 398 x= 91.2 or Mark 16:9-20  [ITALIC]
+  y= 413 x= 91.2 Acts 1:(1-5)6-14 or  [ITALIC]
+  y= 423 x= 99.2 Ezek 39:21-29
+  y= 433 x= 91.2 Ps 68:1-20 or 47  [ITALIC]
+  y= 443 x= 91.2 1 Pet 4:12-19
+  y= 452 x= 91.2 John 17:1-11
+  y= 483 x= 93.6 correspond to the New Coverdale  [ITALIC]
+  y= 505 x= 92.7 e n da r s & l e c
+-- col B
+  y=  63 x=175.1 year b
+  y=  79 x=175.1 Acts 3:12a, 13-15,17-26
+  y=  89 x=175.1 or Isa 26:1-9,19  [ITALIC]
+  y=  98 x=175.1 Ps 111
+  y= 108 x=175.1 1 John 5:1-5
+  y= 118 x=175.1 John 20:19-31
+  y= 133 x=175.1 Acts 4:5-14 or  [ITALIC]
+  y= 143 x=183.1 Mic 4:1-5
+  y= 153 x=175.1 Ps 98 or 98:1-5  [ITALIC]
+  y= 162 x=175.1 1 John 1:1-2:2
+  y= 172 x=175.1 Luke 24:36-49
+  y= 187 x=175.1 Acts 4:(23-31)32-37
+  y= 197 x=175.1 or Ezek 34:1-10  [ITALIC]
+  y= 207 x=175.1 Ps 23
+  y= 216 x=175.1 1 John 3:1-10
+  y= 226 x=175.1 John 10:11-16
+  y= 241 x=175.1 Acts 8:26-40 or  [ITALIC]
+  y= 251 x=175.1 Deut 4:32-40
+  y= 259 x=209.3 v v
+  y= 261 x=175.1 Ps 66:1-11 or 66:1-8  [ITALIC]
+  y= 271 x=175.1 1 John 3:(11-17)18-24
+  y= 280 x=175.1 John 14:15-21
+  y= 295 x=175.1 Acts 11:19-30 or  [ITALIC]
+  y= 305 x=175.1 Isa 45:11-13,18-19
+  y= 315 x=183.1 (20-25)
+  y= 323 x=245.2 v
+  y= 325 x=175.1 Ps 33 or 33:1-8,18-22  [ITALIC]
+  y= 334 x=175.1 1 John 4:7-21
+  y= 344 x=175.1 John 15:9-17
+  y= 359 x=175.1 Acts 1:1-11
+  y= 369 x=175.1 Ps 47 or 110:1-5  [ITALIC]
+  y= 379 x=175.1 Eph 1:15-23
+  y= 388 x=175.1 Luke 24:44-53
+  y= 398 x=175.1 or Mark 16:9-20  [ITALIC]
+  y= 413 x=175.1 Acts 1:15-26 or  [ITALIC]
+  y= 423 x=183.1 Ex 28:1-4,9-10,29-30
+  y= 433 x=175.1 Ps 68:1-20 or 47  [ITALIC]
+  y= 443 x=175.1 1 John 5:6-15
+  y= 452 x=175.1 John 17:11b-19
+  y= 483 x=194.1 Psalter found in this book  [ITALIC]
+  y= 505 x=175.3 t i on a r i e s
+-- col C
+  y=  63 x=261.6 year c
+  y=  79 x=261.6 Acts 5:12a, 17-22, 25-29
+  y=  89 x=261.6 or Job 42:1-6  [ITALIC]
+  y=  98 x=261.6 Ps 111
+  y= 108 x=261.6 Rev 1:(1-8)9-19
+  y= 118 x=261.6 John 20:19-31
+  y= 133 x=261.6 Acts 9:1-19a or  [ITALIC]
+  y= 143 x=269.6 Jer 32:36-41
+  y= 151 x=314.4 v
+  y= 153 x=261.6 Ps 33 or 33:1-11  [ITALIC]
+  y= 162 x=261.6 Rev 5:(1-5)6-14
+  y= 172 x=261.6 John 21:1-14
+  y= 187 x=261.6 Acts 13:14b-16, 26-39
+  y= 197 x=261.6 or Num 27:12-23  [ITALIC]
+  y= 207 x=261.6 Ps 100
+  y= 216 x=261.6 Rev 7:9-17
+  y= 226 x=261.6 John 10:22-30
+  y= 241 x=261.6 Acts 13:44-52 or  [ITALIC]
+  y= 251 x=261.6 Lev 19:1-2,9-18
+  y= 259 x=318.4 v
+  y= 261 x=261.6 Ps 145 or 145:1-9  [ITALIC]
+  y= 271 x=261.6 Rev 19:1-9
+  y= 280 x=261.6 John 13:31-35
+  y= 300 x=261.6 Acts 14:8-18 or  [ITALIC]
+  y= 310 x=261.6 Joel 2:21-27
+  y= 320 x=261.6 Ps 67
+  y= 329 x=261.6 Rev 21:1-4,22-22:5
+  y= 339 x=261.6 John 14:21-29
+  y= 359 x=261.6 Acts 1:1-11
+  y= 369 x=261.6 Ps 47 or 110:1-5  [ITALIC]
+  y= 379 x=261.6 Eph 1:15-23
+  y= 388 x=261.6 Luke 24:44-53
+  y= 398 x=261.6 or Mark 16:9-20  [ITALIC]
+  y= 413 x=261.6 Acts 16:16-34 or  [ITALIC]
+  y= 423 x=261.6 1 Sam 12:19-24
+  y= 433 x=261.6 Ps 68:1-20 or 47  [ITALIC]
+  y= 443 x=261.6 Rev 22:10-21
+  y= 452 x=261.6 John 17:20-26
+=== PDF p.733 (libro p.725) colstart A=101.1671 B=185.0522 C=271.5912 width=387.0
+-- col L
+  y=  62 x= 38.8 day
+  y= 103 x= 38.8 pentecost
+  y= 165 x= 38.8 Sundays may also be  [ITALIC]
+  y= 176 x= 38.8 The Lessons for each  [ITALIC]
+  y= 206 x= 38.8 trinity
+  y= 217 x= 38.8 sunday
+  y= 241 x= 38.8 proper 1
+  y= 252 x= 38.8 Weekdays  [ITALIC]
+  y= 263 x= 38.8 following  [ITALIC]
+  y= 274 x= 38.8 the Sunday from  [ITALIC]
+  y= 285 x= 38.8 May 8 to  [ITALIC]
+  y= 296 x= 38.8 May 14  [ITALIC]
+  y= 311 x= 38.8 proper 2
+  y= 322 x= 38.8 Weekdays  [ITALIC]
+  y= 333 x= 38.8 following  [ITALIC]
+  y= 344 x= 38.8 the Sunday from  [ITALIC]
+  y= 355 x= 38.8 May 15 to  [ITALIC]
+  y= 366 x= 38.8 May 21  [ITALIC]
+  y= 384 x= 38.8 proper 3
+  y= 395 x= 38.8 Sunday from  [ITALIC]
+  y= 406 x= 38.8 May 22 to  [ITALIC]
+  y= 417 x= 38.8 May 28  [ITALIC]
+  y= 437 x= 38.8 proper 4
+  y= 448 x= 38.8 Sunday from  [ITALIC]
+  y= 459 x= 38.8 May 29 to  [ITALIC]
+  y= 470 x= 38.8 June 4  [ITALIC]
+  y= 505 x= 42.6 sunday, holy
+-- col A
+  y=  62 x=101.2 year a
+  y=  79 x=101.2 Gen 11:1-9 or  [ITALIC]
+  y=  88 x=109.2 Acts 2:1-11(12-21)
+  y=  96 x=143.9 v
+  y=  98 x=101.2 Ps 104:24-35
+  y= 108 x=101.2 Acts 2:1-11(12-21) or  [ITALIC]
+  y= 118 x=109.2 1 Cor 12:4-13
+  y= 128 x=101.2 John 14:8-17
+  y= 150 x=103.0 the season after
+  y= 165 x=101.5 named “After Trinity”  [ITALIC]
+  y= 176 x= 98.4 Sunday are used at celebrations  [ITALIC]
+  y= 197 x=101.2 Gen 1:1—2:3
+  y= 207 x=101.2 Ps 150
+  y= 216 x=101.2 2 Cor 13:5-14
+  y= 226 x=101.2 Matt 28:16-20
+  y= 254 x=101.2 Ecclesiasticus 15:11-20  [ITALIC]
+  y= 264 x=101.2 Ps 119:1-16
+  y= 274 x=101.2 1 Cor 3:1-9
+  y= 283 x=101.2 Matt 5:21-37
+  y= 324 x=101.2 Lev 19:1-2,9-18
+  y= 332 x=158.0 v
+  y= 334 x=101.2 Ps 71 or 71:11-23  [ITALIC]
+  y= 343 x=101.2 1 Cor 3:10-23
+  y= 353 x=101.2 Matt 5:38-48
+  y= 385 x=101.2 Isa 49:8-18(19-23)
+  y= 395 x=101.2 Ps 62
+  y= 405 x=101.2 1 Cor 4:1-13
+  y= 415 x=101.2 Matt 6:24-34
+  y= 439 x=101.2 Deut 11:18-32
+  y= 447 x=167.5 v
+  y= 448 x=101.2 Ps 31 or Ps 31:18-27  [ITALIC]
+  y= 458 x=101.2 Rom 3:21-31
+  y= 468 x=101.2 Matt 7:21-27
+  y= 505 x=116.7 day, and commemoration  [ITALIC]
+-- col B
+  y=  62 x=185.1 year b
+  y=  79 x=185.1 Gen 11:1-9 or  [ITALIC]
+  y=  88 x=193.1 Acts 2:1-11(12-21)
+  y=  96 x=227.8 v
+  y=  98 x=185.1 Ps 104:24-35
+  y= 108 x=185.1 Acts 2:1-11(12-21) or  [ITALIC]
+  y= 118 x=193.1 1 Cor 12:4-13
+  y= 128 x=185.1 John 14:8-17
+  y= 150 x=219.3 pentecost
+  y= 176 x=191.0 of the Holy Communion during  [ITALIC]
+  y= 197 x=185.1 Ex 3:1-6
+  y= 207 x=185.1 Ps 93
+  y= 216 x=185.1 Rom 8:12-17
+  y= 226 x=185.1 John 3:1-16
+  y= 254 x=185.1 2 Kings 5:1-15a
+  y= 264 x=185.1 Ps 42
+  y= 274 x=185.1 1 Cor 9:24-27
+  y= 283 x=185.1 Mark 1:40-45
+  y= 324 x=185.1 Isa 43:18-25
+  y= 334 x=185.1 Ps 32
+  y= 343 x=185.1 2 Cor 1:18-22
+  y= 353 x=185.1 Mark 2:1-12
+  y= 385 x=185.1 Hos 2:14-23
+  y= 395 x=185.1 Ps 103 or 103:1-14  [ITALIC]
+  y= 405 x=185.1 2 Cor 3:4-18
+  y= 415 x=185.1 Mark 2:18-22
+  y= 439 x=185.1 Deut 5:6-21
+  y= 448 x=185.1 Ps 81:1-10(11-16)
+  y= 458 x=185.1 2 Cor 4:1-12
+  y= 468 x=185.1 Mark 2:23-28
+  y= 505 x=254.1 lectionary
+-- col C
+  y=  62 x=271.6 year c
+  y=  79 x=271.6 Gen 11:1-9 or  [ITALIC]
+  y=  88 x=279.6 Acts 2:1-11(12-21)
+  y=  96 x=314.4 v
+  y=  98 x=271.6 Ps 104:24-35
+  y= 108 x=271.6 Acts 2:1-11(12-21) or  [ITALIC]
+  y= 118 x=279.6 1 Cor 12:4-13
+  y= 128 x=271.6 John 14:8-17
+  y= 176 x=285.8 the following week.  [ITALIC]
+  y= 197 x=271.6 Isa 6:1-7
+  y= 207 x=271.6 Ps 29
+  y= 216 x=271.6 Rev 4:1-11
+  y= 226 x=271.6 John 16:(5-11)12-15
+  y= 254 x=271.6 Jer 17:5-10
+  y= 264 x=271.6 Ps 1
+  y= 274 x=271.6 1 Cor 15:12-20
+  y= 283 x=271.6 Luke 6:17-26
+  y= 324 x=271.6 Gen 45:3-11,21-28
+  y= 332 x=322.9 v
+  y= 334 x=271.6 Ps 37:(1-6)7-17
+  y= 343 x=271.6 1 Cor 15:35-49
+  y= 353 x=271.6 Luke 6:27-38
+  y= 385 x=271.6 Jer 7:1-15
+  y= 395 x=271.6 Ps 92
+  y= 405 x=271.6 1 Cor 15:50-58
+  y= 415 x=271.6 Luke 6:39-49
+  y= 439 x=271.6 1 Kings 8:22-30,41-43
+  y= 448 x=271.6 Ps 96
+  y= 458 x=271.6 Gal 1:1-10
+  y= 468 x=271.6 Luke 7:1-10
+  y= 504 x=324.5 725

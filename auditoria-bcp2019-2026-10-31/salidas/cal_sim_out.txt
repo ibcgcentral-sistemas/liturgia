@@ -1,0 +1,132 @@
+﻿[A] días 2001-2120: 43829; claves rotas: 0; fallback 'feria': 0; claves distintas: 369
+[A] claves no-feria sin lecciones en BCPLectionary.SUNDAY: ninguna
+[A] claves no-feria sin colecta en BCPPropers.COLLECTS: ninguna
+[A] familias de clave de feria: christmasFeria, epiphanyFeria, lentFeriaN, holyWeekFeria, easterFeriaN, pentecostFeria, properFeriaN, adventFeriaN, epiphanyOctaveFeria
+[B] fiestas principales perdidas (excepto Todos los Santos) 2001-2120: 0 | rango emitido: {"easter":"principal","ascension":"principal","pentecost":"principal","trinitySunday":"principal","christmas":"principal","epiphany":"principal","11-01":"holyDay"}
+[B] años 2001-2120 en que 1-nov NO sale como 11-01: 17 de 120
+[B] ... dentro de 2024-2060: 5 de 37 -> 2026 (Dom) -> proper26; 2037 (Dom) -> proper26; 2043 (Dom) -> proper26; 2048 (Dom) -> proper26; 2054 (Dom) -> proper26
+[B] 2026-11-01 (domingo): {"name":"Proper 26","nameEs":"Propio 26","color":"green","rank":"sunday","key":"proper26","season":"ordinary","cycle":"A","isFixed":false}
+[C] apariciones de fiestas fijas 2024-2060: {"shown":933,"sunday":162,"moved":14,"other":1,"total":1110}
+[C] suprimidas por caer en domingo, por temporada del domingo: {"ordinary":86,"epiphany":23,"advent":12,"christmas":21,"easter":12,"lent":6,"holyWeek":2}
+[C] otras (no domingo, no trasladadas, no mostradas): 1 2057-05-31 05-31 -> ascension
+01-01: mostrada 33, domingo 4, trasladada 0, otra 0
+01-18: mostrada 31, domingo 6, trasladada 0, otra 0
+01-25: mostrada 31, domingo 6, trasladada 0, otra 0
+02-02: mostrada 31, domingo 6, trasladada 0, otra 0
+02-24: mostrada 32, domingo 5, trasladada 0, otra 0
+03-19: mostrada 30, domingo 5, trasladada 2, otra 0
+03-25: mostrada 26, domingo 5, trasladada 6, otra 0
+04-25: mostrada 26, domingo 6, trasladada 5, otra 0
+05-01: mostrada 32, domingo 4, trasladada 1, otra 0
+05-31: mostrada 31, domingo 5, trasladada 0, otra 1
+06-11: mostrada 32, domingo 5, trasladada 0, otra 0
+06-24: mostrada 32, domingo 5, trasladada 0, otra 0
+06-29: mostrada 31, domingo 6, trasladada 0, otra 0
+07-22: mostrada 32, domingo 5, trasladada 0, otra 0
+07-25: mostrada 31, domingo 6, trasladada 0, otra 0
+08-06: mostrada 32, domingo 5, trasladada 0, otra 0
+08-15: mostrada 31, domingo 6, trasladada 0, otra 0
+08-24: mostrada 31, domingo 6, trasladada 0, otra 0
+09-14: mostrada 31, domingo 6, trasladada 0, otra 0
+09-21: mostrada 31, domingo 6, trasladada 0, otra 0
+09-29: mostrada 31, domingo 6, trasladada 0, otra 0
+10-18: mostrada 32, domingo 5, trasladada 0, otra 0
+10-23: mostrada 33, domingo 4, trasladada 0, otra 0
+10-28: mostrada 32, domingo 5, trasladada 0, otra 0
+11-01: mostrada 32, domingo 5, trasladada 0, otra 0
+11-30: mostrada 31, domingo 6, trasladada 0, otra 0
+12-21: mostrada 31, domingo 6, trasladada 0, otra 0
+12-26: mostrada 31, domingo 6, trasladada 0, otra 0
+12-27: mostrada 32, domingo 5, trasladada 0, otra 0
+12-28: mostrada 31, domingo 6, trasladada 0, otra 0
+[C] claves que ocupan el domingo: {"properN":82,"epiphanyN":20,"adventN":12,"christmasSunday":21,"trinitySunday":4,"easterN":9,"lentN":6,"palmSunday":2,"easter":3,"transfiguration":3}
+[C] ... de ellas, fuera de Adviento/Cuaresma/Semana Santa/Pascua (el libro permite observar o trasladar): 130 de 162
+[C] ... por fiesta: {"09-29":6,"02-02":6,"06-29":6,"08-24":6,"09-14":6,"09-21":6,"12-28":6,"01-18":6,"01-25":6,"05-31":5,"10-18":5,"11-01":5,"12-27":5,"07-25":6,"08-15":6,"12-26":6,"06-11":5,"08-06":5,"06-24":5,"07-22":5,"10-28":5,"02-24":5,"10-23":4,"01-01":4}
+[C] 2026-2027: 2026-01-18 01-18->epiphany2(epiphany) | 2026-01-25 01-25->epiphany3(epiphany) | 2026-05-31 05-31->trinitySunday(ordinary) | 2026-10-18 10-18->proper24(ordinary) | 2026-11-01 11-01->proper26(ordinary) | 2026-12-27 12-27->christmasSunday(christmas) | 2027-04-25 04-25->easter5(easter) | 2027-07-25 07-25->proper12(ordinary) | 2027-08-15 08-15->proper15(ordinary) | 2027-12-26 12-26->christmasSunday(christmas)
+[D] traslados 2024-2060: 14 fiestas en 14 años; anomalías: 0
+2024-03-25 (Lun) 03-25 -> 2024-04-08 (Lun) [destino: 03-25,trasl; origen: holyWeekFeria_1]
+2025-04-25 (Vie) 04-25 -> 2025-04-28 (Lun) [destino: 04-25,trasl; origen: easterFeria1_5]
+2027-03-25 (Jue) 03-25 -> 2027-04-05 (Lun) [destino: 03-25,trasl; origen: maundyThursday]
+2030-04-25 (Jue) 04-25 -> 2030-04-29 (Lun) [destino: 04-25,trasl; origen: easterFeria1_4]
+2032-03-25 (Jue) 03-25 -> 2032-04-05 (Lun) [destino: 03-25,trasl; origen: maundyThursday]
+2035-03-19 (Lun) 03-19 -> 2035-04-02 (Lun) [destino: 03-19,trasl; origen: holyWeekFeria_1]
+2038-05-01 (Sáb) 05-01 -> 2038-05-03 (Lun) [destino: 05-01,trasl; origen: easterFeria1_6]
+2041-04-25 (Jue) 04-25 -> 2041-04-29 (Lun) [destino: 04-25,trasl; origen: easterFeria1_4]
+2043-03-25 (Mié) 03-25 -> 2043-04-06 (Lun) [destino: 03-25,trasl; origen: holyWeekFeria_3]
+2046-03-19 (Lun) 03-19 -> 2046-04-02 (Lun) [destino: 03-19,trasl; origen: holyWeekFeria_1]
+2052-04-25 (Jue) 04-25 -> 2052-04-29 (Lun) [destino: 04-25,trasl; origen: easterFeria1_4]
+2054-03-25 (Mié) 03-25 -> 2054-04-06 (Lun) [destino: 03-25,trasl; origen: holyWeekFeria_3]
+2057-04-25 (Mié) 04-25 -> 2057-04-30 (Lun) [destino: 04-25,trasl; origen: easterFeria1_3]
+2059-03-25 (Mar) 03-25 -> 2059-04-07 (Lun) [destino: 03-25,trasl; origen: holyWeekFeria_2]
+[E] ferias después de Trinidad 2024-2060: 5187 días; Propio por fecha ≠ Propio del domingo de su semana: 2583 (49.8%)
+2024-05-29 (Mié) feria usa Propio 4; su domingo 2024-05-26 es Propio 3
+2024-05-30 (Jue) feria usa Propio 4; su domingo 2024-05-26 es Propio 3
+2024-06-01 (Sáb) feria usa Propio 4; su domingo 2024-05-26 es Propio 3
+2024-06-05 (Mié) feria usa Propio 5; su domingo 2024-06-02 es Propio 4
+2024-06-06 (Jue) feria usa Propio 5; su domingo 2024-06-02 es Propio 4
+2024-06-07 (Vie) feria usa Propio 5; su domingo 2024-06-02 es Propio 4
+[F1] Jue-Sáb tras Ceniza, ej. 2026:
+    2026-02-19 (Jue) clave=lentFeria1_4 | lecturas=transfiguration(prestadas) | colecta=transfiguration
+    2026-02-20 (Vie) clave=lentFeria1_5 | lecturas=transfiguration(prestadas) | colecta=transfiguration
+    2026-02-21 (Sáb) clave=lentFeria1_6 | lecturas=transfiguration(prestadas) | colecta=transfiguration
+[F1] 2024-2060: 111 de 111 días (Jue-Sáb tras Ceniza) no usan colecta/lecciones de Miércoles de Ceniza
+[F2] Vie-Sáb tras Ascensión, ej. 2026:
+    2026-05-15 (Vie) clave=easterFeria6_5 | lecturas=easter6(prestadas) | colecta=easter6
+    2026-05-16 (Sáb) clave=easterFeria6_6 | lecturas=easter6(prestadas) | colecta=easter6
+[F2] 2024-2060: 70 de 70 días (Vie/Sáb tras Ascensión sin fiesta propia) no usan colecta/lecciones de la Ascensión
+[F3] ferias tras Pentecostés (sin fiesta propia) 2024-2060: 206 de 206 usan la colecta de Pentecostés (el libro lo prohíbe: "not used on the following weekdays")
+[F3] ferias tras Trinidad: 209 de 209 usan la colecta de Trinidad (el libro lo prohíbe)
+    2026-05-25 (Lun) clave=pentecostFeria_1 | lecturas=pentecost(prestadas) | colecta=pentecost
+    2026-06-01 (Lun) clave=properFeria4_1 | lecturas=trinitySunday(prestadas) | colecta=trinitySunday
+    2026-06-05 (Vie) clave=properFeria5_5 | lecturas=trinitySunday(prestadas) | colecta=trinitySunday
+[F3] lecturas prestadas de Pentecostés/Trinidad en ferias siguientes: 415
+[F4] 29-31 dic. antes del 1.er domingo de Navidad (sin fiesta): 15 de 27 no usan la colecta/lecciones del Día de Navidad
+ 2028-12-29 (Vie) clave=christmasFeria | lecturas=advent4(prestadas) | colecta=advent4
+ 2028-12-30 (Sáb) clave=christmasFeria | lecturas=advent4(prestadas) | colecta=advent4
+ 2029-12-29 (Sáb) clave=christmasFeria | lecturas=advent4(prestadas) | colecta=advent4
+ 2034-12-29 (Vie) clave=christmasFeria | lecturas=advent4(prestadas) | colecta=advent4
+ 2034-12-30 (Sáb) clave=christmasFeria | lecturas=advent4(prestadas) | colecta=advent4
+[F5] ferias entre Epifanía y el domingo siguiente 2024-2060: 113; colecta usada: {"christmasSunday2":79,"epiphany":30,"christmasSunday":4} (libro: colecta de la Epifanía, o lecciones del 2.º Domingo de Navidad)
+[F6] colectas/lecciones propias de la semana (libro: 17046-17070 y 17130-17176; 20849-20990):
+   holyWeekFeria_1: colecta=false lecciones=true
+   holyWeekFeria_2: colecta=false lecciones=true
+   holyWeekFeria_3: colecta=false lecciones=true
+   easterFeria1_1: colecta=false lecciones=false
+   easterFeria1_2: colecta=false lecciones=false
+   easterFeria1_3: colecta=false lecciones=false
+   easterFeria1_4: colecta=false lecciones=false
+   easterFeria1_5: colecta=false lecciones=false
+   easterFeria1_6: colecta=false lecciones=false
+   Claves de colecta existentes tipo feria: (ninguna)
+   Claves de lecciones tipo feria: holyWeekFeria_1, holyWeekFeria_2, holyWeekFeria_3
+   ¿Existen COLLECTS para christmasEve / easterEve / rogation / ember? christmasEve=false easterEve=false rogation=false ember=false
+   Claves de COLLECTS ( 95 ): advent1 advent2 advent3 advent4 christmas christmasSunday christmasSunday2 circumcision epiphany epiphany1 epiphany2 epiphany3 epiphany4 epiphany5 epiphany6 epiphany7 epiphany8 transfiguration ashWednesday lent1 lent2 lent3 lent4 lent5 palmSunday maundyThursday goodFriday holySaturday easter easter2 easter3 easter4 easter5 easter6 easter7 ascension pentecost trinitySunday proper3 proper4 proper5 proper6 proper7 proper8 proper9 proper10 proper11 proper12 proper13 proper14 proper15 proper16 proper17 proper18 proper19 proper20 proper21 proper22 proper23 proper24 proper25 proper26 proper27 proper28 proper29 01-01 01-18 01-25 02-02 02-24 03-19 03-25 04-25 05-01 05-31 06-11 06-24 06-29 07-22 07-25 08-06 08-15 08-24 09-14 09-21 09-29 10-18 10-23 10-28 11-01 11-30 12-21 12-26 12-27 12-28
+[G] ferias de Cuaresma 2024-2060: 1144; con número de semana distinto del domingo que las precede: 802 (70.1%)
+2024-02-15 (Jue) etiqueta semana 1; lo correcto: 0 -> "Jueves de Cuaresma (semana 1)"
+2024-02-16 (Vie) etiqueta semana 1; lo correcto: 0 -> "Viernes de Cuaresma (semana 1)"
+2024-02-17 (Sáb) etiqueta semana 1; lo correcto: 0 -> "Sábado de Cuaresma (semana 1)"
+2024-02-21 (Mié) etiqueta semana 2; lo correcto: 1 -> "Miércoles de Cuaresma (semana 2)"
+2024-02-22 (Jue) etiqueta semana 2; lo correcto: 1 -> "Jueves de Cuaresma (semana 2)"
+[H] 1-ene en domingo (Navidad cayó en domingo el año anterior), 2001-2120: 18 años
+2006-01-01: key=christmasSunday (Domingo en la Octava de Navidad)
+2012-01-01: key=christmasSunday (Domingo en la Octava de Navidad)
+2017-01-01: key=christmasSunday (Domingo en la Octava de Navidad)
+2023-01-01: key=christmasSunday (Domingo en la Octava de Navidad)
+2034-01-01: key=christmasSunday (Domingo en la Octava de Navidad)
+2040-01-01: key=christmasSunday (Domingo en la Octava de Navidad)
+2045-01-01: key=christmasSunday (Domingo en la Octava de Navidad)
+2051-01-01: key=christmasSunday (Domingo en la Octava de Navidad)
+2062-01-01: key=christmasSunday (Domingo en la Octava de Navidad)
+2068-01-01: key=christmasSunday (Domingo en la Octava de Navidad)
+2073-01-01: key=christmasSunday (Domingo en la Octava de Navidad)
+2079-01-01: key=christmasSunday (Domingo en la Octava de Navidad)
+2090-01-01: key=christmasSunday (Domingo en la Octava de Navidad)
+2096-01-01: key=christmasSunday (Domingo en la Octava de Navidad)
+2102-01-01: key=christmasSunday (Domingo en la Octava de Navidad)
+2108-01-01: key=christmasSunday (Domingo en la Octava de Navidad)
+2113-01-01: key=christmasSunday (Domingo en la Octava de Navidad)
+2119-01-01: key=christmasSunday (Domingo en la Octava de Navidad)
+[H] dentro de 2024-2060: 4 -> 2034, 2040, 2045, 2051
+[I] fronteras de temporada que difieren de la definición del libro (2024-2060): {"Pentecostés (libro: la Pascua \"incluye y termina\" en Pentecostés)":37,"lunes tras Pentecostés":37}
+[I] 2026: Pentecostés pentecost | lunes tras Pent. pentecost | Trinidad ordinary | fiesta fija en esa ventana (p.ej. 31-may Trinidad 2026) -> seasonForDate no exportado
+[J] domingos 2001-2120 con rango distinto de sunday/principal: 0 

@@ -1,0 +1,366 @@
+fecha;dow;clave_dia;dia;clave_colecta_app;slot_de_la_clave;slot_prescrito_libro;regla_libro;slot_del_TEXTO_del_app;clase;veredicto
+2027-01-01;vie;01-01;El Santo Nombre de Nuestro Señor Jesucristo;01-01;01-01;01-01;propio;01-01;V;OK_V
+2027-01-02;sab;christmasFeria;Sábado de Navidad;christmasSunday;christmas1;christmas1;domingo-precedente(p.21/p.48);christmas2;D;TEXTO
+2027-01-03;dom;christmasSunday2;Segundo Domingo después de Navidad;christmasSunday2;christmas2;christmas2;propio;;D;TEXTO
+2027-01-04;lun;christmasFeria;Lunes de Navidad;christmasSunday2;christmas2;christmas2;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-01-05;mar;christmasFeria;Martes de Navidad;christmasSunday2;christmas2;christmas2;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-01-06;mie;epiphany;La Epifanía del Señor;epiphany;epiphany;epiphany;propio;epiphany;C;OK_C
+2027-01-07;jue;epiphanyOctaveFeria;Jueves después de Epifanía;christmasSunday2;christmas2;epiphany;Epifania-ferias-hasta-domingo(p.601);;D;LOGICA
+2027-01-08;vie;epiphanyOctaveFeria;Viernes después de Epifanía;christmasSunday2;christmas2;epiphany;Epifania-ferias-hasta-domingo(p.601);;D;LOGICA
+2027-01-09;sab;epiphanyOctaveFeria;Sábado después de Epifanía;christmasSunday2;christmas2;epiphany;Epifania-ferias-hasta-domingo(p.601);;D;LOGICA
+2027-01-10;dom;epiphany1;El Bautismo del Señor;epiphany1;epiphany1;epiphany1;propio;epiphany1;V;OK_V
+2027-01-11;lun;epiphanyFeria;Lunes después de Epifanía;epiphany1;epiphany1;epiphany1;domingo-precedente(p.21/p.48);epiphany1;V;OK_V
+2027-01-12;mar;epiphanyFeria;Martes después de Epifanía;epiphany1;epiphany1;epiphany1;domingo-precedente(p.21/p.48);epiphany1;V;OK_V
+2027-01-13;mie;epiphanyFeria;Miércoles después de Epifanía;epiphany1;epiphany1;epiphany1;domingo-precedente(p.21/p.48);epiphany1;V;OK_V
+2027-01-14;jue;epiphanyFeria;Jueves después de Epifanía;epiphany1;epiphany1;epiphany1;domingo-precedente(p.21/p.48);epiphany1;V;OK_V
+2027-01-15;vie;epiphanyFeria;Viernes después de Epifanía;epiphany1;epiphany1;epiphany1;domingo-precedente(p.21/p.48);epiphany1;V;OK_V
+2027-01-16;sab;epiphanyFeria;Sábado después de Epifanía;epiphany1;epiphany1;epiphany1;domingo-precedente(p.21/p.48);epiphany1;V;OK_V
+2027-01-17;dom;epiphany2;2° Domingo después de Epifanía;epiphany2;epiphany2;epiphany2;propio;;D;TEXTO
+2027-01-18;lun;01-18;La Confesión de San Pedro;01-18;01-18;01-18;propio;01-18;C;OK_C
+2027-01-19;mar;epiphanyFeria;Martes después de Epifanía;epiphany2;epiphany2;epiphany2;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-01-20;mie;epiphanyFeria;Miércoles después de Epifanía;epiphany2;epiphany2;epiphany2;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-01-21;jue;epiphanyFeria;Jueves después de Epifanía;epiphany2;epiphany2;epiphany2;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-01-22;vie;epiphanyFeria;Viernes después de Epifanía;epiphany2;epiphany2;epiphany2;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-01-23;sab;epiphanyFeria;Sábado después de Epifanía;epiphany2;epiphany2;epiphany2;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-01-24;dom;epiphany3;3° Domingo después de Epifanía;epiphany3;epiphany3;epiphany3;propio;epiphany3;C;OK_C
+2027-01-25;lun;01-25;La Conversión de San Pablo;01-25;01-25;01-25;propio;01-25;C;OK_C
+2027-01-26;mar;epiphanyFeria;Martes después de Epifanía;epiphany3;epiphany3;epiphany3;domingo-precedente(p.21/p.48);epiphany3;C;OK_C
+2027-01-27;mie;epiphanyFeria;Miércoles después de Epifanía;epiphany3;epiphany3;epiphany3;domingo-precedente(p.21/p.48);epiphany3;C;OK_C
+2027-01-28;jue;epiphanyFeria;Jueves después de Epifanía;epiphany3;epiphany3;epiphany3;domingo-precedente(p.21/p.48);epiphany3;C;OK_C
+2027-01-29;vie;epiphanyFeria;Viernes después de Epifanía;epiphany3;epiphany3;epiphany3;domingo-precedente(p.21/p.48);epiphany3;C;OK_C
+2027-01-30;sab;epiphanyFeria;Sábado después de Epifanía;epiphany3;epiphany3;epiphany3;domingo-precedente(p.21/p.48);epiphany3;C;OK_C
+2027-01-31;dom;epiphany4;4° Domingo después de Epifanía;epiphany4;epiphany4;epiphany4;propio;;D;TEXTO
+2027-02-01;lun;epiphanyFeria;Lunes después de Epifanía;epiphany4;epiphany4;epiphany4;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-02-02;mar;02-02;La Presentación del Señor (Candelaria);02-02;02-02;02-02;propio;02-02;C;OK_C
+2027-02-03;mie;epiphanyFeria;Miércoles después de Epifanía;epiphany4;epiphany4;epiphany4;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-02-04;jue;epiphanyFeria;Jueves después de Epifanía;epiphany4;epiphany4;epiphany4;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-02-05;vie;epiphanyFeria;Viernes después de Epifanía;epiphany4;epiphany4;epiphany4;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-02-06;sab;epiphanyFeria;Sábado después de Epifanía;epiphany4;epiphany4;epiphany4;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-02-07;dom;transfiguration;Último Domingo después de Epifanía (Transfiguración);transfiguration;epiphanyLast;epiphanyLast;propio;epiphanyLast;C;OK_C
+2027-02-08;lun;epiphanyFeria;Lunes después de Epifanía;transfiguration;epiphanyLast;epiphanyLast;domingo-precedente(p.21/p.48);epiphanyLast;C;OK_C
+2027-02-09;mar;epiphanyFeria;Martes después de Epifanía;transfiguration;epiphanyLast;epiphanyLast;domingo-precedente(p.21/p.48);epiphanyLast;C;OK_C
+2027-02-10;mie;ashWednesday;Miércoles de Ceniza;ashWednesday;ashWednesday;ashWednesday;propio;ashWednesday;C;OK_C
+2027-02-11;jue;lentFeria1_4;Jueves de Cuaresma (semana 1);transfiguration;epiphanyLast;ashWednesday;Ceniza-sirve-dias-siguientes(p.605);epiphanyLast;C;LOGICA
+2027-02-12;vie;lentFeria1_5;Viernes de Cuaresma (semana 1);transfiguration;epiphanyLast;ashWednesday;Ceniza-sirve-dias-siguientes(p.605);epiphanyLast;C;LOGICA
+2027-02-13;sab;lentFeria1_6;Sábado de Cuaresma (semana 1);transfiguration;epiphanyLast;ashWednesday;Ceniza-sirve-dias-siguientes(p.605);epiphanyLast;C;LOGICA
+2027-02-14;dom;lent1;Primer Domingo de Cuaresma;lent1;lent1;lent1;propio;;D;TEXTO
+2027-02-15;lun;lentFeria1_1;Lunes de Cuaresma (semana 1);lent1;lent1;lent1;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-02-16;mar;lentFeria1_2;Martes de Cuaresma (semana 1);lent1;lent1;lent1;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-02-17;mie;lentFeria2_3;Miércoles de Cuaresma (semana 2);lent1;lent1;lent1;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-02-18;jue;lentFeria2_4;Jueves de Cuaresma (semana 2);lent1;lent1;lent1;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-02-19;vie;lentFeria2_5;Viernes de Cuaresma (semana 2);lent1;lent1;lent1;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-02-20;sab;lentFeria2_6;Sábado de Cuaresma (semana 2);lent1;lent1;lent1;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-02-21;dom;lent2;Segundo Domingo de Cuaresma;lent2;lent2;lent2;propio;;D;TEXTO
+2027-02-22;lun;lentFeria2_1;Lunes de Cuaresma (semana 2);lent2;lent2;lent2;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-02-23;mar;lentFeria2_2;Martes de Cuaresma (semana 2);lent2;lent2;lent2;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-02-24;mie;02-24;San Matías, Apóstol;02-24;02-24;02-24;propio;02-24;C;OK_C
+2027-02-25;jue;lentFeria3_4;Jueves de Cuaresma (semana 3);lent2;lent2;lent2;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-02-26;vie;lentFeria3_5;Viernes de Cuaresma (semana 3);lent2;lent2;lent2;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-02-27;sab;lentFeria3_6;Sábado de Cuaresma (semana 3);lent2;lent2;lent2;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-02-28;dom;lent3;Tercer Domingo de Cuaresma;lent3;lent3;lent3;propio;lent2;D;TEXTO
+2027-03-01;lun;lentFeria3_1;Lunes de Cuaresma (semana 3);lent3;lent3;lent3;domingo-precedente(p.21/p.48);lent2;D;TEXTO
+2027-03-02;mar;lentFeria3_2;Martes de Cuaresma (semana 3);lent3;lent3;lent3;domingo-precedente(p.21/p.48);lent2;D;TEXTO
+2027-03-03;mie;lentFeria4_3;Miércoles de Cuaresma (semana 4);lent3;lent3;lent3;domingo-precedente(p.21/p.48);lent2;D;TEXTO
+2027-03-04;jue;lentFeria4_4;Jueves de Cuaresma (semana 4);lent3;lent3;lent3;domingo-precedente(p.21/p.48);lent2;D;TEXTO
+2027-03-05;vie;lentFeria4_5;Viernes de Cuaresma (semana 4);lent3;lent3;lent3;domingo-precedente(p.21/p.48);lent2;D;TEXTO
+2027-03-06;sab;lentFeria4_6;Sábado de Cuaresma (semana 4);lent3;lent3;lent3;domingo-precedente(p.21/p.48);lent2;D;TEXTO
+2027-03-07;dom;lent4;Cuarto Domingo de Cuaresma (Laetare);lent4;lent4;lent4;propio;;D;TEXTO
+2027-03-08;lun;lentFeria4_1;Lunes de Cuaresma (semana 4);lent4;lent4;lent4;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-03-09;mar;lentFeria4_2;Martes de Cuaresma (semana 4);lent4;lent4;lent4;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-03-10;mie;lentFeria5_3;Miércoles de Cuaresma (semana 5);lent4;lent4;lent4;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-03-11;jue;lentFeria5_4;Jueves de Cuaresma (semana 5);lent4;lent4;lent4;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-03-12;vie;lentFeria5_5;Viernes de Cuaresma (semana 5);lent4;lent4;lent4;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-03-13;sab;lentFeria5_6;Sábado de Cuaresma (semana 5);lent4;lent4;lent4;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-03-14;dom;lent5;Quinto Domingo de Cuaresma (Domingo de Pasión);lent5;lent5;lent5;propio;goodFriday;D;TEXTO
+2027-03-15;lun;lentFeria5_1;Lunes de Cuaresma (semana 5);lent5;lent5;lent5;domingo-precedente(p.21/p.48);goodFriday;D;TEXTO
+2027-03-16;mar;lentFeria5_2;Martes de Cuaresma (semana 5);lent5;lent5;lent5;domingo-precedente(p.21/p.48);goodFriday;D;TEXTO
+2027-03-17;mie;lentFeria6_3;Miércoles de Cuaresma (semana 6);lent5;lent5;lent5;domingo-precedente(p.21/p.48);goodFriday;D;TEXTO
+2027-03-18;jue;lentFeria6_4;Jueves de Cuaresma (semana 6);lent5;lent5;lent5;domingo-precedente(p.21/p.48);goodFriday;D;TEXTO
+2027-03-19;vie;03-19;San José, Esposo de la Virgen María;03-19;03-19;03-19;propio;03-19;C;OK_C
+2027-03-20;sab;lentFeria6_6;Sábado de Cuaresma (semana 6);lent5;lent5;lent5;domingo-precedente(p.21/p.48);goodFriday;D;TEXTO
+2027-03-21;dom;palmSunday;Domingo de Ramos;palmSunday;palmSunday;palmSunday;propio;palmSunday;V;OK_V
+2027-03-22;lun;holyWeekFeria_1;Lunes Santo;palmSunday;palmSunday;holyWeekMon;SemanaSanta-L-M-X-propias(p.607-608);palmSunday;V;LOGICA
+2027-03-23;mar;holyWeekFeria_2;Martes Santo;palmSunday;palmSunday;holyWeekTue;SemanaSanta-L-M-X-propias(p.607-608);palmSunday;V;LOGICA
+2027-03-24;mie;holyWeekFeria_3;Miércoles Santo;palmSunday;palmSunday;holyWeekWed;SemanaSanta-L-M-X-propias(p.607-608);palmSunday;V;LOGICA
+2027-03-25;jue;maundyThursday;Jueves Santo;maundyThursday;maundyThursday;maundyThursday;propio;maundyThursday;C;OK_C
+2027-03-26;vie;goodFriday;Viernes Santo;goodFriday;goodFriday;goodFriday;propio;goodFriday;C;OK_C
+2027-03-27;sab;holySaturday;Sábado Santo;holySaturday;holySaturday;holySaturday;propio;holySaturday;V;OK_V
+2027-03-28;dom;easter;Domingo de Resurrección;easter;easterDay;easterDay;propio;easterDay;V;OK_V
+2027-03-29;lun;easterFeria1_1;Lunes de Pascua (semana 1);easter;easterDay;easterWeekMon;SemanaPascua-propias(p.609-611);easterDay;V;LOGICA
+2027-03-30;mar;easterFeria1_2;Martes de Pascua (semana 1);easter;easterDay;easterWeekTue;SemanaPascua-propias(p.609-611);easterDay;V;LOGICA
+2027-03-31;mie;easterFeria1_3;Miércoles de Pascua (semana 1);easter;easterDay;easterWeekWed;SemanaPascua-propias(p.609-611);easterDay;V;LOGICA
+2027-04-01;jue;easterFeria1_4;Jueves de Pascua (semana 1);easter;easterDay;easterWeekThu;SemanaPascua-propias(p.609-611);easterDay;V;LOGICA
+2027-04-02;vie;easterFeria1_5;Viernes de Pascua (semana 1);easter;easterDay;easterWeekFri;SemanaPascua-propias(p.609-611);easterDay;V;LOGICA
+2027-04-03;sab;easterFeria1_6;Sábado de Pascua (semana 1);easter;easterDay;easterWeekSat;SemanaPascua-propias(p.609-611);easterDay;V;LOGICA
+2027-04-04;dom;easter2;Segundo Domingo de Pascua;easter2;easter2;easter2;propio;;D;TEXTO
+2027-04-05;lun;03-25;La Anunciación del Señor (trasladada);03-25;03-25;03-25;propio;03-25;C;OK_C
+2027-04-06;mar;easterFeria2_2;Martes de Pascua (semana 2);easter2;easter2;easter2;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-04-07;mie;easterFeria2_3;Miércoles de Pascua (semana 2);easter2;easter2;easter2;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-04-08;jue;easterFeria2_4;Jueves de Pascua (semana 2);easter2;easter2;easter2;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-04-09;vie;easterFeria2_5;Viernes de Pascua (semana 2);easter2;easter2;easter2;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-04-10;sab;easterFeria2_6;Sábado de Pascua (semana 2);easter2;easter2;easter2;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-04-11;dom;easter3;Tercer Domingo de Pascua;easter3;easter3;easter3;propio;easterWeekWed;D;TEXTO
+2027-04-12;lun;easterFeria3_1;Lunes de Pascua (semana 3);easter3;easter3;easter3;domingo-precedente(p.21/p.48);easterWeekWed;D;TEXTO
+2027-04-13;mar;easterFeria3_2;Martes de Pascua (semana 3);easter3;easter3;easter3;domingo-precedente(p.21/p.48);easterWeekWed;D;TEXTO
+2027-04-14;mie;easterFeria3_3;Miércoles de Pascua (semana 3);easter3;easter3;easter3;domingo-precedente(p.21/p.48);easterWeekWed;D;TEXTO
+2027-04-15;jue;easterFeria3_4;Jueves de Pascua (semana 3);easter3;easter3;easter3;domingo-precedente(p.21/p.48);easterWeekWed;D;TEXTO
+2027-04-16;vie;easterFeria3_5;Viernes de Pascua (semana 3);easter3;easter3;easter3;domingo-precedente(p.21/p.48);easterWeekWed;D;TEXTO
+2027-04-17;sab;easterFeria3_6;Sábado de Pascua (semana 3);easter3;easter3;easter3;domingo-precedente(p.21/p.48);easterWeekWed;D;TEXTO
+2027-04-18;dom;easter4;Cuarto Domingo de Pascua (Buen Pastor);easter4;easter4;easter4;propio;easter4;C;OK_C
+2027-04-19;lun;easterFeria4_1;Lunes de Pascua (semana 4);easter4;easter4;easter4;domingo-precedente(p.21/p.48);easter4;C;OK_C
+2027-04-20;mar;easterFeria4_2;Martes de Pascua (semana 4);easter4;easter4;easter4;domingo-precedente(p.21/p.48);easter4;C;OK_C
+2027-04-21;mie;easterFeria4_3;Miércoles de Pascua (semana 4);easter4;easter4;easter4;domingo-precedente(p.21/p.48);easter4;C;OK_C
+2027-04-22;jue;easterFeria4_4;Jueves de Pascua (semana 4);easter4;easter4;easter4;domingo-precedente(p.21/p.48);easter4;C;OK_C
+2027-04-23;vie;easterFeria4_5;Viernes de Pascua (semana 4);easter4;easter4;easter4;domingo-precedente(p.21/p.48);easter4;C;OK_C
+2027-04-24;sab;easterFeria4_6;Sábado de Pascua (semana 4);easter4;easter4;easter4;domingo-precedente(p.21/p.48);easter4;C;OK_C
+2027-04-25;dom;easter5;Quinto Domingo de Pascua;easter5;easter5;easter5;propio;easter5;C;OK_C
+2027-04-26;lun;easterFeria5_1;Lunes de Pascua (semana 5);easter5;easter5;easter5;domingo-precedente(p.21/p.48);easter5;C;OK_C
+2027-04-27;mar;easterFeria5_2;Martes de Pascua (semana 5);easter5;easter5;easter5;domingo-precedente(p.21/p.48);easter5;C;OK_C
+2027-04-28;mie;easterFeria5_3;Miércoles de Pascua (semana 5);easter5;easter5;easter5;domingo-precedente(p.21/p.48);easter5;C;OK_C
+2027-04-29;jue;easterFeria5_4;Jueves de Pascua (semana 5);easter5;easter5;easter5;domingo-precedente(p.21/p.48);easter5;C;OK_C
+2027-04-30;vie;easterFeria5_5;Viernes de Pascua (semana 5);easter5;easter5;easter5;domingo-precedente(p.21/p.48);easter5;C;OK_C
+2027-05-01;sab;05-01;SS. Felipe y Santiago, Apóstoles;05-01;05-01;05-01;propio;05-01;V;OK_V
+2027-05-02;dom;easter6;Sexto Domingo de Pascua;easter6;easter6;easter6;propio;;D;TEXTO
+2027-05-03;lun;easterFeria6_1;Lunes de Pascua (semana 6);easter6;easter6;easter6;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-05-04;mar;easterFeria6_2;Martes de Pascua (semana 6);easter6;easter6;easter6;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-05-05;mie;easterFeria6_3;Miércoles de Pascua (semana 6);easter6;easter6;easter6;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-05-06;jue;ascension;La Ascensión del Señor;ascension;ascension;ascension;propio;ascension;C;OK_C
+2027-05-07;vie;easterFeria6_5;Viernes de Pascua (semana 6);easter6;easter6;ascension;Ascension-vie-sab(p.613);;D;LOGICA
+2027-05-08;sab;easterFeria6_6;Sábado de Pascua (semana 6);easter6;easter6;ascension;Ascension-vie-sab(p.613);;D;LOGICA
+2027-05-09;dom;easter7;Séptimo Domingo de Pascua;easter7;easter7;easter7;propio;easter7;C;OK_C
+2027-05-10;lun;easterFeria7_1;Lunes de Pascua (semana 7);easter7;easter7;easter7;domingo-precedente(p.21/p.48);easter7;C;OK_C
+2027-05-11;mar;easterFeria7_2;Martes de Pascua (semana 7);easter7;easter7;easter7;domingo-precedente(p.21/p.48);easter7;C;OK_C
+2027-05-12;mie;easterFeria7_3;Miércoles de Pascua (semana 7);easter7;easter7;easter7;domingo-precedente(p.21/p.48);easter7;C;OK_C
+2027-05-13;jue;easterFeria7_4;Jueves de Pascua (semana 7);easter7;easter7;easter7;domingo-precedente(p.21/p.48);easter7;C;OK_C
+2027-05-14;vie;easterFeria7_5;Viernes de Pascua (semana 7);easter7;easter7;easter7;domingo-precedente(p.21/p.48);easter7;C;OK_C
+2027-05-15;sab;easterFeria7_6;Sábado de Pascua (semana 7);easter7;easter7;easter7;domingo-precedente(p.21/p.48);easter7;C;OK_C
+2027-05-16;dom;pentecost;Día de Pentecostés;pentecost;pentecost;pentecost;propio;pentecost;C;OK_C
+2027-05-17;lun;pentecostFeria_1;Lunes después de Pentecostés;pentecost;pentecost;proper2;Pentecostes-ferias->propio-fechado(p.614);pentecost;C;LOGICA
+2027-05-18;mar;pentecostFeria_2;Martes después de Pentecostés;pentecost;pentecost;proper2;Pentecostes-ferias->propio-fechado(p.614);pentecost;C;LOGICA
+2027-05-19;mie;pentecostFeria_3;Miércoles después de Pentecostés;pentecost;pentecost;proper2;Pentecostes-ferias->propio-fechado(p.614);pentecost;C;LOGICA
+2027-05-20;jue;pentecostFeria_4;Jueves después de Pentecostés;pentecost;pentecost;proper2;Pentecostes-ferias->propio-fechado(p.614);pentecost;C;LOGICA
+2027-05-21;vie;pentecostFeria_5;Viernes después de Pentecostés;pentecost;pentecost;proper2;Pentecostes-ferias->propio-fechado(p.614);pentecost;C;LOGICA
+2027-05-22;sab;pentecostFeria_6;Sábado después de Pentecostés;pentecost;pentecost;proper2;Pentecostes-ferias->propio-fechado(p.614);pentecost;C;LOGICA
+2027-05-23;dom;trinitySunday;La Santísima Trinidad;trinitySunday;trinity;trinity;propio;trinity;V;OK_V
+2027-05-24;lun;properFeria3_1;Lunes después de Pentecostés;trinitySunday;trinity;proper3;Trinidad-ferias->propio-fechado(p.614);trinity;V;LOGICA
+2027-05-25;mar;properFeria3_2;Martes después de Pentecostés;trinitySunday;trinity;proper3;Trinidad-ferias->propio-fechado(p.614);trinity;V;LOGICA
+2027-05-26;mie;properFeria3_3;Miércoles después de Pentecostés;trinitySunday;trinity;proper3;Trinidad-ferias->propio-fechado(p.614);trinity;V;LOGICA
+2027-05-27;jue;properFeria3_4;Jueves después de Pentecostés;trinitySunday;trinity;proper3;Trinidad-ferias->propio-fechado(p.614);trinity;V;LOGICA
+2027-05-28;vie;properFeria3_5;Viernes después de Pentecostés;trinitySunday;trinity;proper3;Trinidad-ferias->propio-fechado(p.614);trinity;V;LOGICA
+2027-05-29;sab;properFeria4_6;Sábado después de Pentecostés;trinitySunday;trinity;proper3;Trinidad-ferias->propio-fechado(p.614);trinity;V;LOGICA
+2027-05-30;dom;proper4;Propio 4;proper4;proper4;proper4;propio;;D;TEXTO
+2027-05-31;lun;05-31;La Visitación de la Virgen María;05-31;05-31;05-31;propio;05-31;V;OK_V
+2027-06-01;mar;properFeria4_2;Martes después de Pentecostés;proper4;proper4;proper4;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-06-02;mie;properFeria4_3;Miércoles después de Pentecostés;proper4;proper4;proper4;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-06-03;jue;properFeria4_4;Jueves después de Pentecostés;proper4;proper4;proper4;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-06-04;vie;properFeria4_5;Viernes después de Pentecostés;proper4;proper4;proper4;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-06-05;sab;properFeria5_6;Sábado después de Pentecostés;proper4;proper4;proper4;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-06-06;dom;proper5;Propio 5;proper5;proper5;proper5;propio;proper11;D;TEXTO
+2027-06-07;lun;properFeria5_1;Lunes después de Pentecostés;proper5;proper5;proper5;domingo-precedente(p.21/p.48);proper11;D;TEXTO
+2027-06-08;mar;properFeria5_2;Martes después de Pentecostés;proper5;proper5;proper5;domingo-precedente(p.21/p.48);proper11;D;TEXTO
+2027-06-09;mie;properFeria5_3;Miércoles después de Pentecostés;proper5;proper5;proper5;domingo-precedente(p.21/p.48);proper11;D;TEXTO
+2027-06-10;jue;properFeria5_4;Jueves después de Pentecostés;proper5;proper5;proper5;domingo-precedente(p.21/p.48);proper11;D;TEXTO
+2027-06-11;vie;06-11;San Bernabé, Apóstol;06-11;06-11;06-11;propio;06-11;V;OK_V
+2027-06-12;sab;properFeria6_6;Sábado después de Pentecostés;proper5;proper5;proper5;domingo-precedente(p.21/p.48);proper11;D;TEXTO
+2027-06-13;dom;proper6;Propio 6;proper6;proper6;proper6;propio;proper15;D;TEXTO
+2027-06-14;lun;properFeria6_1;Lunes después de Pentecostés;proper6;proper6;proper6;domingo-precedente(p.21/p.48);proper15;D;TEXTO
+2027-06-15;mar;properFeria6_2;Martes después de Pentecostés;proper6;proper6;proper6;domingo-precedente(p.21/p.48);proper15;D;TEXTO
+2027-06-16;mie;properFeria6_3;Miércoles después de Pentecostés;proper6;proper6;proper6;domingo-precedente(p.21/p.48);proper15;D;TEXTO
+2027-06-17;jue;properFeria6_4;Jueves después de Pentecostés;proper6;proper6;proper6;domingo-precedente(p.21/p.48);proper15;D;TEXTO
+2027-06-18;vie;properFeria6_5;Viernes después de Pentecostés;proper6;proper6;proper6;domingo-precedente(p.21/p.48);proper15;D;TEXTO
+2027-06-19;sab;properFeria7_6;Sábado después de Pentecostés;proper6;proper6;proper6;domingo-precedente(p.21/p.48);proper15;D;TEXTO
+2027-06-20;dom;proper7;Propio 7;proper7;proper7;proper7;propio;proper2;D;TEXTO
+2027-06-21;lun;properFeria7_1;Lunes después de Pentecostés;proper7;proper7;proper7;domingo-precedente(p.21/p.48);proper2;D;TEXTO
+2027-06-22;mar;properFeria7_2;Martes después de Pentecostés;proper7;proper7;proper7;domingo-precedente(p.21/p.48);proper2;D;TEXTO
+2027-06-23;mie;properFeria7_3;Miércoles después de Pentecostés;proper7;proper7;proper7;domingo-precedente(p.21/p.48);proper2;D;TEXTO
+2027-06-24;jue;06-24;Natividad de San Juan Bautista;06-24;06-24;06-24;propio;06-24;V;OK_V
+2027-06-25;vie;properFeria7_5;Viernes después de Pentecostés;proper7;proper7;proper7;domingo-precedente(p.21/p.48);proper2;D;TEXTO
+2027-06-26;sab;properFeria8_6;Sábado después de Pentecostés;proper7;proper7;proper7;domingo-precedente(p.21/p.48);proper2;D;TEXTO
+2027-06-27;dom;proper8;Propio 8;proper8;proper8;proper8;propio;;D;TEXTO
+2027-06-28;lun;properFeria8_1;Lunes después de Pentecostés;proper8;proper8;proper8;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-06-29;mar;06-29;SS. Pedro y Pablo, Apóstoles;06-29;06-29;06-29;propio;06-29;C;OK_C
+2027-06-30;mie;properFeria8_3;Miércoles después de Pentecostés;proper8;proper8;proper8;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-07-01;jue;properFeria8_4;Jueves después de Pentecostés;proper8;proper8;proper8;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-07-02;vie;properFeria8_5;Viernes después de Pentecostés;proper8;proper8;proper8;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-07-03;sab;properFeria9_6;Sábado después de Pentecostés;proper8;proper8;proper8;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-07-04;dom;proper9;Propio 9;proper9;proper9;proper9;propio;;D;TEXTO
+2027-07-05;lun;properFeria9_1;Lunes después de Pentecostés;proper9;proper9;proper9;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-07-06;mar;properFeria9_2;Martes después de Pentecostés;proper9;proper9;proper9;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-07-07;mie;properFeria9_3;Miércoles después de Pentecostés;proper9;proper9;proper9;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-07-08;jue;properFeria9_4;Jueves después de Pentecostés;proper9;proper9;proper9;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-07-09;vie;properFeria9_5;Viernes después de Pentecostés;proper9;proper9;proper9;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-07-10;sab;properFeria10_6;Sábado después de Pentecostés;proper9;proper9;proper9;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-07-11;dom;proper10;Propio 10;proper10;proper10;proper10;propio;;D;TEXTO
+2027-07-12;lun;properFeria10_1;Lunes después de Pentecostés;proper10;proper10;proper10;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-07-13;mar;properFeria10_2;Martes después de Pentecostés;proper10;proper10;proper10;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-07-14;mie;properFeria10_3;Miércoles después de Pentecostés;proper10;proper10;proper10;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-07-15;jue;properFeria10_4;Jueves después de Pentecostés;proper10;proper10;proper10;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-07-16;vie;properFeria10_5;Viernes después de Pentecostés;proper10;proper10;proper10;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-07-17;sab;properFeria11_6;Sábado después de Pentecostés;proper10;proper10;proper10;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-07-18;dom;proper11;Propio 11;proper11;proper11;proper11;propio;proper4;D;TEXTO
+2027-07-19;lun;properFeria11_1;Lunes después de Pentecostés;proper11;proper11;proper11;domingo-precedente(p.21/p.48);proper4;D;TEXTO
+2027-07-20;mar;properFeria11_2;Martes después de Pentecostés;proper11;proper11;proper11;domingo-precedente(p.21/p.48);proper4;D;TEXTO
+2027-07-21;mie;properFeria11_3;Miércoles después de Pentecostés;proper11;proper11;proper11;domingo-precedente(p.21/p.48);proper4;D;TEXTO
+2027-07-22;jue;07-22;Santa María Magdalena;07-22;07-22;07-22;propio;;D;TEXTO
+2027-07-23;vie;properFeria11_5;Viernes después de Pentecostés;proper11;proper11;proper11;domingo-precedente(p.21/p.48);proper4;D;TEXTO
+2027-07-24;sab;properFeria12_6;Sábado después de Pentecostés;proper11;proper11;proper11;domingo-precedente(p.21/p.48);proper4;D;TEXTO
+2027-07-25;dom;proper12;Propio 12;proper12;proper12;proper12;propio;;D;TEXTO
+2027-07-26;lun;properFeria12_1;Lunes después de Pentecostés;proper12;proper12;proper12;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-07-27;mar;properFeria12_2;Martes después de Pentecostés;proper12;proper12;proper12;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-07-28;mie;properFeria12_3;Miércoles después de Pentecostés;proper12;proper12;proper12;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-07-29;jue;properFeria12_4;Jueves después de Pentecostés;proper12;proper12;proper12;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-07-30;vie;properFeria12_5;Viernes después de Pentecostés;proper12;proper12;proper12;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-07-31;sab;properFeria13_6;Sábado después de Pentecostés;proper12;proper12;proper12;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-08-01;dom;proper13;Propio 13;proper13;proper13;proper13;propio;proper13;C;OK_C
+2027-08-02;lun;properFeria13_1;Lunes después de Pentecostés;proper13;proper13;proper13;domingo-precedente(p.21/p.48);proper13;C;OK_C
+2027-08-03;mar;properFeria13_2;Martes después de Pentecostés;proper13;proper13;proper13;domingo-precedente(p.21/p.48);proper13;C;OK_C
+2027-08-04;mie;properFeria13_3;Miércoles después de Pentecostés;proper13;proper13;proper13;domingo-precedente(p.21/p.48);proper13;C;OK_C
+2027-08-05;jue;properFeria13_4;Jueves después de Pentecostés;proper13;proper13;proper13;domingo-precedente(p.21/p.48);proper13;C;OK_C
+2027-08-06;vie;08-06;La Transfiguración del Señor;08-06;08-06;08-06;propio;epiphanyLast;D;TEXTO
+2027-08-07;sab;properFeria14_6;Sábado después de Pentecostés;proper13;proper13;proper13;domingo-precedente(p.21/p.48);proper13;C;OK_C
+2027-08-08;dom;proper14;Propio 14;proper14;proper14;proper14;propio;;D;TEXTO
+2027-08-09;lun;properFeria14_1;Lunes después de Pentecostés;proper14;proper14;proper14;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-08-10;mar;properFeria14_2;Martes después de Pentecostés;proper14;proper14;proper14;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-08-11;mie;properFeria14_3;Miércoles después de Pentecostés;proper14;proper14;proper14;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-08-12;jue;properFeria14_4;Jueves después de Pentecostés;proper14;proper14;proper14;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-08-13;vie;properFeria14_5;Viernes después de Pentecostés;proper14;proper14;proper14;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-08-14;sab;properFeria15_6;Sábado después de Pentecostés;proper14;proper14;proper14;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-08-15;dom;proper15;Propio 15;proper15;proper15;proper15;propio;;D;TEXTO
+2027-08-16;lun;properFeria15_1;Lunes después de Pentecostés;proper15;proper15;proper15;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-08-17;mar;properFeria15_2;Martes después de Pentecostés;proper15;proper15;proper15;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-08-18;mie;properFeria15_3;Miércoles después de Pentecostés;proper15;proper15;proper15;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-08-19;jue;properFeria15_4;Jueves después de Pentecostés;proper15;proper15;proper15;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-08-20;vie;properFeria15_5;Viernes después de Pentecostés;proper15;proper15;proper15;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-08-21;sab;properFeria16_6;Sábado después de Pentecostés;proper15;proper15;proper15;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-08-22;dom;proper16;Propio 16;proper16;proper16;proper16;propio;proper16;C;OK_C
+2027-08-23;lun;properFeria16_1;Lunes después de Pentecostés;proper16;proper16;proper16;domingo-precedente(p.21/p.48);proper16;C;OK_C
+2027-08-24;mar;08-24;San Bartolomé, Apóstol;08-24;08-24;08-24;propio;08-24;C;OK_C
+2027-08-25;mie;properFeria16_3;Miércoles después de Pentecostés;proper16;proper16;proper16;domingo-precedente(p.21/p.48);proper16;C;OK_C
+2027-08-26;jue;properFeria16_4;Jueves después de Pentecostés;proper16;proper16;proper16;domingo-precedente(p.21/p.48);proper16;C;OK_C
+2027-08-27;vie;properFeria16_5;Viernes después de Pentecostés;proper16;proper16;proper16;domingo-precedente(p.21/p.48);proper16;C;OK_C
+2027-08-28;sab;properFeria17_6;Sábado después de Pentecostés;proper16;proper16;proper16;domingo-precedente(p.21/p.48);proper16;C;OK_C
+2027-08-29;dom;proper17;Propio 17;proper17;proper17;proper17;propio;proper17;C;OK_C
+2027-08-30;lun;properFeria17_1;Lunes después de Pentecostés;proper17;proper17;proper17;domingo-precedente(p.21/p.48);proper17;C;OK_C
+2027-08-31;mar;properFeria17_2;Martes después de Pentecostés;proper17;proper17;proper17;domingo-precedente(p.21/p.48);proper17;C;OK_C
+2027-09-01;mie;properFeria17_3;Miércoles después de Pentecostés;proper17;proper17;proper17;domingo-precedente(p.21/p.48);proper17;C;OK_C
+2027-09-02;jue;properFeria17_4;Jueves después de Pentecostés;proper17;proper17;proper17;domingo-precedente(p.21/p.48);proper17;C;OK_C
+2027-09-03;vie;properFeria17_5;Viernes después de Pentecostés;proper17;proper17;proper17;domingo-precedente(p.21/p.48);proper17;C;OK_C
+2027-09-04;sab;properFeria18_6;Sábado después de Pentecostés;proper17;proper17;proper17;domingo-precedente(p.21/p.48);proper17;C;OK_C
+2027-09-05;dom;proper18;Propio 18;proper18;proper18;proper18;propio;;D;TEXTO
+2027-09-06;lun;properFeria18_1;Lunes después de Pentecostés;proper18;proper18;proper18;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-09-07;mar;properFeria18_2;Martes después de Pentecostés;proper18;proper18;proper18;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-09-08;mie;properFeria18_3;Miércoles después de Pentecostés;proper18;proper18;proper18;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-09-09;jue;properFeria18_4;Jueves después de Pentecostés;proper18;proper18;proper18;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-09-10;vie;properFeria18_5;Viernes después de Pentecostés;proper18;proper18;proper18;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-09-11;sab;properFeria19_6;Sábado después de Pentecostés;proper18;proper18;proper18;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-09-12;dom;proper19;Propio 19;proper19;proper19;proper19;propio;proper12;D;TEXTO
+2027-09-13;lun;properFeria19_1;Lunes después de Pentecostés;proper19;proper19;proper19;domingo-precedente(p.21/p.48);proper12;D;TEXTO
+2027-09-14;mar;09-14;La Exaltación de la Santa Cruz;09-14;09-14;09-14;propio;09-14;C;OK_C
+2027-09-15;mie;properFeria19_3;Miércoles después de Pentecostés;proper19;proper19;proper19;domingo-precedente(p.21/p.48);proper12;D;TEXTO
+2027-09-16;jue;properFeria19_4;Jueves después de Pentecostés;proper19;proper19;proper19;domingo-precedente(p.21/p.48);proper12;D;TEXTO
+2027-09-17;vie;properFeria19_5;Viernes después de Pentecostés;proper19;proper19;proper19;domingo-precedente(p.21/p.48);proper12;D;TEXTO
+2027-09-18;sab;properFeria20_6;Sábado después de Pentecostés;proper19;proper19;proper19;domingo-precedente(p.21/p.48);proper12;D;TEXTO
+2027-09-19;dom;proper20;Propio 20;proper20;proper20;proper20;propio;proper11;D;TEXTO
+2027-09-20;lun;properFeria20_1;Lunes después de Pentecostés;proper20;proper20;proper20;domingo-precedente(p.21/p.48);proper11;D;TEXTO
+2027-09-21;mar;09-21;San Mateo, Apóstol y Evangelista;09-21;09-21;09-21;propio;09-21;V;OK_V
+2027-09-22;mie;properFeria20_3;Miércoles después de Pentecostés;proper20;proper20;proper20;domingo-precedente(p.21/p.48);proper11;D;TEXTO
+2027-09-23;jue;properFeria20_4;Jueves después de Pentecostés;proper20;proper20;proper20;domingo-precedente(p.21/p.48);proper11;D;TEXTO
+2027-09-24;vie;properFeria20_5;Viernes después de Pentecostés;proper20;proper20;proper20;domingo-precedente(p.21/p.48);proper11;D;TEXTO
+2027-09-25;sab;properFeria21_6;Sábado después de Pentecostés;proper20;proper20;proper20;domingo-precedente(p.21/p.48);proper11;D;TEXTO
+2027-09-26;dom;proper21;Propio 21;proper21;proper21;proper21;propio;;D;TEXTO
+2027-09-27;lun;properFeria21_1;Lunes después de Pentecostés;proper21;proper21;proper21;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-09-28;mar;properFeria21_2;Martes después de Pentecostés;proper21;proper21;proper21;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-09-29;mie;09-29;San Miguel y Todos los Ángeles;09-29;09-29;09-29;propio;09-29;C;OK_C
+2027-09-30;jue;properFeria21_4;Jueves después de Pentecostés;proper21;proper21;proper21;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-10-01;vie;properFeria21_5;Viernes después de Pentecostés;proper21;proper21;proper21;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-10-02;sab;properFeria22_6;Sábado después de Pentecostés;proper21;proper21;proper21;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-10-03;dom;proper22;Propio 22;proper22;proper22;proper22;propio;;D;TEXTO
+2027-10-04;lun;properFeria22_1;Lunes después de Pentecostés;proper22;proper22;proper22;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-10-05;mar;properFeria22_2;Martes después de Pentecostés;proper22;proper22;proper22;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-10-06;mie;properFeria22_3;Miércoles después de Pentecostés;proper22;proper22;proper22;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-10-07;jue;properFeria22_4;Jueves después de Pentecostés;proper22;proper22;proper22;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-10-08;vie;properFeria22_5;Viernes después de Pentecostés;proper22;proper22;proper22;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-10-09;sab;properFeria23_6;Sábado después de Pentecostés;proper22;proper22;proper22;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-10-10;dom;proper23;Propio 23;proper23;proper23;proper23;propio;proper17;D;TEXTO
+2027-10-11;lun;properFeria23_1;Lunes después de Pentecostés;proper23;proper23;proper23;domingo-precedente(p.21/p.48);proper17;D;TEXTO
+2027-10-12;mar;properFeria23_2;Martes después de Pentecostés;proper23;proper23;proper23;domingo-precedente(p.21/p.48);proper17;D;TEXTO
+2027-10-13;mie;properFeria23_3;Miércoles después de Pentecostés;proper23;proper23;proper23;domingo-precedente(p.21/p.48);proper17;D;TEXTO
+2027-10-14;jue;properFeria23_4;Jueves después de Pentecostés;proper23;proper23;proper23;domingo-precedente(p.21/p.48);proper17;D;TEXTO
+2027-10-15;vie;properFeria23_5;Viernes después de Pentecostés;proper23;proper23;proper23;domingo-precedente(p.21/p.48);proper17;D;TEXTO
+2027-10-16;sab;properFeria24_6;Sábado después de Pentecostés;proper23;proper23;proper23;domingo-precedente(p.21/p.48);proper17;D;TEXTO
+2027-10-17;dom;proper24;Propio 24;proper24;proper24;proper24;propio;proper14;D;TEXTO
+2027-10-18;lun;10-18;San Lucas, Evangelista;10-18;10-18;10-18;propio;10-18;C;OK_C
+2027-10-19;mar;properFeria24_2;Martes después de Pentecostés;proper24;proper24;proper24;domingo-precedente(p.21/p.48);proper14;D;TEXTO
+2027-10-20;mie;properFeria24_3;Miércoles después de Pentecostés;proper24;proper24;proper24;domingo-precedente(p.21/p.48);proper14;D;TEXTO
+2027-10-21;jue;properFeria24_4;Jueves después de Pentecostés;proper24;proper24;proper24;domingo-precedente(p.21/p.48);proper14;D;TEXTO
+2027-10-22;vie;properFeria24_5;Viernes después de Pentecostés;proper24;proper24;proper24;domingo-precedente(p.21/p.48);proper14;D;TEXTO
+2027-10-23;sab;10-23;Santiago de Jerusalén, Hermano del Señor;10-23;10-23;10-23;propio;;D;TEXTO
+2027-10-24;dom;proper25;Propio 25;proper25;proper25;proper25;propio;proper16;D;TEXTO
+2027-10-25;lun;properFeria25_1;Lunes después de Pentecostés;proper25;proper25;proper25;domingo-precedente(p.21/p.48);proper16;D;TEXTO
+2027-10-26;mar;properFeria25_2;Martes después de Pentecostés;proper25;proper25;proper25;domingo-precedente(p.21/p.48);proper16;D;TEXTO
+2027-10-27;mie;properFeria25_3;Miércoles después de Pentecostés;proper25;proper25;proper25;domingo-precedente(p.21/p.48);proper16;D;TEXTO
+2027-10-28;jue;10-28;SS. Simón y Judas, Apóstoles;10-28;10-28;10-28;propio;;D;TEXTO
+2027-10-29;vie;properFeria25_5;Viernes después de Pentecostés;proper25;proper25;proper25;domingo-precedente(p.21/p.48);proper16;D;TEXTO
+2027-10-30;sab;properFeria26_6;Sábado después de Pentecostés;proper25;proper25;proper25;domingo-precedente(p.21/p.48);proper16;D;TEXTO
+2027-10-31;dom;proper26;Propio 26;proper26;proper26;proper26;propio;;D;TEXTO
+2027-11-01;lun;11-01;Todos los Santos;11-01;11-01;11-01;AllSaints-fiesta-principal;11-01;C;OK_C
+2027-11-02;mar;properFeria26_2;Martes después de Pentecostés;proper26;proper26;proper26;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-11-03;mie;properFeria26_3;Miércoles después de Pentecostés;proper26;proper26;proper26;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-11-04;jue;properFeria26_4;Jueves después de Pentecostés;proper26;proper26;proper26;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-11-05;vie;properFeria26_5;Viernes después de Pentecostés;proper26;proper26;proper26;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-11-06;sab;properFeria27_6;Sábado después de Pentecostés;proper26;proper26;proper26;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-11-07;dom;proper27;Propio 27;proper27;proper27;proper27;propio;;D;TEXTO
+2027-11-08;lun;properFeria27_1;Lunes después de Pentecostés;proper27;proper27;proper27;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-11-09;mar;properFeria27_2;Martes después de Pentecostés;proper27;proper27;proper27;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-11-10;mie;properFeria27_3;Miércoles después de Pentecostés;proper27;proper27;proper27;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-11-11;jue;properFeria27_4;Jueves después de Pentecostés;proper27;proper27;proper27;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-11-12;vie;properFeria27_5;Viernes después de Pentecostés;proper27;proper27;proper27;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-11-13;sab;properFeria28_6;Sábado después de Pentecostés;proper27;proper27;proper27;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-11-14;dom;proper28;Propio 28;proper28;proper28;proper28;propio;;D;TEXTO
+2027-11-15;lun;properFeria28_1;Lunes después de Pentecostés;proper28;proper28;proper28;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-11-16;mar;properFeria28_2;Martes después de Pentecostés;proper28;proper28;proper28;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-11-17;mie;properFeria28_3;Miércoles después de Pentecostés;proper28;proper28;proper28;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-11-18;jue;properFeria28_4;Jueves después de Pentecostés;proper28;proper28;proper28;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-11-19;vie;properFeria28_5;Viernes después de Pentecostés;proper28;proper28;proper28;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-11-20;sab;properFeria29_6;Sábado después de Pentecostés;proper28;proper28;proper28;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-11-21;dom;proper29;Propio 29 — Cristo Rey;proper29;proper29;proper29;propio;proper29;C;OK_C
+2027-11-22;lun;properFeria29_1;Lunes después de Pentecostés;proper29;proper29;proper29;domingo-precedente(p.21/p.48);proper29;C;OK_C
+2027-11-23;mar;properFeria29_2;Martes después de Pentecostés;proper29;proper29;proper29;domingo-precedente(p.21/p.48);proper29;C;OK_C
+2027-11-24;mie;properFeria29_3;Miércoles después de Pentecostés;proper29;proper29;proper29;domingo-precedente(p.21/p.48);proper29;C;OK_C
+2027-11-25;jue;properFeria29_4;Jueves después de Pentecostés;proper29;proper29;proper29;domingo-precedente(p.21/p.48);proper29;C;OK_C
+2027-11-26;vie;properFeria29_5;Viernes después de Pentecostés;proper29;proper29;proper29;domingo-precedente(p.21/p.48);proper29;C;OK_C
+2027-11-27;sab;properFeria29_6;Sábado después de Pentecostés;proper29;proper29;proper29;domingo-precedente(p.21/p.48);proper29;C;OK_C
+2027-11-28;dom;advent1;Primer Domingo de Adviento;advent1;advent1;advent1;propio;advent1;C;OK_C
+2027-11-29;lun;adventFeria1_1;Lunes de Adviento (semana 1);advent1;advent1;advent1;domingo-precedente(p.21/p.48);advent1;C;OK_C
+2027-11-30;mar;11-30;San Andrés, Apóstol;11-30;11-30;11-30;propio;11-30;C;OK_C
+2027-12-01;mie;adventFeria1_3;Miércoles de Adviento (semana 1);advent1;advent1;advent1;domingo-precedente(p.21/p.48);advent1;C;OK_C
+2027-12-02;jue;adventFeria1_4;Jueves de Adviento (semana 1);advent1;advent1;advent1;domingo-precedente(p.21/p.48);advent1;C;OK_C
+2027-12-03;vie;adventFeria1_5;Viernes de Adviento (semana 1);advent1;advent1;advent1;domingo-precedente(p.21/p.48);advent1;C;OK_C
+2027-12-04;sab;adventFeria1_6;Sábado de Adviento (semana 1);advent1;advent1;advent1;domingo-precedente(p.21/p.48);advent1;C;OK_C
+2027-12-05;dom;advent2;Segundo Domingo de Adviento;advent2;advent2;advent2;propio;advent2;C;OK_C
+2027-12-06;lun;adventFeria2_1;Lunes de Adviento (semana 2);advent2;advent2;advent2;domingo-precedente(p.21/p.48);advent2;C;OK_C
+2027-12-07;mar;adventFeria2_2;Martes de Adviento (semana 2);advent2;advent2;advent2;domingo-precedente(p.21/p.48);advent2;C;OK_C
+2027-12-08;mie;adventFeria2_3;Miércoles de Adviento (semana 2);advent2;advent2;advent2;domingo-precedente(p.21/p.48);advent2;C;OK_C
+2027-12-09;jue;adventFeria2_4;Jueves de Adviento (semana 2);advent2;advent2;advent2;domingo-precedente(p.21/p.48);advent2;C;OK_C
+2027-12-10;vie;adventFeria2_5;Viernes de Adviento (semana 2);advent2;advent2;advent2;domingo-precedente(p.21/p.48);advent2;C;OK_C
+2027-12-11;sab;adventFeria2_6;Sábado de Adviento (semana 2);advent2;advent2;advent2;domingo-precedente(p.21/p.48);advent2;C;OK_C
+2027-12-12;dom;advent3;Tercer Domingo de Adviento (Gaudete);advent3;advent3;advent3;propio;advent3;V;OK_V
+2027-12-13;lun;adventFeria3_1;Lunes de Adviento (semana 3);advent3;advent3;advent3;domingo-precedente(p.21/p.48);advent3;V;OK_V
+2027-12-14;mar;adventFeria3_2;Martes de Adviento (semana 3);advent3;advent3;advent3;domingo-precedente(p.21/p.48);advent3;V;OK_V
+2027-12-15;mie;adventFeria3_3;Miércoles de Adviento (semana 3);advent3;advent3;advent3;domingo-precedente(p.21/p.48);advent3;V;OK_V
+2027-12-16;jue;adventFeria3_4;Jueves de Adviento (semana 3);advent3;advent3;advent3;domingo-precedente(p.21/p.48);advent3;V;OK_V
+2027-12-17;vie;adventFeria3_5;Viernes de Adviento (semana 3);advent3;advent3;advent3;domingo-precedente(p.21/p.48);advent3;V;OK_V
+2027-12-18;sab;adventFeria3_6;Sábado de Adviento (semana 3);advent3;advent3;advent3;domingo-precedente(p.21/p.48);advent3;V;OK_V
+2027-12-19;dom;advent4;Cuarto Domingo de Adviento;advent4;advent4;advent4;propio;;D;TEXTO
+2027-12-20;lun;adventFeria4_1;Lunes de Adviento (semana 4);advent4;advent4;advent4;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-12-21;mar;12-21;Santo Tomás, Apóstol;12-21;12-21;12-21;propio;12-21;C;OK_C
+2027-12-22;mie;adventFeria4_3;Miércoles de Adviento (semana 4);advent4;advent4;advent4;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-12-23;jue;adventFeria4_4;Jueves de Adviento (semana 4);advent4;advent4;advent4;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-12-24;vie;adventFeria4_5;Viernes de Adviento (semana 4);advent4;advent4;advent4;domingo-precedente(p.21/p.48);;D;TEXTO
+2027-12-25;sab;christmas;Natividad del Señor;christmas;christmasDay;christmasDay;propio;christmasDay;C;OK_C
+2027-12-26;dom;christmasSunday;Domingo en la Octava de Navidad;christmasSunday;christmas1;christmas1;propio;christmas2;D;TEXTO
+2027-12-27;lun;12-27;San Juan, Apóstol y Evangelista;12-27;12-27;12-27;propio;12-27;C;OK_C
+2027-12-28;mar;12-28;Los Santos Inocentes;12-28;12-28;12-28;propio;12-28;V;OK_V
+2027-12-29;mie;christmasFeria;Miércoles de Navidad;christmasSunday;christmas1;christmas1;domingo-precedente(p.21/p.48);christmas2;D;TEXTO
+2027-12-30;jue;christmasFeria;Jueves de Navidad;christmasSunday;christmas1;christmas1;domingo-precedente(p.21/p.48);christmas2;D;TEXTO
+2027-12-31;vie;christmasFeria;Viernes de Navidad;christmasSunday;christmas1;christmas1;domingo-precedente(p.21/p.48);christmas2;D;TEXTO

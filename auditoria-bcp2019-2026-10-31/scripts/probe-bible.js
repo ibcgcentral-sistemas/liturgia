@@ -1,0 +1,10 @@
+﻿const fs=require('fs');
+const txt=fs.readFileSync('C:/Users/gonza/OneDrive/Desktop/liturgia/js/lib/biblia-de-jerusalen.min.js','utf8');
+const m={exports:{}};
+new Function('module','exports',txt)(m,m.exports);
+const B=m.exports;
+console.log(Object.keys(B).slice(0,10));
+const bb=B.Bible||B;
+console.log(typeof bb, Object.keys(bb).slice(0,10));
+let k=Object.keys(bb)[0];
+console.log(k, typeof bb[k], JSON.stringify(bb[k]).slice(0,300));

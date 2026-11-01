@@ -1,0 +1,11 @@
+keys [
+  'abreviacion',
+  'testamento',
+  'ctd_chapters',
+  'ctd_verses',
+  'chapters'
+]
+ctd_verses type number 2535
+Gen ctd 1532
+{"lt":0,"gt":0,"amp":0,"pausa":1,"repl":0,"dblspace":0,"ast":0,"bracket":0,"paren":0,"empty":0}
+pausa Psalm 24 1

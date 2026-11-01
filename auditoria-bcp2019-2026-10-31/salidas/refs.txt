@@ -1,0 +1,195 @@
+Referencias distintas en BCPLectionary.SUNDAY: 721  (usos totales: 837)
+  distintas por rol: first=193 psalm=145 second=189 gospel=197
+  con sufijo a/b/c: 0
+
+Referencias con algún problema: 59 de 721
+Tipos: {"SALMO":45,"etiquetas de versículo duplicadas":9,"CORTO":7,"EXCEDE BdJ/INGLÉS":1}
+
+### Listado de problemas por referencia (con usos)
+- Psalm 122  [122:1-fin]  usos: advent1/A/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Canción de las subidas. De David. ¡Oh, qué alegría cuando me…»)
+- Psalm 25:1-9  [25:1-9]  usos: advent1/C/psalm, lent1/B/psalm, proper10/C/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («De David Alef. A ti, Yahveh, levanto mi alma,…»)
+- Psalm 72:1-8  [72:1-8]  usos: advent2/A/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («De Salomón. Oh Dios, da al rey tu juicio, al hijo de rey tu …»)
+- Psalm 126  [126:1-fin]  usos: advent2/C/psalm, advent3/B/psalm, lent5/C/psalm, 12-21/all/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Canción de las subidas. Cuando Yahveh hizo volver a los caut…»)
+- Psalm 72:1-7  [72:1-7]  usos: epiphany/all/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («De Salomón. Oh Dios, da al rey tu juicio, al hijo de rey tu …»)
+- Psalm 29  [29:1-fin]  usos: epiphany1/A/psalm, epiphany1/B/psalm, epiphany1/C/psalm, trinitySunday/B/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Salmo. De David. ¡Rendid a Yahveh, hijos de Dios, rendid a Y…»)
+- Psalm 139:1-5  [139:1-5]  usos: epiphany2/B/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Del maestro de coro. De David. Salmo. Yahveh, tú me escrutas…»)
+- Psalm 27:1-9  [27:1-9]  usos: epiphany3/A/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («De David. Yahveh es mi luz y mi salvación, ¿a quién he de te…»)
+- Psalm 15  [15:1-fin]  usos: epiphany4/A/psalm, proper11/C/psalm, proper17/B/psalm, 02-24/all/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Salmo. De David. Yahveh, ¿quién morará en tu tienda?, ¿quién…»)
+- Psalm 138  [138:1-fin]  usos: epiphany5/C/psalm, proper12/C/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («De David. Te doy gracias, Yahveh, de todo corazón, pues tú h…»)
+- Psalm 37:1-12  [37:1-12]  usos: epiphany7/C/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («De David. Alef. No te acalores por causa de los malos, no en…»)
+- Psalm 131  [131:1-fin]  usos: epiphany8/A/psalm, proper3/A/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Canción de las subidas. De David. No está inflado, Yahveh, m…»)
+- Psalm 103:1-13  [103:1-13]  usos: epiphany8/B/psalm, proper3/B/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («De David. Bendice a Yahveh, alma mía, del fondo de mi ser, s…»)
+- Psalm 50:1-6  [50:1-6]  usos: transfiguration/B/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Salmo. De Asaf. El Dios de los dioses, Yahveh, habla y convo…»)
+- Psalm 32  [32:1-fin]  usos: lent1/A/psalm, lent4/C/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («De David. Poema. ¡Dichoso el que es perdonado de su culpa, y…»)
+- Psalm 121  [121:1-fin]  usos: lent2/A/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Canción para las subidas. Alzo mis ojos a los montes: ¿de dó…»)
+- Psalm 27  [27:1-fin]  usos: lent2/C/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («De David. Yahveh es mi luz y mi salvación, ¿a quién he de te…»)
+- Psalm 23  [23:1-fin]  usos: lent4/A/psalm, easter4/A/psalm, easter4/B/psalm, easter4/C/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Salmo. De David. Yahveh es mi pastor, nada me falta.…»)
+- Psalm 130  [130:1-fin]  usos: lent5/A/psalm, holySaturday/all/psalm, proper5/B/psalm, proper8/B/psalm, proper14/B/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Canción de las subidas. Desde lo más profundos grito a ti, Y…»)
+- Matthew 26:14-27:66  [26:14-fin ; 27:1-66]  usos: palmSunday/A/gospel
+     · etiquetas de versículo duplicadas: 14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66
+- Mark 14:1-15:47  [14:1-fin ; 15:1-47]  usos: palmSunday/B/gospel
+     · CORTO: devuelve 118 de 119 versículos esperados
+     · etiquetas de versículo duplicadas: 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47
+- Luke 22:14-23:56  [22:14-fin ; 23:1-56]  usos: palmSunday/C/gospel
+     · CORTO: devuelve 113 de 114 versículos esperados
+     · etiquetas de versículo duplicadas: 14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56
+- Psalm 35:1-3  [35:1-3]  usos: holyWeekFeria_1/all/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («De David. Ataca, Yahveh, a los que me atacan, combate a quie…»)
+- Luke 22:39-71,23:1-53  [22:39-71 ; 23:1-53]  usos: holyWeekFeria_3/all/gospel
+     · CORTO: devuelve 85 de 86 versículos esperados
+     · etiquetas de versículo duplicadas: 39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53
+- John 18:1-19:37  [18:1-fin ; 19:1-37]  usos: goodFriday/all/gospel
+     · etiquetas de versículo duplicadas: 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37
+- Psalm 16  [16:1-fin]  usos: easter2/A/psalm, proper8/C/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («A media voz. De David. Guárdame, oh Dios, en ti está mi refu…»)
+- Psalm 133  [133:1-fin]  usos: easter2/B/psalm, proper15/A/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Canción de las subidas. De David. ¡Oh, qué bueno, qué dulce …»)
+- 1 John 1:1-2:2  [1:1-fin ; 2:1-2]  usos: easter2/B/second
+     · etiquetas de versículo duplicadas: 1,2,3,4,5,6,7,8,9,10,1,2
+- Acts 8:26-40  [8:26-40]  usos: easter5/B/first
+     · CORTO: devuelve 14 de 15 versículos esperados
+- Psalm 98  [98:1-fin]  usos: easter6/B/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Salmo. Cantad a Yahveh un canto nuevo, porque ha hecho marav…»)
+- Genesis 1:1-2:4  [1:1-fin ; 2:1-4]  usos: trinitySunday/A/first
+     · etiquetas de versículo duplicadas: 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,1,2,3,4
+- Psalm 86:1-10  [86:1-10]  usos: proper7/A/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Oración. De David. Tiende tu oído, Yahveh, respóndeme, que s…»)
+- Psalm 13  [13:1-fin]  usos: proper8/A/psalm
+     · CORTO: devuelve 5 de 6 versículos esperados
+- Psalm 45:11-18  [45:11-18]  usos: proper9/A/psalm
+     · EXCEDE BdJ/INGLÉS: Sal 45: v.18 > 17 versículos ingleses
+- Psalm 66:1-8  [66:1-8]  usos: proper9/C/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Del maestro de coro. Cántico. Salmo. Aclamad a Dios, la tier…»)
+- Psalm 24  [24:1-fin]  usos: proper10/B/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Salmo. De David. De Yahveh es la tierra y cuanto hay en ella…»)
+- Psalm 139:1-11  [139:1-11]  usos: proper11/A/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Del maestro de coro. De David. Salmo. Yahveh, tú me escrutas…»)
+- Psalm 14  [14:1-fin]  usos: proper12/B/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Del maestro de coro. De David. Dice en su corazón el insensa…»)
+- Psalm 17:1-7  [17:1-7]  usos: proper13/A/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Oración. De David. Escucha, Yahveh, la justicia, atiende a m…»)
+- Psalm 82  [82:1-fin]  usos: proper15/C/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Salmo. De Asaf. Dios se levanta en la asamblea divina, en me…»)
+- Exodus 1:8-2:10  [1:8-fin ; 2:1-10]  usos: proper16/A/first
+     · etiquetas de versículo duplicadas: 8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,1,2,3,4,5,6,7,8,9,10
+- Psalm 124  [124:1-fin]  usos: proper16/A/psalm, 12-28/all/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Canción de las subidas. De David. Si Yahveh no hubiera estad…»)
+- Psalm 103:1-8  [103:1-8]  usos: proper16/C/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («De David. Bendice a Yahveh, alma mía, del fondo de mi ser, s…»)
+- Psalm 125  [125:1-fin]  usos: proper18/B/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Canción de las subidas. Los que confían en Yahveh son como e…»)
+- Psalm 79:1-9  [79:1-9]  usos: proper20/C/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Salmo. De Asaf. Oh Dios, han invadido tu heredad las gentes,…»)
+- Psalm 78:1-4  [78:1-4]  usos: proper21/A/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Poema. De Asaf. Escucha mi ley, pueblo mío, tiende tu oído a…»)
+- Mark 9:38-50  [9:38-50]  usos: proper21/B/gospel
+     · CORTO: devuelve 11 de 13 versículos esperados
+- Matthew 21:33-46  [21:33-46]  usos: proper22/A/gospel
+     · CORTO: devuelve 13 de 14 versículos esperados
+- Job 1:1,2:1-10  [1:1-1 ; 2:1-10]  usos: proper22/B/first
+     · etiquetas de versículo duplicadas: 1,1,2,3,4,5,6,7,8,9,10
+- Psalm 26  [26:1-fin]  usos: proper22/B/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («De David. Hazme justicia, Yahveh, pues yo camino en mi enter…»)
+- Psalm 66:1-11  [66:1-11]  usos: proper23/C/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Del maestro de coro. Cántico. Salmo. Aclamad a Dios, la tier…»)
+- Psalm 90:1-6  [90:1-6]  usos: proper25/A/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Oración. De Moisés, hombre de Dios. Señor, tú has sido para …»)
+- Psalm 78:1-7  [78:1-7]  usos: proper27/A/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Poema. De Asaf. Escucha mi ley, pueblo mío, tiende tu oído a…»)
+- Psalm 127  [127:1-fin]  usos: proper27/B/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Canción de las subidas. De Salomón. Si Yahveh no construye l…»)
+- Psalm 145:1-5  [145:1-5]  usos: proper27/C/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Himno. De David. Alef. Yo te ensalzo, oh Rey Dios mío, y ben…»)
+- Psalm 123  [123:1-fin]  usos: proper28/A/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Canción de las subidas. A ti levanto mis ojos, tú que habita…»)
+- Psalm 100  [100:1-fin]  usos: proper29/A/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Salmo. Para la acción de gracias. ¡Aclamad a Yahveh, toda la…»)
+- Psalm 87  [87:1-fin]  usos: 06-29/all/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («De los hijos de Coré. Salmo. Cántico. Su fundación sobre los…»)
+- Psalm 98:1-4  [98:1-4]  usos: 09-14/all/psalm
+     · SALMO: el primer versículo mostrado empieza con el TÍTULO/encabezado («Salmo. Cantad a Yahveh un canto nuevo, porque ha hecho marav…»)
+
+### Tabla PSALM_TITLE_OFFSET frente a recuentos (BdJ n − d  vs  inglés)
+  Salmos donde (nº versículos BdJ − d) = recuento inglés: 149 de 150
+  Discrepancias: Sal 13: BdJ=6 d=1 ing=6
+  Salmos distintos citados: 98.  Con título FUNDIDO en v.1 (d=0 y v.1 empieza con encabezado): 39 -> 14, 15, 16, 17, 23, 24, 25, 26, 27, 29, 32, 35, 37, 50, 66, 72, 78, 79, 82, 86, 87, 90, 98, 100, 103, 119, 121, 122, 123, 124, 125, 126, 127, 130, 131, 133, 138, 139, 145
+  d>0 donde un versículo omitido NO parece título, o el primero mostrado sí lo parece: Sal 34 v2 (primero mostrado) parece título: «Alef. Bendeciré a Yahveh en todo tiempo, sin cesar»
+
+### Cánticos (no-Salmos) usados como «salmo»
+  Isaiah 12:2-6 [12:2-6] ret=5/5 usos=advent3/C/psalm :: He aquí a Dios mi Salvador: estoy seguro y sin miedo, pues Yahveh es m …  que grande es en medio de ti el Santo de Israel.»
+  Luke 1:46-55 [1:46-55] ret=10/10 usos=advent4/B/psalm, advent4/C/psalm, 05-31/all/psalm, 08-15/all/psalm, 08-15/all/gospel :: Y dijo María: «Engrandece mi alma al Señor … n favor de Abraham y de su linaje por los siglos.»
+  1 Samuel 2:1-10 [2:1-10] ret=10/10 usos=proper28/B/psalm :: Entonces Ana dijo esta oración: «Mi corazón exulta en Yahveh, mi cuern …  pujanza a su Rey, exalta el cuerno de su Ungido.»
+  Isaiah 12 [12:1-fin] ret=6/6 usos=proper28/C/psalm :: Y dirás aquel día: «Yo te alabo, Yahveh, pues aunque te airaste contra …  que grande es en medio de ti el Santo de Israel.»
+  Luke 1:68-79 [1:68-79] ret=12/12 usos=proper29/C/psalm :: «Bendito el Señor Dios de Israel porque ha visitado y redimido a su pu … e y guiar nuestros pasos por el camino de la paz.»
+
+### Deuterocanónicos
+  Baruch 5:1-9 (Baruc) [5:1-9] ret=9/9 :: Jerusalén, quítate tu ropa de duelo y aflición, y vístete para siempre … , para comunicarles lo que Dios le había ordenado.
+  Sirach 27:4-7 (Eclesiástico) [27:4-7] ret=4/4 :: Cuando la criba se sacude, quedan los desechos; así en su reflexión se … gies a nadie, que esa es la prueba de los hombres.
+
+### Longitud (caracteres) de referencias: min=100 mediana=916 máx=13510
+  más largas: Matthew 26:14-27:66=13510, Mark 14:1-15:47=11790, Luke 22:14-23:56=10764, John 18:1-19:37=8876, Luke 22:39-71,23:1-53=7987, Genesis 24:34-67=4090
+  más cortas (no salmos): Proverbs 22:1-2=135, Leviticus 19:1-2=140, Luke 15:1-3=196, John 1:6-8=202, John 15:26-27=220, 1 Kings 19:15-16=242, Hebrews 11:1-3=252, Romans 1:16-17=253
+
+### translateBibleReference: nombres de libro sin traducir
+  Exodus 24:12-18 -> Éxodo 24:12-18 | Exodus 34:29-35 -> Éxodo 34:29-35 | Exodus 17:1-7 -> Éxodo 17:1-7 | Exodus 20:1-17 -> Éxodo 20:1-17 | Joshua 5:9-12 -> Josué 5:9-12 | Exodus 12:1-14 -> Éxodo 12:1-14 | Exodus 1:8-2:10 -> Éxodo 1:8-2:10 | Joshua 24:1-2 -> Josué 24:1-2 | Exodus 3:1-15 -> Éxodo 3:1-15 | Exodus 14:19-31 -> Éxodo 14:19-31 | Exodus 32:7-14 -> Éxodo 32:7-14 | Exodus 16:2-15 -> Éxodo 16:2-15 | Exodus 20:1-4 -> Éxodo 20:1-4 | Exodus 32:1-14 -> Éxodo 32:1-14 | Exodus 33:12-23 -> Éxodo 33:12-23 | Joshua 3:7-17 -> Josué 3:7-17 | Joshua 24:1-3 -> Josué 24:1-3 | Exodus 33:18-23 -> Éxodo 33:18-23
+
+### Días del barrido 2024-2060 que muestran una referencia problemática: 5745 apariciones en 5494 días distintos
+     335  Psalm 29  (p.ej. 2024-01-07)
+     326  Psalm 130  (p.ej. 2024-03-30)
+     324  Psalm 23  (p.ej. 2024-04-21)
+     282  Psalm 126  (p.ej. 2024-12-08)
+     265  Psalm 15  (p.ej. 2024-02-24)
+     254  Psalm 25:1-9  (p.ej. 2024-02-18)
+     159  Psalm 32  (p.ej. 2025-03-30)
+     158  Psalm 133  (p.ej. 2024-04-07)
+     156  Psalm 16  (p.ej. 2025-06-29)
+     154  Psalm 138  (p.ej. 2025-02-09)
+     110  Psalm 124  (p.ej. 2024-12-28)
+      91  Job 1:1,2:1-10  (p.ej. 2024-10-06)
+      91  Psalm 26  (p.ej. 2024-10-06)
+      91  Psalm 127  (p.ej. 2024-11-10)
+      89  Psalm 24  (p.ej. 2024-07-14)
+      89  Psalm 14  (p.ej. 2024-07-28)
+      87  Acts 8:26-40  (p.ej. 2024-04-28)
+      86  Psalm 125  (p.ej. 2024-09-08)
+      84  Psalm 66:1-8  (p.ej. 2025-07-06)
+      84  Psalm 145:1-5  (p.ej. 2025-11-09)
+      84  Psalm 72:1-8  (p.ej. 2025-12-07)
+      84  Psalm 45:11-18  (p.ej. 2026-07-05)
+      84  Matthew 21:33-46  (p.ej. 2026-10-04)
+      84  Psalm 78:1-7  (p.ej. 2026-11-08)
+      84  Psalm 123  (p.ej. 2026-11-15)
+      83  Mark 9:38-50  (p.ej. 2024-09-29)
+      81  1 John 1:1-2:2  (p.ej. 2024-04-07)
+      80  Psalm 139:1-5  (p.ej. 2024-01-14)
+      80  Psalm 103:1-8  (p.ej. 2025-08-24)
+      80  Psalm 122  (p.ej. 2025-11-30)
+      79  Psalm 13  (p.ej. 2026-06-28)
+      79  Exodus 1:8-2:10  (p.ej. 2026-08-23)
+      79  Psalm 100  (p.ej. 2026-11-22)
+      78  Psalm 27  (p.ej. 2025-03-16)
+      78  Psalm 82  (p.ej. 2025-08-17)
+      78  Psalm 121  (p.ej. 2026-03-01)
+      78  Genesis 1:1-2:4  (p.ej. 2026-05-31)
+      77  Psalm 98  (p.ej. 2024-05-05)
+      77  Psalm 78:1-4  (p.ej. 2026-09-27)
+      76  Psalm 50:1-6  (p.ej. 2024-02-11)

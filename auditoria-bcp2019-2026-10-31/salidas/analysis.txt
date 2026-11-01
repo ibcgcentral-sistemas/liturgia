@@ -1,0 +1,275 @@
+Días simulados: 13515  (2024-01-01 .. 2060-12-31)
+Con excepción: 0
+Con warnings de consola: 0
+
+## Marcas de fallo en HTML (días afectados)
+  (ninguna)
+
+## Días sin lecturas (readings=null): 0
+
+##   por key (sin lecturas)
+
+##   por season (sin lecturas)
+
+##   por mes (sin lecturas)
+  htmlNoFirst: 0  htmlNoGospel: 0
+  de ellos holyWeekFeria: 0
+
+##   Semana Santa por key: días totales
+      37  palmSunday
+      37  holyWeekFeria_1
+      37  holyWeekFeria_2
+      37  holyWeekFeria_3
+      37  maundyThursday
+      37  goodFriday
+      37  holySaturday
+
+##   Semana Santa sin primera lectura por key
+
+## Estados de lecturas
+  firstBad: 0  secondBad: 0  gospelBad: 0
+  psalm ref presente pero 0 versículos devueltos: 0
+  second ref presente pero HTML sin SEGUNDA LECTURA: 0
+  lecturas con len < 150 (first/second/gospel): 0
+
+## Colectas: propia=3127  tomada del domingo precedente=10388  sin colecta (mensaje 'Colecta no disponible')=0
+
+##   sin colecta por key
+  collectLen==0: 0; collect "Colecta no disponible": 0
+  respaldo genérico Proper 11: el código ya no lo usa (getCollect devuelve mensaje). Días cuya colecta == texto de proper11 y key no es proper11/ferias de proper11: ver más abajo
+
+##   colecta prestada: por season del día
+    5187  ordinary
+    1429  easter
+    1361  epiphany
+    1144  lent
+     729  advent
+     221  christmas
+     206  pentecost
+     111  holyWeek
+
+##   colecta prestada: pares (season día -> season domingo precedente) con season distinta
+     107  lent -> epiphany
+      83  epiphany -> christmas
+      15  christmas -> advent
+
+##   colecta prestada: por tipo de clave
+    5187  properFeriaN
+    1429  easterFeriaN
+    1248  epiphanyFeria
+    1144  lentFeriaN
+     729  adventFeriaN
+     221  christmasFeria
+     206  pentecostFeria
+     113  epiphanyOctaveFeria
+     111  holyWeekFeria
+  Ferias lentFeria1_* (jue-sáb tras Ceniza): 176 días; domingo precedente = transfiguration,lent1
+
+##   colecta prestada: key del domingo precedente (todas)
+     222  easter
+     222  proper9
+     222  proper17
+     222  proper22
+     222  proper27
+     222  proper28
+     222  advent2
+     218  proper12
+     217  proper10
+     212  proper26
+     211  epiphany1
+     211  lent1
+     211  easter7
+     210  easter5
+     209  lent4
+     209  trinitySunday
+     208  easter3
+     207  lent5
+     207  easter4
+     207  proper8
+     207  proper16
+     207  advent1
+     206  lent3
+     206  pentecost
+     206  proper18
+     206  proper29
+     206  advent3
+     204  lent2
+     202  proper15
+     201  proper21
+     200  proper23
+     197  epiphany3
+     197  proper20
+     196  epiphany4
+     195  proper14
+     193  easter2
+     191  epiphany2
+     191  proper19
+     190  proper13
+     180  epiphany5
+     180  transfiguration
+     178  easter6
+     174  proper7
+     174  proper24
+     173  proper25
+     168  proper11
+     167  christmasSunday
+     151  proper6
+     120  epiphany6
+     111  palmSunday
+     110  christmasSunday2
+     109  advent4
+      99  proper5
+      70  proper4
+      62  epiphany7
+      30  epiphany
+      18  epiphany8
+      12  christmas
+      10  proper3
+
+## Lecturas prestadas del domingo (borrowedFromSunday): 10277
+
+##   por season
+    5187  ordinary
+    1429  easter
+    1361  epiphany
+    1144  lent
+     729  advent
+     221  christmas
+     206  pentecost
+
+##   lkey usada
+     222  easter
+     222  proper9
+     222  proper17
+     222  proper22
+     222  proper27
+     222  proper28
+     222  advent2
+     218  proper12
+     217  proper10
+     212  proper26
+     211  epiphany1
+     211  lent1
+     211  easter7
+     210  easter5
+     209  lent4
+     209  trinitySunday
+     208  easter3
+     207  lent5
+     207  easter4
+     207  proper8
+     207  proper16
+     207  advent1
+     206  lent3
+     206  pentecost
+     206  proper18
+     206  proper29
+     206  advent3
+     204  lent2
+     202  proper15
+     201  proper21
+     200  proper23
+     197  epiphany3
+     197  proper20
+     196  epiphany4
+     195  proper14
+     193  easter2
+     191  epiphany2
+     191  proper19
+     190  proper13
+     180  epiphany5
+     180  transfiguration
+     178  easter6
+     174  proper7
+     174  proper24
+     173  proper25
+     168  proper11
+     167  christmasSunday
+     151  proper6
+     120  epiphany6
+     110  christmasSunday2
+     109  advent4
+      99  proper5
+      70  proper4
+      62  epiphany7
+      30  epiphany
+      18  epiphany8
+      12  christmas
+      10  proper3
+  (los desajustes de temporada de las lecturas prestadas se calculan en sim_borrow.js)
+
+## Prefacios
+
+##   título del prefacio
+    6674  En Cualquier Tiempo
+    1688  Pascua y Resurrección
+    1611  Epifanía
+    1329  Cuaresma
+     877  Adviento
+     378  Apóstoles y Ordenaciones
+     317  Navidad
+     259  Semana Santa
+     132  Presentación, Anunciación y Transfiguración
+      37  Jueves Santo
+      37  Ascensión
+      37  Pentecostés
+      37  Domingo de la Trinidad
+      37  Cristo Rey
+      33  El Día del Señor
+      32  Todos los Santos
+  prefaceLen==0: 0
+
+##   season|prefacio
+    6259  ordinary|En Cualquier Tiempo
+    1688  easter|Pascua y Resurrección
+    1611  epiphany|Epifanía
+    1329  lent|Cuaresma
+     877  advent|Adviento
+     317  christmas|Navidad
+     225  ordinary|Apóstoles y Ordenaciones
+     222  holyWeek|Semana Santa
+     212  pentecost|En Cualquier Tiempo
+      94  christmas|En Cualquier Tiempo
+      68  epiphany|Presentación, Anunciación y Transfiguración
+      65  easter|Apóstoles y Ordenaciones
+      62  epiphany|En Cualquier Tiempo
+      46  advent|Apóstoles y Ordenaciones
+      37  lent|Semana Santa
+      37  holyWeek|Jueves Santo
+      37  easter|Ascensión
+      37  pentecost|Pentecostés
+      37  ordinary|Domingo de la Trinidad
+      37  ordinary|Cristo Rey
+      33  christmas|El Día del Señor
+      32  ordinary|Presentación, Anunciación y Transfiguración
+      32  ordinary|Todos los Santos
+      30  lent|En Cualquier Tiempo
+      26  lent|Presentación, Anunciación y Transfiguración
+      21  lent|Apóstoles y Ordenaciones
+      17  easter|En Cualquier Tiempo
+      11  epiphany|Apóstoles y Ordenaciones
+      10  pentecost|Apóstoles y Ordenaciones
+       6  easter|Presentación, Anunciación y Transfiguración
+
+## Variantes por season (conteo de días)
+  [christmas]
+       444  acc=std gloria=SI fracción=std despedida=std
+  [epiphany]
+      1752  acc=std gloria=SI fracción=std despedida=std
+  [lent]
+      1366  acc=lent gloria=omitido(rúbrica) fracción=lent despedida=std
+        77  acc=lent gloria=SI fracción=lent despedida=std
+  [holyWeek]
+       222  acc=lent gloria=omitido(rúbrica) fracción=lent despedida=std
+        37  acc=lent gloria=SI fracción=lent despedida=std
+  [easter]
+      1813  acc=easter gloria=SI fracción=std despedida=alleluia
+  [pentecost]
+       222  acc=std gloria=SI fracción=std despedida=std
+        37  acc=easter gloria=SI fracción=std despedida=alleluia
+  [ordinary]
+      6622  acc=std gloria=SI fracción=std despedida=std
+  [advent]
+       877  acc=std gloria=omitido(rúbrica) fracción=std despedida=std
+        46  acc=std gloria=SI fracción=std despedida=std
+  variantes UNKNOWN: 0

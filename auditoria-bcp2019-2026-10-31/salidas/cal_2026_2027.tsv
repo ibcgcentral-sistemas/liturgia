@@ -1,0 +1,731 @@
+fecha	dow	clave	nombre_en	nombre_es	color	rango	temporada	ciclo	isFixed	isTransferred
+2026-01-01	Jue	01-01	The Holy Name of Our Lord Jesus Christ	El Santo Nombre de Nuestro Señor Jesucristo	white	holyDay	christmas	A	true	false
+2026-01-02	Vie	christmasFeria	Friday in Christmastide	Viernes de Navidad	white	feria	christmas	A	false	false
+2026-01-03	Sáb	christmasFeria	Saturday in Christmastide	Sábado de Navidad	white	feria	christmas	A	false	false
+2026-01-04	Dom	christmasSunday2	The Second Sunday after Christmas Day	Segundo Domingo después de Navidad	white	sunday	christmas	A	false	false
+2026-01-05	Lun	christmasFeria	Monday in Christmastide	Lunes de Navidad	white	feria	christmas	A	false	false
+2026-01-06	Mar	epiphany	The Epiphany of Our Lord	La Epifanía del Señor	white	principal	epiphany	A	false	false
+2026-01-07	Mié	epiphanyOctaveFeria	Wednesday after Epiphany	Miércoles después de Epifanía	white	feria	epiphany	A	false	false
+2026-01-08	Jue	epiphanyOctaveFeria	Thursday after Epiphany	Jueves después de Epifanía	white	feria	epiphany	A	false	false
+2026-01-09	Vie	epiphanyOctaveFeria	Friday after Epiphany	Viernes después de Epifanía	white	feria	epiphany	A	false	false
+2026-01-10	Sáb	epiphanyOctaveFeria	Saturday after Epiphany	Sábado después de Epifanía	white	feria	epiphany	A	false	false
+2026-01-11	Dom	epiphany1	The Baptism of Our Lord (Epiphany I)	El Bautismo del Señor	white	sunday	epiphany	A	false	false
+2026-01-12	Lun	epiphanyFeria	Monday after Epiphany	Lunes después de Epifanía	green	feria	epiphany	A	false	false
+2026-01-13	Mar	epiphanyFeria	Tuesday after Epiphany	Martes después de Epifanía	green	feria	epiphany	A	false	false
+2026-01-14	Mié	epiphanyFeria	Wednesday after Epiphany	Miércoles después de Epifanía	green	feria	epiphany	A	false	false
+2026-01-15	Jue	epiphanyFeria	Thursday after Epiphany	Jueves después de Epifanía	green	feria	epiphany	A	false	false
+2026-01-16	Vie	epiphanyFeria	Friday after Epiphany	Viernes después de Epifanía	green	feria	epiphany	A	false	false
+2026-01-17	Sáb	epiphanyFeria	Saturday after Epiphany	Sábado después de Epifanía	green	feria	epiphany	A	false	false
+2026-01-18	Dom	epiphany2	Epiphany 2	2° Domingo después de Epifanía	green	sunday	epiphany	A	false	false
+2026-01-19	Lun	epiphanyFeria	Monday after Epiphany	Lunes después de Epifanía	green	feria	epiphany	A	false	false
+2026-01-20	Mar	epiphanyFeria	Tuesday after Epiphany	Martes después de Epifanía	green	feria	epiphany	A	false	false
+2026-01-21	Mié	epiphanyFeria	Wednesday after Epiphany	Miércoles después de Epifanía	green	feria	epiphany	A	false	false
+2026-01-22	Jue	epiphanyFeria	Thursday after Epiphany	Jueves después de Epifanía	green	feria	epiphany	A	false	false
+2026-01-23	Vie	epiphanyFeria	Friday after Epiphany	Viernes después de Epifanía	green	feria	epiphany	A	false	false
+2026-01-24	Sáb	epiphanyFeria	Saturday after Epiphany	Sábado después de Epifanía	green	feria	epiphany	A	false	false
+2026-01-25	Dom	epiphany3	Epiphany 3	3° Domingo después de Epifanía	green	sunday	epiphany	A	false	false
+2026-01-26	Lun	epiphanyFeria	Monday after Epiphany	Lunes después de Epifanía	green	feria	epiphany	A	false	false
+2026-01-27	Mar	epiphanyFeria	Tuesday after Epiphany	Martes después de Epifanía	green	feria	epiphany	A	false	false
+2026-01-28	Mié	epiphanyFeria	Wednesday after Epiphany	Miércoles después de Epifanía	green	feria	epiphany	A	false	false
+2026-01-29	Jue	epiphanyFeria	Thursday after Epiphany	Jueves después de Epifanía	green	feria	epiphany	A	false	false
+2026-01-30	Vie	epiphanyFeria	Friday after Epiphany	Viernes después de Epifanía	green	feria	epiphany	A	false	false
+2026-01-31	Sáb	epiphanyFeria	Saturday after Epiphany	Sábado después de Epifanía	green	feria	epiphany	A	false	false
+2026-02-01	Dom	epiphany4	Epiphany 4	4° Domingo después de Epifanía	green	sunday	epiphany	A	false	false
+2026-02-02	Lun	02-02	The Presentation of Our Lord	La Presentación del Señor (Candelaria)	white	holyDay	epiphany	A	true	false
+2026-02-03	Mar	epiphanyFeria	Tuesday after Epiphany	Martes después de Epifanía	green	feria	epiphany	A	false	false
+2026-02-04	Mié	epiphanyFeria	Wednesday after Epiphany	Miércoles después de Epifanía	green	feria	epiphany	A	false	false
+2026-02-05	Jue	epiphanyFeria	Thursday after Epiphany	Jueves después de Epifanía	green	feria	epiphany	A	false	false
+2026-02-06	Vie	epiphanyFeria	Friday after Epiphany	Viernes después de Epifanía	green	feria	epiphany	A	false	false
+2026-02-07	Sáb	epiphanyFeria	Saturday after Epiphany	Sábado después de Epifanía	green	feria	epiphany	A	false	false
+2026-02-08	Dom	epiphany5	Epiphany 5	5° Domingo después de Epifanía	green	sunday	epiphany	A	false	false
+2026-02-09	Lun	epiphanyFeria	Monday after Epiphany	Lunes después de Epifanía	green	feria	epiphany	A	false	false
+2026-02-10	Mar	epiphanyFeria	Tuesday after Epiphany	Martes después de Epifanía	green	feria	epiphany	A	false	false
+2026-02-11	Mié	epiphanyFeria	Wednesday after Epiphany	Miércoles después de Epifanía	green	feria	epiphany	A	false	false
+2026-02-12	Jue	epiphanyFeria	Thursday after Epiphany	Jueves después de Epifanía	green	feria	epiphany	A	false	false
+2026-02-13	Vie	epiphanyFeria	Friday after Epiphany	Viernes después de Epifanía	green	feria	epiphany	A	false	false
+2026-02-14	Sáb	epiphanyFeria	Saturday after Epiphany	Sábado después de Epifanía	green	feria	epiphany	A	false	false
+2026-02-15	Dom	transfiguration	The Last Sunday after the Epiphany (Transfiguration)	Último Domingo después de Epifanía (Transfiguración)	white	sunday	epiphany	A	false	false
+2026-02-16	Lun	epiphanyFeria	Monday after Epiphany	Lunes después de Epifanía	green	feria	epiphany	A	false	false
+2026-02-17	Mar	epiphanyFeria	Tuesday after Epiphany	Martes después de Epifanía	green	feria	epiphany	A	false	false
+2026-02-18	Mié	ashWednesday	Ash Wednesday	Miércoles de Ceniza	violet	holyDay	lent	A	false	false
+2026-02-19	Jue	lentFeria1_4	Thursday in Lent Week 1	Jueves de Cuaresma (semana 1)	violet	feria	lent	A	false	false
+2026-02-20	Vie	lentFeria1_5	Friday in Lent Week 1	Viernes de Cuaresma (semana 1)	violet	feria	lent	A	false	false
+2026-02-21	Sáb	lentFeria1_6	Saturday in Lent Week 1	Sábado de Cuaresma (semana 1)	violet	feria	lent	A	false	false
+2026-02-22	Dom	lent1	Lent I	Primer Domingo de Cuaresma	violet	sunday	lent	A	false	false
+2026-02-23	Lun	lentFeria1_1	Monday in Lent Week 1	Lunes de Cuaresma (semana 1)	violet	feria	lent	A	false	false
+2026-02-24	Mar	02-24	St. Matthias, Apostle	San Matías, Apóstol	red	holyDay	lent	A	true	false
+2026-02-25	Mié	lentFeria2_3	Wednesday in Lent Week 2	Miércoles de Cuaresma (semana 2)	violet	feria	lent	A	false	false
+2026-02-26	Jue	lentFeria2_4	Thursday in Lent Week 2	Jueves de Cuaresma (semana 2)	violet	feria	lent	A	false	false
+2026-02-27	Vie	lentFeria2_5	Friday in Lent Week 2	Viernes de Cuaresma (semana 2)	violet	feria	lent	A	false	false
+2026-02-28	Sáb	lentFeria2_6	Saturday in Lent Week 2	Sábado de Cuaresma (semana 2)	violet	feria	lent	A	false	false
+2026-03-01	Dom	lent2	Lent II	Segundo Domingo de Cuaresma	violet	sunday	lent	A	false	false
+2026-03-02	Lun	lentFeria2_1	Monday in Lent Week 2	Lunes de Cuaresma (semana 2)	violet	feria	lent	A	false	false
+2026-03-03	Mar	lentFeria2_2	Tuesday in Lent Week 2	Martes de Cuaresma (semana 2)	violet	feria	lent	A	false	false
+2026-03-04	Mié	lentFeria3_3	Wednesday in Lent Week 3	Miércoles de Cuaresma (semana 3)	violet	feria	lent	A	false	false
+2026-03-05	Jue	lentFeria3_4	Thursday in Lent Week 3	Jueves de Cuaresma (semana 3)	violet	feria	lent	A	false	false
+2026-03-06	Vie	lentFeria3_5	Friday in Lent Week 3	Viernes de Cuaresma (semana 3)	violet	feria	lent	A	false	false
+2026-03-07	Sáb	lentFeria3_6	Saturday in Lent Week 3	Sábado de Cuaresma (semana 3)	violet	feria	lent	A	false	false
+2026-03-08	Dom	lent3	Lent III	Tercer Domingo de Cuaresma	violet	sunday	lent	A	false	false
+2026-03-09	Lun	lentFeria3_1	Monday in Lent Week 3	Lunes de Cuaresma (semana 3)	violet	feria	lent	A	false	false
+2026-03-10	Mar	lentFeria3_2	Tuesday in Lent Week 3	Martes de Cuaresma (semana 3)	violet	feria	lent	A	false	false
+2026-03-11	Mié	lentFeria4_3	Wednesday in Lent Week 4	Miércoles de Cuaresma (semana 4)	violet	feria	lent	A	false	false
+2026-03-12	Jue	lentFeria4_4	Thursday in Lent Week 4	Jueves de Cuaresma (semana 4)	violet	feria	lent	A	false	false
+2026-03-13	Vie	lentFeria4_5	Friday in Lent Week 4	Viernes de Cuaresma (semana 4)	violet	feria	lent	A	false	false
+2026-03-14	Sáb	lentFeria4_6	Saturday in Lent Week 4	Sábado de Cuaresma (semana 4)	violet	feria	lent	A	false	false
+2026-03-15	Dom	lent4	Lent IV (Laetare)	Cuarto Domingo de Cuaresma (Laetare)	rose	sunday	lent	A	false	false
+2026-03-16	Lun	lentFeria4_1	Monday in Lent Week 4	Lunes de Cuaresma (semana 4)	violet	feria	lent	A	false	false
+2026-03-17	Mar	lentFeria4_2	Tuesday in Lent Week 4	Martes de Cuaresma (semana 4)	violet	feria	lent	A	false	false
+2026-03-18	Mié	lentFeria5_3	Wednesday in Lent Week 5	Miércoles de Cuaresma (semana 5)	violet	feria	lent	A	false	false
+2026-03-19	Jue	03-19	St. Joseph	San José, Esposo de la Virgen María	white	holyDay	lent	A	true	false
+2026-03-20	Vie	lentFeria5_5	Friday in Lent Week 5	Viernes de Cuaresma (semana 5)	violet	feria	lent	A	false	false
+2026-03-21	Sáb	lentFeria5_6	Saturday in Lent Week 5	Sábado de Cuaresma (semana 5)	violet	feria	lent	A	false	false
+2026-03-22	Dom	lent5	Lent V (Passion Sunday)	Quinto Domingo de Cuaresma (Domingo de Pasión)	violet	sunday	lent	A	false	false
+2026-03-23	Lun	lentFeria5_1	Monday in Lent Week 5	Lunes de Cuaresma (semana 5)	violet	feria	lent	A	false	false
+2026-03-24	Mar	lentFeria5_2	Tuesday in Lent Week 5	Martes de Cuaresma (semana 5)	violet	feria	lent	A	false	false
+2026-03-25	Mié	03-25	The Annunciation of Our Lord	La Anunciación del Señor	white	holyDay	lent	A	true	false
+2026-03-26	Jue	lentFeria6_4	Thursday in Lent Week 6	Jueves de Cuaresma (semana 6)	violet	feria	lent	A	false	false
+2026-03-27	Vie	lentFeria6_5	Friday in Lent Week 6	Viernes de Cuaresma (semana 6)	violet	feria	lent	A	false	false
+2026-03-28	Sáb	lentFeria6_6	Saturday in Lent Week 6	Sábado de Cuaresma (semana 6)	violet	feria	lent	A	false	false
+2026-03-29	Dom	palmSunday	Palm Sunday	Domingo de Ramos	red	sunday	holyWeek	A	false	false
+2026-03-30	Lun	holyWeekFeria_1	Monday in Holy Week	Lunes Santo	violet	feria	holyWeek	A	false	false
+2026-03-31	Mar	holyWeekFeria_2	Tuesday in Holy Week	Martes Santo	violet	feria	holyWeek	A	false	false
+2026-04-01	Mié	holyWeekFeria_3	Wednesday in Holy Week	Miércoles Santo	violet	feria	holyWeek	A	false	false
+2026-04-02	Jue	maundyThursday	Maundy Thursday	Jueves Santo	white	holyDay	holyWeek	A	false	false
+2026-04-03	Vie	goodFriday	Good Friday	Viernes Santo	red	holyDay	holyWeek	A	false	false
+2026-04-04	Sáb	holySaturday	Holy Saturday	Sábado Santo	violet	holyDay	holyWeek	A	false	false
+2026-04-05	Dom	easter	Easter Day	Domingo de Resurrección	white	principal	easter	A	false	false
+2026-04-06	Lun	easterFeria1_1	Monday of Easter Week 1	Lunes de Pascua (semana 1)	white	feria	easter	A	false	false
+2026-04-07	Mar	easterFeria1_2	Tuesday of Easter Week 1	Martes de Pascua (semana 1)	white	feria	easter	A	false	false
+2026-04-08	Mié	easterFeria1_3	Wednesday of Easter Week 1	Miércoles de Pascua (semana 1)	white	feria	easter	A	false	false
+2026-04-09	Jue	easterFeria1_4	Thursday of Easter Week 1	Jueves de Pascua (semana 1)	white	feria	easter	A	false	false
+2026-04-10	Vie	easterFeria1_5	Friday of Easter Week 1	Viernes de Pascua (semana 1)	white	feria	easter	A	false	false
+2026-04-11	Sáb	easterFeria1_6	Saturday of Easter Week 1	Sábado de Pascua (semana 1)	white	feria	easter	A	false	false
+2026-04-12	Dom	easter2	Easter II	Segundo Domingo de Pascua	white	sunday	easter	A	false	false
+2026-04-13	Lun	easterFeria2_1	Monday of Easter Week 2	Lunes de Pascua (semana 2)	white	feria	easter	A	false	false
+2026-04-14	Mar	easterFeria2_2	Tuesday of Easter Week 2	Martes de Pascua (semana 2)	white	feria	easter	A	false	false
+2026-04-15	Mié	easterFeria2_3	Wednesday of Easter Week 2	Miércoles de Pascua (semana 2)	white	feria	easter	A	false	false
+2026-04-16	Jue	easterFeria2_4	Thursday of Easter Week 2	Jueves de Pascua (semana 2)	white	feria	easter	A	false	false
+2026-04-17	Vie	easterFeria2_5	Friday of Easter Week 2	Viernes de Pascua (semana 2)	white	feria	easter	A	false	false
+2026-04-18	Sáb	easterFeria2_6	Saturday of Easter Week 2	Sábado de Pascua (semana 2)	white	feria	easter	A	false	false
+2026-04-19	Dom	easter3	Easter III	Tercer Domingo de Pascua	white	sunday	easter	A	false	false
+2026-04-20	Lun	easterFeria3_1	Monday of Easter Week 3	Lunes de Pascua (semana 3)	white	feria	easter	A	false	false
+2026-04-21	Mar	easterFeria3_2	Tuesday of Easter Week 3	Martes de Pascua (semana 3)	white	feria	easter	A	false	false
+2026-04-22	Mié	easterFeria3_3	Wednesday of Easter Week 3	Miércoles de Pascua (semana 3)	white	feria	easter	A	false	false
+2026-04-23	Jue	easterFeria3_4	Thursday of Easter Week 3	Jueves de Pascua (semana 3)	white	feria	easter	A	false	false
+2026-04-24	Vie	easterFeria3_5	Friday of Easter Week 3	Viernes de Pascua (semana 3)	white	feria	easter	A	false	false
+2026-04-25	Sáb	04-25	St. Mark, Evangelist	San Marcos, Evangelista	red	holyDay	easter	A	true	false
+2026-04-26	Dom	easter4	Easter IV (Good Shepherd)	Cuarto Domingo de Pascua (Buen Pastor)	white	sunday	easter	A	false	false
+2026-04-27	Lun	easterFeria4_1	Monday of Easter Week 4	Lunes de Pascua (semana 4)	white	feria	easter	A	false	false
+2026-04-28	Mar	easterFeria4_2	Tuesday of Easter Week 4	Martes de Pascua (semana 4)	white	feria	easter	A	false	false
+2026-04-29	Mié	easterFeria4_3	Wednesday of Easter Week 4	Miércoles de Pascua (semana 4)	white	feria	easter	A	false	false
+2026-04-30	Jue	easterFeria4_4	Thursday of Easter Week 4	Jueves de Pascua (semana 4)	white	feria	easter	A	false	false
+2026-05-01	Vie	05-01	SS. Philip & James, Apostles	SS. Felipe y Santiago, Apóstoles	red	holyDay	easter	A	true	false
+2026-05-02	Sáb	easterFeria4_6	Saturday of Easter Week 4	Sábado de Pascua (semana 4)	white	feria	easter	A	false	false
+2026-05-03	Dom	easter5	Easter V	Quinto Domingo de Pascua	white	sunday	easter	A	false	false
+2026-05-04	Lun	easterFeria5_1	Monday of Easter Week 5	Lunes de Pascua (semana 5)	white	feria	easter	A	false	false
+2026-05-05	Mar	easterFeria5_2	Tuesday of Easter Week 5	Martes de Pascua (semana 5)	white	feria	easter	A	false	false
+2026-05-06	Mié	easterFeria5_3	Wednesday of Easter Week 5	Miércoles de Pascua (semana 5)	white	feria	easter	A	false	false
+2026-05-07	Jue	easterFeria5_4	Thursday of Easter Week 5	Jueves de Pascua (semana 5)	white	feria	easter	A	false	false
+2026-05-08	Vie	easterFeria5_5	Friday of Easter Week 5	Viernes de Pascua (semana 5)	white	feria	easter	A	false	false
+2026-05-09	Sáb	easterFeria5_6	Saturday of Easter Week 5	Sábado de Pascua (semana 5)	white	feria	easter	A	false	false
+2026-05-10	Dom	easter6	Easter VI	Sexto Domingo de Pascua	white	sunday	easter	A	false	false
+2026-05-11	Lun	easterFeria6_1	Monday of Easter Week 6	Lunes de Pascua (semana 6)	white	feria	easter	A	false	false
+2026-05-12	Mar	easterFeria6_2	Tuesday of Easter Week 6	Martes de Pascua (semana 6)	white	feria	easter	A	false	false
+2026-05-13	Mié	easterFeria6_3	Wednesday of Easter Week 6	Miércoles de Pascua (semana 6)	white	feria	easter	A	false	false
+2026-05-14	Jue	ascension	Ascension Day	La Ascensión del Señor	white	principal	easter	A	false	false
+2026-05-15	Vie	easterFeria6_5	Friday of Easter Week 6	Viernes de Pascua (semana 6)	white	feria	easter	A	false	false
+2026-05-16	Sáb	easterFeria6_6	Saturday of Easter Week 6	Sábado de Pascua (semana 6)	white	feria	easter	A	false	false
+2026-05-17	Dom	easter7	Easter VII (Sunday after Ascension)	Séptimo Domingo de Pascua	white	sunday	easter	A	false	false
+2026-05-18	Lun	easterFeria7_1	Monday of Easter Week 7	Lunes de Pascua (semana 7)	white	feria	easter	A	false	false
+2026-05-19	Mar	easterFeria7_2	Tuesday of Easter Week 7	Martes de Pascua (semana 7)	white	feria	easter	A	false	false
+2026-05-20	Mié	easterFeria7_3	Wednesday of Easter Week 7	Miércoles de Pascua (semana 7)	white	feria	easter	A	false	false
+2026-05-21	Jue	easterFeria7_4	Thursday of Easter Week 7	Jueves de Pascua (semana 7)	white	feria	easter	A	false	false
+2026-05-22	Vie	easterFeria7_5	Friday of Easter Week 7	Viernes de Pascua (semana 7)	white	feria	easter	A	false	false
+2026-05-23	Sáb	easterFeria7_6	Saturday of Easter Week 7	Sábado de Pascua (semana 7)	white	feria	easter	A	false	false
+2026-05-24	Dom	pentecost	The Day of Pentecost	Día de Pentecostés	red	principal	pentecost	A	false	false
+2026-05-25	Lun	pentecostFeria_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	pentecost	A	false	false
+2026-05-26	Mar	pentecostFeria_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	pentecost	A	false	false
+2026-05-27	Mié	pentecostFeria_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	pentecost	A	false	false
+2026-05-28	Jue	pentecostFeria_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	pentecost	A	false	false
+2026-05-29	Vie	pentecostFeria_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	pentecost	A	false	false
+2026-05-30	Sáb	pentecostFeria_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	pentecost	A	false	false
+2026-05-31	Dom	trinitySunday	Trinity Sunday	La Santísima Trinidad	white	principal	ordinary	A	false	false
+2026-06-01	Lun	properFeria4_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-06-02	Mar	properFeria4_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-06-03	Mié	properFeria4_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	A	false	false
+2026-06-04	Jue	properFeria4_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	A	false	false
+2026-06-05	Vie	properFeria5_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-06-06	Sáb	properFeria5_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	A	false	false
+2026-06-07	Dom	proper5	Proper 5	Propio 5	green	sunday	ordinary	A	false	false
+2026-06-08	Lun	properFeria5_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-06-09	Mar	properFeria5_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-06-10	Mié	properFeria5_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	A	false	false
+2026-06-11	Jue	06-11	St. Barnabas, Apostle	San Bernabé, Apóstol	red	holyDay	ordinary	A	true	false
+2026-06-12	Vie	properFeria6_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-06-13	Sáb	properFeria6_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	A	false	false
+2026-06-14	Dom	proper6	Proper 6	Propio 6	green	sunday	ordinary	A	false	false
+2026-06-15	Lun	properFeria6_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-06-16	Mar	properFeria6_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-06-17	Mié	properFeria6_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	A	false	false
+2026-06-18	Jue	properFeria6_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	A	false	false
+2026-06-19	Vie	properFeria7_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-06-20	Sáb	properFeria7_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	A	false	false
+2026-06-21	Dom	proper7	Proper 7	Propio 7	green	sunday	ordinary	A	false	false
+2026-06-22	Lun	properFeria7_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-06-23	Mar	properFeria7_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-06-24	Mié	06-24	The Nativity of St. John the Baptist	Natividad de San Juan Bautista	white	holyDay	ordinary	A	true	false
+2026-06-25	Jue	properFeria7_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	A	false	false
+2026-06-26	Vie	properFeria8_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-06-27	Sáb	properFeria8_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	A	false	false
+2026-06-28	Dom	proper8	Proper 8	Propio 8	green	sunday	ordinary	A	false	false
+2026-06-29	Lun	06-29	SS. Peter & Paul, Apostles	SS. Pedro y Pablo, Apóstoles	red	holyDay	ordinary	A	true	false
+2026-06-30	Mar	properFeria8_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-07-01	Mié	properFeria8_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	A	false	false
+2026-07-02	Jue	properFeria8_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	A	false	false
+2026-07-03	Vie	properFeria9_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-07-04	Sáb	properFeria9_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	A	false	false
+2026-07-05	Dom	proper9	Proper 9	Propio 9	green	sunday	ordinary	A	false	false
+2026-07-06	Lun	properFeria9_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-07-07	Mar	properFeria9_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-07-08	Mié	properFeria9_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	A	false	false
+2026-07-09	Jue	properFeria9_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	A	false	false
+2026-07-10	Vie	properFeria10_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-07-11	Sáb	properFeria10_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	A	false	false
+2026-07-12	Dom	proper10	Proper 10	Propio 10	green	sunday	ordinary	A	false	false
+2026-07-13	Lun	properFeria10_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-07-14	Mar	properFeria10_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-07-15	Mié	properFeria10_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	A	false	false
+2026-07-16	Jue	properFeria10_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	A	false	false
+2026-07-17	Vie	properFeria11_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-07-18	Sáb	properFeria11_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	A	false	false
+2026-07-19	Dom	proper11	Proper 11	Propio 11	green	sunday	ordinary	A	false	false
+2026-07-20	Lun	properFeria11_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-07-21	Mar	properFeria11_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-07-22	Mié	07-22	St. Mary Magdalene	Santa María Magdalena	white	holyDay	ordinary	A	true	false
+2026-07-23	Jue	properFeria11_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	A	false	false
+2026-07-24	Vie	properFeria12_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-07-25	Sáb	07-25	St. James, Apostle	Santiago, Apóstol	red	holyDay	ordinary	A	true	false
+2026-07-26	Dom	proper12	Proper 12	Propio 12	green	sunday	ordinary	A	false	false
+2026-07-27	Lun	properFeria12_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-07-28	Mar	properFeria12_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-07-29	Mié	properFeria12_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	A	false	false
+2026-07-30	Jue	properFeria12_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	A	false	false
+2026-07-31	Vie	properFeria13_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-08-01	Sáb	properFeria13_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	A	false	false
+2026-08-02	Dom	proper13	Proper 13	Propio 13	green	sunday	ordinary	A	false	false
+2026-08-03	Lun	properFeria13_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-08-04	Mar	properFeria13_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-08-05	Mié	properFeria13_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	A	false	false
+2026-08-06	Jue	08-06	The Transfiguration of Our Lord	La Transfiguración del Señor	white	holyDay	ordinary	A	true	false
+2026-08-07	Vie	properFeria14_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-08-08	Sáb	properFeria14_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	A	false	false
+2026-08-09	Dom	proper14	Proper 14	Propio 14	green	sunday	ordinary	A	false	false
+2026-08-10	Lun	properFeria14_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-08-11	Mar	properFeria14_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-08-12	Mié	properFeria14_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	A	false	false
+2026-08-13	Jue	properFeria14_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	A	false	false
+2026-08-14	Vie	properFeria15_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-08-15	Sáb	08-15	St. Mary the Virgin	Santa María Virgen	white	holyDay	ordinary	A	true	false
+2026-08-16	Dom	proper15	Proper 15	Propio 15	green	sunday	ordinary	A	false	false
+2026-08-17	Lun	properFeria15_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-08-18	Mar	properFeria15_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-08-19	Mié	properFeria15_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	A	false	false
+2026-08-20	Jue	properFeria15_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	A	false	false
+2026-08-21	Vie	properFeria16_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-08-22	Sáb	properFeria16_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	A	false	false
+2026-08-23	Dom	proper16	Proper 16	Propio 16	green	sunday	ordinary	A	false	false
+2026-08-24	Lun	08-24	St. Bartholomew, Apostle	San Bartolomé, Apóstol	red	holyDay	ordinary	A	true	false
+2026-08-25	Mar	properFeria16_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-08-26	Mié	properFeria16_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	A	false	false
+2026-08-27	Jue	properFeria16_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	A	false	false
+2026-08-28	Vie	properFeria17_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-08-29	Sáb	properFeria17_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	A	false	false
+2026-08-30	Dom	proper17	Proper 17	Propio 17	green	sunday	ordinary	A	false	false
+2026-08-31	Lun	properFeria17_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-09-01	Mar	properFeria17_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-09-02	Mié	properFeria17_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	A	false	false
+2026-09-03	Jue	properFeria17_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	A	false	false
+2026-09-04	Vie	properFeria18_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-09-05	Sáb	properFeria18_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	A	false	false
+2026-09-06	Dom	proper18	Proper 18	Propio 18	green	sunday	ordinary	A	false	false
+2026-09-07	Lun	properFeria18_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-09-08	Mar	properFeria18_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-09-09	Mié	properFeria18_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	A	false	false
+2026-09-10	Jue	properFeria18_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	A	false	false
+2026-09-11	Vie	properFeria19_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-09-12	Sáb	properFeria19_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	A	false	false
+2026-09-13	Dom	proper19	Proper 19	Propio 19	green	sunday	ordinary	A	false	false
+2026-09-14	Lun	09-14	Holy Cross Day	La Exaltación de la Santa Cruz	red	holyDay	ordinary	A	true	false
+2026-09-15	Mar	properFeria19_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-09-16	Mié	properFeria19_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	A	false	false
+2026-09-17	Jue	properFeria19_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	A	false	false
+2026-09-18	Vie	properFeria20_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-09-19	Sáb	properFeria20_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	A	false	false
+2026-09-20	Dom	proper20	Proper 20	Propio 20	green	sunday	ordinary	A	false	false
+2026-09-21	Lun	09-21	St. Matthew, Apostle & Evangelist	San Mateo, Apóstol y Evangelista	red	holyDay	ordinary	A	true	false
+2026-09-22	Mar	properFeria20_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-09-23	Mié	properFeria20_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	A	false	false
+2026-09-24	Jue	properFeria20_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	A	false	false
+2026-09-25	Vie	properFeria21_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-09-26	Sáb	properFeria21_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	A	false	false
+2026-09-27	Dom	proper21	Proper 21	Propio 21	green	sunday	ordinary	A	false	false
+2026-09-28	Lun	properFeria21_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-09-29	Mar	09-29	St. Michael & All Angels	San Miguel y Todos los Ángeles	white	holyDay	ordinary	A	true	false
+2026-09-30	Mié	properFeria21_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	A	false	false
+2026-10-01	Jue	properFeria21_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	A	false	false
+2026-10-02	Vie	properFeria22_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-10-03	Sáb	properFeria22_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	A	false	false
+2026-10-04	Dom	proper22	Proper 22	Propio 22	green	sunday	ordinary	A	false	false
+2026-10-05	Lun	properFeria22_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-10-06	Mar	properFeria22_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-10-07	Mié	properFeria22_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	A	false	false
+2026-10-08	Jue	properFeria22_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	A	false	false
+2026-10-09	Vie	properFeria23_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-10-10	Sáb	properFeria23_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	A	false	false
+2026-10-11	Dom	proper23	Proper 23	Propio 23	green	sunday	ordinary	A	false	false
+2026-10-12	Lun	properFeria23_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-10-13	Mar	properFeria23_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-10-14	Mié	properFeria23_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	A	false	false
+2026-10-15	Jue	properFeria23_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	A	false	false
+2026-10-16	Vie	properFeria24_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-10-17	Sáb	properFeria24_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	A	false	false
+2026-10-18	Dom	proper24	Proper 24	Propio 24	green	sunday	ordinary	A	false	false
+2026-10-19	Lun	properFeria24_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-10-20	Mar	properFeria24_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-10-21	Mié	properFeria24_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	A	false	false
+2026-10-22	Jue	properFeria24_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	A	false	false
+2026-10-23	Vie	10-23	St. James of Jerusalem	Santiago de Jerusalén, Hermano del Señor	red	holyDay	ordinary	A	true	false
+2026-10-24	Sáb	properFeria25_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	A	false	false
+2026-10-25	Dom	proper25	Proper 25	Propio 25	green	sunday	ordinary	A	false	false
+2026-10-26	Lun	properFeria25_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-10-27	Mar	properFeria25_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-10-28	Mié	10-28	SS. Simon & Jude, Apostles	SS. Simón y Judas, Apóstoles	red	holyDay	ordinary	A	true	false
+2026-10-29	Jue	properFeria25_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	A	false	false
+2026-10-30	Vie	properFeria26_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-10-31	Sáb	properFeria26_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	A	false	false
+2026-11-01	Dom	proper26	Proper 26	Propio 26	green	sunday	ordinary	A	false	false
+2026-11-02	Lun	properFeria26_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-11-03	Mar	properFeria26_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-11-04	Mié	properFeria26_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	A	false	false
+2026-11-05	Jue	properFeria26_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	A	false	false
+2026-11-06	Vie	properFeria27_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-11-07	Sáb	properFeria27_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	A	false	false
+2026-11-08	Dom	proper27	Proper 27	Propio 27	green	sunday	ordinary	A	false	false
+2026-11-09	Lun	properFeria27_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-11-10	Mar	properFeria27_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-11-11	Mié	properFeria27_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	A	false	false
+2026-11-12	Jue	properFeria27_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	A	false	false
+2026-11-13	Vie	properFeria28_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-11-14	Sáb	properFeria28_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	A	false	false
+2026-11-15	Dom	proper28	Proper 28	Propio 28	green	sunday	ordinary	A	false	false
+2026-11-16	Lun	properFeria28_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-11-17	Mar	properFeria28_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-11-18	Mié	properFeria28_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	A	false	false
+2026-11-19	Jue	properFeria28_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	A	false	false
+2026-11-20	Vie	properFeria29_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-11-21	Sáb	properFeria29_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	A	false	false
+2026-11-22	Dom	proper29	Proper 29 (Cristo Rey)	Propio 29 — Cristo Rey	green	sunday	ordinary	A	false	false
+2026-11-23	Lun	properFeria29_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-11-24	Mar	properFeria29_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-11-25	Mié	properFeria29_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	A	false	false
+2026-11-26	Jue	properFeria29_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	A	false	false
+2026-11-27	Vie	properFeria29_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	A	false	false
+2026-11-28	Sáb	properFeria29_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	A	false	false
+2026-11-29	Dom	advent1	Advent I	Primer Domingo de Adviento	violet	sunday	advent	B	false	false
+2026-11-30	Lun	11-30	St. Andrew, Apostle	San Andrés, Apóstol	red	holyDay	advent	B	true	false
+2026-12-01	Mar	adventFeria1_2	Tuesday of Advent Week 1	Martes de Adviento (semana 1)	violet	feria	advent	B	false	false
+2026-12-02	Mié	adventFeria1_3	Wednesday of Advent Week 1	Miércoles de Adviento (semana 1)	violet	feria	advent	B	false	false
+2026-12-03	Jue	adventFeria1_4	Thursday of Advent Week 1	Jueves de Adviento (semana 1)	violet	feria	advent	B	false	false
+2026-12-04	Vie	adventFeria1_5	Friday of Advent Week 1	Viernes de Adviento (semana 1)	violet	feria	advent	B	false	false
+2026-12-05	Sáb	adventFeria1_6	Saturday of Advent Week 1	Sábado de Adviento (semana 1)	violet	feria	advent	B	false	false
+2026-12-06	Dom	advent2	Advent II	Segundo Domingo de Adviento	violet	sunday	advent	B	false	false
+2026-12-07	Lun	adventFeria2_1	Monday of Advent Week 2	Lunes de Adviento (semana 2)	violet	feria	advent	B	false	false
+2026-12-08	Mar	adventFeria2_2	Tuesday of Advent Week 2	Martes de Adviento (semana 2)	violet	feria	advent	B	false	false
+2026-12-09	Mié	adventFeria2_3	Wednesday of Advent Week 2	Miércoles de Adviento (semana 2)	violet	feria	advent	B	false	false
+2026-12-10	Jue	adventFeria2_4	Thursday of Advent Week 2	Jueves de Adviento (semana 2)	violet	feria	advent	B	false	false
+2026-12-11	Vie	adventFeria2_5	Friday of Advent Week 2	Viernes de Adviento (semana 2)	violet	feria	advent	B	false	false
+2026-12-12	Sáb	adventFeria2_6	Saturday of Advent Week 2	Sábado de Adviento (semana 2)	violet	feria	advent	B	false	false
+2026-12-13	Dom	advent3	Advent III	Tercer Domingo de Adviento (Gaudete)	rose	sunday	advent	B	false	false
+2026-12-14	Lun	adventFeria3_1	Monday of Advent Week 3	Lunes de Adviento (semana 3)	violet	feria	advent	B	false	false
+2026-12-15	Mar	adventFeria3_2	Tuesday of Advent Week 3	Martes de Adviento (semana 3)	violet	feria	advent	B	false	false
+2026-12-16	Mié	adventFeria3_3	Wednesday of Advent Week 3	Miércoles de Adviento (semana 3)	violet	feria	advent	B	false	false
+2026-12-17	Jue	adventFeria3_4	Thursday of Advent Week 3	Jueves de Adviento (semana 3)	violet	feria	advent	B	false	false
+2026-12-18	Vie	adventFeria3_5	Friday of Advent Week 3	Viernes de Adviento (semana 3)	violet	feria	advent	B	false	false
+2026-12-19	Sáb	adventFeria3_6	Saturday of Advent Week 3	Sábado de Adviento (semana 3)	violet	feria	advent	B	false	false
+2026-12-20	Dom	advent4	Advent IV	Cuarto Domingo de Adviento	violet	sunday	advent	B	false	false
+2026-12-21	Lun	12-21	St. Thomas, Apostle	Santo Tomás, Apóstol	red	holyDay	advent	B	true	false
+2026-12-22	Mar	adventFeria4_2	Tuesday of Advent Week 4	Martes de Adviento (semana 4)	violet	feria	advent	B	false	false
+2026-12-23	Mié	adventFeria4_3	Wednesday of Advent Week 4	Miércoles de Adviento (semana 4)	violet	feria	advent	B	false	false
+2026-12-24	Jue	adventFeria4_4	Thursday of Advent Week 4	Jueves de Adviento (semana 4)	violet	feria	advent	B	false	false
+2026-12-25	Vie	christmas	The Nativity of Our Lord (Christmas Day)	Natividad del Señor	white	principal	christmas	B	false	false
+2026-12-26	Sáb	12-26	St. Stephen, Deacon and Martyr	San Esteban, Diácono y Protomártir	red	holyDay	christmas	B	true	false
+2026-12-27	Dom	christmasSunday	The First Sunday after Christmas Day	Domingo en la Octava de Navidad	white	sunday	christmas	B	false	false
+2026-12-28	Lun	12-28	The Holy Innocents	Los Santos Inocentes	red	holyDay	christmas	B	true	false
+2026-12-29	Mar	christmasFeria	Tuesday in Christmastide	Martes de Navidad	white	feria	christmas	B	false	false
+2026-12-30	Mié	christmasFeria	Wednesday in Christmastide	Miércoles de Navidad	white	feria	christmas	B	false	false
+2026-12-31	Jue	christmasFeria	Thursday in Christmastide	Jueves de Navidad	white	feria	christmas	B	false	false
+2027-01-01	Vie	01-01	The Holy Name of Our Lord Jesus Christ	El Santo Nombre de Nuestro Señor Jesucristo	white	holyDay	christmas	B	true	false
+2027-01-02	Sáb	christmasFeria	Saturday in Christmastide	Sábado de Navidad	white	feria	christmas	B	false	false
+2027-01-03	Dom	christmasSunday2	The Second Sunday after Christmas Day	Segundo Domingo después de Navidad	white	sunday	christmas	B	false	false
+2027-01-04	Lun	christmasFeria	Monday in Christmastide	Lunes de Navidad	white	feria	christmas	B	false	false
+2027-01-05	Mar	christmasFeria	Tuesday in Christmastide	Martes de Navidad	white	feria	christmas	B	false	false
+2027-01-06	Mié	epiphany	The Epiphany of Our Lord	La Epifanía del Señor	white	principal	epiphany	B	false	false
+2027-01-07	Jue	epiphanyOctaveFeria	Thursday after Epiphany	Jueves después de Epifanía	white	feria	epiphany	B	false	false
+2027-01-08	Vie	epiphanyOctaveFeria	Friday after Epiphany	Viernes después de Epifanía	white	feria	epiphany	B	false	false
+2027-01-09	Sáb	epiphanyOctaveFeria	Saturday after Epiphany	Sábado después de Epifanía	white	feria	epiphany	B	false	false
+2027-01-10	Dom	epiphany1	The Baptism of Our Lord (Epiphany I)	El Bautismo del Señor	white	sunday	epiphany	B	false	false
+2027-01-11	Lun	epiphanyFeria	Monday after Epiphany	Lunes después de Epifanía	green	feria	epiphany	B	false	false
+2027-01-12	Mar	epiphanyFeria	Tuesday after Epiphany	Martes después de Epifanía	green	feria	epiphany	B	false	false
+2027-01-13	Mié	epiphanyFeria	Wednesday after Epiphany	Miércoles después de Epifanía	green	feria	epiphany	B	false	false
+2027-01-14	Jue	epiphanyFeria	Thursday after Epiphany	Jueves después de Epifanía	green	feria	epiphany	B	false	false
+2027-01-15	Vie	epiphanyFeria	Friday after Epiphany	Viernes después de Epifanía	green	feria	epiphany	B	false	false
+2027-01-16	Sáb	epiphanyFeria	Saturday after Epiphany	Sábado después de Epifanía	green	feria	epiphany	B	false	false
+2027-01-17	Dom	epiphany2	Epiphany 2	2° Domingo después de Epifanía	green	sunday	epiphany	B	false	false
+2027-01-18	Lun	01-18	The Confession of St. Peter	La Confesión de San Pedro	white	holyDay	epiphany	B	true	false
+2027-01-19	Mar	epiphanyFeria	Tuesday after Epiphany	Martes después de Epifanía	green	feria	epiphany	B	false	false
+2027-01-20	Mié	epiphanyFeria	Wednesday after Epiphany	Miércoles después de Epifanía	green	feria	epiphany	B	false	false
+2027-01-21	Jue	epiphanyFeria	Thursday after Epiphany	Jueves después de Epifanía	green	feria	epiphany	B	false	false
+2027-01-22	Vie	epiphanyFeria	Friday after Epiphany	Viernes después de Epifanía	green	feria	epiphany	B	false	false
+2027-01-23	Sáb	epiphanyFeria	Saturday after Epiphany	Sábado después de Epifanía	green	feria	epiphany	B	false	false
+2027-01-24	Dom	epiphany3	Epiphany 3	3° Domingo después de Epifanía	green	sunday	epiphany	B	false	false
+2027-01-25	Lun	01-25	The Conversion of St. Paul	La Conversión de San Pablo	white	holyDay	epiphany	B	true	false
+2027-01-26	Mar	epiphanyFeria	Tuesday after Epiphany	Martes después de Epifanía	green	feria	epiphany	B	false	false
+2027-01-27	Mié	epiphanyFeria	Wednesday after Epiphany	Miércoles después de Epifanía	green	feria	epiphany	B	false	false
+2027-01-28	Jue	epiphanyFeria	Thursday after Epiphany	Jueves después de Epifanía	green	feria	epiphany	B	false	false
+2027-01-29	Vie	epiphanyFeria	Friday after Epiphany	Viernes después de Epifanía	green	feria	epiphany	B	false	false
+2027-01-30	Sáb	epiphanyFeria	Saturday after Epiphany	Sábado después de Epifanía	green	feria	epiphany	B	false	false
+2027-01-31	Dom	epiphany4	Epiphany 4	4° Domingo después de Epifanía	green	sunday	epiphany	B	false	false
+2027-02-01	Lun	epiphanyFeria	Monday after Epiphany	Lunes después de Epifanía	green	feria	epiphany	B	false	false
+2027-02-02	Mar	02-02	The Presentation of Our Lord	La Presentación del Señor (Candelaria)	white	holyDay	epiphany	B	true	false
+2027-02-03	Mié	epiphanyFeria	Wednesday after Epiphany	Miércoles después de Epifanía	green	feria	epiphany	B	false	false
+2027-02-04	Jue	epiphanyFeria	Thursday after Epiphany	Jueves después de Epifanía	green	feria	epiphany	B	false	false
+2027-02-05	Vie	epiphanyFeria	Friday after Epiphany	Viernes después de Epifanía	green	feria	epiphany	B	false	false
+2027-02-06	Sáb	epiphanyFeria	Saturday after Epiphany	Sábado después de Epifanía	green	feria	epiphany	B	false	false
+2027-02-07	Dom	transfiguration	The Last Sunday after the Epiphany (Transfiguration)	Último Domingo después de Epifanía (Transfiguración)	white	sunday	epiphany	B	false	false
+2027-02-08	Lun	epiphanyFeria	Monday after Epiphany	Lunes después de Epifanía	green	feria	epiphany	B	false	false
+2027-02-09	Mar	epiphanyFeria	Tuesday after Epiphany	Martes después de Epifanía	green	feria	epiphany	B	false	false
+2027-02-10	Mié	ashWednesday	Ash Wednesday	Miércoles de Ceniza	violet	holyDay	lent	B	false	false
+2027-02-11	Jue	lentFeria1_4	Thursday in Lent Week 1	Jueves de Cuaresma (semana 1)	violet	feria	lent	B	false	false
+2027-02-12	Vie	lentFeria1_5	Friday in Lent Week 1	Viernes de Cuaresma (semana 1)	violet	feria	lent	B	false	false
+2027-02-13	Sáb	lentFeria1_6	Saturday in Lent Week 1	Sábado de Cuaresma (semana 1)	violet	feria	lent	B	false	false
+2027-02-14	Dom	lent1	Lent I	Primer Domingo de Cuaresma	violet	sunday	lent	B	false	false
+2027-02-15	Lun	lentFeria1_1	Monday in Lent Week 1	Lunes de Cuaresma (semana 1)	violet	feria	lent	B	false	false
+2027-02-16	Mar	lentFeria1_2	Tuesday in Lent Week 1	Martes de Cuaresma (semana 1)	violet	feria	lent	B	false	false
+2027-02-17	Mié	lentFeria2_3	Wednesday in Lent Week 2	Miércoles de Cuaresma (semana 2)	violet	feria	lent	B	false	false
+2027-02-18	Jue	lentFeria2_4	Thursday in Lent Week 2	Jueves de Cuaresma (semana 2)	violet	feria	lent	B	false	false
+2027-02-19	Vie	lentFeria2_5	Friday in Lent Week 2	Viernes de Cuaresma (semana 2)	violet	feria	lent	B	false	false
+2027-02-20	Sáb	lentFeria2_6	Saturday in Lent Week 2	Sábado de Cuaresma (semana 2)	violet	feria	lent	B	false	false
+2027-02-21	Dom	lent2	Lent II	Segundo Domingo de Cuaresma	violet	sunday	lent	B	false	false
+2027-02-22	Lun	lentFeria2_1	Monday in Lent Week 2	Lunes de Cuaresma (semana 2)	violet	feria	lent	B	false	false
+2027-02-23	Mar	lentFeria2_2	Tuesday in Lent Week 2	Martes de Cuaresma (semana 2)	violet	feria	lent	B	false	false
+2027-02-24	Mié	02-24	St. Matthias, Apostle	San Matías, Apóstol	red	holyDay	lent	B	true	false
+2027-02-25	Jue	lentFeria3_4	Thursday in Lent Week 3	Jueves de Cuaresma (semana 3)	violet	feria	lent	B	false	false
+2027-02-26	Vie	lentFeria3_5	Friday in Lent Week 3	Viernes de Cuaresma (semana 3)	violet	feria	lent	B	false	false
+2027-02-27	Sáb	lentFeria3_6	Saturday in Lent Week 3	Sábado de Cuaresma (semana 3)	violet	feria	lent	B	false	false
+2027-02-28	Dom	lent3	Lent III	Tercer Domingo de Cuaresma	violet	sunday	lent	B	false	false
+2027-03-01	Lun	lentFeria3_1	Monday in Lent Week 3	Lunes de Cuaresma (semana 3)	violet	feria	lent	B	false	false
+2027-03-02	Mar	lentFeria3_2	Tuesday in Lent Week 3	Martes de Cuaresma (semana 3)	violet	feria	lent	B	false	false
+2027-03-03	Mié	lentFeria4_3	Wednesday in Lent Week 4	Miércoles de Cuaresma (semana 4)	violet	feria	lent	B	false	false
+2027-03-04	Jue	lentFeria4_4	Thursday in Lent Week 4	Jueves de Cuaresma (semana 4)	violet	feria	lent	B	false	false
+2027-03-05	Vie	lentFeria4_5	Friday in Lent Week 4	Viernes de Cuaresma (semana 4)	violet	feria	lent	B	false	false
+2027-03-06	Sáb	lentFeria4_6	Saturday in Lent Week 4	Sábado de Cuaresma (semana 4)	violet	feria	lent	B	false	false
+2027-03-07	Dom	lent4	Lent IV (Laetare)	Cuarto Domingo de Cuaresma (Laetare)	rose	sunday	lent	B	false	false
+2027-03-08	Lun	lentFeria4_1	Monday in Lent Week 4	Lunes de Cuaresma (semana 4)	violet	feria	lent	B	false	false
+2027-03-09	Mar	lentFeria4_2	Tuesday in Lent Week 4	Martes de Cuaresma (semana 4)	violet	feria	lent	B	false	false
+2027-03-10	Mié	lentFeria5_3	Wednesday in Lent Week 5	Miércoles de Cuaresma (semana 5)	violet	feria	lent	B	false	false
+2027-03-11	Jue	lentFeria5_4	Thursday in Lent Week 5	Jueves de Cuaresma (semana 5)	violet	feria	lent	B	false	false
+2027-03-12	Vie	lentFeria5_5	Friday in Lent Week 5	Viernes de Cuaresma (semana 5)	violet	feria	lent	B	false	false
+2027-03-13	Sáb	lentFeria5_6	Saturday in Lent Week 5	Sábado de Cuaresma (semana 5)	violet	feria	lent	B	false	false
+2027-03-14	Dom	lent5	Lent V (Passion Sunday)	Quinto Domingo de Cuaresma (Domingo de Pasión)	violet	sunday	lent	B	false	false
+2027-03-15	Lun	lentFeria5_1	Monday in Lent Week 5	Lunes de Cuaresma (semana 5)	violet	feria	lent	B	false	false
+2027-03-16	Mar	lentFeria5_2	Tuesday in Lent Week 5	Martes de Cuaresma (semana 5)	violet	feria	lent	B	false	false
+2027-03-17	Mié	lentFeria6_3	Wednesday in Lent Week 6	Miércoles de Cuaresma (semana 6)	violet	feria	lent	B	false	false
+2027-03-18	Jue	lentFeria6_4	Thursday in Lent Week 6	Jueves de Cuaresma (semana 6)	violet	feria	lent	B	false	false
+2027-03-19	Vie	03-19	St. Joseph	San José, Esposo de la Virgen María	white	holyDay	lent	B	true	false
+2027-03-20	Sáb	lentFeria6_6	Saturday in Lent Week 6	Sábado de Cuaresma (semana 6)	violet	feria	lent	B	false	false
+2027-03-21	Dom	palmSunday	Palm Sunday	Domingo de Ramos	red	sunday	holyWeek	B	false	false
+2027-03-22	Lun	holyWeekFeria_1	Monday in Holy Week	Lunes Santo	violet	feria	holyWeek	B	false	false
+2027-03-23	Mar	holyWeekFeria_2	Tuesday in Holy Week	Martes Santo	violet	feria	holyWeek	B	false	false
+2027-03-24	Mié	holyWeekFeria_3	Wednesday in Holy Week	Miércoles Santo	violet	feria	holyWeek	B	false	false
+2027-03-25	Jue	maundyThursday	Maundy Thursday	Jueves Santo	white	holyDay	holyWeek	B	false	false
+2027-03-26	Vie	goodFriday	Good Friday	Viernes Santo	red	holyDay	holyWeek	B	false	false
+2027-03-27	Sáb	holySaturday	Holy Saturday	Sábado Santo	violet	holyDay	holyWeek	B	false	false
+2027-03-28	Dom	easter	Easter Day	Domingo de Resurrección	white	principal	easter	B	false	false
+2027-03-29	Lun	easterFeria1_1	Monday of Easter Week 1	Lunes de Pascua (semana 1)	white	feria	easter	B	false	false
+2027-03-30	Mar	easterFeria1_2	Tuesday of Easter Week 1	Martes de Pascua (semana 1)	white	feria	easter	B	false	false
+2027-03-31	Mié	easterFeria1_3	Wednesday of Easter Week 1	Miércoles de Pascua (semana 1)	white	feria	easter	B	false	false
+2027-04-01	Jue	easterFeria1_4	Thursday of Easter Week 1	Jueves de Pascua (semana 1)	white	feria	easter	B	false	false
+2027-04-02	Vie	easterFeria1_5	Friday of Easter Week 1	Viernes de Pascua (semana 1)	white	feria	easter	B	false	false
+2027-04-03	Sáb	easterFeria1_6	Saturday of Easter Week 1	Sábado de Pascua (semana 1)	white	feria	easter	B	false	false
+2027-04-04	Dom	easter2	Easter II	Segundo Domingo de Pascua	white	sunday	easter	B	false	false
+2027-04-05	Lun	03-25	The Annunciation of Our Lord (transferred)	La Anunciación del Señor (trasladada)	white	holyDay	easter	B	true	true
+2027-04-06	Mar	easterFeria2_2	Tuesday of Easter Week 2	Martes de Pascua (semana 2)	white	feria	easter	B	false	false
+2027-04-07	Mié	easterFeria2_3	Wednesday of Easter Week 2	Miércoles de Pascua (semana 2)	white	feria	easter	B	false	false
+2027-04-08	Jue	easterFeria2_4	Thursday of Easter Week 2	Jueves de Pascua (semana 2)	white	feria	easter	B	false	false
+2027-04-09	Vie	easterFeria2_5	Friday of Easter Week 2	Viernes de Pascua (semana 2)	white	feria	easter	B	false	false
+2027-04-10	Sáb	easterFeria2_6	Saturday of Easter Week 2	Sábado de Pascua (semana 2)	white	feria	easter	B	false	false
+2027-04-11	Dom	easter3	Easter III	Tercer Domingo de Pascua	white	sunday	easter	B	false	false
+2027-04-12	Lun	easterFeria3_1	Monday of Easter Week 3	Lunes de Pascua (semana 3)	white	feria	easter	B	false	false
+2027-04-13	Mar	easterFeria3_2	Tuesday of Easter Week 3	Martes de Pascua (semana 3)	white	feria	easter	B	false	false
+2027-04-14	Mié	easterFeria3_3	Wednesday of Easter Week 3	Miércoles de Pascua (semana 3)	white	feria	easter	B	false	false
+2027-04-15	Jue	easterFeria3_4	Thursday of Easter Week 3	Jueves de Pascua (semana 3)	white	feria	easter	B	false	false
+2027-04-16	Vie	easterFeria3_5	Friday of Easter Week 3	Viernes de Pascua (semana 3)	white	feria	easter	B	false	false
+2027-04-17	Sáb	easterFeria3_6	Saturday of Easter Week 3	Sábado de Pascua (semana 3)	white	feria	easter	B	false	false
+2027-04-18	Dom	easter4	Easter IV (Good Shepherd)	Cuarto Domingo de Pascua (Buen Pastor)	white	sunday	easter	B	false	false
+2027-04-19	Lun	easterFeria4_1	Monday of Easter Week 4	Lunes de Pascua (semana 4)	white	feria	easter	B	false	false
+2027-04-20	Mar	easterFeria4_2	Tuesday of Easter Week 4	Martes de Pascua (semana 4)	white	feria	easter	B	false	false
+2027-04-21	Mié	easterFeria4_3	Wednesday of Easter Week 4	Miércoles de Pascua (semana 4)	white	feria	easter	B	false	false
+2027-04-22	Jue	easterFeria4_4	Thursday of Easter Week 4	Jueves de Pascua (semana 4)	white	feria	easter	B	false	false
+2027-04-23	Vie	easterFeria4_5	Friday of Easter Week 4	Viernes de Pascua (semana 4)	white	feria	easter	B	false	false
+2027-04-24	Sáb	easterFeria4_6	Saturday of Easter Week 4	Sábado de Pascua (semana 4)	white	feria	easter	B	false	false
+2027-04-25	Dom	easter5	Easter V	Quinto Domingo de Pascua	white	sunday	easter	B	false	false
+2027-04-26	Lun	easterFeria5_1	Monday of Easter Week 5	Lunes de Pascua (semana 5)	white	feria	easter	B	false	false
+2027-04-27	Mar	easterFeria5_2	Tuesday of Easter Week 5	Martes de Pascua (semana 5)	white	feria	easter	B	false	false
+2027-04-28	Mié	easterFeria5_3	Wednesday of Easter Week 5	Miércoles de Pascua (semana 5)	white	feria	easter	B	false	false
+2027-04-29	Jue	easterFeria5_4	Thursday of Easter Week 5	Jueves de Pascua (semana 5)	white	feria	easter	B	false	false
+2027-04-30	Vie	easterFeria5_5	Friday of Easter Week 5	Viernes de Pascua (semana 5)	white	feria	easter	B	false	false
+2027-05-01	Sáb	05-01	SS. Philip & James, Apostles	SS. Felipe y Santiago, Apóstoles	red	holyDay	easter	B	true	false
+2027-05-02	Dom	easter6	Easter VI	Sexto Domingo de Pascua	white	sunday	easter	B	false	false
+2027-05-03	Lun	easterFeria6_1	Monday of Easter Week 6	Lunes de Pascua (semana 6)	white	feria	easter	B	false	false
+2027-05-04	Mar	easterFeria6_2	Tuesday of Easter Week 6	Martes de Pascua (semana 6)	white	feria	easter	B	false	false
+2027-05-05	Mié	easterFeria6_3	Wednesday of Easter Week 6	Miércoles de Pascua (semana 6)	white	feria	easter	B	false	false
+2027-05-06	Jue	ascension	Ascension Day	La Ascensión del Señor	white	principal	easter	B	false	false
+2027-05-07	Vie	easterFeria6_5	Friday of Easter Week 6	Viernes de Pascua (semana 6)	white	feria	easter	B	false	false
+2027-05-08	Sáb	easterFeria6_6	Saturday of Easter Week 6	Sábado de Pascua (semana 6)	white	feria	easter	B	false	false
+2027-05-09	Dom	easter7	Easter VII (Sunday after Ascension)	Séptimo Domingo de Pascua	white	sunday	easter	B	false	false
+2027-05-10	Lun	easterFeria7_1	Monday of Easter Week 7	Lunes de Pascua (semana 7)	white	feria	easter	B	false	false
+2027-05-11	Mar	easterFeria7_2	Tuesday of Easter Week 7	Martes de Pascua (semana 7)	white	feria	easter	B	false	false
+2027-05-12	Mié	easterFeria7_3	Wednesday of Easter Week 7	Miércoles de Pascua (semana 7)	white	feria	easter	B	false	false
+2027-05-13	Jue	easterFeria7_4	Thursday of Easter Week 7	Jueves de Pascua (semana 7)	white	feria	easter	B	false	false
+2027-05-14	Vie	easterFeria7_5	Friday of Easter Week 7	Viernes de Pascua (semana 7)	white	feria	easter	B	false	false
+2027-05-15	Sáb	easterFeria7_6	Saturday of Easter Week 7	Sábado de Pascua (semana 7)	white	feria	easter	B	false	false
+2027-05-16	Dom	pentecost	The Day of Pentecost	Día de Pentecostés	red	principal	pentecost	B	false	false
+2027-05-17	Lun	pentecostFeria_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	pentecost	B	false	false
+2027-05-18	Mar	pentecostFeria_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	pentecost	B	false	false
+2027-05-19	Mié	pentecostFeria_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	pentecost	B	false	false
+2027-05-20	Jue	pentecostFeria_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	pentecost	B	false	false
+2027-05-21	Vie	pentecostFeria_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	pentecost	B	false	false
+2027-05-22	Sáb	pentecostFeria_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	pentecost	B	false	false
+2027-05-23	Dom	trinitySunday	Trinity Sunday	La Santísima Trinidad	white	principal	ordinary	B	false	false
+2027-05-24	Lun	properFeria3_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-05-25	Mar	properFeria3_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-05-26	Mié	properFeria3_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	B	false	false
+2027-05-27	Jue	properFeria3_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	B	false	false
+2027-05-28	Vie	properFeria3_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-05-29	Sáb	properFeria4_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	B	false	false
+2027-05-30	Dom	proper4	Proper 4	Propio 4	green	sunday	ordinary	B	false	false
+2027-05-31	Lun	05-31	The Visitation of the B.V.M.	La Visitación de la Virgen María	white	holyDay	ordinary	B	true	false
+2027-06-01	Mar	properFeria4_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-06-02	Mié	properFeria4_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	B	false	false
+2027-06-03	Jue	properFeria4_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	B	false	false
+2027-06-04	Vie	properFeria4_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-06-05	Sáb	properFeria5_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	B	false	false
+2027-06-06	Dom	proper5	Proper 5	Propio 5	green	sunday	ordinary	B	false	false
+2027-06-07	Lun	properFeria5_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-06-08	Mar	properFeria5_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-06-09	Mié	properFeria5_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	B	false	false
+2027-06-10	Jue	properFeria5_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	B	false	false
+2027-06-11	Vie	06-11	St. Barnabas, Apostle	San Bernabé, Apóstol	red	holyDay	ordinary	B	true	false
+2027-06-12	Sáb	properFeria6_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	B	false	false
+2027-06-13	Dom	proper6	Proper 6	Propio 6	green	sunday	ordinary	B	false	false
+2027-06-14	Lun	properFeria6_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-06-15	Mar	properFeria6_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-06-16	Mié	properFeria6_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	B	false	false
+2027-06-17	Jue	properFeria6_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	B	false	false
+2027-06-18	Vie	properFeria6_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-06-19	Sáb	properFeria7_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	B	false	false
+2027-06-20	Dom	proper7	Proper 7	Propio 7	green	sunday	ordinary	B	false	false
+2027-06-21	Lun	properFeria7_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-06-22	Mar	properFeria7_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-06-23	Mié	properFeria7_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	B	false	false
+2027-06-24	Jue	06-24	The Nativity of St. John the Baptist	Natividad de San Juan Bautista	white	holyDay	ordinary	B	true	false
+2027-06-25	Vie	properFeria7_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-06-26	Sáb	properFeria8_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	B	false	false
+2027-06-27	Dom	proper8	Proper 8	Propio 8	green	sunday	ordinary	B	false	false
+2027-06-28	Lun	properFeria8_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-06-29	Mar	06-29	SS. Peter & Paul, Apostles	SS. Pedro y Pablo, Apóstoles	red	holyDay	ordinary	B	true	false
+2027-06-30	Mié	properFeria8_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	B	false	false
+2027-07-01	Jue	properFeria8_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	B	false	false
+2027-07-02	Vie	properFeria8_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-07-03	Sáb	properFeria9_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	B	false	false
+2027-07-04	Dom	proper9	Proper 9	Propio 9	green	sunday	ordinary	B	false	false
+2027-07-05	Lun	properFeria9_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-07-06	Mar	properFeria9_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-07-07	Mié	properFeria9_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	B	false	false
+2027-07-08	Jue	properFeria9_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	B	false	false
+2027-07-09	Vie	properFeria9_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-07-10	Sáb	properFeria10_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	B	false	false
+2027-07-11	Dom	proper10	Proper 10	Propio 10	green	sunday	ordinary	B	false	false
+2027-07-12	Lun	properFeria10_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-07-13	Mar	properFeria10_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-07-14	Mié	properFeria10_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	B	false	false
+2027-07-15	Jue	properFeria10_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	B	false	false
+2027-07-16	Vie	properFeria10_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-07-17	Sáb	properFeria11_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	B	false	false
+2027-07-18	Dom	proper11	Proper 11	Propio 11	green	sunday	ordinary	B	false	false
+2027-07-19	Lun	properFeria11_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-07-20	Mar	properFeria11_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-07-21	Mié	properFeria11_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	B	false	false
+2027-07-22	Jue	07-22	St. Mary Magdalene	Santa María Magdalena	white	holyDay	ordinary	B	true	false
+2027-07-23	Vie	properFeria11_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-07-24	Sáb	properFeria12_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	B	false	false
+2027-07-25	Dom	proper12	Proper 12	Propio 12	green	sunday	ordinary	B	false	false
+2027-07-26	Lun	properFeria12_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-07-27	Mar	properFeria12_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-07-28	Mié	properFeria12_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	B	false	false
+2027-07-29	Jue	properFeria12_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	B	false	false
+2027-07-30	Vie	properFeria12_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-07-31	Sáb	properFeria13_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	B	false	false
+2027-08-01	Dom	proper13	Proper 13	Propio 13	green	sunday	ordinary	B	false	false
+2027-08-02	Lun	properFeria13_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-08-03	Mar	properFeria13_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-08-04	Mié	properFeria13_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	B	false	false
+2027-08-05	Jue	properFeria13_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	B	false	false
+2027-08-06	Vie	08-06	The Transfiguration of Our Lord	La Transfiguración del Señor	white	holyDay	ordinary	B	true	false
+2027-08-07	Sáb	properFeria14_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	B	false	false
+2027-08-08	Dom	proper14	Proper 14	Propio 14	green	sunday	ordinary	B	false	false
+2027-08-09	Lun	properFeria14_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-08-10	Mar	properFeria14_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-08-11	Mié	properFeria14_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	B	false	false
+2027-08-12	Jue	properFeria14_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	B	false	false
+2027-08-13	Vie	properFeria14_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-08-14	Sáb	properFeria15_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	B	false	false
+2027-08-15	Dom	proper15	Proper 15	Propio 15	green	sunday	ordinary	B	false	false
+2027-08-16	Lun	properFeria15_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-08-17	Mar	properFeria15_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-08-18	Mié	properFeria15_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	B	false	false
+2027-08-19	Jue	properFeria15_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	B	false	false
+2027-08-20	Vie	properFeria15_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-08-21	Sáb	properFeria16_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	B	false	false
+2027-08-22	Dom	proper16	Proper 16	Propio 16	green	sunday	ordinary	B	false	false
+2027-08-23	Lun	properFeria16_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-08-24	Mar	08-24	St. Bartholomew, Apostle	San Bartolomé, Apóstol	red	holyDay	ordinary	B	true	false
+2027-08-25	Mié	properFeria16_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	B	false	false
+2027-08-26	Jue	properFeria16_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	B	false	false
+2027-08-27	Vie	properFeria16_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-08-28	Sáb	properFeria17_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	B	false	false
+2027-08-29	Dom	proper17	Proper 17	Propio 17	green	sunday	ordinary	B	false	false
+2027-08-30	Lun	properFeria17_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-08-31	Mar	properFeria17_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-09-01	Mié	properFeria17_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	B	false	false
+2027-09-02	Jue	properFeria17_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	B	false	false
+2027-09-03	Vie	properFeria17_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-09-04	Sáb	properFeria18_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	B	false	false
+2027-09-05	Dom	proper18	Proper 18	Propio 18	green	sunday	ordinary	B	false	false
+2027-09-06	Lun	properFeria18_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-09-07	Mar	properFeria18_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-09-08	Mié	properFeria18_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	B	false	false
+2027-09-09	Jue	properFeria18_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	B	false	false
+2027-09-10	Vie	properFeria18_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-09-11	Sáb	properFeria19_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	B	false	false
+2027-09-12	Dom	proper19	Proper 19	Propio 19	green	sunday	ordinary	B	false	false
+2027-09-13	Lun	properFeria19_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-09-14	Mar	09-14	Holy Cross Day	La Exaltación de la Santa Cruz	red	holyDay	ordinary	B	true	false
+2027-09-15	Mié	properFeria19_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	B	false	false
+2027-09-16	Jue	properFeria19_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	B	false	false
+2027-09-17	Vie	properFeria19_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-09-18	Sáb	properFeria20_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	B	false	false
+2027-09-19	Dom	proper20	Proper 20	Propio 20	green	sunday	ordinary	B	false	false
+2027-09-20	Lun	properFeria20_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-09-21	Mar	09-21	St. Matthew, Apostle & Evangelist	San Mateo, Apóstol y Evangelista	red	holyDay	ordinary	B	true	false
+2027-09-22	Mié	properFeria20_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	B	false	false
+2027-09-23	Jue	properFeria20_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	B	false	false
+2027-09-24	Vie	properFeria20_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-09-25	Sáb	properFeria21_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	B	false	false
+2027-09-26	Dom	proper21	Proper 21	Propio 21	green	sunday	ordinary	B	false	false
+2027-09-27	Lun	properFeria21_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-09-28	Mar	properFeria21_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-09-29	Mié	09-29	St. Michael & All Angels	San Miguel y Todos los Ángeles	white	holyDay	ordinary	B	true	false
+2027-09-30	Jue	properFeria21_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	B	false	false
+2027-10-01	Vie	properFeria21_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-10-02	Sáb	properFeria22_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	B	false	false
+2027-10-03	Dom	proper22	Proper 22	Propio 22	green	sunday	ordinary	B	false	false
+2027-10-04	Lun	properFeria22_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-10-05	Mar	properFeria22_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-10-06	Mié	properFeria22_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	B	false	false
+2027-10-07	Jue	properFeria22_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	B	false	false
+2027-10-08	Vie	properFeria22_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-10-09	Sáb	properFeria23_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	B	false	false
+2027-10-10	Dom	proper23	Proper 23	Propio 23	green	sunday	ordinary	B	false	false
+2027-10-11	Lun	properFeria23_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-10-12	Mar	properFeria23_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-10-13	Mié	properFeria23_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	B	false	false
+2027-10-14	Jue	properFeria23_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	B	false	false
+2027-10-15	Vie	properFeria23_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-10-16	Sáb	properFeria24_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	B	false	false
+2027-10-17	Dom	proper24	Proper 24	Propio 24	green	sunday	ordinary	B	false	false
+2027-10-18	Lun	10-18	St. Luke, Evangelist	San Lucas, Evangelista	red	holyDay	ordinary	B	true	false
+2027-10-19	Mar	properFeria24_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-10-20	Mié	properFeria24_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	B	false	false
+2027-10-21	Jue	properFeria24_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	B	false	false
+2027-10-22	Vie	properFeria24_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-10-23	Sáb	10-23	St. James of Jerusalem	Santiago de Jerusalén, Hermano del Señor	red	holyDay	ordinary	B	true	false
+2027-10-24	Dom	proper25	Proper 25	Propio 25	green	sunday	ordinary	B	false	false
+2027-10-25	Lun	properFeria25_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-10-26	Mar	properFeria25_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-10-27	Mié	properFeria25_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	B	false	false
+2027-10-28	Jue	10-28	SS. Simon & Jude, Apostles	SS. Simón y Judas, Apóstoles	red	holyDay	ordinary	B	true	false
+2027-10-29	Vie	properFeria25_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-10-30	Sáb	properFeria26_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	B	false	false
+2027-10-31	Dom	proper26	Proper 26	Propio 26	green	sunday	ordinary	B	false	false
+2027-11-01	Lun	11-01	All Saints' Day	Todos los Santos	white	holyDay	ordinary	B	true	false
+2027-11-02	Mar	properFeria26_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-11-03	Mié	properFeria26_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	B	false	false
+2027-11-04	Jue	properFeria26_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	B	false	false
+2027-11-05	Vie	properFeria26_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-11-06	Sáb	properFeria27_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	B	false	false
+2027-11-07	Dom	proper27	Proper 27	Propio 27	green	sunday	ordinary	B	false	false
+2027-11-08	Lun	properFeria27_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-11-09	Mar	properFeria27_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-11-10	Mié	properFeria27_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	B	false	false
+2027-11-11	Jue	properFeria27_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	B	false	false
+2027-11-12	Vie	properFeria27_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-11-13	Sáb	properFeria28_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	B	false	false
+2027-11-14	Dom	proper28	Proper 28	Propio 28	green	sunday	ordinary	B	false	false
+2027-11-15	Lun	properFeria28_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-11-16	Mar	properFeria28_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-11-17	Mié	properFeria28_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	B	false	false
+2027-11-18	Jue	properFeria28_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	B	false	false
+2027-11-19	Vie	properFeria28_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-11-20	Sáb	properFeria29_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	B	false	false
+2027-11-21	Dom	proper29	Proper 29 (Cristo Rey)	Propio 29 — Cristo Rey	green	sunday	ordinary	B	false	false
+2027-11-22	Lun	properFeria29_1	Monday after Pentecost	Lunes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-11-23	Mar	properFeria29_2	Tuesday after Pentecost	Martes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-11-24	Mié	properFeria29_3	Wednesday after Pentecost	Miércoles después de Pentecostés	green	feria	ordinary	B	false	false
+2027-11-25	Jue	properFeria29_4	Thursday after Pentecost	Jueves después de Pentecostés	green	feria	ordinary	B	false	false
+2027-11-26	Vie	properFeria29_5	Friday after Pentecost	Viernes después de Pentecostés	green	feria	ordinary	B	false	false
+2027-11-27	Sáb	properFeria29_6	Saturday after Pentecost	Sábado después de Pentecostés	green	feria	ordinary	B	false	false
+2027-11-28	Dom	advent1	Advent I	Primer Domingo de Adviento	violet	sunday	advent	C	false	false
+2027-11-29	Lun	adventFeria1_1	Monday of Advent Week 1	Lunes de Adviento (semana 1)	violet	feria	advent	C	false	false
+2027-11-30	Mar	11-30	St. Andrew, Apostle	San Andrés, Apóstol	red	holyDay	advent	C	true	false
+2027-12-01	Mié	adventFeria1_3	Wednesday of Advent Week 1	Miércoles de Adviento (semana 1)	violet	feria	advent	C	false	false
+2027-12-02	Jue	adventFeria1_4	Thursday of Advent Week 1	Jueves de Adviento (semana 1)	violet	feria	advent	C	false	false
+2027-12-03	Vie	adventFeria1_5	Friday of Advent Week 1	Viernes de Adviento (semana 1)	violet	feria	advent	C	false	false
+2027-12-04	Sáb	adventFeria1_6	Saturday of Advent Week 1	Sábado de Adviento (semana 1)	violet	feria	advent	C	false	false
+2027-12-05	Dom	advent2	Advent II	Segundo Domingo de Adviento	violet	sunday	advent	C	false	false
+2027-12-06	Lun	adventFeria2_1	Monday of Advent Week 2	Lunes de Adviento (semana 2)	violet	feria	advent	C	false	false
+2027-12-07	Mar	adventFeria2_2	Tuesday of Advent Week 2	Martes de Adviento (semana 2)	violet	feria	advent	C	false	false
+2027-12-08	Mié	adventFeria2_3	Wednesday of Advent Week 2	Miércoles de Adviento (semana 2)	violet	feria	advent	C	false	false
+2027-12-09	Jue	adventFeria2_4	Thursday of Advent Week 2	Jueves de Adviento (semana 2)	violet	feria	advent	C	false	false
+2027-12-10	Vie	adventFeria2_5	Friday of Advent Week 2	Viernes de Adviento (semana 2)	violet	feria	advent	C	false	false
+2027-12-11	Sáb	adventFeria2_6	Saturday of Advent Week 2	Sábado de Adviento (semana 2)	violet	feria	advent	C	false	false
+2027-12-12	Dom	advent3	Advent III	Tercer Domingo de Adviento (Gaudete)	rose	sunday	advent	C	false	false
+2027-12-13	Lun	adventFeria3_1	Monday of Advent Week 3	Lunes de Adviento (semana 3)	violet	feria	advent	C	false	false
+2027-12-14	Mar	adventFeria3_2	Tuesday of Advent Week 3	Martes de Adviento (semana 3)	violet	feria	advent	C	false	false
+2027-12-15	Mié	adventFeria3_3	Wednesday of Advent Week 3	Miércoles de Adviento (semana 3)	violet	feria	advent	C	false	false
+2027-12-16	Jue	adventFeria3_4	Thursday of Advent Week 3	Jueves de Adviento (semana 3)	violet	feria	advent	C	false	false
+2027-12-17	Vie	adventFeria3_5	Friday of Advent Week 3	Viernes de Adviento (semana 3)	violet	feria	advent	C	false	false
+2027-12-18	Sáb	adventFeria3_6	Saturday of Advent Week 3	Sábado de Adviento (semana 3)	violet	feria	advent	C	false	false
+2027-12-19	Dom	advent4	Advent IV	Cuarto Domingo de Adviento	violet	sunday	advent	C	false	false
+2027-12-20	Lun	adventFeria4_1	Monday of Advent Week 4	Lunes de Adviento (semana 4)	violet	feria	advent	C	false	false
+2027-12-21	Mar	12-21	St. Thomas, Apostle	Santo Tomás, Apóstol	red	holyDay	advent	C	true	false
+2027-12-22	Mié	adventFeria4_3	Wednesday of Advent Week 4	Miércoles de Adviento (semana 4)	violet	feria	advent	C	false	false
+2027-12-23	Jue	adventFeria4_4	Thursday of Advent Week 4	Jueves de Adviento (semana 4)	violet	feria	advent	C	false	false
+2027-12-24	Vie	adventFeria4_5	Friday of Advent Week 4	Viernes de Adviento (semana 4)	violet	feria	advent	C	false	false
+2027-12-25	Sáb	christmas	The Nativity of Our Lord (Christmas Day)	Natividad del Señor	white	principal	christmas	C	false	false
+2027-12-26	Dom	christmasSunday	The First Sunday after Christmas Day	Domingo en la Octava de Navidad	white	sunday	christmas	C	false	false
+2027-12-27	Lun	12-27	St. John, Apostle & Evangelist	San Juan, Apóstol y Evangelista	white	holyDay	christmas	C	true	false
+2027-12-28	Mar	12-28	The Holy Innocents	Los Santos Inocentes	red	holyDay	christmas	C	true	false
+2027-12-29	Mié	christmasFeria	Wednesday in Christmastide	Miércoles de Navidad	white	feria	christmas	C	false	false
+2027-12-30	Jue	christmasFeria	Thursday in Christmastide	Jueves de Navidad	white	feria	christmas	C	false	false
+2027-12-31	Vie	christmasFeria	Friday in Christmastide	Viernes de Navidad	white	feria	christmas	C	false	false

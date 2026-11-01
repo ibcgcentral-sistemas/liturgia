@@ -1,0 +1,13 @@
+## HTML y reglas de Aleluya: 13515 días
+   10388  colecta prestada NO anunciada en el HTML   p.ej. 2024-01-02 | 2024-01-03 | 2024-01-04 | 2024-01-05 | 2024-01-08
+
+## Colectas con alta similitud léxica (Jaccard de palabras >= 0.55)
+  0.94  epiphany8 ~ proper17
+  0.80  transfiguration ~ 08-06
+  0.80  proper5 ~ proper20
+  0.78  lent5 ~ goodFriday
+  0.76  proper17 ~ proper23
+  0.73  proper16 ~ proper25
+  0.72  epiphany8 ~ proper23
+  0.68  easter6 ~ proper21
+  0.59  easter5 ~ 05-01
