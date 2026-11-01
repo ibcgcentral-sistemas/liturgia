@@ -95,9 +95,7 @@ const BCPLibrito = (() => {
       return html;
     };
 
-    return `
-    <div class="librito-document">
-
+    const headHtml = `
       <div class="cover-page">
         <div class="cover-cross">✠</div>
         <h2 class="cover-title">LIBRITO DE LA<br>SANTA EUCARISTÍA</h2>
@@ -114,7 +112,33 @@ const BCPLibrito = (() => {
         <p class="librito-date">${dateStr}</p>
         <p class="librito-feast">${dayInfo.nameEs || dayInfo.name}</p>
         <p class="librito-meta">Color: <strong>${colorName}</strong> · Ciclo: <strong>${dayInfo.cycle}</strong></p>
+      </div>`;
+
+    // Viernes y Sábado Santo: sin Eucaristía (ver NO_EUCHARIST_DAYS en utils.js).
+    const noEucharist = noEucharistNotice(dayInfo);
+    if (noEucharist) {
+      return `
+    <div class="librito-document">
+      ${headHtml}
+
+      <section class="librito-section">
+        <h2>✠ ${dayInfo.nameEs || dayInfo.name}</h2>
+        <div class="librito-instruction"><p>${noEucharist}</p></div>
+      </section>
+
+      <div class="librito-footer">
+        <p>✠ Soli Deo Gloria ✠</p>
+        <p>Librito de la Santa Eucaristía para el Pueblo Cristiano</p>
       </div>
+
+    </div>
+    `;
+    }
+
+    return `
+    <div class="librito-document">
+
+      ${headHtml}
 
       <section class="librito-section">
         <h2>✠ ANTES DE COMENZAR</h2>
@@ -157,7 +181,7 @@ const BCPLibrito = (() => {
       <section class="librito-section">
         <h2>✠ LITURGIA DE LA PALABRA</h2>
         <div class="librito-instruction"><p><strong>Nos sentamos.</strong></p></div>
-        ${borrowedFromSunday ? '<div class="librito-instruction"><p>Hoy se repiten las lecturas del Domingo o fiesta precedente.</p></div>' : ''}
+        ${borrowedFromSunday ? '<div class="librito-instruction"><p>Hoy se repiten las lecturas del Domingo o fiesta correspondiente.</p></div>' : ''}
 
         ${firstReading && readings ? fmtReading(translateBibleReference(readings.first), firstReading, 'PRIMERA LECTURA') : ''}
         ${psalmVerses && psalmVerses.length && readings ? fmtPsalm(translateBibleReference(readings.psalm), psalmVerses, psalmAnt) : ''}

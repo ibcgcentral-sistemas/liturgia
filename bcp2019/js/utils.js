@@ -96,9 +96,118 @@ function shouldOmitGloria(dayInfo) {
 const GLORIA_OMITTED_RUBRIC = 'El Gloria in excelsis se omite en Adviento y Cuaresma.';
 
 // ══════════════════════════════════════════════════════════════════════════
+//  DÍAS SIN EUCARISTÍA: VIERNES SANTO Y SÁBADO SANTO
+// ══════════════════════════════════════════════════════════════════════════
+
+// El libro dice, en el rito propio de cada día, que la Eucaristía no se celebra:
+// Viernes Santo (el rito empieza en la p. 565; la frase está en «Distribución de
+// la Comunión», p. 575): «El rito de la Santa Eucaristía no se celebra en este
+// día.»; Sábado Santo (p. 578): «No hay celebración de la Eucaristía en este
+// día.». Este generador solo arma el Texto Estándar de la Santa Eucaristía y no
+// modela esos dos ritos propios, así que en lugar de imprimir una Eucaristía
+// completa, con Oración de Consagración, muestra la frase del libro y remite a
+// la página donde empieza el rito. La Vigilia Pascual (p. 582) tampoco está
+// modelada.
+const NO_EUCHARIST_DAYS = {
+  goodFriday:   { sentence: 'El rito de la Santa Eucaristía no se celebra en este día.', page: 565 },
+  holySaturday: { sentence: 'No hay celebración de la Eucaristía en este día.', page: 578 },
+};
+
+// Devuelve el aviso (texto plano) si el día no tiene Eucaristía; '' si la tiene.
+function noEucharistNotice(dayInfo) {
+  const n = dayInfo && NO_EUCHARIST_DAYS[dayInfo.key];
+  if (!n) return '';
+  return `${n.sentence} El rito propio de este día (Libro de Oración Común, p. ${n.page}) no está incluido en este generador.`;
+}
+
+// ══════════════════════════════════════════════════════════════════════════
 //  ESCAPE DE HTML (para mensajes de error inyectados con innerHTML)
 // ══════════════════════════════════════════════════════════════════════════
 
 function escapeHtml(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+//  NUMERACIÓN DE VERSÍCULOS: LECCIONARIO (inglesa) → BIBLIA DE JERUSALÉN (hebrea)
+// ══════════════════════════════════════════════════════════════════════════
+
+// El leccionario del libro cita con la numeración de las Biblias inglesas; la
+// Biblia de Jerusalén cargada sigue la hebrea, que en unos pocos pasajes parte
+// el texto de otro modo (los Salmos los resuelve biblia-wrapper.js, no esta
+// tabla). Cada fila: [libro, capítulo inglés, del v., al v., capítulo BdJ,
+// desplazamiento de versículo]. Solo están los pasajes que usa el leccionario
+// del BCP 2019 (test-bcp2019.js comprueba que cada cita devuelve texto): Is 9:1 inglés = 8:23
+// hebreo, Is 64:1 = 63:19, Os 2:1-23 = 2:3-25, Jon 2:1-10 = 2:2-11, Mi 5:1 =
+// 4:14 y 5:2-15 = 5:1-14, Mal 4:1-6 = 3:19-24, Gn 32:1-32 = 32:2-33 y
+// Ex 22:1 = 21:37 y 22:2-31 = 22:1-30.
+const VERSE_SHIFTS = [
+  ['Isaiah', 9, 1, 1, 8, 22], ['Isaiah', 9, 2, 7, 9, -1],
+  ['Isaiah', 64, 1, 1, 63, 18], ['Isaiah', 64, 2, 12, 64, -1],
+  ['Hosea', 2, 1, 23, 2, 2],
+  ['Jonah', 2, 1, 10, 2, 1],
+  ['Micah', 5, 1, 1, 4, 13], ['Micah', 5, 2, 15, 5, -1],
+  ['Malachi', 4, 1, 6, 3, 18],
+  ['Genesis', 32, 1, 32, 32, 1],
+  ['Exodus', 22, 1, 1, 21, 36], ['Exodus', 22, 2, 31, 22, -1],
+];
+// Último versículo de un capítulo inglés, solo donde hace falta para abrir un tramo entre capítulos.
+const ESV_CHAPTER_LAST = { 'Malachi 3': 18 };
+
+// Devuelve la cita partida en tramos de la Biblia de Jerusalén —cada uno con
+// la etiqueta (versículo inglés) de su primer versículo— o null si la cita no
+// necesita conversión (la gran mayoría) o no se entiende: entonces se lee tal cual.
+function toBibliaPieces(ref) {
+  const m = /^((?:[1-3] )?[A-Za-z ]+?)\s+(\d.*)$/.exec(String(ref || '').trim());
+  if (!m || !VERSE_SHIFTS.some(s => s[0] === m[1])) return null;
+  const book = m[1];
+  const segs = []; let last = null;
+  for (const raw of m[2].split(',')) {
+    let mm = raw.match(/^(\d+):(\d+)-(\d+):(\d+)$/);
+    if (!mm && last != null) { // «25-3:7»: del v. 25 del capítulo en curso al 3:7
+      const x = raw.match(/^(\d+)-(\d+):(\d+)$/);
+      if (x) mm = [raw, last, x[1], x[2], x[3]];
+    }
+    if (mm) {
+      const c1 = +mm[1], c2 = +mm[3];
+      for (let c = c1; c <= c2; c++) segs.push({ c, a: c === c1 ? +mm[2] : 1, b: c === c2 ? +mm[4] : (ESV_CHAPTER_LAST[book + ' ' + c] || 999) });
+      last = c2;
+    } else if ((mm = raw.match(/^(\d+):(\d+)-(\d+)$/))) { segs.push({ c: +mm[1], a: +mm[2], b: +mm[3] }); last = +mm[1]; }
+    else if ((mm = raw.match(/^(\d+):(\d+)$/))) { segs.push({ c: +mm[1], a: +mm[2], b: +mm[2] }); last = +mm[1]; }
+    else if (last != null && (mm = raw.match(/^(\d+)-(\d+)$/))) segs.push({ c: last, a: +mm[1], b: +mm[2] });
+    else if (last != null && (mm = raw.match(/^(\d+)$/))) segs.push({ c: last, a: +mm[1], b: +mm[1] });
+    else return null;
+  }
+  let changed = false;
+  const pieces = [];
+  for (const s of segs) {
+    let cur = s.a;
+    while (cur <= s.b) {
+      const rule = VERSE_SHIFTS.find(r => r[0] === book && r[1] === s.c && cur >= r[2] && cur <= r[3]);
+      if (rule) {
+        const end = Math.min(s.b, rule[3]);
+        pieces.push({ book, c: rule[4], a: cur + rule[5], b: end + rule[5], label: cur });
+        cur = end + 1; changed = true;
+      } else {
+        const end = Math.min(s.b, ...VERSE_SHIFTS.filter(r => r[0] === book && r[1] === s.c && r[2] > cur).map(r => r[2] - 1));
+        pieces.push({ book, c: s.c, a: cur, b: end, label: cur });
+        cur = end + 1;
+      }
+    }
+  }
+  return changed ? pieces : null;
+}
+
+// Texto de una cita convertida con toBibliaPieces(): lee cada tramo de la Biblia
+// de Jerusalén y rotula los versículos con la numeración del libro (la de la
+// cita impresa en el encabezado), no con la hebrea.
+function biblePassageFromPieces(ref, pieces) {
+  const out = [];
+  for (const p of pieces) {
+    for (const v of window.BibliaJerusalen.getVerses(`${p.book} ${p.c}:${p.a}-${p.b}`)) {
+      out.push(`<sup class="verse-num">${p.label + (parseInt(v.h, 10) - p.a)}</sup> ${v.content}`);
+    }
+  }
+  if (!out.length) return { text: `<em class="rubric">[No se encontró: ${ref} — verifique el nombre del libro]</em>`, reference: ref };
+  return { text: out.join(' '), reference: ref };
 }

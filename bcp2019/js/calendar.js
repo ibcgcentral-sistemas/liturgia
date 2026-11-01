@@ -250,6 +250,16 @@ const BCPCalendar = (() => {
     return { name, nameEs, color, rank, key, season, cycle, isFixed };
   }
 
+  // Feria cuya Colecta, salmo y lecturas el libro señala expresamente (campo
+  // `inherits`: clave del día del que se toman). app.js lo consulta antes de
+  // caer en el Domingo precedente, que en estos casos es de otro tiempo o el
+  // libro lo excluye. Si la clave no tiene entrada en propers.js/lectionary.js
+  // (Propios 1 y 2), app.js conserva el respaldo del Domingo precedente.
+  function withInherits(day, key) {
+    day.inherits = key;
+    return day;
+  }
+
   // Season real de una fecha, independiente de si es domingo o feria — usado
   // para que las fiestas fijas del santoral (que pueden caer en cualquier
   // tiempo litúrgico) hereden el season correcto en vez de un valor fijo.
@@ -309,7 +319,13 @@ const BCPCalendar = (() => {
     }
     if (date > F.easter && date < F.pentecost && dow !== 0 && (!FIXED_FEASTS[md] || movedAway)) {
       const week = Math.ceil(diffDays(F.easter, date) / 7);
-      return mk(`${DAY_NAMES_EN[dow]} of Easter Week ${week}`, `${DAY_NAMES_ES[dow]} de Pascua (semana ${week})`, 'white', 'feria', `easterFeria${week}_${dow}`, 'easter', cycle);
+      const day = mk(`${DAY_NAMES_EN[dow]} of Easter Week ${week}`, `${DAY_NAMES_ES[dow]} de Pascua (semana ${week})`, 'white', 'feria', `easterFeria${week}_${dow}`, 'easter', cycle);
+      // "La Colecta del Día de la Ascensión, con el salmo y las lecturas
+      // correspondientes, sirve también para el viernes y el sábado siguientes"
+      // (Colectas del Año Cristiano, nota tras la Colecta de la Ascensión).
+      // Antes tomaban Pascua VI.
+      if (sameDay(date, addDays(F.ascension, 1)) || sameDay(date, addDays(F.ascension, 2))) return withInherits(day, 'ascension');
+      return day;
     }
 
     // ── TRINIDAD ──
@@ -324,7 +340,13 @@ const BCPCalendar = (() => {
     if (sameDay(date, F.lent5))        return mk('Lent V (Passion Sunday)', 'Quinto Domingo de Cuaresma (Domingo de Pasión)', 'violet', 'sunday', 'lent5', 'lent', cycle);
     if (date >= F.ashWednesday && date < F.palmSunday && dow !== 0 && !FIXED_FEASTS[md]) {
       const week = Math.ceil(diffDays(F.ashWednesday, date) / 7);
-      return mk(`${DAY_NAMES_EN[dow]} in Lent Week ${week}`, `${DAY_NAMES_ES[dow]} de Cuaresma (semana ${week})`, 'violet', 'feria', `lentFeria${week}_${dow}`, 'lent', cycle);
+      const day = mk(`${DAY_NAMES_EN[dow]} in Lent Week ${week}`, `${DAY_NAMES_ES[dow]} de Cuaresma (semana ${week})`, 'violet', 'feria', `lentFeria${week}_${dow}`, 'lent', cycle);
+      // Jueves a sábado tras Ceniza: "Esta Colecta, con el salmo y las lecturas
+      // correspondientes, sirve también para los días de semana siguientes"
+      // (Colectas del Año Cristiano, nota tras la Colecta del Miércoles de
+      // Ceniza). Antes tomaban el último domingo de Epifanía (Transfiguración).
+      if (date < F.lent1) return withInherits(day, 'ashWednesday');
+      return day;
     }
 
     // ── ADVIENTO ──
@@ -339,19 +361,20 @@ const BCPCalendar = (() => {
 
     // ── NAVIDAD ──
     if (md === '12-25') return mk('The Nativity of Our Lord (Christmas Day)', 'Natividad del Señor', 'white', 'principal', 'christmas', 'christmas', cycle);
-    // "|| md === '01-01'": el 1 de enero cae justo en el hueco entre este rango
-    // (26-31 dic.) y el de "Segundo Domingo después de Navidad" (2-5 ene.) — sin
-    // este caso, un domingo que cayera exactamente el 1 de enero no coincidía
-    // con ningún chequeo de domingo ni con la fiesta fija (que exige día de
-    // semana), y caía hasta el fallback genérico final "Feria".
-    if (dow === 0 && ((md >= '12-26' && md <= '12-31') || md === '01-01')) {
+    if (dow === 0 && md >= '12-26' && md <= '12-31') {
       return mk('The First Sunday after Christmas Day', 'Domingo en la Octava de Navidad', 'white', 'sunday', 'christmasSunday', 'christmas', cycle);
     }
-    // Segundo Domingo después de Navidad: solo ocurre en años donde caben dos
-    // domingos entre Navidad y Epifanía (el domingo cae entre el 2 y el 5 de
-    // enero). No siempre existe — la mayoría de los años el 6 de enero llega
-    // antes de que haya lugar para un segundo domingo.
-    if (dow === 0 && md >= '01-02' && md <= '01-05') {
+    // Segundo Domingo después de Navidad: cae entre el 1 y el 5 de enero. No
+    // siempre existe — la mayoría de los años el 6 de enero llega antes de que
+    // haya lugar para un segundo domingo. El 1 de enero en domingo ocurre
+    // exactamente cuando el 25 de diciembre anterior también fue domingo (1 ene.
+    // 2034, 2040, 2045, 2051): entonces no hay Primer Domingo de Navidad y el libro dice
+    // "el domingo siguiente es el Segundo Domingo de Navidad o la fiesta de la
+    // Circuncisión y el Santo Nombre" (nota tras la Colecta de Navidad). Se
+    // toma la primera opción, que ya tiene clave propia; antes salía como
+    // Primer Domingo, un domingo que ese año no existe. La fiesta del Santo
+    // Nombre queda cediendo ante el domingo, como el resto de las fijas.
+    if (dow === 0 && md >= '01-01' && md <= '01-05') {
       return mk('The Second Sunday after Christmas Day', 'Segundo Domingo después de Navidad', 'white', 'sunday', 'christmasSunday2', 'christmas', cycle);
     }
     if ((md >= '12-26' && md <= '12-31') || (md >= '01-01' && md <= '01-05')) {
@@ -360,7 +383,15 @@ const BCPCalendar = (() => {
       // precedencia — de ahí el "!FIXED_FEASTS[md]": sin él, este fallback se
       // disparaba primero y la fiesta fija (más abajo) nunca se alcanzaba.
       if (dow !== 0 && !FIXED_FEASTS[md]) {
-        return mk(`${DAY_NAMES_EN[dow]} in Christmastide`, `${DAY_NAMES_ES[dow]} de Navidad`, 'white', 'feria', 'christmasFeria', 'christmas', cycle);
+        const day = mk(`${DAY_NAMES_EN[dow]} in Christmastide`, `${DAY_NAMES_ES[dow]} de Navidad`, 'white', 'feria', 'christmasFeria', 'christmas', cycle);
+        // "La Colecta del Día de Navidad y cualquiera de los juegos de lecturas
+        // propias del Día de Navidad sirven para los días de semana entre los
+        // Santos Inocentes y el Primer Domingo de Navidad" (Colectas del Año
+        // Cristiano, nota tras la Colecta de Navidad). Si el domingo anterior es
+        // anterior al 25 de diciembre (Adviento IV), esos días tomaban la
+        // Colecta y el Evangelio de Adviento.
+        if (date.getMonth() === 11 && addDays(date, -dow) < F.christmas) return withInherits(day, 'christmas');
+        return day;
       }
     }
 
@@ -381,7 +412,11 @@ const BCPCalendar = (() => {
       return mk(`${DAY_NAMES_EN[dow]} after Epiphany`, `${DAY_NAMES_ES[dow]} después de Epifanía`, 'green', 'feria', 'epiphanyFeria', 'epiphany', cycle);
     }
     if (md > '01-06' && md < '01-13' && dow !== 0 && date < F.baptismOfLord && !FIXED_FEASTS[md]) {
-      return mk(`${DAY_NAMES_EN[dow]} after Epiphany`, `${DAY_NAMES_ES[dow]} después de Epifanía`, 'white', 'feria', 'epiphanyOctaveFeria', 'epiphany', cycle);
+      // "Esta Colecta, con el salmo y las lecturas de la Epifanía, … sirve para
+      // los días de semana entre la Epifanía y el domingo siguiente" (Colectas
+      // del Año Cristiano, nota tras la Colecta de la Epifanía). Antes tomaban
+      // el Domingo de Navidad.
+      return withInherits(mk(`${DAY_NAMES_EN[dow]} after Epiphany`, `${DAY_NAMES_ES[dow]} después de Epifanía`, 'white', 'feria', 'epiphanyOctaveFeria', 'epiphany', cycle), 'epiphany');
     }
 
     // ── FIESTAS FIJAS DEL SANTORAL — antes del bloque genérico de Propios ──
@@ -391,10 +426,15 @@ const BCPCalendar = (() => {
     // Navidad, Epifanía, Cuaresma, Semana Santa o Pascua — el 47% de sus
     // apariciones reales en día de semana, verificado simulando 2024-2050.
     // En domingo, el domingo siempre prevalece — no se implementan reglas de
-    // desplazamiento en esta fase).
-    if (dow !== 0 && FIXED_FEASTS[md] && !movedAway) {
+    // desplazamiento en esta fase — salvo Todos los Santos: el libro lo cuenta
+    // entre las Fiestas Principales, que "toman precedencia sobre cualquier otro
+    // día u observancia" (The Calendar of the Christian Year, p. 688). Sin esta
+    // excepción, cuando el 1 de noviembre es domingo (2026, 2037, 2043, 2048,
+    // 2054) salía el Propio 26 en lugar de la fiesta.
+    const isPrincipalFixed = md === '11-01';
+    if ((dow !== 0 || isPrincipalFixed) && FIXED_FEASTS[md] && !movedAway) {
       const ff = FIXED_FEASTS[md];
-      return { name: ff.name, nameEs: ff.nameEs, color: ff.color, rank: 'holyDay', key: md, season: seasonForDate(date, F, advent1), cycle, isFixed: true };
+      return { name: ff.name, nameEs: ff.nameEs, color: ff.color, rank: isPrincipalFixed ? 'principal' : 'holyDay', key: md, season: seasonForDate(date, F, advent1), cycle, isFixed: true };
     }
 
     // ── FERIAS DE LA SEMANA ENTRE PENTECOSTÉS Y LA TRINIDAD ────────────────
@@ -402,11 +442,16 @@ const BCPCalendar = (() => {
     // Pentecostés y el de Propios empieza después de Trinidad, así que caían
     // hasta el fallback genérico final y se mostraban como "Feria", sin
     // identidad ni tiempo litúrgico (206 días en el barrido 2024-2060).
-    // Toman lecturas y colecta prestadas del Domingo precedente (Pentecostés),
-    // igual que cualquier otra feria.
+    // La Colecta y las lecturas de Pentecostés y de la Trinidad "no se usan en
+    // los días de semana siguientes: en su lugar se usan los propios fechados
+    // de la semana" (Colectas del Año Cristiano, nota de "La temporada después
+    // de Pentecostés"). Propio de la semana = el del domingo que la abre, por
+    // su fecha (PROPER_RANGES). Si ese Propio es el 1 o el 2 (Pascua muy
+    // temprana), que no tienen entrada en propers.js ni lectionary.js, app.js
+    // conserva el respaldo del Domingo precedente.
     if (date > F.pentecost && date < F.trinitySunday && dow !== 0) {
-      return mk(`${DAY_NAMES_EN[dow]} after Pentecost`, `${DAY_NAMES_ES[dow]} después de Pentecostés`,
-                'green', 'feria', `pentecostFeria_${dow}`, 'pentecost', cycle);
+      return withInherits(mk(`${DAY_NAMES_EN[dow]} after Pentecost`, `${DAY_NAMES_ES[dow]} después de Pentecostés`,
+                'green', 'feria', `pentecostFeria_${dow}`, 'pentecost', cycle), `proper${getProperNumber(F.pentecost)}`);
     }
 
     // ── DOMINGOS Y FERIAS DESPUÉS DE PENTECOSTÉS (sistema de Propios RCL) ──
@@ -416,7 +461,13 @@ const BCPCalendar = (() => {
         const label = properN === 29 ? ' (Cristo Rey)' : '';
         return mk(`Proper ${properN}${label}`, `Propio ${properN}${properN === 29 ? ' — Cristo Rey' : ''}`, 'green', 'sunday', `proper${properN}`, 'ordinary', cycle);
       }
-      return mk(`${DAY_NAMES_EN[dow]} after Pentecost`, `${DAY_NAMES_ES[dow]} después de Pentecostés`, 'green', 'feria', `properFeria${properN}_${dow}`, 'ordinary', cycle);
+      const day = mk(`${DAY_NAMES_EN[dow]} after Pentecost`, `${DAY_NAMES_ES[dow]} después de Pentecostés`, 'green', 'feria', `properFeria${properN}_${dow}`, 'ordinary', cycle);
+      // Propio de la semana = el del domingo que la abre, por su fecha (ver el
+      // bloque de Pentecostés, arriba). Cubre la semana de la Trinidad y también
+      // la de un Todos los Santos en domingo, donde el domingo precedente ya no
+      // devuelve el Propio sino la fiesta. En las demás semanas coincide con el
+      // domingo precedente, así que no cambia nada.
+      return withInherits(day, `proper${getProperNumber(addDays(date, -dow))}`);
     }
 
     // ── FALLBACK ──

@@ -15,7 +15,11 @@ let currentMassState = null;
 async function fetchScripture(ref) {
   if (!ref) return { text: '<em class="rubric">[Lectura no especificada]</em>', reference: '' };
   if (window.BibliaJerusalen) {
-    const result = window.BibliaJerusalen.getPassage(ref);
+    // El leccionario cita con numeración inglesa; unos pocos pasajes (Is 9, Is 64,
+    // Os 2, Jon 2, Mi 5, Mal 4, Gn 32, Ex 22) la Biblia de Jerusalén los numera
+    // distinto: ver VERSE_SHIFTS en utils.js.
+    const pieces = toBibliaPieces(ref);
+    const result = pieces ? biblePassageFromPieces(ref, pieces) : window.BibliaJerusalen.getPassage(ref);
     if (result.text && result.text.length > MAX_READING_LENGTH) {
       return { text: result.text.substring(0, TRUNCATE_AT) + '... <em class="rubric">[Lectura truncada]</em>', reference: ref };
     }
@@ -34,6 +38,10 @@ function getPreviousSunday(date) {
 
 function resolveLectionaryKey(dayInfo, date) {
   if (BCPLectionary.SUNDAY[dayInfo.key]) return { key: dayInfo.key, borrowedFromSunday: false };
+  // Ferias con propios que el libro señala (calendar.js, `inherits`): van antes
+  // del Domingo precedente, que en esos casos es de otro tiempo o el libro lo
+  // excluye. Sin entrada en el leccionario (Propios 1 y 2) se cae al respaldo.
+  if (dayInfo.inherits && BCPLectionary.SUNDAY[dayInfo.inherits]) return { key: dayInfo.inherits, borrowedFromSunday: true, cycle: dayInfo.cycle };
   if (dayInfo.key && dayInfo.key.startsWith('holyWeekFeria')) return { key: null, borrowedFromSunday: false };
   const prevInfo = BCPCalendar.getDay(getPreviousSunday(date));
   if (BCPLectionary.SUNDAY[prevInfo.key]) return { key: prevInfo.key, borrowedFromSunday: true, cycle: prevInfo.cycle };
@@ -48,6 +56,7 @@ function resolveLectionaryKey(dayInfo, date) {
 // feria de cualquier época del año — Adviento, Cuaresma, Navidad, Pascua...
 function resolveCollectKey(dayInfo, date) {
   if (BCPPropers.COLLECTS[dayInfo.key]) return dayInfo.key;
+  if (dayInfo.inherits && BCPPropers.COLLECTS[dayInfo.inherits]) return dayInfo.inherits;
   const prevInfo = BCPCalendar.getDay(getPreviousSunday(date));
   if (BCPPropers.COLLECTS[prevInfo.key]) return prevInfo.key;
   return dayInfo.key;
@@ -136,9 +145,7 @@ function buildLiturgyHTML(d) {
     return html;
   };
 
-  return `
-  <div class="liturgy-document">
-
+  const headHtml = `
     <div class="cover-page">
       <div class="cover-cross">✠</div>
       <h2 class="cover-title">LIBRO DE ORACIÓN<br>COMÚN · 2019</h2>
@@ -159,7 +166,35 @@ function buildLiturgyHTML(d) {
           <span>Ciclo dominical: <strong>${d.dayInfo.cycle}</strong></span>
         </p>
       </div>
+    </div>`;
+
+  const footHtml = `
+    <div class="liturgy-footer">
+      <p>✠ Soli Deo Gloria ✠</p>
+      <p class="footer-note">Libro de Oración Común (2019) · Texto Estándar Anglicano · Ciclo ${d.dayInfo.cycle}</p>
+    </div>`;
+
+  // Viernes y Sábado Santo: el libro no celebra la Eucaristía esos días y este
+  // generador no modela sus ritos propios (ver NO_EUCHARIST_DAYS en utils.js).
+  const noEucharist = noEucharistNotice(d.dayInfo);
+  if (noEucharist) {
+    return `
+  <div class="liturgy-document">
+    ${headHtml}
+
+    <div class="mass-section">
+      <h3 class="section-title main-section">✠ ${d.dayInfo.nameEs || d.dayInfo.name}</h3>
+      <p class="rubric">${noEucharist}</p>
     </div>
+
+    ${footHtml}
+  </div>`;
+  }
+
+  return `
+  <div class="liturgy-document">
+
+    ${headHtml}
 
     <!-- ═══════════════ RITOS INICIALES ═══════════════ -->
     <div class="mass-section">
@@ -193,7 +228,7 @@ function buildLiturgyHTML(d) {
     <div class="mass-section">
       <h3 class="section-title main-section">✠ LITURGIA DE LA PALABRA</h3>
 
-      ${d.borrowedFromSunday ? '<p class="rubric">✠ Esta feria no tiene lecturas propias asignadas: se repiten las del Domingo o fiesta precedente.</p>' : ''}
+      ${d.borrowedFromSunday ? '<p class="rubric">✠ Esta feria no tiene lecturas propias asignadas: se repiten las del Domingo o fiesta correspondiente.</p>' : ''}
 
       ${d.firstReading && d.readings ? fmtReading(translateBibleReference(d.readings.first), d.firstReading, 'first') : '<p class="rubric">[Primera lectura no especificada para este día]</p>'}
       ${d.psalmVerses && d.psalmVerses.length && d.readings ? fmtPsalm(translateBibleReference(d.readings.psalm), d.psalmVerses, d.psalmAnt) : ''}
@@ -277,10 +312,7 @@ function buildLiturgyHTML(d) {
       <div class="liturgical-text-block">${isEaster ? BCPEucharist.DISMISSAL_ALLELUIA : BCPEucharist.DISMISSAL}</div>
     </div>
 
-    <div class="liturgy-footer">
-      <p>✠ Soli Deo Gloria ✠</p>
-      <p class="footer-note">Libro de Oración Común (2019) · Texto Estándar Anglicano · Ciclo ${d.dayInfo.cycle}</p>
-    </div>
+    ${footHtml}
 
   </div>`;
 }

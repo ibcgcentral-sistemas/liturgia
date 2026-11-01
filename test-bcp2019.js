@@ -1,0 +1,138 @@
+// test-bcp2019.js — Prueba de completitud del generador del Libro de Oración Común (2019).
+// Uso: node test-bcp2019.js [añoIni=2024] [añoFin=2060]      (código de salida 1 si algo falla)
+//
+// Carga los módulos REALES de bcp2019/js (con app.js, Librito y la Biblia de Jerusalén) en un contexto
+// vm y barre años enteros, porque los fallos de este proyecto no lanzan excepciones: un dato ausente o
+// equivocado se imprime tan limpio como el correcto. Comprueba, por orden:
+//   1. Mecánica: ningún día lanza, deja una marca de fallo, ni se queda sin colecta, prefacio, primera
+//      lectura o Evangelio (salvo Viernes y Sábado Santo, que no tienen Eucaristía).
+//   2. Citas: cada cita del leccionario devuelve texto de la Biblia de Jerusalén.
+//   3. Leccionario = libro: bcp2019/js/lectionary.js coincide con lo que genera
+//      bcp2019-tools/build-lectionary.js desde las tablas oficiales (pp. 717-733).
+// Al final lista los PENDIENTES CONOCIDOS, que no son fallos de esta prueba pero tampoco están completos.
+'use strict';
+const fs = require('fs');
+const path = require('path');
+const vm = require('vm');
+
+const BCP = path.join(__dirname, 'bcp2019', 'js') + path.sep;
+const LIB = path.join(__dirname, 'js', 'lib') + path.sep;
+const Y0 = +(process.argv[2] || 2024), Y1 = +(process.argv[3] || 2060);
+
+function load() {
+  const noop = () => ({ classList: { add() {}, remove() {}, contains() { return false; }, toggle() {} }, style: {}, addEventListener() {}, appendChild() {}, remove() {}, querySelector() { return null; }, querySelectorAll() { return []; }, setAttribute() {}, scrollIntoView() {}, value: '', textContent: '', innerHTML: '' });
+  const warns = [];
+  const ctx = { console: { log() {}, info() {}, debug() {}, warn: (...a) => warns.push(a.join(' ')), error: (...a) => warns.push('ERROR ' + a.join(' ')) },
+    Date, Math, JSON, Object, Array, String, Number, RegExp, Map, Set, Promise, Boolean, Error, parseInt, parseFloat, isNaN, setTimeout, clearTimeout, Symbol, Intl };
+  ctx.window = ctx; ctx.globalThis = ctx; ctx.self = ctx; ctx.navigator = {};
+  ctx.document = { addEventListener() {}, getElementById: noop, querySelectorAll: () => [], querySelector: () => null, createElement: noop, body: noop() };
+  vm.createContext(ctx);
+  const mod = { exports: {} };
+  new Function('module', 'exports', fs.readFileSync(LIB + 'biblia-de-jerusalen.min.js', 'utf8'))(mod, mod.exports);
+  ctx._BibliaInstance = new mod.exports.Bible();
+  vm.runInContext(fs.readFileSync(LIB + 'biblia-wrapper.js', 'utf8') + '\n;', ctx, { filename: 'biblia-wrapper.js' });
+  for (const f of ['calendar.js', 'lectionary.js', 'propers.js', 'eucharist.js', 'utils.js', 'app.js', 'librito-pueblo.js']) {
+    vm.runInContext(fs.readFileSync(BCP + f, 'utf8') + '\n;', ctx, { filename: f });
+  }
+  const get = n => vm.runInContext(`typeof ${n} !== 'undefined' ? ${n} : undefined`, ctx);
+  return { ctx, warns, get, state: () => vm.runInContext('currentMassState', ctx) };
+}
+
+const C = load();
+const Cal = C.get('BCPCalendar'), Lect = C.get('BCPLectionary'), Prop = C.get('BCPPropers');
+const generateLiturgy = C.get('generateLiturgy'), fetchScripture = C.get('fetchScripture'), noEucharistNotice = C.get('noEucharistNotice');
+const strip = h => String(h).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+const iso = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+
+const results = [];
+function check(name, failures, total) {
+  results.push({ name, fails: failures.length, total, examples: failures.slice(0, 4) });
+}
+const MARKS = [/\[Lectura no especificada/, /\[Primera lectura no especificada/, /\[Evangelio no especificado/, /no especificad/, /\[Error/, /\bundefined\b/, /\bNaN\b/, /\[object/, /\bnull\b/,
+  /Lectura truncada/, /no disponible/, /Referencia no reconocida/, /Libro no encontrado/, /No se encontr/, /Colecta no disponible/, /Invalid Date/];
+const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|no cargada|Lectura no especificada/;
+
+(async () => {
+  // ── 1. Mecánica ──────────────────────────────────────────────────────────
+  const f = { excepcion: [], marcas: [], sinColecta: [], sinPrefacio: [], sinLecturas: [], sinPrimera: [], sinEvangelio: [], sinSalmo: [], noEucaristiaSinAviso: [], noEucaristiaConMisa: [] };
+  let days = 0, borrowed = 0, noEu = 0, inheritFallback = 0;
+  for (let d = new Date(Y0, 0, 1, 12); d.getFullYear() <= Y1; d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1, 12)) {
+    days++;
+    const date = iso(d);
+    let html, st;
+    try { html = await generateLiturgy(d); st = C.state(); } catch (e) { f.excepcion.push(date + ' ' + e.message); continue; }
+    const text = strip(html);
+    const bad = MARKS.find(rx => rx.test(text));
+    if (bad) f.marcas.push(date + ' ' + bad);
+    if (st.borrowedFromSunday) borrowed++;
+    if (st.dayInfo.inherits && st.collect && Prop.COLLECTS[st.dayInfo.inherits] === undefined) inheritFallback++;
+    if (!st.collect || !strip(st.collect)) f.sinColecta.push(date);
+    if (!st.preface || !strip(st.preface.text || '')) f.sinPrefacio.push(date);
+    if (noEucharistNotice(st.dayInfo)) {
+      noEu++;
+      if (!/no se celebra|No hay celebración/.test(text)) f.noEucaristiaSinAviso.push(date);
+      if (/ORACIÓN DE CONSAGRACIÓN/.test(text)) f.noEucaristiaConMisa.push(date);
+      continue;
+    }
+    if (!st.readings) { f.sinLecturas.push(date + ' ' + st.dayInfo.key); continue; }
+    if (!st.firstReading || strip(st.firstReading.text || '').length < 40) f.sinPrimera.push(date + ' ' + st.readings.first);
+    if (!st.gospel || strip(st.gospel.text || '').length < 40) f.sinEvangelio.push(date + ' ' + st.readings.gospel);
+    if (st.readings.psalm && (!st.psalmVerses || !st.psalmVerses.length)) f.sinSalmo.push(date + ' ' + st.readings.psalm);
+  }
+  check(`1a. Sin excepciones (${days} días, ${Y0}-${Y1})`, f.excepcion, days);
+  check('1b. Sin marcas de fallo en el HTML (16 patrones)', f.marcas, days);
+  check('1c. Todo día tiene colecta', f.sinColecta, days);
+  check('1d. Todo día tiene prefacio', f.sinPrefacio, days);
+  check('1e. Todo día con Eucaristía tiene lecturas', f.sinLecturas, days - noEu);
+  check('1f. …y primera lectura con texto', f.sinPrimera, days - noEu);
+  check('1g. …y Evangelio con texto', f.sinEvangelio, days - noEu);
+  check('1h. …y salmo con versículos', f.sinSalmo, days - noEu);
+  check('1i. Viernes y Sábado Santo muestran el aviso sin Eucaristía', f.noEucaristiaSinAviso.concat(f.noEucaristiaConMisa), noEu);
+
+  // ── 2. Citas del leccionario ─────────────────────────────────────────────
+  const refs = new Map();
+  for (const [key, e] of Object.entries(Lect.SUNDAY)) for (const c of (e.all ? ['all'] : ['A', 'B', 'C'])) {
+    const set = e.all || e[c]; for (const s of ['first', 'psalm', 'second', 'gospel']) if (set[s]) { const r = set[s]; (refs.get(r + '|' + s) || refs.set(r + '|' + s, { r, s, where: [] }).get(r + '|' + s)).where.push(key + '/' + c); }
+  }
+  const badRefs = [];
+  for (const { r, s, where } of refs.values()) {
+    if (s === 'psalm') { if (!C.ctx.BibliaJerusalen.getVerses(r).length) badRefs.push(`${r} (${where[0]})`); continue; }
+    const res = await fetchScripture(r);
+    if (!res.text || ERR_IN_TEXT.test(res.text) || strip(res.text).length < 25) badRefs.push(`${r} (${where[0]})`);
+  }
+  check(`2. Cada cita del leccionario devuelve texto (${refs.size} citas distintas)`, badRefs, refs.size);
+
+  // ── 3. Leccionario = libro ───────────────────────────────────────────────
+  let drift = [], compared = 0;
+  try {
+    const exp = require('./bcp2019-tools/build-lectionary.js').out;
+    for (const [key, e] of Object.entries(exp)) {
+      const got = Lect.SUNDAY[key];
+      if (!got) { drift.push(`falta la clave ${key}`); continue; }
+      for (const c of (e.all ? ['all'] : ['A', 'B', 'C'])) for (const s of ['first', 'psalm', 'second', 'gospel']) {
+        compared++;
+        const a = (got.all || got[c] || {})[s] ?? null, b = (e.all || e[c])[s] ?? null;
+        if (a !== b) drift.push(`${key}/${c}/${s}: app «${a}» ≠ libro «${b}»`);
+      }
+    }
+  } catch (e) { drift.push('no se pudo comparar: ' + e.message); }
+  check(`3. lectionary.js coincide con las tablas oficiales (${compared} lecturas comparadas)`, drift, compared);
+
+  // ── Informe ──────────────────────────────────────────────────────────────
+  let failed = 0;
+  console.log(`\nPrueba de completitud — BCP 2019, ${Y0}-${Y1}\n`);
+  for (const r of results) {
+    const ok = r.fails === 0; if (!ok) failed++;
+    console.log(`${ok ? 'OK    ' : 'FALLA '} ${r.name}${ok ? '' : `  → ${r.fails} de ${r.total}`}`);
+    for (const ex of r.examples) console.log('         ' + ex);
+  }
+  console.log(`\nDías con lecturas prestadas del domingo o fiesta correspondiente: ${borrowed} de ${days}`);
+  console.log('\nPENDIENTES CONOCIDOS (no los comprueba esta prueba):');
+  console.log('  - Colectas: el texto español oficial (pp. 598-641) no existe; el app usa colectas reconstruidas.');
+  console.log(`  - ${inheritFallback} días cuyo Propio de la semana es el 1 o el 2 usan la colecta del domingo anterior (sin texto español).`);
+  console.log('  - Lunes a Miércoles Santos: lecturas del Misal Romano (decisión previa), no las del libro.');
+  console.log('  - Salmos: se leen de la Biblia de Jerusalén; el Salterio español del libro aún no se usa.');
+  console.log('  - Ritos propios de Ceniza, Ramos, Jueves, Viernes, Sábado y Vigilia no modelados.');
+  console.log(failed ? `\n${failed} comprobación(es) con fallos.` : '\nTodas las comprobaciones pasan.');
+  process.exit(failed ? 1 : 0);
+})();

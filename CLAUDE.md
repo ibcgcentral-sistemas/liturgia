@@ -63,7 +63,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=31` (Misal) y `?v=5` (bcp2019).
+   código viejo. Actualmente en `?v=31` (Misal) y `?v=7` (bcp2019).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -135,9 +135,11 @@ desfase cotejada con el salterio oficial.
 
 ### 3. Huecos conocidos, menores
 
-- `bcp2019/js/lectionary.js`: faltan los propios del Lunes, Martes y Miércoles
-  Santos. La app hermana ya los tiene; esta imprime «[Primera lectura no
-  especificada]» esos 111 días del rango.
+- `bcp2019/js/lectionary.js` se genera desde las tablas oficiales del libro
+  (pp. 717-733) con `node bcp2019-tools/build-lectionary.js`; `node
+  test-bcp2019.js` barre 2024-2060 y falla si algo falta o se aparta del libro.
+  Lunes a Miércoles Santos conservan las lecturas del Misal Romano por decisión
+  previa del usuario, aunque el libro sí trae las suyas (pendiente de confirmar).
 - 10.400 días toman la Colecta del Domingo precedente sin anunciarlo. Las lecturas
   prestadas sí llevan rúbrica; la colecta no. Rotularla «(Colecta del tiempo)»
   sería falso, porque es la del domingo anterior: hace falta decidir la redacción.

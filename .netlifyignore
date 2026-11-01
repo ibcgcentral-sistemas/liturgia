@@ -9,3 +9,7 @@ package.json
 package-lock.json
 VERIFICACION.md
 bcp2019/VERIFICACION-BCP2019.md
+test-bcp2019.js
+bcp2019-tools/
+AUDITORIA-BCP2019-2026-10-31.md
+auditoria-bcp2019-2026-10-31/

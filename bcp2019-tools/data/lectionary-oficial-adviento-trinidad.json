@@ -1,0 +1,2898 @@
+{
+ "meta": {
+  "generado": "2026-10-31",
+  "fuente": "BCP 2019 (ACNA), tabla Sunday, Holy Day, and Commemoration Lectionary, libro pp. 717-725; markdown BCP2019-en.md (lineas 1-based) + PDF \"ACNA BCP - 2019.pdf\" (pagina PDF = pagina del libro + 8)",
+  "metodo": "Transcripcion por columnas del PDF (coordenadas x/y) porque el markdown intercala filas; cada valor se busca despues en el markdown dentro de la ventana del dia. Valor sin linea => \"pdf-only\" (el markdown lo trae fragmentado/desplazado).",
+  "notacion": "Se conserva la notacion del libro: v = numeracion del Nuevo Salterio Coverdale; (..) = versiculos opcionales; \"A or B\" = el libro ofrece dos lecturas alternativas; una sola cifra \"Ps 80 or 80:1-7v\" = salmo completo o la porcion indicada.",
+  "anchors_sin_localizar": []
+ },
+ "days": {
+  "advent1": {
+   "appKey": "advent1",
+   "label": "The First Sunday in Advent",
+   "libroPagina": 717,
+   "pdfPagina": 725,
+   "mdLineas": [
+    20581,
+    20596
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "Isa 2:1-5",
+    "psalm": "Ps 122",
+    "second": "Rom 13:8-14",
+    "gospel": "Matt 24:29-44"
+   },
+   "B": {
+    "first": "Isa 64:1-9a",
+    "psalm": "Ps 80 or 80:1-7v",
+    "second": "1 Cor 1:1-9",
+    "gospel": "Mark 13:24-37"
+   },
+   "C": {
+    "first": "Zech 14:(1-2)3-9",
+    "psalm": "Ps 50 or 50:1-6",
+    "second": "1 Thess 3:6-13",
+    "gospel": "Luke 21:25-33"
+   },
+   "lineas": {
+    "A": {
+     "first": 20585,
+     "psalm": 20588,
+     "second": 20591,
+     "gospel": 20594
+    },
+    "B": {
+     "first": 20585,
+     "psalm": 20587,
+     "second": 20591,
+     "gospel": 20594
+    },
+    "C": {
+     "first": 20585,
+     "psalm": 20588,
+     "second": 20591,
+     "gospel": 20594
+    }
+   },
+   "pdfOnly": []
+  },
+  "advent2": {
+   "appKey": "advent2",
+   "label": "The Second Sunday in Advent",
+   "libroPagina": 717,
+   "pdfPagina": 725,
+   "mdLineas": [
+    20592,
+    20603
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "Isa 11:1-10",
+    "psalm": "Ps 72:1-15(16-19)",
+    "second": "Rom 15:1-13",
+    "gospel": "Matt 3:1-12"
+   },
+   "B": {
+    "first": "Isa 40:1-11",
+    "psalm": "Ps 85",
+    "second": "2 Pet 3:8-18",
+    "gospel": "Mark 1:1-8"
+   },
+   "C": {
+    "first": "Mal 3:1-5",
+    "psalm": "Ps 126",
+    "second": "1 Cor 4:(1-7)8-21",
+    "gospel": "Luke 3:1-6"
+   },
+   "lineas": {
+    "A": {
+     "first": 20596,
+     "psalm": 20597,
+     "second": 20599,
+     "gospel": 20601
+    },
+    "B": {
+     "first": 20596,
+     "psalm": 20597,
+     "second": 20599,
+     "gospel": 20601
+    },
+    "C": {
+     "first": 20596,
+     "psalm": 20597,
+     "second": 20599,
+     "gospel": 20601
+    }
+   },
+   "pdfOnly": []
+  },
+  "advent3": {
+   "appKey": "advent3",
+   "label": "The Third Sunday in Advent",
+   "libroPagina": 717,
+   "pdfPagina": 725,
+   "mdLineas": [
+    20599,
+    20613
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "Isa 35:1-10",
+    "psalm": "Ps 146",
+    "second": "James 5:7-20",
+    "gospel": "Matt 11:2-19"
+   },
+   "B": {
+    "first": "Isa 65:17-25",
+    "psalm": "Ps 126",
+    "second": "1 Thess 5:12-28",
+    "gospel": "John 3:22-30 or John 1:19-28"
+   },
+   "C": {
+    "first": "Zeph 3:14-20",
+    "psalm": "Ps 85",
+    "second": "Phil 4:4-9",
+    "gospel": "Luke 3:7-20"
+   },
+   "lineas": {
+    "A": {
+     "first": 20603,
+     "psalm": 20606,
+     "second": 20608,
+     "gospel": 20610
+    },
+    "B": {
+     "first": 20602,
+     "psalm": 20605,
+     "second": 20608,
+     "gospel": 20609
+    },
+    "C": {
+     "first": 20603,
+     "psalm": 20606,
+     "second": 20608,
+     "gospel": 20610
+    }
+   },
+   "pdfOnly": []
+  },
+  "advent4": {
+   "appKey": "advent4",
+   "label": "The Fourth Sunday in Advent (Annunciation)",
+   "libroPagina": 717,
+   "pdfPagina": 725,
+   "mdLineas": [
+    20609,
+    20623
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "Isa 7:10-17",
+    "psalm": "Ps 24",
+    "second": "Rom 1:1-7",
+    "gospel": "Matt 1:18-25"
+   },
+   "B": {
+    "first": "2 Sam 7:1-17",
+    "psalm": "Ps 132:(1-7) 8-19",
+    "second": "Rom 16:25-27",
+    "gospel": "Luke 1:26-38"
+   },
+   "C": {
+    "first": "Mic 5:2-5a",
+    "psalm": "Ps 80:1-7v",
+    "second": "Heb 10:1-10",
+    "gospel": "Luke 1:39-56"
+   },
+   "lineas": {
+    "A": {
+     "first": 20613,
+     "psalm": 20615,
+     "second": 20616,
+     "gospel": 20617
+    },
+    "B": {
+     "first": 20613,
+     "psalm": 20615,
+     "second": 20616,
+     "gospel": 20617
+    },
+    "C": {
+     "first": 20613,
+     "psalm": 20615,
+     "second": 20616,
+     "gospel": 20617
+    }
+   },
+   "pdfOnly": []
+  },
+  "christmas": {
+   "appKey": "christmas",
+   "label": "Christmas Day I",
+   "libroPagina": 718,
+   "pdfPagina": 726,
+   "mdLineas": [
+    20619,
+    20628
+   ],
+   "cicloUnico": true,
+   "A": {
+    "first": "Isa 9:1-7",
+    "psalm": "Ps 96",
+    "second": "Titus 2:11-14",
+    "gospel": "Luke 2:1-14(15-20)"
+   },
+   "B": {
+    "first": "Isa 9:1-7",
+    "psalm": "Ps 96",
+    "second": "Titus 2:11-14",
+    "gospel": "Luke 2:1-14(15-20)"
+   },
+   "C": {
+    "first": "Isa 9:1-7",
+    "psalm": "Ps 96",
+    "second": "Titus 2:11-14",
+    "gospel": "Luke 2:1-14(15-20)"
+   },
+   "lineas": {
+    "A": {
+     "first": 20623,
+     "psalm": 20625,
+     "second": 20626,
+     "gospel": 20627
+    },
+    "B": {
+     "first": 20623,
+     "psalm": 20625,
+     "second": 20626,
+     "gospel": 20627
+    },
+    "C": {
+     "first": 20623,
+     "psalm": 20625,
+     "second": 20626,
+     "gospel": 20627
+    }
+   },
+   "pdfOnly": []
+  },
+  "christmasDay2": {
+   "appKey": null,
+   "label": "Christmas Day II",
+   "libroPagina": 718,
+   "pdfPagina": 726,
+   "mdLineas": [
+    20624,
+    20632
+   ],
+   "cicloUnico": true,
+   "A": {
+    "first": "Isa 62:6-12",
+    "psalm": "Ps 97",
+    "second": "Titus 3:4-7",
+    "gospel": "Luke 2:(1-14)15-20"
+   },
+   "B": {
+    "first": "Isa 62:6-12",
+    "psalm": "Ps 97",
+    "second": "Titus 3:4-7",
+    "gospel": "Luke 2:(1-14)15-20"
+   },
+   "C": {
+    "first": "Isa 62:6-12",
+    "psalm": "Ps 97",
+    "second": "Titus 3:4-7",
+    "gospel": "Luke 2:(1-14)15-20"
+   },
+   "lineas": {
+    "A": {
+     "first": 20628,
+     "psalm": 20629,
+     "second": 20630,
+     "gospel": 20631
+    },
+    "B": {
+     "first": 20628,
+     "psalm": 20629,
+     "second": 20630,
+     "gospel": 20631
+    },
+    "C": {
+     "first": 20628,
+     "psalm": 20629,
+     "second": 20630,
+     "gospel": 20631
+    }
+   },
+   "pdfOnly": []
+  },
+  "christmasDay3": {
+   "appKey": null,
+   "label": "Christmas Day III",
+   "libroPagina": 718,
+   "pdfPagina": 726,
+   "mdLineas": [
+    20628,
+    20636
+   ],
+   "cicloUnico": true,
+   "A": {
+    "first": "Isa 52:7-12",
+    "psalm": "Ps 98",
+    "second": "Heb 1:1-12",
+    "gospel": "John 1:1-18"
+   },
+   "B": {
+    "first": "Isa 52:7-12",
+    "psalm": "Ps 98",
+    "second": "Heb 1:1-12",
+    "gospel": "John 1:1-18"
+   },
+   "C": {
+    "first": "Isa 52:7-12",
+    "psalm": "Ps 98",
+    "second": "Heb 1:1-12",
+    "gospel": "John 1:1-18"
+   },
+   "lineas": {
+    "A": {
+     "first": 20632,
+     "psalm": 20633,
+     "second": 20634,
+     "gospel": 20635
+    },
+    "B": {
+     "first": 20632,
+     "psalm": 20633,
+     "second": 20634,
+     "gospel": 20635
+    },
+    "C": {
+     "first": 20632,
+     "psalm": 20633,
+     "second": 20634,
+     "gospel": 20635
+    }
+   },
+   "pdfOnly": []
+  },
+  "christmasSunday": {
+   "appKey": "christmasSunday",
+   "label": "The First Sunday of Christmas",
+   "libroPagina": 718,
+   "pdfPagina": 726,
+   "mdLineas": [
+    20632,
+    20647
+   ],
+   "cicloUnico": true,
+   "A": {
+    "first": "Isa 61:10—62:5",
+    "psalm": "Ps 147:12-20v",
+    "second": "Gal 3:23—4:7",
+    "gospel": "John 1:1-18"
+   },
+   "B": {
+    "first": "Isa 61:10—62:5",
+    "psalm": "Ps 147:12-20v",
+    "second": "Gal 3:23—4:7",
+    "gospel": "John 1:1-18"
+   },
+   "C": {
+    "first": "Isa 61:10—62:5",
+    "psalm": "Ps 147:12-20v",
+    "second": "Gal 3:23—4:7",
+    "gospel": "John 1:1-18"
+   },
+   "lineas": {
+    "A": {
+     "first": 20636,
+     "psalm": 20638,
+     "second": 20641,
+     "gospel": 20644
+    },
+    "B": {
+     "first": 20636,
+     "psalm": 20638,
+     "second": 20641,
+     "gospel": 20644
+    },
+    "C": {
+     "first": 20636,
+     "psalm": 20638,
+     "second": 20641,
+     "gospel": 20644
+    }
+   },
+   "pdfOnly": []
+  },
+  "circumcision": {
+   "appKey": "circumcision",
+   "label": "The Circumcision & Holy Name of Our Lord Jesus Christ (January 1)",
+   "libroPagina": 718,
+   "pdfPagina": 726,
+   "mdLineas": [
+    20643,
+    20655
+   ],
+   "cicloUnico": true,
+   "A": {
+    "first": "Ex 34:1-9",
+    "psalm": "Ps 8",
+    "second": "Rom 1:1-7",
+    "gospel": "Luke 2:15-21"
+   },
+   "B": {
+    "first": "Ex 34:1-9",
+    "psalm": "Ps 8",
+    "second": "Rom 1:1-7",
+    "gospel": "Luke 2:15-21"
+   },
+   "C": {
+    "first": "Ex 34:1-9",
+    "psalm": "Ps 8",
+    "second": "Rom 1:1-7",
+    "gospel": "Luke 2:15-21"
+   },
+   "lineas": {
+    "A": {
+     "first": 20647,
+     "psalm": 20649,
+     "second": 20650,
+     "gospel": 20652
+    },
+    "B": {
+     "first": 20647,
+     "psalm": 20649,
+     "second": 20650,
+     "gospel": 20652
+    },
+    "C": {
+     "first": 20647,
+     "psalm": 20649,
+     "second": 20650,
+     "gospel": 20652
+    }
+   },
+   "pdfOnly": []
+  },
+  "christmasSunday2": {
+   "appKey": "christmasSunday2",
+   "label": "The Second Sunday of Christmas",
+   "libroPagina": 718,
+   "pdfPagina": 726,
+   "mdLineas": [
+    20651,
+    20662
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "Jer 31:7-14",
+    "psalm": "Ps 84",
+    "second": "Eph 1:3-14",
+    "gospel": "Luke 2:41-52 or Matt 2:1-12"
+   },
+   "B": {
+    "first": "Jer 31:7-14",
+    "psalm": "Ps 84",
+    "second": "Eph 1:3-14",
+    "gospel": "Matt 2:13-23 or Matt 2:1-12"
+   },
+   "C": {
+    "first": "Jer 31:7-14",
+    "psalm": "Ps 84",
+    "second": "Eph 1:3-14",
+    "gospel": "Luke 2:22-40 or Matt 2:1-12"
+   },
+   "lineas": {
+    "A": {
+     "first": 20655,
+     "psalm": 20657,
+     "second": 20658,
+     "gospel": 20659
+    },
+    "B": {
+     "first": 20655,
+     "psalm": 20657,
+     "second": 20658,
+     "gospel": 20659
+    },
+    "C": {
+     "first": 20655,
+     "psalm": 20657,
+     "second": 20658,
+     "gospel": 20659
+    }
+   },
+   "pdfOnly": []
+  },
+  "epiphany": {
+   "appKey": "epiphany",
+   "label": "The Epiphany of Our Lord Jesus Christ (January 6)",
+   "libroPagina": 718,
+   "pdfPagina": 726,
+   "mdLineas": [
+    20658,
+    20674
+   ],
+   "cicloUnico": true,
+   "A": {
+    "first": "Isa 60:1-9",
+    "psalm": "Ps 72 or 72:1-11",
+    "second": "Eph 3:1-13",
+    "gospel": "Matt 2:1-12"
+   },
+   "B": {
+    "first": "Isa 60:1-9",
+    "psalm": "Ps 72 or 72:1-11",
+    "second": "Eph 3:1-13",
+    "gospel": "Matt 2:1-12"
+   },
+   "C": {
+    "first": "Isa 60:1-9",
+    "psalm": "Ps 72 or 72:1-11",
+    "second": "Eph 3:1-13",
+    "gospel": "Matt 2:1-12"
+   },
+   "lineas": {
+    "A": {
+     "first": 20662,
+     "psalm": 20664,
+     "second": 20665,
+     "gospel": 20667
+    },
+    "B": {
+     "first": 20662,
+     "psalm": 20664,
+     "second": 20665,
+     "gospel": 20667
+    },
+    "C": {
+     "first": 20662,
+     "psalm": 20664,
+     "second": 20665,
+     "gospel": 20667
+    }
+   },
+   "pdfOnly": []
+  },
+  "epiphany1": {
+   "appKey": "epiphany1",
+   "label": "The First Sunday of Epiphany (Baptism of Our Lord)",
+   "libroPagina": 719,
+   "pdfPagina": 727,
+   "mdLineas": [
+    20670,
+    20679
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "Isa 42:1-9",
+    "psalm": "Ps 89:1-29v or 89:20-29v",
+    "second": "Acts 10:34-38",
+    "gospel": "Matt 3:13-17"
+   },
+   "B": {
+    "first": "Isa 42:1-9",
+    "psalm": "Ps 89:1-29v or 89:20-29v",
+    "second": "Acts 10:34-38",
+    "gospel": "Mark 1:7-11"
+   },
+   "C": {
+    "first": "Isa 42:1-9",
+    "psalm": "Ps 89:1-29v or 89:20-29v",
+    "second": "Acts 10:34-38",
+    "gospel": "Luke 3:15-22"
+   },
+   "lineas": {
+    "A": {
+     "first": 20674,
+     "psalm": 20675,
+     "second": 20677,
+     "gospel": 20678
+    },
+    "B": {
+     "first": 20674,
+     "psalm": 20675,
+     "second": 20677,
+     "gospel": 20678
+    },
+    "C": {
+     "first": 20674,
+     "psalm": 20675,
+     "second": 20677,
+     "gospel": 20678
+    }
+   },
+   "pdfOnly": []
+  },
+  "epiphany2": {
+   "appKey": "epiphany2",
+   "label": "The Second Sunday of Epiphany",
+   "libroPagina": 719,
+   "pdfPagina": 727,
+   "mdLineas": [
+    20675,
+    20688
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "Ex 12:21-28",
+    "psalm": "Ps 40:1-11v",
+    "second": "1 Cor 1:1-9",
+    "gospel": "John 1:29-42"
+   },
+   "B": {
+    "first": "1 Sam 3:1-20",
+    "psalm": "Ps 63:1-9(10-12)v",
+    "second": "1 Cor 6:9-20",
+    "gospel": "John 1:43-51"
+   },
+   "C": {
+    "first": "Isa 62:1-5",
+    "psalm": "Ps 96",
+    "second": "1 Cor 12:1-11",
+    "gospel": "John 2:1-11"
+   },
+   "lineas": {
+    "A": {
+     "first": 20679,
+     "psalm": 20680,
+     "second": 20683,
+     "gospel": 20686
+    },
+    "B": {
+     "first": 20679,
+     "psalm": 20680,
+     "second": 20683,
+     "gospel": 20686
+    },
+    "C": {
+     "first": 20679,
+     "psalm": 20681,
+     "second": 20683,
+     "gospel": 20686
+    }
+   },
+   "pdfOnly": []
+  },
+  "epiphany3": {
+   "appKey": "epiphany3",
+   "label": "The Third Sunday of Epiphany",
+   "libroPagina": 719,
+   "pdfPagina": 727,
+   "mdLineas": [
+    20684,
+    20698
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "Amos 3:1-11",
+    "psalm": "Ps 139:1-18v",
+    "second": "1 Cor 1:10-17",
+    "gospel": "Matt 4:12-22"
+   },
+   "B": {
+    "first": "Jer 3:19-4:4",
+    "psalm": "Ps 130",
+    "second": "1 Cor 7:17-24",
+    "gospel": "Mark 1:14-20"
+   },
+   "C": {
+    "first": "Neh 8:1-12",
+    "psalm": "Ps 113",
+    "second": "1 Cor 12:12-27",
+    "gospel": "Luke 4:14-21"
+   },
+   "lineas": {
+    "A": {
+     "first": 20688,
+     "psalm": 20689,
+     "second": 20693,
+     "gospel": 20696
+    },
+    "B": {
+     "first": 20688,
+     "psalm": 20690,
+     "second": 20693,
+     "gospel": 20696
+    },
+    "C": {
+     "first": 20688,
+     "psalm": 20690,
+     "second": 20693,
+     "gospel": 20696
+    }
+   },
+   "pdfOnly": []
+  },
+  "epiphany4": {
+   "appKey": "epiphany4",
+   "label": "The Fourth Sunday of Epiphany",
+   "libroPagina": 719,
+   "pdfPagina": 727,
+   "mdLineas": [
+    20694,
+    20712
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "Mic 6:1-8",
+    "psalm": "Ps 37:1-11v",
+    "second": "1 Cor 1:18-31",
+    "gospel": "Matt 5:1-12"
+   },
+   "B": {
+    "first": "Deut 18:15-22",
+    "psalm": "Ps 111",
+    "second": "1 Cor 8:1-13",
+    "gospel": "Mark 1:21-28"
+   },
+   "C": {
+    "first": "Jer 1:4-10",
+    "psalm": "Ps 71:11-20v",
+    "second": "1 Cor 14:12-25",
+    "gospel": "Luke 4:21-32"
+   },
+   "lineas": {
+    "A": {
+     "first": 20698,
+     "psalm": 20699,
+     "second": 20702,
+     "gospel": 20704
+    },
+    "B": {
+     "first": 20698,
+     "psalm": 20700,
+     "second": 20702,
+     "gospel": 20704
+    },
+    "C": {
+     "first": 20698,
+     "psalm": 20699,
+     "second": 20702,
+     "gospel": 20704
+    }
+   },
+   "pdfOnly": []
+  },
+  "epiphany5": {
+   "appKey": "epiphany5",
+   "label": "The Fifth Sunday of Epiphany",
+   "libroPagina": 719,
+   "pdfPagina": 727,
+   "mdLineas": [
+    20708,
+    20721
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "2 Kings 22:8-20",
+    "psalm": "Ps 27",
+    "second": "1 Cor 2:1-16",
+    "gospel": "Matt 5:13-20"
+   },
+   "B": {
+    "first": "2 Kings 4:8-21(22-31)32-37",
+    "psalm": "Ps 142",
+    "second": "1 Cor 9:16-23",
+    "gospel": "Mark 1:29-39"
+   },
+   "C": {
+    "first": "Judg 6:11-24",
+    "psalm": "Ps 85",
+    "second": "1 Cor 15:1-11",
+    "gospel": "Luke 5:1-11"
+   },
+   "lineas": {
+    "A": {
+     "first": 20712,
+     "psalm": 20715,
+     "second": 20717,
+     "gospel": 20719
+    },
+    "B": {
+     "first": null,
+     "psalm": 20716,
+     "second": 20718,
+     "gospel": 20720
+    },
+    "C": {
+     "first": 20712,
+     "psalm": 20715,
+     "second": 20717,
+     "gospel": 20719
+    }
+   },
+   "pdfOnly": [
+    "B.first"
+   ]
+  },
+  "epiphany6": {
+   "appKey": "epiphany6",
+   "label": "The Sixth Sunday of Epiphany",
+   "libroPagina": 719,
+   "pdfPagina": 727,
+   "mdLineas": [
+    20717,
+    20732
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "Ecclesiasticus 15:11-20",
+    "psalm": "Ps 119:(1-8)9-16",
+    "second": "1 Cor 3:1-9",
+    "gospel": "Matt 5:21-37"
+   },
+   "B": {
+    "first": "2 Kings 5:1-15a",
+    "psalm": "Ps 42:1-7(8-15)",
+    "second": "1 Cor 9:24-27",
+    "gospel": "Mark 1:40-45"
+   },
+   "C": {
+    "first": "Jer 17:5-10",
+    "psalm": "Ps 1",
+    "second": "1 Cor 15:12-20",
+    "gospel": "Luke 6:17-26"
+   },
+   "lineas": {
+    "A": {
+     "first": 20721,
+     "psalm": 20724,
+     "second": 20727,
+     "gospel": 20730
+    },
+    "B": {
+     "first": 20721,
+     "psalm": 20724,
+     "second": 20727,
+     "gospel": 20730
+    },
+    "C": {
+     "first": 20721,
+     "psalm": 20724,
+     "second": 20727,
+     "gospel": 20730
+    }
+   },
+   "pdfOnly": []
+  },
+  "epiphany7": {
+   "appKey": "epiphany7",
+   "label": "The Seventh Sunday of Epiphany",
+   "libroPagina": 719,
+   "pdfPagina": 727,
+   "mdLineas": [
+    20728,
+    20745
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "Lev 19:1-2,9-18",
+    "psalm": "Ps 71 or 71:11-23v",
+    "second": "1 Cor 3:10-23",
+    "gospel": "Matt 5:38-48"
+   },
+   "B": {
+    "first": "Isa 43:18-25",
+    "psalm": "Ps 32",
+    "second": "2 Cor 1:18-22",
+    "gospel": "Mark 2:1-12"
+   },
+   "C": {
+    "first": "Gen 45:3-11,21-28",
+    "psalm": "Ps 37:(1-7)8-17v",
+    "second": "1 Cor 15:35-49",
+    "gospel": "Luke 6:27-38"
+   },
+   "lineas": {
+    "A": {
+     "first": 20732,
+     "psalm": 20733,
+     "second": 20736,
+     "gospel": 20739
+    },
+    "B": {
+     "first": 20732,
+     "psalm": 20734,
+     "second": 20736,
+     "gospel": 20739
+    },
+    "C": {
+     "first": 20732,
+     "psalm": 20733,
+     "second": 20736,
+     "gospel": 20739
+    }
+   },
+   "pdfOnly": []
+  },
+  "epiphany8": {
+   "appKey": "epiphany8",
+   "label": "The Eighth Sunday of Epiphany",
+   "libroPagina": 720,
+   "pdfPagina": 728,
+   "mdLineas": [
+    20741,
+    20755
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "Isa 49:8-18(19-23)",
+    "psalm": "Ps 62",
+    "second": "1 Cor 4:1-13",
+    "gospel": "Matt 6:24-34"
+   },
+   "B": {
+    "first": "Hos 2:14-23",
+    "psalm": "Ps 103 or 103:1-14",
+    "second": "2 Cor 3:4-18",
+    "gospel": "Mark 2:18-22"
+   },
+   "C": {
+    "first": "Jer 7:1-15",
+    "psalm": "Ps 92",
+    "second": "1 Cor 15:50-58",
+    "gospel": "Luke 6:39-49"
+   },
+   "lineas": {
+    "A": {
+     "first": 20745,
+     "psalm": 20747,
+     "second": 20750,
+     "gospel": 20753
+    },
+    "B": {
+     "first": 20745,
+     "psalm": 20747,
+     "second": 20750,
+     "gospel": 20753
+    },
+    "C": {
+     "first": 20745,
+     "psalm": 20747,
+     "second": 20750,
+     "gospel": 20753
+    }
+   },
+   "pdfOnly": []
+  },
+  "worldMission": {
+   "appKey": null,
+   "label": "The Second to Last Sunday of Epiphany: World Mission (sustituye a cualquier domingo de Epifanía salvo el primero y el último)",
+   "libroPagina": 720,
+   "pdfPagina": 728,
+   "mdLineas": [
+    20751,
+    20759
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "Isa 49:1-7",
+    "psalm": "Ps 67",
+    "second": "Acts 1:1-8",
+    "gospel": "Matt 9:35-38"
+   },
+   "B": {
+    "first": "Gen 12:1-3",
+    "psalm": "Ps 86:8-13",
+    "second": "Rev 7:9-17",
+    "gospel": "Matt 28:16-20"
+   },
+   "C": {
+    "first": "Isa 61:1-4",
+    "psalm": "Ps 96",
+    "second": "Rom 10:9-17",
+    "gospel": "John 20:19-31"
+   },
+   "lineas": {
+    "A": {
+     "first": 20755,
+     "psalm": 20756,
+     "second": 20757,
+     "gospel": 20758
+    },
+    "B": {
+     "first": 20755,
+     "psalm": 20756,
+     "second": 20757,
+     "gospel": 20758
+    },
+    "C": {
+     "first": 20755,
+     "psalm": 20756,
+     "second": 20757,
+     "gospel": 20758
+    }
+   },
+   "pdfOnly": []
+  },
+  "transfiguration": {
+   "appKey": "transfiguration",
+   "label": "The Last Sunday of Epiphany: Transfiguration",
+   "libroPagina": 720,
+   "pdfPagina": 728,
+   "mdLineas": [
+    20755,
+    20764
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "Ex 24:12-18",
+    "psalm": "Ps 99",
+    "second": "Phil 3:7-14",
+    "gospel": "Matt 17:1-9"
+   },
+   "B": {
+    "first": "1 Kings 19:9-18",
+    "psalm": "Ps 27",
+    "second": "2 Pet 1:13-21",
+    "gospel": "Mark 9:2-9"
+   },
+   "C": {
+    "first": "Ex 34:29-35",
+    "psalm": "Ps 99",
+    "second": "1 Cor 12:27—13:13",
+    "gospel": "Luke 9:28-36"
+   },
+   "lineas": {
+    "A": {
+     "first": 20759,
+     "psalm": 20760,
+     "second": 20761,
+     "gospel": 20762
+    },
+    "B": {
+     "first": 20759,
+     "psalm": 20760,
+     "second": 20761,
+     "gospel": 20762
+    },
+    "C": {
+     "first": 20759,
+     "psalm": 20760,
+     "second": 20761,
+     "gospel": 20762
+    }
+   },
+   "pdfOnly": []
+  },
+  "ashWednesday": {
+   "appKey": "ashWednesday",
+   "label": "Ash Wednesday",
+   "libroPagina": 720,
+   "pdfPagina": 728,
+   "mdLineas": [
+    20760,
+    20774
+   ],
+   "cicloUnico": true,
+   "A": {
+    "first": "Joel 2:1-2, 12-17 or Isa 58:1-12",
+    "psalm": "Ps 103 or 103:8-14",
+    "second": "2 Cor 5:20—6:10",
+    "gospel": "Matt 6:1-6, 16-21"
+   },
+   "B": {
+    "first": "Joel 2:1-2, 12-17 or Isa 58:1-12",
+    "psalm": "Ps 103 or 103:8-14",
+    "second": "2 Cor 5:20—6:10",
+    "gospel": "Matt 6:1-6, 16-21"
+   },
+   "C": {
+    "first": "Joel 2:1-2, 12-17 or Isa 58:1-12",
+    "psalm": "Ps 103 or 103:8-14",
+    "second": "2 Cor 5:20—6:10",
+    "gospel": "Matt 6:1-6, 16-21"
+   },
+   "lineas": {
+    "A": {
+     "first": 20764,
+     "psalm": 20768,
+     "second": 20771,
+     "gospel": 20773
+    },
+    "B": {
+     "first": 20764,
+     "psalm": 20768,
+     "second": 20771,
+     "gospel": 20773
+    },
+    "C": {
+     "first": 20764,
+     "psalm": 20768,
+     "second": 20771,
+     "gospel": 20773
+    }
+   },
+   "pdfOnly": [],
+   "especialesMd": [
+    {
+     "linea": 15455,
+     "texto": "joel 2:1-2, 12-17 or isaiah 58:1-12"
+    },
+    {
+     "linea": 15456,
+     "texto": "psalm 103 or 103:8-14"
+    },
+    {
+     "linea": 15457,
+     "texto": "2 corinthians 5:20—6:10"
+    },
+    {
+     "linea": 15458,
+     "texto": "matthew 6:1-6, 16-21"
+    }
+   ]
+  },
+  "lent1": {
+   "appKey": "lent1",
+   "label": "The First Sunday in Lent",
+   "libroPagina": 720,
+   "pdfPagina": 728,
+   "mdLineas": [
+    20770,
+    20784
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "Gen 2:4-9, 15-17, 25—3:7",
+    "psalm": "Ps 51 or Ps 51:1-12v",
+    "second": "Rom 5:12-21",
+    "gospel": "Matt 4:1-11"
+   },
+   "B": {
+    "first": "Gen 9:8-17",
+    "psalm": "Ps 25 or 25:3-9",
+    "second": "1 Pet 3:18-22",
+    "gospel": "Mark 1:9-13"
+   },
+   "C": {
+    "first": "Deut 26:(1-4)5-11",
+    "psalm": "Ps 91 or 91:9-16",
+    "second": "Rom 10:4-13",
+    "gospel": "Luke 4:1-13"
+   },
+   "lineas": {
+    "A": {
+     "first": null,
+     "psalm": 20779,
+     "second": 20781,
+     "gospel": 20783
+    },
+    "B": {
+     "first": 20775,
+     "psalm": 20778,
+     "second": 20780,
+     "gospel": 20782
+    },
+    "C": {
+     "first": 20775,
+     "psalm": 20778,
+     "second": 20780,
+     "gospel": 20782
+    }
+   },
+   "pdfOnly": [
+    "A.first"
+   ]
+  },
+  "lent2": {
+   "appKey": "lent2",
+   "label": "The Second Sunday in Lent",
+   "libroPagina": 720,
+   "pdfPagina": 728,
+   "mdLineas": [
+    20780,
+    20795
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "Gen 12:1-9",
+    "psalm": "Ps 33:12-21v",
+    "second": "Rom 4:1-5(6-12)13-17",
+    "gospel": "John 3:1-16"
+   },
+   "B": {
+    "first": "Gen 22:1-14",
+    "psalm": "Ps 16 or 16:6-12v",
+    "second": "Rom 8:31-39",
+    "gospel": "Mark 8:31-38"
+   },
+   "C": {
+    "first": "Gen 15:1-18",
+    "psalm": "Ps 27 or 27:9-17v",
+    "second": "Phil 3:17—4:1",
+    "gospel": "Luke 13:(22-30)31-35"
+   },
+   "lineas": {
+    "A": {
+     "first": 20784,
+     "psalm": 20787,
+     "second": 20790,
+     "gospel": 20793
+    },
+    "B": {
+     "first": 20784,
+     "psalm": 20787,
+     "second": 20790,
+     "gospel": 20793
+    },
+    "C": {
+     "first": 20784,
+     "psalm": 20787,
+     "second": 20790,
+     "gospel": 20793
+    }
+   },
+   "pdfOnly": []
+  },
+  "lent3": {
+   "appKey": "lent3",
+   "label": "The Third Sunday in Lent",
+   "libroPagina": 720,
+   "pdfPagina": 728,
+   "mdLineas": [
+    20791,
+    20813
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "Ex 17:1-7",
+    "psalm": "Ps 95",
+    "second": "Rom 1:16-32",
+    "gospel": "John 4:5-26(27-38)39-42"
+   },
+   "B": {
+    "first": "Ex 20:1-21",
+    "psalm": "Ps 19:7-14",
+    "second": "Rom 7:12-25",
+    "gospel": "John 2:13-22"
+   },
+   "C": {
+    "first": "Ex 3:1-15",
+    "psalm": "Ps 103 or 103:1-12",
+    "second": "1 Cor 10:1-13",
+    "gospel": "Luke 13:1-9(10-17)"
+   },
+   "lineas": {
+    "A": {
+     "first": 20795,
+     "psalm": 20798,
+     "second": 20801,
+     "gospel": null
+    },
+    "B": {
+     "first": 20796,
+     "psalm": 20799,
+     "second": 20802,
+     "gospel": 20804
+    },
+    "C": {
+     "first": 20796,
+     "psalm": 20799,
+     "second": 20802,
+     "gospel": 20804
+    }
+   },
+   "pdfOnly": [
+    "A.gospel"
+   ]
+  },
+  "lent4": {
+   "appKey": "lent4",
+   "label": "The Fourth Sunday in Lent",
+   "libroPagina": 721,
+   "pdfPagina": 729,
+   "mdLineas": [
+    20809,
+    20826
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "1 Sam 16:1-13",
+    "psalm": "Ps 23",
+    "second": "Eph 5:1-14",
+    "gospel": "John 9:1-13, 28-38 (39-41)"
+   },
+   "B": {
+    "first": "2 Chr 36:14-23",
+    "psalm": "Ps 122",
+    "second": "Eph 2:1-10",
+    "gospel": "John 6:1-15"
+   },
+   "C": {
+    "first": "Josh (4:19-24) 5:1(2-8)9-12",
+    "psalm": "Ps 34 or 34:1-8",
+    "second": "2 Cor 5:17-21",
+    "gospel": "Luke 15:11-32"
+   },
+   "lineas": {
+    "A": {
+     "first": 20813,
+     "psalm": 20815,
+     "second": 20818,
+     "gospel": null
+    },
+    "B": {
+     "first": 20814,
+     "psalm": 20817,
+     "second": 20820,
+     "gospel": 20823
+    },
+    "C": {
+     "first": null,
+     "psalm": 20818,
+     "second": 20821,
+     "gospel": 20824
+    }
+   },
+   "pdfOnly": [
+    "A.gospel",
+    "C.first"
+   ]
+  },
+  "lent5": {
+   "appKey": "lent5",
+   "label": "The Fifth Sunday in Lent (Passion Sunday)",
+   "libroPagina": 721,
+   "pdfPagina": 729,
+   "mdLineas": [
+    20822,
+    20832
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "Ezek 37:1-14",
+    "psalm": "Ps 130",
+    "second": "Rom 6:15-23",
+    "gospel": "John 11:(1-17)18-44"
+   },
+   "B": {
+    "first": "Jer 31:31-34",
+    "psalm": "Ps 51 or 51:10-15v",
+    "second": "Heb (4:14-16) 5:1-10",
+    "gospel": "John 12:20-33(34-36)"
+   },
+   "C": {
+    "first": "Isa 43:16-21",
+    "psalm": "Ps 126",
+    "second": "Phil 3:7-16",
+    "gospel": "Luke 20:9-19"
+   },
+   "lineas": {
+    "A": {
+     "first": 20826,
+     "psalm": 20827,
+     "second": 20828,
+     "gospel": 20829
+    },
+    "B": {
+     "first": 20826,
+     "psalm": 20827,
+     "second": 20828,
+     "gospel": 20829
+    },
+    "C": {
+     "first": 20826,
+     "psalm": 20827,
+     "second": 20828,
+     "gospel": 20829
+    }
+   },
+   "pdfOnly": []
+  },
+  "palmSundayPalms": {
+   "appKey": null,
+   "label": "Palm Sunday: Liturgy of the Palms (evangelio de la entrada + salmo)",
+   "libroPagina": 721,
+   "pdfPagina": 729,
+   "mdLineas": [
+    20828,
+    20838
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": null,
+    "psalm": "Ps 118:19-29",
+    "second": null,
+    "gospel": "Matt 21:1-11"
+   },
+   "B": {
+    "first": null,
+    "psalm": "Ps 118:19-29",
+    "second": null,
+    "gospel": "Mark 11:1-11a"
+   },
+   "C": {
+    "first": null,
+    "psalm": "Ps 118:19-29",
+    "second": null,
+    "gospel": "Luke 19:29-40"
+   },
+   "lineas": {
+    "A": {
+     "first": null,
+     "psalm": 20835,
+     "second": null,
+     "gospel": 20832
+    },
+    "B": {
+     "first": null,
+     "psalm": 20835,
+     "second": null,
+     "gospel": 20832
+    },
+    "C": {
+     "first": null,
+     "psalm": 20835,
+     "second": null,
+     "gospel": 20832
+    }
+   },
+   "pdfOnly": [],
+   "especialesMd": [
+    {
+     "linea": 15731,
+     "texto": "Year A matthew 21:1-11"
+    },
+    {
+     "linea": 15732,
+     "texto": "Year B mark 11:1-11a"
+    },
+    {
+     "linea": 15733,
+     "texto": "Year C luke 19:28-40  (NOTA: la tabla del leccionario dice Luke 19:29-40)"
+    },
+    {
+     "linea": 15758,
+     "texto": "Psalm 118:19-29 (procesión)"
+    }
+   ]
+  },
+  "palmSunday": {
+   "appKey": "palmSunday",
+   "label": "Palm Sunday (propio de la Eucaristía / Pasión)",
+   "libroPagina": 721,
+   "pdfPagina": 729,
+   "mdLineas": [
+    20834,
+    20847
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "Isa 52:13—53:12",
+    "psalm": "Ps 22:1-21v or Ps 22:1-11v",
+    "second": "Phil 2:5-11",
+    "gospel": "Matt (26:36-75) 27:1-54 (55-66)"
+   },
+   "B": {
+    "first": "Isa 52:13—53:12",
+    "psalm": "Ps 22:1-11v or Ps 22:1-21v",
+    "second": "Phil 2:5-11",
+    "gospel": "Mark (14:32-72) 15:1-39 (40-47)"
+   },
+   "C": {
+    "first": "Isa 52:13—53:12",
+    "psalm": "Ps 22:1-11v or Ps 22:1-21v",
+    "second": "Phil 2:5-11",
+    "gospel": "Luke (22:39-71) 23:1-49 (50-56)"
+   },
+   "lineas": {
+    "A": {
+     "first": 20838,
+     "psalm": 20840,
+     "second": 20843,
+     "gospel": null
+    },
+    "B": {
+     "first": 20838,
+     "psalm": 20840,
+     "second": 20843,
+     "gospel": null
+    },
+    "C": {
+     "first": 20838,
+     "psalm": 20840,
+     "second": 20843,
+     "gospel": null
+    }
+   },
+   "pdfOnly": [
+    "A.gospel",
+    "B.gospel",
+    "C.gospel"
+   ],
+   "especialesMd": [
+    {
+     "linea": 15784,
+     "texto": "isaiah 52:13—53:12"
+    },
+    {
+     "linea": 15785,
+     "texto": "psalm 22:1-22v, 22:1-11v or 31:10-18v  (NOTA: la tabla dice Ps 22:1-21v or 22:1-11v; aquí además aparece Sal 31:10-18v)"
+    },
+    {
+     "linea": 15786,
+     "texto": "philippians 2:5-11"
+    },
+    {
+     "linea": 15791,
+     "texto": "Year A matthew (26:36-75) 27:1-54 (55-66)"
+    },
+    {
+     "linea": 15792,
+     "texto": "Year B mark (14:32-72) 15:1-39 (40-47)"
+    },
+    {
+     "linea": 15793,
+     "texto": "Year C luke (22:39-71) 23:1-49 (50-56)"
+    }
+   ]
+  },
+  "holyWeekFeria_1": {
+   "appKey": "holyWeekFeria_1",
+   "label": "Monday in Holy Week",
+   "libroPagina": 721,
+   "pdfPagina": 729,
+   "mdLineas": [
+    20843,
+    20856
+   ],
+   "cicloUnico": true,
+   "A": {
+    "first": "Isa 42:1-9",
+    "psalm": "Ps 36:5-10",
+    "second": "Heb 11:39—12:3",
+    "gospel": "John 12:1-11 or Mark 14:3-9"
+   },
+   "B": {
+    "first": "Isa 42:1-9",
+    "psalm": "Ps 36:5-10",
+    "second": "Heb 11:39—12:3",
+    "gospel": "John 12:1-11 or Mark 14:3-9"
+   },
+   "C": {
+    "first": "Isa 42:1-9",
+    "psalm": "Ps 36:5-10",
+    "second": "Heb 11:39—12:3",
+    "gospel": "John 12:1-11 or Mark 14:3-9"
+   },
+   "lineas": {
+    "A": {
+     "first": 20847,
+     "psalm": 20848,
+     "second": 20850,
+     "gospel": 20853
+    },
+    "B": {
+     "first": 20847,
+     "psalm": 20848,
+     "second": 20850,
+     "gospel": 20853
+    },
+    "C": {
+     "first": 20847,
+     "psalm": 20848,
+     "second": 20850,
+     "gospel": 20853
+    }
+   },
+   "pdfOnly": []
+  },
+  "holyWeekFeria_2": {
+   "appKey": "holyWeekFeria_2",
+   "label": "Tuesday in Holy Week",
+   "libroPagina": 721,
+   "pdfPagina": 729,
+   "mdLineas": [
+    20852,
+    20865
+   ],
+   "cicloUnico": true,
+   "A": {
+    "first": "Isa 49:1-6",
+    "psalm": "Ps 71:1-11v",
+    "second": "1 Cor 1:18-31",
+    "gospel": "John 12:37-38,42-50 or Mark 11:15-19"
+   },
+   "B": {
+    "first": "Isa 49:1-6",
+    "psalm": "Ps 71:1-11v",
+    "second": "1 Cor 1:18-31",
+    "gospel": "John 12:37-38,42-50 or Mark 11:15-19"
+   },
+   "C": {
+    "first": "Isa 49:1-6",
+    "psalm": "Ps 71:1-11v",
+    "second": "1 Cor 1:18-31",
+    "gospel": "John 12:37-38,42-50 or Mark 11:15-19"
+   },
+   "lineas": {
+    "A": {
+     "first": 20856,
+     "psalm": 20857,
+     "second": 20859,
+     "gospel": 20862
+    },
+    "B": {
+     "first": 20856,
+     "psalm": 20857,
+     "second": 20859,
+     "gospel": 20862
+    },
+    "C": {
+     "first": 20856,
+     "psalm": 20857,
+     "second": 20859,
+     "gospel": 20862
+    }
+   },
+   "pdfOnly": []
+  },
+  "holyWeekFeria_3": {
+   "appKey": "holyWeekFeria_3",
+   "label": "Wednesday in Holy Week",
+   "libroPagina": 721,
+   "pdfPagina": 729,
+   "mdLineas": [
+    20861,
+    20874
+   ],
+   "cicloUnico": true,
+   "A": {
+    "first": "Isa 50:4-9",
+    "psalm": "Ps 69:6-14,21-22v",
+    "second": "Heb 9:11-28",
+    "gospel": "Matt 26:1-5,14-25"
+   },
+   "B": {
+    "first": "Isa 50:4-9",
+    "psalm": "Ps 69:6-14,21-22v",
+    "second": "Heb 9:11-28",
+    "gospel": "Matt 26:1-5,14-25"
+   },
+   "C": {
+    "first": "Isa 50:4-9",
+    "psalm": "Ps 69:6-14,21-22v",
+    "second": "Heb 9:11-28",
+    "gospel": "Matt 26:1-5,14-25"
+   },
+   "lineas": {
+    "A": {
+     "first": 20865,
+     "psalm": 20866,
+     "second": 20867,
+     "gospel": 20869
+    },
+    "B": {
+     "first": 20865,
+     "psalm": 20866,
+     "second": 20867,
+     "gospel": 20869
+    },
+    "C": {
+     "first": 20865,
+     "psalm": 20866,
+     "second": 20867,
+     "gospel": 20869
+    }
+   },
+   "pdfOnly": []
+  },
+  "maundyThursday": {
+   "appKey": "maundyThursday",
+   "label": "Maundy Thursday",
+   "libroPagina": 722,
+   "pdfPagina": 730,
+   "mdLineas": [
+    20870,
+    20882
+   ],
+   "cicloUnico": true,
+   "A": {
+    "first": "Ex 12:1-14",
+    "psalm": "Ps 78:15-26v",
+    "second": "1 Cor 11:23-26(27-34)",
+    "gospel": "John 13:1-15 or Luke 22:14-30"
+   },
+   "B": {
+    "first": "Ex 12:1-14",
+    "psalm": "Ps 78:15-26v",
+    "second": "1 Cor 11:23-26(27-34)",
+    "gospel": "John 13:1-15 or Luke 22:14-30"
+   },
+   "C": {
+    "first": "Ex 12:1-14",
+    "psalm": "Ps 78:15-26v",
+    "second": "1 Cor 11:23-26(27-34)",
+    "gospel": "John 13:1-15 or Luke 22:14-30"
+   },
+   "lineas": {
+    "A": {
+     "first": 20874,
+     "psalm": 20875,
+     "second": 20877,
+     "gospel": 20879
+    },
+    "B": {
+     "first": 20874,
+     "psalm": 20875,
+     "second": 20877,
+     "gospel": 20879
+    },
+    "C": {
+     "first": 20874,
+     "psalm": 20875,
+     "second": 20877,
+     "gospel": 20879
+    }
+   },
+   "pdfOnly": [],
+   "especialesMd": [
+    {
+     "linea": 15857,
+     "texto": "exodus 12:1-14"
+    },
+    {
+     "linea": 15858,
+     "texto": "psalm 78:15-26v"
+    },
+    {
+     "linea": 15859,
+     "texto": "1 corinthians 11:23-26(27-34)"
+    },
+    {
+     "linea": 15860,
+     "texto": "john 13:1-15 or luke 22:14-30"
+    }
+   ]
+  },
+  "goodFriday": {
+   "appKey": "goodFriday",
+   "label": "Good Friday",
+   "libroPagina": 722,
+   "pdfPagina": 730,
+   "mdLineas": [
+    20878,
+    20891
+   ],
+   "cicloUnico": true,
+   "A": {
+    "first": "Gen 22:1-18 or Isa 52:13—53:12",
+    "psalm": "Ps 22:1-11(12-21)v or Ps 40:1-16v or Ps 69:1-22v",
+    "second": "Heb 10:1-25",
+    "gospel": "John (18:1-40) 19:1-37"
+   },
+   "B": {
+    "first": "Gen 22:1-18 or Isa 52:13—53:12",
+    "psalm": "Ps 22:1-11(12-21)v or Ps 40:1-16v or Ps 69:1-22v",
+    "second": "Heb 10:1-25",
+    "gospel": "John (18:1-40) 19:1-37"
+   },
+   "C": {
+    "first": "Gen 22:1-18 or Isa 52:13—53:12",
+    "psalm": "Ps 22:1-11(12-21)v or Ps 40:1-16v or Ps 69:1-22v",
+    "second": "Heb 10:1-25",
+    "gospel": "John (18:1-40) 19:1-37"
+   },
+   "lineas": {
+    "A": {
+     "first": 20882,
+     "psalm": 20884,
+     "second": 20889,
+     "gospel": 20890
+    },
+    "B": {
+     "first": 20882,
+     "psalm": 20884,
+     "second": 20889,
+     "gospel": 20890
+    },
+    "C": {
+     "first": 20882,
+     "psalm": 20884,
+     "second": 20889,
+     "gospel": 20890
+    }
+   },
+   "pdfOnly": [],
+   "especialesMd": [
+    {
+     "linea": 15948,
+     "texto": "genesis 22:1-18 or isaiah 52:13—53:12"
+    },
+    {
+     "linea": 15949,
+     "texto": "psalm 22:1-11 (12-21)v or 40:1-16v or 69:1-22v"
+    },
+    {
+     "linea": 15950,
+     "texto": "hebrews 10:1-25"
+    },
+    {
+     "linea": 15956,
+     "texto": "john 18:1—19:37 or 19:1-37"
+    }
+   ]
+  },
+  "holySaturday": {
+   "appKey": "holySaturday",
+   "label": "Holy Saturday",
+   "libroPagina": 722,
+   "pdfPagina": 730,
+   "mdLineas": [
+    20887,
+    20898
+   ],
+   "cicloUnico": true,
+   "A": {
+    "first": "Job 14:1-17",
+    "psalm": "Ps 130 or 31:1-6v",
+    "second": "1 Pet 4:1-8",
+    "gospel": "Matt 27:57-66 or John 19:38-42"
+   },
+   "B": {
+    "first": "Job 14:1-17",
+    "psalm": "Ps 130 or 31:1-6v",
+    "second": "1 Pet 4:1-8",
+    "gospel": "Matt 27:57-66 or John 19:38-42"
+   },
+   "C": {
+    "first": "Job 14:1-17",
+    "psalm": "Ps 130 or 31:1-6v",
+    "second": "1 Pet 4:1-8",
+    "gospel": "Matt 27:57-66 or John 19:38-42"
+   },
+   "lineas": {
+    "A": {
+     "first": 20891,
+     "psalm": 20893,
+     "second": 20894,
+     "gospel": 20895
+    },
+    "B": {
+     "first": 20891,
+     "psalm": 20893,
+     "second": 20894,
+     "gospel": 20895
+    },
+    "C": {
+     "first": 20891,
+     "psalm": 20893,
+     "second": 20894,
+     "gospel": 20895
+    }
+   },
+   "pdfOnly": [],
+   "especialesMd": [
+    {
+     "linea": 16298,
+     "texto": "job 14:1-14  (NOTA: la tabla dice Job 14:1-17)"
+    },
+    {
+     "linea": 16299,
+     "texto": "psalm 130 or 88 or 31:1-6v  (NOTA: la tabla dice Ps 130 or 31:1-6v; aquí añade Sal 88)"
+    },
+    {
+     "linea": 16300,
+     "texto": "1 peter 4:1-8"
+    },
+    {
+     "linea": 16301,
+     "texto": "matthew 27:57-66 or john 19:38-42"
+    }
+   ]
+  },
+  "easterVigil": {
+   "appKey": null,
+   "label": "The Great Vigil of Easter (12 lecturas AT; el servicio sigue con Epístola y Evangelio)",
+   "libroPagina": 722,
+   "pdfPagina": 730,
+   "mdLineas": [
+    20894,
+    20922
+   ],
+   "cicloUnico": true,
+   "A": {
+    "first": "Gen 1:1—2:3; Gen 3; Gen 7:1-5,11-18; 8:6-20; 9:8-13; Gen 22:1-18; Ex 14:10—15:1; Isa 4:2-6; Isa 55:1-11; Ezek 36:24-28; Ezek 37:1-14; Dan 3:1-28; Jonah 1:1—2:10; Zeph 3:12-20",
+    "psalm": null,
+    "second": "Rom 6:3-11",
+    "gospel": "Matt 28:1-10"
+   },
+   "B": {
+    "first": "Gen 1:1—2:3; Gen 3; Gen 7:1-5,11-18; 8:6-20; 9:8-13; Gen 22:1-18; Ex 14:10—15:1; Isa 4:2-6; Isa 55:1-11; Ezek 36:24-28; Ezek 37:1-14; Dan 3:1-28; Jonah 1:1—2:10; Zeph 3:12-20",
+    "psalm": null,
+    "second": "Rom 6:3-11",
+    "gospel": "Matt 28:1-10"
+   },
+   "C": {
+    "first": "Gen 1:1—2:3; Gen 3; Gen 7:1-5,11-18; 8:6-20; 9:8-13; Gen 22:1-18; Ex 14:10—15:1; Isa 4:2-6; Isa 55:1-11; Ezek 36:24-28; Ezek 37:1-14; Dan 3:1-28; Jonah 1:1—2:10; Zeph 3:12-20",
+    "psalm": null,
+    "second": "Rom 6:3-11",
+    "gospel": "Matt 28:1-10"
+   },
+   "lineas": {
+    "A": {
+     "first": null,
+     "psalm": null,
+     "second": 20914,
+     "gospel": 20915
+    },
+    "B": {
+     "first": null,
+     "psalm": null,
+     "second": 20914,
+     "gospel": 20915
+    },
+    "C": {
+     "first": null,
+     "psalm": null,
+     "second": 20914,
+     "gospel": 20915
+    }
+   },
+   "pdfOnly": [],
+   "especialesMd": [
+    {
+     "linea": 16494,
+     "texto": "genesis 1:1—2:3 / psalm 104:1-13 (14-24)v or Supplemental Canticle 10"
+    },
+    {
+     "linea": 16503,
+     "texto": "genesis 3 / psalm 32"
+    },
+    {
+     "linea": 16515,
+     "texto": "genesis 7:1-5, 11-18; 8:6-20; 9:8-13 / psalm 36 or 46"
+    },
+    {
+     "linea": 16525,
+     "texto": "genesis 22:1-18 / psalm 16"
+    },
+    {
+     "linea": 16537,
+     "texto": "exodus 14:10—15:1 / Supplemental Canticle 5"
+    },
+    {
+     "linea": 16548,
+     "texto": "isaiah 4:2-6 / psalm 122"
+    },
+    {
+     "linea": 16557,
+     "texto": "isaiah 55:1-11 / Supplemental Canticle 8 or psalm 42:1-7"
+    },
+    {
+     "linea": 16569,
+     "texto": "ezekiel 36:24-28 / psalm 42:1-7 or Canticle 8"
+    },
+    {
+     "linea": 16579,
+     "texto": "ezekiel 37:1-14 / psalm 30 or 126"
+    },
+    {
+     "linea": 16589,
+     "texto": "daniel 3:1-28 / Canticle 10 or Benedictus es"
+    },
+    {
+     "linea": 16599,
+     "texto": "jonah 1:1—2:10 / psalm 130"
+    },
+    {
+     "linea": 16608,
+     "texto": "zephaniah 3:12-20 / psalm 98"
+    },
+    {
+     "linea": 16669,
+     "texto": "romans 6:3-11 (Psalm 114 or other)"
+    },
+    {
+     "linea": 16678,
+     "texto": "matthew 28:1-10"
+    }
+   ]
+  },
+  "easterEarly": {
+   "appKey": null,
+   "label": "Easter Day: early service",
+   "libroPagina": 723,
+   "pdfPagina": 731,
+   "mdLineas": [
+    20918,
+    20928
+   ],
+   "cicloUnico": true,
+   "A": {
+    "first": "Use one of the Old Testament Lessons from the Vigil",
+    "psalm": "Ps 114",
+    "second": "Rom 6:3-11",
+    "gospel": "Matt 28:1-10"
+   },
+   "B": {
+    "first": "Use one of the Old Testament Lessons from the Vigil",
+    "psalm": "Ps 114",
+    "second": "Rom 6:3-11",
+    "gospel": "Matt 28:1-10"
+   },
+   "C": {
+    "first": "Use one of the Old Testament Lessons from the Vigil",
+    "psalm": "Ps 114",
+    "second": "Rom 6:3-11",
+    "gospel": "Matt 28:1-10"
+   },
+   "lineas": {
+    "A": {
+     "first": null,
+     "psalm": 20925,
+     "second": 20926,
+     "gospel": 20927
+    },
+    "B": {
+     "first": null,
+     "psalm": 20925,
+     "second": 20926,
+     "gospel": 20927
+    },
+    "C": {
+     "first": null,
+     "psalm": 20925,
+     "second": 20926,
+     "gospel": 20927
+    }
+   },
+   "pdfOnly": []
+  },
+  "easter": {
+   "appKey": "easter",
+   "label": "Easter Day: principal service",
+   "libroPagina": 723,
+   "pdfPagina": 731,
+   "mdLineas": [
+    20924,
+    20945
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "Acts 10:34-43 or Ex 14:10-14,21-31",
+    "psalm": "Ps 118:14-17,22-24",
+    "second": "Col 3:1-4 or Acts 10:34-43",
+    "gospel": "John 20:1-10(11-18) or Matt 28:1-10"
+   },
+   "B": {
+    "first": "Acts 10:34-43 or Isa 25:6-9",
+    "psalm": "Ps 118:14-17,22-24",
+    "second": "Col 3:1-4 or Acts 10:34-43",
+    "gospel": "Mark 16:1-8"
+   },
+   "C": {
+    "first": "Acts 10:34-43 or Isa 51:9-11",
+    "psalm": "Ps 118:14-17,22-24",
+    "second": "Col 3:1-4 or Acts 10:34-43",
+    "gospel": "Luke 24:1-12"
+   },
+   "lineas": {
+    "A": {
+     "first": 20928,
+     "psalm": 20934,
+     "second": 20937,
+     "gospel": 20941
+    },
+    "B": {
+     "first": 20928,
+     "psalm": 20934,
+     "second": 20937,
+     "gospel": 20942
+    },
+    "C": {
+     "first": 20928,
+     "psalm": 20934,
+     "second": 20937,
+     "gospel": 20942
+    }
+   },
+   "pdfOnly": []
+  },
+  "easterEvening": {
+   "appKey": null,
+   "label": "Easter Day: evening service",
+   "libroPagina": 723,
+   "pdfPagina": 731,
+   "mdLineas": [
+    20941,
+    20950
+   ],
+   "cicloUnico": true,
+   "A": {
+    "first": "Dan 12:1-3",
+    "psalm": "Ps 136",
+    "second": "1 Cor 5:6-8",
+    "gospel": "Luke 24:13-35"
+   },
+   "B": {
+    "first": "Dan 12:1-3",
+    "psalm": "Ps 136",
+    "second": "1 Cor 5:6-8",
+    "gospel": "Luke 24:13-35"
+   },
+   "C": {
+    "first": "Dan 12:1-3",
+    "psalm": "Ps 136",
+    "second": "1 Cor 5:6-8",
+    "gospel": "Luke 24:13-35"
+   },
+   "lineas": {
+    "A": {
+     "first": 20945,
+     "psalm": 20947,
+     "second": 20948,
+     "gospel": 20949
+    },
+    "B": {
+     "first": 20945,
+     "psalm": 20947,
+     "second": 20948,
+     "gospel": 20949
+    },
+    "C": {
+     "first": 20945,
+     "psalm": 20947,
+     "second": 20948,
+     "gospel": 20949
+    }
+   },
+   "pdfOnly": []
+  },
+  "easterMon": {
+   "appKey": null,
+   "label": "Monday of Easter Week",
+   "libroPagina": 723,
+   "pdfPagina": 731,
+   "mdLineas": [
+    20946,
+    20957
+   ],
+   "cicloUnico": true,
+   "A": {
+    "first": "Acts 2:14,22-32",
+    "psalm": "Ps 16",
+    "second": null,
+    "gospel": "Matt 28:9-15"
+   },
+   "B": {
+    "first": "Acts 2:14,22-32",
+    "psalm": "Ps 16",
+    "second": null,
+    "gospel": "Matt 28:9-15"
+   },
+   "C": {
+    "first": "Acts 2:14,22-32",
+    "psalm": "Ps 16",
+    "second": null,
+    "gospel": "Matt 28:9-15"
+   },
+   "lineas": {
+    "A": {
+     "first": 20950,
+     "psalm": 20952,
+     "second": null,
+     "gospel": 20955
+    },
+    "B": {
+     "first": 20950,
+     "psalm": 20952,
+     "second": null,
+     "gospel": 20955
+    },
+    "C": {
+     "first": 20950,
+     "psalm": 20952,
+     "second": null,
+     "gospel": 20955
+    }
+   },
+   "pdfOnly": []
+  },
+  "easterTue": {
+   "appKey": null,
+   "label": "Tuesday of Easter Week",
+   "libroPagina": 723,
+   "pdfPagina": 731,
+   "mdLineas": [
+    20953,
+    20964
+   ],
+   "cicloUnico": true,
+   "A": {
+    "first": "Acts 2:14,36-41",
+    "psalm": "Ps 33:17-21v",
+    "second": null,
+    "gospel": "John 20:11-18"
+   },
+   "B": {
+    "first": "Acts 2:14,36-41",
+    "psalm": "Ps 33:17-21v",
+    "second": null,
+    "gospel": "John 20:11-18"
+   },
+   "C": {
+    "first": "Acts 2:14,36-41",
+    "psalm": "Ps 33:17-21v",
+    "second": null,
+    "gospel": "John 20:11-18"
+   },
+   "lineas": {
+    "A": {
+     "first": 20957,
+     "psalm": 20959,
+     "second": null,
+     "gospel": 20962
+    },
+    "B": {
+     "first": 20957,
+     "psalm": 20959,
+     "second": null,
+     "gospel": 20962
+    },
+    "C": {
+     "first": 20957,
+     "psalm": 20959,
+     "second": null,
+     "gospel": 20962
+    }
+   },
+   "pdfOnly": []
+  },
+  "easterWed": {
+   "appKey": null,
+   "label": "Wednesday of Easter Week",
+   "libroPagina": 723,
+   "pdfPagina": 731,
+   "mdLineas": [
+    20960,
+    20971
+   ],
+   "cicloUnico": true,
+   "A": {
+    "first": "Acts 3:1-10",
+    "psalm": "Ps 105:1-8v",
+    "second": null,
+    "gospel": "Luke 24:13-35"
+   },
+   "B": {
+    "first": "Acts 3:1-10",
+    "psalm": "Ps 105:1-8v",
+    "second": null,
+    "gospel": "Luke 24:13-35"
+   },
+   "C": {
+    "first": "Acts 3:1-10",
+    "psalm": "Ps 105:1-8v",
+    "second": null,
+    "gospel": "Luke 24:13-35"
+   },
+   "lineas": {
+    "A": {
+     "first": 20964,
+     "psalm": 20966,
+     "second": null,
+     "gospel": 20969
+    },
+    "B": {
+     "first": 20964,
+     "psalm": 20966,
+     "second": null,
+     "gospel": 20969
+    },
+    "C": {
+     "first": 20964,
+     "psalm": 20966,
+     "second": null,
+     "gospel": 20969
+    }
+   },
+   "pdfOnly": []
+  },
+  "easterThu": {
+   "appKey": null,
+   "label": "Thursday of Easter Week",
+   "libroPagina": 723,
+   "pdfPagina": 731,
+   "mdLineas": [
+    20967,
+    20978
+   ],
+   "cicloUnico": true,
+   "A": {
+    "first": "Acts 3:11-26",
+    "psalm": "Ps 8",
+    "second": null,
+    "gospel": "Luke 24:36-49"
+   },
+   "B": {
+    "first": "Acts 3:11-26",
+    "psalm": "Ps 8",
+    "second": null,
+    "gospel": "Luke 24:36-49"
+   },
+   "C": {
+    "first": "Acts 3:11-26",
+    "psalm": "Ps 8",
+    "second": null,
+    "gospel": "Luke 24:36-49"
+   },
+   "lineas": {
+    "A": {
+     "first": 20971,
+     "psalm": 20973,
+     "second": null,
+     "gospel": 20976
+    },
+    "B": {
+     "first": 20971,
+     "psalm": 20973,
+     "second": null,
+     "gospel": 20976
+    },
+    "C": {
+     "first": 20971,
+     "psalm": 20973,
+     "second": null,
+     "gospel": 20976
+    }
+   },
+   "pdfOnly": []
+  },
+  "easterFri": {
+   "appKey": null,
+   "label": "Friday of Easter Week",
+   "libroPagina": 723,
+   "pdfPagina": 731,
+   "mdLineas": [
+    20974,
+    20985
+   ],
+   "cicloUnico": true,
+   "A": {
+    "first": "1 Pet 1:3-9",
+    "psalm": "Ps 116:1-9v",
+    "second": null,
+    "gospel": "John 21:1-14"
+   },
+   "B": {
+    "first": "1 Pet 1:3-9",
+    "psalm": "Ps 116:1-9v",
+    "second": null,
+    "gospel": "John 21:1-14"
+   },
+   "C": {
+    "first": "1 Pet 1:3-9",
+    "psalm": "Ps 116:1-9v",
+    "second": null,
+    "gospel": "John 21:1-14"
+   },
+   "lineas": {
+    "A": {
+     "first": 20978,
+     "psalm": 20980,
+     "second": null,
+     "gospel": 20983
+    },
+    "B": {
+     "first": 20978,
+     "psalm": 20980,
+     "second": null,
+     "gospel": 20983
+    },
+    "C": {
+     "first": 20978,
+     "psalm": 20980,
+     "second": null,
+     "gospel": 20983
+    }
+   },
+   "pdfOnly": []
+  },
+  "easterSat": {
+   "appKey": null,
+   "label": "Saturday of Easter Week",
+   "libroPagina": 723,
+   "pdfPagina": 731,
+   "mdLineas": [
+    20981,
+    20996
+   ],
+   "cicloUnico": true,
+   "A": {
+    "first": "Acts 4:1-22",
+    "psalm": "Ps 118:14-18",
+    "second": null,
+    "gospel": "Mark 16:9-20"
+   },
+   "B": {
+    "first": "Acts 4:1-22",
+    "psalm": "Ps 118:14-18",
+    "second": null,
+    "gospel": "Mark 16:9-20"
+   },
+   "C": {
+    "first": "Acts 4:1-22",
+    "psalm": "Ps 118:14-18",
+    "second": null,
+    "gospel": "Mark 16:9-20"
+   },
+   "lineas": {
+    "A": {
+     "first": 20985,
+     "psalm": 20987,
+     "second": null,
+     "gospel": 20990
+    },
+    "B": {
+     "first": 20985,
+     "psalm": 20987,
+     "second": null,
+     "gospel": 20990
+    },
+    "C": {
+     "first": 20985,
+     "psalm": 20987,
+     "second": null,
+     "gospel": 20990
+    }
+   },
+   "pdfOnly": []
+  },
+  "easter2": {
+   "appKey": "easter2",
+   "label": "The Second Sunday of Easter",
+   "libroPagina": 724,
+   "pdfPagina": 732,
+   "mdLineas": [
+    20992,
+    21003
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "Acts 2:14a,22-32 or Gen 8:6-16, 9:8-16",
+    "psalm": "Ps 111",
+    "second": "1 Pet 1:3-9",
+    "gospel": "John 20:19-31"
+   },
+   "B": {
+    "first": "Acts 3:12a, 13-15,17-26 or Isa 26:1-9,19",
+    "psalm": "Ps 111",
+    "second": "1 John 5:1-5",
+    "gospel": "John 20:19-31"
+   },
+   "C": {
+    "first": "Acts 5:12a, 17-22, 25-29 or Job 42:1-6",
+    "psalm": "Ps 111",
+    "second": "Rev 1:(1-8)9-19",
+    "gospel": "John 20:19-31"
+   },
+   "lineas": {
+    "A": {
+     "first": 20996,
+     "psalm": 21000,
+     "second": 21001,
+     "gospel": 21002
+    },
+    "B": {
+     "first": 20996,
+     "psalm": 21000,
+     "second": 21001,
+     "gospel": 21002
+    },
+    "C": {
+     "first": 20996,
+     "psalm": 21000,
+     "second": 21001,
+     "gospel": 21002
+    }
+   },
+   "pdfOnly": []
+  },
+  "easter3": {
+   "appKey": "easter3",
+   "label": "The Third Sunday of Easter",
+   "libroPagina": 724,
+   "pdfPagina": 732,
+   "mdLineas": [
+    20999,
+    21013
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "Acts 2:14a,36-47 or Isa 43:1-12",
+    "psalm": "Ps 116:11-16v",
+    "second": "1 Pet 1:13-25",
+    "gospel": "Luke 24:13-35"
+   },
+   "B": {
+    "first": "Acts 4:5-14 or Mic 4:1-5",
+    "psalm": "Ps 98 or 98:1-5",
+    "second": "1 John 1:1-2:2",
+    "gospel": "Luke 24:36-49"
+   },
+   "C": {
+    "first": "Acts 9:1-19a or Jer 32:36-41",
+    "psalm": "Ps 33 or 33:1-11v",
+    "second": "Rev 5:(1-5)6-14",
+    "gospel": "John 21:1-14"
+   },
+   "lineas": {
+    "A": {
+     "first": 21003,
+     "psalm": 21007,
+     "second": 21009,
+     "gospel": 21011
+    },
+    "B": {
+     "first": 21003,
+     "psalm": 21008,
+     "second": 21009,
+     "gospel": 21011
+    },
+    "C": {
+     "first": 21003,
+     "psalm": 21007,
+     "second": 21009,
+     "gospel": 21011
+    }
+   },
+   "pdfOnly": []
+  },
+  "easter4": {
+   "appKey": "easter4",
+   "label": "The Fourth Sunday of Easter (Good Shepherd)",
+   "libroPagina": 724,
+   "pdfPagina": 732,
+   "mdLineas": [
+    21009,
+    21024
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "Acts 6:1-9, 7:2a,51-60 or Neh 9:(1-3)6-15",
+    "psalm": "Ps 23",
+    "second": "1 Pet 2:13-25",
+    "gospel": "John 10:1-10"
+   },
+   "B": {
+    "first": "Acts 4:(23-31)32-37 or Ezek 34:1-10",
+    "psalm": "Ps 23",
+    "second": "1 John 3:1-10",
+    "gospel": "John 10:11-16"
+   },
+   "C": {
+    "first": "Acts 13:14b-16, 26-39 or Num 27:12-23",
+    "psalm": "Ps 100",
+    "second": "Rev 7:9-17",
+    "gospel": "John 10:22-30"
+   },
+   "lineas": {
+    "A": {
+     "first": 21013,
+     "psalm": 21018,
+     "second": 21021,
+     "gospel": 21023
+    },
+    "B": {
+     "first": 21013,
+     "psalm": 21018,
+     "second": 21021,
+     "gospel": 21023
+    },
+    "C": {
+     "first": 21013,
+     "psalm": 21018,
+     "second": 21021,
+     "gospel": 21023
+    }
+   },
+   "pdfOnly": []
+  },
+  "easter5": {
+   "appKey": "easter5",
+   "label": "The Fifth Sunday of Easter",
+   "libroPagina": 724,
+   "pdfPagina": 732,
+   "mdLineas": [
+    21020,
+    21031
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "Acts 17:1-15 or Deut 6:20-25",
+    "psalm": "Ps 66:1-11v or 66:1-8v",
+    "second": "1 Pet 2:1-12",
+    "gospel": "John 14:1-14"
+   },
+   "B": {
+    "first": "Acts 8:26-40 or Deut 4:32-40",
+    "psalm": "Ps 66:1-11v or 66:1-8v",
+    "second": "1 John 3:(11-17)18-24",
+    "gospel": "John 14:15-21"
+   },
+   "C": {
+    "first": "Acts 13:44-52 or Lev 19:1-2,9-18",
+    "psalm": "Ps 145 or 145:1-9v",
+    "second": "Rev 19:1-9",
+    "gospel": "John 13:31-35"
+   },
+   "lineas": {
+    "A": {
+     "first": 21024,
+     "psalm": 21026,
+     "second": 21027,
+     "gospel": 21029
+    },
+    "B": {
+     "first": 21024,
+     "psalm": 21026,
+     "second": 21027,
+     "gospel": 21029
+    },
+    "C": {
+     "first": 21024,
+     "psalm": 21026,
+     "second": 21027,
+     "gospel": 21029
+    }
+   },
+   "pdfOnly": []
+  },
+  "easter6": {
+   "appKey": "easter6",
+   "label": "The Sixth Sunday of Easter (Rogation Sunday)",
+   "libroPagina": 724,
+   "pdfPagina": 732,
+   "mdLineas": [
+    21027,
+    21046
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "Acts 17:(16-21)22-34 or Isa 41:17-20",
+    "psalm": "Ps 148 or 148:7-14",
+    "second": "1 Pet 3:8-18",
+    "gospel": "John 15:1-11"
+   },
+   "B": {
+    "first": "Acts 11:19-30 or Isa 45:11-13,18-19(20-25)",
+    "psalm": "Ps 33 or 33:1-8,18-22v",
+    "second": "1 John 4:7-21",
+    "gospel": "John 15:9-17"
+   },
+   "C": {
+    "first": "Acts 14:8-18 or Joel 2:21-27",
+    "psalm": "Ps 67",
+    "second": "Rev 21:1-4,22-22:5",
+    "gospel": "John 14:21-29"
+   },
+   "lineas": {
+    "A": {
+     "first": 21031,
+     "psalm": 21037,
+     "second": 21040,
+     "gospel": 21043
+    },
+    "B": {
+     "first": 21030,
+     "psalm": 21039,
+     "second": 21042,
+     "gospel": 21045
+    },
+    "C": {
+     "first": 21031,
+     "psalm": 21037,
+     "second": 21040,
+     "gospel": 21043
+    }
+   },
+   "pdfOnly": []
+  },
+  "ascension": {
+   "appKey": "ascension",
+   "label": "Ascension Day",
+   "libroPagina": 724,
+   "pdfPagina": 732,
+   "mdLineas": [
+    21042,
+    21052
+   ],
+   "cicloUnico": true,
+   "A": {
+    "first": "Acts 1:1-11",
+    "psalm": "Ps 47 or 110:1-5",
+    "second": "Eph 1:15-23",
+    "gospel": "Luke 24:44-53 or Mark 16:9-20"
+   },
+   "B": {
+    "first": "Acts 1:1-11",
+    "psalm": "Ps 47 or 110:1-5",
+    "second": "Eph 1:15-23",
+    "gospel": "Luke 24:44-53 or Mark 16:9-20"
+   },
+   "C": {
+    "first": "Acts 1:1-11",
+    "psalm": "Ps 47 or 110:1-5",
+    "second": "Eph 1:15-23",
+    "gospel": "Luke 24:44-53 or Mark 16:9-20"
+   },
+   "lineas": {
+    "A": {
+     "first": 21046,
+     "psalm": 21048,
+     "second": 21049,
+     "gospel": 21050
+    },
+    "B": {
+     "first": 21046,
+     "psalm": 21048,
+     "second": 21049,
+     "gospel": 21050
+    },
+    "C": {
+     "first": 21046,
+     "psalm": 21048,
+     "second": 21049,
+     "gospel": 21050
+    }
+   },
+   "pdfOnly": []
+  },
+  "easter7": {
+   "appKey": "easter7",
+   "label": "The Sunday after Ascension Day",
+   "libroPagina": 724,
+   "pdfPagina": 732,
+   "mdLineas": [
+    21048,
+    21065
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "Acts 1:(1-5)6-14 or Ezek 39:21-29",
+    "psalm": "Ps 68:1-20 or 47",
+    "second": "1 Pet 4:12-19",
+    "gospel": "John 17:1-11"
+   },
+   "B": {
+    "first": "Acts 1:15-26 or Ex 28:1-4,9-10,29-30",
+    "psalm": "Ps 68:1-20 or 47",
+    "second": "1 John 5:6-15",
+    "gospel": "John 17:11b-19"
+   },
+   "C": {
+    "first": "Acts 16:16-34 or 1 Sam 12:19-24",
+    "psalm": "Ps 68:1-20 or 47",
+    "second": "Rev 22:10-21",
+    "gospel": "John 17:20-26"
+   },
+   "lineas": {
+    "A": {
+     "first": 21052,
+     "psalm": 21056,
+     "second": 21057,
+     "gospel": 21058
+    },
+    "B": {
+     "first": 21052,
+     "psalm": 21056,
+     "second": 21057,
+     "gospel": 21058
+    },
+    "C": {
+     "first": 21052,
+     "psalm": 21056,
+     "second": 21057,
+     "gospel": 21058
+    }
+   },
+   "pdfOnly": []
+  },
+  "pentecost": {
+   "appKey": "pentecost",
+   "label": "The Day of Pentecost",
+   "libroPagina": 725,
+   "pdfPagina": 733,
+   "mdLineas": [
+    21061,
+    21077
+   ],
+   "cicloUnico": true,
+   "A": {
+    "first": "Gen 11:1-9 or Acts 2:1-11(12-21)",
+    "psalm": "Ps 104:24-35v",
+    "second": "Acts 2:1-11(12-21) or 1 Cor 12:4-13",
+    "gospel": "John 14:8-17"
+   },
+   "B": {
+    "first": "Gen 11:1-9 or Acts 2:1-11(12-21)",
+    "psalm": "Ps 104:24-35v",
+    "second": "Acts 2:1-11(12-21) or 1 Cor 12:4-13",
+    "gospel": "John 14:8-17"
+   },
+   "C": {
+    "first": "Gen 11:1-9 or Acts 2:1-11(12-21)",
+    "psalm": "Ps 104:24-35v",
+    "second": "Acts 2:1-11(12-21) or 1 Cor 12:4-13",
+    "gospel": "John 14:8-17"
+   },
+   "lineas": {
+    "A": {
+     "first": 21065,
+     "psalm": 21067,
+     "second": 21066,
+     "gospel": 21073
+    },
+    "B": {
+     "first": 21065,
+     "psalm": 21067,
+     "second": 21066,
+     "gospel": 21073
+    },
+    "C": {
+     "first": 21065,
+     "psalm": 21067,
+     "second": 21066,
+     "gospel": 21073
+    }
+   },
+   "pdfOnly": []
+  },
+  "trinitySunday": {
+   "appKey": "trinitySunday",
+   "label": "Trinity Sunday",
+   "libroPagina": 725,
+   "pdfPagina": 733,
+   "mdLineas": [
+    21073,
+    21116
+   ],
+   "cicloUnico": false,
+   "A": {
+    "first": "Gen 1:1—2:3",
+    "psalm": "Ps 150",
+    "second": "2 Cor 13:5-14",
+    "gospel": "Matt 28:16-20"
+   },
+   "B": {
+    "first": "Ex 3:1-6",
+    "psalm": "Ps 93",
+    "second": "Rom 8:12-17",
+    "gospel": "John 3:1-16"
+   },
+   "C": {
+    "first": "Isa 6:1-7",
+    "psalm": "Ps 29",
+    "second": "Rev 4:1-11",
+    "gospel": "John 16:(5-11)12-15"
+   },
+   "lineas": {
+    "A": {
+     "first": 21077,
+     "psalm": 21079,
+     "second": 21080,
+     "gospel": 21081
+    },
+    "B": {
+     "first": 21077,
+     "psalm": 21079,
+     "second": 21080,
+     "gospel": 21081
+    },
+    "C": {
+     "first": 21077,
+     "psalm": 21079,
+     "second": 21080,
+     "gospel": 21081
+    }
+   },
+   "pdfOnly": []
+  }
+ }
+}
