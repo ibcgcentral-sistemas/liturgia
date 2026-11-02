@@ -309,6 +309,14 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   }
   check(`5. Prefacio de cada día = el del libro (${prefCubiertos} días, ${prefCasos.size} claves)`, prefMal, prefCubiertos);
 
+  // ── 8. Colectas ──────────────────────────────────────────────────────────
+  // 5 oficiales (Ceniza y Semana Santa) idénticas al libro en español; 90 traducidas del inglés, de las que se
+  // comprueba la forma (Amén, fórmula final, longitud, nombre del santo). El inglés no está en el repositorio: sin él
+  // se omite esa comparación y se anota como pendiente.
+  let colectas;
+  try { colectas = require('./bcp2019-tools/check-colectas.js').compare(); } catch (e) { colectas = { total: 1, oficiales: 0, traducidas: 0, fallos: ['no se pudo comprobar: ' + e.message], notas: [] }; }
+  check(`8. Colectas: ${colectas.oficiales} oficiales idénticas al libro en español y ${colectas.traducidas} traducidas con forma correcta`, colectas.fallos, colectas.total);
+
   // ── Informe ──────────────────────────────────────────────────────────────
   let failed = 0;
   console.log(`\nPrueba de completitud — BCP 2019, ${Y0}-${Y1}\n`);
@@ -319,7 +327,8 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   }
   console.log(`\nDías con lecturas prestadas del domingo o fiesta correspondiente: ${borrowed} de ${days}`);
   console.log('\nPENDIENTES CONOCIDOS (no los comprueba esta prueba):');
-  console.log('  - Colectas: el texto español oficial (pp. 598-641) no existe; el app usa colectas reconstruidas.');
+  console.log(`  - Colectas: ${colectas.traducidas} son traducción propia del inglés (el libro en español no trae «Colectas del Año Cristiano»), pendientes de revisión litúrgica; ver bcp2019/COLECTAS-REVISION.md.`);
+  for (const n of colectas.notas || []) console.log('  - Colectas: ' + n + ' (ver bcp2019-tools/check-colectas.js).');
   console.log(`  - ${inheritFallback} días cuyo Propio de la semana es el 1 o el 2 usan la colecta del domingo anterior (sin texto español).`);
   console.log('  - Salmos: se leen de la Biblia de Jerusalén; el Salterio español del libro aún no se usa.');
   console.log('  - Lecturas: el libro en español no trae leccionario; el texto es de la Biblia de Jerusalén, que no trae Mateo 21:44, Hechos 8:37 ni Marcos 9:44 y 9:46 (ver DIF_CONOCIDAS).');

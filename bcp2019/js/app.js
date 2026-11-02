@@ -48,6 +48,12 @@ function resolveLectionaryKey(dayInfo, date) {
   return { key: null, borrowedFromSunday: false };
 }
 
+// Las colectas, salvo las de Ceniza y Semana Santa, son traducción del inglés hecha en este proyecto (ver propers.js,
+// COLLECT_OFFICIAL): mientras no las revise un liturgista, la liturgia lo dice bajo la colecta. Ponerlo en false cuando
+// estén revisadas (la prueba de test-bcp2019.js no depende de esto).
+const SHOW_COLLECT_TRANSLATION_NOTE = true;
+const COLLECT_TRANSLATION_NOTE = 'Colecta traducida del inglés (BCP 2019); pendiente de revisión litúrgica.';
+
 // La Colecta del Día toma prestada la del Domingo/fiesta precedente cuando la
 // feria no tiene una propia — a diferencia de resolveLectionaryKey(), esto NO
 // excluye la Semana Santa: repetir la Colecta de Ramos el Lunes/Martes/
@@ -70,7 +76,8 @@ async function generateLiturgy(date) {
   const { key: lKey, borrowedFromSunday, cycle: borrowedCycle } = resolveLectionaryKey(dayInfo, date);
   const readings = lKey ? BCPLectionary.getSundayReadings(lKey, borrowedCycle || dayInfo.cycle) : null;
 
-  const collect = BCPPropers.getCollect(resolveCollectKey(dayInfo, date));
+  const collectKey = resolveCollectKey(dayInfo, date);
+  const collect = BCPPropers.getCollect(collectKey);
   const preface = BCPPropers.getPreface(dayInfo.key, dayInfo.season);
 
   let firstReading = null, psalmVerses = [], secondReading = null, gospel = null, psalmAnt = '';
@@ -91,7 +98,7 @@ async function generateLiturgy(date) {
 
   currentMassState = {
     date, dayInfo, readings, firstReading, secondReading, gospel, psalmVerses, psalmAnt,
-    collect, preface, borrowedFromSunday,
+    collect, collectKey, preface, borrowedFromSunday,
   };
 
   return buildLiturgyHTML(currentMassState);
@@ -227,6 +234,7 @@ function buildLiturgyHTML(d) {
       <h3 class="section-title">✠ LA COLECTA DEL DÍA</h3>
       <div class="liturgical-text-block">${BCPEucharist.SALUTATION}</div>
       <div class="prayer-text collect-text">${d.collect}</div>
+      ${SHOW_COLLECT_TRANSLATION_NOTE && BCPPropers.isCollectTranslated(d.collectKey) ? `<p class="rubric">${COLLECT_TRANSLATION_NOTE}</p>` : ''}
     </div>
 
     <!-- ═══════════════ LITURGIA DE LA PALABRA ═══════════════ -->

@@ -43,6 +43,10 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
    secretas, ni antífonas, ni traducciones. Si falta un texto, se deja faltando y
    se anota en `Propers.MISSING_TEXTS`. Se puede corregir lógica, mapeos,
    referencias bíblicas mal formadas y erratas de codificación.
+   **Única excepción, pedida por el usuario (2026-11-02):** las colectas del BCP 2019
+   (`bcp2019/js/propers.js`) se tradujeron del inglés; ver «Colectas traducidas» en
+   *Decisiones ya tomadas*. Fuera de eso la regla sigue en pie: en particular no se
+   traduce nada del Misal de la raíz ni de otros textos sin que el usuario lo pida.
 2. **No confiar en los documentos de verificación.** `VERIFICACION.md` declaró
    correcta durante meses una fórmula equivocada del ciclo ferial, y
    `test-logic.js` repetía el mismo error, así que los tests pasaban en verde
@@ -63,7 +67,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=31` (Misal) y `?v=15` (bcp2019; la hoja de estilo, `?v=6`).
+   código viejo. Actualmente en `?v=31` (Misal) y `?v=16` (bcp2019; la hoja de estilo, `?v=6`).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -221,6 +225,19 @@ sale con título (no se midió cuántos).
 ## Decisiones ya tomadas por el usuario
 
 No volver a plantearlas salvo que él las reabra:
+
+- **Colectas traducidas del inglés en el BCP 2019** (2026-11-02): el usuario pidió expresamente
+  traducir, «a pesar de la regla del proyecto». Las colectas que traía `propers.js` estaban
+  reconstruidas de memoria y no coincidían con el libro (el Propio 3 era otra oración).
+  Ahora hay 95: **5 oficiales** (Ceniza, Ramos, Jueves, Viernes y Sábado Santo, copiadas del
+  libro en español, `COLLECT_OFFICIAL`) y **90 traducidas** por este proyecto del *Collects of the
+  Christian Year* del BCP 2019. Son traducciones propias, **pendientes de revisión litúrgica**
+  (`bcp2019/COLECTAS-REVISION.md`); la liturgia imprime bajo cada una la nota «Colecta traducida
+  del inglés», que se apaga con `SHOW_COLLECT_TRANSLATION_NOTE = false` en `app.js`. Fórmulas
+  finales del propio libro en español. `test-bcp2019.js` 8 y `bcp2019-tools/check-colectas.js`
+  vigilan que las oficiales sigan idénticas al libro y que las traducidas tengan la forma, la
+  longitud y el santo correctos; no pueden juzgar la calidad del español. El inglés no está en
+  el repositorio: `BCP_EN_MD=ruta/BCP2019-en.md` activa la comparación con el original.
 
 - **Gloria**: uso tradicional. Se omite desde Septuagésima (domingos de
   Pre-Cuaresma incluidos) y en el Domingo de Ramos.
