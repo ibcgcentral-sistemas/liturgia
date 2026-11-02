@@ -216,7 +216,7 @@ function buildLiturgyHTML(d) {
 
       <h4 class="section-title">GLORIA IN EXCELSIS</h4>
       ${shouldOmitGloria(d.dayInfo)
-        ? `<p class="rubric">${GLORIA_OMITTED_RUBRIC}</p>`
+        ? `<p class="rubric">${gloriaOmittedRubric(d.dayInfo)}</p>`
         : `<div class="liturgical-text-block">${BCPEucharist.GLORIA}</div>`}
     </div>
 

@@ -108,7 +108,7 @@ const BCPManual = (() => {
 
       <h3>Gloria in Excelsis</h3>
       <ul>
-        <li>El Libro dice: «Es apropiado omitir el canto de alabanza durante los tiempos de penitencia y los días señalados para el ayuno». Este generador lo omite en Cuaresma y Semana Santa (salvo el Jueves Santo y las fiestas de santos). El Libro no llama penitencial a Adviento, así que allí sí se dice.</li>
+        <li>El Libro dice: «Es apropiado omitir el canto de alabanza durante los tiempos de penitencia y los días señalados para el ayuno». Este generador lo omite en Adviento, Cuaresma y Semana Santa (salvo el Jueves Santo y las fiestas de santos). El Libro no nombra el Adviento; se omite allí por costumbre tradicional.</li>
       </ul>
 
       <h3>La Colecta del Día</h3>
@@ -214,7 +214,7 @@ const BCPManual = (() => {
       <h3>Adviento</h3>
       <ul>
         <li>Color morado (rosa opcional el III Domingo).</li>
-        <li>Se dice el Gloria (el Libro no señala Adviento como tiempo de penitencia); se mantiene el Aleluya.</li>
+        <li>Se omite el Gloria (por costumbre; el Libro no nombra el Adviento), salvo en las fiestas de santos; se mantiene el Aleluya.</li>
       </ul>
 
       <h3>Cuaresma</h3>

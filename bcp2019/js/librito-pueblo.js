@@ -167,7 +167,7 @@ const BCPLibrito = (() => {
 
         <h3>GLORIA IN EXCELSIS</h3>
         ${omitGloria
-          ? `<div class="librito-instruction"><p>${GLORIA_OMITTED_RUBRIC}</p></div>`
+          ? `<div class="librito-instruction"><p>${gloriaOmittedRubric(dayInfo)}</p></div>`
           : `<div class="librito-instruction"><p>Todos juntos:</p></div>
         <div class="librito-text">
           <p>Gloria a Dios en el cielo, y paz en la tierra a quienes ama el Señor. Por tu inmensa gloria te alabamos, te bendecimos, te adoramos, te glorificamos, te damos gracias; Señor Dios, Rey celestial, Dios Padre Todopoderoso. Señor, Hijo único Jesucristo, Señor Dios, Cordero de Dios, Hijo del Padre: Tú que quitas el pecado del mundo, ten piedad de nosotros; Tú que quitas el pecado del mundo, atiende a nuestra súplica; Tú que estás sentado a la derecha del Padre, ten piedad de nosotros. Porque solo tú eres Santo, sólo tú Señor, sólo tú Altísimo, Jesucristo, con el Espíritu Santo, en la gloria de Dios Padre. Amén.</p>

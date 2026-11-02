@@ -83,11 +83,13 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
       if (/ORACIÓN DE CONSAGRACIÓN/.test(text)) f.noEucaristiaConMisa.push(date);
       continue;
     }
-    // Gloria: el libro solo dice que es apropiado omitirlo en los tiempos de penitencia (Cuaresma) y días de
-    // ayuno; Adviento no es penitencial en el libro. Se omite en Cuaresma y Semana Santa, salvo Jueves Santo y fiestas fijas.
+    // Gloria: el libro solo dice que es apropiado omitirlo en los tiempos de penitencia y días de ayuno, y no nombra
+    // el Adviento. DECISIÓN DEL USUARIO (2026-11-02): se omite también en Adviento, por costumbre. Se omite en
+    // Adviento, Cuaresma y Semana Santa, salvo Jueves Santo y fiestas fijas; la rúbrica impresa nombra el tiempo real.
     const gloriaOmitido = /se omite el Gloria in excelsis/.test(text);
-    const debeOmitir = ['lent', 'holyWeek'].includes(st.dayInfo.season) && !st.dayInfo.isFixed && st.dayInfo.key !== 'maundyThursday';
+    const debeOmitir = ['advent', 'lent', 'holyWeek'].includes(st.dayInfo.season) && !st.dayInfo.isFixed && st.dayInfo.key !== 'maundyThursday';
     if (gloriaOmitido !== debeOmitir) f.gloria.push(`${date} ${st.dayInfo.key} (${st.dayInfo.season}): ${gloriaOmitido ? 'omitido' : 'presente'}`);
+    if (debeOmitir && gloriaOmitido && !(st.dayInfo.season === 'advent' ? /en Adviento se omite el Gloria/ : /en Cuaresma se omite el Gloria/).test(text)) f.gloria.push(`${date} ${st.dayInfo.key} (${st.dayInfo.season}): la rúbrica nombra otro tiempo`);
     // Aclamación, Fracción y Despedida según el tiempo (comprobación 6). Se lee el HTML ya armado.
     {
       const s = st.dayInfo.season, k = st.dayInfo.key;
@@ -101,6 +103,8 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
       if (conAleluyaDesp !== debeAleluyaDesp) f.despedida.push(`${date} ${k} (${s}): ${conAleluyaDesp ? 'con' : 'sin'} aleluya`);
       // El Librito no recalcula nada, pero decide estas tres cosas con su propio código: se mide igual.
       let lib = ''; try { lib = Librito.generateLibrito(st); } catch (e) { f.aclamacion.push(`${date} Librito lanzó: ${e.message}`); }
+      const lgl = /<h3>GLORIA IN EXCELSIS<\/h3>([\s\S]*?)(?=<h[23])/.exec(lib);
+      if (lib && (!lgl || /se omite el Gloria in excelsis/.test(lgl[1]) !== debeOmitir)) f.gloria.push(`${date} ${k} (${s}) Librito: ${!lgl ? 'sin sección' : debeOmitir ? 'presente' : 'omitido'}`);
       const lam = /<h3>LA ACLAMACIÓN<\/h3>([\s\S]*?)(?=<h[23])/.exec(lib);
       const lacl = !lam ? 'ausente' : /Bendito sea nuestro Dios/.test(lam[1]) ? 'semana-santa' : /Bendigamos al Señor que perdona/.test(lam[1]) ? 'cuaresma' : /Cristo ha resucitado/.test(lam[1]) ? 'pascua' : /Bendito sea Dios: Padre/.test(lam[1]) ? 'ordinaria' : 'desconocida';
       if (lib && lacl !== aclEsp) f.aclamacion.push(`${date} ${k} (${s}) Librito: ${lacl}, debía ser ${aclEsp}`);
@@ -123,7 +127,7 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   check('1g. …y Evangelio con texto', f.sinEvangelio, days - noEu);
   check('1h. …y salmo con versículos', f.sinSalmo, days - noEu);
   check('1i. Viernes y Sábado Santo muestran el aviso sin Eucaristía', f.noEucaristiaSinAviso.concat(f.noEucaristiaConMisa), noEu);
-  check('1j. Gloria: se omite solo en Cuaresma y Semana Santa, no en Adviento', f.gloria, days - noEu);
+  check('1j. Gloria: se omite en Adviento, Cuaresma y Semana Santa (salvo Jueves Santo y fiestas), en la liturgia y el Librito', f.gloria, days - noEu);
   check('1l. Salmo del día: sin título pegado al v. 1 ni versículos repetidos', f.salmoMal, days - noEu);
   // Libro: la Aclamación de Cuaresma rige «desde el Miércoles de Ceniza a la víspera del Domingo de Ramos»; la Semana
   // Santa tiene la suya («Bendito sea nuestro Dios»); la pascual va «desde el día de Resurrección hasta la Víspera de

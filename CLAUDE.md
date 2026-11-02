@@ -63,7 +63,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=31` (Misal) y `?v=12` (bcp2019).
+   código viejo. Actualmente en `?v=31` (Misal) y `?v=13` (bcp2019).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -200,6 +200,13 @@ No volver a plantearlas salvo que él las reabra:
 
 - **Gloria**: uso tradicional. Se omite desde Septuagésima (domingos de
   Pre-Cuaresma incluidos) y en el Domingo de Ramos.
+- **Gloria en el BCP 2019** (2026-11-02): se omite en **Adviento**, Cuaresma y
+  Semana Santa, salvo Jueves Santo y las fiestas fijas de santos. El libro de la ACNA
+  solo pide omitirlo «en los tiempos de penitencia y los días de ayuno» y **no nombra
+  el Adviento**; el BCP episcopal de 1979 sí lo omite en Adviento y Cuaresma. Una
+  auditoría lo había retirado del Adviento por esa razón y el usuario lo restituyó:
+  no volver a quitarlo (`shouldOmitGloria`, `utils.js`; la rúbrica impresa dice que es
+  costumbre, no mandato del libro). `test-bcp2019.js` 1j lo vigila.
 - **Color del Domingo de Ramos**: se queda en rojo, sin cambiar.
 - **Ciclo ferial I/II**: se retiró el anuncio de la interfaz, porque el
   leccionario ferial no está implementado y las ferias reutilizan las lecturas del
