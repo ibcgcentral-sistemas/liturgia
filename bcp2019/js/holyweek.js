@@ -17,13 +17,17 @@ const BCPHolyWeek = (() => {
   // Liturgia principal: devuelve el HTML de la sección. `lecturas` es el HTML con las lecturas que sustituye a LECTURAS.
   // `leer(ref, citaDelLibro, tipo)` devuelve el HTML del texto bíblico de una lección de la Vigilia (tipo 'LECCION' o
   // 'EVANGELIO'); sin él, esas citas no se pintan.
-  function render(nombre, lecturas = '', leer = null) {
-    const items = DATA[nombre];
+  // `prefacio()` devuelve el HTML del prefacio del día, que va donde el libro dice «Inserta el Prefacio indicado» (Texto
+  // Antiguo Renovado). `opts.sinTitulo` omite el título con que abre la sección: el app pone el suyo.
+  function render(nombre, lecturas = '', leer = null, prefacio = null, opts = {}) {
+    let items = DATA[nombre];
     if (!items) return '';
+    if (opts.sinTitulo && items[0] && items[0].t === 'T') items = items.slice(1);
     let html = '', bloque = '';
     const cierra = () => { if (bloque) { html += `<div class="liturgical-text-block holyweek-rite">${bloque}</div>`; bloque = ''; } };
     for (const it of items) {
       if (it.t === 'LECTURAS') { cierra(); html += lecturas; continue; }
+      if (it.t === 'PREFACIO') { cierra(); html += prefacio ? prefacio() : ''; continue; }
       if (it.t === 'LECCION' || it.t === 'EVANGELIO') { cierra(); html += leer ? leer(it.ref, it.x, it.t) : ''; continue; }
       const x = esc(it.x);
       if (it.t === 'T') bloque += `<span class="lit-title">${x}</span>`;
@@ -38,12 +42,14 @@ const BCPHolyWeek = (() => {
   }
 
   // Librito del pueblo: las rúbricas como instrucciones, las partes del pueblo en negrita, las oraciones íntegras.
-  function renderLibrito(nombre, lecturas = '', leer = null) {
-    const items = DATA[nombre];
+  function renderLibrito(nombre, lecturas = '', leer = null, prefacio = null, opts = {}) {
+    let items = DATA[nombre];
     if (!items) return '';
+    if (opts.sinTitulo && items[0] && items[0].t === 'T') items = items.slice(1);
     let html = '';
     for (const it of items) {
       if (it.t === 'LECTURAS') { html += lecturas; continue; }
+      if (it.t === 'PREFACIO') { html += prefacio ? prefacio() : ''; continue; }
       if (it.t === 'LECCION' || it.t === 'EVANGELIO') { html += leer ? leer(it.ref, it.x, it.t) : ''; continue; }
       const x = esc(it.x);
       if (it.t === 'T') html += `<h3>${x}</h3>`;

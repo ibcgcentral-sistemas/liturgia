@@ -411,6 +411,80 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   }
   check(`10. Miércoles de Ceniza con su rito del libro (${ceDias} días), en la liturgia y el Librito`, ce, ceDias);
 
+  // ── 11. Eucaristía en Texto Antiguo Renovado ─────────────────────────────
+  // La segunda forma del libro (holyweek-data.js, secciones `renewed*`, cortadas de LOC-10-10-23.md l. 3174-3612). Cada día,
+  // en la liturgia y en el Librito: (a) sale entero y en orden cada bloque del libro que ese día toca (si app.js o el Librito
+  // dejaran de pintar uno no lanzaría nada); (b) no se cuela ningún texto propio del Estándar (Confesión, Oraciones del Pueblo,
+  // Humilde Acceso...); (c) el Aleluya de la Despedida solo desde la Vigilia hasta Pentecostés; (d) en la forma Estándar, a su
+  // vez, no se cuela ningún texto del Renovado, y pedir {form:'standard'} es lo mismo que no pedir nada.
+  const ra = []; let raDias = 0;
+  const RA = (cond, msg) => { if (!cond) ra.push(msg); };
+  const norm = s => String(s).replace(/\s+/g, ' ').trim();
+  const escH = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const ventana = (s, desde, n) => { s = norm(s); return s.length >= desde + n ? s.slice(desde, desde + n) : ''; };
+  const HWD = C.get('BCP_HOLYWEEK_DATA'), Euc = C.get('BCPEucharist');
+  const ratNames = Object.keys(HWD).filter(n => /^renewed/.test(n));
+  const ratItems = n => HWD[n].filter(i => i.t !== 'T' && i.t !== 'PREFACIO' && i.x).map(i => norm(escH(i.x)));
+  const ratTodo = ratNames.map(n => ratItems(n).join(' ')).join(' ');
+  const hwTodo = Object.keys(HWD).filter(n => !/^renewed/.test(n)).map(n => HWD[n].filter(i => i.x).map(i => norm(escH(i.x))).join(' ')).join(' ');
+  const domingo = new Date(2026, 5, 7, 12);
+  const stdBase = norm(strip(await generateLiturgy(domingo))), ratBase = norm(strip(await generateLiturgy(domingo, { form: 'renewed' })));
+  // Marcas: un trozo de 70 caracteres de cada pieza que solo existe en una de las dos formas (se calibran contra la página
+  // ya pintada de un domingo en cada forma, para que las etiquetas «Cel.» y «Pueblo» cuenten).
+  const stdMarcas = ['CONFESSION', 'COMFORTABLE_WORDS', 'PRAYERS_OF_THE_PEOPLE', 'CREED', 'PEACE', 'OFFERTORY_SENTENCE', 'PRAYER_OF_CONSECRATION', 'LORDS_PRAYER', 'HUMBLE_ACCESS', 'AGNUS_DEI', 'ADMINISTRATION', 'POST_COMMUNION', 'BLESSING']
+    .map(n => ({ n, m: ventana(strip(Euc[n]), 15, 70) })).filter(x => x.m && !ratBase.includes(x.m) && !ratTodo.includes(x.m) && !hwTodo.includes(x.m));
+  const ratMarcas = ratNames.map(n => ({ n, m: ventana(ratItems(n).sort((a, b) => b.length - a.length)[0] || '', 10, 70) })).filter(x => x.m && !stdBase.includes(x.m));
+  RA(stdMarcas.length >= 8 && stdMarcas.every(x => stdBase.includes(x.m)), `la prueba no tiene marcas del Estándar fiables (${stdMarcas.length})`);
+  RA(ratMarcas.length >= 10, `la prueba no tiene marcas del Renovado fiables (${ratMarcas.length})`);
+  // Qué secciones del Renovado toca pintar ese día (el Miércoles de Ceniza y el Domingo de Ramos sustituyen partes; el Jueves
+  // Santo cierra sin bendición ni despedida; la Vigilia no lleva Credo; el Aleluya de la Despedida es de Pascua).
+  const seccionesRat = (dayInfo) => {
+    const k = dayInfo.key, ash = k === 'ashWednesday', palm = k === 'palmSunday', maundy = k === 'maundyThursday', sat = k === 'holySaturday';
+    const s = [];
+    if (!palm && !ash && !sat) s.push('renewedCreed');
+    if (!palm && !ash) s.push('renewedPrayers');
+    if (!ash) s.push('renewedConfession', 'renewedPeace');
+    s.push('renewedOffertory', 'renewedSursum', 'renewedConsecration', 'renewedLordsPrayer', 'renewedHumbleAccess', 'renewedAgnusDei', 'renewedAdministration', 'renewedPostCommunion');
+    if (!maundy) s.push('renewedBlessing', 'renewedDismissal');
+    if (!maundy && (sat || dayInfo.season === 'easter' || k === 'pentecost')) s.push('renewedDismissalAlleluia');
+    return s;
+  };
+  for (let d = new Date(Y0, 0, 1, 12), i = 0; d.getFullYear() <= Y1; d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1, 12), i++) {
+    raDias++;
+    const w = iso(d);
+    let html, st;
+    try { html = await generateLiturgy(d, { form: 'renewed' }); st = C.state(); } catch (e) { ra.push(`${w}: lanzó ${e.message}`); continue; }
+    const k = st.dayInfo.key;
+    RA(st.form === 'renewed', `${w}: currentMassState no guarda la forma`);
+    const vistas = [[norm(strip(html)), ''], [norm(strip(Librito.generateLibrito(st))), ' Librito']];
+    for (const [t, n] of vistas) {
+      // (el propio libro nombra al Texto Estándar en una rúbrica de la poscomunión: se miran la portada y el pie, no todo el texto)
+      const rotulo = n ? 'Libro de Oración Común (2019) · ' : 'Santa Eucaristía — ';
+      RA(t.includes(rotulo + 'Texto Antiguo Renovado') && !t.includes(rotulo + 'Texto Estándar Anglicano'), `${w}${n}: debe decir que es el Texto Antiguo Renovado y no el Estándar`);
+      RA(stdMarcas.every(x => !t.includes(x.m)), `${w}${n}: se coló texto del Estándar (${(stdMarcas.find(x => t.includes(x.m)) || {}).n})`);
+      if (k === 'goodFriday') { RA(ratMarcas.every(x => !t.includes(x.m)), `${w}${n}: el Viernes Santo no tiene Eucaristía y salió texto del Renovado`); continue; }
+      const toca = seccionesRat(st.dayInfo);
+      let pos = 0, perdido = '';
+      for (const nombre of toca) for (const it of ratItems(nombre)) {
+        const j = t.indexOf(it, pos);
+        if (j < 0) { perdido = perdido || `${nombre}: «${it.slice(0, 50)}…»`; continue; }
+        pos = j + it.length;
+      }
+      RA(!perdido, `${w}${n}: falta o está fuera de orden un bloque del libro (${perdido})`);
+      RA(toca.includes('renewedDismissalAlleluia') === /Desde la Vigilia Pascual hasta el Día de Pentecostés/.test(t), `${w}${n}: el Aleluya de la Despedida debe salir solo de la Vigilia a Pentecostés`);
+      const pf = k === 'holySaturday' ? Prop.PREFACES.easter : st.preface;
+      RA(pf && (n ? t.includes('PREFACIO: ' + pf.title.toUpperCase()) : t.includes(ventana(strip(pf.text), 0, 60))), `${w}${n}: falta el prefacio del día en el Renovado`);
+    }
+    // La forma Estándar, en una muestra: igual con o sin pedirla, y sin nada del Renovado.
+    if (i % 9 === 0) {
+      let s1, s2, ls;
+      try { s1 = await generateLiturgy(d); ls = Librito.generateLibrito(C.state()); s2 = await generateLiturgy(d, { form: 'standard' }); } catch (e) { ra.push(`${w}: la forma Estándar lanzó ${e.message}`); continue; }
+      RA(s1 === s2, `${w}: pedir la forma Estándar no es lo mismo que no pedir ninguna`);
+      for (const [t, n] of [[norm(strip(s1)), ''], [norm(strip(ls)), ' Librito']]) RA(t.includes((n ? 'Libro de Oración Común (2019) · ' : 'Santa Eucaristía — ') + 'Texto Estándar Anglicano') && ratMarcas.every(x => !t.includes(x.m)), `${w}${n} (Estándar): se coló texto del Renovado (${(ratMarcas.find(x => t.includes(x.m)) || {}).n})`);
+    }
+  }
+  check(`11. Eucaristía en Texto Antiguo Renovado, la segunda forma del libro (${raDias} días), en la liturgia y el Librito`, ra, raDias);
+
   // ── 8. Colectas ──────────────────────────────────────────────────────────
   // 5 oficiales (Ceniza y Semana Santa) idénticas al libro en español; 90 traducidas del inglés, de las que se
   // comprueba la forma (Amén, fórmula final, longitud, nombre del santo). El inglés no está en el repositorio: sin él

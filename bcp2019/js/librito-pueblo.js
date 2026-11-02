@@ -66,6 +66,10 @@ const BCPLibrito = (() => {
     const isLent = dayInfo.season === 'lent' || dayInfo.season === 'holyWeek';
     const isEaster = dayInfo.season === 'easter' || dayInfo.key === 'pentecost';
     const omitGloria = shouldOmitGloria(dayInfo);
+    // Segunda forma del libro (Texto Antiguo Renovado), igual que en app.js: desde el Credo el texto es el propio del libro.
+    const renewed = state.form === 'renewed';
+    const formName = renewed ? 'Texto Antiguo Renovado' : 'Texto Estándar Anglicano';
+    const rat = (nombre, prefacio = null) => BCPHolyWeek.renderLibrito(nombre, '', null, prefacio, { sinTitulo: true });
 
     const fmtReading = (ref, data, label) => {
       if (!data) return '';
@@ -125,7 +129,7 @@ const BCPLibrito = (() => {
       <div class="librito-header">
         <div class="librito-cross">✠</div>
         <h2>LIBRITO DE LA SANTA EUCARISTÍA</h2>
-        <p class="librito-subtitle">Libro de Oración Común (2019) · Texto Estándar Anglicano</p>
+        <p class="librito-subtitle">Libro de Oración Común (2019) · ${formName}</p>
         <p class="librito-date">${dateStr}</p>
         <p class="librito-feast">${dayInfo.nameEs || dayInfo.name}</p>
         <p class="librito-meta">Color: <strong>${colorName}</strong> · Ciclo: <strong>${dayInfo.cycle}</strong></p>
@@ -137,6 +141,81 @@ const BCPLibrito = (() => {
     // la bendición, va la oración de cierre del libro.
     const libritoEndHtml = ({ preface: pf = preface, vigil = false, ash = false } = {}) => {
       const fraccionSinAleluya = vigil ? false : isLent, despedidaConAleluya = vigil ? true : isEaster;
+      if (renewed) {
+        // Texto Antiguo Renovado (igual que app.js): el texto propio del libro, íntegro. El Prefacio lo dice el Celebrante, así
+        // que aquí va como indicación y no como texto, igual que en el Texto Estándar; la Fracción es la misma en las dos formas.
+        const prefacioLibrito = () => `<div class="librito-instruction"><p>El Celebrante dice el Prefacio propio del día (${pf ? pf.title : 'Prefacio Común'}).</p></div>`;
+        return `
+      ${ash ? '' : `<section class="librito-section">
+        <h2>✠ CONFESIÓN Y ABSOLUCIÓN</h2>
+        <div class="librito-instruction"><p><strong>Nos arrodillamos si podemos.</strong></p></div>
+        ${rat('renewedConfession')}
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ LA PAZ</h2>
+        <div class="librito-instruction"><p><strong>Nos ponemos de pie.</strong></p></div>
+        ${rat('renewedPeace')}
+      </section>`}
+
+      <section class="librito-section">
+        <h2>✠ EL OFERTORIO</h2>
+        ${rat('renewedOffertory')}
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ PREFACIO: ${pf ? pf.title.toUpperCase() : 'PREFACIO COMÚN'}</h2>
+        ${rat('renewedSursum', prefacioLibrito)}
+        <div class="librito-instruction"><p><strong>Nos arrodillamos.</strong> Comienza la Oración de Consagración.</p></div>
+      </section>
+
+      <section class="librito-section warning">
+        <h2>✠ LA ORACIÓN DE CONSAGRACIÓN</h2>
+        <div class="librito-instruction warning">
+          <p><strong>Nos arrodillamos en reverencia.</strong> Al pronunciar las palabras de la institución sobre el pan y el cáliz guardamos un silencio reverente; muchos fieles se inclinan en este momento en adoración.</p>
+        </div>
+        ${rat('renewedConsecration')}
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ EL PADRENUESTRO</h2>
+        ${rat('renewedLordsPrayer')}
+
+        <h3>LA FRACCIÓN</h3>
+        <div class="librito-response">
+          <p><strong>Celebrante: ${fraccionSinAleluya ? 'Cristo, nuestra Pascua, es sacrificado por nosotros.' : '[Aleluya.] Cristo, nuestra Pascua, es sacrificado por nosotros.'}</strong><br><strong>Pueblo: Celebremos la fiesta.${fraccionSinAleluya ? '' : ' [Aleluya.]'}</strong></p>
+        </div>
+
+        <h3>ORACIÓN DE HUMILDE ACCESO</h3>
+        ${rat('renewedHumbleAccess')}
+
+        <h3>EL AGNUS DEI</h3>
+        ${rat('renewedAgnusDei')}
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ LA SAGRADA COMUNIÓN</h2>
+        ${rat('renewedAdministration')}
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ ORACIÓN DE POSCOMUNIÓN</h2>
+        <div class="librito-instruction"><p><strong>Nos ponemos de pie.</strong></p></div>
+        ${rat('renewedPostCommunion')}
+      </section>
+
+      ${isMaundy ? `<section class="librito-section">
+        <h2>✠ AL TERMINAR LA LITURGIA</h2>
+        ${BCPHolyWeek.renderLibrito('maundyThursdayClosing')}
+      </section>` : `<section class="librito-section">
+        <h2>✠ LA BENDICIÓN Y LA DESPEDIDA</h2>
+        ${ash ? BCPHolyWeek.renderLibrito('ashWednesdayClosing') : ''}
+        ${rat('renewedBlessing')}
+        ${rat('renewedDismissal')}
+        ${despedidaConAleluya ? BCPHolyWeek.renderLibrito('renewedDismissalAlleluia') : ''}
+      </section>`}
+`;
+      }
       return `
       ${ash ? '' : `<section class="librito-section">
         <h2>✠ CONFESIÓN Y ABSOLUCIÓN</h2>
@@ -246,6 +325,13 @@ const BCPLibrito = (() => {
 `;
     };
 
+    // Oración de los Fieles: en el Texto Antiguo Renovado el libro trae la letanía completa (con las respuestas del pueblo).
+    const prayersLibrito = `<section class="librito-section">
+        <h2>✠ ORACIÓN DE LOS FIELES</h2>
+        ${renewed ? rat('renewedPrayers') : `<div class="librito-instruction"><p>Un Lector dirige las peticiones. Después de cada una:</p></div>
+        <div class="librito-response"><p><strong>Lector: Señor, en tu misericordia:</strong><br><strong>Pueblo: Escucha nuestra oración.</strong></p></div>`}
+      </section>`;
+
     // Las lecturas del día en el Librito, para el rito propio del Viernes y el Sábado Santo (reemplazan al marcador LECTURAS).
     const lecturasLibrito = `
         ${firstReading && readings ? fmtReading(translateBibleReference(readings.first), firstReading, 'PRIMERA LECTURA') : ''}
@@ -279,11 +365,7 @@ const BCPLibrito = (() => {
         ${BCPHolyWeek.renderLibrito('easterVigilWord', '', leerVigilia)}
       </section>
 
-      <section class="librito-section">
-        <h2>✠ ORACIÓN DE LOS FIELES</h2>
-        <div class="librito-instruction"><p>Un Lector dirige las peticiones. Después de cada una:</p></div>
-        <div class="librito-response"><p><strong>Lector: Señor, en tu misericordia:</strong><br><strong>Pueblo: Escucha nuestra oración.</strong></p></div>
-      </section>
+      ${prayersLibrito}
 
       ${libritoEndHtml({ preface: BCPPropers.PREFACES.easter, vigil: true })}`;
       return `
@@ -385,7 +467,10 @@ const BCPLibrito = (() => {
 
         ${isMaundy ? BCPHolyWeek.renderLibrito('maundyThursdayFootWashing') : ''}
 
-        ${isPalm ? `<div class="librito-instruction"><p>Siguiendo el Sermón, cuando ha precedido la Liturgia de las Palmas, el Credo de Nicea y las Oraciones del Pueblo pueden omitirse en la Eucaristía.</p></div>` : isAsh ? '' : `
+        ${isPalm ? `<div class="librito-instruction"><p>Siguiendo el Sermón, cuando ha precedido la Liturgia de las Palmas, el Credo de Nicea y las Oraciones del Pueblo pueden omitirse en la Eucaristía.</p></div>` : isAsh ? '' : renewed ? `
+        <h3>EL CREDO NICENO</h3>
+        <div class="librito-instruction"><p><strong>Nos ponemos de pie.</strong></p></div>
+        ${rat('renewedCreed')}` : `
         <h3>EL CREDO NICENO</h3>
         <div class="librito-instruction"><p><strong>Nos ponemos de pie.</strong></p></div>
         <div class="librito-credo">
@@ -411,11 +496,7 @@ const BCPLibrito = (() => {
 
       <section class="librito-section">
         ${BCPHolyWeek.renderLibrito('ashWednesdayAbsolution')}
-      </section>` : `<section class="librito-section">
-        <h2>✠ ORACIÓN DE LOS FIELES</h2>
-        <div class="librito-instruction"><p>Un Lector dirige las peticiones. Después de cada una:</p></div>
-        <div class="librito-response"><p><strong>Lector: Señor, en tu misericordia:</strong><br><strong>Pueblo: Escucha nuestra oración.</strong></p></div>
-      </section>`}
+      </section>` : prayersLibrito}
 
       ${libritoEndHtml({ ash: isAsh })}
 

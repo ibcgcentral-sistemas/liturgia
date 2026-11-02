@@ -2,7 +2,7 @@
  * holyweek-data.js — Liturgias de la Semana Santa (Libro de Oración Común 2019, ACNA).
  * GENERADO por bcp2019-tools/build-holyweek.js a partir del libro oficial en español (LOC-10-10-23.md); NO editar a
  * mano: test-bcp2019.js comprueba que sigue idéntico a lo que genera el script. Texto copiado, no traducido.
- * Procedencia: palmSundayPalms LOC l. 14728-14794; maundyThursdayOpening LOC l. 14844-14858; maundyThursdayFootWashing LOC l. 14875-14902; maundyThursdayClosing LOC l. 14903-14911; goodFriday LOC l. 14939-15244; holySaturday LOC l. 15248-15315; ashWednesdayOpening LOC l. 14474-14477; ashWednesdayInvitation LOC l. 14478-14502; ashWednesdayAshes LOC l. 14519-14568; ashWednesdayConfession LOC l. 14569-14649; ashWednesdayAbsolution LOC l. 14650-14685; ashWednesdayClosing LOC l. 14686-14697; easterVigilIntro LOC l. 15318-15337; easterVigilLight LOC l. 15341-15440; easterVigilReadings LOC l. 15441-15572; easterVigilWord LOC l. 15573-15633; easterVigilBlessing LOC l. 15634-15641.
+ * Procedencia: palmSundayPalms LOC l. 14728-14794; maundyThursdayOpening LOC l. 14844-14858; maundyThursdayFootWashing LOC l. 14875-14902; maundyThursdayClosing LOC l. 14903-14911; goodFriday LOC l. 14939-15244; holySaturday LOC l. 15248-15315; renewedCreed LOC l. 3283-3325; renewedPrayers LOC l. 3326-3365; renewedConfession LOC l. 3366-3409; renewedPeace LOC l. 3410-3413; renewedOffertory LOC l. 3414-3425; renewedSursum LOC l. 3426-3450; renewedConsecration LOC l. 3451-3494; renewedLordsPrayer LOC l. 3495-3515; renewedHumbleAccess LOC l. 3526-3542; renewedAgnusDei LOC l. 3543-3550; renewedAdministration LOC l. 3551-3567; renewedPostCommunion LOC l. 3568-3585; renewedBlessing LOC l. 3586-3595; renewedDismissal LOC l. 3596-3608; renewedDismissalAlleluia LOC l. 3609-3615; ashWednesdayOpening LOC l. 14474-14477; ashWednesdayInvitation LOC l. 14478-14502; ashWednesdayAshes LOC l. 14519-14568; ashWednesdayConfession LOC l. 14569-14649; ashWednesdayAbsolution LOC l. 14650-14685; ashWednesdayClosing LOC l. 14686-14697; easterVigilIntro LOC l. 15318-15337; easterVigilLight LOC l. 15341-15440; easterVigilReadings LOC l. 15441-15572; easterVigilWord LOC l. 15573-15633; easterVigilBlessing LOC l. 15634-15641.
  * Tipos: T título, R rúbrica, P párrafo, V versos (líneas separadas por \n), REF cita bíblica, CEL/PUEBLO/DIAC/LECTOR/
  * OFIC/TODOS/OBISPO/PRES voces, LECTURAS = lugar donde el app inserta las lecturas del día.
  */
@@ -695,6 +695,579 @@ const BCP_HOLYWEEK_DATA = {
   {
    "t": "REF",
    "x": "2 CORINTIOS 13:14 (NVI)"
+  }
+ ],
+ "renewedCreed": [
+  {
+   "t": "T",
+   "x": "EL CREDO NICENO"
+  },
+  {
+   "t": "P",
+   "x": "Los domingos, otros días festivos importantes y otras horas señaladas, todos se ponen de pie para recitar el Credo de Nicea, diciendo el Celebrante primero: Confesemos nuestra fe en las palabras del Credo Niceno:"
+  },
+  {
+   "t": "R",
+   "x": "Celebrante y gente"
+  },
+  {
+   "t": "V",
+   "x": "Creemos en un solo Dios,\nPadre todopoderoso,\ncreador del cielo y tierra,\nde todo lo visible e invisible.\nCreemos en un solo Señor Jesucristo,\nHijo único de Dios,\nnacido del Padre antes de todos los siglos:\nDios de Dios, luz de luz, Dios verdadero de\nDios verdadero, engendrado, no creado,\nde la misma naturaleza que el Padre\npor quien todo fue hecho;\nque por nosotros y por nuestra salvación\nbajo del cielo: por obra del Espíritu Santo se\nencarnó de María, la Virgen, y se hizo hombre.\nPor nuestra causa fue crucificado en tiempo\nde Poncio Pilato: padeció y fue sepultado.\nResucitó al tercer día según las escrituras;\nsubió al cielo, y está sentado a la derecha del Padre.\nDe nuevo vendrá con gloria para juzgar a vivos y muertos,\ny su reino no tendrá fin.\nCreemos en el Espíritu Santo, Señor y dador de vida,\nque procede del Padre y del Hijo;\nque con el Padre y el Hijo recibe una misma\nadoración y gloria, y que habló por los profetas.\nCreemos en la Iglesia,\nque es una, Santa, católica y apostólica.\nConfesamos un solo Bautismo\npara el perdón de los pecados.\nEsperamos la resurrección de los muertos\ny la vida del mundo futuro. Amén."
+  },
+  {
+   "t": "P",
+   "x": "† La frase “y el Hijo” (latín filioque) no está en el texto griego original. Véase la resolución del Colegio Episcopal sobre el filioque en Fundamentos Documentales (pág. 768)"
+  }
+ ],
+ "renewedPrayers": [
+  {
+   "t": "T",
+   "x": "ORACIONES DE LOS FIELES"
+  },
+  {
+   "t": "R",
+   "x": "El diácono u otra persona designada dice estas oraciones, o las oraciones de los fieles en el Texto Anglicano Estándar."
+  },
+  {
+   "t": "P",
+   "x": "El lector hace una pausa después de cada oración, y la gente puede agregar peticiones, ya sea en silencio o en voz alta."
+  },
+  {
+   "t": "P",
+   "x": "Oremos por la Iglesia y por el mundo, diciendo, \"Escucha nuestra oración\"."
+  },
+  {
+   "t": "P",
+   "x": "Por la paz del mundo entero, y por el bienestar y la unidad del pueblo de Dios."
+  },
+  {
+   "t": "LECTOR",
+   "x": "Señor, en tu misericordia:"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Escucha nuestra oración."
+  },
+  {
+   "t": "P",
+   "x": "Por N., nuestro Arzobispo, y N., nuestro Obispo, y por todos los clérigos y por toda la gente de nuestra Diócesis y Congregación."
+  },
+  {
+   "t": "LECTOR",
+   "x": "Señor, en tu misericordia:"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Escucha nuestra oración."
+  },
+  {
+   "t": "P",
+   "x": "Por todos los que proclaman el Evangelio aquí y en el extranjero; y por todos aquellos que enseñan y hacen discípulos."
+  },
+  {
+   "t": "LECTOR",
+   "x": "Señor, en tu misericordia:"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Escucha nuestra oración."
+  },
+  {
+   "t": "P",
+   "x": "Por nuestros hermanos y hermanas en Cristo que sufren persecución por su fe."
+  },
+  {
+   "t": "LECTOR",
+   "x": "Señor, en tu misericordia:"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Escucha nuestra oración."
+  },
+  {
+   "t": "P",
+   "x": "Por nuestro País, por los que ocupan posiciones de autoridad, y por todos los que sirven en el sector público [especialmente a ]."
+  },
+  {
+   "t": "LECTOR",
+   "x": "Señor, en tu misericordia:"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Escucha nuestra oración."
+  },
+  {
+   "t": "P",
+   "x": "Por todos aquellos que se encuentran en dificultades, angustias, necesidades, enfermedades o en cualquier otra adversidad [especialmente a _____]."
+  },
+  {
+   "t": "LECTOR",
+   "x": "Señor, en tu misericordia:"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Escucha nuestra oración."
+  },
+  {
+   "t": "P",
+   "x": "Por todos aquellos que han partido de esta vida en la esperanza segura de la resurrección, [especialmente a _____,] con corazones agradecidos, oremos."
+  },
+  {
+   "t": "LECTOR",
+   "x": "Señor, en tu misericordia:"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Escucha nuestra oración."
+  },
+  {
+   "t": "R",
+   "x": "Se pueden agregar peticiones adicionales. También se pueden invitar acciones de gracias."
+  },
+  {
+   "t": "R",
+   "x": "El Celebrante concluye con esta u otra Colecta apropiada."
+  },
+  {
+   "t": "P",
+   "x": "Padre Celestial, concede estas nuestras oraciones por amor a Jesucristo, nuestro único Mediador y Abogado, que vive y reina contigo en la unidad del Espíritu Santo, un solo Dios, ahora y por siempre. Amén."
+  },
+  {
+   "t": "R",
+   "x": "El Celebrante puede entonces decir la Exhortación."
+  }
+ ],
+ "renewedConfession": [
+  {
+   "t": "T",
+   "x": "LA CONFESIÓN Y ABSOLUCIÓN DE LOS PECADOS"
+  },
+  {
+   "t": "R",
+   "x": "El Diácono u otra persona designada dice lo siguiente"
+  },
+  {
+   "t": "P",
+   "x": "Confesemos humildemente nuestros pecados a Dios Todopoderoso."
+  },
+  {
+   "t": "R",
+   "x": "Silencio"
+  },
+  {
+   "t": "R",
+   "x": "El Diácono y el pueblo se arrodillan como pueden y rezan"
+  },
+  {
+   "t": "V",
+   "x": "Dios de gran misericordia,\nconfesamos que hemos pecado contra ti\nen pensamiento, palabra y obra,\npor lo que hemos hecho, y lo que hemos dejado de hacer.\nNo te hemos amado con todo el corazón;\nno hemos amado a nuestro prójimo como a nosotros mismos.\nEstamos apenados y humildemente nos arrepentimos.\nPor amor de tu Hijo Jesucristo,\nten piedad de nosotros y perdónanos;\npara que disfrutemos de hacer tu voluntad,\ny andar por tus caminos,\npara gloria de tu nombre. Amén."
+  },
+  {
+   "t": "R",
+   "x": "El obispo o sacerdote se pone de pie y dice"
+  },
+  {
+   "t": "P",
+   "x": "Dios omnipotente, nuestro Padre celestial, que en su gran misericordia ha prometido el perdón de pecados a todos los que con sincero arrepentimiento y verdadera fe se vuelven a él, tenga misericordia de ustedes, los perdone y los libere de todos sus pecados, los confirme y los fortalezca en toda virtud, y los conduzca a la vida eterna; mediante Jesucristo nuestro Señor. Amén."
+  },
+  {
+   "t": "T",
+   "x": "PALABRAS RECONFORTANTES"
+  },
+  {
+   "t": "R",
+   "x": "El Celebrante puede entonces decir una o más de las siguientes oraciones, primero diciendo"
+  },
+  {
+   "t": "P",
+   "x": "Escuchen la Palabra de Dios, todos los que verdaderamente se vuelven a él. Vengan a mí, todos ustedes que están cansados y agobiados, y yo les daré descanso."
+  },
+  {
+   "t": "REF",
+   "x": "MATEO 11:28 (NVI)"
+  },
+  {
+   "t": "P",
+   "x": "Porque tanto amó Dios al mundo, que dio a su Hijo unigénito, para que todo aquel que cree en él no se pierda, sino que tenga vida eterna."
+  },
+  {
+   "t": "REF",
+   "x": "JOHN 3:16 (NVI)"
+  },
+  {
+   "t": "P",
+   "x": "Este mensaje es digno de crédito y merece ser aceptado por todos: que Cristo Jesús vino al mundo a salvar a los pecadores."
+  },
+  {
+   "t": "REF",
+   "x": "1 TIMOTEO 1:15 (NVI)"
+  },
+  {
+   "t": "P",
+   "x": "Si Mis queridos hijos, les escribo estas cosas para que no pequen. Pero, si alguno peca, tenemos ante el Padre a un intercesor, a Jesucristo, el Justo. Él es el sacrificio por el perdón de nuestros pecados, y no solo por los nuestros, sino por los de todo el mundo."
+  },
+  {
+   "t": "REF",
+   "x": "1 JUAN 2: 1-2 (NVI)"
+  }
+ ],
+ "renewedPeace": [
+  {
+   "t": "T",
+   "x": "LA PAZ"
+  },
+  {
+   "t": "CEL",
+   "x": "La paz del Señor esté siempre con ustedes."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Y con tu espíritu."
+  },
+  {
+   "t": "R",
+   "x": "Entonces los Ministros y el Pueblo podrán saludarse en el Nombre del Señor."
+  }
+ ],
+ "renewedOffertory": [
+  {
+   "t": "T",
+   "x": "EL OFERTORIO"
+  },
+  {
+   "t": "R",
+   "x": "El Celebrante puede comenzar el Ofertorio con uno de los versículos proporcionados en las Escrituras."
+  },
+  {
+   "t": "R",
+   "x": "Durante el ofertorio se puede cantar un himno, salmo o antífona. El Diácono o Sacerdote prepara la Santa Mesa para la celebración. Representantes de la congregación pueden traer al diácono o al sacerdote las ofrendas de pan y vino del pueblo, dinero u otras donaciones."
+  },
+  {
+   "t": "R",
+   "x": "El Pueblo se pone de pie mientras se presentan las ofrendas. Se puede decir lo siguiente:"
+  },
+  {
+   "t": "CEL",
+   "x": "Tuyos son, Señor, la grandeza, y el poder, la gloria, la victoria y la majestad; Tuyo es todo cuanto hay en el cielo y en la tierra; Tuyo también es el Reino, y tú estás por encima de todo. Todas las cosas proceden de Ti, Señor,"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Y lo que te hemos dado, de Ti lo hemos recibido."
+  },
+  {
+   "t": "REF",
+   "x": "1 CRÓNICAS 29:11, 14 (NVI)"
+  }
+ ],
+ "renewedSursum": [
+  {
+   "t": "T",
+   "x": "EL SURSUM CORDA"
+  },
+  {
+   "t": "R",
+   "x": "El Pueblo permanece de pie. El Celebrante frente a ellos canta o dice"
+  },
+  {
+   "t": "P",
+   "x": "El Señor esté con ustedes"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Y con tu espíritu."
+  },
+  {
+   "t": "CEL",
+   "x": "Levantemos el corazón."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Lo tenemos levantado hacia el Señor."
+  },
+  {
+   "t": "CEL",
+   "x": "Demos gracias al Señor nuestro Dios."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Es justo darle gracias y alabarlo."
+  },
+  {
+   "t": "R",
+   "x": "El Celebrante continúa"
+  },
+  {
+   "t": "P",
+   "x": "Es justo, nuestro deber y nuestro gozo, siempre y en todo lugar darte gracias, Padre Todopoderoso, Creador del cielo y de la tierra."
+  },
+  {
+   "t": "PREFACIO"
+  },
+  {
+   "t": "P",
+   "x": "Por lo tanto, nosotros te alabamos, uniendo nuestras voces a los Ángeles y Arcángeles y a toda la compañía del cielo, que cantan por siempre este himno para proclamar la gloria de tu Nombre: El SANCTUS"
+  },
+  {
+   "t": "R",
+   "x": "Celebrante y Pueblo"
+  },
+  {
+   "t": "V",
+   "x": "Santo, Santo, Santo es el Señor, Dios del universo,\nllenos están el cielo y la tierra de tu gloria.\nHosanna en el cielo."
+  },
+  {
+   "t": "V",
+   "x": "Bendito el que viene en el Nombre del Señor.\nHosanna en el cielo."
+  }
+ ],
+ "renewedConsecration": [
+  {
+   "t": "T",
+   "x": "LA ORACIÓN DE CONSAGRACIÓN"
+  },
+  {
+   "t": "R",
+   "x": "La gente se pone de pie o se arrodilla. El Celebrante continúa:"
+  },
+  {
+   "t": "P",
+   "x": "Padre santo y misericordioso: En tu infinito amor nos hiciste para ti; y cuando habíamos pecado contra ti, y nos habíamos convertido en cautivos del mal y de la muerte, tú, en tu misericordia, enviaste a tu único Hijo Jesucristo al mundo para nuestra salvación. Por el Espíritu Santo y la Virgen María se hizo carne y habitó entre nosotros. Obedeciendo tu voluntad, extendió los brazos sobre la Cruz y se ofreció de una vez por todas para que por su sufrimiento y muerte fuéramos salvos. Con su resurrección rompió los lazos de la muerte, pisoteando al infierno y a Satanás bajo sus pies. Como nuestro gran sumo sacerdote, ascendió a tu diestra en gloria, para que pudiéramos acudir con confianza ante el trono de la gracia."
+  },
+  {
+   "t": "R",
+   "x": "En las siguientes palabras sobre el pan, el Celebrante debe sostenerlo o poner una mano sobre él, y aquí * puede partir el pan; y en las palabras sobre el Cáliz, sostiene o coloca una mano sobre el Cáliz y cualquier otro recipiente que contenga el vino destinado a ser consagrado."
+  },
+  {
+   "t": "P",
+   "x": "En la misma noche en que fue traicionado, nuestro Señor Jesucristo tomó pan; y habiendo dado gracias, lo partió, y se lo dio a sus discípulos, diciendo: “Tomen y coman. Este es mi Cuerpo que será entregado por ustedes: Hagan esto en memoria de Mí”."
+  },
+  {
+   "t": "P",
+   "x": "Asimismo, después de la cena, Jesús tomó el cáliz, y habiendo dado gracias, se lo dio a ellos, diciendo: “Beban todos de él; porque esta es mi Sangre de la Nueva Alianza, que será derramada por ustedes y por muchos para perdón de los pecados: Siempre que lo beban, háganlo en memoria de Mí."
+  },
+  {
+   "t": "P",
+   "x": "Por lo tanto, proclamamos el misterio de fe:"
+  },
+  {
+   "t": "R",
+   "x": "Celebrante y gente"
+  },
+  {
+   "t": "V",
+   "x": "Cristo ha muerto.\nCristo ha resucitado.\nCristo vendrá de nuevo."
+  },
+  {
+   "t": "P",
+   "x": "Celebramos el memorial de nuestra redención, oh Padre, en este sacrificio de alabanza y acción de gracias, y te ofrecemos estos dones."
+  },
+  {
+   "t": "P",
+   "x": "Santifícalos por tu Palabra y Espíritu Santo para que sean para tu pueblo el Cuerpo y la Sangre de tu Hijo Jesucristo. Santifícanos también, para que recibamos dignamente este santo Sacramento y seamos un solo cuerpo con él, para que él more en nosotros y nosotros en él. En el cumplimiento de los tiempos, pon todas las cosas en sujeción bajo Cristo y tráenos con todos tus santos al gozo de tu reino celestial, donde veremos a nuestro Señor cara a cara."
+  },
+  {
+   "t": "P",
+   "x": "Todo esto te lo pedimos por tu Hijo Jesucristo: Por él, y con él, y en él, en la unidad del Espíritu Santo, todo honor y gloria son tuyos, Padre Todopoderoso, ahora y por siempre. Amén."
+  }
+ ],
+ "renewedLordsPrayer": [
+  {
+   "t": "T",
+   "x": "LA ORACIÓN DEL SEÑOR"
+  },
+  {
+   "t": "P",
+   "x": "Y ahora, orando como nuestro Salvador Jesucristo nos enseñó, nos atrevemos a decir:"
+  },
+  {
+   "t": "R",
+   "x": "El celebrante y el pueblo rezan juntos"
+  },
+  {
+   "t": "V",
+   "x": "Padre Nuestro que estás en el cielo,\nsantificado sea tu Nombre,\nvenga tu reino,\nhágase tu voluntad,\nen la tierra como en el cielo.\nDanos hoy nuestro pan de cada día.\nPerdona nuestras ofensas,\ncomo también nosotros perdonamos a los que\nnos ofenden.\nNo nos dejes caer en tentación\ny líbranos del mal.\nPorque tuyo es el reino,\ntuyo es el poder,\ny tuya es la gloria,\nahora y por siempre. Amén."
+  }
+ ],
+ "renewedHumbleAccess": [
+  {
+   "t": "T",
+   "x": "LA ORACIÓN DE HUMILDE ACCESO"
+  },
+  {
+   "t": "R",
+   "x": "Celebrante y las personas juntas pueden decir"
+  },
+  {
+   "t": "V",
+   "x": "Nosotros no nos atrevemos a venir a esta tu mesa, oh Señor misericordioso,\nconfiados en nuestra rectitud,\nsino en tus muchas y grandes misericordias.\nNo somos dignos ni aun de recoger las migajas debajo de tu mesa;\nmas tú eres el mismo señor,\ncuyo carácter es siempre de tener misericordia.\nConcédenos, por tanto, Señor, por tu clemencia,\nQue de tal modo comamos la Carne de tu amado Hijo Jesucristo\ny bebamos su sangre,\nque nuestros cuerpos pecadores sean purificados por su Cuerpo, y nuestras\nalmas lavadas por su más preciosa Sangre, y para que siempre vivamos en él, y\nél en nosotros. Amén."
+  }
+ ],
+ "renewedAgnusDei": [
+  {
+   "t": "T",
+   "x": "EL AGNUS DEI"
+  },
+  {
+   "t": "P",
+   "x": "El siguiente himno o algún otro himno adecuado se puede cantar o decir aquí."
+  },
+  {
+   "t": "V",
+   "x": "Cordero de Dios, que quitas el pecado del mundo;\nTen misericordia de nosotros.\nCordero de Dios, que quitas el pecado del mundo;\nTen misericordia de nosotros.\nCordero de Dios, que quitas el pecado del mundo;\nDanos tu paz."
+  }
+ ],
+ "renewedAdministration": [
+  {
+   "t": "T",
+   "x": "LA ADMINISTRACIÓN DE LA COMUNIÓN"
+  },
+  {
+   "t": "R",
+   "x": "Frente al Pueblo, el Celebrante puede decir la siguiente invitación:"
+  },
+  {
+   "t": "P",
+   "x": "Los Dones de Dios para el Pueblo de Dios. [Tómenlos en memoria de que Cristo murió por ustedes, y aliméntense de Él en sus corazones, por fe, y con agradecimiento]. o esto, Aquí tienen al Cordero de Dios que quita el pecado del mundo. ¡Dichosos los que han sido convidados a la cena de las bodas del Cordero!"
+  },
+  {
+   "t": "REF",
+   "x": "JOHN 1:29, APOCALIPSIS 19:9 (NVI)"
+  },
+  {
+   "t": "R",
+   "x": "Los ministros reciben el sacramento en ambas formas y luego lo entregan inmediatamente al pueblo."
+  },
+  {
+   "t": "R",
+   "x": "El Pan y el Cáliz se entregan a los comulgantes con estas palabras:"
+  },
+  {
+   "t": "P",
+   "x": "El Cuerpo de Cristo, pan del cielo."
+  },
+  {
+   "t": "P",
+   "x": "La Sangre de Cristo, Cáliz de salvación."
+  },
+  {
+   "t": "R",
+   "x": "Durante el ministerio de la Comunión, se pueden cantar himnos, salmos o antífonas."
+  },
+  {
+   "t": "R",
+   "x": "El Celebrante puede ofrecer una frase de la Escritura al final de la Comunión."
+  }
+ ],
+ "renewedPostCommunion": [
+  {
+   "t": "T",
+   "x": "ORACIÓN DESPUÉS DE LA COMUNIÓN"
+  },
+  {
+   "t": "R",
+   "x": "Después de la Comunión, el Celebrante dice:"
+  },
+  {
+   "t": "P",
+   "x": "Oremos:"
+  },
+  {
+   "t": "R",
+   "x": "Juntos, el Celebrante y el pueblo dicen lo siguiente (o la oración posterior a la comunión en el Texto Estándar Anglicano):"
+  },
+  {
+   "t": "V",
+   "x": "Padre Celestial,\nte damos gracias porque nos has nutrido con el alimento espiritual\ndel preciosísimo Cuerpo y Sangre\nde tu Hijo, nuestro Salvador Jesucristo;\ny porque nos aseguras, en estos santos misterios,\nque somos miembros vivos del Cuerpo de tu Hijo\ny herederos de tu reino eterno.\nY ahora, Padre, envíanos al mundo para cumplir la\nMisión que tú nos has encomendado,\npara amarte y servirte\ncomo fieles testigos de Cristo nuestro Señor.\nA él, a ti y al Espíritu Santo,\nsea todo honor y gloria, ahora y por siempre. Amén."
+  }
+ ],
+ "renewedBlessing": [
+  {
+   "t": "T",
+   "x": "LA BENDICIÓN"
+  },
+  {
+   "t": "R",
+   "x": "El obispo, cuando está presente, o el sacerdote, da esta bendición o una alternativa."
+  },
+  {
+   "t": "P",
+   "x": "La paz de Dios, que sobrepasa todo entendimiento, mantenga su corazón y su mente en el conocimiento y el amor de Dios y de su Hijo Jesucristo, nuestro Señor; y la bendición de Dios Todopoderoso, Padre, Hijo y Espíritu Santo, esté con todos ustedes y permanezca para siempre. Amén."
+  },
+  {
+   "t": "R",
+   "x": "Se puede cantar un himno, salmo o antífona después de la bendición (o después de la despedida)."
+  }
+ ],
+ "renewedDismissal": [
+  {
+   "t": "T",
+   "x": "LA DESPEDIDA"
+  },
+  {
+   "t": "R",
+   "x": "El diácono, o el sacerdote, puede despedir al pueblo con estas palabras"
+  },
+  {
+   "t": "P",
+   "x": "Nos podemos retirar en el Nombre de Cristo."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Demos gracias a Dios."
+  },
+  {
+   "t": "R",
+   "x": "o bien,"
+  },
+  {
+   "t": "DIAC",
+   "x": "Vayan en paz para amar y servir al Señor."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Demos gracias a Dios."
+  },
+  {
+   "t": "R",
+   "x": "o bien,"
+  },
+  {
+   "t": "DIAC",
+   "x": "Vayamos al mundo, regocijándonos en el poder del Espíritu Santo."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Demos gracias a Dios."
+  },
+  {
+   "t": "R",
+   "x": "o bien,"
+  },
+  {
+   "t": "DIAC",
+   "x": "Bendigamos al Señor."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Demos gracias a Dios."
+  }
+ ],
+ "renewedDismissalAlleluia": [
+  {
+   "t": "R",
+   "x": "Desde la Vigilia Pascual hasta el Día de Pentecostés, “Aleluya, aleluya” se agrega a cualquiera de las despedidas."
+  },
+  {
+   "t": "R",
+   "x": "Puede añadirse en otros momentos, excepto durante la Cuaresma y en otras ocasiones penitenciales."
+  },
+  {
+   "t": "R",
+   "x": "La gente responde"
+  },
+  {
+   "t": "P",
+   "x": "Demos gracias a Dios. Aleluya, Aleluya."
   }
  ],
  "ashWednesdayOpening": [

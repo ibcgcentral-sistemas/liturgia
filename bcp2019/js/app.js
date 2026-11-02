@@ -73,7 +73,9 @@ function resolveCollectKey(dayInfo, date) {
 // ══════════════════════════════════════════════════════════════════════════
 //  GENERACIÓN DE LA LITURGIA
 // ══════════════════════════════════════════════════════════════════════════
-async function generateLiturgy(date) {
+// `opts.form`: 'standard' (Texto Estándar, la primera forma del libro) o 'renewed' (Texto Antiguo Renovado, la segunda).
+async function generateLiturgy(date, opts = {}) {
+  const form = opts.form === 'renewed' ? 'renewed' : 'standard';
   const dayInfo = BCPCalendar.getDay(date);
   const { key: lKey, borrowedFromSunday, cycle: borrowedCycle } = resolveLectionaryKey(dayInfo, date);
   const readings = lKey ? BCPLectionary.getSundayReadings(lKey, borrowedCycle || dayInfo.cycle) : null;
@@ -110,7 +112,7 @@ async function generateLiturgy(date) {
 
   currentMassState = {
     date, dayInfo, readings, firstReading, secondReading, gospel, psalmVerses, psalmAnt,
-    collect, collectKey, preface, borrowedFromSunday, vigilTexts,
+    collect, collectKey, preface, borrowedFromSunday, vigilTexts, form,
   };
 
   return buildLiturgyHTML(currentMassState);
@@ -141,6 +143,15 @@ function buildLiturgyHTML(d) {
   // letanía, absolución, palabras confortantes y paz) sustituye a los Ritos Iniciales, la colecta aparte, el Credo, las
   // Oraciones del Pueblo y la confesión habitual (holyweek.js, texto del libro en español).
   const isAsh = key === 'ashWednesday';
+  // Segunda forma del libro, el Texto Antiguo Renovado: comparte con el Estándar el comienzo (Aclamación, Colecta por
+  // pureza, Resumen de la Ley, Kyrie, Gloria, Colecta del Día) y la Liturgia de la Palabra; desde el Credo es texto propio
+  // (holyweek.js, secciones `renewed*`, cortadas del libro en español). Los ritos propios de la Semana Santa y de Ceniza
+  // siguen siendo los mismos, y entre ellos se inserta esta forma.
+  const renewed = d.form === 'renewed';
+  const formName = renewed ? 'Texto Antiguo Renovado' : 'Texto Estándar Anglicano';
+  // Una sección del Texto Antiguo Renovado, sin su título (el app pone el suyo); `prefacio` es lo que va donde el libro
+  // dice «Inserta el Prefacio indicado».
+  const rat = (nombre, prefacio = null) => BCPHolyWeek.render(nombre, '', null, prefacio, { sinTitulo: true });
 
   const fmtReading = (ref, data, type) => {
     if (!data) return '';
@@ -186,7 +197,7 @@ function buildLiturgyHTML(d) {
     <div class="cover-page">
       <div class="cover-cross">✠</div>
       <h2 class="cover-title">LIBRO DE ORACIÓN<br>COMÚN · 2019</h2>
-      <p class="cover-subtitle">Santa Eucaristía — Texto Estándar Anglicano</p>
+      <p class="cover-subtitle">Santa Eucaristía — ${formName}</p>
       <div class="cover-divider"></div>
       <h2 class="cover-feast">${d.dayInfo.nameEs || d.dayInfo.name}</h2>
       <p class="cover-date">${dateStr}</p>
@@ -208,7 +219,7 @@ function buildLiturgyHTML(d) {
   const footHtml = `
     <div class="liturgy-footer">
       <p>✠ Soli Deo Gloria ✠</p>
-      <p class="footer-note">Libro de Oración Común (2019) · Texto Estándar Anglicano · Ciclo ${d.dayInfo.cycle}</p>
+      <p class="footer-note">Libro de Oración Común (2019) · ${formName} · Ciclo ${d.dayInfo.cycle}</p>
     </div>`;
 
   // Final de la Eucaristía, de la Confesión a la Despedida: lo comparten la Eucaristía de cada día y la de la Gran Vigilia,
@@ -220,6 +231,74 @@ function buildLiturgyHTML(d) {
     const fraccionSinAleluya = vigil ? false : isLent, despedidaConAleluya = vigil ? true : isEaster;
     const bendicionVigilia = vigil ? BCPHolyWeek.render('easterVigilBlessing') : '';
     const cierreCeniza = ash ? BCPHolyWeek.render('ashWednesdayClosing') : '';
+    if (renewed) {
+      // Texto Antiguo Renovado: de la Confesión a la Despedida con el texto propio del libro. La Fracción es la misma
+      // que en el Estándar (el libro la repite); el Miércoles de Ceniza salta la confesión y la paz, como arriba.
+      const prefacioHtml = () => `<div class="prayer-text">${pf ? pf.text : ''}</div>`;
+      return `
+    ${ash ? '' : `<div class="mass-section">
+      <h3 class="section-title">✠ CONFESIÓN Y ABSOLUCIÓN DE LOS PECADOS</h3>
+      ${rat('renewedConfession')}
+    </div>
+
+    <div class="mass-section">
+      <h3 class="section-title">✠ LA PAZ</h3>
+      ${rat('renewedPeace')}
+    </div>`}
+
+    <!-- ═══════════════ LITURGIA EUCARÍSTICA ═══════════════ -->
+    <div class="mass-section">
+      <h3 class="section-title main-section">✠ LITURGIA EUCARÍSTICA — EL OFERTORIO</h3>
+      ${rat('renewedOffertory')}
+    </div>
+
+    <div class="mass-section">
+      <h3 class="section-title">✠ PREFACIO: ${pf ? pf.title.toUpperCase() : 'PREFACIO COMÚN'}</h3>
+      ${rat('renewedSursum', prefacioHtml)}
+    </div>
+
+    <div class="mass-section canon-section">
+      <h3 class="section-title main-section">✠ LA ORACIÓN DE CONSAGRACIÓN</h3>
+      ${rat('renewedConsecration')}
+    </div>
+
+    <div class="mass-section">
+      <h3 class="section-title">✠ LA ORACIÓN DEL SEÑOR</h3>
+      ${rat('renewedLordsPrayer')}
+    </div>
+
+    <div class="mass-section">
+      <h3 class="section-title">✠ LA FRACCIÓN</h3>
+      <div class="liturgical-text-block">${fraccionSinAleluya ? BCPEucharist.FRACTION_LENT : BCPEucharist.FRACTION}</div>
+      <h4 class="section-title">ORACIÓN DE HUMILDE ACCESO</h4>
+      ${rat('renewedHumbleAccess')}
+      <h4 class="section-title">EL AGNUS DEI</h4>
+      ${rat('renewedAgnusDei')}
+    </div>
+
+    <div class="mass-section">
+      <h3 class="section-title">✠ LA ADMINISTRACIÓN DE LA COMUNIÓN</h3>
+      ${rat('renewedAdministration')}
+    </div>
+
+    <div class="mass-section">
+      <h3 class="section-title">✠ ORACIÓN DESPUÉS DE LA COMUNIÓN</h3>
+      ${rat('renewedPostCommunion')}
+    </div>
+
+    ${isMaundy ? `<div class="mass-section">
+      <h3 class="section-title main-section">✠ AL TERMINAR LA LITURGIA</h3>
+      ${BCPHolyWeek.render('maundyThursdayClosing')}
+    </div>` : `<div class="mass-section">
+      <h3 class="section-title main-section">✠ LA BENDICIÓN Y LA DESPEDIDA</h3>
+      ${cierreCeniza}
+      ${rat('renewedBlessing')}
+      ${bendicionVigilia}
+      ${rat('renewedDismissal')}
+      ${despedidaConAleluya ? BCPHolyWeek.render('renewedDismissalAlleluia') : ''}
+    </div>`}
+`;
+    }
     return `
     ${ash ? '' : `<div class="mass-section">
       <h3 class="section-title">✠ CONFESIÓN Y ABSOLUCIÓN DE LOS PECADOS</h3>
@@ -290,6 +369,18 @@ function buildLiturgyHTML(d) {
 `;
   };
 
+  // El Credo y las Oraciones del Pueblo: en el Texto Antiguo Renovado el libro trae su propia redacción de ambos.
+  const prayersHtml = `<div class="mass-section intercessions">
+      <h3 class="section-title main-section">✠ ORACIÓN DE LOS FIELES</h3>
+      ${renewed ? rat('renewedPrayers') : `<div class="liturgical-text-block">${BCPEucharist.PRAYERS_OF_THE_PEOPLE}</div>`}
+    </div>`;
+  const creedAndPrayersHtml = `<div class="mass-section">
+      <h3 class="section-title">✠ EL CREDO NICENO</h3>
+      ${renewed ? rat('renewedCreed') : `<div class="liturgical-text-block">${BCPEucharist.CREED}</div>`}
+    </div>
+
+    ${prayersHtml}`;
+
   // Las cuatro lecturas del día (primera, salmo, segunda, Evangelio). Las usa la Liturgia de la Palabra y, el Viernes y el
   // Sábado Santo, el rito propio, donde sustituyen al marcador LECTURAS de holyweek-data.js.
   const readingsHtml = `
@@ -320,10 +411,7 @@ function buildLiturgyHTML(d) {
       <h3 class="section-title main-section">✠ LA ACLAMACIÓN PASCUAL Y LA PALABRA</h3>
       ${BCPHolyWeek.render('easterVigilWord', '', leerVigilia)}
     </div>
-    <div class="mass-section intercessions">
-      <h3 class="section-title main-section">✠ ORACIÓN DE LOS FIELES</h3>
-      <div class="liturgical-text-block">${BCPEucharist.PRAYERS_OF_THE_PEOPLE}</div>
-    </div>
+    ${prayersHtml}
     ${eucharistEndHtml({ preface: BCPPropers.PREFACES.easter, vigil: true })}`;
     return `
   <div class="liturgy-document">
@@ -422,15 +510,7 @@ function buildLiturgyHTML(d) {
 
     <div class="mass-section">
       ${BCPHolyWeek.render('ashWednesdayAbsolution')}
-    </div>` : `<div class="mass-section">
-      <h3 class="section-title">✠ EL CREDO NICENO</h3>
-      <div class="liturgical-text-block">${BCPEucharist.CREED}</div>
-    </div>
-
-    <div class="mass-section intercessions">
-      <h3 class="section-title main-section">✠ ORACIÓN DE LOS FIELES</h3>
-      <div class="liturgical-text-block">${BCPEucharist.PRAYERS_OF_THE_PEOPLE}</div>
-    </div>`}
+    </div>` : creedAndPrayersHtml}
 
     ${eucharistEndHtml({ ash: isAsh })}
 
@@ -484,7 +564,8 @@ async function handleGenerate() {
   if (generateBtn) generateBtn.disabled = true;
 
   try {
-    const html = await generateLiturgy(date);
+    const formSelect = document.getElementById('form-select');
+    const html = await generateLiturgy(date, { form: formSelect ? formSelect.value : 'standard' });
     output.innerHTML = html;
     output.classList.remove('hidden');
     output.scrollIntoView({ behavior: 'smooth' });

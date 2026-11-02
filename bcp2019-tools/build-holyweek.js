@@ -21,6 +21,24 @@ const SECCIONES = {
   maundyThursdayClosing: { ini: 'Cuando se desee administrar la Santa Comunión el Viernes Santo', fin: 'INDICACIONES ADICIONALES', desde: 14850 },
   goodFriday: { ini: 'En este día los ministros entran en silencio.', fin: 'LO CONCERNIENTE', desde: 14900, hastaIncluida: 'Los Ministros y el Pueblo se van en silencio.' },
   holySaturday: { ini: 'No hay celebración de la Eucaristía en este día.', fin: 'LO CONCERNIENTE A LA GRAN VIGILIA', desde: 15200 },
+  // Texto Antiguo Renovado (la segunda forma de la Eucaristía). Su comienzo, hasta la Colecta y las lecturas, es el del Texto
+  // Estándar y el app lo conserva; de ahí en adelante el libro da texto propio, y estas secciones lo copian. El lugar del
+  // prefacio del día queda marcado como {t:'PREFACIO'} (en el libro: «Inserta el Prefacio indicado»).
+  renewedCreed: { ini: 'EL CREDO NICENO', fin: 'ORACIONES DE LOS FIELES', desde: 3180 },
+  renewedPrayers: { ini: 'ORACIONES DE LOS FIELES', fin: 'LA CONFESIÓN Y ABSOLUCIÓN DE LOS PECADOS', desde: 3180 },
+  renewedConfession: { ini: 'LA CONFESIÓN Y ABSOLUCIÓN DE LOS PECADOS', fin: 'LA PAZ', desde: 3180 },
+  renewedPeace: { ini: 'LA PAZ', fin: 'EL OFERTORIO', desde: 3180 },
+  renewedOffertory: { ini: 'EL OFERTORIO', fin: 'EL SURSUM CORDA', desde: 3180 },
+  renewedSursum: { ini: 'EL SURSUM CORDA', fin: 'LA ORACIÓN DE CONSAGRACIÓN', desde: 3180 },
+  renewedConsecration: { ini: 'LA ORACIÓN DE CONSAGRACIÓN', fin: 'LA ORACIÓN DEL SEÑOR', desde: 3180 },
+  renewedLordsPrayer: { ini: 'LA ORACIÓN DEL SEÑOR', fin: 'LA FRACCIÓN', desde: 3180 },
+  renewedHumbleAccess: { ini: 'LA ORACIÓN DE HUMILDE ACCESO', fin: 'EL AGNUS DEI', desde: 3180 },
+  renewedAgnusDei: { ini: 'EL AGNUS DEI', fin: 'LA ADMINISTRACIÓN DE LA COMUNIÓN', desde: 3180 },
+  renewedAdministration: { ini: 'LA ADMINISTRACIÓN DE LA COMUNIÓN', fin: 'ORACIÓN DESPUÉS DE LA COMUNIÓN', desde: 3180 },
+  renewedPostCommunion: { ini: 'ORACIÓN DESPUÉS DE LA COMUNIÓN', fin: 'LA BENDICIÓN', desde: 3180 },
+  renewedBlessing: { ini: 'LA BENDICIÓN', fin: 'LA DESPEDIDA', desde: 3180 },
+  renewedDismissal: { ini: 'LA DESPEDIDA', fin: 'Desde la Vigilia Pascual hasta el Día de Pentecostés', desde: 3180 },
+  renewedDismissalAlleluia: { ini: 'Desde la Vigilia Pascual hasta el Día de Pentecostés', fin: 'INDICACIONES ADICIONALES', desde: 3180 },
   // Miércoles de Ceniza (el rito con Comunión): apertura, invitación a la santa Cuaresma con la colecta, salmo penitencial e
   // imposición de la ceniza, confesión y letanía, absolución con las palabras confortantes y la paz, y el cierre.
   ashWednesdayOpening: { ini: 'Los ministros pueden entrar en silencio', fin: 'El Oficiante invita al Pueblo a la observancia', desde: 14460 },
@@ -63,7 +81,7 @@ const LECTURAS = {
   holySaturday: { ini: 'LAS LECTURAS', fin: 'Después del Evangelio, puede seguir una homilía.' },
 };
 
-const ROTULO = /^(Se (dice|canta|puede|pueden|utiliza|omiten|omite|guarda|lleva)|Luego[ ,]|A continuación|Todos (de pie|se |pueden)|El (Celebrante|Oficiante|Diácono|Presbítero|Obispo) (puede|dice|reza|lee|entonces|concluye|invita|se pone|se levanta)|El servicio siempre|El rito de la Santa Eucaristía no|No hay celebración de la Eucaristía|El Celebrante (enciende|puede presentar)|El oficiante dice|El Pueblo se pone|Todos de rodillas|El Lector solo continúa|Entonces todos rezan|Si está presente el Obispo|El Oficiante puede entonces|Cuando hay Comunión|El silencio puede seguir|El Diácono \(o el Celebrante|El Cirio Pascual se coloca|El servicio continúa|Se leen |Después del Evangelio|La celebración continúa|El Prefacio de Pascua|La siguiente bendición|El Santo Bautismo puede|O, si las oraciones|Todos se ponen de pie|Se puede tocar|El Gloria in Excelsis, o algún otro|El Diácono, u otra persona|La Gran Vigilia, cuando|El Servicio de la Luz|El servicio de las lecturas|El Santo Bautismo es|La Sagrada Eucaristía es|En la oscuridad, el fuego|El Obispo o Sacerdote|El Diácono (u otra|y el Pueblo)|El Oficiante (y el|dice|entonces)|Los Ministros|Los ministros|La Congregación|Cuando |Si |Durante |Después |Siguiendo |En (un lugar|la ausencia|ausencia|este día los)|Puede |Pueden |Estas |Esta liturgia|Las peticiones|Las oraciones iniciales|El himno de|El Evangelio de la Pasión|Año [ABC] |Frente al|Pueden seguir|Ahora se puede|Entonces se puede|La liturgia continúa|Silencio)/;
+const ROTULO = /^(Se (dice|canta|puede|pueden|utiliza|omiten|omite|guarda|lleva)|Luego[ ,]|A continuación|Todos (de pie|se |pueden)|El (Celebrante|Oficiante|Diácono|Presbítero|Obispo) (puede|dice|reza|lee|entonces|concluye|invita|se pone|se levanta)|El servicio siempre|El rito de la Santa Eucaristía no|No hay celebración de la Eucaristía|El Celebrante (enciende|puede presentar)|El oficiante dice|El Pueblo se pone|Todos de rodillas|El Lector solo continúa|Entonces todos rezan|Si está presente el Obispo|El Oficiante puede entonces|Cuando hay Comunión|El silencio puede seguir|El Diácono \(o el Celebrante|El [Dd]iácono (u otra|y el [Pp]ueblo)|El Pueblo permanece|El Celebrante continúa|La gente se pone de pie|En las siguientes palabras|El [Oo]bispo o sacerdote|El obispo, cuando|El diácono, o el sacerdote|Después de la Comunión|El Pan y el Cáliz se entregan|El Celebrante puede ofrecer|Durante el ministerio|Juntos, el Celebrante|Se puede cantar un himno|Si el Pan consagrado|En Cuaresma, se omite|Después de cada lectura|Se leen una o más|Se puede agregar una cita|O el lector puede|Puede seguir un momento|Un salmo, himno|Todos de pie, el diácono|Después del Evangelio, el lector|El Celebrante le dice|El Celebrante reza|Desde la Vigilia Pascual|Puede añadirse en otros|La gente responde|Antes de la celebración|El Celebrante puede comenzar|Durante el ofertorio|El Pueblo se pone de pie mientras|Entonces los Ministros|Se puede cantar o decir la Gloria|Luego sigue el Resumen|El celebrante y el pueblo rezan|El Celebrante y el pueblo rezan|El Cirio Pascual se coloca|El servicio continúa|Se leen |Después del Evangelio|La celebración continúa|El Prefacio de Pascua|La siguiente bendición|El Santo Bautismo puede|O, si las oraciones|Todos se ponen de pie|Se puede tocar|El Gloria in Excelsis, o algún otro|El Diácono, u otra persona|La Gran Vigilia, cuando|El Servicio de la Luz|El servicio de las lecturas|El Santo Bautismo es|La Sagrada Eucaristía es|En la oscuridad, el fuego|El Obispo o Sacerdote|El Diácono (u otra|y el Pueblo)|El Oficiante (y el|dice|entonces)|Los Ministros|Los ministros|La Congregación|Cuando |Si |Durante |Después |Siguiendo |En (un lugar|la ausencia|ausencia|este día los)|Puede |Pueden |Estas |Esta liturgia|Las peticiones|Las oraciones iniciales|El himno de|El Evangelio de la Pasión|Año [ABC] |Frente al|Pueden seguir|Ahora se puede|Entonces se puede|La liturgia continúa|Silencio)/;
 const ROTULO_EXACTO = /^(o esto|o bien,?|O lo siguiente|Silencio\.?)$/;
 // «Pueblo mío», «Todos los que…» y «Todos nosotros…» son texto, no la etiqueta de quien habla.
 const ETIQUETA = /^(Celebrante|Pueblo(?! mío| de Dios| santo)|Diácono|Lector|Oficiante|Todos(?! los| nosotros)|Obispo|Presbítero)\s+(.+)$/;
@@ -73,7 +91,7 @@ const REFERENCIA = /^\(?(Año [ABC] )?([1-3] )?[A-ZÁÉÍÓÚÑ]{3,}( [A-ZÁÉÍ
 const FIN_FRASE = /[.:;?!”»)"]$/;
 // Un párrafo de texto corrido (P) NO se corta al final de cada frase: sigue hasta «Amén.» o hasta que empiece otro
 // párrafo reconocible por su primera palabra. Es el único sitio donde hace falta enumerar comienzos.
-const INICIO_PARRAFO = /^(Oremos |Encomendémonos|Amado Pueblo|Oramos, por tanto|Esta es la noche|Por lo tanto|Vengan ahora|Compañeros siervos|Queridos hermanos|Nosotros te alabamos|Concédenos que los que|Dios todopoderoso, cuyo Hijo amadísimo)/;
+const INICIO_PARRAFO = /^(La Sangre de Cristo, Cáliz|Por la paz del mundo|Asimismo, después de la cena|Por lo tanto, proclamamos|Celebramos el memorial|Santifícalos por tu Palabra|Todo esto te lo pedimos|Oremos |Encomendémonos|Amado Pueblo|Oramos, por tanto|Esta es la noche|Por lo tanto|Vengan ahora|Compañeros siervos|Queridos hermanos|Nosotros te alabamos|Concédenos que los que|Dios todopoderoso, cuyo Hijo amadísimo)/;
 // Excepciones por texto exacto de la línea: lo que la heurística clasifica mal.
 const OVERRIDES = {
   'Oremos:': 'P', 'Oremos.': 'P', 'Oremos': 'P',
@@ -88,6 +106,7 @@ const OVERRIDES = {
   'Bendito sea el Señor que perdona todos nuestros pecados.': 'OFIC',
   'LA PAZ': 'T',
   'Confirmación. Si no hay candidatos para el Bautismo o la Confirmación, la': 'CONT',
+  'Anglicano):': 'CONT',
   // Últimas líneas de una rúbrica, que el ancho de la página parte y empiezan en mayúscula.
   'Colecta adecuada.': 'CONT', 'Confirmación, el Celebrante dirige al pueblo a la Renovación de los Votos Bautismales.': 'CONT',
   'Instrucciones Adicionales. En ausencia de Candidatos para el Bautismo o Confirmación, el Celebrante dirige al': 'CONT',
@@ -115,6 +134,32 @@ const VERSOS = {
   easterVigilWord: [
     { ini: 'Gloria a Dios en el cielo,', fin: 'LA ORACIÓN COLECTA', corta: /^Amén\.$/ },
   ],
+  // Texto Antiguo Renovado: el Credo, la confesión, el Sanctus, la aclamación memorial, el Padrenuestro, la oración de acceso
+  // humilde, el Agnus Dei y la oración después de la comunión van en verso (una línea por renglón del libro).
+  renewedCreed: [
+    { ini: 'Creemos en un solo Dios,', fin: '† La frase', corta: /vida del mundo futuro\. Amén\.$/ },
+  ],
+  renewedConfession: [
+    { ini: 'Dios de gran misericordia,', fin: 'El obispo o sacerdote se pone de pie y dice', corta: /para gloria de tu nombre\. Amén\.$/ },
+  ],
+  renewedSursum: [
+    { ini: 'Santo, Santo, Santo es el Señor', corta: /Hosanna en el cielo\.$/ },
+  ],
+  renewedConsecration: [
+    { ini: 'Cristo ha muerto.', fin: 'Celebramos el memorial', corta: /vendrá de nuevo\.$/ },
+  ],
+  renewedLordsPrayer: [
+    { ini: 'Padre Nuestro que estás en el cielo,', corta: /ahora y por siempre\. Amén\.$/ },
+  ],
+  renewedHumbleAccess: [
+    { ini: 'Nosotros no nos atrevemos a venir', corta: /él en nosotros\. Amén\.$/ },
+  ],
+  renewedAgnusDei: [
+    { ini: 'Cordero de Dios, que quitas el pecado del mundo;', corta: /Danos tu paz\.$/ },
+  ],
+  renewedPostCommunion: [
+    { ini: 'Padre Celestial,', corta: /ahora y por siempre\. Amén\.$/ },
+  ],
   // Ceniza: el Salmo 51 (texto del propio libro), un versículo cada dos líneas, y la confesión de la letanía.
   ashWednesdayAshes: [
     { ini: '1 Ten compasión de mí, oh Dios', cada: 2 },
@@ -124,8 +169,16 @@ const VERSOS = {
   ],
 };
 
+// Excepciones por comienzo de línea (cuando la línea es larga o varía): tipo que se le da.
+const OVERRIDES_PREFIJO = [
+  ['Mesa para la celebración.', 'CONT'],            // sigue la rúbrica «El Diácono o Sacerdote prepara la Santa»
+  ['Si Mis queridos hijos', 'P'],                    // «Si» sobrante de la conversión del PDF: es el texto de 1 Juan 2:1-2
+  ['Celebrante y ', 'R'],                             // «Celebrante y gente / y Pueblo / y las personas juntas pueden decir»: quién lo dice
+];
+
 function tipoLinea(l) {
   if (OVERRIDES[l]) return OVERRIDES[l];
+  for (const [p, t] of OVERRIDES_PREFIJO) if (l.startsWith(p)) return t;
   if (ROTULO_EXACTO.test(l)) return 'R';
   if (/^(UN CANTO|EL CANTO DE|SEGURAMENTE ES DIOS)/.test(l)) return 'REF';   // cánticos que acompañan a una lección
   if (REFERENCIA.test(l) && !/[a-záéíóú]{3,} [a-záéíóú]{3,} [a-záéíóú]{3,}/.test(l.replace(/\(.*?\)/g, ''))) return 'REF';
@@ -143,6 +196,9 @@ function analizar(lineas) {
     const l = bruta.trim();
     if (!l || /^\d{3}$/.test(l)) continue;
     if (l === '[[LECTURAS]]') { cierra(); items.push({ t: 'LECTURAS' }); continue; }
+    const mv0 = /^\[\[V:(.*)\]\]$/s.exec(l);
+    if (mv0) { cierra(); items.push({ t: 'V', x: mv0[1] }); continue; }
+    if (l === '[[PREFACIO]]') { cierra(); items.push({ t: 'PREFACIO' }); continue; }
     const t = tipoLinea(l);
     if (t === 'CONT' && cur) { cur.lineas.push(l); continue; }
     // ¿Continúa la frase anterior? Solo si hay un item abierto de texto, esta línea no es título, referencia ni rúbrica
@@ -165,7 +221,7 @@ function analizar(lineas) {
   }
   cierra();
   return items.map(it => {
-    if (it.t === 'LECTURAS' || it.x !== undefined) return it;
+    if (it.t === 'LECTURAS' || it.t === 'PREFACIO' || it.x !== undefined) return it;
     const ls = it.lineas;
     const corto = ls.length >= 3 && ls.every(x => x.length < 66);
     return { t: corto && it.t === 'P' ? 'V' : it.t, x: (corto && it.t === 'P' ? ls.join('\n') : ls.join(' ')).replace(/\s+/g, m => (m.includes('\n') ? m : ' ')) };
@@ -205,6 +261,8 @@ function construir(locPath) {
   for (const [nombre, def] of Object.entries(SECCIONES)) {
     const r = recorte(lineas, def, def.desde);
     let ls = r.lineas.slice();
+    // El libro dice «Inserta el Prefacio indicado (págs. 152-158)»: ahí va el prefacio del día (lo pone el app).
+    ls = ls.map(l => (l.trim().startsWith('Inserta el Prefacio indicado') ? '[[PREFACIO]]' : l));
     if (LECTURAS[nombre]) {
       const a = ls.findIndex(l => l.trim().startsWith(LECTURAS[nombre].ini)), b = ls.findIndex((l, n) => n > a && l.trim().startsWith(LECTURAS[nombre].fin));
       if (a < 0 || b < 0) throw new Error('no encuentro el tramo de lecturas de ' + nombre);

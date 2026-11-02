@@ -28,7 +28,7 @@
   <header class="app-header">
     <div class="header-cross">✠</div>
     <h1>LIBRO DE ORACIÓN COMÚN</h1>
-    <p class="subtitle">Santa Eucaristía · Texto Estándar Anglicano · ACNA (2019)</p>
+    <p class="subtitle">Santa Eucaristía · Texto Estándar Anglicano y Texto Antiguo Renovado · ACNA (2019)</p>
     <p class="subtitle" style="font-size:0.85rem; margin-top:0.3rem; opacity:0.7;">
       Ciclo Dominical A · B · C &nbsp;·&nbsp; Domingos después de Pentecostés (Leccionario Común Revisado)
     </p>
@@ -41,6 +41,13 @@
       <div class="control-group">
         <label for="date-picker">Fecha Litúrgica</label>
         <input type="date" id="date-picker" class="neu-input" value="">
+      </div>
+      <div class="control-group">
+        <label for="form-select">Forma de la Eucaristía</label>
+        <select id="form-select" class="neu-input">
+          <option value="standard">Texto Estándar Anglicano (primera forma)</option>
+          <option value="renewed">Texto Antiguo Renovado (segunda forma)</option>
+        </select>
       </div>
     </div>
 
@@ -77,21 +84,21 @@
   <script src="/js/lib/biblia-loader.js"></script>
   <script src="/js/lib/biblia-wrapper.js?v=29"></script>
 
-  <script src="/bcp2019/js/calendar.js?v=21"></script>
-  <script src="/bcp2019/js/lectionary.js?v=21"></script>
-  <script src="/bcp2019/js/propers.js?v=21"></script>
-  <script src="/bcp2019/js/eucharist.js?v=21"></script>
-  <script src="/bcp2019/js/holyweek-data.js?v=21"></script>
-  <script src="/bcp2019/js/holyweek.js?v=21"></script>
-  <script src="/bcp2019/js/utils.js?v=21"></script>
-  <script src="/bcp2019/js/app.js?v=21"></script>
-  <script src="/bcp2019/js/manual.js?v=21"></script>
-  <script src="/bcp2019/js/librito-pueblo.js?v=21"></script>
+  <script src="/bcp2019/js/calendar.js?v=22"></script>
+  <script src="/bcp2019/js/lectionary.js?v=22"></script>
+  <script src="/bcp2019/js/propers.js?v=22"></script>
+  <script src="/bcp2019/js/eucharist.js?v=22"></script>
+  <script src="/bcp2019/js/holyweek-data.js?v=22"></script>
+  <script src="/bcp2019/js/holyweek.js?v=22"></script>
+  <script src="/bcp2019/js/utils.js?v=22"></script>
+  <script src="/bcp2019/js/app.js?v=22"></script>
+  <script src="/bcp2019/js/manual.js?v=22"></script>
+  <script src="/bcp2019/js/librito-pueblo.js?v=22"></script>
 
   <!-- Exportación a Word (librería compartida con el Misal Anglicano) -->
   <script src="/js/lib/docx.iife.js"></script>
   <script src="/js/lib/FileSaver.min.js"></script>
-  <script src="/bcp2019/js/docx-export.js?v=21"></script>
+  <script src="/bcp2019/js/docx-export.js?v=22"></script>
 
   <!-- PWA: registro del Service Worker (scope /bcp2019/) -->
   <script>
