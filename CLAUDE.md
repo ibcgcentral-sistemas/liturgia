@@ -67,7 +67,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=31` (Misal) y `?v=16` (bcp2019; la hoja de estilo, `?v=6`).
+   código viejo. Actualmente en `?v=31` (Misal) y `?v=18` (bcp2019; la hoja de estilo, `?v=7`).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -202,10 +202,28 @@ sale con título (no se midió cuántos).
   primitiva, cercano al Rito II de 1979), más las *Additional Directions* (orden de
   1662, Orden Penitencial, abreviaturas, Oración de los Fieles alternativas). El
   generador implementa **solo el Texto Estándar** (`eucharist.js`); el Texto Antiguo
-  Renovado, el Orden Penitencial, el reordenamiento de 1662, el Sermón como marca y el
-  Trisagio (hay texto en `eucharist.js`, no se ofrece) no están. Falta decidir si se
-  quiere el Texto Antiguo Renovado como segunda forma: es trabajo grande y el texto
-  español está en `LOC-10-10-23.md`, no hay que inventar nada.
+  Renovado, el Orden Penitencial, el reordenamiento de 1662 y el Trisagio (hay texto
+  en `eucharist.js`, no se ofrece) no están; el Sermón sí figura como rúbrica. Falta
+  decidir si se quiere el Texto Antiguo Renovado como segunda forma: es trabajo grande y
+  el texto español está en `LOC-10-10-23.md`, no hay que inventar nada.
+- `bcp2019`, **Semana Santa** (2026-11-02): Domingo de Ramos, Jueves, Viernes y Sábado
+  Santo llevan su rito del libro en español, **copiado, no traducido**. `bcp2019-tools/
+  build-holyweek.js` corta el libro por anclas y genera `bcp2019/js/holyweek-data.js`
+  (no editar a mano; `test-bcp2019.js` 9 comprueba que sigue idéntico a lo que genera el
+  script, y `holyweek.js` lo pinta en la liturgia y en el Librito). Ramos: Liturgia de las
+  Palmas, y en la Eucaristía el Saludo y la Colecta sin Ritos Iniciales, sin Credo ni
+  Oraciones del Pueblo (el libro dice «pueden omitirse»: se omiten, rúbrica incluida) y la
+  Pasión sin las respuestas habituales. Jueves: apertura y lavatorio del libro, y **sin
+  bendición ni despedida** («la Congregación se marcha en silencio»; antes las imprimía).
+  Viernes y Sábado Santo: rito completo (Colectas Solemnes, Improperios, Distribución de la
+  Comunión; himno del Sábado) con las lecturas del leccionario. El libro no distingue
+  rúbricas de texto en el Markdown: el script las clasifica por su forma (heurística;
+  `--preview` muestra cómo) y las excepciones van en `OVERRIDES`. **Faltan:** la Gran
+  Vigilia Pascual (Exsultet, lecturas, Bautismo) y la imposición de la ceniza del
+  Miércoles de Ceniza. **Discrepancia del libro, no corregida:** la página del Sábado
+  Santo pide Job 14:1-14 y la tabla del leccionario (`lectionary.js`) Job 14:1-17; se
+  sigue la tabla. El Jueves Santo conserva Colecta por la Pureza, Kyrie y Gloria porque el
+  libro no los quita, aunque tampoco los nombra.
 - `bcp2019`, **lecturas en español** (2026-11-02): el libro en español NO trae leccionario,
   así que el texto de las lecturas es de la **Biblia de Jerusalén** (elección del
   proyecto), pedida por la cita inglesa del libro. Medido por simulación: las 876

@@ -31,7 +31,7 @@ function load() {
   new Function('module', 'exports', fs.readFileSync(LIB + 'biblia-de-jerusalen.min.js', 'utf8'))(mod, mod.exports);
   ctx._BibliaInstance = new mod.exports.Bible();
   vm.runInContext(fs.readFileSync(LIB + 'biblia-wrapper.js', 'utf8') + '\n;', ctx, { filename: 'biblia-wrapper.js' });
-  for (const f of ['calendar.js', 'lectionary.js', 'propers.js', 'eucharist.js', 'utils.js', 'app.js', 'librito-pueblo.js']) {
+  for (const f of ['calendar.js', 'lectionary.js', 'propers.js', 'eucharist.js', 'holyweek-data.js', 'holyweek.js', 'utils.js', 'app.js', 'librito-pueblo.js']) {
     vm.runInContext(fs.readFileSync(BCP + f, 'utf8') + '\n;', ctx, { filename: f });
   }
   const get = n => vm.runInContext(`typeof ${n} !== 'undefined' ? ${n} : undefined`, ctx);
@@ -94,19 +94,22 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
     // Adviento, Cuaresma y Semana Santa, salvo Jueves Santo y fiestas fijas; la rúbrica impresa nombra el tiempo real.
     const gloriaOmitido = /se omite el Gloria in excelsis/.test(text);
     const debeOmitir = ['advent', 'lent', 'holyWeek'].includes(st.dayInfo.season) && !st.dayInfo.isFixed && st.dayInfo.key !== 'maundyThursday';
-    if (gloriaOmitido !== debeOmitir) f.gloria.push(`${date} ${st.dayInfo.key} (${st.dayInfo.season}): ${gloriaOmitido ? 'omitido' : 'presente'}`);
-    if (debeOmitir && gloriaOmitido && !(st.dayInfo.season === 'advent' ? /en Adviento se omite el Gloria/ : /en Cuaresma se omite el Gloria/).test(text)) f.gloria.push(`${date} ${st.dayInfo.key} (${st.dayInfo.season}): la rúbrica nombra otro tiempo`);
+    // El Domingo de Ramos la Liturgia de las Palmas sustituye a los Ritos Iniciales (sin Aclamación ni Gloria; comprobación 9).
+    const esRamos = st.dayInfo.key === 'palmSunday';
+    if (!esRamos && gloriaOmitido !== debeOmitir) f.gloria.push(`${date} ${st.dayInfo.key} (${st.dayInfo.season}): ${gloriaOmitido ? 'omitido' : 'presente'}`);
+    if (!esRamos && debeOmitir && gloriaOmitido && !(st.dayInfo.season === 'advent' ? /en Adviento se omite el Gloria/ : /en Cuaresma se omite el Gloria/).test(text)) f.gloria.push(`${date} ${st.dayInfo.key} (${st.dayInfo.season}): la rúbrica nombra otro tiempo`);
     // Aclamación, Fracción y Despedida según el tiempo (comprobación 6). Se lee el HTML ya armado.
     {
       const s = st.dayInfo.season, k = st.dayInfo.key;
       const am = /LA ACLAMACIÓN<\/h4>([\s\S]*?)(?=<h[34])/.exec(html), fr = /LA FRACCIÓN<\/h3>([\s\S]*?)(?=ORACIÓN DE HUMILDE ACCESO)/.exec(html), dm = /LA BENDICIÓN Y LA DESPEDIDA<\/h3>([\s\S]*)$/.exec(html);
       const acl = !am ? 'ausente' : /Derramaré mi Espíritu/.test(am[1]) ? (joelCompleto(strip(am[1])) ? 'pentecostes' : 'pentecostes-incompleto') : /Bendito sea nuestro Dios/.test(am[1]) ? 'semana-santa' : /Bendigamos al Señor que perdona/.test(am[1]) ? 'cuaresma' : /Cristo ha resucitado/.test(am[1]) ? 'pascua' : /Bendito sea Dios: Padre/.test(am[1]) ? 'ordinaria' : 'desconocida';
       const aclEsp = k === 'pentecost' ? 'pentecostes' : s === 'holyWeek' ? 'semana-santa' : s === 'lent' ? 'cuaresma' : s === 'easter' ? 'pascua' : 'ordinaria';
-      if (acl !== aclEsp) f.aclamacion.push(`${date} ${k} (${s}): ${acl}, debía ser ${aclEsp}`);
+      if (!esRamos && acl !== aclEsp) f.aclamacion.push(`${date} ${k} (${s}): ${acl}, debía ser ${aclEsp}`);
       const conAleluyaFr = !!fr && /\[Aleluya\.\]/.test(fr[1]), debeAleluyaFr = !['lent', 'holyWeek'].includes(s);
       if (conAleluyaFr !== debeAleluyaFr) f.fraccion.push(`${date} ${k} (${s}): ${conAleluyaFr ? 'con' : 'sin'} Aleluya`);
       const conAleluyaDesp = !!dm && /aleluya, aleluya/i.test(dm[1]), debeAleluyaDesp = s === 'easter' || k === 'pentecost';
-      if (conAleluyaDesp !== debeAleluyaDesp) f.despedida.push(`${date} ${k} (${s}): ${conAleluyaDesp ? 'con' : 'sin'} aleluya`);
+      const sinDespedida = k === 'maundyThursday'; // el Jueves Santo «se omiten la bendición final y la despedida»
+      if (!sinDespedida && conAleluyaDesp !== debeAleluyaDesp) f.despedida.push(`${date} ${k} (${s}): ${conAleluyaDesp ? 'con' : 'sin'} aleluya`);
       // El Librito no recalcula nada, pero decide estas tres cosas con su propio código: se mide igual.
       let lib = ''; try { lib = Librito.generateLibrito(st); } catch (e) { f.aclamacion.push(`${date} Librito lanzó: ${e.message}`); }
       // Salmo alternado: Lector el primer versículo que se muestra, Pueblo el siguiente, sin saltarse ninguno y en orden.
@@ -128,13 +131,13 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
         if (p2) f.salmoAlterna.push(`${date} ${st.readings.psalm}: ${p2}`);
       }
       const lgl = /<h3>GLORIA IN EXCELSIS<\/h3>([\s\S]*?)(?=<h[23])/.exec(lib);
-      if (lib && (!lgl || /se omite el Gloria in excelsis/.test(lgl[1]) !== debeOmitir)) f.gloria.push(`${date} ${k} (${s}) Librito: ${!lgl ? 'sin sección' : debeOmitir ? 'presente' : 'omitido'}`);
+      if (lib && !esRamos && (!lgl || /se omite el Gloria in excelsis/.test(lgl[1]) !== debeOmitir)) f.gloria.push(`${date} ${k} (${s}) Librito: ${!lgl ? 'sin sección' : debeOmitir ? 'presente' : 'omitido'}`);
       const lam = /<h3>LA ACLAMACIÓN<\/h3>([\s\S]*?)(?=<h[23])/.exec(lib);
       const lacl = !lam ? 'ausente' : /Derramaré mi Espíritu/.test(lam[1]) ? (joelCompleto(strip(lam[1])) ? 'pentecostes' : 'pentecostes-incompleto') : /Bendito sea nuestro Dios/.test(lam[1]) ? 'semana-santa' : /Bendigamos al Señor que perdona/.test(lam[1]) ? 'cuaresma' : /Cristo ha resucitado/.test(lam[1]) ? 'pascua' : /Bendito sea Dios: Padre/.test(lam[1]) ? 'ordinaria' : 'desconocida';
-      if (lib && lacl !== aclEsp) f.aclamacion.push(`${date} ${k} (${s}) Librito: ${lacl}, debía ser ${aclEsp}`);
+      if (lib && !esRamos && lacl !== aclEsp) f.aclamacion.push(`${date} ${k} (${s}) Librito: ${lacl}, debía ser ${aclEsp}`);
       const lfr = /Celebrante: (\[Aleluya\.\] )?Cristo, nuestra Pascua/.exec(lib), ldm = /Salgamos en el Nombre de Cristo\.( Aleluya, aleluya\.)?/.exec(lib);
       if (lib && (!lfr || !!lfr[1] !== debeAleluyaFr)) f.fraccion.push(`${date} ${k} (${s}) Librito: ${!lfr ? 'sin Fracción' : lfr[1] ? 'con' : 'sin'} Aleluya`);
-      if (lib && (!ldm || !!ldm[1] !== debeAleluyaDesp)) f.despedida.push(`${date} ${k} (${s}) Librito: ${!ldm ? 'sin Despedida' : ldm[1] ? 'con' : 'sin'} aleluya`);
+      if (lib && !sinDespedida && (!ldm || !!ldm[1] !== debeAleluyaDesp)) f.despedida.push(`${date} ${k} (${s}) Librito: ${!ldm ? 'sin Despedida' : ldm[1] ? 'con' : 'sin'} aleluya`);
     }
     if (!st.readings) { f.sinLecturas.push(date + ' ' + st.dayInfo.key); continue; }
     if (!st.firstReading || strip(st.firstReading.text || '').length < 40) f.sinPrimera.push(date + ' ' + st.readings.first);
@@ -309,6 +312,64 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   }
   check(`5. Prefacio de cada día = el del libro (${prefCubiertos} días, ${prefCasos.size} claves)`, prefMal, prefCubiertos);
 
+  // ── 9. Semana Santa ──────────────────────────────────────────────────────
+  // Domingo de Ramos: Liturgia de las Palmas y, en la Eucaristía, sin Credo ni Oraciones del Pueblo; la Pasión sin las
+  // respuestas habituales. Jueves Santo: apertura, lavatorio y cierre propios, sin bendición ni despedida. Viernes y
+  // Sábado Santo: su rito propio, con las lecturas del día. Los textos vienen del libro en español (holyweek-data.js).
+  const hw = []; let hwDias = 0;
+  const HW = (cond, msg) => { if (!cond) hw.push(msg); };
+  for (let y = Y0; y <= Y1; y++) {
+    const F = Cal.getFeastDates(y);
+    for (const [k, fecha] of [['palmSunday', F.palmSunday], ['maundyThursday', F.maundyThursday], ['goodFriday', F.goodFriday], ['holySaturday', F.holySaturday]]) {
+      const d = new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate(), 12); hwDias++;
+      let html, st; try { html = await generateLiturgy(d); st = C.state(); } catch (e) { hw.push(`${iso(d)} ${k}: lanzó ${e.message}`); continue; }
+      const lib = Librito.generateLibrito(st), tx = strip(html), tl = strip(lib), w = `${iso(d)} ${k}`;
+      const pasion = (h) => { const i = h.indexOf('LA PASIÓN'); if (i < 0) return null; const j = h.search(/class="(mass-section|librito-section)/); const rest = h.slice(i); const m = rest.search(/class="(mass-section|librito-section)/); return m < 0 ? rest : rest.slice(0, m); };
+      if (k === 'palmSunday') {
+        HW(/LA LITURGIA DE LAS PALMAS/.test(tx) && /Hosanna al Hijo de David/.test(tx), `${w}: falta la Liturgia de las Palmas`);
+        HW(/LA LITURGIA DE LAS PALMAS/.test(tl) && /Hosanna al Hijo de David/.test(tl), `${w} Librito: falta la Liturgia de las Palmas`);
+        HW(/EN LA EUCARISTÍA/.test(tx) && !/EL CREDO NICENO|ORACIÓN DE LOS FIELES/.test(tx), `${w}: debe omitir el Credo y las Oraciones del Pueblo`);
+        HW(!/EL CREDO NICENO|ORACIÓN DE LOS FIELES/.test(tl), `${w} Librito: debe omitir el Credo y las Oraciones del Pueblo`);
+        HW(/Dios todopoderoso y eterno, en tu tierno amor/.test(tx), `${w}: falta la colecta oficial de Ramos`);
+      }
+      if (k === 'palmSunday' || k === 'goodFriday') {
+        const p = pasion(html), pl = pasion(lib);
+        HW(p && p.length > 500 && !/Gloria a ti, Cristo Señor|Te alabamos, Cristo Señor/.test(p), `${w}: la Pasión debe ir sin las respuestas habituales`);
+        HW(pl && pl.length > 500 && !/Gloria a ti, Cristo Señor|Te alabamos, Cristo Señor/.test(pl), `${w} Librito: la Pasión debe ir sin las respuestas habituales`);
+      }
+      if (k === 'maundyThursday') {
+        for (const [t, n] of [[tx, ''], [tl, ' Librito']]) {
+          HW(/Esta es la noche en que Cristo/.test(t) && /LAVATORIO DE LOS PIES/.test(t), `${w}${n}: faltan las palabras de apertura o el lavatorio`);
+          HW(!/Salgamos en el Nombre de Cristo/.test(t) && /se omiten la bendición final y la despedida/i.test(t), `${w}${n}: el Jueves Santo no lleva bendición ni despedida`);
+        }
+      }
+      if (k === 'goodFriday') {
+        for (const [t, n] of [[tx, ''], [tl, ' Librito']]) {
+          HW(/COLECTAS SOLEMNES/.test(t) && /IMPROPERIOS/.test(t) && /ORACIÓN CONCLUSIVA/.test(t) && /Señor Jesucristo, Hijo del Dios vivo/.test(t), `${w}${n}: falta parte del rito del Viernes Santo`);
+          HW(!/ORACIÓN DE CONSAGRACIÓN/.test(t) && /no se celebra/.test(t), `${w}${n}: el Viernes Santo no tiene Eucaristía`);
+          HW(/Génesis 22|Hebreos 10/.test(t) && /Juan/.test(t), `${w}${n}: faltan las lecturas del día`);
+        }
+      }
+      if (k === 'holySaturday') {
+        for (const [t, n] of [[tx, ''], [tl, ' Librito']]) {
+          HW(/No hay celebración de la Eucaristía/.test(t) && /EL HIMNO/.test(t) && /Oh Dios, Creador del cielo y de la tierra/.test(t), `${w}${n}: falta parte del rito del Sábado Santo`);
+          HW(/Job|1 Pedro/.test(t) && /Mateo/.test(t), `${w}${n}: faltan las lecturas del día`);
+        }
+      }
+    }
+  }
+  // Ningún otro día lleva rito de Semana Santa: la Liturgia de las Palmas y el lavatorio no se cuelan.
+  for (const k of ['2026-06-07', '2026-11-08', '2026-03-10']) { const d = new Date(k + 'T12:00:00'); const t = strip(await generateLiturgy(d)); HW(!/LITURGIA DE LAS PALMAS|LAVATORIO DE LOS PIES|IMPROPERIOS/.test(t), `${k}: se coló un rito de Semana Santa`); }
+  // El archivo generado sigue siendo idéntico al libro.
+  try {
+    const gen = require('./bcp2019-tools/build-holyweek.js');
+    if (fs.existsSync(gen.LOC_POR_DEFECTO)) {
+      const esperado = gen.archivo(gen.construir(gen.LOC_POR_DEFECTO)).replace(/\r\n/g, '\n'), actual = fs.readFileSync(path.join(__dirname, 'bcp2019', 'js', 'holyweek-data.js'), 'utf8').replace(/\r\n/g, '\n');
+      HW(esperado === actual, 'holyweek-data.js ya no coincide con lo que genera bcp2019-tools/build-holyweek.js desde el libro en español (volver a ejecutarlo)');
+    }
+  } catch (e) { hw.push('no se pudo comprobar holyweek-data.js: ' + e.message); }
+  check(`9. Semana Santa: Ramos, Jueves, Viernes y Sábado Santo con su rito del libro (${hwDias} días), en la liturgia y el Librito`, hw, hwDias);
+
   // ── 8. Colectas ──────────────────────────────────────────────────────────
   // 5 oficiales (Ceniza y Semana Santa) idénticas al libro en español; 90 traducidas del inglés, de las que se
   // comprueba la forma (Amén, fórmula final, longitud, nombre del santo). El inglés no está en el repositorio: sin él
@@ -333,7 +394,7 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   console.log('  - Salmos: se leen de la Biblia de Jerusalén; el Salterio español del libro aún no se usa.');
   console.log('  - Lecturas: el libro en español no trae leccionario; el texto es de la Biblia de Jerusalén, que no trae Mateo 21:44, Hechos 8:37 ni Marcos 9:44 y 9:46 (ver DIF_CONOCIDAS).');
   if (!prefacios) console.log('  - Prefacios: no se cotejaron con el libro (falta LOC-10-10-23.md; ver bcp2019-tools/check-prefacios.js).');
-  console.log('  - Ritos propios de Ceniza, Ramos, Jueves, Viernes, Sábado y Vigilia no modelados.');
+  console.log('  - Ritos propios del Miércoles de Ceniza (imposición de la ceniza) y de la Gran Vigilia Pascual no modelados; Ramos, Jueves, Viernes y Sábado Santo sí (holyweek.js).');
   console.log(failed ? `\n${failed} comprobación(es) con fallos.` : '\nTodas las comprobaciones pasan.');
   process.exit(failed ? 1 : 0);
 })();

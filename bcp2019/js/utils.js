@@ -152,7 +152,7 @@ const NO_EUCHARIST_DAYS = {
 function noEucharistNotice(dayInfo) {
   const n = dayInfo && NO_EUCHARIST_DAYS[dayInfo.key];
   if (!n) return '';
-  return `${n.sentence} El rito propio de este día (Libro de Oración Común, p. ${n.page}) no está incluido en este generador.`;
+  return n.sentence;
 }
 
 // ══════════════════════════════════════════════════════════════════════════

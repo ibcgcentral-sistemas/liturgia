@@ -311,6 +311,9 @@ body {
 .lit-title { font-weight: bold; text-transform: uppercase; font-size: 0.82rem; letter-spacing: 0.1em; margin: 0.9rem 0 0.3rem; color: var(--ink); display: block; }
 .lit-consecracion { font-weight: bold; font-size: 1.05rem; text-align: center; margin: 0.6rem 1rem; line-height: 1.9; display: block; }
 .lit-prayer { margin: 0.15rem 0; line-height: 1.5; display: block; }
+/* Semana Santa (holyweek.js): oraciones y súplicas largas, una tras otra; se separan para leerlas bien. */
+.holyweek-rite .lit-prayer { margin: 0.55rem 0; }
+.holyweek-rite .lit-rubric { margin: 0.5rem 0 0.2rem 0; }
 
 /* ── READINGS ─────────────────────────────────────────────────────────────── */
 .reading { margin-bottom: 1.8rem; padding-bottom: 1.4rem; border-bottom: 1px dashed var(--paper-dark); }

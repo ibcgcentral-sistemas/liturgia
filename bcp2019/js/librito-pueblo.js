@@ -58,6 +58,10 @@ const BCPLibrito = (() => {
     // Igual que app.js: la Aclamación la decide acclamationKind (utils.js); la Fracción sin Aleluya rige en
     // Cuaresma y Semana Santa (isLent); la Despedida con «aleluya» llega hasta el Día de Pentecostés (isEaster).
     const acclamation = acclamationKind(dayInfo);
+    // Semana Santa (igual que app.js): la Pasión se lee sin las respuestas habituales; Ramos antepone la Liturgia de las
+    // Palmas; el Jueves Santo tiene apertura, lavatorio y cierre propios, sin bendición ni despedida (holyweek.js).
+    const hwKey = dayInfo.key;
+    const isPalm = hwKey === 'palmSunday', isMaundy = hwKey === 'maundyThursday', isPassion = isPalm || hwKey === 'goodFriday';
     const isLent = dayInfo.season === 'lent' || dayInfo.season === 'holyWeek';
     const isEaster = dayInfo.season === 'easter' || dayInfo.key === 'pentecost';
     const omitGloria = shouldOmitGloria(dayInfo);
@@ -74,6 +78,13 @@ const BCPLibrito = (() => {
 
     const fmtGospel = (ref, data) => {
       if (!data) return '';
+      if (isPassion) return `
+        <div class="librito-gospel">
+          <p class="gospel-ref">✠ LA PASIÓN</p>
+          ${getGospelAuthor(ref) ? `<p class="reading-ref-small">De Nuestro Señor Jesucristo según ${getGospelAuthor(ref)}</p>` : ''}
+          <div class="librito-instruction"><p>Se omiten las respuestas habituales antes y después del Evangelio.</p></div>
+          <p class="reading-text">${data.text}</p>
+        </div>`;
       return `
         <div class="librito-gospel">
           <p class="gospel-ref">✠ SANTO EVANGELIO</p>
@@ -119,7 +130,14 @@ const BCPLibrito = (() => {
         <p class="librito-meta">Color: <strong>${colorName}</strong> · Ciclo: <strong>${dayInfo.cycle}</strong></p>
       </div>`;
 
-    // Viernes y Sábado Santo: sin Eucaristía (ver NO_EUCHARIST_DAYS en utils.js).
+    // Las lecturas del día en el Librito, para el rito propio del Viernes y el Sábado Santo (reemplazan al marcador LECTURAS).
+    const lecturasLibrito = `
+        ${firstReading && readings ? fmtReading(translateBibleReference(readings.first), firstReading, 'PRIMERA LECTURA') : ''}
+        ${psalmVerses && psalmVerses.length && readings ? fmtPsalm(translateBibleReference(readings.psalm), psalmVerses, psalmAnt) : ''}
+        ${secondReading && readings && readings.second ? fmtReading(translateBibleReference(readings.second), secondReading, 'SEGUNDA LECTURA') : ''}
+        ${gospel && readings ? fmtGospel(translateBibleReference(readings.gospel), gospel) : ''}`;
+
+    // Viernes y Sábado Santo: sin Eucaristía; rito propio (BCPHolyWeek, texto del libro en español).
     const noEucharist = noEucharistNotice(dayInfo);
     if (noEucharist) {
       return `
@@ -128,7 +146,7 @@ const BCPLibrito = (() => {
 
       <section class="librito-section">
         <h2>✠ ${dayInfo.nameEs || dayInfo.name}</h2>
-        <div class="librito-instruction"><p>${noEucharist}</p></div>
+        ${BCPHolyWeek.renderLibrito(hwKey, lecturasLibrito)}
       </section>
 
       <div class="librito-footer">
@@ -152,12 +170,20 @@ const BCPLibrito = (() => {
         </div>
       </section>
 
+      ${isPalm ? `<section class="librito-section">
+        <h2>✠ DOMINGO DE RAMOS</h2>
+        ${BCPHolyWeek.renderLibrito('palmSundayPalms')}
+      </section>
+
       <section class="librito-section">
+        <h2>✠ EN LA EUCARISTÍA</h2>
+        <div class="librito-instruction"><p>Cuando la Liturgia de las Palmas precede inmediatamente a la Eucaristía, la celebración comienza con el Saludo y la Colecta del Día.</p></div>
+      </section>` : `<section class="librito-section">
         <h2>✠ RITOS INICIALES</h2>
         <div class="librito-instruction"><p><strong>Todos de pie.</strong></p></div>
 
         <h3>LA ACLAMACIÓN</h3>
-        <div class="librito-response">
+        ${isMaundy ? BCPHolyWeek.renderLibrito('maundyThursdayOpening') : `<div class="librito-response">
           ${acclamation === 'easter' ? `<p><strong>Celebrante: ¡Aleluya! ¡Cristo ha resucitado!</strong><br><strong>Pueblo: ¡Ciertamente el Señor ha resucitado! ¡Aleluya!</strong></p>`
           : acclamation === 'lent' ? `<p><strong>Celebrante: Bendigamos al Señor que perdona todos nuestros pecados.</strong><br><strong>Pueblo: Su misericordia perdura para siempre.</strong></p>`
           : acclamation === 'holyWeek' ? `<p><strong>Celebrante: Bendito sea nuestro Dios.</strong><br><strong>Pueblo: Ahora y por siempre. Amén.</strong></p>`
@@ -166,7 +192,7 @@ const BCPLibrito = (() => {
             <p><strong>Celebrante: Entonces sabrán que yo estoy en medio de Israel,</strong><br><strong>Pueblo: Que yo soy el Señor su Dios y no hay otro fuera de Mí</strong></p>
             <p><strong>Celebrante: Y esto sucederá</strong><br><strong>Pueblo: Que todo el que invoque el Nombre del Señor será salvado.</strong></p>`
           : `<p><strong>Celebrante: Bendito sea Dios: Padre, Hijo y Espíritu Santo.</strong><br><strong>Pueblo: Y bendito sea su reino, ahora y por siempre. Amén.</strong></p>`}
-        </div>
+        </div>`}
 
         <h3>KYRIE</h3>
         <div class="librito-response">
@@ -180,7 +206,7 @@ const BCPLibrito = (() => {
         <div class="librito-text">
           <p>Gloria a Dios en el cielo, y paz en la tierra a quienes ama el Señor. Por tu inmensa gloria te alabamos, te bendecimos, te adoramos, te glorificamos, te damos gracias; Señor Dios, Rey celestial, Dios Padre Todopoderoso. Señor, Hijo único Jesucristo, Señor Dios, Cordero de Dios, Hijo del Padre: Tú que quitas el pecado del mundo, ten piedad de nosotros; Tú que quitas el pecado del mundo, atiende a nuestra súplica; Tú que estás sentado a la derecha del Padre, ten piedad de nosotros. Porque solo tú eres Santo, sólo tú Señor, sólo tú Altísimo, Jesucristo, con el Espíritu Santo, en la gloria de Dios Padre. Amén.</p>
         </div>`}
-      </section>
+      </section>`}
 
       <section class="librito-section">
         <h2>✠ LA COLECTA DEL DÍA</h2>
@@ -202,6 +228,9 @@ const BCPLibrito = (() => {
 
         <div class="librito-instruction"><p><strong>Nos sentamos</strong> para el Sermón.</p></div>
 
+        ${isMaundy ? BCPHolyWeek.renderLibrito('maundyThursdayFootWashing') : ''}
+
+        ${isPalm ? `<div class="librito-instruction"><p>Siguiendo el Sermón, cuando ha precedido la Liturgia de las Palmas, el Credo de Nicea y las Oraciones del Pueblo pueden omitirse en la Eucaristía.</p></div>` : `
         <h3>EL CREDO NICENO</h3>
         <div class="librito-instruction"><p><strong>Nos ponemos de pie.</strong></p></div>
         <div class="librito-credo">
@@ -212,14 +241,14 @@ const BCPLibrito = (() => {
             <p>✠ ✠ ✠</p>
           </div>
           <p>Por nuestra causa fue crucificado en tiempos de Poncio Pilato: padeció y fue sepultado. Resucitó al tercer día, según las escrituras; subió al cielo, y está sentado a la derecha del Padre. De nuevo vendrá con gloria para juzgar a vivos y muertos, y su reino no tendrá fin. Creemos en el Espíritu Santo, Señor y dador de vida, que procede del Padre y del Hijo; que con el Padre y el Hijo recibe una misma adoración y gloria, y que habló por los profetas. Creemos en la Iglesia, que es una, santa, católica y apostólica. Confesamos que hay un solo Bautismo para el perdón de los pecados. Esperamos la resurrección de los muertos y la vida del mundo futuro. Amén.</p>
-        </div>
+        </div>`}
       </section>
 
-      <section class="librito-section">
+      ${isPalm ? '' : `<section class="librito-section">
         <h2>✠ ORACIÓN DE LOS FIELES</h2>
         <div class="librito-instruction"><p>Un Lector dirige las peticiones. Después de cada una:</p></div>
         <div class="librito-response"><p><strong>Lector: Señor, en tu misericordia:</strong><br><strong>Pueblo: Escucha nuestra oración.</strong></p></div>
-      </section>
+      </section>`}
 
       <section class="librito-section">
         <h2>✠ CONFESIÓN Y ABSOLUCIÓN</h2>
@@ -315,13 +344,16 @@ const BCPLibrito = (() => {
         </div>
       </section>
 
-      <section class="librito-section">
+      ${isMaundy ? `<section class="librito-section">
+        <h2>✠ AL TERMINAR LA LITURGIA</h2>
+        ${BCPHolyWeek.renderLibrito('maundyThursdayClosing')}
+      </section>` : `<section class="librito-section">
         <h2>✠ LA BENDICIÓN Y LA DESPEDIDA</h2>
         <div class="librito-instruction"><p>El Celebrante da la Bendición final.</p></div>
         <div class="librito-response">
           <p><strong>Celebrante: Salgamos en el Nombre de Cristo.${isEaster ? ' Aleluya, aleluya.' : ''}</strong><br><strong>Pueblo: Demos gracias a Dios.${isEaster ? ' Aleluya, aleluya.' : ''}</strong></p>
         </div>
-      </section>
+      </section>`}
 
       <div class="librito-footer">
         <p>✠ Soli Deo Gloria ✠</p>

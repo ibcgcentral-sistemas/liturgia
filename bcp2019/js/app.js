@@ -119,20 +119,27 @@ function buildLiturgyHTML(d) {
   const acclamation = acclamationKind(d.dayInfo);
   const isLent = d.dayInfo.season === 'lent' || d.dayInfo.season === 'holyWeek';
   const isEaster = d.dayInfo.season === 'easter' || d.dayInfo.key === 'pentecost';
+  // Semana Santa (BCP 2019, Texto Estándar): el Domingo de Ramos y el Viernes Santo el Evangelio es la Pasión, que se
+  // anuncia «La Pasión de Nuestro Señor Jesucristo según …» y «se omiten las respuestas habituales antes y después del
+  // Evangelio». El Domingo de Ramos la Liturgia de las Palmas precede a la Eucaristía; el Jueves Santo lleva su
+  // propia apertura, lavatorio y cierre sin bendición ni despedida (holyweek.js, texto del libro en español).
+  const key = d.dayInfo.key;
+  const isPalm = key === 'palmSunday', isMaundy = key === 'maundyThursday', isPassion = isPalm || key === 'goodFriday';
 
   const fmtReading = (ref, data, type) => {
     if (!data) return '';
     let header = '';
     if (type === 'first') header = `<h3 class="section-title">✠ PRIMERA LECTURA</h3><p class="rubric">Lectura de <em>${ref}</em></p>`;
     if (type === 'second') header = `<h3 class="section-title">✠ SEGUNDA LECTURA</h3><p class="rubric">Lectura de <em>${ref}</em></p>`;
-    if (type === 'gospel') header = `<h3 class="section-title gospel-title">✠ SANTO EVANGELIO</h3><p class="rubric">Lectura del Santo Evangelio${getGospelAuthor(ref) ? ' según ' + getGospelAuthor(ref) : ''}</p>`;
+    if (type === 'gospel' && isPassion) header = `<h3 class="section-title gospel-title">✠ LA PASIÓN</h3><p class="rubric">La Pasión de Nuestro Señor Jesucristo${getGospelAuthor(ref) ? ' según ' + getGospelAuthor(ref) : ''}</p>`;
+    else if (type === 'gospel') header = `<h3 class="section-title gospel-title">✠ SANTO EVANGELIO</h3><p class="rubric">Lectura del Santo Evangelio${getGospelAuthor(ref) ? ' según ' + getGospelAuthor(ref) : ''}</p>`;
     return `
       <div class="reading ${type}-reading">
         ${header}
-        ${type === 'gospel' ? '<p class="response"><strong>Pueblo: Gloria a ti, Cristo Señor.</strong></p>' : ''}
+        ${type === 'gospel' && !isPassion ? '<p class="response"><strong>Pueblo: Gloria a ti, Cristo Señor.</strong></p>' : ''}
         <div class="scripture-text">${data.text}</div>
         ${type === 'gospel'
-          ? '<p class="response">El Evangelio del Señor. <strong>Pueblo: Te alabamos, Cristo Señor.</strong></p>'
+          ? (isPassion ? '' : '<p class="response">El Evangelio del Señor. <strong>Pueblo: Te alabamos, Cristo Señor.</strong></p>')
           : '<p class="response">Palabra del Señor. <strong>Pueblo: Demos gracias a Dios.</strong></p>'}
       </div>`;
   };
@@ -186,8 +193,16 @@ function buildLiturgyHTML(d) {
       <p class="footer-note">Libro de Oración Común (2019) · Texto Estándar Anglicano · Ciclo ${d.dayInfo.cycle}</p>
     </div>`;
 
-  // Viernes y Sábado Santo: el libro no celebra la Eucaristía esos días y este
-  // generador no modela sus ritos propios (ver NO_EUCHARIST_DAYS en utils.js).
+  // Las cuatro lecturas del día (primera, salmo, segunda, Evangelio). Las usa la Liturgia de la Palabra y, el Viernes y el
+  // Sábado Santo, el rito propio, donde sustituyen al marcador LECTURAS de holyweek-data.js.
+  const readingsHtml = `
+      ${d.firstReading && d.readings ? fmtReading(translateBibleReference(d.readings.first), d.firstReading, 'first') : '<p class="rubric">[Primera lectura no especificada para este día]</p>'}
+      ${d.psalmVerses && d.psalmVerses.length && d.readings ? fmtPsalm(translateBibleReference(d.readings.psalm), d.psalmVerses, d.psalmAnt) : ''}
+      ${d.secondReading && d.readings && d.readings.second ? fmtReading(translateBibleReference(d.readings.second), d.secondReading, 'second') : ''}
+      ${d.gospel && d.readings ? fmtReading(translateBibleReference(d.readings.gospel), d.gospel, 'gospel') : '<p class="rubric">[Evangelio no especificado para este día]</p>'}`;
+
+  // Viernes y Sábado Santo: el libro no celebra la Eucaristía esos días; tienen su rito propio (holyweek.js, texto del
+  // libro en español). Del Vigilia Pascual no hay rito todavía.
   const noEucharist = noEucharistNotice(d.dayInfo);
   if (noEucharist) {
     return `
@@ -196,7 +211,7 @@ function buildLiturgyHTML(d) {
 
     <div class="mass-section">
       <h3 class="section-title main-section">✠ ${d.dayInfo.nameEs || d.dayInfo.name}</h3>
-      <p class="rubric">${noEucharist}</p>
+      ${BCPHolyWeek.render(key, readingsHtml)}
     </div>
 
     ${footHtml}
@@ -208,11 +223,21 @@ function buildLiturgyHTML(d) {
 
     ${headHtml}
 
-    <!-- ═══════════════ RITOS INICIALES ═══════════════ -->
+    ${isPalm ? `<!-- ═══════════════ LITURGIA DE LAS PALMAS ═══════════════ -->
     <div class="mass-section">
+      <h3 class="section-title main-section">✠ DOMINGO DE RAMOS</h3>
+      ${BCPHolyWeek.render('palmSundayPalms')}
+    </div>` : ''}
+
+    <!-- ═══════════════ RITOS INICIALES ═══════════════ -->
+    ${isPalm ? `<div class="mass-section">
+      <h3 class="section-title main-section">✠ EN LA EUCARISTÍA</h3>
+      <p class="rubric">Cuando la Liturgia de las Palmas precede inmediatamente a la Eucaristía, la celebración comienza con el Saludo y la Colecta del Día.</p>
+    </div>` : `<div class="mass-section">
       <h3 class="section-title main-section">✠ RITOS INICIALES</h3>
       <h4 class="section-title">LA ACLAMACIÓN</h4>
-      <div class="liturgical-text-block">${acclamation === 'lent' ? BCPEucharist.ACCLAMATION_LENT : acclamation === 'holyWeek' ? BCPEucharist.ACCLAMATION_HOLYWEEK : acclamation === 'easter' ? BCPEucharist.ACCLAMATION_EASTER : acclamation === 'pentecost' ? BCPEucharist.ACCLAMATION_PENTECOST : BCPEucharist.ACCLAMATION}</div>
+      <div class="liturgical-text-block">${isMaundy ? '' : acclamation === 'lent' ? BCPEucharist.ACCLAMATION_LENT : acclamation === 'holyWeek' ? BCPEucharist.ACCLAMATION_HOLYWEEK : acclamation === 'easter' ? BCPEucharist.ACCLAMATION_EASTER : acclamation === 'pentecost' ? BCPEucharist.ACCLAMATION_PENTECOST : BCPEucharist.ACCLAMATION}</div>
+      ${isMaundy ? BCPHolyWeek.render('maundyThursdayOpening') : ''}
 
       <h4 class="section-title">LA COLECTA POR PUREZA</h4>
       <div class="liturgical-text-block">${BCPEucharist.COLLECT_FOR_PURITY}</div>
@@ -227,7 +252,7 @@ function buildLiturgyHTML(d) {
       ${shouldOmitGloria(d.dayInfo)
         ? `<p class="rubric">${gloriaOmittedRubric(d.dayInfo)}</p>`
         : `<div class="liturgical-text-block">${BCPEucharist.GLORIA}</div>`}
-    </div>
+    </div>`}
 
     <!-- COLECTA DEL DÍA -->
     <div class="mass-section">
@@ -243,17 +268,20 @@ function buildLiturgyHTML(d) {
 
       ${d.borrowedFromSunday ? '<p class="rubric">✠ Esta feria no tiene lecturas propias asignadas: se repiten las del Domingo o fiesta correspondiente.</p>' : ''}
 
-      ${d.firstReading && d.readings ? fmtReading(translateBibleReference(d.readings.first), d.firstReading, 'first') : '<p class="rubric">[Primera lectura no especificada para este día]</p>'}
-      ${d.psalmVerses && d.psalmVerses.length && d.readings ? fmtPsalm(translateBibleReference(d.readings.psalm), d.psalmVerses, d.psalmAnt) : ''}
-      ${d.secondReading && d.readings && d.readings.second ? fmtReading(translateBibleReference(d.readings.second), d.secondReading, 'second') : ''}
-      ${d.gospel && d.readings ? fmtReading(translateBibleReference(d.readings.gospel), d.gospel, 'gospel') : '<p class="rubric">[Evangelio no especificado para este día]</p>'}
+      ${readingsHtml}
     </div>
 
     <div class="mass-section">
       <p class="rubric">✠ EL SERMÓN — El Celebrante predica. Sigue un momento de silencio.</p>
     </div>
 
-    <div class="mass-section">
+    ${isMaundy ? `<div class="mass-section">
+      ${BCPHolyWeek.render('maundyThursdayFootWashing')}
+    </div>` : ''}
+
+    ${isPalm ? `<div class="mass-section">
+      <p class="rubric">Siguiendo el Sermón, cuando ha precedido la Liturgia de las Palmas, el Credo de Nicea y las Oraciones del Pueblo pueden omitirse en la Eucaristía.</p>
+    </div>` : `<div class="mass-section">
       <h3 class="section-title">✠ EL CREDO NICENO</h3>
       <div class="liturgical-text-block">${BCPEucharist.CREED}</div>
     </div>
@@ -261,7 +289,7 @@ function buildLiturgyHTML(d) {
     <div class="mass-section intercessions">
       <h3 class="section-title main-section">✠ ORACIÓN DE LOS FIELES</h3>
       <div class="liturgical-text-block">${BCPEucharist.PRAYERS_OF_THE_PEOPLE}</div>
-    </div>
+    </div>`}
 
     <div class="mass-section">
       <h3 class="section-title">✠ CONFESIÓN Y ABSOLUCIÓN DE LOS PECADOS</h3>
@@ -319,11 +347,14 @@ function buildLiturgyHTML(d) {
       <div class="liturgical-text-block">${BCPEucharist.POST_COMMUNION}</div>
     </div>
 
-    <div class="mass-section">
+    ${isMaundy ? `<div class="mass-section">
+      <h3 class="section-title main-section">✠ AL TERMINAR LA LITURGIA</h3>
+      ${BCPHolyWeek.render('maundyThursdayClosing')}
+    </div>` : `<div class="mass-section">
       <h3 class="section-title main-section">✠ LA BENDICIÓN Y LA DESPEDIDA</h3>
       <div class="liturgical-text-block">${BCPEucharist.BLESSING}</div>
       <div class="liturgical-text-block">${isEaster ? BCPEucharist.DISMISSAL_ALLELUIA : BCPEucharist.DISMISSAL}</div>
-    </div>
+    </div>`}
 
     ${footHtml}
 
