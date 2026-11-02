@@ -67,7 +67,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=31` (Misal) y `?v=19` (bcp2019; la hoja de estilo, `?v=7`).
+   código viejo. Actualmente en `?v=31` (Misal) y `?v=20` (bcp2019; la hoja de estilo, `?v=7`).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -229,8 +229,17 @@ sale con título (no se midió cuántos).
   `VERSE_SHIFTS` (`test-bcp2019.js` 9 cuenta los versículos de las 14 citas). **No están:**
   el texto de los salmos y cánticos de la Vigilia (solo sus citas, como en el libro), el
   Santo Bautismo y la Renovación de los Votos Bautismales (el libro remite a otro rito),
-  la marca del Cirio Pascual y la imposición de la ceniza del Miércoles de Ceniza.
-  **Discrepancia del libro, no corregida:** la página del Sábado
+  y la marca del Cirio Pascual. **Miércoles de Ceniza** (2026-11-02): su rito propio
+  (`ashWednesday*` en `holyweek-data.js`, `test-bcp2019.js` 10) sustituye a los Ritos
+  Iniciales, la colecta aparte, el Credo, las Oraciones del Pueblo y la confesión
+  habitual: apertura, Invitación a la santa Cuaresma con su colecta (oficial), imposición
+  de la ceniza con el Salmo 51 (texto del propio libro, no de la Biblia de Jerusalén),
+  Confesión y Letanía de Penitencia, Absolución (las dos fórmulas), palabras confortantes
+  y paz, y la Eucaristía con prefacio de Cuaresma y la oración de cierre del libro. Se
+  imprime siempre el rito con Comunión; el de sin Comunión (Padrenuestro y oración
+  final), la absolución de un diácono o laico y la ceniza «con las Palmas del año
+  anterior» solo figuran como rúbricas del libro. **Discrepancia del libro, no
+  corregida:** la página del Sábado
   Santo pide Job 14:1-14 y la tabla del leccionario (`lectionary.js`) Job 14:1-17; se
   sigue la tabla. El Jueves Santo conserva Colecta por la Pureza, Kyrie y Gloria porque el
   libro no los quita, aunque tampoco los nombra.

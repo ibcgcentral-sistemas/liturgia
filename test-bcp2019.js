@@ -95,8 +95,9 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
     // Adviento, Cuaresma y Semana Santa, salvo Jueves Santo y fiestas fijas; la rúbrica impresa nombra el tiempo real.
     const gloriaOmitido = /se omite el Gloria in excelsis/.test(text);
     const debeOmitir = ['advent', 'lent', 'holyWeek'].includes(st.dayInfo.season) && !st.dayInfo.isFixed && st.dayInfo.key !== 'maundyThursday';
-    // El Domingo de Ramos la Liturgia de las Palmas sustituye a los Ritos Iniciales (sin Aclamación ni Gloria; comprobación 9).
-    const esRamos = st.dayInfo.key === 'palmSunday';
+    // El Domingo de Ramos (Liturgia de las Palmas) y el Miércoles de Ceniza (invitación a la santa Cuaresma) traen su propio
+    // comienzo, que sustituye a los Ritos Iniciales: sin la sección de Aclamación ni de Gloria (comprobaciones 9 y 10).
+    const esRamos = ['palmSunday', 'ashWednesday'].includes(st.dayInfo.key);
     if (!esRamos && gloriaOmitido !== debeOmitir) f.gloria.push(`${date} ${st.dayInfo.key} (${st.dayInfo.season}): ${gloriaOmitido ? 'omitido' : 'presente'}`);
     if (!esRamos && debeOmitir && gloriaOmitido && !(st.dayInfo.season === 'advent' ? /en Adviento se omite el Gloria/ : /en Cuaresma se omite el Gloria/).test(text)) f.gloria.push(`${date} ${st.dayInfo.key} (${st.dayInfo.season}): la rúbrica nombra otro tiempo`);
     // Aclamación, Fracción y Despedida según el tiempo (comprobación 6). Se lee el HTML ya armado.
@@ -373,7 +374,7 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   HW(JSON.stringify([...HWm.VIGIL_REFS].sort()) === JSON.stringify(Object.keys(CUENTA_VIGILIA).sort()), 'las citas de la Vigilia en holyweek-data.js no son las esperadas: ' + HWm.VIGIL_REFS.join(' | '));
   for (const [ref, n] of Object.entries(CUENTA_VIGILIA)) { const got = [...(await fetchScripture(ref)).text.matchAll(/<sup class="verse-num">/g)].length; HW(got === n, `${ref}: salen ${got} versículos y el libro tiene ${n}`); }
   // Ningún otro día lleva rito de Semana Santa: la Liturgia de las Palmas y el lavatorio no se cuelan.
-  for (const k of ['2026-06-07', '2026-11-08', '2026-03-10']) { const d = new Date(k + 'T12:00:00'); const t = strip(await generateLiturgy(d)); HW(!/LITURGIA DE LAS PALMAS|LAVATORIO DE LOS PIES|IMPROPERIOS/.test(t), `${k}: se coló un rito de Semana Santa`); }
+  for (const k of ['2026-06-07', '2026-11-08', '2026-03-10']) { const d = new Date(k + 'T12:00:00'); const t = strip(await generateLiturgy(d)); HW(!/LITURGIA DE LAS PALMAS|LAVATORIO DE LOS PIES|IMPROPERIOS|IMPOSICIÓN DE LA CENIZA|LETANÍA DE PENITENCIA/.test(t), `${k}: se coló un rito de Semana Santa o de Ceniza`); }
   // El archivo generado sigue siendo idéntico al libro.
   try {
     const gen = require('./bcp2019-tools/build-holyweek.js');
@@ -383,6 +384,29 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
     }
   } catch (e) { hw.push('no se pudo comprobar holyweek-data.js: ' + e.message); }
   check(`9. Semana Santa: Ramos, Jueves, Viernes y Sábado Santo con su rito del libro (${hwDias} días), en la liturgia y el Librito`, hw, hwDias);
+
+  // ── 10. Miércoles de Ceniza ──────────────────────────────────────────────
+  // Su rito propio (texto del libro en español, holyweek-data.js): apertura, invitación a la santa Cuaresma con su colecta
+  // (una sola vez), imposición de la ceniza con el Salmo 51, confesión y letanía, absolución con las palabras confortantes
+  // y la paz, y la Eucaristía con prefacio de Cuaresma. Sustituye a los Ritos Iniciales, el Credo y las Oraciones del Pueblo.
+  const ce = []; let ceDias = 0;
+  const CE = (cond, msg) => { if (!cond) ce.push(msg); };
+  for (let y = Y0; y <= Y1; y++) {
+    const f = Cal.getFeastDates(y).ashWednesday; const d = new Date(f.getFullYear(), f.getMonth(), f.getDate(), 12); ceDias++;
+    let html; try { html = await generateLiturgy(d); } catch (e) { ce.push(`${iso(d)}: lanzó ${e.message}`); continue; }
+    const st = C.state(), lib = Librito.generateLibrito(st), w = iso(d);
+    for (const [h, n] of [[html, ''], [lib, ' Librito']]) {
+      const t = strip(h);
+      CE(/Bendito sea el Señor que perdona todos nuestros pecados/.test(t) && /INVITACIÓN A LA SANTA CUARESMA/.test(t) && /Los invito, pues, en nombre de la Iglesia/.test(t), `${w}${n}: falta la apertura o la invitación a la santa Cuaresma`);
+      CE((t.match(/Dios todopoderoso y eterno, que nada de lo que has hecho odias/g) || []).length === 1, `${w}${n}: la colecta del Miércoles de Ceniza debe salir una sola vez`);
+      CE(/IMPOSICIÓN DE LA CENIZA/.test(t) && /Recuerda que eres polvo y en polvo te convertirás/.test(t) && /1 Ten compasión de mí, oh Dios/.test(t) && /17 El sacrificio que te agrada/.test(t), `${w}${n}: falta la imposición de la ceniza o el Salmo 51 completo (versículos 1-17)`);
+      CE(/LETANÍA DE PENITENCIA/.test(t) && (t.match(/Porque hemos pecado contra ti/g) || []).length >= 12 && /Muestra favor a tu pueblo, oh Señor/.test(t), `${w}${n}: falta la confesión y letanía de penitencia`);
+      CE(/LA ABSOLUCIÓN/.test(t) && /LAS PALABRAS CONFORTANTES/.test(t) && /Vengan a mí todos ustedes que están cansados/.test(t) && /Señor Dios nuestro, concédenos la gracia de desearte/.test(t), `${w}${n}: falta la absolución, las palabras confortantes o la oración de cierre`);
+      CE(/PREFACIO: CUARESMA/.test(t) && /ORACIÓN DE CONSAGRACIÓN/.test(t), `${w}${n}: la Eucaristía debe llevar prefacio de Cuaresma y consagración`);
+      CE(!/EL CREDO NICENO|ORACIÓN DE LOS FIELES|LA COLECTA POR PUREZA|CONFESIÓN Y ABSOLUCIÓN/.test(t), `${w}${n}: el rito de Ceniza sustituye al Credo, las Oraciones del Pueblo, la Colecta por la Pureza y la confesión habitual`);
+    }
+  }
+  check(`10. Miércoles de Ceniza con su rito del libro (${ceDias} días), en la liturgia y el Librito`, ce, ceDias);
 
   // ── 8. Colectas ──────────────────────────────────────────────────────────
   // 5 oficiales (Ceniza y Semana Santa) idénticas al libro en español; 90 traducidas del inglés, de las que se
@@ -408,7 +432,7 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   console.log('  - Salmos: se leen de la Biblia de Jerusalén; el Salterio español del libro aún no se usa.');
   console.log('  - Lecturas: el libro en español no trae leccionario; el texto es de la Biblia de Jerusalén, que no trae Mateo 21:44, Hechos 8:37 ni Marcos 9:44 y 9:46 (ver DIF_CONOCIDAS).');
   if (!prefacios) console.log('  - Prefacios: no se cotejaron con el libro (falta LOC-10-10-23.md; ver bcp2019-tools/check-prefacios.js).');
-  console.log('  - Semana Santa (holyweek.js): Ramos, Jueves, Viernes, Sábado Santo y Gran Vigilia sí; sin modelar la imposición de la ceniza, el Bautismo y la Renovación de los Votos de la Vigilia, y el texto de sus salmos y cánticos.');
+  console.log('  - Semana Santa y Ceniza (holyweek.js): Ceniza, Ramos, Jueves, Viernes, Sábado Santo y Gran Vigilia sí; sin modelar el Bautismo y la Renovación de los Votos de la Vigilia, y el texto de sus salmos y cánticos.');
   console.log(failed ? `\n${failed} comprobación(es) con fallos.` : '\nTodas las comprobaciones pasan.');
   process.exit(failed ? 1 : 0);
 })();

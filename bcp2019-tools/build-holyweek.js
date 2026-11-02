@@ -21,6 +21,14 @@ const SECCIONES = {
   maundyThursdayClosing: { ini: 'Cuando se desee administrar la Santa Comunión el Viernes Santo', fin: 'INDICACIONES ADICIONALES', desde: 14850 },
   goodFriday: { ini: 'En este día los ministros entran en silencio.', fin: 'LO CONCERNIENTE', desde: 14900, hastaIncluida: 'Los Ministros y el Pueblo se van en silencio.' },
   holySaturday: { ini: 'No hay celebración de la Eucaristía en este día.', fin: 'LO CONCERNIENTE A LA GRAN VIGILIA', desde: 15200 },
+  // Miércoles de Ceniza (el rito con Comunión): apertura, invitación a la santa Cuaresma con la colecta, salmo penitencial e
+  // imposición de la ceniza, confesión y letanía, absolución con las palabras confortantes y la paz, y el cierre.
+  ashWednesdayOpening: { ini: 'Los ministros pueden entrar en silencio', fin: 'El Oficiante invita al Pueblo a la observancia', desde: 14460 },
+  ashWednesdayInvitation: { ini: 'El Oficiante invita al Pueblo a la observancia', fin: 'LAS LECTURAS', desde: 14460 },
+  ashWednesdayAshes: { ini: 'SALMO PENITENCIAL E IMPOSICIÓN DE LA CENIZA', fin: 'CONFESIÓN Y LETANÍA DE PENITENCIA', desde: 14500 },
+  ashWednesdayConfession: { ini: 'CONFESIÓN Y LETANÍA DE PENITENCIA', fin: 'LA ABSOLUCIÓN', desde: 14500 },
+  ashWednesdayAbsolution: { ini: 'LA ABSOLUCIÓN', fin: 'Cuando hay Comunión, la liturgia continúa', desde: 14600 },
+  ashWednesdayClosing: { ini: 'Cuando hay Comunión, la liturgia continúa', fin: 'INDICACCIONES ADICIONALES', desde: 14680 },
   // Gran Vigilia de Pascua: la introducción del libro (como rúbrica) y las cuatro partes de la liturgia.
   easterVigilIntro: { ini: 'La Gran Vigilia, cuando se observa', fin: 'LA', desde: 15300, comoRubrica: true },
   easterVigilLight: { ini: 'LA ILUMINACIÓN DEL CIRIO PASCUAL', fin: 'LAS LECTURAS', desde: 15330 },
@@ -55,8 +63,8 @@ const LECTURAS = {
   holySaturday: { ini: 'LAS LECTURAS', fin: 'Después del Evangelio, puede seguir una homilía.' },
 };
 
-const ROTULO = /^(Se (dice|canta|puede|pueden|utiliza|omiten|omite|guarda|lleva)|Luego[ ,]|A continuación|Todos (de pie|se |pueden)|El (Celebrante|Oficiante|Diácono|Presbítero|Obispo) (puede|dice|reza|lee|entonces|concluye|invita|se pone|se levanta)|El servicio siempre|El rito de la Santa Eucaristía no|No hay celebración de la Eucaristía|El Celebrante (enciende|puede presentar)|El Diácono \(o el Celebrante|El Cirio Pascual se coloca|El servicio continúa|Se leen |Después del Evangelio|La celebración continúa|El Prefacio de Pascua|La siguiente bendición|El Santo Bautismo puede|O, si las oraciones|Todos se ponen de pie|Se puede tocar|El Gloria in Excelsis, o algún otro|El Diácono, u otra persona|La Gran Vigilia, cuando|El Servicio de la Luz|El servicio de las lecturas|El Santo Bautismo es|La Sagrada Eucaristía es|En la oscuridad, el fuego|El Obispo o Sacerdote|El Diácono (u otra|y el Pueblo)|El Oficiante (y el|dice|entonces)|Los Ministros|Los ministros|La Congregación|Cuando |Si |Durante |Después |Siguiendo |En (un lugar|la ausencia|ausencia|este día los)|Puede |Pueden |Estas |Esta liturgia|Las peticiones|Las oraciones iniciales|El himno de|El Evangelio de la Pasión|Año [ABC] |Frente al|Pueden seguir|Ahora se puede|Entonces se puede|La liturgia continúa|Silencio)/;
-const ROTULO_EXACTO = /^(o esto|o bien,?|Silencio\.?)$/;
+const ROTULO = /^(Se (dice|canta|puede|pueden|utiliza|omiten|omite|guarda|lleva)|Luego[ ,]|A continuación|Todos (de pie|se |pueden)|El (Celebrante|Oficiante|Diácono|Presbítero|Obispo) (puede|dice|reza|lee|entonces|concluye|invita|se pone|se levanta)|El servicio siempre|El rito de la Santa Eucaristía no|No hay celebración de la Eucaristía|El Celebrante (enciende|puede presentar)|El oficiante dice|El Pueblo se pone|Todos de rodillas|El Lector solo continúa|Entonces todos rezan|Si está presente el Obispo|El Oficiante puede entonces|Cuando hay Comunión|El silencio puede seguir|El Diácono \(o el Celebrante|El Cirio Pascual se coloca|El servicio continúa|Se leen |Después del Evangelio|La celebración continúa|El Prefacio de Pascua|La siguiente bendición|El Santo Bautismo puede|O, si las oraciones|Todos se ponen de pie|Se puede tocar|El Gloria in Excelsis, o algún otro|El Diácono, u otra persona|La Gran Vigilia, cuando|El Servicio de la Luz|El servicio de las lecturas|El Santo Bautismo es|La Sagrada Eucaristía es|En la oscuridad, el fuego|El Obispo o Sacerdote|El Diácono (u otra|y el Pueblo)|El Oficiante (y el|dice|entonces)|Los Ministros|Los ministros|La Congregación|Cuando |Si |Durante |Después |Siguiendo |En (un lugar|la ausencia|ausencia|este día los)|Puede |Pueden |Estas |Esta liturgia|Las peticiones|Las oraciones iniciales|El himno de|El Evangelio de la Pasión|Año [ABC] |Frente al|Pueden seguir|Ahora se puede|Entonces se puede|La liturgia continúa|Silencio)/;
+const ROTULO_EXACTO = /^(o esto|o bien,?|O lo siguiente|Silencio\.?)$/;
 // «Pueblo mío», «Todos los que…» y «Todos nosotros…» son texto, no la etiqueta de quien habla.
 const ETIQUETA = /^(Celebrante|Pueblo(?! mío| de Dios| santo)|Diácono|Lector|Oficiante|Todos(?! los| nosotros)|Obispo|Presbítero)\s+(.+)$/;
 const TIPO_ETIQUETA = { Celebrante: 'CEL', Pueblo: 'PUEBLO', 'Diácono': 'DIAC', Lector: 'LECTOR', Oficiante: 'OFIC', Todos: 'TODOS', Obispo: 'OBISPO', 'Presbítero': 'PRES' };
@@ -77,6 +85,8 @@ const OVERRIDES = {
   'Oremos.. Silencio': 'R', 'Oremos. Silencio': 'R',
   'El Santo Evangelio de nuestro Señor Jesucristo según San Mateo.': 'DIAC', 'El Evangelio del Señor.': 'LECTOR',
   'La luz de Cristo.': 'DIAC',
+  'Bendito sea el Señor que perdona todos nuestros pecados.': 'OFIC',
+  'LA PAZ': 'T',
   'Confirmación. Si no hay candidatos para el Bautismo o la Confirmación, la': 'CONT',
   // Últimas líneas de una rúbrica, que el ancho de la página parte y empiezan en mayúscula.
   'Colecta adecuada.': 'CONT', 'Confirmación, el Celebrante dirige al pueblo a la Renovación de los Votos Bautismales.': 'CONT',
@@ -104,6 +114,13 @@ const VERSOS = {
   ],
   easterVigilWord: [
     { ini: 'Gloria a Dios en el cielo,', fin: 'LA ORACIÓN COLECTA', corta: /^Amén\.$/ },
+  ],
+  // Ceniza: el Salmo 51 (texto del propio libro), un versículo cada dos líneas, y la confesión de la letanía.
+  ashWednesdayAshes: [
+    { ini: '1 Ten compasión de mí, oh Dios', cada: 2 },
+  ],
+  ashWednesdayConfession: [
+    { ini: 'Padre santísimo y misericordioso,', fin: 'Lector Señor, ten piedad de nosotros:', corta: /Espíritu Santo\.$/ },
   ],
 };
 
@@ -143,7 +160,8 @@ function analizar(lineas) {
     if (mv) { cierra(); items.push({ t: 'V', x: mv[1] }); continue; }
     cierra();
     const m = ETIQUETA.exec(l);
-    cur = { t, lineas: [m && TIPO_ETIQUETA[m[1]] === t ? m[2] : l], exacto: ROTULO_EXACTO.test(l) || /^Oremos[:.]?$/.test(l) };
+    const solo = m && TIPO_ETIQUETA[m[1]] === t ? m[2] : l;
+    cur = { t, lineas: [solo], exacto: ROTULO_EXACTO.test(l) || /^Oremos[:.]?$/.test(solo) };
   }
   cierra();
   return items.map(it => {
@@ -175,7 +193,7 @@ function envuelveVersos(ls, v, nombre) {
     const l = raw.trim();
     if (!l || /^\d{3}$/.test(l)) continue;
     cur.push(l);
-    if (v.corta.test(l)) { estrofas.push(cur); cur = []; }
+    if (v.cada ? cur.length === v.cada : v.corta.test(l)) { estrofas.push(cur); cur = []; }
   }
   if (cur.length) estrofas.push(cur);
   return ls.slice(0, a).concat(estrofas.map(e => '[[V:' + e.join('\n') + ']]'), ls.slice(b));

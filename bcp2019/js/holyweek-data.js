@@ -2,7 +2,7 @@
  * holyweek-data.js — Liturgias de la Semana Santa (Libro de Oración Común 2019, ACNA).
  * GENERADO por bcp2019-tools/build-holyweek.js a partir del libro oficial en español (LOC-10-10-23.md); NO editar a
  * mano: test-bcp2019.js comprueba que sigue idéntico a lo que genera el script. Texto copiado, no traducido.
- * Procedencia: palmSundayPalms LOC l. 14728-14794; maundyThursdayOpening LOC l. 14844-14858; maundyThursdayFootWashing LOC l. 14875-14902; maundyThursdayClosing LOC l. 14903-14911; goodFriday LOC l. 14939-15244; holySaturday LOC l. 15248-15315; easterVigilIntro LOC l. 15318-15337; easterVigilLight LOC l. 15341-15440; easterVigilReadings LOC l. 15441-15572; easterVigilWord LOC l. 15573-15633; easterVigilBlessing LOC l. 15634-15641.
+ * Procedencia: palmSundayPalms LOC l. 14728-14794; maundyThursdayOpening LOC l. 14844-14858; maundyThursdayFootWashing LOC l. 14875-14902; maundyThursdayClosing LOC l. 14903-14911; goodFriday LOC l. 14939-15244; holySaturday LOC l. 15248-15315; ashWednesdayOpening LOC l. 14474-14477; ashWednesdayInvitation LOC l. 14478-14502; ashWednesdayAshes LOC l. 14519-14568; ashWednesdayConfession LOC l. 14569-14649; ashWednesdayAbsolution LOC l. 14650-14685; ashWednesdayClosing LOC l. 14686-14697; easterVigilIntro LOC l. 15318-15337; easterVigilLight LOC l. 15341-15440; easterVigilReadings LOC l. 15441-15572; easterVigilWord LOC l. 15573-15633; easterVigilBlessing LOC l. 15634-15641.
  * Tipos: T título, R rúbrica, P párrafo, V versos (líneas separadas por \n), REF cita bíblica, CEL/PUEBLO/DIAC/LECTOR/
  * OFIC/TODOS/OBISPO/PRES voces, LECTURAS = lugar donde el app inserta las lecturas del día.
  */
@@ -695,6 +695,382 @@ const BCP_HOLYWEEK_DATA = {
   {
    "t": "REF",
    "x": "2 CORINTIOS 13:14 (NVI)"
+  }
+ ],
+ "ashWednesdayOpening": [
+  {
+   "t": "R",
+   "x": "Los ministros pueden entrar en silencio, o se puede cantar un himno, salmo o antífona."
+  },
+  {
+   "t": "R",
+   "x": "El Pueblo se pone de pie, y el Oficiante dice"
+  },
+  {
+   "t": "OFIC",
+   "x": "Bendito sea el Señor que perdona todos nuestros pecados."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Su misericordia perdura para siempre."
+  }
+ ],
+ "ashWednesdayInvitation": [
+  {
+   "t": "R",
+   "x": "El Oficiante invita al Pueblo a la observancia de una santa Cuaresma, ya sea aquí o después del sermón, diciendo"
+  },
+  {
+   "t": "P",
+   "x": "Querido Pueblo de Dios: Los primeros cristianos observaban con gran devoción los días de la pasión y resurrección del Señor, y se hizo costumbre de la Iglesia prepararlos con un tiempo de penitencia y ayuno. Esta temporada de Cuaresma proporcionó un tiempo en el que los conversos a la fe se prepararon para el Santo Bautismo. También fue un tiempo en que aquellos que, a causa de pecados notorios, habían sido separados del cuerpo de los fieles, fueron reconciliados por la penitencia y el perdón, y restaurados a la comunión de la Iglesia. De esta manera, se recordó a toda la Congregación el mensaje de perdón y absolución del Evangelio de nuestro Salvador, y la necesidad que tenemos todos los cristianos de renovar continuamente el arrepentimiento y la fe. Los invito, pues, en nombre de la Iglesia, a la observancia de una santa Cuaresma: mediante el autoexamen y el arrepentimiento; por la oración, el ayuno y la limosna; y leyendo y meditando en la santa Palabra de Dios. Y para hacer un buen comienzo, oremos ahora por gracia, para que podamos guardar fielmente esta Cuaresma."
+  },
+  {
+   "t": "R",
+   "x": "El Oficiante y el pueblo se arrodillan. Sigue un período de oración en silencio."
+  },
+  {
+   "t": "R",
+   "x": "El Oficiante entonces dice"
+  },
+  {
+   "t": "P",
+   "x": "Dios todopoderoso y eterno, que nada de lo que has hecho odias, y perdonas los pecados de todos los que se arrepienten: Crea y haz en nosotros corazones nuevos y contritos, para que, lamentando dignamente nuestros pecados y reconociendo nuestra miseria, podamos obtener de ti, el Dios de toda misericordia, perfecta remisión y perdón; por Jesucristo nuestro Señor, que vive y reina contigo y el Espíritu Santo, un solo Dios, por los siglos de los siglos. Amén."
+  }
+ ],
+ "ashWednesdayAshes": [
+  {
+   "t": "T",
+   "x": "SALMO PENITENCIAL E IMPOSICIÓN DE LA CENIZA"
+  },
+  {
+   "t": "R",
+   "x": "El oficiante dice"
+  },
+  {
+   "t": "P",
+   "x": "Recordemos ahora nuestro pecado y la infinita misericordia de Dios."
+  },
+  {
+   "t": "R",
+   "x": "Si se han de imponer cenizas, dice el Oficiante"
+  },
+  {
+   "t": "P",
+   "x": "Dios todopoderoso, nos has creado del polvo de la tierra: Haz que estas cenizas sean para nosotros un símbolo de nuestra mortalidad y un signo de nuestra penitencia, para que recordemos que es solo por tu gracia que recibimos el don de vida eterna por Jesucristo nuestro Salvador. Amén."
+  },
+  {
+   "t": "R",
+   "x": "Luego se imponen cenizas con las siguientes palabras"
+  },
+  {
+   "t": "P",
+   "x": "Recuerda que eres polvo y en polvo te convertirás."
+  },
+  {
+   "t": "REF",
+   "x": "SALMO 51"
+  },
+  {
+   "t": "R",
+   "x": "Todos de rodillas. El Salmo 51:1-17 se canta o se dice."
+  },
+  {
+   "t": "V",
+   "x": "1 Ten compasión de mí, oh Dios, conforme a tu gran amor; *\nconforme a tu inmensa bondad, borra mis pecados."
+  },
+  {
+   "t": "V",
+   "x": "2 Lávame de toda mi maldad, *\ny límpiame de mi pecado."
+  },
+  {
+   "t": "V",
+   "x": "3 Yo reconozco mis culpas; *\nsiempre tengo presente mi pecado."
+  },
+  {
+   "t": "V",
+   "x": "4 Contra ti he pecado, solo contra ti, y he hecho lo que es malo ante tus ojos; *\npor eso, tu sentencia es justa, y tu juicio, irreprochable."
+  },
+  {
+   "t": "V",
+   "x": "5 Yo sé que soy malo de nacimiento; *\npecador me concibió mi madre."
+  },
+  {
+   "t": "V",
+   "x": "6 Yo sé que tú amas la verdad en lo íntimo; *\nen lo secreto me has enseñado sabiduría."
+  },
+  {
+   "t": "V",
+   "x": "7 Purifícame con hisopo, y quedaré limpio; *\nlávame, y quedaré más blanco que la nieve."
+  },
+  {
+   "t": "V",
+   "x": "8 Anúnciame gozo y alegría; *\ninfunde gozo en estos huesos que has quebrantado."
+  },
+  {
+   "t": "V",
+   "x": "9 Aparta tu rostro de mis pecados*\ny borra toda mi maldad."
+  },
+  {
+   "t": "V",
+   "x": "10 Crea en mí, oh Dios, un corazón limpio, *\ny renueva la firmeza de mi espíritu."
+  },
+  {
+   "t": "V",
+   "x": "11 No me alejes de tu presencia*\nni me quites tu santo Espíritu."
+  },
+  {
+   "t": "V",
+   "x": "12 Devuélveme la alegría de tu salvación; *\nque un espíritu obediente me sostenga."
+  },
+  {
+   "t": "V",
+   "x": "13 Así enseñaré a los transgresores tus caminos, *\ny los pecadores se volverán a ti."
+  },
+  {
+   "t": "V",
+   "x": "14 Dios mío, Dios de mi salvación, líbrame de derramar sangre, *\ny mi lengua alabará tu justicia."
+  },
+  {
+   "t": "V",
+   "x": "15 Abre, Señor, mis labios, *\ny mi boca proclamará tu alabanza."
+  },
+  {
+   "t": "V",
+   "x": "16 Tú no te deleitas en los sacrificios, de lo contrario, te los ofrecería. *\nni te complacen los holocaustos;"
+  },
+  {
+   "t": "V",
+   "x": "17 El sacrificio que te agrada, es un espíritu quebrantado; *\ntú, oh Dios, no desprecias al corazón quebrantado y arrepentido."
+  }
+ ],
+ "ashWednesdayConfession": [
+  {
+   "t": "T",
+   "x": "CONFESIÓN Y LETANÍA DE PENITENCIA"
+  },
+  {
+   "t": "R",
+   "x": "El Diácono u otra persona designada dice"
+  },
+  {
+   "t": "P",
+   "x": "Confesemos humildemente nuestros pecados al Dios Todopoderoso."
+  },
+  {
+   "t": "R",
+   "x": "El silencio puede seguir. El Oficiante y el Pueblo juntos, todos de rodillas, rezan"
+  },
+  {
+   "t": "V",
+   "x": "Padre santísimo y misericordioso,\nNosotros confesamos a Ti y los unos a los otros,\ny a toda la comunión de los santos\nen el cielo y en la tierra,\nque hemos pecado, por nuestra propia culpa\nen pensamiento, palabra y obra;\npor lo que hemos hecho,\ny por lo que hemos dejado de hacer.\nNo te hemos amado con todo nuestro corazón, mente y fuerzas.\nNo hemos amado a nuestro prójimo como a nosotros mismos.\nNo hemos perdonado a los demás, como hemos sido perdonados.\nNos hemos hecho sordos a tu llamado de servir,\ncomo Cristo nos ha servido a nosotros.\nNo hemos sido fieles a la mente de Cristo.\nHemos entristecido a tu Espíritu Santo."
+  },
+  {
+   "t": "LECTOR",
+   "x": "Señor, ten piedad de nosotros:"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Porque hemos pecado contra ti."
+  },
+  {
+   "t": "R",
+   "x": "El Lector solo continúa, y el Pueblo responde"
+  },
+  {
+   "t": "P",
+   "x": "Por todas nuestras infidelidades y desobediencias; por la soberbia, vanidad e hipocresía de nuestras vidas; Señor, ten piedad de nosotros:"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Porque hemos pecado contra ti."
+  },
+  {
+   "t": "P",
+   "x": "Por nuestra autocompasión e impaciencia, y nuestra envidia de aquellos que consideramos más afortunados que nosotros; Señor, ten piedad de nosotros:"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Porque hemos pecado contra ti."
+  },
+  {
+   "t": "P",
+   "x": "Por nuestra ira, amargura y resentimiento injustos; por todas las mentiras, chismes y calumnias contra nuestro prójimo; Señor, ten piedad de nosotros:"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Porque hemos pecado contra ti."
+  },
+  {
+   "t": "P",
+   "x": "Por nuestra impureza sexual, nuestra explotación de otras personas y nuestra incapacidad para darnos en amor; Señor, ten piedad de nosotros:"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Porque hemos pecado contra ti."
+  },
+  {
+   "t": "P",
+   "x": "Por nuestros apetitos y maneras autoindulgentes, y nuestra búsqueda desmedida de bienes y comodidades mundanos; Señor, ten piedad de nosotros:"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Porque hemos pecado contra ti."
+  },
+  {
+   "t": "P",
+   "x": "Por nuestra deshonestidad en la vida diaria y el trabajo, nuestra ingratitud por tus dones y nuestra falta de atención a tu llamada. Señor, ten piedad de nosotros:"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Porque hemos pecado contra ti."
+  },
+  {
+   "t": "P",
+   "x": "Por nuestra ceguera ante la necesidad y los sufrimientos humanos, y nuestra indiferencia ante la injusticia y la crueldad; Señor, ten piedad de nosotros:"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Porque hemos pecado contra ti."
+  },
+  {
+   "t": "P",
+   "x": "Por nuestro despilfarro y mal uso de tu creación, y nuestra falta de preocupación por los que vienen después de nosotros; Señor, ten piedad de nosotros:"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Porque hemos pecado contra ti."
+  },
+  {
+   "t": "P",
+   "x": "Por todos los juicios falsos, por el prejuicio y desprecio de los demás, y por todos los pensamientos poco caritativos hacia nuestro prójimo; Señor, ten piedad de nosotros:"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Porque hemos pecado contra ti."
+  },
+  {
+   "t": "V",
+   "x": "Por nuestra negligencia en la oración y adoración;\npor nuestra presunción y abuso de tus medios de gracia;\nSeñor, ten piedad de nosotros:"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Porque hemos pecado contra ti."
+  },
+  {
+   "t": "P",
+   "x": "Por buscar la alabanza de los demás en lugar de la aprobación de Dios; Señor, ten piedad de nosotros:"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Porque hemos pecado contra ti."
+  },
+  {
+   "t": "P",
+   "x": "Por nuestro fracaso en recomendar la fe que está en nosotros; Señor, ten piedad de nosotros:"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Porque hemos pecado contra ti."
+  },
+  {
+   "t": "R",
+   "x": "Entonces todos rezan"
+  },
+  {
+   "t": "P",
+   "x": "Muestra favor a tu pueblo, oh Señor, que se vuelve a ti con llanto, ayuno y oración. Porque tú eres un Dios misericordioso, lleno de compasión, paciente y grande en misericordia. Tú perdonas cuando merecemos castigo, y en tu ira te acuerdas de la misericordia. Perdona a tu pueblo, buen Señor, perdónanos; en la multitud de tus misericordias, míranos y perdónanos; por los méritos y mediación de tu bendito Hijo Jesucristo nuestro Señor. Amén."
+  }
+ ],
+ "ashWednesdayAbsolution": [
+  {
+   "t": "T",
+   "x": "LA ABSOLUCIÓN"
+  },
+  {
+   "t": "R",
+   "x": "Si está presente el Obispo, o el Sacerdote, solo se pone de pie y dice"
+  },
+  {
+   "t": "P",
+   "x": "Dios Todopoderoso, el Padre de nuestro Señor Jesucristo, no desea la muerte de los pecadores, sino que se conviertan de su maldad y vivan. Ha autorizado y mandado a sus ministros a pronunciar a su pueblo penitente, la absolución y la remisión de sus pecados. Él perdona y absuelve a todos los que verdaderamente se arrepienten y creen genuinamente en su santo Evangelio. Por eso le suplicamos que nos conceda el verdadero arrepentimiento y su Espíritu Santo, para que nuestras obras presentes le agraden, el resto de nuestra vida sea pura y santa, y lleguemos al fin a su gozo eterno; por Jesucristo nuestro Señor. Amén."
+  },
+  {
+   "t": "R",
+   "x": "O lo siguiente"
+  },
+  {
+   "t": "P",
+   "x": "Dios omnipotente, nuestro Padre celestial, que en su gran misericordia ha prometido el perdón de pecados a todos los que con sincero arrepentimiento y verdadera fe se vuelven a él, tenga misericordia de ustedes, los perdone y los libere de todos sus pecados, los confirme y los fortalezca en toda virtud, y los conduzca a la vida eterna; mediante Jesucristo nuestro Señor. Amén."
+  },
+  {
+   "t": "T",
+   "x": "LAS PALABRAS CONFORTANTES"
+  },
+  {
+   "t": "R",
+   "x": "El Oficiante puede entonces decir una o más de las siguientes oraciones, diciendo primero"
+  },
+  {
+   "t": "P",
+   "x": "Escuchen la Palabra de Dios todos los que de verdad se vuelven a Él. Vengan a mí todos ustedes que están cansados y agobiados, y yo les daré descanso."
+  },
+  {
+   "t": "REF",
+   "x": "MATEO 11:28, (NVI)"
+  },
+  {
+   "t": "P",
+   "x": "Porque tanto amó Dios al mundo que dio a su Hijo unigénito, para que todo el que cree en Él no se pierda, sino que tenga vida eterna."
+  },
+  {
+   "t": "REF",
+   "x": "JUAN 3:16T"
+  },
+  {
+   "t": "P",
+   "x": "Este mensaje es digno de crédito y merece ser aceptado por todos: que Cristo Jesús vino al mundo a salvar a los pecadores, de los cuales yo soy el primero"
+  },
+  {
+   "t": "REF",
+   "x": "1 TIMOTEO 1:15, (NVI)"
+  },
+  {
+   "t": "P",
+   "x": "Mis queridos hijos, les escribo estas cosas para que no pequen. Pero, si alguno peca, tenemos ante el Padre a un intercesor, a Jesucristo, el Justo. Él es el sacrificio por el perdón de nuestros pecados, y no solo por los nuestros, sino por los de todo el mundo."
+  },
+  {
+   "t": "REF",
+   "x": "1 JUAN 2:1-2T"
+  },
+  {
+   "t": "T",
+   "x": "LA PAZ"
+  },
+  {
+   "t": "OFIC",
+   "x": "La Paz del Señor esté siempre con ustedes."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Y con tu espíritu."
+  }
+ ],
+ "ashWednesdayClosing": [
+  {
+   "t": "R",
+   "x": "Cuando hay Comunión, la liturgia continúa con el Ofertorio. Se usa el Prefacio Propio de Cuaresma. La siguiente oración puede ser dicha por el Celebrante antes de la bendición final."
+  },
+  {
+   "t": "R",
+   "x": "Si no hay Comunión, entonces se reza el Padrenuestro. La siguiente oración puede usarse para concluir la liturgia."
+  },
+  {
+   "t": "OFIC",
+   "x": "Oremos"
+  },
+  {
+   "t": "P",
+   "x": "Señor Dios nuestro, concédenos la gracia de desearte con todo nuestro corazón: que, deseándote, te busquemos; y que, buscándote, podamos encontrarte; y que, al encontrarte, podamos amarte; y que, amándote, odiemos aquellos pecados de los cuales nos has librado; por Jesucristo nuestro Señor. Amén."
   }
  ],
  "easterVigilIntro": [

@@ -135,6 +135,10 @@ function buildLiturgyHTML(d) {
   // propia apertura, lavatorio y cierre sin bendición ni despedida (holyweek.js, texto del libro en español).
   const key = d.dayInfo.key;
   const isPalm = key === 'palmSunday', isMaundy = key === 'maundyThursday', isPassion = isPalm || key === 'goodFriday';
+  // Miércoles de Ceniza: su rito propio (invitación a la Cuaresma, imposición de la ceniza con el Salmo 51, confesión y
+  // letanía, absolución, palabras confortantes y paz) sustituye a los Ritos Iniciales, la colecta aparte, el Credo, las
+  // Oraciones del Pueblo y la confesión habitual (holyweek.js, texto del libro en español).
+  const isAsh = key === 'ashWednesday';
 
   const fmtReading = (ref, data, type) => {
     if (!data) return '';
@@ -207,12 +211,15 @@ function buildLiturgyHTML(d) {
 
   // Final de la Eucaristía, de la Confesión a la Despedida: lo comparten la Eucaristía de cada día y la de la Gran Vigilia,
   // que cambia el prefacio (el de Pascua), la Fracción y la Despedida (con Aleluya) y añade su bendición opcional.
-  const eucharistEndHtml = ({ preface = d.preface, vigil = false } = {}) => {
+  // El Miércoles de Ceniza (ash) trae su propia confesión, absolución, palabras confortantes y paz (holyweek.js): aquí se
+  // salta lo habitual y, antes de la bendición, va la oración de cierre del libro.
+  const eucharistEndHtml = ({ preface = d.preface, vigil = false, ash = false } = {}) => {
     const pf = preface;
     const fraccionSinAleluya = vigil ? false : isLent, despedidaConAleluya = vigil ? true : isEaster;
     const bendicionVigilia = vigil ? BCPHolyWeek.render('easterVigilBlessing') : '';
+    const cierreCeniza = ash ? BCPHolyWeek.render('ashWednesdayClosing') : '';
     return `
-    <div class="mass-section">
+    ${ash ? '' : `<div class="mass-section">
       <h3 class="section-title">✠ CONFESIÓN Y ABSOLUCIÓN DE LOS PECADOS</h3>
       <div class="liturgical-text-block">${BCPEucharist.CONFESSION}</div>
       <h4 class="section-title">PALABRAS RECONFORTANTES</h4>
@@ -222,7 +229,7 @@ function buildLiturgyHTML(d) {
     <div class="mass-section">
       <h3 class="section-title">✠ LA PAZ</h3>
       <div class="liturgical-text-block">${BCPEucharist.PEACE}</div>
-    </div>
+    </div>`}
 
     <!-- ═══════════════ LITURGIA EUCARÍSTICA ═══════════════ -->
     <div class="mass-section">
@@ -273,6 +280,7 @@ function buildLiturgyHTML(d) {
       ${BCPHolyWeek.render('maundyThursdayClosing')}
     </div>` : `<div class="mass-section">
       <h3 class="section-title main-section">✠ LA BENDICIÓN Y LA DESPEDIDA</h3>
+      ${cierreCeniza}
       <div class="liturgical-text-block">${BCPEucharist.BLESSING}</div>
       ${bendicionVigilia}
       <div class="liturgical-text-block">${despedidaConAleluya ? BCPEucharist.DISMISSAL_ALLELUIA : BCPEucharist.DISMISSAL}</div>
@@ -344,6 +352,14 @@ function buildLiturgyHTML(d) {
     ${isPalm ? `<div class="mass-section">
       <h3 class="section-title main-section">✠ EN LA EUCARISTÍA</h3>
       <p class="rubric">Cuando la Liturgia de las Palmas precede inmediatamente a la Eucaristía, la celebración comienza con el Saludo y la Colecta del Día.</p>
+    </div>` : isAsh ? `<div class="mass-section">
+      <h3 class="section-title main-section">✠ MIÉRCOLES DE CENIZA</h3>
+      ${BCPHolyWeek.render('ashWednesdayOpening')}
+    </div>
+
+    <div class="mass-section">
+      <h3 class="section-title main-section">✠ INVITACIÓN A LA SANTA CUARESMA</h3>
+      ${BCPHolyWeek.render('ashWednesdayInvitation')}
     </div>` : `<div class="mass-section">
       <h3 class="section-title main-section">✠ RITOS INICIALES</h3>
       <h4 class="section-title">LA ACLAMACIÓN</h4>
@@ -365,13 +381,13 @@ function buildLiturgyHTML(d) {
         : `<div class="liturgical-text-block">${BCPEucharist.GLORIA}</div>`}
     </div>`}
 
-    <!-- COLECTA DEL DÍA -->
-    <div class="mass-section">
+    <!-- COLECTA DEL DÍA (el Miércoles de Ceniza va dentro de la Invitación a la santa Cuaresma, tras el silencio) -->
+    ${isAsh ? '' : `<div class="mass-section">
       <h3 class="section-title">✠ LA COLECTA DEL DÍA</h3>
       <div class="liturgical-text-block">${BCPEucharist.SALUTATION}</div>
       <div class="prayer-text collect-text">${d.collect}</div>
       ${SHOW_COLLECT_TRANSLATION_NOTE && BCPPropers.isCollectTranslated(d.collectKey) ? `<p class="rubric">${COLLECT_TRANSLATION_NOTE}</p>` : ''}
-    </div>
+    </div>`}
 
     <!-- ═══════════════ LITURGIA DE LA PALABRA ═══════════════ -->
     <div class="mass-section">
@@ -392,6 +408,18 @@ function buildLiturgyHTML(d) {
 
     ${isPalm ? `<div class="mass-section">
       <p class="rubric">Siguiendo el Sermón, cuando ha precedido la Liturgia de las Palmas, el Credo de Nicea y las Oraciones del Pueblo pueden omitirse en la Eucaristía.</p>
+    </div>` : isAsh ? `<div class="mass-section">
+      <h3 class="section-title main-section">✠ SALMO PENITENCIAL E IMPOSICIÓN DE LA CENIZA</h3>
+      ${BCPHolyWeek.render('ashWednesdayAshes')}
+    </div>
+
+    <div class="mass-section">
+      <h3 class="section-title main-section">✠ CONFESIÓN Y LETANÍA DE PENITENCIA</h3>
+      ${BCPHolyWeek.render('ashWednesdayConfession')}
+    </div>
+
+    <div class="mass-section">
+      ${BCPHolyWeek.render('ashWednesdayAbsolution')}
     </div>` : `<div class="mass-section">
       <h3 class="section-title">✠ EL CREDO NICENO</h3>
       <div class="liturgical-text-block">${BCPEucharist.CREED}</div>
@@ -402,7 +430,7 @@ function buildLiturgyHTML(d) {
       <div class="liturgical-text-block">${BCPEucharist.PRAYERS_OF_THE_PEOPLE}</div>
     </div>`}
 
-    ${eucharistEndHtml()}
+    ${eucharistEndHtml({ ash: isAsh })}
 
     ${footHtml}
 

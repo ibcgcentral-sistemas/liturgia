@@ -62,6 +62,7 @@ const BCPLibrito = (() => {
     // Palmas; el Jueves Santo tiene apertura, lavatorio y cierre propios, sin bendición ni despedida (holyweek.js).
     const hwKey = dayInfo.key;
     const isPalm = hwKey === 'palmSunday', isMaundy = hwKey === 'maundyThursday', isPassion = isPalm || hwKey === 'goodFriday';
+    const isAsh = hwKey === 'ashWednesday';   // el rito propio del Miércoles de Ceniza (ver app.js)
     const isLent = dayInfo.season === 'lent' || dayInfo.season === 'holyWeek';
     const isEaster = dayInfo.season === 'easter' || dayInfo.key === 'pentecost';
     const omitGloria = shouldOmitGloria(dayInfo);
@@ -132,10 +133,12 @@ const BCPLibrito = (() => {
 
     // Final de la Eucaristía, de la Confesión a la Despedida: lo comparten la de cada día y la de la Gran Vigilia (prefacio de
     // Pascua, Fracción y Despedida con Aleluya).
-    const libritoEndHtml = ({ preface: pf = preface, vigil = false } = {}) => {
+    // El Miércoles de Ceniza (ash) trae su propia confesión, absolución y paz (holyweek.js): se salta lo habitual y, antes de
+    // la bendición, va la oración de cierre del libro.
+    const libritoEndHtml = ({ preface: pf = preface, vigil = false, ash = false } = {}) => {
       const fraccionSinAleluya = vigil ? false : isLent, despedidaConAleluya = vigil ? true : isEaster;
       return `
-      <section class="librito-section">
+      ${ash ? '' : `<section class="librito-section">
         <h2>✠ CONFESIÓN Y ABSOLUCIÓN</h2>
         <div class="librito-instruction"><p><strong>Nos arrodillamos si podemos.</strong> Todos juntos:</p></div>
         <div class="librito-text">
@@ -148,7 +151,7 @@ const BCPLibrito = (() => {
         <h2>✠ LA PAZ</h2>
         <div class="librito-instruction"><p><strong>Nos ponemos de pie</strong> y nos saludamos en el Nombre del Señor.</p></div>
         <div class="librito-response"><p><strong>Celebrante: La paz del Señor esté siempre con ustedes.</strong><br><strong>Pueblo: Y con tu espíritu.</strong></p></div>
-      </section>
+      </section>`}
 
       <section class="librito-section">
         <h2>✠ EL OFERTORIO</h2>
@@ -234,6 +237,7 @@ const BCPLibrito = (() => {
         ${BCPHolyWeek.renderLibrito('maundyThursdayClosing')}
       </section>` : `<section class="librito-section">
         <h2>✠ LA BENDICIÓN Y LA DESPEDIDA</h2>
+        ${ash ? BCPHolyWeek.renderLibrito('ashWednesdayClosing') : ''}
         <div class="librito-instruction"><p>El Celebrante da la Bendición final.</p></div>
         <div class="librito-response">
           <p><strong>Celebrante: Salgamos en el Nombre de Cristo.${despedidaConAleluya ? ' Aleluya, aleluya.' : ''}</strong><br><strong>Pueblo: Demos gracias a Dios.${despedidaConAleluya ? ' Aleluya, aleluya.' : ''}</strong></p>
@@ -321,6 +325,14 @@ const BCPLibrito = (() => {
       <section class="librito-section">
         <h2>✠ EN LA EUCARISTÍA</h2>
         <div class="librito-instruction"><p>Cuando la Liturgia de las Palmas precede inmediatamente a la Eucaristía, la celebración comienza con el Saludo y la Colecta del Día.</p></div>
+      </section>` : isAsh ? `<section class="librito-section">
+        <h2>✠ MIÉRCOLES DE CENIZA</h2>
+        ${BCPHolyWeek.renderLibrito('ashWednesdayOpening')}
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ INVITACIÓN A LA SANTA CUARESMA</h2>
+        ${BCPHolyWeek.renderLibrito('ashWednesdayInvitation')}
       </section>` : `<section class="librito-section">
         <h2>✠ RITOS INICIALES</h2>
         <div class="librito-instruction"><p><strong>Todos de pie.</strong></p></div>
@@ -351,11 +363,11 @@ const BCPLibrito = (() => {
         </div>`}
       </section>`}
 
-      <section class="librito-section">
+      ${isAsh ? '' : `<section class="librito-section">
         <h2>✠ LA COLECTA DEL DÍA</h2>
         <div class="librito-response"><p><strong>Celebrante: El Señor esté con ustedes.</strong><br><strong>Pueblo: Y con tu espíritu.</strong></p></div>
         <div class="librito-text"><p>${collect}</p></div>
-      </section>
+      </section>`}
 
       <section class="librito-section">
         <h2>✠ LITURGIA DE LA PALABRA</h2>
@@ -373,7 +385,7 @@ const BCPLibrito = (() => {
 
         ${isMaundy ? BCPHolyWeek.renderLibrito('maundyThursdayFootWashing') : ''}
 
-        ${isPalm ? `<div class="librito-instruction"><p>Siguiendo el Sermón, cuando ha precedido la Liturgia de las Palmas, el Credo de Nicea y las Oraciones del Pueblo pueden omitirse en la Eucaristía.</p></div>` : `
+        ${isPalm ? `<div class="librito-instruction"><p>Siguiendo el Sermón, cuando ha precedido la Liturgia de las Palmas, el Credo de Nicea y las Oraciones del Pueblo pueden omitirse en la Eucaristía.</p></div>` : isAsh ? '' : `
         <h3>EL CREDO NICENO</h3>
         <div class="librito-instruction"><p><strong>Nos ponemos de pie.</strong></p></div>
         <div class="librito-credo">
@@ -387,13 +399,25 @@ const BCPLibrito = (() => {
         </div>`}
       </section>
 
-      ${isPalm ? '' : `<section class="librito-section">
+      ${isPalm ? '' : isAsh ? `<section class="librito-section">
+        <h2>✠ SALMO PENITENCIAL E IMPOSICIÓN DE LA CENIZA</h2>
+        ${BCPHolyWeek.renderLibrito('ashWednesdayAshes')}
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ CONFESIÓN Y LETANÍA DE PENITENCIA</h2>
+        ${BCPHolyWeek.renderLibrito('ashWednesdayConfession')}
+      </section>
+
+      <section class="librito-section">
+        ${BCPHolyWeek.renderLibrito('ashWednesdayAbsolution')}
+      </section>` : `<section class="librito-section">
         <h2>✠ ORACIÓN DE LOS FIELES</h2>
         <div class="librito-instruction"><p>Un Lector dirige las peticiones. Después de cada una:</p></div>
         <div class="librito-response"><p><strong>Lector: Señor, en tu misericordia:</strong><br><strong>Pueblo: Escucha nuestra oración.</strong></p></div>
       </section>`}
 
-      ${libritoEndHtml()}
+      ${libritoEndHtml({ ash: isAsh })}
 
       <div class="librito-footer">
         <p>✠ Soli Deo Gloria ✠</p>
