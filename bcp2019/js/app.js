@@ -81,7 +81,7 @@ async function generateLiturgy(date) {
         readings.second ? fetchScripture(readings.second) : Promise.resolve(null),
         fetchScripture(readings.gospel),
       ]);
-      psalmVerses = (window.BibliaJerusalen && readings.psalm) ? window.BibliaJerusalen.getVerses(readings.psalm) : [];
+      psalmVerses = (window.BibliaJerusalen && readings.psalm) ? cleanPsalmVerses(readings.psalm, window.BibliaJerusalen.getVerses(readings.psalm)) : [];
     } catch (e) {
       firstReading = { text: '<em class="rubric">[Error cargando lectura]</em>', reference: '' };
       gospel = { text: '<em class="rubric">[Error cargando evangelio]</em>', reference: '' };

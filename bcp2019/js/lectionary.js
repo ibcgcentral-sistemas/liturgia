@@ -274,7 +274,7 @@ const BCPLectionary = (() => {
     proper14: {
       A: { first: 'Jonah 2:1-10', psalm: 'Psalm 29', second: 'Romans 9:1-5', gospel: 'Matthew 14:22-33' },
       B: { first: 'Deuteronomy 8:1-10', psalm: 'Psalm 34:1-22', second: 'Ephesians 4:17-5:2', gospel: 'John 6:37-51' },
-      C: { first: 'Genesis 15:1-6', psalm: 'Psalm 33,1-9,10-21', second: 'Hebrews 11:1-16', gospel: 'Luke 12:32-40' },
+      C: { first: 'Genesis 15:1-6', psalm: 'Psalm 33:1-21', second: 'Hebrews 11:1-16', gospel: 'Luke 12:32-40' },
     },
     proper15: {
       A: { first: 'Isaiah 56:1-8', psalm: 'Psalm 67', second: 'Romans 11:13-24', gospel: 'Matthew 15:21-28' },

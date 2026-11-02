@@ -63,7 +63,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=31` (Misal) y `?v=8` (bcp2019).
+   código viejo. Actualmente en `?v=31` (Misal) y `?v=9` (bcp2019).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -124,14 +124,22 @@ impreso:
 - Graduales, tractos, ofertorios y comuniones de los Domingos después de la
   Trinidad y de las fiestas fijas no marianas.
 
-### 2. Desfase de versículos en los salmos del BCP 2019
+### 2. Salmos del BCP 2019: título y versículos (resuelto en lo medible, 2026-11-02)
 
-La Biblia de Jerusalén numera el encabezamiento como versículo, y el desfase
-**varía salmo por salmo**: el 51 va desplazado dos (el `Psalm 51:1-13` imprime dos
-líneas de rúbrica y se queda en el v. 11 del Miserere), el 31 uno, el 23 ninguno
-porque su título va fundido en el v. 1. Afecta a entre 46 y 63 de los 137 salmos
-citados. Ninguna heurística automática resulta fiable: hace falta una tabla de
-desfase cotejada con el salterio oficial.
+La Biblia de Jerusalén numera el título como versículo 1. Hay dos casos y cada uno
+tiene su tabla: `PSALM_TITLE_OFFSET` (`js/lib/biblia-wrapper.js`) salta el título
+cuando ocupa su propio versículo (el 51 lo salta en dos), y `PSALM_FUSED_TITLE`
+(`bcp2019/js/utils.js`) recorta el título que va fundido en el v. 1 con el comienzo
+del cuerpo (23, 130 y otros 31; 33 salmos en total). Solo recorta texto de la Biblia,
+no añade nada. `test-bcp2019.js` (1l, 2b, 2c) falla si un salmo del día empieza con
+título, repite versículos, o si un título de la tabla deja de abrir su v. 1.
+
+Límites: se comprobó el comienzo del cuerpo en los 87 salmos que cita el leccionario,
+no cada versículo interior ni los cortes de final de cita. Las letras del acróstico
+(«Alef.», «Bet.» en los salmos 25, 34, 37, 111, 112, 119 y 145) siguen impresas.
+`js/app.js` del Misal de la raíz lee los salmos con el mismo wrapper y **no** aplica
+`cleanPsalmVerses`, así que cualquier salmo con título fundido que cite su leccionario
+sale con título (no se midió cuántos).
 
 ### 3. Huecos conocidos, menores
 

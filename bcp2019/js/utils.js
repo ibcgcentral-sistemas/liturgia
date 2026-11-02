@@ -138,6 +138,69 @@ function escapeHtml(s) {
 }
 
 // ══════════════════════════════════════════════════════════════════════════
+//  SALMOS: TÍTULO FUNDIDO EN EL VERSÍCULO 1
+// ══════════════════════════════════════════════════════════════════════════
+
+// La Biblia de Jerusalén numera el título del salmo como versículo 1. En muchos
+// salmos ocupa un versículo propio y biblia-wrapper.js ya lo salta
+// (PSALM_TITLE_OFFSET); en los de esta tabla va fundido en el v. 1 con el
+// comienzo del cuerpo («Salmo. De David. Yahveh es mi pastor, nada me falta.»)
+// y el wrapper no puede saltarlo sin perder ese comienzo. El título no forma
+// parte del salmo que se proclama: las citas del leccionario, con numeración
+// inglesa, empiezan en el primer versículo del cuerpo.
+//
+// Cada entrada es el texto LITERAL del título, con su espacio final, tal como abre
+// el v. 1 de la Biblia. Solo se recorta; no se añade ni se cambia ninguna palabra.
+// La lista no sale de una heurística sino de leer el v. 1 de los 87 salmos que cita
+// el leccionario; test-bcp2019.js comprueba que cada título sigue abriendo su
+// versículo y que ningún salmo del día empieza con un título. Las letras del
+// acróstico («Alef.», «Bet.») no son título y se dejan como están.
+const PSALM_FUSED_TITLE = {
+  15: 'Salmo. De David. ',
+  16: 'A media voz. De David. ',
+  17: 'Oración. De David. ',
+  23: 'Salmo. De David. ',
+  24: 'Salmo. De David. ',
+  25: 'De David ',
+  26: 'De David. ',
+  27: 'De David. ',
+  29: 'Salmo. De David. ',
+  32: 'De David. Poema. ',
+  37: 'De David. ',
+  50: 'Salmo. De Asaf. ',
+  66: 'Del maestro de coro. Cántico. Salmo. ',
+  72: 'De Salomón. ',
+  78: 'Poema. De Asaf. ',
+  82: 'Salmo. De Asaf. ',
+  86: 'Oración. De David. ',
+  87: 'De los hijos de Coré. Salmo. Cántico. ',
+  90: 'Oración. De Moisés, hombre de Dios. ',
+  98: 'Salmo. ',
+  100: 'Salmo. Para la acción de gracias. ',
+  103: 'De David. ',
+  110: 'De David. Salmo. ',
+  121: 'Canción para las subidas. ',
+  122: 'Canción de las subidas. De David. ',
+  123: 'Canción de las subidas. ',
+  124: 'Canción de las subidas. De David. ',
+  126: 'Canción de las subidas. ',
+  130: 'Canción de las subidas. ',
+  132: 'Canción de las subidas. ',
+  138: 'De David. ',
+  139: 'Del maestro de coro. De David. Salmo. ',
+  145: 'Himno. De David. ',
+};
+
+// Versículos de un salmo ({v, h, content}, como los devuelve BibliaJerusalen.getVerses)
+// listos para mostrar: quita el título fundido del v. 1 si la cita lo incluye.
+function cleanPsalmVerses(ref, verses) {
+  const m = /^Psalms? (\d+)/.exec(String(ref || '').trim());
+  const title = m && PSALM_FUSED_TITLE[+m[1]];
+  if (!title || !verses || !verses.length) return verses;
+  return verses.map(v => (v.h === '1' && String(v.content).startsWith(title)) ? { ...v, content: v.content.slice(title.length) } : v);
+}
+
+// ══════════════════════════════════════════════════════════════════════════
 //  NUMERACIÓN DE VERSÍCULOS: LECCIONARIO (inglesa) → BIBLIA DE JERUSALÉN (hebrea)
 // ══════════════════════════════════════════════════════════════════════════
 

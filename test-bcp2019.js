@@ -44,6 +44,15 @@ const generateLiturgy = C.get('generateLiturgy'), fetchScripture = C.get('fetchS
 const strip = h => String(h).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 const iso = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 
+// Salmo listo para mostrar: sin título pegado al v. 1 y sin versículos repetidos (etiquetas estrictamente crecientes).
+const TITULO_SALMO = /^(Salmo|De David|De Asaf|De Salomón|De Moisés|De los hijos|Del maestro|Canción|Oración|Himno|Poema|A media voz|Cántico)[\s.,]/;
+function psalmProblem(verses) {
+  if (!verses || !verses.length) return '';
+  if (verses[0].h === '1' && TITULO_SALMO.test(strip(verses[0].content))) return `título pegado al v. 1: «${strip(verses[0].content).slice(0, 40)}…»`;
+  for (let i = 1; i < verses.length; i++) if (+verses[i].v <= +verses[i - 1].v) return `versículo repetido o fuera de orden (${verses[i - 1].v} → ${verses[i].v})`;
+  return '';
+}
+
 const results = [];
 function check(name, failures, total) {
   results.push({ name, fails: failures.length, total, examples: failures.slice(0, 4) });
@@ -54,7 +63,7 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
 
 (async () => {
   // ── 1. Mecánica ──────────────────────────────────────────────────────────
-  const f = { excepcion: [], marcas: [], sinColecta: [], sinPrefacio: [], sinLecturas: [], sinPrimera: [], sinEvangelio: [], sinSalmo: [], noEucaristiaSinAviso: [], noEucaristiaConMisa: [], gloria: [] };
+  const f = { excepcion: [], marcas: [], sinColecta: [], sinPrefacio: [], sinLecturas: [], sinPrimera: [], sinEvangelio: [], sinSalmo: [], noEucaristiaSinAviso: [], noEucaristiaConMisa: [], gloria: [], salmoMal: [] };
   let days = 0, borrowed = 0, noEu = 0, inheritFallback = 0;
   for (let d = new Date(Y0, 0, 1, 12); d.getFullYear() <= Y1; d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1, 12)) {
     days++;
@@ -83,6 +92,7 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
     if (!st.firstReading || strip(st.firstReading.text || '').length < 40) f.sinPrimera.push(date + ' ' + st.readings.first);
     if (!st.gospel || strip(st.gospel.text || '').length < 40) f.sinEvangelio.push(date + ' ' + st.readings.gospel);
     if (st.readings.psalm && (!st.psalmVerses || !st.psalmVerses.length)) f.sinSalmo.push(date + ' ' + st.readings.psalm);
+    const pp = psalmProblem(st.psalmVerses); if (pp) f.salmoMal.push(`${date} ${st.readings.psalm}: ${pp}`);
   }
   check(`1a. Sin excepciones (${days} días, ${Y0}-${Y1})`, f.excepcion, days);
   check('1b. Sin marcas de fallo en el HTML (16 patrones)', f.marcas, days);
@@ -94,6 +104,7 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   check('1h. …y salmo con versículos', f.sinSalmo, days - noEu);
   check('1i. Viernes y Sábado Santo muestran el aviso sin Eucaristía', f.noEucaristiaSinAviso.concat(f.noEucaristiaConMisa), noEu);
   check('1j. Gloria: se omite solo en Cuaresma y Semana Santa, no en Adviento', f.gloria, days - noEu);
+  check('1l. Salmo del día: sin título pegado al v. 1 ni versículos repetidos', f.salmoMal, days - noEu);
 
   // ── 1k. Fiestas fijas en domingo ─────────────────────────────────────────
   // Fuera de Adviento, Cuaresma y Pascua el libro permite observarlas ese domingo o trasladarlas al día de semana
@@ -128,6 +139,23 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
     if (!res.text || ERR_IN_TEXT.test(res.text) || strip(res.text).length < 25) badRefs.push(`${r} (${where[0]})`);
   }
   check(`2. Cada cita del leccionario devuelve texto (${refs.size} citas distintas)`, badRefs, refs.size);
+
+  // ── 2b. Salmos: cada cita, tal como se muestra, y la tabla de títulos fundidos ─
+  const cleanPsalmVerses = C.get('cleanPsalmVerses'), FUSED = C.get('PSALM_FUSED_TITLE') || {};
+  const psalmRefs = [...refs.values()].filter(x => x.s === 'psalm');
+  const badPsalms = [];
+  for (const { r, where } of psalmRefs) {
+    const p = psalmProblem(cleanPsalmVerses ? cleanPsalmVerses(r, C.ctx.BibliaJerusalen.getVerses(r)) : C.ctx.BibliaJerusalen.getVerses(r));
+    if (p) badPsalms.push(`${r} (${where[0]}): ${p}`);
+  }
+  check(`2b. Citas de salmo (${psalmRefs.length}): sin título pegado ni versículos repetidos`, badPsalms, psalmRefs.length);
+  // La tabla recorta texto de la Biblia de Jerusalén: cada título debe seguir siendo el comienzo literal del v. 1.
+  const badFused = [];
+  for (const [n, t] of Object.entries(FUSED)) {
+    const v = C.ctx.BibliaJerusalen.getVerses(`Psalm ${n}:1`);
+    if (!v.length || v[0].h !== '1' || !v[0].content.startsWith(t)) badFused.push(`Sal ${n}: «${t}» ya no abre el v. 1 (${v.length ? strip(v[0].content).slice(0, 40) : 'sin texto'})`);
+  }
+  check(`2c. Tabla de títulos fundidos: cada título abre el v. 1 de la Biblia (${Object.keys(FUSED).length} salmos)`, badFused, Math.max(1, Object.keys(FUSED).length));
 
   // ── 3. Leccionario = libro ───────────────────────────────────────────────
   let drift = [], compared = 0;

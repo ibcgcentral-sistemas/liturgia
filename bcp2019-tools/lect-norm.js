@@ -66,6 +66,9 @@ function normOne(raw) {
   const book = BOOKS[m[1]];
   if (!book) throw new Error('libro desconocido «' + m[1] + '» en «' + raw + '»');
   let rest = m[2];
+  // El libro escribe «Ps 33(1-9)10-21» por «33:1-21» con los vv. 1-9 opcionales: sin los dos puntos
+  // «33,1-9,10-21» se leía como el salmo entero y además 33:1-9 y 33:10-21 (43 versículos en vez de 21).
+  if (book === 'Psalm') rest = rest.replace(/^(\d+)\(/, '$1:(');
   rest = rest.replace(/(\d)[a-d]\b/g, '$1').replace(/(\d)v\b/g, '$1');
   rest = rest.replace(/\)(?=\d)/g, ',').replace(/(\d)\(/g, '$1,').replace(/[()]/g, '');
   rest = rest.replace(/\s+/g, ',').replace(/,+/g, ',').replace(/^,|,$/g, '');
