@@ -157,6 +157,10 @@ const BCPLibrito = (() => {
           ${acclamation === 'easter' ? `<p><strong>Celebrante: ¡Aleluya! ¡Cristo ha resucitado!</strong><br><strong>Pueblo: ¡Ciertamente el Señor ha resucitado! ¡Aleluya!</strong></p>`
           : acclamation === 'lent' ? `<p><strong>Celebrante: Bendigamos al Señor que perdona todos nuestros pecados.</strong><br><strong>Pueblo: Su misericordia perdura para siempre.</strong></p>`
           : acclamation === 'holyWeek' ? `<p><strong>Celebrante: Bendito sea nuestro Dios.</strong><br><strong>Pueblo: Ahora y por siempre. Amén.</strong></p>`
+          : acclamation === 'pentecost' ? `<p><strong>Celebrante: Derramaré mi Espíritu sobre todo el género humano.</strong><br><strong>Pueblo: Y los hijos y las hijas de ustedes profetizarán.</strong></p>
+            <p><strong>Celebrante: Tendrán sueños los ancianos</strong><br><strong>Pueblo: Y visiones los jóvenes.</strong></p>
+            <p><strong>Celebrante: Entonces sabrán que yo estoy en medio de Israel,</strong><br><strong>Pueblo: Que yo soy el Señor su Dios y no hay otro fuera de Mí</strong></p>
+            <p><strong>Celebrante: Y esto sucederá</strong><br><strong>Pueblo: Que todo el que invoque el Nombre del Señor será salvado.</strong></p>`
           : `<p><strong>Celebrante: Bendito sea Dios: Padre, Hijo y Espíritu Santo.</strong><br><strong>Pueblo: Y bendito sea su reino, ahora y por siempre. Amén.</strong></p>`}
         </div>
 

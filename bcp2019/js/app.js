@@ -203,7 +203,7 @@ function buildLiturgyHTML(d) {
     <div class="mass-section">
       <h3 class="section-title main-section">✠ RITOS INICIALES</h3>
       <h4 class="section-title">LA ACLAMACIÓN</h4>
-      <div class="liturgical-text-block">${acclamation === 'lent' ? BCPEucharist.ACCLAMATION_LENT : acclamation === 'holyWeek' ? BCPEucharist.ACCLAMATION_HOLYWEEK : acclamation === 'easter' ? BCPEucharist.ACCLAMATION_EASTER : BCPEucharist.ACCLAMATION}</div>
+      <div class="liturgical-text-block">${acclamation === 'lent' ? BCPEucharist.ACCLAMATION_LENT : acclamation === 'holyWeek' ? BCPEucharist.ACCLAMATION_HOLYWEEK : acclamation === 'easter' ? BCPEucharist.ACCLAMATION_EASTER : acclamation === 'pentecost' ? BCPEucharist.ACCLAMATION_PENTECOST : BCPEucharist.ACCLAMATION}</div>
 
       <h4 class="section-title">LA COLECTA POR PUREZA</h4>
       <div class="liturgical-text-block">${BCPEucharist.COLLECT_FOR_PURITY}</div>

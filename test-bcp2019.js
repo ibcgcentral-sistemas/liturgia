@@ -53,6 +53,12 @@ function psalmProblem(verses) {
   return '';
 }
 
+// Saludo del Día de Pentecostés (Saludos para los Tiempos Litúrgicos, p. 146; LOC-10-10-23.md l. 3789-3796), tal como
+// lo imprime el libro. Debe salir completo y en orden, no solo su primera línea.
+const JOEL = ['Derramaré mi Espíritu sobre todo el género humano.', 'Y los hijos y las hijas de ustedes profetizarán.', 'Tendrán sueños los ancianos', 'Y visiones los jóvenes.',
+  'Entonces sabrán que yo estoy en medio de Israel,', 'Que yo soy el Señor su Dios y no hay otro fuera de Mí', 'Y esto sucederá', 'Que todo el que invoque el Nombre del Señor será salvado.'];
+function joelCompleto(txt) { let p = 0; for (const l of JOEL) { const i = txt.indexOf(l, p); if (i < 0) return false; p = i + l.length; } return true; }
+
 const results = [];
 function check(name, failures, total) {
   results.push({ name, fails: failures.length, total, examples: failures.slice(0, 4) });
@@ -94,8 +100,8 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
     {
       const s = st.dayInfo.season, k = st.dayInfo.key;
       const am = /LA ACLAMACIÓN<\/h4>([\s\S]*?)(?=<h[34])/.exec(html), fr = /LA FRACCIÓN<\/h3>([\s\S]*?)(?=ORACIÓN DE HUMILDE ACCESO)/.exec(html), dm = /LA BENDICIÓN Y LA DESPEDIDA<\/h3>([\s\S]*)$/.exec(html);
-      const acl = !am ? 'ausente' : /Bendito sea nuestro Dios/.test(am[1]) ? 'semana-santa' : /Bendigamos al Señor que perdona/.test(am[1]) ? 'cuaresma' : /Cristo ha resucitado/.test(am[1]) ? 'pascua' : /Bendito sea Dios: Padre/.test(am[1]) ? 'ordinaria' : 'desconocida';
-      const aclEsp = s === 'holyWeek' ? 'semana-santa' : s === 'lent' ? 'cuaresma' : s === 'easter' ? 'pascua' : 'ordinaria';
+      const acl = !am ? 'ausente' : /Derramaré mi Espíritu/.test(am[1]) ? (joelCompleto(strip(am[1])) ? 'pentecostes' : 'pentecostes-incompleto') : /Bendito sea nuestro Dios/.test(am[1]) ? 'semana-santa' : /Bendigamos al Señor que perdona/.test(am[1]) ? 'cuaresma' : /Cristo ha resucitado/.test(am[1]) ? 'pascua' : /Bendito sea Dios: Padre/.test(am[1]) ? 'ordinaria' : 'desconocida';
+      const aclEsp = k === 'pentecost' ? 'pentecostes' : s === 'holyWeek' ? 'semana-santa' : s === 'lent' ? 'cuaresma' : s === 'easter' ? 'pascua' : 'ordinaria';
       if (acl !== aclEsp) f.aclamacion.push(`${date} ${k} (${s}): ${acl}, debía ser ${aclEsp}`);
       const conAleluyaFr = !!fr && /\[Aleluya\.\]/.test(fr[1]), debeAleluyaFr = !['lent', 'holyWeek'].includes(s);
       if (conAleluyaFr !== debeAleluyaFr) f.fraccion.push(`${date} ${k} (${s}): ${conAleluyaFr ? 'con' : 'sin'} Aleluya`);
@@ -106,7 +112,7 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
       const lgl = /<h3>GLORIA IN EXCELSIS<\/h3>([\s\S]*?)(?=<h[23])/.exec(lib);
       if (lib && (!lgl || /se omite el Gloria in excelsis/.test(lgl[1]) !== debeOmitir)) f.gloria.push(`${date} ${k} (${s}) Librito: ${!lgl ? 'sin sección' : debeOmitir ? 'presente' : 'omitido'}`);
       const lam = /<h3>LA ACLAMACIÓN<\/h3>([\s\S]*?)(?=<h[23])/.exec(lib);
-      const lacl = !lam ? 'ausente' : /Bendito sea nuestro Dios/.test(lam[1]) ? 'semana-santa' : /Bendigamos al Señor que perdona/.test(lam[1]) ? 'cuaresma' : /Cristo ha resucitado/.test(lam[1]) ? 'pascua' : /Bendito sea Dios: Padre/.test(lam[1]) ? 'ordinaria' : 'desconocida';
+      const lacl = !lam ? 'ausente' : /Derramaré mi Espíritu/.test(lam[1]) ? (joelCompleto(strip(lam[1])) ? 'pentecostes' : 'pentecostes-incompleto') : /Bendito sea nuestro Dios/.test(lam[1]) ? 'semana-santa' : /Bendigamos al Señor que perdona/.test(lam[1]) ? 'cuaresma' : /Cristo ha resucitado/.test(lam[1]) ? 'pascua' : /Bendito sea Dios: Padre/.test(lam[1]) ? 'ordinaria' : 'desconocida';
       if (lib && lacl !== aclEsp) f.aclamacion.push(`${date} ${k} (${s}) Librito: ${lacl}, debía ser ${aclEsp}`);
       const lfr = /Celebrante: (\[Aleluya\.\] )?Cristo, nuestra Pascua/.exec(lib), ldm = /Salgamos en el Nombre de Cristo\.( Aleluya, aleluya\.)?/.exec(lib);
       if (lib && (!lfr || !!lfr[1] !== debeAleluyaFr)) f.fraccion.push(`${date} ${k} (${s}) Librito: ${!lfr ? 'sin Fracción' : lfr[1] ? 'con' : 'sin'} Aleluya`);
@@ -131,9 +137,9 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   check('1l. Salmo del día: sin título pegado al v. 1 ni versículos repetidos', f.salmoMal, days - noEu);
   // Libro: la Aclamación de Cuaresma rige «desde el Miércoles de Ceniza a la víspera del Domingo de Ramos»; la Semana
   // Santa tiene la suya («Bendito sea nuestro Dios»); la pascual va «desde el día de Resurrección hasta la Víspera de
-  // Pentecostés», así que el Día de Pentecostés usa la ordinaria. La Fracción omite el Aleluya en Cuaresma y Semana
-  // Santa. La Despedida lleva «aleluya, aleluya» «desde la Vigilia Pascual hasta el Día de Pentecostés» inclusive.
-  check('6a. Aclamación según el tiempo (Cuaresma / Semana Santa / Pascua hasta la víspera de Pentecostés)', f.aclamacion, days - noEu);
+  // Pentecostés», así que el Día de Pentecostés lleva el saludo de Joel (decisión del usuario, 2026-11-02; el libro
+  // admite también la fija). La Fracción omite el Aleluya en Cuaresma y Semana Santa. La Despedida lleva «aleluya, aleluya» «desde la Vigilia Pascual hasta el Día de Pentecostés» inclusive.
+  check('6a. Aclamación según el tiempo (Cuaresma / Semana Santa / Pascua hasta la víspera / saludo de Joel en Pentecostés)', f.aclamacion, days - noEu);
   check('6b. Fracción sin Aleluya en Cuaresma y Semana Santa, con él en el resto', f.fraccion, days - noEu);
   check('6c. Despedida con «aleluya, aleluya» de Pascua al Día de Pentecostés inclusive', f.despedida, days - noEu);
 

@@ -40,7 +40,7 @@ const BCPEucharist = (() => {
     }).join('');
   }
 
-  // ── LA ACLAMACIÓN (con variantes de Cuaresma, Semana Santa y Pascua) ────
+  // ── LA ACLAMACIÓN (con variantes de Cuaresma, Semana Santa, Pascua y Pentecostés) ─
   const ACCLAMATION_DATA = [
     { type: 'R', text: 'La gente de pie, el celebrante dice esto o un saludo de temporada.' },
     { type: 'CEL', text: 'Bendito sea Dios: Padre, Hijo y Espíritu Santo.' },
@@ -55,6 +55,21 @@ const BCPEucharist = (() => {
     { type: 'R', text: 'Para la Semana Santa.' },
     { type: 'CEL', text: 'Bendito sea nuestro Dios.' },
     { type: 'PUEBLO', text: 'Ahora y por siempre. Amén.' },
+  ];
+  // Saludo propio del Día de Pentecostés (Saludos para los Tiempos Litúrgicos, p. 146), tal como lo imprime el
+  // libro, sin puntuación añadida. El libro lo da también para las ocasiones de confirmación y ordenación, que el
+  // generador no modela.
+  const ACCLAMATION_PENTECOST_DATA = [
+    { type: 'R', text: 'Para el Día de Pentecostés.' },
+    { type: 'CEL', text: 'Derramaré mi Espíritu sobre todo el género humano.' },
+    { type: 'PUEBLO', text: 'Y los hijos y las hijas de ustedes profetizarán.' },
+    { type: 'CEL', text: 'Tendrán sueños los ancianos' },
+    { type: 'PUEBLO', text: 'Y visiones los jóvenes.' },
+    { type: 'CEL', text: 'Entonces sabrán que yo estoy en medio de Israel,' },
+    { type: 'PUEBLO', text: 'Que yo soy el Señor su Dios y no hay otro fuera de Mí' },
+    { type: 'CEL', text: 'Y esto sucederá' },
+    { type: 'PUEBLO', text: 'Que todo el que invoque el Nombre del Señor será salvado.' },
+    { type: 'R', text: 'Joel 2:27-28, 32; Hechos 2:17, 21 (NVI).' },
   ];
   const ACCLAMATION_EASTER_DATA = [
     { type: 'R', text: 'Desde el día de Resurrección hasta la Víspera de Pentecostés.' },
@@ -290,6 +305,7 @@ const BCPEucharist = (() => {
     ACCLAMATION: render(ACCLAMATION_DATA),
     ACCLAMATION_LENT: render(ACCLAMATION_LENT_DATA),
     ACCLAMATION_HOLYWEEK: render(ACCLAMATION_HOLYWEEK_DATA),
+    ACCLAMATION_PENTECOST: render(ACCLAMATION_PENTECOST_DATA),
     ACCLAMATION_EASTER: render(ACCLAMATION_EASTER_DATA),
     COLLECT_FOR_PURITY: render(COLLECT_FOR_PURITY_DATA),
     SUMMARY_OF_LAW: render(SUMMARY_OF_LAW_DATA),

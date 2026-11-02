@@ -93,7 +93,7 @@ const BCPManual = (() => {
       <h3>La Aclamación</h3>
       <ul>
         <li>Todos de pie. El Celebrante dice la Aclamación fija, o un saludo propio de la temporada (Adviento, Navidad, Epifanía, Cuaresma — ver "Saludos para los Tiempos Litúrgicos" del Libro).</li>
-        <li>En Cuaresma se usa la fórmula penitencial; en la Semana Santa, "Bendito sea nuestro Dios / Ahora y por siempre. Amén."; desde el día de Resurrección hasta la víspera de Pentecostés, la fórmula pascual con "Aleluya". El Día de Pentecostés usa la Aclamación fija.</li>
+        <li>En Cuaresma se usa la fórmula penitencial; en la Semana Santa, "Bendito sea nuestro Dios / Ahora y por siempre. Amén."; desde el día de Resurrección hasta la víspera de Pentecostés, la fórmula pascual con "Aleluya". El Día de Pentecostés, el saludo de Joel ("Derramaré mi Espíritu sobre todo el género humano…").</li>
       </ul>
 
       <h3>Colecta por Pureza</h3>
