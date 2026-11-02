@@ -69,7 +69,7 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
 
 (async () => {
   // ── 1. Mecánica ──────────────────────────────────────────────────────────
-  const f = { excepcion: [], marcas: [], sinColecta: [], sinPrefacio: [], sinLecturas: [], sinPrimera: [], sinEvangelio: [], sinSalmo: [], noEucaristiaSinAviso: [], noEucaristiaConMisa: [], gloria: [], salmoMal: [], aclamacion: [], fraccion: [], despedida: [] };
+  const f = { excepcion: [], marcas: [], sinColecta: [], sinPrefacio: [], sinLecturas: [], sinPrimera: [], sinEvangelio: [], sinSalmo: [], noEucaristiaSinAviso: [], noEucaristiaConMisa: [], gloria: [], salmoMal: [], aclamacion: [], fraccion: [], despedida: [], salmoAlterna: [] };
   let days = 0, borrowed = 0, noEu = 0, inheritFallback = 0;
   for (let d = new Date(Y0, 0, 1, 12); d.getFullYear() <= Y1; d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1, 12)) {
     days++;
@@ -109,6 +109,24 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
       if (conAleluyaDesp !== debeAleluyaDesp) f.despedida.push(`${date} ${k} (${s}): ${conAleluyaDesp ? 'con' : 'sin'} aleluya`);
       // El Librito no recalcula nada, pero decide estas tres cosas con su propio código: se mide igual.
       let lib = ''; try { lib = Librito.generateLibrito(st); } catch (e) { f.aclamacion.push(`${date} Librito lanzó: ${e.message}`); }
+      // Salmo alternado: Lector el primer versículo que se muestra, Pueblo el siguiente, sin saltarse ninguno y en orden.
+      if (st.psalmVerses && st.psalmVerses.length && st.readings) {
+        const pm = /SALMO RESPONSORIAL<\/h3>([\s\S]*?)<\/div><\/div>/.exec(html);
+        const rowsA = pm ? [...pm[1].matchAll(/<span class="lit-line (lector|pueblo)"><span class="lit-label">[^<]*<\/span><span class="lit-text"><sup class="verse-num">([^<]*)<\/sup>([\s\S]*?)<\/span><\/span>/g)].map(m => ({ role: m[1], v: m[2], t: strip(m[3]) })) : [];
+        const lm2 = /<div class="librito-psalm">([\s\S]*?)<\/div>\s*(?=<\/div>|<div class="librito-|<h[23])/.exec(lib);
+        const rowsB = [...lib.matchAll(/<div class="psalm-verse psalm-(lector|pueblo)"><p><span class="psalm-role">[^<]*<\/span> (?:<strong>)?<span class="verse-num">([^<]*)<\/span>([\s\S]*?)(?:<\/strong>)?<\/p><\/div>/g)].map(m => ({ role: m[1], v: m[2], t: strip(m[3]) }));
+        const prob = (rows, donde) => {
+          if (rows.length !== st.psalmVerses.length) return `${donde}: ${rows.length} versículos impresos de ${st.psalmVerses.length}`;
+          for (let i = 0; i < rows.length; i++) {
+            if (rows[i].role !== (i % 2 === 0 ? 'lector' : 'pueblo')) return `${donde}: el versículo ${i + 1} lo dice ${rows[i].role}`;
+            if (rows[i].v !== String(st.psalmVerses[i].v) || rows[i].t !== strip(st.psalmVerses[i].content)) return `${donde}: el versículo ${i + 1} no coincide con el de la Biblia`;
+          }
+          return '';
+        };
+        const p1 = prob(rowsA, 'liturgia'), p2 = prob(rowsB, 'Librito');
+        if (p1) f.salmoAlterna.push(`${date} ${st.readings.psalm}: ${p1}`);
+        if (p2) f.salmoAlterna.push(`${date} ${st.readings.psalm}: ${p2}`);
+      }
       const lgl = /<h3>GLORIA IN EXCELSIS<\/h3>([\s\S]*?)(?=<h[23])/.exec(lib);
       if (lib && (!lgl || /se omite el Gloria in excelsis/.test(lgl[1]) !== debeOmitir)) f.gloria.push(`${date} ${k} (${s}) Librito: ${!lgl ? 'sin sección' : debeOmitir ? 'presente' : 'omitido'}`);
       const lam = /<h3>LA ACLAMACIÓN<\/h3>([\s\S]*?)(?=<h[23])/.exec(lib);
@@ -142,6 +160,7 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   check('6a. Aclamación según el tiempo (Cuaresma / Semana Santa / Pascua hasta la víspera / saludo de Joel en Pentecostés)', f.aclamacion, days - noEu);
   check('6b. Fracción sin Aleluya en Cuaresma y Semana Santa, con él en el resto', f.fraccion, days - noEu);
   check('6c. Despedida con «aleluya, aleluya» de Pascua al Día de Pentecostés inclusive', f.despedida, days - noEu);
+  check('7. Salmo alternado Lector/Pueblo por versículos, completo y en orden (liturgia y Librito)', f.salmoAlterna, days - noEu);
 
   // ── 1k. Fiestas fijas en domingo ─────────────────────────────────────────
   // Fuera de Adviento, Cuaresma y Pascua el libro permite observarlas ese domingo o trasladarlas al día de semana
@@ -193,6 +212,45 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
     if (!v.length || v[0].h !== '1' || !v[0].content.startsWith(t)) badFused.push(`Sal ${n}: «${t}» ya no abre el v. 1 (${v.length ? strip(v[0].content).slice(0, 40) : 'sin texto'})`);
   }
   check(`2c. Tabla de títulos fundidos: cada título abre el v. 1 de la Biblia (${Object.keys(FUSED).length} salmos)`, badFused, Math.max(1, Object.keys(FUSED).length));
+
+  // ── 2d. Los versículos impresos son los que pide la cita ─────────────────
+  // El texto sale de la Biblia de Jerusalén (el libro en español no trae leccionario) y el libro cita con numeración
+  // inglesa. Para cada cita de UN solo capítulo se compara la secuencia de versículos pedida con la impresa. Las
+  // diferencias de abajo se midieron el 2026-11-02 y son TODAS las que hay; cualquier otra, o que una deje de serlo,
+  // falla. Las citas de varios capítulos se comparan solo por su primer y último versículo.
+  const DIF_CONOCIDAS = {
+    'Acts 8:26-40': 'la BdJ no trae el v. 37 (variante textual)',
+    'Mark 9:38-48': 'la BdJ no trae los vv. 44 y 46 (variantes textuales)',
+    'Romans 11:25-36': 'la BdJ junta 11:35-36 en su v. 35: el texto sale completo, con un versículo menos rotulado',
+    '2 Corinthians 13:5-14': 'la BdJ junta 13:12-13 en su v. 12 y numera la gracia como 13:13: texto completo',
+    'Matthew 21:33-44': 'FALTA el v. 44: la BdJ no lo trae (sale hasta el 43)',
+  };
+  const versosPedidos = ref => {
+    const m = /^((?:[1-3] )?[A-Za-z ]+?)\s+(\d.*)$/.exec(ref); if (!m || !/:/.test(m[2])) return null;
+    let ch = null; const out = [];
+    for (const s of m[2].split(',')) {
+      let x;
+      if ((x = s.match(/^(\d+):(\d+)-(\d+)$/))) { if (ch != null && ch !== +x[1]) return null; ch = +x[1]; for (let v = +x[2]; v <= +x[3]; v++) out.push(v); }
+      else if ((x = s.match(/^(\d+):(\d+)$/))) { if (ch != null && ch !== +x[1]) return null; ch = +x[1]; out.push(+x[2]); }
+      else if (ch != null && (x = s.match(/^(\d+)-(\d+)$/))) { for (let v = +x[1]; v <= +x[2]; v++) out.push(v); }
+      else if (ch != null && (x = s.match(/^(\d+)$/))) out.push(+x[1]);
+      else return null;
+    }
+    return out;
+  };
+  const difVersos = []; let versosComparadas = 0; const vistas = new Set();
+  for (const { r, s, where } of refs.values()) {
+    if (s === 'psalm') continue;
+    const exp = versosPedidos(r); if (!exp) continue;
+    versosComparadas++;
+    const got = [...(await fetchScripture(r)).text.matchAll(/<sup class="verse-num">(\d+)[a-z]?<\/sup>/g)].map(x => +x[1]);
+    const igual = JSON.stringify(exp) === JSON.stringify(got);
+    if (!igual && !DIF_CONOCIDAS[r]) difVersos.push(`${r} (${where[0]}): pedido ${exp[0]}..${exp[exp.length - 1]} (${exp.length}), impreso ${got.length ? got[0] + '..' + got[got.length - 1] : 'nada'} (${got.length})`);
+    if (igual && DIF_CONOCIDAS[r]) difVersos.push(`${r}: ya no difiere; quitarla de DIF_CONOCIDAS`);
+    if (!igual) vistas.add(r);
+  }
+  for (const r of Object.keys(DIF_CONOCIDAS)) if (!vistas.has(r) && !difVersos.some(x => x.startsWith(r + ':'))) difVersos.push(`${r}: la cita ya no está en el leccionario; quitarla de DIF_CONOCIDAS`);
+  check(`2d. Versículos impresos = pedidos (${versosComparadas} citas de un capítulo; ${Object.keys(DIF_CONOCIDAS).length} diferencias conocidas)`, difVersos, versosComparadas);
 
   // ── 3. Leccionario = libro ───────────────────────────────────────────────
   let drift = [], compared = 0;
@@ -264,6 +322,7 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   console.log('  - Colectas: el texto español oficial (pp. 598-641) no existe; el app usa colectas reconstruidas.');
   console.log(`  - ${inheritFallback} días cuyo Propio de la semana es el 1 o el 2 usan la colecta del domingo anterior (sin texto español).`);
   console.log('  - Salmos: se leen de la Biblia de Jerusalén; el Salterio español del libro aún no se usa.');
+  console.log('  - Lecturas: el libro en español no trae leccionario; el texto es de la Biblia de Jerusalén, que no trae Mateo 21:44, Hechos 8:37 ni Marcos 9:44 y 9:46 (ver DIF_CONOCIDAS).');
   if (!prefacios) console.log('  - Prefacios: no se cotejaron con el libro (falta LOC-10-10-23.md; ver bcp2019-tools/check-prefacios.js).');
   console.log('  - Ritos propios de Ceniza, Ramos, Jueves, Viernes, Sábado y Vigilia no modelados.');
   console.log(failed ? `\n${failed} comprobación(es) con fallos.` : '\nTodas las comprobaciones pasan.');

@@ -70,6 +70,9 @@ const BCPDocxExport = (() => {
           if (cls.contains('lit-rubric') || cls.contains('rubric') || (tag === 'EM' && cls.contains('rubric'))) {
             const t = sanitizeText(child.textContent);
             if (t.trim()) runs.push(new TextRun({ text: t, italics: true, color: C_RUB, size: SZ_SM, font: FONT }));
+          } else if (cls.contains('psalm-role')) {
+            // Etiqueta «Lector» / «Pueblo» de los versículos alternados del salmo del Librito.
+            runs.push(new TextRun({ text: sanitizeText(child.textContent) + '  ', bold: true, color: C_RUB, size: SZ_SM, font: FONT }));
           } else if (tag === 'SUP' && cls.contains('verse-num')) {
             runs.push(new TextRun({ text: sanitizeText(child.textContent), superScript: true, size: 16, color: '777777', font: FONT }));
           } else if (tag === 'BR') {
@@ -134,7 +137,9 @@ const BCPDocxExport = (() => {
         const label = span.querySelector('.lit-label')?.textContent?.trim() ?? '';
         const textEl = span.querySelector('.lit-text');
         if (!textEl) return;
-        const isPeoplePart = cls.contains('pueblo') || cls.contains('todos') || cls.contains('lector');
+        // Solo el pueblo va en negrita, como en pantalla (style.css: .lit-line.pueblo / .todos). El Lector NO: antes
+        // salía en negrita en el Word aunque en pantalla no, y con el salmo alternado se perdía la distinción.
+        const isPeoplePart = cls.contains('pueblo') || cls.contains('todos');
         paras.push(new Paragraph({
           children: [
             new TextRun({ text: label + '\t', bold: true, size: SZ, color: C_RUB, font: FONT }),

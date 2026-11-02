@@ -120,7 +120,7 @@ const BCPManual = (() => {
     <section id="m-palabra" class="manual-section">
       <h2>✠ 6. Liturgia de la Palabra</h2>
       <ul>
-        <li><strong>Primera Lectura</strong> (Antiguo Testamento) y <strong>Salmo Responsorial</strong>, dicho o cantado.</li>
+        <li><strong>Primera Lectura</strong> (Antiguo Testamento) y <strong>Salmo Responsorial</strong>, dicho o cantado. En este generador se reza alternando los versículos: el Lector lee el primero y el Pueblo el siguiente.</li>
         <li><strong>Segunda Lectura</strong> (Epístola) — se omite solo si el día no la trae.</li>
         <li><strong>Santo Evangelio</strong>: todos de pie; el lector puede decir "El Santo Evangelio de nuestro Señor Jesucristo según N." e incensar el Evangeliario si es costumbre local (no obligatorio).</li>
         <li><strong>El Sermón</strong>, seguido de un momento de silencio.</li>

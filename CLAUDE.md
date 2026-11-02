@@ -63,7 +63,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=31` (Misal) y `?v=14` (bcp2019).
+   código viejo. Actualmente en `?v=31` (Misal) y `?v=15` (bcp2019; la hoja de estilo, `?v=6`).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -192,6 +192,29 @@ sale con título (no se midió cuántos).
   en el Librito, y 6a exige el saludo de Joel completo y en orden. Siguen sin estar los
   saludos de Adviento, Navidad, Epifanía y Todos los Santos de esa misma página,
   porque el libro los da como opcionales («puede ser reemplazada»).
+- `bcp2019`, **formas de la Eucaristía** (2026-11-02): el libro da DOS (*Concerning the
+  Holy Eucharist*, EN l. 2729-2745): el **Texto Estándar Anglicano** (de 1662 y sus
+  sucesores, en lenguaje contemporáneo) y el **Texto Antiguo Renovado** (de la Iglesia
+  primitiva, cercano al Rito II de 1979), más las *Additional Directions* (orden de
+  1662, Orden Penitencial, abreviaturas, Oración de los Fieles alternativas). El
+  generador implementa **solo el Texto Estándar** (`eucharist.js`); el Texto Antiguo
+  Renovado, el Orden Penitencial, el reordenamiento de 1662, el Sermón como marca y el
+  Trisagio (hay texto en `eucharist.js`, no se ofrece) no están. Falta decidir si se
+  quiere el Texto Antiguo Renovado como segunda forma: es trabajo grande y el texto
+  español está en `LOC-10-10-23.md`, no hay que inventar nada.
+- `bcp2019`, **lecturas en español** (2026-11-02): el libro en español NO trae leccionario,
+  así que el texto de las lecturas es de la **Biblia de Jerusalén** (elección del
+  proyecto), pedida por la cita inglesa del libro. Medido por simulación: las 876
+  referencias coinciden con las tablas oficiales (prueba 3); las 715 citas devuelven
+  texto (2); y de 532 citas de un solo capítulo, 527 imprimen exactamente los versículos
+  pedidos (2d). Las 5 distintas están fijadas en `DIF_CONOCIDAS` de `test-bcp2019.js`:
+  Hechos 8:37 y Marcos 9:44 y 46 (variantes textuales que la Biblia de Jerusalén no
+  trae), Romanos 11:35-36 y 2 Corintios 13:12-13 (versículos fundidos, texto completo) y
+  **Mateo 21:44, que falta** (el pasaje sale hasta el 43; no se puede añadir sin
+  inventar). Las citas de varios capítulos solo se compararon por su primer y último
+  versículo. **No** se verificó que la traducción sea fiel ni, en los salmos, cada
+  versículo interior. Si el usuario prefiere otra versión (el libro en español cita
+  la NVI) hace falta una fuente con licencia.
 - Código muerto inocuo: `takeProper()` en `app.js`, el alias `ordinaryFeria` en
   `propers.js`, `circumcision` y `getSundaysAfterPentecostLabel()` en `bcp2019`.
 
@@ -208,6 +231,13 @@ No volver a plantearlas salvo que él las reabra:
   auditoría lo había retirado del Adviento por esa razón y el usuario lo restituyó:
   no volver a quitarlo (`shouldOmitGloria`, `utils.js`; la rúbrica impresa dice que es
   costumbre, no mandato del libro). `test-bcp2019.js` 1j lo vigila.
+- **Salmo alternado en el BCP 2019** (2026-11-02): el salmo del día se reza alternando por
+  versículos, el **Lector** el primero que se muestra y el **Pueblo** el siguiente, en la
+  liturgia, el Librito y el Word. El libro solo dice que «un salmo, himno o antífona
+  puede seguir a cada lectura» y no prescribe la forma. Si el día trae antífona (4 días),
+  el Pueblo la dice al comienzo y al final, no tras cada estrofa. `test-bcp2019.js` 7 lo
+  vigila. Efecto lateral: en el Word el Lector ya no sale en negrita (antes sí, a
+  diferencia de la pantalla), para que se distinga del Pueblo.
 - **Color del Domingo de Ramos**: se queda en rojo, sin cambiar.
 - **Ciclo ferial I/II**: se retiró el anuncio de la interfaz, porque el
   leccionario ferial no está implementado y las ferias reutilizan las lecturas del

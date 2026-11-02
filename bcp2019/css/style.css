@@ -816,7 +816,13 @@ body.dark-mode .manual-close-btn { background: #a4243b; color: #fff; }
 
 .psalm-verse { margin: 0.6rem 0; line-height: 1.6; }
 .psalm-verse p { margin: 0.3rem 0; }
+/* Salmo alternado en la liturgia: el rótulo Lector/Pueblo queda a la izquierda también en pantalla estrecha (la regla
+   general de .lit-line envuelve y lo pasaba encima del texto cuando el versículo es largo). */
+.psalm-reading .lit-line { flex-wrap: nowrap; margin: 0.35rem 0; }
+.psalm-reading .lit-line .lit-text { flex: 1 1 0; min-width: 0; }
 .psalm-verse .verse-num { color: #1a5c42; font-weight: bold; margin-right: 0.3rem; }
+.psalm-verse .psalm-role { display: inline-block; min-width: 3.4rem; margin-right: 0.3rem; font-size: 0.72rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.04em; color: #1a5c42; }
+.psalm-verse.psalm-pueblo .psalm-role { color: var(--rubric); }
 .psalm-response { text-align: center; color: #1a5c42; font-weight: bold; margin: 0.5rem 0; font-style: italic; }
 
 .librito-credo {

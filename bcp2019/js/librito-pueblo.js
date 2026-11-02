@@ -86,10 +86,14 @@ const BCPLibrito = (() => {
 
     const fmtPsalm = (ref, verses, ant) => {
       if (!verses || !verses.length) return '';
-      let html = `<div class="librito-psalm"><p class="rubric">${ref}</p>`;
+      // Igual que app.js: se alterna por versículos, el Lector primero y el Pueblo después (en negrita, como
+      // las demás partes del pueblo del Librito).
+      let html = `<div class="librito-psalm"><p class="rubric">${ref}</p><p class="rubric">Se reza alternando los versículos: el Lector lee el primero y el Pueblo el siguiente.</p>`;
       if (ant) html += `<p class="psalm-response">${ant}</p>`;
-      verses.forEach(v => {
-        html += `<div class="psalm-verse"><p><span class="verse-num">${v.v}</span>${v.content}</p></div>`;
+      verses.forEach((v, i) => {
+        const role = i % 2 === 0 ? 'lector' : 'pueblo';
+        const verse = `<span class="verse-num">${v.v}</span>${v.content}`;
+        html += `<div class="psalm-verse psalm-${role}"><p><span class="psalm-role">${role === 'lector' ? 'Lector' : 'Pueblo'}</span> ${role === 'pueblo' ? `<strong>${verse}</strong>` : verse}</p></div>`;
       });
       if (ant) html += `<p class="psalm-response">${ant}</p>`;
       html += `</div>`;

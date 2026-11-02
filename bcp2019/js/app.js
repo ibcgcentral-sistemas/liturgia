@@ -132,19 +132,21 @@ function buildLiturgyHTML(d) {
 
   const fmtPsalm = (ref, verses, ant) => {
     if (!verses || verses.length === 0) return '';
+    // El salmo se reza ALTERNANDO por versículos (decisión del usuario, 2026-11-02): el Lector lee el primero que
+    // se muestra, el Pueblo el siguiente, y así hasta el final, sin importar su número. El libro solo dice que
+    // «un salmo, himno o antífona puede seguir a cada lectura»; la forma de rezarlo no está prescrita. Si el día
+    // trae antífona, el Pueblo la dice al comienzo y al final, no tras cada estrofa, para no romper la alternancia.
     const antLine = ant ? `<span class="lit-line pueblo"><span class="lit-label">Pueblo</span><span class="lit-text"><strong>${ant}</strong></span></span>` : '';
-    const strophes = [];
-    for (let i = 0; i < verses.length; i += 2) strophes.push(verses.slice(i, i + 2));
     let html = `<div class="reading psalm-reading">
       <h3 class="section-title">✠ SALMO RESPONSORIAL</h3>
       <p class="rubric">${ref}</p>
+      <p class="rubric">Se reza alternando los versículos: el Lector lee el primero y el Pueblo el siguiente.</p>
       <div class="liturgical-text-block">${antLine}`;
-    strophes.forEach(strophe => {
-      const text = strophe.map(v => `<sup class="verse-num">${v.v}</sup> ${v.content}`).join('<br>');
-      html += `<span class="lit-line lector"><span class="lit-label">Lector</span><span class="lit-text">${text}</span></span>`;
-      if (antLine) html += antLine;
+    verses.forEach((v, i) => {
+      const role = i % 2 === 0 ? 'lector' : 'pueblo';
+      html += `<span class="lit-line ${role}"><span class="lit-label">${role === 'lector' ? 'Lector' : 'Pueblo'}</span><span class="lit-text"><sup class="verse-num">${v.v}</sup> ${v.content}</span></span>`;
     });
-    html += `</div></div>`;
+    html += `${antLine}</div></div>`;
     return html;
   };
 
