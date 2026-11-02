@@ -15,13 +15,16 @@ const BCPHolyWeek = (() => {
     LECTOR: ['Lector', 'lector'], PUEBLO: ['Pueblo', 'pueblo'], TODOS: ['Todos', 'todos'] };
 
   // Liturgia principal: devuelve el HTML de la sección. `lecturas` es el HTML con las lecturas que sustituye a LECTURAS.
-  function render(nombre, lecturas = '') {
+  // `leer(ref, citaDelLibro, tipo)` devuelve el HTML del texto bíblico de una lección de la Vigilia (tipo 'LECCION' o
+  // 'EVANGELIO'); sin él, esas citas no se pintan.
+  function render(nombre, lecturas = '', leer = null) {
     const items = DATA[nombre];
     if (!items) return '';
     let html = '', bloque = '';
     const cierra = () => { if (bloque) { html += `<div class="liturgical-text-block holyweek-rite">${bloque}</div>`; bloque = ''; } };
     for (const it of items) {
       if (it.t === 'LECTURAS') { cierra(); html += lecturas; continue; }
+      if (it.t === 'LECCION' || it.t === 'EVANGELIO') { cierra(); html += leer ? leer(it.ref, it.x, it.t) : ''; continue; }
       const x = esc(it.x);
       if (it.t === 'T') bloque += `<span class="lit-title">${x}</span>`;
       else if (it.t === 'R') bloque += `<span class="lit-rubric">(${x})</span>`;
@@ -35,12 +38,13 @@ const BCPHolyWeek = (() => {
   }
 
   // Librito del pueblo: las rúbricas como instrucciones, las partes del pueblo en negrita, las oraciones íntegras.
-  function renderLibrito(nombre, lecturas = '') {
+  function renderLibrito(nombre, lecturas = '', leer = null) {
     const items = DATA[nombre];
     if (!items) return '';
     let html = '';
     for (const it of items) {
       if (it.t === 'LECTURAS') { html += lecturas; continue; }
+      if (it.t === 'LECCION' || it.t === 'EVANGELIO') { html += leer ? leer(it.ref, it.x, it.t) : ''; continue; }
       const x = esc(it.x);
       if (it.t === 'T') html += `<h3>${x}</h3>`;
       else if (it.t === 'R') html += `<div class="librito-instruction"><p>${x}</p></div>`;
@@ -53,5 +57,9 @@ const BCPHolyWeek = (() => {
     return html;
   }
 
-  return { render, renderLibrito, SECCIONES: Object.keys(DATA) };
+  // Citas bíblicas de la Gran Vigilia (las doce lecciones, la Epístola y el Evangelio), en el orden del libro.
+  const VIGIL_REFS = [];
+  for (const sec of ['easterVigilReadings', 'easterVigilWord']) for (const it of DATA[sec] || []) if ((it.t === 'LECCION' || it.t === 'EVANGELIO') && !VIGIL_REFS.includes(it.ref)) VIGIL_REFS.push(it.ref);
+
+  return { render, renderLibrito, VIGIL_REFS, SECCIONES: Object.keys(DATA) };
 })();

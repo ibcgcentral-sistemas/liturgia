@@ -86,7 +86,8 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
     if (noEucharistNotice(st.dayInfo)) {
       noEu++;
       if (!/no se celebra|No hay celebración/.test(text)) f.noEucaristiaSinAviso.push(date);
-      if (/ORACIÓN DE CONSAGRACIÓN/.test(text)) f.noEucaristiaConMisa.push(date);
+      // El Sábado Santo no tiene Eucaristía de día, pero la Gran Vigilia que se ofrece con él SÍ la celebra (comprobación 9).
+      if (/ORACIÓN DE CONSAGRACIÓN/.test(text) && st.dayInfo.key !== 'holySaturday') f.noEucaristiaConMisa.push(date);
       continue;
     }
     // Gloria: el libro solo dice que es apropiado omitirlo en los tiempos de penitencia y días de ayuno, y no nombra
@@ -354,10 +355,23 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
         for (const [t, n] of [[tx, ''], [tl, ' Librito']]) {
           HW(/No hay celebración de la Eucaristía/.test(t) && /EL HIMNO/.test(t) && /Oh Dios, Creador del cielo y de la tierra/.test(t), `${w}${n}: falta parte del rito del Sábado Santo`);
           HW(/Job|1 Pedro/.test(t) && /Mateo/.test(t), `${w}${n}: faltan las lecturas del día`);
+          // Gran Vigilia Pascual (el libro: Servicio de la Luz, Lecturas, Aclamación y Palabra, Eucaristía con prefacio de Pascua).
+          HW(/LA GRAN VIGILIA DE RESURRECCIÓN/.test(t) && /EL PREGÓN PASCUAL/.test(t) && /Alégrense por fin, bóveda del cielo/.test(t) && /La luz de Cristo/.test(t), `${w}${n}: falta el Servicio de la Luz de la Vigilia`);
+          HW(/Escuchemos el registro de las obras salvadoras de Dios/.test(t) && /LA CREACIÓN/.test(t) && /LIBERACIÓN DE ISRAEL EN EL MAR ROJO/.test(t) && /EL ENCUENTRO DEL PUEBLO DE DIOS/.test(t), `${w}${n}: faltan las lecciones de la Vigilia`);
+          HW(/(Lectura de|LECCIÓN)\s+Éxodo 14:10-15:1/.test(t) && /(Lectura de|LECCIÓN)\s+Romanos 6:3-11/.test(t) && /(Lectura de|LECCIÓN)\s+Mateo 28:1-10/.test(t),`${w}${n}: falta el texto bíblico de la Vigilia (Éxodo, Epístola o Evangelio)`);
+          HW(/¡Aleluya! ¡Cristo ha resucitado!/.test(t) && /Oh Dios, que hiciste resplandecer esta noche santísima/.test(t), `${w}${n}: falta la Aclamación Pascual o la colecta de la Vigilia`);
+          HW(/PREFACIO: PASCUA/.test(t) && /ORACIÓN DE CONSAGRACIÓN/.test(t) && /\[Aleluya\.\] Cristo, nuestra Pascua/.test(t) && /aleluya, aleluya/i.test(t), `${w}${n}: la Eucaristía de la Vigilia debe llevar prefacio de Pascua, consagración, Fracción y Despedida con Aleluya`);
         }
       }
     }
   }
+  // Las 14 citas de la Gran Vigilia dan el nº de versículos del libro (numeración inglesa; Daniel 3 y Jonás 1:17 se
+  // convierten a la de la Biblia de Jerusalén: sin esa conversión salen 26 de Jonás y el Cántico de Azarías en Daniel).
+  const CUENTA_VIGILIA = { 'Genesis 1:1-2:3': 34, 'Genesis 3': 24, 'Genesis 7:1-5,11-18,8:6-20,9:8-13': 34, 'Genesis 22:1-18': 18, 'Exodus 14:10-15:1': 23, 'Isaiah 4:2-6': 5, 'Isaiah 55:1-11': 11,
+    'Ezekiel 36:24-28': 5, 'Ezekiel 37:1-14': 14, 'Daniel 3:1-23,91-95': 28, 'Jonah 1:1-2:10': 27, 'Zephaniah 3:12-20': 9, 'Romans 6:3-11': 9, 'Matthew 28:1-10': 10 };
+  const HWm = C.get('BCPHolyWeek');
+  HW(JSON.stringify([...HWm.VIGIL_REFS].sort()) === JSON.stringify(Object.keys(CUENTA_VIGILIA).sort()), 'las citas de la Vigilia en holyweek-data.js no son las esperadas: ' + HWm.VIGIL_REFS.join(' | '));
+  for (const [ref, n] of Object.entries(CUENTA_VIGILIA)) { const got = [...(await fetchScripture(ref)).text.matchAll(/<sup class="verse-num">/g)].length; HW(got === n, `${ref}: salen ${got} versículos y el libro tiene ${n}`); }
   // Ningún otro día lleva rito de Semana Santa: la Liturgia de las Palmas y el lavatorio no se cuelan.
   for (const k of ['2026-06-07', '2026-11-08', '2026-03-10']) { const d = new Date(k + 'T12:00:00'); const t = strip(await generateLiturgy(d)); HW(!/LITURGIA DE LAS PALMAS|LAVATORIO DE LOS PIES|IMPROPERIOS/.test(t), `${k}: se coló un rito de Semana Santa`); }
   // El archivo generado sigue siendo idéntico al libro.
@@ -394,7 +408,7 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   console.log('  - Salmos: se leen de la Biblia de Jerusalén; el Salterio español del libro aún no se usa.');
   console.log('  - Lecturas: el libro en español no trae leccionario; el texto es de la Biblia de Jerusalén, que no trae Mateo 21:44, Hechos 8:37 ni Marcos 9:44 y 9:46 (ver DIF_CONOCIDAS).');
   if (!prefacios) console.log('  - Prefacios: no se cotejaron con el libro (falta LOC-10-10-23.md; ver bcp2019-tools/check-prefacios.js).');
-  console.log('  - Ritos propios del Miércoles de Ceniza (imposición de la ceniza) y de la Gran Vigilia Pascual no modelados; Ramos, Jueves, Viernes y Sábado Santo sí (holyweek.js).');
+  console.log('  - Semana Santa (holyweek.js): Ramos, Jueves, Viernes, Sábado Santo y Gran Vigilia sí; sin modelar la imposición de la ceniza, el Bautismo y la Renovación de los Votos de la Vigilia, y el texto de sus salmos y cánticos.');
   console.log(failed ? `\n${failed} comprobación(es) con fallos.` : '\nTodas las comprobaciones pasan.');
   process.exit(failed ? 1 : 0);
 })();

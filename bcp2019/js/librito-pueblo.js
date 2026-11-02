@@ -130,6 +130,118 @@ const BCPLibrito = (() => {
         <p class="librito-meta">Color: <strong>${colorName}</strong> · Ciclo: <strong>${dayInfo.cycle}</strong></p>
       </div>`;
 
+    // Final de la Eucaristía, de la Confesión a la Despedida: lo comparten la de cada día y la de la Gran Vigilia (prefacio de
+    // Pascua, Fracción y Despedida con Aleluya).
+    const libritoEndHtml = ({ preface: pf = preface, vigil = false } = {}) => {
+      const fraccionSinAleluya = vigil ? false : isLent, despedidaConAleluya = vigil ? true : isEaster;
+      return `
+      <section class="librito-section">
+        <h2>✠ CONFESIÓN Y ABSOLUCIÓN</h2>
+        <div class="librito-instruction"><p><strong>Nos arrodillamos si podemos.</strong> Todos juntos:</p></div>
+        <div class="librito-text">
+          <p>Dios Todopoderoso, Padre de nuestro Señor Jesucristo, Creador y juez de todos nosotros: Confesamos y lamentamos nuestros muchos pecados y ofensas, que hemos cometido de pensamiento, palabra y obra contra tu divina majestad, provocando muy justamente tu razonable ira contra nosotros. Sentimos profundamente nuestras transgresiones; la carga de ellas es más de lo que podemos soportar. Ten misericordia de nosotros, ten misericordia de nosotros, Padre misericordioso; por amor de tu Hijo, nuestro Señor Jesucristo, perdónanos todo lo pasado; y concédenos que podamos servirte y agradarte cada vez más en una vida nueva, para el honor y la gloria de tu Nombre; por Jesucristo nuestro Señor. Amén.</p>
+        </div>
+        <div class="librito-instruction"><p>El Celebrante pronuncia la Absolución.</p></div>
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ LA PAZ</h2>
+        <div class="librito-instruction"><p><strong>Nos ponemos de pie</strong> y nos saludamos en el Nombre del Señor.</p></div>
+        <div class="librito-response"><p><strong>Celebrante: La paz del Señor esté siempre con ustedes.</strong><br><strong>Pueblo: Y con tu espíritu.</strong></p></div>
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ EL OFERTORIO</h2>
+        <div class="librito-instruction"><p>Se presentan el pan, el vino y las ofrendas del pueblo.</p></div>
+        <div class="librito-response"><p>${celLine(plainItems('OFFERTORY_SENTENCE', 'CEL')[0].text)}<br>${puebloLine(plainItems('OFFERTORY_SENTENCE', 'PUEBLO')[0].text)}</p></div>
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ PREFACIO: ${pf ? pf.title.toUpperCase() : 'PREFACIO COMÚN'}</h2>
+        <div class="librito-response">
+          <p><strong>Celebrante: Levantemos el corazón.</strong><br><strong>Pueblo: Lo tenemos levantado hacia el Señor.</strong><br>
+          <strong>Celebrante: Demos gracias al Señor nuestro Dios.</strong><br><strong>Pueblo: Es justo darle gracias y alabanza.</strong></p>
+        </div>
+        <div class="librito-instruction"><p>El Celebrante continúa con el Prefacio propio del día, y todos cantan o recitan:</p></div>
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ SANCTUS</h2>
+        <div class="librito-text">
+          <p>Santo, Santo, Santo es el Señor, Dios del universo, llenos están el cielo y la tierra de tu gloria. Hosanna en el cielo. Bendito el que viene en el Nombre del Señor. Hosanna en el cielo.</p>
+        </div>
+        <div class="librito-instruction"><p><strong>Nos arrodillamos.</strong> Comienza la Oración de Consagración.</p></div>
+      </section>
+
+      <section class="librito-section warning">
+        <h2>✠ LA ORACIÓN DE CONSAGRACIÓN</h2>
+        <div class="librito-instruction warning">
+          <p><strong>Nos arrodillamos en reverencia.</strong> A diferencia de otras tradiciones, en este rito la Plegaria se dice en voz alta y es compartida por toda la congregación — no hay partes secretas.</p>
+        </div>
+        ${consecrationHtml()}
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ EL PADRENUESTRO</h2>
+        <div class="librito-text">
+          <p>Padre Nuestro que estás en el cielo, santificado sea tu Nombre, venga tu reino, hágase tu voluntad, en la tierra como en el cielo. Danos hoy nuestro pan de cada día. Perdona nuestras ofensas, como también nosotros perdonamos a los que nos ofenden. No nos dejes caer en tentación y líbranos del mal. Porque tuyo es el reino, tuyo es el poder, y tuya es la gloria, ahora y por siempre. Amén.</p>
+        </div>
+
+        <h3>LA FRACCIÓN</h3>
+        <div class="librito-response">
+          <p><strong>Celebrante: ${fraccionSinAleluya ? 'Cristo, nuestra Pascua, es sacrificado por nosotros.' : '[Aleluya.] Cristo, nuestra Pascua, es sacrificado por nosotros.'}</strong><br><strong>Pueblo: Celebremos la fiesta.${fraccionSinAleluya ? '' : ' [Aleluya.]'}</strong></p>
+        </div>
+
+        <h3>ORACIÓN DE HUMILDE ACCESO</h3>
+        <div class="librito-instruction"><p>${plainItems('HUMBLE_ACCESS', 'R')[0].text}</p></div>
+        <div class="librito-text">
+          <p>${plainItems('HUMBLE_ACCESS', 'TODOS')[0].text}</p>
+        </div>
+
+        <h3>EL AGNUS DEI</h3>
+        <div class="librito-text">
+          <p>Cordero de Dios, que quitas el pecado del mundo; ten misericordia de nosotros. Cordero de Dios, que quitas el pecado del mundo; ten misericordia de nosotros. Cordero de Dios, que quitas el pecado del mundo; danos tu paz.</p>
+        </div>
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ LA SAGRADA COMUNIÓN</h2>
+        ${(() => {
+          // Invitación y fórmulas de distribución, íntegras: son las palabras
+          // que cada comulgante oye al recibir el Pan y el Cáliz.
+          const [invitation, ...formulas] = plainItems('ADMINISTRATION', 'CEL').map(i => i.text);
+          return `<div class="librito-response"><p>${celLine(invitation)}</p></div>
+        <div class="librito-instruction"><p>Nos acercamos a recibir el Pan y el Cáliz.</p></div>
+        <div class="librito-response">
+          <p>${formulas.map(celLine).join('<br>')}</p>
+        </div>`;
+        })()}
+        <div class="librito-instruction"><p><strong>Después de comulgar</strong>, volvemos a nuestro lugar y oramos en silencio.</p></div>
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ ORACIÓN DE POSCOMUNIÓN</h2>
+        <div class="librito-instruction"><p><strong>Nos ponemos de pie.</strong></p></div>
+        <div class="librito-response"><p>${celLine(plainItems('POST_COMMUNION', 'CEL')[0].text)}</p></div>
+        <div class="librito-instruction"><p>Todos juntos:</p></div>
+        <div class="librito-text">
+          <p>${plainItems('POST_COMMUNION', 'TODOS')[0].text}</p>
+        </div>
+      </section>
+
+      ${isMaundy ? `<section class="librito-section">
+        <h2>✠ AL TERMINAR LA LITURGIA</h2>
+        ${BCPHolyWeek.renderLibrito('maundyThursdayClosing')}
+      </section>` : `<section class="librito-section">
+        <h2>✠ LA BENDICIÓN Y LA DESPEDIDA</h2>
+        <div class="librito-instruction"><p>El Celebrante da la Bendición final.</p></div>
+        <div class="librito-response">
+          <p><strong>Celebrante: Salgamos en el Nombre de Cristo.${despedidaConAleluya ? ' Aleluya, aleluya.' : ''}</strong><br><strong>Pueblo: Demos gracias a Dios.${despedidaConAleluya ? ' Aleluya, aleluya.' : ''}</strong></p>
+        </div>
+      </section>`}
+`;
+    };
+
     // Las lecturas del día en el Librito, para el rito propio del Viernes y el Sábado Santo (reemplazan al marcador LECTURAS).
     const lecturasLibrito = `
         ${firstReading && readings ? fmtReading(translateBibleReference(readings.first), firstReading, 'PRIMERA LECTURA') : ''}
@@ -140,6 +252,36 @@ const BCPLibrito = (() => {
     // Viernes y Sábado Santo: sin Eucaristía; rito propio (BCPHolyWeek, texto del libro en español).
     const noEucharist = noEucharistNotice(dayInfo);
     if (noEucharist) {
+      // Sábado Santo: junto al rito del día va la Gran Vigilia Pascual, con su Eucaristía.
+      const leerVigilia = (ref) => state.vigilTexts && state.vigilTexts[ref] ? fmtReading(translateBibleReference(ref), state.vigilTexts[ref], 'LECCIÓN') : '';
+      const vigiliaLibrito = hwKey !== 'holySaturday' ? '' : `
+      <section class="librito-section">
+        <h2>✠ LA GRAN VIGILIA DE RESURRECCIÓN</h2>
+        ${BCPHolyWeek.renderLibrito('easterVigilIntro')}
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ EL SERVICIO DE LA LUZ</h2>
+        ${BCPHolyWeek.renderLibrito('easterVigilLight')}
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ EL SERVICIO DE LAS LECTURAS</h2>
+        ${BCPHolyWeek.renderLibrito('easterVigilReadings', '', leerVigilia)}
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ LA ACLAMACIÓN PASCUAL Y LA PALABRA</h2>
+        ${BCPHolyWeek.renderLibrito('easterVigilWord', '', leerVigilia)}
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ ORACIÓN DE LOS FIELES</h2>
+        <div class="librito-instruction"><p>Un Lector dirige las peticiones. Después de cada una:</p></div>
+        <div class="librito-response"><p><strong>Lector: Señor, en tu misericordia:</strong><br><strong>Pueblo: Escucha nuestra oración.</strong></p></div>
+      </section>
+
+      ${libritoEndHtml({ preface: BCPPropers.PREFACES.easter, vigil: true })}`;
       return `
     <div class="librito-document">
       ${headHtml}
@@ -148,6 +290,7 @@ const BCPLibrito = (() => {
         <h2>✠ ${dayInfo.nameEs || dayInfo.name}</h2>
         ${BCPHolyWeek.renderLibrito(hwKey, lecturasLibrito)}
       </section>
+      ${vigiliaLibrito}
 
       <div class="librito-footer">
         <p>✠ Soli Deo Gloria ✠</p>
@@ -250,110 +393,7 @@ const BCPLibrito = (() => {
         <div class="librito-response"><p><strong>Lector: Señor, en tu misericordia:</strong><br><strong>Pueblo: Escucha nuestra oración.</strong></p></div>
       </section>`}
 
-      <section class="librito-section">
-        <h2>✠ CONFESIÓN Y ABSOLUCIÓN</h2>
-        <div class="librito-instruction"><p><strong>Nos arrodillamos si podemos.</strong> Todos juntos:</p></div>
-        <div class="librito-text">
-          <p>Dios Todopoderoso, Padre de nuestro Señor Jesucristo, Creador y juez de todos nosotros: Confesamos y lamentamos nuestros muchos pecados y ofensas, que hemos cometido de pensamiento, palabra y obra contra tu divina majestad, provocando muy justamente tu razonable ira contra nosotros. Sentimos profundamente nuestras transgresiones; la carga de ellas es más de lo que podemos soportar. Ten misericordia de nosotros, ten misericordia de nosotros, Padre misericordioso; por amor de tu Hijo, nuestro Señor Jesucristo, perdónanos todo lo pasado; y concédenos que podamos servirte y agradarte cada vez más en una vida nueva, para el honor y la gloria de tu Nombre; por Jesucristo nuestro Señor. Amén.</p>
-        </div>
-        <div class="librito-instruction"><p>El Celebrante pronuncia la Absolución.</p></div>
-      </section>
-
-      <section class="librito-section">
-        <h2>✠ LA PAZ</h2>
-        <div class="librito-instruction"><p><strong>Nos ponemos de pie</strong> y nos saludamos en el Nombre del Señor.</p></div>
-        <div class="librito-response"><p><strong>Celebrante: La paz del Señor esté siempre con ustedes.</strong><br><strong>Pueblo: Y con tu espíritu.</strong></p></div>
-      </section>
-
-      <section class="librito-section">
-        <h2>✠ EL OFERTORIO</h2>
-        <div class="librito-instruction"><p>Se presentan el pan, el vino y las ofrendas del pueblo.</p></div>
-        <div class="librito-response"><p>${celLine(plainItems('OFFERTORY_SENTENCE', 'CEL')[0].text)}<br>${puebloLine(plainItems('OFFERTORY_SENTENCE', 'PUEBLO')[0].text)}</p></div>
-      </section>
-
-      <section class="librito-section">
-        <h2>✠ PREFACIO: ${preface ? preface.title.toUpperCase() : 'PREFACIO COMÚN'}</h2>
-        <div class="librito-response">
-          <p><strong>Celebrante: Levantemos el corazón.</strong><br><strong>Pueblo: Lo tenemos levantado hacia el Señor.</strong><br>
-          <strong>Celebrante: Demos gracias al Señor nuestro Dios.</strong><br><strong>Pueblo: Es justo darle gracias y alabanza.</strong></p>
-        </div>
-        <div class="librito-instruction"><p>El Celebrante continúa con el Prefacio propio del día, y todos cantan o recitan:</p></div>
-      </section>
-
-      <section class="librito-section">
-        <h2>✠ SANCTUS</h2>
-        <div class="librito-text">
-          <p>Santo, Santo, Santo es el Señor, Dios del universo, llenos están el cielo y la tierra de tu gloria. Hosanna en el cielo. Bendito el que viene en el Nombre del Señor. Hosanna en el cielo.</p>
-        </div>
-        <div class="librito-instruction"><p><strong>Nos arrodillamos.</strong> Comienza la Oración de Consagración.</p></div>
-      </section>
-
-      <section class="librito-section warning">
-        <h2>✠ LA ORACIÓN DE CONSAGRACIÓN</h2>
-        <div class="librito-instruction warning">
-          <p><strong>Nos arrodillamos en reverencia.</strong> A diferencia de otras tradiciones, en este rito la Plegaria se dice en voz alta y es compartida por toda la congregación — no hay partes secretas.</p>
-        </div>
-        ${consecrationHtml()}
-      </section>
-
-      <section class="librito-section">
-        <h2>✠ EL PADRENUESTRO</h2>
-        <div class="librito-text">
-          <p>Padre Nuestro que estás en el cielo, santificado sea tu Nombre, venga tu reino, hágase tu voluntad, en la tierra como en el cielo. Danos hoy nuestro pan de cada día. Perdona nuestras ofensas, como también nosotros perdonamos a los que nos ofenden. No nos dejes caer en tentación y líbranos del mal. Porque tuyo es el reino, tuyo es el poder, y tuya es la gloria, ahora y por siempre. Amén.</p>
-        </div>
-
-        <h3>LA FRACCIÓN</h3>
-        <div class="librito-response">
-          <p><strong>Celebrante: ${isLent ? 'Cristo, nuestra Pascua, es sacrificado por nosotros.' : '[Aleluya.] Cristo, nuestra Pascua, es sacrificado por nosotros.'}</strong><br><strong>Pueblo: Celebremos la fiesta.${isLent ? '' : ' [Aleluya.]'}</strong></p>
-        </div>
-
-        <h3>ORACIÓN DE HUMILDE ACCESO</h3>
-        <div class="librito-instruction"><p>${plainItems('HUMBLE_ACCESS', 'R')[0].text}</p></div>
-        <div class="librito-text">
-          <p>${plainItems('HUMBLE_ACCESS', 'TODOS')[0].text}</p>
-        </div>
-
-        <h3>EL AGNUS DEI</h3>
-        <div class="librito-text">
-          <p>Cordero de Dios, que quitas el pecado del mundo; ten misericordia de nosotros. Cordero de Dios, que quitas el pecado del mundo; ten misericordia de nosotros. Cordero de Dios, que quitas el pecado del mundo; danos tu paz.</p>
-        </div>
-      </section>
-
-      <section class="librito-section">
-        <h2>✠ LA SAGRADA COMUNIÓN</h2>
-        ${(() => {
-          // Invitación y fórmulas de distribución, íntegras: son las palabras
-          // que cada comulgante oye al recibir el Pan y el Cáliz.
-          const [invitation, ...formulas] = plainItems('ADMINISTRATION', 'CEL').map(i => i.text);
-          return `<div class="librito-response"><p>${celLine(invitation)}</p></div>
-        <div class="librito-instruction"><p>Nos acercamos a recibir el Pan y el Cáliz.</p></div>
-        <div class="librito-response">
-          <p>${formulas.map(celLine).join('<br>')}</p>
-        </div>`;
-        })()}
-        <div class="librito-instruction"><p><strong>Después de comulgar</strong>, volvemos a nuestro lugar y oramos en silencio.</p></div>
-      </section>
-
-      <section class="librito-section">
-        <h2>✠ ORACIÓN DE POSCOMUNIÓN</h2>
-        <div class="librito-instruction"><p><strong>Nos ponemos de pie.</strong></p></div>
-        <div class="librito-response"><p>${celLine(plainItems('POST_COMMUNION', 'CEL')[0].text)}</p></div>
-        <div class="librito-instruction"><p>Todos juntos:</p></div>
-        <div class="librito-text">
-          <p>${plainItems('POST_COMMUNION', 'TODOS')[0].text}</p>
-        </div>
-      </section>
-
-      ${isMaundy ? `<section class="librito-section">
-        <h2>✠ AL TERMINAR LA LITURGIA</h2>
-        ${BCPHolyWeek.renderLibrito('maundyThursdayClosing')}
-      </section>` : `<section class="librito-section">
-        <h2>✠ LA BENDICIÓN Y LA DESPEDIDA</h2>
-        <div class="librito-instruction"><p>El Celebrante da la Bendición final.</p></div>
-        <div class="librito-response">
-          <p><strong>Celebrante: Salgamos en el Nombre de Cristo.${isEaster ? ' Aleluya, aleluya.' : ''}</strong><br><strong>Pueblo: Demos gracias a Dios.${isEaster ? ' Aleluya, aleluya.' : ''}</strong></p>
-        </div>
-      </section>`}
+      ${libritoEndHtml()}
 
       <div class="librito-footer">
         <p>✠ Soli Deo Gloria ✠</p>

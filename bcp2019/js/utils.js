@@ -236,14 +236,15 @@ function cleanPsalmVerses(ref, verses) {
 // tabla). Cada fila: [libro, capítulo inglés, del v., al v., capítulo BdJ,
 // desplazamiento de versículo]. Solo están los pasajes que usa el leccionario
 // del BCP 2019 (test-bcp2019.js comprueba que cada cita devuelve texto): Is 9:1 inglés = 8:23
-// hebreo, Is 64:1 = 63:19, Os 2:1-23 = 2:3-25, Jon 2:1-10 = 2:2-11, Mi 5:1 =
+// hebreo, Is 64:1 = 63:19, Os 2:1-23 = 2:3-25, Jon 1:17 = 2:1 y Jon 2:1-10 = 2:2-11 (este último y el de la
+// Gran Vigilia: Jonás 1:1-2:10), Mi 5:1 =
 // 4:14 y 5:2-15 = 5:1-14, Mal 4:1-6 = 3:19-24, Gn 32:1-32 = 32:2-33 y
 // Ex 22:1 = 21:37 y 22:2-31 = 22:1-30.
 const VERSE_SHIFTS = [
   ['Isaiah', 9, 1, 1, 8, 22], ['Isaiah', 9, 2, 7, 9, -1],
   ['Isaiah', 64, 1, 1, 63, 18], ['Isaiah', 64, 2, 12, 64, -1],
   ['Hosea', 2, 1, 23, 2, 2],
-  ['Jonah', 2, 1, 10, 2, 1],
+  ['Jonah', 2, 1, 10, 2, 1], ['Jonah', 1, 17, 17, 2, -16],
   ['Micah', 5, 1, 1, 4, 13], ['Micah', 5, 2, 15, 5, -1],
   ['Malachi', 4, 1, 6, 3, 18],
   ['Genesis', 32, 1, 32, 32, 1],

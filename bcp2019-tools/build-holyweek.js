@@ -21,6 +21,32 @@ const SECCIONES = {
   maundyThursdayClosing: { ini: 'Cuando se desee administrar la Santa Comunión el Viernes Santo', fin: 'INDICACIONES ADICIONALES', desde: 14850 },
   goodFriday: { ini: 'En este día los ministros entran en silencio.', fin: 'LO CONCERNIENTE', desde: 14900, hastaIncluida: 'Los Ministros y el Pueblo se van en silencio.' },
   holySaturday: { ini: 'No hay celebración de la Eucaristía en este día.', fin: 'LO CONCERNIENTE A LA GRAN VIGILIA', desde: 15200 },
+  // Gran Vigilia de Pascua: la introducción del libro (como rúbrica) y las cuatro partes de la liturgia.
+  easterVigilIntro: { ini: 'La Gran Vigilia, cuando se observa', fin: 'LA', desde: 15300, comoRubrica: true },
+  easterVigilLight: { ini: 'LA ILUMINACIÓN DEL CIRIO PASCUAL', fin: 'LAS LECTURAS', desde: 15330 },
+  easterVigilReadings: { ini: 'LAS LECTURAS', fin: 'LA ACLAMACIÓN PASCUAL', desde: 15430 },
+  easterVigilWord: { ini: 'LA ACLAMACIÓN PASCUAL', fin: 'La siguiente bendición puede usarse', desde: 15560 },
+  easterVigilBlessing: { ini: 'La siguiente bendición puede usarse', fin: 'DIRECCIONES ADICIONALES', desde: 15620 },
+};
+// Citas del libro que el app sustituye por el texto bíblico (lo pide al leccionario/Biblia de Jerusalén). La clave es
+// el texto exacto de la línea del libro; `ref` es la cita en la forma que entiende BibliaJerusalen (numeración inglesa
+// del libro; Daniel 3 se cuenta aquí a la católica porque la Biblia de Jerusalén intercala el Cántico de Azarías en
+// 3:24-90, de modo que «3:1-28» inglés es «3:1-23, 91-95» allí).
+const LECCIONES = {
+  'GÉNESIS 1: 1—2: 3': { t: 'LECCION', ref: 'Genesis 1:1-2:3' },
+  'GÉNESIS 3': { t: 'LECCION', ref: 'Genesis 3' },
+  'GÉNESIS 7: 1-5, 11-18; 8: 6-20; 9: 8-13': { t: 'LECCION', ref: 'Genesis 7:1-5,11-18,8:6-20,9:8-13' },
+  'GÉNESIS 22: 1-18': { t: 'LECCION', ref: 'Genesis 22:1-18' },
+  'ÉXODO 14:10—15:1': { t: 'LECCION', ref: 'Exodus 14:10-15:1' },
+  'ISAÍAS 4: 2-6': { t: 'LECCION', ref: 'Isaiah 4:2-6' },
+  'ISAÍAS 55: 1-11': { t: 'LECCION', ref: 'Isaiah 55:1-11' },
+  'EZEQUIEL 36: 24-28': { t: 'LECCION', ref: 'Ezekiel 36:24-28' },
+  'EZEQUIEL 37:1-14': { t: 'LECCION', ref: 'Ezekiel 37:1-14' },
+  'DANIEL 3:1-28': { t: 'LECCION', ref: 'Daniel 3:1-23,91-95' },
+  'JONÁS 1:1—2:10': { t: 'LECCION', ref: 'Jonah 1:1-2:10' },
+  'SOFONÍAS 3:12-20': { t: 'LECCION', ref: 'Zephaniah 3:12-20' },
+  'ROMANOS 6:3-11': { t: 'LECCION', ref: 'Romans 6:3-11' },
+  'MATEO 28: 1-10': { t: 'EVANGELIO', ref: 'Matthew 28:1-10' },
 };
 // Tramos que el app sustituye por las lecturas del día (las toma del leccionario): desde la línea que empieza así
 // hasta la que empieza así (exclusiva). Se deja un marcador {t:'LECTURAS'}.
@@ -29,7 +55,7 @@ const LECTURAS = {
   holySaturday: { ini: 'LAS LECTURAS', fin: 'Después del Evangelio, puede seguir una homilía.' },
 };
 
-const ROTULO = /^(Se (dice|canta|puede|pueden|utiliza|omiten|omite|guarda|lleva)|Luego |A continuación|Todos (de pie|se |pueden)|El (Celebrante|Oficiante|Diácono|Presbítero|Obispo) (puede|dice|reza|lee|entonces|concluye|invita|se pone|se levanta)|El servicio siempre|El rito de la Santa Eucaristía no|No hay celebración de la Eucaristía|El Obispo o Sacerdote|El Diácono (u otra|y el Pueblo)|El Oficiante (y el|dice|entonces)|Los Ministros|Los ministros|La Congregación|Cuando |Si |Durante |Después |Siguiendo |En (un lugar|la ausencia|ausencia|este día los)|Puede |Pueden |Estas |Esta liturgia|Las peticiones|Las oraciones iniciales|El himno de|El Evangelio de la Pasión|Año [ABC] |Frente al|Pueden seguir|Ahora se puede|Entonces se puede|La liturgia continúa|Silencio)/;
+const ROTULO = /^(Se (dice|canta|puede|pueden|utiliza|omiten|omite|guarda|lleva)|Luego[ ,]|A continuación|Todos (de pie|se |pueden)|El (Celebrante|Oficiante|Diácono|Presbítero|Obispo) (puede|dice|reza|lee|entonces|concluye|invita|se pone|se levanta)|El servicio siempre|El rito de la Santa Eucaristía no|No hay celebración de la Eucaristía|El Celebrante (enciende|puede presentar)|El Diácono \(o el Celebrante|El Cirio Pascual se coloca|El servicio continúa|Se leen |Después del Evangelio|La celebración continúa|El Prefacio de Pascua|La siguiente bendición|El Santo Bautismo puede|O, si las oraciones|Todos se ponen de pie|Se puede tocar|El Gloria in Excelsis, o algún otro|El Diácono, u otra persona|La Gran Vigilia, cuando|El Servicio de la Luz|El servicio de las lecturas|El Santo Bautismo es|La Sagrada Eucaristía es|En la oscuridad, el fuego|El Obispo o Sacerdote|El Diácono (u otra|y el Pueblo)|El Oficiante (y el|dice|entonces)|Los Ministros|Los ministros|La Congregación|Cuando |Si |Durante |Después |Siguiendo |En (un lugar|la ausencia|ausencia|este día los)|Puede |Pueden |Estas |Esta liturgia|Las peticiones|Las oraciones iniciales|El himno de|El Evangelio de la Pasión|Año [ABC] |Frente al|Pueden seguir|Ahora se puede|Entonces se puede|La liturgia continúa|Silencio)/;
 const ROTULO_EXACTO = /^(o esto|o bien,?|Silencio\.?)$/;
 // «Pueblo mío», «Todos los que…» y «Todos nosotros…» son texto, no la etiqueta de quien habla.
 const ETIQUETA = /^(Celebrante|Pueblo(?! mío| de Dios| santo)|Diácono|Lector|Oficiante|Todos(?! los| nosotros)|Obispo|Presbítero)\s+(.+)$/;
@@ -47,6 +73,14 @@ const OVERRIDES = {
   'Hosanna en las alturas.': 'CONT', 'Hosanna en el cielo.': 'CONT', 'Amén.': 'CONT', 'Amén': 'CONT', 'Patri.': 'CONT', 'Cruz.': 'CONT',
   // «Pueblo mío» y «Todos nosotros» son texto, no la etiqueta de quien habla.
   'Pueblo mío, ¿qué te he hecho?': 'P', 'Oh mi iglesia, ¿qué te he hecho?': 'P',
+  // Vigilia: el libro imprime «Oremos.. Silencio» (sic) tras cada lección, y las fórmulas del Evangelio sin etiqueta.
+  'Oremos.. Silencio': 'R', 'Oremos. Silencio': 'R',
+  'El Santo Evangelio de nuestro Señor Jesucristo según San Mateo.': 'DIAC', 'El Evangelio del Señor.': 'LECTOR',
+  'La luz de Cristo.': 'DIAC',
+  'Confirmación. Si no hay candidatos para el Bautismo o la Confirmación, la': 'CONT',
+  // Últimas líneas de una rúbrica, que el ancho de la página parte y empiezan en mayúscula.
+  'Colecta adecuada.': 'CONT', 'Confirmación, el Celebrante dirige al pueblo a la Renovación de los Votos Bautismales.': 'CONT',
+  'Instrucciones Adicionales. En ausencia de Candidatos para el Bautismo o Confirmación, el Celebrante dirige al': 'CONT',
 };
 // Tramos en verso: líneas cortas que se conservan una por línea. Cada tramo va de la línea que empieza con `ini` hasta
 // la anterior a la que empieza con `fin`, y se parte en estrofas donde una línea termina con `corta`.
@@ -63,11 +97,20 @@ const VERSOS = {
     { ini: 'El hombre nacido de mujer', fin: 'El Oficiante y el Pueblo rezan juntos', corta: /nunca sigue igual\.$|muerte eterna\.$|nos apartemos de ti\.$/ },
     { ini: 'Padre Nuestro que estás en el cielo,', fin: 'El Oficiante concluye', corta: /ahora y por siempre\. Amén\.$/ },
   ],
+  // Vigilia: el Pregón Pascual (Exsultet) en estrofas, y el Gloria. `fin` ausente = hasta el final de la sección.
+  easterVigilLight: [
+    { ini: 'Alégrense por fin', fin: 'Diácono El Señor esté con ustedes.', corta: /poderoso\.$|eterno\.$|pueblo\.$|siglos de los siglos\. Amén\.$/ },
+    { ini: 'Verdaderamente es justo y necesario', corta: /y nos santifica\.$|victorioso de la tumba\.$|tan grande y glorioso!$|reconcilia con Dios\.$|por los siglos de los siglos\. Amén\.$/ },
+  ],
+  easterVigilWord: [
+    { ini: 'Gloria a Dios en el cielo,', fin: 'LA ORACIÓN COLECTA', corta: /^Amén\.$/ },
+  ],
 };
 
 function tipoLinea(l) {
   if (OVERRIDES[l]) return OVERRIDES[l];
   if (ROTULO_EXACTO.test(l)) return 'R';
+  if (/^(UN CANTO|EL CANTO DE|SEGURAMENTE ES DIOS)/.test(l)) return 'REF';   // cánticos que acompañan a una lección
   if (REFERENCIA.test(l) && !/[a-záéíóú]{3,} [a-záéíóú]{3,} [a-záéíóú]{3,}/.test(l.replace(/\(.*?\)/g, ''))) return 'REF';
   if (MAYUSCULAS.test(l) && /[A-ZÁÉÍÓÚÑ]{4,}/.test(l)) return 'T';
   if (ROTULO.test(l)) return 'R';
@@ -125,7 +168,7 @@ function recorte(lineas, def, desde) {
 function envuelveVersos(ls, v, nombre) {
   const a = ls.findIndex(l => l.trim().startsWith(v.ini));
   if (a < 0) throw new Error(`${nombre}: no encuentro el tramo en verso que empieza «${v.ini}»`);
-  const b = ls.findIndex((l, n) => n > a && l.trim().startsWith(v.fin));
+  const b = v.fin ? ls.findIndex((l, n) => n > a && l.trim().startsWith(v.fin)) : ls.length;
   if (b < 0) throw new Error(`${nombre}: no encuentro el fin «${v.fin}» del tramo «${v.ini}»`);
   const estrofas = []; let cur = [];
   for (const raw of ls.slice(a, b)) {
@@ -150,7 +193,11 @@ function construir(locPath) {
       ls = ls.slice(0, a).concat(['[[LECTURAS]]'], ls.slice(b));
     }
     for (const v of VERSOS[nombre] || []) ls = envuelveVersos(ls, v, nombre);
-    out[nombre] = analizar(ls);
+    let items = analizar(ls);
+    // Las citas bíblicas que el app sustituye por el texto (LECCION / EVANGELIO) y la introducción como rúbrica.
+    items = items.map(it => (it.t === 'REF' && LECCIONES[it.x]) ? { t: LECCIONES[it.x].t, x: it.x, ref: LECCIONES[it.x].ref } : it);
+    if (def.comoRubrica) items = items.map(it => (it.t === 'P' ? { t: 'R', x: it.x } : it));
+    out[nombre] = items;
     origen[nombre] = `LOC l. ${r.desde + 1}-${r.hasta}`;
   }
   return { out, origen };

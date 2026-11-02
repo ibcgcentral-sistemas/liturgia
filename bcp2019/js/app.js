@@ -96,9 +96,19 @@ async function generateLiturgy(date) {
     psalmAnt = readings.psalmAnt || '';
   }
 
+  // Sábado Santo: junto al rito del día se ofrece la Gran Vigilia Pascual, cuyas lecciones, Epístola y Evangelio salen
+  // de la Biblia de Jerusalén. Se piden todas aquí (la liturgia se arma luego de forma síncrona) y van al estado para
+  // que el Librito no vuelva a pedirlas.
+  const vigilTexts = {};
+  if (dayInfo.key === 'holySaturday') {
+    await Promise.all(BCPHolyWeek.VIGIL_REFS.map(async ref => {
+      try { vigilTexts[ref] = await fetchScripture(ref); } catch (e) { vigilTexts[ref] = { text: '<em class="rubric">[Error cargando lectura]</em>', reference: ref }; }
+    }));
+  }
+
   currentMassState = {
     date, dayInfo, readings, firstReading, secondReading, gospel, psalmVerses, psalmAnt,
-    collect, collectKey, preface, borrowedFromSunday,
+    collect, collectKey, preface, borrowedFromSunday, vigilTexts,
   };
 
   return buildLiturgyHTML(currentMassState);
@@ -131,6 +141,8 @@ function buildLiturgyHTML(d) {
     let header = '';
     if (type === 'first') header = `<h3 class="section-title">✠ PRIMERA LECTURA</h3><p class="rubric">Lectura de <em>${ref}</em></p>`;
     if (type === 'second') header = `<h3 class="section-title">✠ SEGUNDA LECTURA</h3><p class="rubric">Lectura de <em>${ref}</em></p>`;
+    // Lecciones de la Gran Vigilia: el rito del libro ya trae el título, el Evangelio y sus respuestas; aquí solo va el texto.
+    if (type === 'vigil') return `<div class="reading vigil-reading"><p class="rubric">Lectura de <em>${ref}</em></p><div class="scripture-text">${data.text}</div></div>`;
     if (type === 'gospel' && isPassion) header = `<h3 class="section-title gospel-title">✠ LA PASIÓN</h3><p class="rubric">La Pasión de Nuestro Señor Jesucristo${getGospelAuthor(ref) ? ' según ' + getGospelAuthor(ref) : ''}</p>`;
     else if (type === 'gospel') header = `<h3 class="section-title gospel-title">✠ SANTO EVANGELIO</h3><p class="rubric">Lectura del Santo Evangelio${getGospelAuthor(ref) ? ' según ' + getGospelAuthor(ref) : ''}</p>`;
     return `
@@ -193,6 +205,81 @@ function buildLiturgyHTML(d) {
       <p class="footer-note">Libro de Oración Común (2019) · Texto Estándar Anglicano · Ciclo ${d.dayInfo.cycle}</p>
     </div>`;
 
+  // Final de la Eucaristía, de la Confesión a la Despedida: lo comparten la Eucaristía de cada día y la de la Gran Vigilia,
+  // que cambia el prefacio (el de Pascua), la Fracción y la Despedida (con Aleluya) y añade su bendición opcional.
+  const eucharistEndHtml = ({ preface = d.preface, vigil = false } = {}) => {
+    const pf = preface;
+    const fraccionSinAleluya = vigil ? false : isLent, despedidaConAleluya = vigil ? true : isEaster;
+    const bendicionVigilia = vigil ? BCPHolyWeek.render('easterVigilBlessing') : '';
+    return `
+    <div class="mass-section">
+      <h3 class="section-title">✠ CONFESIÓN Y ABSOLUCIÓN DE LOS PECADOS</h3>
+      <div class="liturgical-text-block">${BCPEucharist.CONFESSION}</div>
+      <h4 class="section-title">PALABRAS RECONFORTANTES</h4>
+      <div class="liturgical-text-block">${BCPEucharist.COMFORTABLE_WORDS}</div>
+    </div>
+
+    <div class="mass-section">
+      <h3 class="section-title">✠ LA PAZ</h3>
+      <div class="liturgical-text-block">${BCPEucharist.PEACE}</div>
+    </div>
+
+    <!-- ═══════════════ LITURGIA EUCARÍSTICA ═══════════════ -->
+    <div class="mass-section">
+      <h3 class="section-title main-section">✠ LITURGIA EUCARÍSTICA — EL OFERTORIO</h3>
+      <div class="liturgical-text-block">${BCPEucharist.OFFERTORY_SENTENCE}</div>
+    </div>
+
+    <div class="mass-section">
+      <h3 class="section-title">✠ PREFACIO: ${pf ? pf.title.toUpperCase() : 'PREFACIO COMÚN'}</h3>
+      <div class="liturgical-text-block">${BCPEucharist.SURSUM_CORDA}</div>
+      <div class="prayer-text">${pf ? pf.text : ''}</div>
+      <div class="liturgical-text-block">${BCPEucharist.SURSUM_CORDA_CLOSE}</div>
+      <h4 class="section-title">EL SANCTUS</h4>
+      <div class="liturgical-text-block">${BCPEucharist.SANCTUS}</div>
+    </div>
+
+    <div class="mass-section canon-section">
+      <h3 class="section-title main-section">✠ LA ORACIÓN DE CONSAGRACIÓN</h3>
+      <div class="liturgical-text-block">${BCPEucharist.PRAYER_OF_CONSECRATION}</div>
+    </div>
+
+    <div class="mass-section">
+      <h3 class="section-title">✠ LA ORACIÓN DEL SEÑOR</h3>
+      <div class="liturgical-text-block">${BCPEucharist.LORDS_PRAYER}</div>
+    </div>
+
+    <div class="mass-section">
+      <h3 class="section-title">✠ LA FRACCIÓN</h3>
+      <div class="liturgical-text-block">${fraccionSinAleluya ? BCPEucharist.FRACTION_LENT : BCPEucharist.FRACTION}</div>
+      <h4 class="section-title">ORACIÓN DE HUMILDE ACCESO</h4>
+      <div class="liturgical-text-block">${BCPEucharist.HUMBLE_ACCESS}</div>
+      <h4 class="section-title">EL AGNUS DEI</h4>
+      <div class="liturgical-text-block">${BCPEucharist.AGNUS_DEI}</div>
+    </div>
+
+    <div class="mass-section">
+      <h3 class="section-title">✠ LA ADMINISTRACIÓN DE LA COMUNIÓN</h3>
+      <div class="liturgical-text-block">${BCPEucharist.ADMINISTRATION}</div>
+    </div>
+
+    <div class="mass-section">
+      <h3 class="section-title">✠ ORACIÓN DESPUÉS DE LA COMUNIÓN</h3>
+      <div class="liturgical-text-block">${BCPEucharist.POST_COMMUNION}</div>
+    </div>
+
+    ${isMaundy ? `<div class="mass-section">
+      <h3 class="section-title main-section">✠ AL TERMINAR LA LITURGIA</h3>
+      ${BCPHolyWeek.render('maundyThursdayClosing')}
+    </div>` : `<div class="mass-section">
+      <h3 class="section-title main-section">✠ LA BENDICIÓN Y LA DESPEDIDA</h3>
+      <div class="liturgical-text-block">${BCPEucharist.BLESSING}</div>
+      ${bendicionVigilia}
+      <div class="liturgical-text-block">${despedidaConAleluya ? BCPEucharist.DISMISSAL_ALLELUIA : BCPEucharist.DISMISSAL}</div>
+    </div>`}
+`;
+  };
+
   // Las cuatro lecturas del día (primera, salmo, segunda, Evangelio). Las usa la Liturgia de la Palabra y, el Viernes y el
   // Sábado Santo, el rito propio, donde sustituyen al marcador LECTURAS de holyweek-data.js.
   const readingsHtml = `
@@ -202,9 +289,32 @@ function buildLiturgyHTML(d) {
       ${d.gospel && d.readings ? fmtReading(translateBibleReference(d.readings.gospel), d.gospel, 'gospel') : '<p class="rubric">[Evangelio no especificado para este día]</p>'}`;
 
   // Viernes y Sábado Santo: el libro no celebra la Eucaristía esos días; tienen su rito propio (holyweek.js, texto del
-  // libro en español). Del Vigilia Pascual no hay rito todavía.
+  // libro en español). El Sábado Santo añade la Gran Vigilia Pascual, que SÍ lleva Eucaristía (la primera de Pascua).
   const noEucharist = noEucharistNotice(d.dayInfo);
   if (noEucharist) {
+    const leerVigilia = (ref, cita, tipo) => d.vigilTexts && d.vigilTexts[ref] ? fmtReading(translateBibleReference(ref), d.vigilTexts[ref], 'vigil') : '';
+    const vigiliaHtml = key !== 'holySaturday' ? '' : `
+    <div class="mass-section vigil-section">
+      <h3 class="section-title main-section">✠ LA GRAN VIGILIA DE RESURRECCIÓN</h3>
+      ${BCPHolyWeek.render('easterVigilIntro')}
+    </div>
+    <div class="mass-section vigil-section">
+      <h3 class="section-title main-section">✠ EL SERVICIO DE LA LUZ</h3>
+      ${BCPHolyWeek.render('easterVigilLight')}
+    </div>
+    <div class="mass-section vigil-section">
+      <h3 class="section-title main-section">✠ EL SERVICIO DE LAS LECTURAS</h3>
+      ${BCPHolyWeek.render('easterVigilReadings', '', leerVigilia)}
+    </div>
+    <div class="mass-section vigil-section">
+      <h3 class="section-title main-section">✠ LA ACLAMACIÓN PASCUAL Y LA PALABRA</h3>
+      ${BCPHolyWeek.render('easterVigilWord', '', leerVigilia)}
+    </div>
+    <div class="mass-section intercessions">
+      <h3 class="section-title main-section">✠ ORACIÓN DE LOS FIELES</h3>
+      <div class="liturgical-text-block">${BCPEucharist.PRAYERS_OF_THE_PEOPLE}</div>
+    </div>
+    ${eucharistEndHtml({ preface: BCPPropers.PREFACES.easter, vigil: true })}`;
     return `
   <div class="liturgy-document">
     ${headHtml}
@@ -213,6 +323,7 @@ function buildLiturgyHTML(d) {
       <h3 class="section-title main-section">✠ ${d.dayInfo.nameEs || d.dayInfo.name}</h3>
       ${BCPHolyWeek.render(key, readingsHtml)}
     </div>
+    ${vigiliaHtml}
 
     ${footHtml}
   </div>`;
@@ -291,70 +402,7 @@ function buildLiturgyHTML(d) {
       <div class="liturgical-text-block">${BCPEucharist.PRAYERS_OF_THE_PEOPLE}</div>
     </div>`}
 
-    <div class="mass-section">
-      <h3 class="section-title">✠ CONFESIÓN Y ABSOLUCIÓN DE LOS PECADOS</h3>
-      <div class="liturgical-text-block">${BCPEucharist.CONFESSION}</div>
-      <h4 class="section-title">PALABRAS RECONFORTANTES</h4>
-      <div class="liturgical-text-block">${BCPEucharist.COMFORTABLE_WORDS}</div>
-    </div>
-
-    <div class="mass-section">
-      <h3 class="section-title">✠ LA PAZ</h3>
-      <div class="liturgical-text-block">${BCPEucharist.PEACE}</div>
-    </div>
-
-    <!-- ═══════════════ LITURGIA EUCARÍSTICA ═══════════════ -->
-    <div class="mass-section">
-      <h3 class="section-title main-section">✠ LITURGIA EUCARÍSTICA — EL OFERTORIO</h3>
-      <div class="liturgical-text-block">${BCPEucharist.OFFERTORY_SENTENCE}</div>
-    </div>
-
-    <div class="mass-section">
-      <h3 class="section-title">✠ PREFACIO: ${d.preface ? d.preface.title.toUpperCase() : 'PREFACIO COMÚN'}</h3>
-      <div class="liturgical-text-block">${BCPEucharist.SURSUM_CORDA}</div>
-      <div class="prayer-text">${d.preface ? d.preface.text : ''}</div>
-      <div class="liturgical-text-block">${BCPEucharist.SURSUM_CORDA_CLOSE}</div>
-      <h4 class="section-title">EL SANCTUS</h4>
-      <div class="liturgical-text-block">${BCPEucharist.SANCTUS}</div>
-    </div>
-
-    <div class="mass-section canon-section">
-      <h3 class="section-title main-section">✠ LA ORACIÓN DE CONSAGRACIÓN</h3>
-      <div class="liturgical-text-block">${BCPEucharist.PRAYER_OF_CONSECRATION}</div>
-    </div>
-
-    <div class="mass-section">
-      <h3 class="section-title">✠ LA ORACIÓN DEL SEÑOR</h3>
-      <div class="liturgical-text-block">${BCPEucharist.LORDS_PRAYER}</div>
-    </div>
-
-    <div class="mass-section">
-      <h3 class="section-title">✠ LA FRACCIÓN</h3>
-      <div class="liturgical-text-block">${isLent ? BCPEucharist.FRACTION_LENT : BCPEucharist.FRACTION}</div>
-      <h4 class="section-title">ORACIÓN DE HUMILDE ACCESO</h4>
-      <div class="liturgical-text-block">${BCPEucharist.HUMBLE_ACCESS}</div>
-      <h4 class="section-title">EL AGNUS DEI</h4>
-      <div class="liturgical-text-block">${BCPEucharist.AGNUS_DEI}</div>
-    </div>
-
-    <div class="mass-section">
-      <h3 class="section-title">✠ LA ADMINISTRACIÓN DE LA COMUNIÓN</h3>
-      <div class="liturgical-text-block">${BCPEucharist.ADMINISTRATION}</div>
-    </div>
-
-    <div class="mass-section">
-      <h3 class="section-title">✠ ORACIÓN DESPUÉS DE LA COMUNIÓN</h3>
-      <div class="liturgical-text-block">${BCPEucharist.POST_COMMUNION}</div>
-    </div>
-
-    ${isMaundy ? `<div class="mass-section">
-      <h3 class="section-title main-section">✠ AL TERMINAR LA LITURGIA</h3>
-      ${BCPHolyWeek.render('maundyThursdayClosing')}
-    </div>` : `<div class="mass-section">
-      <h3 class="section-title main-section">✠ LA BENDICIÓN Y LA DESPEDIDA</h3>
-      <div class="liturgical-text-block">${BCPEucharist.BLESSING}</div>
-      <div class="liturgical-text-block">${isEaster ? BCPEucharist.DISMISSAL_ALLELUIA : BCPEucharist.DISMISSAL}</div>
-    </div>`}
+    ${eucharistEndHtml()}
 
     ${footHtml}
 

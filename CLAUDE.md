@@ -67,7 +67,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=31` (Misal) y `?v=18` (bcp2019; la hoja de estilo, `?v=7`).
+   código viejo. Actualmente en `?v=31` (Misal) y `?v=19` (bcp2019; la hoja de estilo, `?v=7`).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -218,9 +218,19 @@ sale con título (no se midió cuántos).
   Viernes y Sábado Santo: rito completo (Colectas Solemnes, Improperios, Distribución de la
   Comunión; himno del Sábado) con las lecturas del leccionario. El libro no distingue
   rúbricas de texto en el Markdown: el script las clasifica por su forma (heurística;
-  `--preview` muestra cómo) y las excepciones van en `OVERRIDES`. **Faltan:** la Gran
-  Vigilia Pascual (Exsultet, lecturas, Bautismo) y la imposición de la ceniza del
-  Miércoles de Ceniza. **Discrepancia del libro, no corregida:** la página del Sábado
+  `--preview` muestra cómo) y las excepciones van en `OVERRIDES`. **Gran Vigilia
+  Pascual** (2026-11-02): se ofrece en la página del **Sábado Santo**, tras el rito del día
+  (`easterVigil*` en `holyweek-data.js`): Servicio de la Luz con el Pregón (Exsultet),
+  las **12 lecciones** con su colecta y salmos (el libro pide «al menos tres, siempre el
+  Éxodo»: se imprimen todas, el celebrante elige), Aclamación Pascual, Gloria, colecta,
+  Epístola y Evangelio, y la Eucaristía de Pascua (prefacio de Pascua, Fracción y
+  Despedida con Aleluya, bendición opcional de la Vigilia). Los textos bíblicos son de la
+  Biblia de Jerusalén; Daniel 3 se pide como `3:1-23,91-95` y Jonás 1:17 tiene regla en
+  `VERSE_SHIFTS` (`test-bcp2019.js` 9 cuenta los versículos de las 14 citas). **No están:**
+  el texto de los salmos y cánticos de la Vigilia (solo sus citas, como en el libro), el
+  Santo Bautismo y la Renovación de los Votos Bautismales (el libro remite a otro rito),
+  la marca del Cirio Pascual y la imposición de la ceniza del Miércoles de Ceniza.
+  **Discrepancia del libro, no corregida:** la página del Sábado
   Santo pide Job 14:1-14 y la tabla del leccionario (`lectionary.js`) Job 14:1-17; se
   sigue la tabla. El Jueves Santo conserva Colecta por la Pureza, Kyrie y Gloria porque el
   libro no los quita, aunque tampoco los nombra.

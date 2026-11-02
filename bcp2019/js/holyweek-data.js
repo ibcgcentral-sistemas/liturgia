@@ -2,7 +2,7 @@
  * holyweek-data.js — Liturgias de la Semana Santa (Libro de Oración Común 2019, ACNA).
  * GENERADO por bcp2019-tools/build-holyweek.js a partir del libro oficial en español (LOC-10-10-23.md); NO editar a
  * mano: test-bcp2019.js comprueba que sigue idéntico a lo que genera el script. Texto copiado, no traducido.
- * Procedencia: palmSundayPalms LOC l. 14728-14794; maundyThursdayOpening LOC l. 14844-14858; maundyThursdayFootWashing LOC l. 14875-14902; maundyThursdayClosing LOC l. 14903-14911; goodFriday LOC l. 14939-15244; holySaturday LOC l. 15248-15315.
+ * Procedencia: palmSundayPalms LOC l. 14728-14794; maundyThursdayOpening LOC l. 14844-14858; maundyThursdayFootWashing LOC l. 14875-14902; maundyThursdayClosing LOC l. 14903-14911; goodFriday LOC l. 14939-15244; holySaturday LOC l. 15248-15315; easterVigilIntro LOC l. 15318-15337; easterVigilLight LOC l. 15341-15440; easterVigilReadings LOC l. 15441-15572; easterVigilWord LOC l. 15573-15633; easterVigilBlessing LOC l. 15634-15641.
  * Tipos: T título, R rúbrica, P párrafo, V versos (líneas separadas por \n), REF cita bíblica, CEL/PUEBLO/DIAC/LECTOR/
  * OFIC/TODOS/OBISPO/PRES voces, LECTURAS = lugar donde el app inserta las lecturas del día.
  */
@@ -695,6 +695,574 @@ const BCP_HOLYWEEK_DATA = {
   {
    "t": "REF",
    "x": "2 CORINTIOS 13:14 (NVI)"
+  }
+ ],
+ "easterVigilIntro": [
+  {
+   "t": "R",
+   "x": "La Gran Vigilia, cuando se observa, es la primera liturgia del Día de Pascua. Se celebra en un tiempo conveniente entre la puesta del sol del Sábado Santo y el amanecer de la mañana de Pascua. Es apropiado que el servicio comience en la oscuridad. La liturgia normalmente consta de cuatro partes:"
+  },
+  {
+   "t": "R",
+   "x": "El Servicio de la Luz: se enciende un nuevo fuego, y de él se enciende el Cirio Pascual, que simboliza a Cristo, la luz del mundo. El Exsultet, una antigua canción de alabanza se canta o recita como punto culminante de esta parte de la liturgia."
+  },
+  {
+   "t": "R",
+   "x": "El servicio de las lecturas: pasajes clave de las Escrituras relatan la historia de los poderosos actos y promesas de Dios. Estas lecturas van acompañadas de salmos, cánticos y oraciones."
+  },
+  {
+   "t": "R",
+   "x": "El Santo Bautismo es el Sacramento a través del cual los candidatos se unen a la muerte y resurrección de Jesucristo (ROMANOS 6: 3-4), que la Iglesia celebra en esta noche santísima. Cuando el Obispo está presente, también se puede administrar la Confirmación. Si no hay candidatos para el Bautismo o la Confirmación, la"
+  },
+  {
+   "t": "R",
+   "x": "Congregación se une a la Renovación de los Votos Bautismales."
+  },
+  {
+   "t": "R",
+   "x": "La Sagrada Eucaristía es la culminación apropiada de la Liturgia Pascual. Al celebrar esta santa fiesta, compartimos el gozo del triunfo de nuestro Salvador y su gracia nos fortalece para caminar en una vida nueva."
+  }
+ ],
+ "easterVigilLight": [
+  {
+   "t": "T",
+   "x": "LA ILUMINACIÓN DEL CIRIO PASCUAL"
+  },
+  {
+   "t": "R",
+   "x": "En la oscuridad, el fuego se enciende; después de lo cual el Celebrante dice"
+  },
+  {
+   "t": "P",
+   "x": "Queridos amigos en Cristo: En esta noche santísima, en la que nuestro Señor Jesús pasó de muerte a vida, la Iglesia invita a sus miembros, dispersos por todo el mundo, a reunirse en vigilia y oración. Porque esta es la Pascua del Señor, en la que, al escuchar su Palabra y celebrar sus sacramentos, compartimos su victoria sobre la muerte."
+  },
+  {
+   "t": "R",
+   "x": "El Celebrante puede decir la siguiente oración"
+  },
+  {
+   "t": "P",
+   "x": "Dios eterno, que hiciste brillar esta noche santísima con el resplandor de tu única luz verdadera: santifica este nuevo fuego, te rogamos, y enciéndenos así con el fuego de tu amor, para que con corazones puros y afectos ardientes podamos alcanzar al resplandor de tu gloria celestial; por Jesucristo nuestro Señor. Amén."
+  },
+  {
+   "t": "R",
+   "x": "Si se va a marcar el Cirio Pascual, se hace en este momento (página 595)."
+  },
+  {
+   "t": "R",
+   "x": "El Celebrante enciende el Cirio Pascual con el fuego recién encendido y dice"
+  },
+  {
+   "t": "P",
+   "x": "Que la luz de Cristo, elevándose en gloria, destierre toda oscuridad de nuestros corazones y mentes."
+  },
+  {
+   "t": "R",
+   "x": "El Diácono (o el Celebrante si no hay Diácono), portando la Vela, conduce la procesión hasta el presbiterio, haciendo tres pausas y cantando o diciendo"
+  },
+  {
+   "t": "DIAC",
+   "x": "La luz de Cristo."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Demos gracias a Dios."
+  },
+  {
+   "t": "R",
+   "x": "Si se han distribuido velas a los miembros de la Congregación, se encienden con el Cirio Pascual. También se pueden encender otras velas y lámparas de la iglesia, excepto las del Altar."
+  },
+  {
+   "t": "R",
+   "x": "El Cirio Pascual se coloca en su soporte."
+  },
+  {
+   "t": "R",
+   "x": "Luego, el Diácono, u otra persona designada, de pie cerca de la vela, canta o dice habitualmente el Exsultet."
+  },
+  {
+   "t": "T",
+   "x": "EL PREGÓN PASCUAL"
+  },
+  {
+   "t": "V",
+   "x": "Alégrense por fin, bóveda del cielo y coros de ángeles,\ny dejen que sus trompetas anuncien la Salvación\ny por la victoria de nuestro Rey tan poderoso."
+  },
+  {
+   "t": "V",
+   "x": "Regocíjate y canta ahora, toda la tierra entera,\ninundada de tanta claridad,\nporque las tinieblas han sido vencidas por nuestro Rey eterno."
+  },
+  {
+   "t": "V",
+   "x": "Alégrese y goce ahora, nuestra madre la Iglesia,\ny deja que tus santos atrios, en luz radiante,\nresuenen con aclamaciones de tu pueblo."
+  },
+  {
+   "t": "V",
+   "x": "Todos ustedes los que están cerca de esta llama santa y maravillosa,\noren conmigo a Dios Todopoderoso\npor la gracia de cantar la alabanza digna de esta gran luz;\nPor Jesucristo tu Hijo nuestro Señor,\nque vive y reina con Él,\nen la unidad del Espíritu Santo,\nun solo Dios, por los siglos de los siglos. Amén."
+  },
+  {
+   "t": "DIAC",
+   "x": "El Señor esté con ustedes."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Y con tu espíritu."
+  },
+  {
+   "t": "DIAC",
+   "x": "Levantemos el corazón."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Lo tenemos levantado hacia el Señor."
+  },
+  {
+   "t": "DIAC",
+   "x": "Demos gracias al Señor nuestro Dios."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Es justo darle gracias y alabarlo."
+  },
+  {
+   "t": "V",
+   "x": "Verdaderamente es justo y necesario, siempre y en todo lugar,\ncon todo nuestro corazón, mente y voz alabarte,\nDios invisible, todopoderoso y eterno,\ny a tu Hijo unigénito Jesucristo nuestro Señor;\nquien pagó por nosotros la deuda del pecado de Adán,\ny por su sangre libró a tu pueblo fiel;\nporque Él es el verdadero Cordero Pascual,\nel mismo Cordero de Dios,\ncuya sangre marca los dinteles de las puertas de los creyentes\ny nos santifica."
+  },
+  {
+   "t": "V",
+   "x": "Esta es la noche en que sacaste a nuestros antepasados,\nlos hijos de Israel, de la servidumbre en Egipto,\ny los condujiste a través del Mar Rojo en tierra seca.\nEsta es la noche en que con una columna de fuego\ndesterraste las tinieblas de nuestra iniquidad.\nEsta es la noche en que todos los que creen en Cristo\nson librados de la penumbra del pecado,\ny son restaurados a la gracia y la santidad de vida.\nEsta es la noche en que Cristo rompió los lazos de la muerte y el infierno,\ny se levantó victorioso de la tumba."
+  },
+  {
+   "t": "V",
+   "x": "Nuestro nacimiento no habría sido una ganancia\nsi no hubiéramos sido redimidos.\nQué maravilloso y más allá de nuestro conocimiento, oh Dios,\nestá tu misericordia y bondad amorosa para con nosotros,\nque, para redimir a un esclavo, le diste un Hijo.\n¡Oh maravillosa providencia del pecado de Adán\ndestruido completamente por la muerte de Cristo!\n¡Oh, feliz falta que nos ganó\nun Redentor tan grande y glorioso!"
+  },
+  {
+   "t": "V",
+   "x": "Esta es la noche de la que está escrito:\nla noche será tan brillante como el día.\nQué santa es esta noche en que la maldad se pone en fuga\ny el pecado se lava.\nDevuelve la inocencia a los caídos y la alegría a los que lloran.\nExpulsa el orgullo y el odio, y trae paz y concordia.\nQué bendita es esta noche en la que la tierra y el cielo se unen\ny el hombre se reconcilia con Dios."
+  },
+  {
+   "t": "V",
+   "x": "Por lo tanto, Oh Padre Santo, acepta nuestro sacrificio vespertino,\nla ofrenda de este cirio en tu honor,\nobra de las abejas y de las manos de tus siervos,\ndon de tu santísima Iglesia.\nQue se mezcle con las luces del cielo,\ny brille continuamente para ahuyentar toda oscuridad.\nQue Cristo, la estrella de la mañana que no tiene ocaso,\nla encuentre siempre ardiendo: El que da su luz a toda la creación,\ny que vive y reina por los siglos de los siglos. Amén."
+  }
+ ],
+ "easterVigilReadings": [
+  {
+   "t": "T",
+   "x": "LAS LECTURAS"
+  },
+  {
+   "t": "R",
+   "x": "El Celebrante puede presentar las lecturas de las Escrituras con estas palabras u otras similares"
+  },
+  {
+   "t": "P",
+   "x": "Escuchemos el registro de las obras salvadoras de Dios en la historia, recordando cómo salvó a su pueblo en épocas pasadas y en la plenitud de los tiempos envió a su Hijo para ser nuestro Redentor; y oremos para que Dios pueda completar en cada uno de nosotros la obra salvadora que ha comenzado."
+  },
+  {
+   "t": "R",
+   "x": "Se leen al menos tres de las siguientes lecturas, de las cuales una es siempre la lectura del Éxodo. Después de cada lectura, se puede decir o cantar el salmo o cánticos enumerados, o algún otro salmo, cántico o himno adecuado. Se puede guardar un período de silencio; y se puede decir la oración Colecta proporcionada, o alguna otra oración Colecta adecuada."
+  },
+  {
+   "t": "T",
+   "x": "LA CREACIÓN"
+  },
+  {
+   "t": "LECCION",
+   "x": "GÉNESIS 1: 1—2: 3",
+   "ref": "Genesis 1:1-2:3"
+  },
+  {
+   "t": "REF",
+   "x": "SALMO 104: 1-13 (14-24) o"
+  },
+  {
+   "t": "REF",
+   "x": "UN CANTO A LA CREACIÓN (Cántico suplementario 10)"
+  },
+  {
+   "t": "R",
+   "x": "Oremos.. Silencio"
+  },
+  {
+   "t": "P",
+   "x": "Oh Dios, que creaste maravillosamente, y aún más maravillosamente restauraste la dignidad de la naturaleza humana: concédenos compartir la vida divina de Aquel que se humilló para compartir nuestra humanidad, tu Hijo Jesucristo nuestro Señor. Amén."
+  },
+  {
+   "t": "T",
+   "x": "LA CAÍDA"
+  },
+  {
+   "t": "LECCION",
+   "x": "GÉNESIS 3",
+   "ref": "Genesis 3"
+  },
+  {
+   "t": "REF",
+   "x": "SALMO 32"
+  },
+  {
+   "t": "R",
+   "x": "Oremos.. Silencio"
+  },
+  {
+   "t": "P",
+   "x": "Oh Dios, enviaste a tu bendito Hijo, la simiente de la mujer, para que aplastara la cabeza de la serpiente e hiciera nueva toda la creación: Concede que, teniendo esta esperanza, nos purifiquemos como Él es puro; para que, cuando vuelva con poder y gran gloria, seamos hechos como Él en su reino eterno y glorioso; por Jesucristo nuestro Señor. Amén."
+  },
+  {
+   "t": "T",
+   "x": "LA INUNDACIÓN"
+  },
+  {
+   "t": "LECCION",
+   "x": "GÉNESIS 7: 1-5, 11-18; 8: 6-20; 9: 8-13",
+   "ref": "Genesis 7:1-5,11-18,8:6-20,9:8-13"
+  },
+  {
+   "t": "REF",
+   "x": "SALMO 36 o SALMO 46"
+  },
+  {
+   "t": "R",
+   "x": "Oremos. Silencio"
+  },
+  {
+   "t": "P",
+   "x": "Concede Señor, que nosotros, que somos bautizados en la muerte de tu Hijo, nuestro Salvador Jesucristo, continuamente destruyamos nuestros malos deseos y seamos sepultados con Él; y para que por el sepulcro y la puerta de la muerte pasemos a nuestra alegre resurrección; por los méritos de aquel que murió, fue sepultado y resucitó por nosotros, tu Hijo Jesucristo nuestro Señor. Amén."
+  },
+  {
+   "t": "T",
+   "x": "ABRAHAM Y EL SACRIFICIO DE ISAAC"
+  },
+  {
+   "t": "LECCION",
+   "x": "GÉNESIS 22: 1-18",
+   "ref": "Genesis 22:1-18"
+  },
+  {
+   "t": "REF",
+   "x": "PSALMO 16"
+  },
+  {
+   "t": "R",
+   "x": "Oremos. Silencio"
+  },
+  {
+   "t": "P",
+   "x": "Dios Todopoderoso, cuyo siervo Abraham obedeció fielmente tu llamado, y se regocijó al ver el día de tu Hijo: Multiplica el número de tus hijos por la gracia del Cordero que fue inmolado; para que tu Iglesia también se regocije de ver cumplida tu promesa a nuestro padre Abraham; Por Jesucristo nuestro Señor. Amén"
+  },
+  {
+   "t": "T",
+   "x": "LA LIBERACIÓN DE ISRAEL EN EL MAR ROJO"
+  },
+  {
+   "t": "LECCION",
+   "x": "ÉXODO 14:10—15:1",
+   "ref": "Exodus 14:10-15:1"
+  },
+  {
+   "t": "REF",
+   "x": "EL CANTO DE MOISES (Cántico Suplementario 5)"
+  },
+  {
+   "t": "R",
+   "x": "Oremos. Silencio"
+  },
+  {
+   "t": "P",
+   "x": "Oh Dios, cuyas maravillas de antaño resplandecen hasta nuestros días, por el poder de tu brazo poderoso libraste una vez a tu pueblo escogido de la esclavitud bajo el mando del faraón, para que sea una señal para nosotros de la salvación que el agua del bautismo ofrece a todas las naciones: Haz que todos los pueblos de la tierra sean contados entre la descendencia de Abraham, y se regocijen en la heredad de Israel; Por Jesucristo nuestro Señor. Amén."
+  },
+  {
+   "t": "T",
+   "x": "LA PRESENCIA DE DIOS EN UN ISRAEL RENOVADO"
+  },
+  {
+   "t": "LECCION",
+   "x": "ISAÍAS 4: 2-6",
+   "ref": "Isaiah 4:2-6"
+  },
+  {
+   "t": "REF",
+   "x": "SALMO 122"
+  },
+  {
+   "t": "R",
+   "x": "Oremos. Silencio"
+  },
+  {
+   "t": "P",
+   "x": "Oh Dios, que guiaste a tu antiguo pueblo con una columna de nubes de día y una columna de fuego de noche: Concede que nosotros, que te servimos ahora en la tierra, lleguemos al gozo de esa Jerusalén celestial, donde todas las lágrimas son enjugadas y donde tus santos por siempre cantan tus alabanzas; por Jesucristo nuestro Señor. Amén."
+  },
+  {
+   "t": "T",
+   "x": "LA SALVACIÓN ES OFRECIDA PARA TODOS"
+  },
+  {
+   "t": "LECCION",
+   "x": "ISAÍAS 55: 1-11",
+   "ref": "Isaiah 55:1-11"
+  },
+  {
+   "t": "REF",
+   "x": "SEGURAMENTE ES DIOS QUIEN ME SALVA (Cántico Suplementario 8) o"
+  },
+  {
+   "t": "REF",
+   "x": "SALMO 42: 1-7"
+  },
+  {
+   "t": "R",
+   "x": "Oremos. Silencio"
+  },
+  {
+   "t": "P",
+   "x": "Oh Dios, tú creaste todas las cosas con el poder de tu Palabra, y renuevas la tierra con tu Espíritu: Da el agua de la vida a todos los que tienen sed de ti, para que den fruto abundante en tu reino glorioso; por Jesucristo nuestro Señor. Amén."
+  },
+  {
+   "t": "T",
+   "x": "UN NUEVO CORAZÓN Y UN NUEVO ESPÍRITU"
+  },
+  {
+   "t": "LECCION",
+   "x": "EZEQUIEL 36: 24-28",
+   "ref": "Ezekiel 36:24-28"
+  },
+  {
+   "t": "REF",
+   "x": "SALMO 42: 1-7 o"
+  },
+  {
+   "t": "REF",
+   "x": "SEGURAMENTE ES DIOS QUIEN ME SALVA (Cántico Suplementario 8)"
+  },
+  {
+   "t": "R",
+   "x": "Oremos. Silencio"
+  },
+  {
+   "t": "P",
+   "x": "Padre Celestial, por el poder de tu Espíritu Santo prometes a tu pueblo fiel nueva vida en el agua del Bautismo: Guíanos y fortalécenos por el mismo Espíritu, para que los que hemos nacido de nuevo te sirvamos en fe y amor, y crezcamos a la altura plena de tu Hijo Jesucristo nuestro Señor. Amén."
+  },
+  {
+   "t": "T",
+   "x": "EL VALLE DE LOS HUESOS SECOS"
+  },
+  {
+   "t": "LECCION",
+   "x": "EZEQUIEL 37:1-14",
+   "ref": "Ezekiel 37:1-14"
+  },
+  {
+   "t": "REF",
+   "x": "SALMO 30 o SALMO 126"
+  },
+  {
+   "t": "R",
+   "x": "Oremos. Silencio"
+  },
+  {
+   "t": "P",
+   "x": "Señor Dios de nuestra salvación, tú hablas la palabra a tu pueblo esparcido, y nos levantas del valle de la muerte: Infunde tu Espíritu sobre tu Iglesia, para que podamos vivir y estar delante de ti confiando en tu Hijo resucitado, nuestro Salvador Jesucristo. Amén."
+  },
+  {
+   "t": "T",
+   "x": "LOS TRES HOMBRES EN EL HORNO ENCENDIDO"
+  },
+  {
+   "t": "LECCION",
+   "x": "DANIEL 3:1-28",
+   "ref": "Daniel 3:1-23,91-95"
+  },
+  {
+   "t": "REF",
+   "x": "UN CANTO A LA CREACIÓN (Cántico Suplementario 10) o"
+  },
+  {
+   "t": "REF",
+   "x": "UN CANTO DE ALABANZA (Benedictus es, Domine)"
+  },
+  {
+   "t": "R",
+   "x": "Oremos. Silencio"
+  },
+  {
+   "t": "P",
+   "x": "Oh Dios, tú sabes que estamos en medio de muchos peligros graves, y debido a la fragilidad de nuestra naturaleza no siempre podemos mantenernos firmes: Concede que tu presencia y protección nos sostenga en todas las pruebas y nos lleve a través de cada tentación; Por Jesucristo nuestro Señor. Amén."
+  },
+  {
+   "t": "T",
+   "x": "JONÁS Y EL PEZ"
+  },
+  {
+   "t": "LECCION",
+   "x": "JONÁS 1:1—2:10",
+   "ref": "Jonah 1:1-2:10"
+  },
+  {
+   "t": "REF",
+   "x": "SALMO 130"
+  },
+  {
+   "t": "R",
+   "x": "Oremos. Silencio"
+  },
+  {
+   "t": "P",
+   "x": "Dios Todopoderoso, por la resurrección de tu Hijo nos has sacado del pecado a la justicia y de la muerte a la vida: Concede a los sellados por tu Espíritu Santo la voluntad y el poder de proclamarte a todo el mundo; por Jesucristo nuestro Señor. Amén."
+  },
+  {
+   "t": "T",
+   "x": "EL ENCUENTRO DEL PUEBLO DE DIOS"
+  },
+  {
+   "t": "LECCION",
+   "x": "SOFONÍAS 3:12-20",
+   "ref": "Zephaniah 3:12-20"
+  },
+  {
+   "t": "REF",
+   "x": "SALMO 98"
+  },
+  {
+   "t": "R",
+   "x": "Oremos. Silencio"
+  },
+  {
+   "t": "P",
+   "x": "Dios Todopoderoso, llamaste a tu Iglesia a dar testimonio de que estabas en Cristo reconciliando el mundo hacia ti. Danos valor para proclamar la buena noticia de tu amor, para que todos los que la escuchen sean atraídos hacia ti; por Aquel que fue levantado sobre la cruz, Jesucristo nuestro Señor. Amén."
+  },
+  {
+   "t": "R",
+   "x": "O, si las oraciones Solemnes no se dijeron el Viernes Santo, se puede usar lo siguiente"
+  },
+  {
+   "t": "P",
+   "x": "Oh Dios de poder inmutable y luz eterna: Mira con bondad a toda tu Iglesia, ese misterio maravilloso y sagrado; por la obra eficaz de tu providencia, lleva a cabo con tranquilidad el plan de salvación; deja que todo el mundo vea y sepa que las cosas que fueron derribadas se están levantando, y las cosas que habían envejecido se renuevan, y que todas las cosas están siendo perfeccionadas por Aquel por quien todas las cosas fueron hechas, tu Hijo Jesucristo nuestro Señor. Amén."
+  },
+  {
+   "t": "R",
+   "x": "El Santo Bautismo puede administrarse aquí o después del Evangelio (y sermón). La Confirmación también se puede administrar como se indica en Instrucciones Adicionales. En ausencia de Candidatos para el Bautismo o la Confirmación, el Celebrante dirige al pueblo a la Renovación de los Votos Bautismales."
+  }
+ ],
+ "easterVigilWord": [
+  {
+   "t": "T",
+   "x": "LA ACLAMACIÓN PASCUAL"
+  },
+  {
+   "t": "CEL",
+   "x": "¡Aleluya! ¡Cristo ha resucitado!"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "¡El Señor ciertamente ha resucitado! ¡Aleluya!"
+  },
+  {
+   "t": "R",
+   "x": "Se puede tocar una alegre comparsa y se pueden tocar campanas. La iglesia está encendida y las velas del Altar ahora pueden encenderse con el Cirio Pascual."
+  },
+  {
+   "t": "R",
+   "x": "El Gloria in Excelsis, o algún otro himno de alabanza, se canta o dice"
+  },
+  {
+   "t": "V",
+   "x": "Gloria a Dios en el cielo,\ny paz en la tierra a quienes ama el Señor.\nPor tu inmensa gloria\nte alabamos,\nte bendecimos,\nte adoramos,\nte glorificamos,\nte damos gracias;\nSeñor Dios, Rey celestial,\nDios Padre Todopoderoso.\nSeñor, Hijo único Jesucristo,\nSeñor Dios, Cordero de Dios,\nHijo del Padre:\nTú que quitas el pecado del mundo,\nten piedad de nosotros;\nTú que quitas el pecado del mundo,\natiende a nuestra súplica;\nTú que estás sentado a la derecha del Padre,\nten piedad de nosotros.\nPorque solo tú eres Santo, sólo tú Señor,\nsólo tú Altísimo, Jesucristo, con el Espíritu Santo,\nen la gloria de Dios Padre.\nAmén."
+  },
+  {
+   "t": "T",
+   "x": "LA ORACIÓN COLECTA"
+  },
+  {
+   "t": "CEL",
+   "x": "El Señor esté con ustedes."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Y con tu espíritu."
+  },
+  {
+   "t": "CEL",
+   "x": "Oremos."
+  },
+  {
+   "t": "P",
+   "x": "Oh Dios, que hiciste resplandecer esta noche santísima con la gloria de la resurrección del Señor: despierta en tu Iglesia el Espíritu de adopción que nos fue dado en el Bautismo, para que, renovados en cuerpo y mente, te adoremos en sinceridad y verdad; por Jesucristo nuestro Señor, que vive y reina contigo, en la unidad del Espíritu Santo, un solo Dios, ahora y por siempre. Amén."
+  },
+  {
+   "t": "R",
+   "x": "El servicio continúa con la lectura de la Epístola"
+  },
+  {
+   "t": "LECCION",
+   "x": "ROMANOS 6:3-11",
+   "ref": "Romans 6:3-11"
+  },
+  {
+   "t": "R",
+   "x": "Se puede decir o cantar el Salmo 114 o algún otro salmo, himno o cántico adecuado. El uso de \"Aleluya\" es particularmente apropiado."
+  },
+  {
+   "t": "R",
+   "x": "Todos se ponen de pie, y el Diácono o Sacerdote lee el evangelio, primero diciendo"
+  },
+  {
+   "t": "DIAC",
+   "x": "El Santo Evangelio de nuestro Señor Jesucristo según San Mateo."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Gloria a ti, Cristo Señor."
+  },
+  {
+   "t": "EVANGELIO",
+   "x": "MATEO 28: 1-10",
+   "ref": "Matthew 28:1-10"
+  },
+  {
+   "t": "R",
+   "x": "Después del Evangelio, el lector dice"
+  },
+  {
+   "t": "LECTOR",
+   "x": "El Evangelio del Señor."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Te alabamos, Cristo Señor."
+  },
+  {
+   "t": "T",
+   "x": "EL SERMÓN"
+  },
+  {
+   "t": "T",
+   "x": "BAUTISMO, CONFIRMACION,"
+  },
+  {
+   "t": "T",
+   "x": "Y RENOVACIÓN DE LOS VOTOS BAUTISMALES"
+  },
+  {
+   "t": "R",
+   "x": "El Santo Bautismo puede administrarse aquí. La Confirmación también se puede administrar como se indica en Instrucciones Adicionales. En ausencia de Candidatos para el Bautismo o Confirmación, el Celebrante dirige al pueblo en la Renovación de los Votos Bautismales."
+  },
+  {
+   "t": "R",
+   "x": "La celebración continúa con las Oración de los Fieles."
+  },
+  {
+   "t": "R",
+   "x": "El Prefacio de Pascua se utiliza en la Eucaristía."
+  }
+ ],
+ "easterVigilBlessing": [
+  {
+   "t": "R",
+   "x": "La siguiente bendición puede usarse al final de la liturgia, en lugar de la bendición habitual."
+  },
+  {
+   "t": "P",
+   "x": "El Dios de paz, que resucitó de entre los muertos a nuestro Señor Jesucristo, el gran Pastor de las ovejas, por la sangre del pacto eterno, los perfeccione en toda buena obra para hacer su voluntad, obrando en ustedes lo bueno y agradable a su vista; y la bendición de Dios Todopoderoso, Padre, Hijo y Espíritu Santo, esté con ustedes y permanezca con ustedes para siempre. Amén"
   }
  ]
 };
