@@ -78,22 +78,31 @@ function getGospelAuthor(gospelRef) {
 //  GLORIA IN EXCELSIS: DÍAS EN QUE SE OMITE
 // ══════════════════════════════════════════════════════════════════════════
 
-// Misma regla que el Misal Anglicano de la raíz (Calendar.getOmissions): el
-// Gloria se omite en el oficio de los tiempos penitenciales —aquí Adviento,
-// Cuaresma y Semana Santa (season 'advent', 'lent' y 'holyWeek', domingos
-// incluidos; el Domingo de Ramos queda omitido)— salvo el Jueves Santo, donde
-// sí se dice. No se omite en las FIESTAS fijas del santoral (dayInfo.isFixed)
-// que caen dentro de esos tiempos (San Matías, San José, la Anunciación, San
-// Andrés, Santo Tomás). Navidad, Epifanía, Pascua y el tiempo ordinario no
-// cambian. Lo usan app.js y librito-pueblo.js, así que ambos concuerdan.
+// La ÚNICA regla del libro (Santa Eucaristía, Texto Estándar y Texto antiguo
+// renovado) es: «Se puede cantar o decir el Gloria o algún otro cántico de
+// alabanza, todos de pie. Es apropiado omitir el canto de alabanza durante los
+// tiempos de penitencia y los días señalados para el ayuno». El libro llama
+// penitencial a la Cuaresma («Lent and other penitential occasions») y no dice
+// en ninguna parte que Adviento lo sea: lo presenta como el tiempo que precede
+// a la Navidad. Hasta 2026-11 este generador omitía el Gloria también en
+// Adviento, por analogía con el Misal Anglicano de la raíz; el libro no lo
+// respalda, y se corrigió.
+//
+// Se omite, pues, en Cuaresma y Semana Santa (season 'lent' y 'holyWeek',
+// domingos incluidos; el Domingo de Ramos queda omitido), salvo el Jueves Santo,
+// donde sí se dice. No se omite en las FIESTAS fijas del santoral
+// (dayInfo.isFixed) que caen dentro de esos tiempos (San Matías, San José, la
+// Anunciación). Los días de ayuno que el libro señala fuera de la Cuaresma
+// (Témporas, Rogativas, los viernes) son opcionales y el calendario no los
+// emite. Lo usan app.js y librito-pueblo.js, así que ambos concuerdan.
 function shouldOmitGloria(dayInfo) {
   if (!dayInfo) return false;
   if (dayInfo.key === 'maundyThursday') return false;
   if (dayInfo.isFixed === true) return false;
-  return dayInfo.season === 'advent' || dayInfo.season === 'lent' || dayInfo.season === 'holyWeek';
+  return dayInfo.season === 'lent' || dayInfo.season === 'holyWeek';
 }
 
-const GLORIA_OMITTED_RUBRIC = 'El Gloria in excelsis se omite en Adviento y Cuaresma.';
+const GLORIA_OMITTED_RUBRIC = 'Es apropiado omitir el canto de alabanza durante los tiempos de penitencia y los días señalados para el ayuno: en Cuaresma se omite el Gloria in excelsis.';
 
 // ══════════════════════════════════════════════════════════════════════════
 //  DÍAS SIN EUCARISTÍA: VIERNES SANTO Y SÁBADO SANTO

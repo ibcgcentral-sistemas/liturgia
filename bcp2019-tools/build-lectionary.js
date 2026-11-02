@@ -17,7 +17,7 @@ const { normOne, pick, readingSet } = require('./lect-norm');
 const out = {};           // key → {A,B,C} | {all}
 const notes = [];
 const EASTER_WEEK = { easterMon: 'easterFeria1_1', easterTue: 'easterFeria1_2', easterWed: 'easterFeria1_3', easterThu: 'easterFeria1_4', easterFri: 'easterFeria1_5', easterSat: 'easterFeria1_6' };
-const KEEP_OLD = ['holyWeekFeria_1', 'holyWeekFeria_2', 'holyWeekFeria_3']; // decisión previa del usuario: lecturas del Misal Romano
+const KEEP_OLD = []; // entradas del lectionary.js vigente que se conservan en vez de tomarlas del libro (ninguna desde 2026-10-31)
 const SKIP = new Set(['christmasDay2', 'christmasDay3', 'worldMission', 'palmSundayPalms', 'easterVigil', 'easterEarly', 'easterEvening', 'circumcision']);
 
 for (const [k, v] of Object.entries(j1.days)) {
@@ -114,11 +114,9 @@ const HEADER = `/**
  *    Aurora y de la tarde de Pascua, Vigilia Pascual, Liturgia de las Palmas,
  *    Domingo de Misión Mundial, Témporas, Rogativas, Acción de Gracias, días
  *    nacionales y Comunes.
- *  - Lunes, Martes y Miércoles Santos: el libro SÍ trae lecturas propias (Isa
- *    42:1-9, Heb 11:39-12:3, Jn 12:1-11 el lunes; Isa 49:1-6, 1 Cor 1:18-31,
- *    Jn 12:37-38,42-50 el martes; Isa 50:4-9, Heb 9:11-28, Mt 26:1-5,14-25 el
- *    miércoles), pero aquí se conservan las del Misal Romano por decisión previa
- *    del usuario, tomada cuando se creía que el libro no las asignaba.
+ *  - Lunes, Martes y Miércoles Santos: lecturas propias del libro. Antes eran las
+ *    del Misal Romano, elegidas cuando se creía que el libro no las asignaba; el
+ *    usuario pidió pasar a las oficiales el 2026-10-31.
  *  - Las antífonas de salmo (psalmAnt) se conservaron SOLO donde el salmo no
  *    cambió respecto de la tabla anterior.
  *

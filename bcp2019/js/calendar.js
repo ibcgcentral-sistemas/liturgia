@@ -215,9 +215,20 @@ const BCPCalendar = (() => {
   // sobre el día de Semana Santa o de la Octava de Pascua: en el barrido
   // 2024-2060 ocurría 11 veces (p.ej. la Anunciación el Lunes Santo de 2024 y
   // San Marcos el Viernes de la Octava de Pascua de 2025).
-  // Las fiestas que caen en DOMINGO dentro de esa ventana siguen cediendo ante
-  // el domingo, igual que en el resto del año (no se implementa traslado
-  // dominical en esta fase).
+  // Las fiestas que caen en DOMINGO dentro de esa ventana son Pascua o Cuaresma:
+  // ahí el libro no manda trasladarlas y ceden ante el domingo (ver abajo).
+  //
+  // FIESTAS EN DOMINGO. «Cualquiera de estas fiestas que caiga en domingo, fuera
+  // de Adviento, Cuaresma y Pascua, puede observarse ese domingo o trasladarse al
+  // día de semana siguiente más cercano» (The Calendar of the Christian Year, nota
+  // sobre los Días Santos). Se TRASLADAN (decisión del usuario, 2026-10-31): al
+  // primer día de semana siguiente que no tenga otra fiesta fija, ni sea Fiesta
+  // Principal, ni Miércoles de Ceniza, Semana Santa o Semana de Pascua. No se
+  // trasladan: Todos los Santos (Fiesta Principal, prevalece sobre el domingo) ni
+  // el Santo Nombre (1 de enero), que cuando cae en domingo compite con el
+  // Segundo Domingo de Navidad según una regla propia del libro. Dentro de
+  // Adviento, Cuaresma y Pascua (hasta Pentecostés inclusive) ceden ante el
+  // domingo y no se trasladan, porque el libro excluye esos tiempos.
   const _transferCache = new Map();
   function getTransferredFeasts(year) {
     if (_transferCache.has(year)) return _transferCache.get(year);
@@ -239,6 +250,28 @@ const BCPCalendar = (() => {
       from.set(md, new Date(cursor));
       to.set(mmdd(cursor), md);
       cursor = addDays(cursor, 1);
+    }
+
+    // Fiestas en domingo (ver arriba).
+    const advent1 = getAdvent1(year);
+    const inAdventLentEaster = d => (d >= advent1 && d < F.christmas) || (d >= F.ashWednesday && d < F.easter) || (d >= F.easter && d <= F.pentecost);
+    const isPrincipal = c => ['12-25', '01-06', '11-01'].includes(mmdd(c)) || sameDay(c, F.ascension);
+    const onSunday = [];
+    for (const md of Object.keys(FIXED_FEASTS)) {
+      if (md === '11-01' || md === '01-01') continue;
+      const [mm, dd] = md.split('-').map(Number);
+      const d = new Date(year, mm - 1, dd);
+      if (d.getDay() === 0 && !inAdventLentEaster(d)) onSunday.push({ md, d });
+    }
+    onSunday.sort((a, b) => a.d - b.d);
+    for (const { md, d } of onSunday) {
+      let c = addDays(d, 1);
+      while (c.getDay() === 0 || FIXED_FEASTS[mmdd(c)] || to.has(mmdd(c)) || isPrincipal(c) ||
+             sameDay(c, F.ashWednesday) || (c >= F.palmSunday && c <= F.easter2)) {
+        c = addDays(c, 1);
+      }
+      from.set(md, new Date(c));
+      to.set(mmdd(c), md);
     }
     const res = { from, to };
     _transferCache.set(year, res);
@@ -315,7 +348,7 @@ const BCPCalendar = (() => {
     if (isTransferTarget) {
       const ff = FIXED_FEASTS[movedHere];
       return { name: `${ff.name} (transferred)`, nameEs: `${ff.nameEs} (trasladada)`, color: ff.color,
-               rank: 'holyDay', key: movedHere, season: 'easter', cycle, isFixed: true, isTransferred: true };
+               rank: 'holyDay', key: movedHere, season: seasonForDate(date, F, advent1), cycle, isFixed: true, isTransferred: true };
     }
     if (date > F.easter && date < F.pentecost && dow !== 0 && (!FIXED_FEASTS[md] || movedAway)) {
       const week = Math.ceil(diffDays(F.easter, date) / 7);

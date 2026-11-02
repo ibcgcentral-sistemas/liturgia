@@ -54,7 +54,7 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
 
 (async () => {
   // ── 1. Mecánica ──────────────────────────────────────────────────────────
-  const f = { excepcion: [], marcas: [], sinColecta: [], sinPrefacio: [], sinLecturas: [], sinPrimera: [], sinEvangelio: [], sinSalmo: [], noEucaristiaSinAviso: [], noEucaristiaConMisa: [] };
+  const f = { excepcion: [], marcas: [], sinColecta: [], sinPrefacio: [], sinLecturas: [], sinPrimera: [], sinEvangelio: [], sinSalmo: [], noEucaristiaSinAviso: [], noEucaristiaConMisa: [], gloria: [] };
   let days = 0, borrowed = 0, noEu = 0, inheritFallback = 0;
   for (let d = new Date(Y0, 0, 1, 12); d.getFullYear() <= Y1; d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1, 12)) {
     days++;
@@ -74,6 +74,11 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
       if (/ORACIÓN DE CONSAGRACIÓN/.test(text)) f.noEucaristiaConMisa.push(date);
       continue;
     }
+    // Gloria: el libro solo dice que es apropiado omitirlo en los tiempos de penitencia (Cuaresma) y días de
+    // ayuno; Adviento no es penitencial en el libro. Se omite en Cuaresma y Semana Santa, salvo Jueves Santo y fiestas fijas.
+    const gloriaOmitido = /se omite el Gloria in excelsis/.test(text);
+    const debeOmitir = ['lent', 'holyWeek'].includes(st.dayInfo.season) && !st.dayInfo.isFixed && st.dayInfo.key !== 'maundyThursday';
+    if (gloriaOmitido !== debeOmitir) f.gloria.push(`${date} ${st.dayInfo.key} (${st.dayInfo.season}): ${gloriaOmitido ? 'omitido' : 'presente'}`);
     if (!st.readings) { f.sinLecturas.push(date + ' ' + st.dayInfo.key); continue; }
     if (!st.firstReading || strip(st.firstReading.text || '').length < 40) f.sinPrimera.push(date + ' ' + st.readings.first);
     if (!st.gospel || strip(st.gospel.text || '').length < 40) f.sinEvangelio.push(date + ' ' + st.readings.gospel);
@@ -88,6 +93,28 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   check('1g. …y Evangelio con texto', f.sinEvangelio, days - noEu);
   check('1h. …y salmo con versículos', f.sinSalmo, days - noEu);
   check('1i. Viernes y Sábado Santo muestran el aviso sin Eucaristía', f.noEucaristiaSinAviso.concat(f.noEucaristiaConMisa), noEu);
+  check('1j. Gloria: se omite solo en Cuaresma y Semana Santa, no en Adviento', f.gloria, days - noEu);
+
+  // ── 1k. Fiestas fijas en domingo ─────────────────────────────────────────
+  // Fuera de Adviento, Cuaresma y Pascua el libro permite observarlas ese domingo o trasladarlas al día de semana
+  // siguiente: se trasladan (una sola vez, dentro de los 7 días siguientes). Dentro de esos tiempos no.
+  const mal = []; let fiestasDomingo = 0;
+  for (let y = Y0; y <= Y1; y++) {
+    const F = Cal.getFeastDates(y);
+    for (const md of Object.keys(Cal.FIXED_FEASTS)) {
+      if (md === '11-01' || md === '01-01') continue; // Todos los Santos prevalece; el Santo Nombre compite con el 2.º Domingo de Navidad
+      const [mm, dd] = md.split('-').map(Number);
+      const d = new Date(y, mm - 1, dd, 12);
+      if (d.getDay() !== 0) continue;
+      fiestasDomingo++;
+      const dia0 = new Date(y, mm - 1, dd);
+      const enATP = (dia0 >= F.advent1 && dia0 < F.christmas) || (dia0 >= F.ashWednesday && dia0 < F.easter) || (dia0 >= F.easter && dia0 <= F.pentecost);
+      const hits = [];
+      for (let k = 1; k <= 7; k++) { const di = Cal.getDay(new Date(y, mm - 1, dd + k, 12)); if (di.key === md) hits.push(di); }
+      if (enATP ? hits.length !== 0 : !(hits.length === 1 && hits[0].isTransferred)) mal.push(`${y}-${md}: ${hits.length} apariciones en los 7 días siguientes${enATP ? ' (no debía trasladarse)' : ''}`);
+    }
+  }
+  check(`1k. Fiestas fijas en domingo: se trasladan fuera de Adviento, Cuaresma y Pascua (${fiestasDomingo} casos)`, mal, fiestasDomingo);
 
   // ── 2. Citas del leccionario ─────────────────────────────────────────────
   const refs = new Map();
@@ -130,7 +157,6 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   console.log('\nPENDIENTES CONOCIDOS (no los comprueba esta prueba):');
   console.log('  - Colectas: el texto español oficial (pp. 598-641) no existe; el app usa colectas reconstruidas.');
   console.log(`  - ${inheritFallback} días cuyo Propio de la semana es el 1 o el 2 usan la colecta del domingo anterior (sin texto español).`);
-  console.log('  - Lunes a Miércoles Santos: lecturas del Misal Romano (decisión previa), no las del libro.');
   console.log('  - Salmos: se leen de la Biblia de Jerusalén; el Salterio español del libro aún no se usa.');
   console.log('  - Ritos propios de Ceniza, Ramos, Jueves, Viernes, Sábado y Vigilia no modelados.');
   console.log(failed ? `\n${failed} comprobación(es) con fallos.` : '\nTodas las comprobaciones pasan.');

@@ -24,11 +24,9 @@
  *    Aurora y de la tarde de Pascua, Vigilia Pascual, Liturgia de las Palmas,
  *    Domingo de Misión Mundial, Témporas, Rogativas, Acción de Gracias, días
  *    nacionales y Comunes.
- *  - Lunes, Martes y Miércoles Santos: el libro SÍ trae lecturas propias (Isa
- *    42:1-9, Heb 11:39-12:3, Jn 12:1-11 el lunes; Isa 49:1-6, 1 Cor 1:18-31,
- *    Jn 12:37-38,42-50 el martes; Isa 50:4-9, Heb 9:11-28, Mt 26:1-5,14-25 el
- *    miércoles), pero aquí se conservan las del Misal Romano por decisión previa
- *    del usuario, tomada cuando se creía que el libro no las asignaba.
+ *  - Lunes, Martes y Miércoles Santos: lecturas propias del libro. Antes eran las
+ *    del Misal Romano, elegidas cuando se creía que el libro no las asignaba; el
+ *    usuario pidió pasar a las oficiales el 2026-10-31.
  *  - Las antífonas de salmo (psalmAnt) se conservaron SOLO donde el salmo no
  *    cambió respecto de la tabla anterior.
  *
@@ -150,12 +148,12 @@ const BCPLectionary = (() => {
       B: { first: 'Isaiah 52:13-53:12', psalm: 'Psalm 22:1-11', second: 'Philippians 2:5-11', gospel: 'Mark 14:32-72,15:1-47' },
       C: { first: 'Isaiah 52:13-53:12', psalm: 'Psalm 22:1-11', second: 'Philippians 2:5-11', gospel: 'Luke 22:39-71,23:1-56' },
     },
+    holyWeekFeria_1: { all: { first: 'Isaiah 42:1-9', psalm: 'Psalm 36:5-10', second: 'Hebrews 11:39-12:3', gospel: 'John 12:1-11' } },
+    holyWeekFeria_2: { all: { first: 'Isaiah 49:1-6', psalm: 'Psalm 71:1-11', second: '1 Corinthians 1:18-31', gospel: 'John 12:37-38,42-50' } },
+    holyWeekFeria_3: { all: { first: 'Isaiah 50:4-9', psalm: 'Psalm 69:6-14,21-22', second: 'Hebrews 9:11-28', gospel: 'Matthew 26:1-5,14-25' } },
     maundyThursday: { all: { first: 'Exodus 12:1-14', psalm: 'Psalm 78:15-26', second: '1 Corinthians 11:23-34', gospel: 'John 13:1-15' } },
     goodFriday: { all: { first: 'Genesis 22:1-18', psalm: 'Psalm 22:1-11,12-21v', second: 'Hebrews 10:1-25', gospel: 'John 18:1-40,19:1-37' } },
     holySaturday: { all: { first: 'Job 14:1-17', psalm: 'Psalm 31:1-6', second: '1 Peter 4:1-8', gospel: 'Matthew 27:57-66' } },
-    holyWeekFeria_1: { all: { first: 'Isaiah 50:5-10', psalm: 'Psalm 35:1-3', second: null, gospel: 'John 12:1-9' } },
-    holyWeekFeria_2: { all: { first: 'Jeremiah 11:18-20', psalm: 'Psalm 67:1-2', second: null, gospel: 'John 13:21-38' } },
-    holyWeekFeria_3: { all: { first: 'Isaiah 62:11-63:7', psalm: 'Psalm 102:1-2', second: null, gospel: 'Luke 22:39-71,23:1-53' } },
 
     // ═══════════════ PASCUA, ASCENSIÓN, PENTECOSTÉS Y TRINIDAD ═══════════════
     easter: {
