@@ -173,6 +173,12 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   } catch (e) { drift.push('no se pudo comparar: ' + e.message); }
   check(`3. lectionary.js coincide con las tablas oficiales (${compared} lecturas comparadas)`, drift, compared);
 
+  // ── 4. Prefacios = libro ─────────────────────────────────────────────────
+  // Se compara con el libro en español, que vive fuera del repositorio: sin él, se anota como pendiente.
+  let prefacios = null;
+  try { prefacios = require('./bcp2019-tools/check-prefacios.js').compare(); } catch (e) { prefacios = { total: 1, diferencias: ['no se pudo comparar: ' + e.message] }; }
+  if (prefacios) check(`4. Prefacios: texto idéntico al libro en español (${prefacios.total} prefacios, ${(prefacios.deliberadas || []).length} desviaciones deliberadas)`, prefacios.diferencias, prefacios.total);
+
   // ── Informe ──────────────────────────────────────────────────────────────
   let failed = 0;
   console.log(`\nPrueba de completitud — BCP 2019, ${Y0}-${Y1}\n`);
@@ -186,6 +192,7 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   console.log('  - Colectas: el texto español oficial (pp. 598-641) no existe; el app usa colectas reconstruidas.');
   console.log(`  - ${inheritFallback} días cuyo Propio de la semana es el 1 o el 2 usan la colecta del domingo anterior (sin texto español).`);
   console.log('  - Salmos: se leen de la Biblia de Jerusalén; el Salterio español del libro aún no se usa.');
+  if (!prefacios) console.log('  - Prefacios: no se cotejaron con el libro (falta LOC-10-10-23.md; ver bcp2019-tools/check-prefacios.js).');
   console.log('  - Ritos propios de Ceniza, Ramos, Jueves, Viernes, Sábado y Vigilia no modelados.');
   console.log(failed ? `\n${failed} comprobación(es) con fallos.` : '\nTodas las comprobaciones pasan.');
   process.exit(failed ? 1 : 0);

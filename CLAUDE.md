@@ -63,7 +63,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=31` (Misal) y `?v=9` (bcp2019).
+   código viejo. Actualmente en `?v=31` (Misal) y `?v=10` (bcp2019).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -160,6 +160,14 @@ sale con título (no se midió cuántos).
   anterior de que estaba truncado no se pudo reproducir.
 - `bcp2019`: 165 supresiones de fiestas fijas en domingo, sin traslado ni
   conmemoración. El BCP 2019 permite ambas cosas; es criterio litúrgico, no error.
+- `bcp2019`, prefacios: el **texto** se cotejó el 2026-11-02 con el libro en español
+  (`node bcp2019-tools/check-prefacios.js`; 29 de 31 idénticos y 2 desviaciones
+  deliberadas, «Tú pides» y el punto final del Matrimonio). Sigue abierto el **mapeo
+  día→prefacio**, que sale de la auditoría y no se replicó: los domingos de Propio
+  imprimen «En Cualquier Tiempo» y el libro manda el del Día del Señor, el V de
+  Cuaresma y el VII de Pascua llevan prefacio equivocado, y 16 fiestas fijas difieren
+  (`AUDITORIA-BCP2019-2026-10-31.md`, ORD-04 a ORD-06; la auditoría dice 77 de 321
+  días). «En Cualquier Tiempo» se imprime en 6.654 de 13.515 días.
 - Código muerto inocuo: `takeProper()` en `app.js`, el alias `ordinaryFeria` en
   `propers.js`, `circumcision` y `getSundaysAfterPentecostLabel()` en `bcp2019`.
 

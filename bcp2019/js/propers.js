@@ -2,8 +2,13 @@
  * propers.js — Colectas y Prefacios Propios
  * Libro de Oración Común (2019), ACNA — Santa Eucaristía, Texto Estándar Anglicano
  *
- * PREFACES: transcritos fielmente del PDF fuente (líneas 3924-4090 del
- * Libro de Oración Común 2019 convertido a Markdown).
+ * PREFACES: transcritos del libro en español (LOC-10-10-23.md, líneas 3924-4086
+ * del Libro de Oración Común 2019 convertido a Markdown). Cotejados carácter a
+ * carácter el 2026-11-02 con bcp2019-tools/check-prefacios.js: coinciden los 31,
+ * salvo dos desviaciones deliberadas, «Tú pides» (el libro trae «Tu pides», errata)
+ * y el punto final del Santo Matrimonio. El libro da además tres prefacios que aquí
+ * no figuran (la alternativa de «En Cualquier Tiempo», Día de Canadá o de la
+ * Independencia, Día de Conmemoración o de los Caídos): el calendario no los emite.
  *
  * COLLECTS: AVISO DE FUENTE — reconstruidas de memoria (la sección "Colectas
  * del Año Cristiano", páginas 598-642, no estaba disponible). Las de los
@@ -125,11 +130,11 @@ const BCPPropers = (() => {
   };
 
   // ══════════════════════════════════════════════════════════════════════
-  //  PREFACIOS PROPIOS — transcritos fielmente del PDF fuente (líneas 3924-4090)
+  //  PREFACIOS PROPIOS — transcritos del libro en español (líneas 3924-4086)
   // ══════════════════════════════════════════════════════════════════════
   const PREFACES = {
-    lordsDay: { title: 'El Día del Señor', text: 'Porque Jesucristo nuestro Señor, que el primer día de la semana venció a la muerte y al sepulcro, y por su gloriosa resurrección nos abrió el camino de la vida eterna.' },
-    common: { title: 'En Cualquier Tiempo', text: 'Porque él es tu Palabra viva desde antes del tiempo y para todos los tiempos; por él creaste todas las cosas, y por él haces nuevas todas las cosas.' },
+    lordsDay: { title: 'El Día del Señor', text: 'Por Jesucristo nuestro Señor, que el primer día de la semana venció a la muerte y al sepulcro, y por su gloriosa resurrección nos abrió el camino de la vida eterna.' },
+    common: { title: 'En Cualquier Tiempo', text: 'Por Jesucristo nuestro Señor; porque él es tu Palabra viva desde antes del tiempo y para todos los tiempos; por él creaste todas las cosas, y por él haces nuevas todas las cosas.' },
     advent: { title: 'Adviento', text: 'Porque enviaste a tu Hijo amado para redimirnos del pecado y de la muerte, y para hacernos herederos en él de vida eterna; para que cuando vuelva con poder y gran gloria para juzgar al mundo, podamos sin vergüenza ni temor regocijarnos al contemplar su aparición.' },
     christmas: { title: 'Navidad', text: 'Porque diste a Jesucristo, tu único Hijo, para que naciera por nosotros; quien, por el Espíritu Santo y la Virgen María su madre, se hizo verdaderamente hombre, pero sin la mancha del pecado, para que seamos limpios del pecado y se nos otorgue el derecho de ser sus hijos.' },
     epiphany: { title: 'Epifanía', text: 'Mediante Jesucristo nuestro Señor que asumió nuestra carne mortal para revelar su gloria, para sacarnos de las tinieblas y llevarnos a su propia luz gloriosa.' },
@@ -158,7 +163,7 @@ const BCPPropers = (() => {
     ecumenist: { title: 'Común para un Ecuménico', text: 'Por tu Hijo Jesucristo nuestro Señor; en Él nos haces conocer tu verdad y nos unes con el vínculo de una fe y un bautismo, para que nos amemos unos a otros y manifestemos tu amor al mundo.' },
     socialReformer: { title: 'Común para un Restaurador de la Sociedad', text: 'Porque tú no te apartas nunca de nosotros y envías continuamente entre nosotros a quienes buscan justicia, defienden a los oprimidos, alimentan a los pobres y vendan a los quebrantados de corazón.' },
     churchReformer: { title: 'Común para un Reformador de la Iglesia', text: 'Porque tú, maestro de obras, nunca abandonas tu Iglesia, que has construido con piedras vivas; llamas a tus siervos fieles para restaurar sus antiguos muros y reunir sus murallas rotas, para que sean un templo santo de tu presencia.' },
-    anyCommemoration: { title: 'Común para Cualquier Conmemoración', text: 'Por la gracia y la virtud manifestadas en tus santos, que han sido los vasos escogidos de tu amor, y las luces del mundo en sus generaciones.' },
+    anyCommemoration: { title: 'Común para Cualquier Conmemoración', text: 'Por la gracia y la virtud manifestadas en [N. y todos] tus santos, que han sido los vasos escogidos de tu amor, y las luces del mundo en sus generaciones.' },
   };
 
   // ══════════════════════════════════════════════════════════════════════
