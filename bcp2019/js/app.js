@@ -20,6 +20,8 @@ async function fetchScripture(ref) {
     // distinto: ver VERSE_SHIFTS en utils.js.
     const pieces = toBibliaPieces(ref);
     const result = pieces ? biblePassageFromPieces(ref, pieces) : window.BibliaJerusalen.getPassage(ref);
+    // Versículos que el leccionario pide y esa Biblia no trae en el texto (Mt 21:44): ver VERSE_SUPPLEMENTS en utils.js.
+    if (result.text) result.text = applyVerseSupplements(ref, result.text);
     if (result.text && result.text.length > MAX_READING_LENGTH) {
       return { text: result.text.substring(0, TRUNCATE_AT) + '... <em class="rubric">[Lectura truncada]</em>', reference: ref };
     }

@@ -228,7 +228,6 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
     'Mark 9:38-48': 'la BdJ no trae los vv. 44 y 46 (variantes textuales)',
     'Romans 11:25-36': 'la BdJ junta 11:35-36 en su v. 35: el texto sale completo, con un versículo menos rotulado',
     '2 Corinthians 13:5-14': 'la BdJ junta 13:12-13 en su v. 12 y numera la gracia como 13:13: texto completo',
-    'Matthew 21:33-44': 'FALTA el v. 44: la BdJ no lo trae (sale hasta el 43)',
   };
   const versosPedidos = ref => {
     const m = /^((?:[1-3] )?[A-Za-z ]+?)\s+(\d.*)$/.exec(ref); if (!m || !/:/.test(m[2])) return null;
@@ -255,7 +254,11 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
     if (!igual) vistas.add(r);
   }
   for (const r of Object.keys(DIF_CONOCIDAS)) if (!vistas.has(r) && !difVersos.some(x => x.startsWith(r + ':'))) difVersos.push(`${r}: la cita ya no está en el leccionario; quitarla de DIF_CONOCIDAS`);
-  check(`2d. Versículos impresos = pedidos (${versosComparadas} citas de un capítulo; ${Object.keys(DIF_CONOCIDAS).length} diferencias conocidas)`, difVersos, versosComparadas);
+  // Mt 21:44 (Propio 22, ciclo A): la Biblia de Jerusalén no lo trae en el texto; se completa con la NVI y se avisa con una
+  // rúbrica (VERSE_SUPPLEMENTS en utils.js). Sin esto la lectura saldría hasta el v. 43.
+  const mt2144 = (await fetchScripture('Matthew 21:33-44')).text;
+  if (!/<sup class="verse-num">44<\/sup> El que caiga sobre esta piedra quedará despedazado, y si ella cae sobre alguien, lo hará polvo\./.test(mt2144) || !/\[v\. 44 según la NVI; la Biblia de Jerusalén no lo trae en el texto\]/.test(mt2144)) difVersos.push('Matthew 21:33-44: falta el v. 44 completado con la NVI y su rúbrica');
+  check(`2d. Versículos impresos = pedidos (${versosComparadas} citas de un capítulo; ${Object.keys(DIF_CONOCIDAS).length} diferencias conocidas; Mt 21:44 completado con la NVI)`, difVersos, versosComparadas);
 
   // ── 3. Leccionario = libro ───────────────────────────────────────────────
   let drift = [], compared = 0;
@@ -430,7 +433,7 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   for (const n of colectas.notas || []) console.log('  - Colectas: ' + n + ' (ver bcp2019-tools/check-colectas.js).');
   console.log(`  - ${inheritFallback} días cuyo Propio de la semana es el 1 o el 2 usan la colecta del domingo anterior (sin texto español).`);
   console.log('  - Salmos: se leen de la Biblia de Jerusalén; el Salterio español del libro aún no se usa.');
-  console.log('  - Lecturas: el libro en español no trae leccionario; el texto es de la Biblia de Jerusalén, que no trae Mateo 21:44, Hechos 8:37 ni Marcos 9:44 y 9:46 (ver DIF_CONOCIDAS).');
+  console.log('  - Lecturas: el libro en español no trae leccionario; el texto es de la Biblia de Jerusalén, que no trae Hechos 8:37 ni Marcos 9:44 y 9:46 (ver DIF_CONOCIDAS); Mateo 21:44 se completa con la NVI y lo avisa una rúbrica.');
   if (!prefacios) console.log('  - Prefacios: no se cotejaron con el libro (falta LOC-10-10-23.md; ver bcp2019-tools/check-prefacios.js).');
   console.log('  - Semana Santa y Ceniza (holyweek.js): Ceniza, Ramos, Jueves, Viernes, Sábado Santo y Gran Vigilia sí; sin modelar el Bautismo y la Renovación de los Votos de la Vigilia, y el texto de sus salmos y cánticos.');
   console.log(failed ? `\n${failed} comprobación(es) con fallos.` : '\nTodas las comprobaciones pasan.');

@@ -253,6 +253,34 @@ const VERSE_SHIFTS = [
 // Último versículo de un capítulo inglés, solo donde hace falta para abrir un tramo entre capítulos.
 const ESV_CHAPTER_LAST = { 'Malachi 3': 18 };
 
+// Versículos que el leccionario pide y la Biblia de Jerusalén cargada NO trae en el texto (los remite a una nota por ser
+// dudosos en los manuscritos). Se completan con otra traducción, a petición del usuario (2026-11-02), y la lectura lo
+// avisa con una rúbrica para que nadie crea que es de la Biblia de Jerusalén. Mt 21:44 (pasaje del Propio 22, ciclo A):
+// el texto es el de la NVI, la versión en que cita la Escritura el libro en español. Para cambiar de traducción basta
+// con cambiar `text` y `source` (la Reina-Valera 1909, de dominio público, dice: «Y el que cayere sobre esta piedra,
+// será quebrantado; y sobre quien ella cayere, le desmenuzará.»).
+const VERSE_SUPPLEMENTS = [
+  { book: 'Matthew', chapter: 21, verse: 44, source: 'NVI', text: 'El que caiga sobre esta piedra quedará despedazado, y si ella cae sobre alguien, lo hará polvo.' },
+];
+
+// Inserta en el texto de una cita de UN capítulo («Libro c:a-b») los versículos de VERSE_SUPPLEMENTS que la cita incluye y
+// el texto no trae, en su sitio (antes del primer versículo mayor, o al final).
+function applyVerseSupplements(ref, text) {
+  const m = /^((?:[1-3] )?[A-Za-z ]+?)\s+(\d+):(\d+)-(\d+)$/.exec(String(ref || '').trim());
+  if (!m || !text) return text;
+  let out = text;
+  for (const s of VERSE_SUPPLEMENTS) {
+    if (s.book !== m[1] || s.chapter !== +m[2] || s.verse < +m[3] || s.verse > +m[4]) continue;
+    const marca = `<sup class="verse-num">${s.verse}</sup>`;
+    if (out.includes(marca)) continue;
+    const nota = `<em class="rubric">[v. ${s.verse} según la ${s.source}; la Biblia de Jerusalén no lo trae en el texto]</em>`;
+    const bloque = `${marca} ${s.text} ${nota}`;
+    const sig = [...out.matchAll(/<sup class="verse-num">(\d+)[a-z]?<\/sup>/g)].find(x => +x[1] > s.verse);
+    out = sig ? out.slice(0, sig.index) + bloque + ' ' + out.slice(sig.index) : out.trimEnd() + ' ' + bloque;
+  }
+  return out;
+}
+
 // Devuelve la cita partida en tramos de la Biblia de Jerusalén —cada uno con
 // la etiqueta (versículo inglés) de su primer versículo— o null si la cita no
 // necesita conversión (la gran mayoría) o no se entiende: entonces se lee tal cual.

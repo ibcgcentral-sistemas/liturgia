@@ -67,7 +67,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=31` (Misal) y `?v=20` (bcp2019; la hoja de estilo, `?v=7`).
+   código viejo. Actualmente en `?v=31` (Misal) y `?v=21` (bcp2019; la hoja de estilo, `?v=7`).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -247,15 +247,19 @@ sale con título (no se midió cuántos).
   así que el texto de las lecturas es de la **Biblia de Jerusalén** (elección del
   proyecto), pedida por la cita inglesa del libro. Medido por simulación: las 876
   referencias coinciden con las tablas oficiales (prueba 3); las 715 citas devuelven
-  texto (2); y de 532 citas de un solo capítulo, 527 imprimen exactamente los versículos
-  pedidos (2d). Las 5 distintas están fijadas en `DIF_CONOCIDAS` de `test-bcp2019.js`:
+  texto (2); y de 532 citas de un solo capítulo, 531 imprimen exactamente los versículos
+  pedidos (2d). Las 4 distintas están fijadas en `DIF_CONOCIDAS` de `test-bcp2019.js`:
   Hechos 8:37 y Marcos 9:44 y 46 (variantes textuales que la Biblia de Jerusalén no
-  trae), Romanos 11:35-36 y 2 Corintios 13:12-13 (versículos fundidos, texto completo) y
-  **Mateo 21:44, que falta** (el pasaje sale hasta el 43; no se puede añadir sin
-  inventar). Las citas de varios capítulos solo se compararon por su primer y último
-  versículo. **No** se verificó que la traducción sea fiel ni, en los salmos, cada
-  versículo interior. Si el usuario prefiere otra versión (el libro en español cita
-  la NVI) hace falta una fuente con licencia.
+  trae), y Romanos 11:35-36 y 2 Corintios 13:12-13 (versículos fundidos, texto
+  completo). **Mateo 21:44** (Propio 22, ciclo A) tampoco lo trae esa Biblia: **se
+  completa con la NVI** (la versión en que cita el libro en español; decisión del
+  usuario, 2026-11-02) mediante `VERSE_SUPPLEMENTS` en `utils.js`, y la lectura lo avisa
+  con una rúbrica «[v. 44 según la NVI; la Biblia de Jerusalén no lo trae en el
+  texto]». No se pudo obtener el texto de la Biblia de Jerusalén para ese versículo (no
+  está en la web consultada ni en el archivo local). Alternativa de dominio público: la
+  Reina-Valera 1909 (está anotada en el comentario). Las citas de varios capítulos solo
+  se compararon por su primer y último versículo. **No** se verificó que la traducción
+  sea fiel ni, en los salmos, cada versículo interior.
 - Código muerto inocuo: `takeProper()` en `app.js`, el alias `ordinaryFeria` en
   `propers.js`, `circumcision` y `getSundaysAfterPentecostLabel()` en `bcp2019`.
 
