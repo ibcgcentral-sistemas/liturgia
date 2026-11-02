@@ -179,28 +179,39 @@ const BCPPropers = (() => {
     return COLLECTS[key] || 'Colecta no disponible para este día.';
   }
 
+  // Prefacio de cada fiesta fija, tal como lo rotula el libro en inglés bajo la colecta de cada uno de los 30
+  // «Holy Days». El inglés tiene prefacios separados de la Presentación, la Anunciación y la Transfiguración;
+  // el libro en español los reúne en uno solo (PREFACES.transfiguration). Gana sobre el domingo en que caiga.
+  const FEAST_PREFACE = {
+    '11-30': 'apostles', '12-21': 'apostles', '12-26': 'christmas', '12-27': 'christmas', '12-28': 'christmas',
+    '01-01': 'transfiguration', '01-18': 'apostles', '01-25': 'apostles', '02-02': 'transfiguration', '02-24': 'apostles',
+    '03-19': 'transfiguration', '03-25': 'transfiguration', '04-25': 'allSaints', '05-01': 'apostles', '05-31': 'transfiguration',
+    '06-11': 'apostles', '06-24': 'advent', '06-29': 'apostles', '07-22': 'apostles', '07-25': 'apostles',
+    '08-06': 'transfiguration', '08-15': 'christmas', '08-24': 'apostles', '09-14': 'holyWeek', '09-21': 'apostles',
+    '09-29': 'trinity', '10-18': 'allSaints', '10-23': 'apostles', '10-28': 'apostles', '11-01': 'allSaints',
+  };
+
   function getPreface(key, season) {
-    if (key === 'goodFriday' || key === 'holySaturday' || key === 'palmSunday' || key === 'lent5' || (key && key.startsWith('holyWeekFeria'))) return PREFACES.holyWeek;
+    if (FEAST_PREFACE[key]) return PREFACES[FEAST_PREFACE[key]];
+    if (key === 'goodFriday' || key === 'holySaturday' || key === 'palmSunday' || (key && key.startsWith('holyWeekFeria'))) return PREFACES.holyWeek;
     if (key === 'maundyThursday') return PREFACES.maundyThursday;
     if (key === 'christmas' || key === 'christmasSunday' || key === 'christmasSunday2' || key === 'circumcision' || (key && key.startsWith('christmasFeria'))) return PREFACES.christmas;
     if (key === 'epiphany' || key === 'epiphany1' || (key && key.startsWith('epiphany'))) return PREFACES.epiphany;
-    // '08-06' es la Transfiguración del santoral fijo (6 de agosto): faltaba,
-    // de modo que la propia fiesta de la Transfiguración recibía el Prefacio
-    // Común mientras que el Último Domingo después de Epifanía (clave
-    // 'transfiguration'), que sólo la conmemora, sí recibía el suyo.
-    if (key === 'transfiguration' || key === '02-02' || key === '03-25' || key === '08-06') return PREFACES.transfiguration;
-    if (key === 'ascension') return PREFACES.ascension;
+    if (key === 'transfiguration') return PREFACES.transfiguration;
+    // El Domingo después de la Ascensión (Pascua VII) lleva el prefacio de la Ascensión, no el de Pascua.
+    if (key === 'ascension' || key === 'easter7') return PREFACES.ascension;
     if (key === 'easter' || (key && key.startsWith('easter'))) return PREFACES.easter;
     if (key === 'pentecost') return PREFACES.pentecost;
     if (key === 'trinitySunday') return PREFACES.trinity;
     if (key === 'proper29') return PREFACES.christTheKing;
-    if (key === '11-01') return PREFACES.allSaints;
     if (key && key.startsWith('advent')) return PREFACES.advent;
+    // El Quinto Domingo de Cuaresma (lent5, «Domingo de Pasión») sigue en Cuaresma; la Semana Santa empieza el Domingo de Ramos.
     if (key === 'ashWednesday' || (key && key.startsWith('lent'))) return PREFACES.lent;
-    if (key && key.startsWith('proper')) return PREFACES.common;
-    const apostleFeasts = ['06-29', '11-30', '12-21', '07-25', '08-24', '02-24', '05-01', '06-11', '09-21', '10-28', '04-25', '10-18'];
-    if (apostleFeasts.includes(key)) return PREFACES.apostles;
-    if (key === '01-01') return PREFACES.lordsDay;
+    // «There is no seasonal preface for the numbered propers. Prefaces of the Lord's Day are used on Sundays. No
+    // preface is required on the weekdays of this season, except for Holy Days or commemorations.» Los domingos
+    // (properN) llevan el del Día del Señor. En las ferias el libro no exige ninguno y se conserva «En Cualquier
+    // Tiempo», para que la Eucaristía no quede sin prefacio.
+    if (key && /^proper\d+$/.test(key)) return PREFACES.lordsDay;
     return PREFACES.common;
   }
 

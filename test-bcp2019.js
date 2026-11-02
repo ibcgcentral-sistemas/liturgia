@@ -179,6 +179,41 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   try { prefacios = require('./bcp2019-tools/check-prefacios.js').compare(); } catch (e) { prefacios = { total: 1, diferencias: ['no se pudo comparar: ' + e.message] }; }
   if (prefacios) check(`4. Prefacios: texto idéntico al libro en español (${prefacios.total} prefacios, ${(prefacios.deliberadas || []).length} desviaciones deliberadas)`, prefacios.diferencias, prefacios.total);
 
+  // ── 5. Qué prefacio lleva cada día ───────────────────────────────────────
+  // El texto de cada prefacio lo cubre la comprobación 4; esta cubre CUÁL se imprime cada día. La tabla sale
+  // del libro en inglés (rótulo «Preface of …» bajo cada colecta de «Holy Days» y de los domingos de
+  // Cuaresma, Pascua y Ascensión). El libro en español reúne Presentación, Anunciación y Transfiguración en uno.
+  const FIESTA_PREFACIO = {
+    '11-30': 'apostles', '12-21': 'apostles', '12-26': 'christmas', '12-27': 'christmas', '12-28': 'christmas',
+    '01-01': 'transfiguration', '01-18': 'apostles', '01-25': 'apostles', '02-02': 'transfiguration', '02-24': 'apostles',
+    '03-19': 'transfiguration', '03-25': 'transfiguration', '04-25': 'allSaints', '05-01': 'apostles', '05-31': 'transfiguration',
+    '06-11': 'apostles', '06-24': 'advent', '06-29': 'apostles', '07-22': 'apostles', '07-25': 'apostles',
+    '08-06': 'transfiguration', '08-15': 'christmas', '08-24': 'apostles', '09-14': 'holyWeek', '09-21': 'apostles',
+    '09-29': 'trinity', '10-18': 'allSaints', '10-23': 'apostles', '10-28': 'apostles', '11-01': 'allSaints',
+  };
+  // «There is no seasonal preface for the numbered propers. Prefaces of the Lord's Day are used on Sundays.»
+  // En las ferias de esa temporada el libro no exige prefacio: no se comprueban (conservan «En Cualquier Tiempo»).
+  function prefacioEsperado(key) {
+    if (FIESTA_PREFACIO[key]) return FIESTA_PREFACIO[key];
+    if (key === 'proper29') return 'christTheKing';
+    if (/^proper\d+$/.test(key)) return 'lordsDay';
+    if (/^lent[1-5]$/.test(key) || key === 'ashWednesday') return 'lent';
+    if (key === 'palmSunday') return 'holyWeek';
+    if (key === 'ascension' || key === 'easter7') return 'ascension';
+    if (key === 'pentecost') return 'pentecost';
+    if (key === 'trinitySunday') return 'trinity';
+    return null;
+  }
+  const prefMal = []; let prefCubiertos = 0; const prefCasos = new Set();
+  for (let d = new Date(Y0, 0, 1, 12); d.getFullYear() <= Y1; d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1, 12)) {
+    const info = Cal.getDay(d), exp = prefacioEsperado(info.key);
+    if (!exp) continue;
+    prefCubiertos++; prefCasos.add(info.key);
+    const got = Prop.getPreface(info.key, info.season);
+    if (got !== Prop.PREFACES[exp]) prefMal.push(`${iso(d)} ${info.key}: ${got && got.title} ≠ ${Prop.PREFACES[exp].title}`);
+  }
+  check(`5. Prefacio de cada día = el del libro (${prefCubiertos} días, ${prefCasos.size} claves)`, prefMal, prefCubiertos);
+
   // ── Informe ──────────────────────────────────────────────────────────────
   let failed = 0;
   console.log(`\nPrueba de completitud — BCP 2019, ${Y0}-${Y1}\n`);

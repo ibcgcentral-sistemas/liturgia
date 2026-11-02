@@ -63,7 +63,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=31` (Misal) y `?v=10` (bcp2019).
+   código viejo. Actualmente en `?v=31` (Misal) y `?v=11` (bcp2019).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -146,8 +146,8 @@ sale con título (no se midió cuántos).
 - `bcp2019/js/lectionary.js` se genera desde las tablas oficiales del libro
   (pp. 717-733) con `node bcp2019-tools/build-lectionary.js`; `node
   test-bcp2019.js` barre 2024-2060 y falla si algo falta o se aparta del libro.
-  Lunes a Miércoles Santos conservan las lecturas del Misal Romano por decisión
-  previa del usuario, aunque el libro sí trae las suyas (pendiente de confirmar).
+  Lunes a Miércoles Santos llevan ya las lecturas del libro (`fa4d8f3`), no las del
+  Misal Romano.
 - 10.400 días toman la Colecta del Domingo precedente sin anunciarlo. Las lecturas
   prestadas sí llevan rúbrica; la colecta no. Rotularla «(Colecta del tiempo)»
   sería falso, porque es la del domingo anterior: hace falta decidir la redacción.
@@ -158,16 +158,26 @@ sale con título (no se midió cuántos).
   «Psalmus 25» en latín (numeración hebrea frente a Vulgata, l. 219). El
   *Introibo* (l. 141-142) figura completo en ambos idiomas, así que la nota
   anterior de que estaba truncado no se pudo reproducir.
-- `bcp2019`: 165 supresiones de fiestas fijas en domingo, sin traslado ni
-  conmemoración. El BCP 2019 permite ambas cosas; es criterio litúrgico, no error.
-- `bcp2019`, prefacios: el **texto** se cotejó el 2026-11-02 con el libro en español
+- `bcp2019`: las fiestas fijas que caen en domingo se trasladan al primer día de
+  semana libre (decisión del usuario, 2026-10-31, `fa4d8f3`), salvo en Adviento,
+  Cuaresma y Pascua, donde ceden ante el domingo como pide el libro, y salvo Todos
+  los Santos y el Santo Nombre. `test-bcp2019.js` 1k lo vigila (153 casos). No se
+  comprobó si las que ceden ante el domingo se conmemoran.
+- `bcp2019`, prefacios (2026-11-02): el **texto** se cotejó con el libro en español
   (`node bcp2019-tools/check-prefacios.js`; 29 de 31 idénticos y 2 desviaciones
-  deliberadas, «Tú pides» y el punto final del Matrimonio). Sigue abierto el **mapeo
-  día→prefacio**, que sale de la auditoría y no se replicó: los domingos de Propio
-  imprimen «En Cualquier Tiempo» y el libro manda el del Día del Señor, el V de
-  Cuaresma y el VII de Pascua llevan prefacio equivocado, y 16 fiestas fijas difieren
-  (`AUDITORIA-BCP2019-2026-10-31.md`, ORD-04 a ORD-06; la auditoría dice 77 de 321
-  días). «En Cualquier Tiempo» se imprime en 6.654 de 13.515 días.
+  deliberadas, «Tú pides» y el punto final del Matrimonio). El **mapeo día→prefacio**
+  (ORD-04 a ORD-06) se replicó por simulación y se corrigió en `getPreface`
+  (`propers.js`): los domingos de Propio llevan el del Día del Señor, el V de Cuaresma
+  el de Cuaresma, el VII de Pascua el de la Ascensión, y las 30 fiestas fijas el que
+  rotula el libro en inglés (tabla `FEAST_PREFACE`; 16 diferían). Cambian 1.517 de
+  13.515 días; en 2026-27 son 83, frente a los 77 de la auditoría (no se reconcilió
+  día a día; el traslado de fiestas en domingo es posterior a la auditoría).
+  `test-bcp2019.js` 5 vigila la tabla contra una copia literal sacada del libro. Las
+  **ferias** de Tiempo Ordinario conservan «En Cualquier Tiempo» (el libro no exige
+  prefacio entre semana; se deja uno para que la Eucaristía no quede sin él). Los
+  domingos 5.º-8.º de Epifanía llevan el de Epifanía, que el libro admite junto al del
+  Día del Señor. Sin hacer: faltan la alternativa de «En Cualquier Tiempo» y los
+  prefacios de Canadá/Independencia y de Caídos, que el calendario no emite.
 - Código muerto inocuo: `takeProper()` en `app.js`, el alias `ordinaryFeria` en
   `propers.js`, `circumcision` y `getSundaysAfterPentecostLabel()` en `bcp2019`.
 
