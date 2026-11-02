@@ -105,8 +105,11 @@ function buildLiturgyHTML(d) {
   const colorClass = `color-${d.dayInfo.color}`;
   const colorName = getColorName(d.dayInfo.color);
   const rankName = getRankName(d.dayInfo.rank);
-  // Semana Santa (season 'holyWeek') es parte de la Cuaresma para la aclamación
-  // penitencial y la Fracción sin Aleluya.
+  // Tres reglas distintas, no una sola variable: la Aclamación la decide acclamationKind (utils.js; la Semana
+  // Santa tiene saludo propio y el Día de Pentecostés usa la ordinaria); la Fracción sin Aleluya rige en
+  // Cuaresma Y Semana Santa (isLent); la Despedida con «aleluya, aleluya» llega hasta el Día de Pentecostés
+  // inclusive (isEaster).
+  const acclamation = acclamationKind(d.dayInfo);
   const isLent = d.dayInfo.season === 'lent' || d.dayInfo.season === 'holyWeek';
   const isEaster = d.dayInfo.season === 'easter' || d.dayInfo.key === 'pentecost';
 
@@ -200,7 +203,7 @@ function buildLiturgyHTML(d) {
     <div class="mass-section">
       <h3 class="section-title main-section">✠ RITOS INICIALES</h3>
       <h4 class="section-title">LA ACLAMACIÓN</h4>
-      <div class="liturgical-text-block">${isLent ? BCPEucharist.ACCLAMATION_LENT : isEaster ? BCPEucharist.ACCLAMATION_EASTER : BCPEucharist.ACCLAMATION}</div>
+      <div class="liturgical-text-block">${acclamation === 'lent' ? BCPEucharist.ACCLAMATION_LENT : acclamation === 'holyWeek' ? BCPEucharist.ACCLAMATION_HOLYWEEK : acclamation === 'easter' ? BCPEucharist.ACCLAMATION_EASTER : BCPEucharist.ACCLAMATION}</div>
 
       <h4 class="section-title">LA COLECTA POR PUREZA</h4>
       <div class="liturgical-text-block">${BCPEucharist.COLLECT_FOR_PURITY}</div>

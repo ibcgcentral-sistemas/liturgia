@@ -102,7 +102,21 @@ function shouldOmitGloria(dayInfo) {
   return dayInfo.season === 'lent' || dayInfo.season === 'holyWeek';
 }
 
-const GLORIA_OMITTED_RUBRIC = 'Es apropiado omitir el canto de alabanza durante los tiempos de penitencia y los días señalados para el ayuno: en Cuaresma se omite el Gloria in excelsis.';
+// Qué Aclamación de apertura lleva el día: 'lent' | 'holyWeek' | 'easter' | 'ordinary'. El libro la rotula
+// «En el tiempo de Cuaresma» (del Miércoles de Ceniza a la víspera del Domingo de Ramos), «Para la Semana
+// Santa» (saludo propio, el mismo con que abre la liturgia del Jueves Santo) y «Desde el día de Resurrección
+// hasta la Víspera de Pentecostés». El Día de Pentecostés ya no es Pascua para la Aclamación: usa la ordinaria.
+// OJO: la Fracción sin Aleluya (Cuaresma y Semana Santa) y la Despedida con «aleluya, aleluya» (hasta el Día
+// de Pentecostés inclusive) siguen otras reglas y las deciden app.js y librito-pueblo.js. Lo usan ambos.
+function acclamationKind(dayInfo) {
+  const s = dayInfo && dayInfo.season;
+  if (s === 'lent') return 'lent';
+  if (s === 'holyWeek') return 'holyWeek';
+  if (s === 'easter') return 'easter';
+  return 'ordinary';
+}
+
+const GLORIA_OMITTED_RUBRIC ='Es apropiado omitir el canto de alabanza durante los tiempos de penitencia y los días señalados para el ayuno: en Cuaresma se omite el Gloria in excelsis.';
 
 // ══════════════════════════════════════════════════════════════════════════
 //  DÍAS SIN EUCARISTÍA: VIERNES SANTO Y SÁBADO SANTO

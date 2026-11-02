@@ -40,7 +40,7 @@ const BCPEucharist = (() => {
     }).join('');
   }
 
-  // ── LA ACLAMACIÓN (con variantes de Cuaresma y Pascua) ──────────────────
+  // ── LA ACLAMACIÓN (con variantes de Cuaresma, Semana Santa y Pascua) ────
   const ACCLAMATION_DATA = [
     { type: 'R', text: 'La gente de pie, el celebrante dice esto o un saludo de temporada.' },
     { type: 'CEL', text: 'Bendito sea Dios: Padre, Hijo y Espíritu Santo.' },
@@ -50,6 +50,11 @@ const BCPEucharist = (() => {
     { type: 'R', text: 'En el tiempo de Cuaresma.' },
     { type: 'CEL', text: 'Bendigamos al Señor que perdona todos nuestros pecados.' },
     { type: 'PUEBLO', text: 'Su misericordia perdura para siempre.' },
+  ];
+  const ACCLAMATION_HOLYWEEK_DATA = [
+    { type: 'R', text: 'Para la Semana Santa.' },
+    { type: 'CEL', text: 'Bendito sea nuestro Dios.' },
+    { type: 'PUEBLO', text: 'Ahora y por siempre. Amén.' },
   ];
   const ACCLAMATION_EASTER_DATA = [
     { type: 'R', text: 'Desde el día de Resurrección hasta la Víspera de Pentecostés.' },
@@ -284,6 +289,7 @@ const BCPEucharist = (() => {
     PLAIN,
     ACCLAMATION: render(ACCLAMATION_DATA),
     ACCLAMATION_LENT: render(ACCLAMATION_LENT_DATA),
+    ACCLAMATION_HOLYWEEK: render(ACCLAMATION_HOLYWEEK_DATA),
     ACCLAMATION_EASTER: render(ACCLAMATION_EASTER_DATA),
     COLLECT_FOR_PURITY: render(COLLECT_FOR_PURITY_DATA),
     SUMMARY_OF_LAW: render(SUMMARY_OF_LAW_DATA),

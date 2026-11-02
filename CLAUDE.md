@@ -63,7 +63,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=31` (Misal) y `?v=11` (bcp2019).
+   código viejo. Actualmente en `?v=31` (Misal) y `?v=12` (bcp2019).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -178,6 +178,19 @@ sale con título (no se midió cuántos).
   domingos 5.º-8.º de Epifanía llevan el de Epifanía, que el libro admite junto al del
   Día del Señor. Sin hacer: faltan la alternativa de «En Cualquier Tiempo» y los
   prefacios de Canadá/Independencia y de Caídos, que el calendario no emite.
+- `bcp2019`, Aclamación de apertura (ORD-07/08, 2026-11-02): la Semana Santa llevaba la
+  fórmula de Cuaresma y el Día de Pentecostés la pascual (222 días en 2024-2060).
+  Ahora `acclamationKind()` (`utils.js`, la usan `app.js` y el Librito) da Cuaresma
+  solo de Ceniza al sábado antes de Ramos, «Bendito sea nuestro Dios / Ahora y por
+  siempre. Amén.» en Semana Santa (texto del libro, p. 146), la pascual hasta la
+  víspera de Pentecostés, y la fija el Día de Pentecostés. La Fracción sin Aleluya
+  (Cuaresma y Semana Santa) y la Despedida con «aleluya, aleluya» (hasta Pentecostés
+  inclusive) eran correctas y siguen con su propia regla; `test-bcp2019.js` 6a-6c
+  vigila las tres, en la liturgia y en el Librito. **Decisión que quedó abierta:** el
+  Día de Pentecostés usa la Aclamación fija, no el saludo de Joel que el libro rotula
+  «Para el Día de Pentecostés»; tampoco están los saludos de Adviento, Navidad,
+  Epifanía ni Todos los Santos de esa misma página, porque el libro los da como
+  opcionales («puede ser reemplazada»).
 - Código muerto inocuo: `takeProper()` en `app.js`, el alias `ordinaryFeria` en
   `propers.js`, `circumcision` y `getSundaysAfterPentecostLabel()` en `bcp2019`.
 

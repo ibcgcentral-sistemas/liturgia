@@ -55,8 +55,9 @@ const BCPLibrito = (() => {
     const { date, dayInfo, readings, firstReading, secondReading, gospel, psalmVerses, psalmAnt, collect, preface, borrowedFromSunday } = state;
     const dateStr = formatLiturgyDate(date);
     const colorName = getColorName(dayInfo.color);
-    // Semana Santa (season 'holyWeek') cuenta como Cuaresma: aclamación
-    // penitencial y Fracción sin Aleluya (igual que app.js).
+    // Igual que app.js: la Aclamación la decide acclamationKind (utils.js); la Fracción sin Aleluya rige en
+    // Cuaresma y Semana Santa (isLent); la Despedida con «aleluya» llega hasta el Día de Pentecostés (isEaster).
+    const acclamation = acclamationKind(dayInfo);
     const isLent = dayInfo.season === 'lent' || dayInfo.season === 'holyWeek';
     const isEaster = dayInfo.season === 'easter' || dayInfo.key === 'pentecost';
     const omitGloria = shouldOmitGloria(dayInfo);
@@ -153,8 +154,9 @@ const BCPLibrito = (() => {
 
         <h3>LA ACLAMACIÓN</h3>
         <div class="librito-response">
-          ${isEaster ? `<p><strong>Celebrante: ¡Aleluya! ¡Cristo ha resucitado!</strong><br><strong>Pueblo: ¡Ciertamente el Señor ha resucitado! ¡Aleluya!</strong></p>`
-          : isLent ? `<p><strong>Celebrante: Bendigamos al Señor que perdona todos nuestros pecados.</strong><br><strong>Pueblo: Su misericordia perdura para siempre.</strong></p>`
+          ${acclamation === 'easter' ? `<p><strong>Celebrante: ¡Aleluya! ¡Cristo ha resucitado!</strong><br><strong>Pueblo: ¡Ciertamente el Señor ha resucitado! ¡Aleluya!</strong></p>`
+          : acclamation === 'lent' ? `<p><strong>Celebrante: Bendigamos al Señor que perdona todos nuestros pecados.</strong><br><strong>Pueblo: Su misericordia perdura para siempre.</strong></p>`
+          : acclamation === 'holyWeek' ? `<p><strong>Celebrante: Bendito sea nuestro Dios.</strong><br><strong>Pueblo: Ahora y por siempre. Amén.</strong></p>`
           : `<p><strong>Celebrante: Bendito sea Dios: Padre, Hijo y Espíritu Santo.</strong><br><strong>Pueblo: Y bendito sea su reino, ahora y por siempre. Amén.</strong></p>`}
         </div>
 
