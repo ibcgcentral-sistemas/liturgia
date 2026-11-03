@@ -114,6 +114,8 @@ async function generateLiturgy(date, opts = {}) {
   currentMassState = {
     date, dayInfo, readings, firstReading, secondReading, gospel, psalmVerses, psalmAnt,
     collect, collectKey, preface, borrowedFromSunday, vigilTexts, form,
+    // La feria sin Colecta propia toma la del Domingo o fiesta precedente (resolveCollectKey): la liturgia lo dice.
+    collectBorrowed: collectKey !== dayInfo.key,
   };
 
   return buildLiturgyHTML(currentMassState);
@@ -484,6 +486,7 @@ function buildLiturgyHTML(d) {
       <h3 class="section-title">✠ LA COLECTA DEL DÍA</h3>
       <div class="liturgical-text-block">${BCPEucharist.SALUTATION}</div>
       <div class="prayer-text collect-text">${d.collect}</div>
+      ${d.collectBorrowed ? '<p class="rubric">✠ Esta feria no tiene Colecta propia: se repite la del Domingo o fiesta correspondiente.</p>' : ''}
       ${SHOW_COLLECT_TRANSLATION_NOTE && BCPPropers.isCollectTranslated(d.collectKey) ? `<p class="rubric">${COLLECT_TRANSLATION_NOTE}</p>` : ''}
     </div>`}
 

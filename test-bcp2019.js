@@ -69,8 +69,8 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
 
 (async () => {
   // ── 1. Mecánica ──────────────────────────────────────────────────────────
-  const f = { excepcion: [], marcas: [], sinColecta: [], sinPrefacio: [], sinLecturas: [], sinPrimera: [], sinEvangelio: [], sinSalmo: [], noEucaristiaSinAviso: [], noEucaristiaConMisa: [], gloria: [], salmoMal: [], aclamacion: [], fraccion: [], despedida: [], salmoAlterna: [] };
-  let days = 0, borrowed = 0, noEu = 0, inheritFallback = 0;
+  const f = { colectaPrestada: [], excepcion: [], marcas: [], sinColecta: [], sinPrefacio: [], sinLecturas: [], sinPrimera: [], sinEvangelio: [], sinSalmo: [], noEucaristiaSinAviso: [], noEucaristiaConMisa: [], gloria: [], salmoMal: [], aclamacion: [], fraccion: [], despedida: [], salmoAlterna: [] };
+  let days = 0, borrowed = 0, noEu = 0, inheritFallback = 0, colectasPrestadas = 0;
   for (let d = new Date(Y0, 0, 1, 12); d.getFullYear() <= Y1; d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1, 12)) {
     days++;
     const date = iso(d);
@@ -114,6 +114,11 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
       if (!sinDespedida && conAleluyaDesp !== debeAleluyaDesp) f.despedida.push(`${date} ${k} (${s}): ${conAleluyaDesp ? 'con' : 'sin'} aleluya`);
       // El Librito no recalcula nada, pero decide estas tres cosas con su propio código: se mide igual.
       let lib = ''; try { lib = Librito.generateLibrito(st); } catch (e) { f.aclamacion.push(`${date} Librito lanzó: ${e.message}`); }
+      // Colecta prestada: la feria sin colecta propia repite la del Domingo o fiesta precedente y la liturgia y el Librito lo dicen; si es propia, no.
+      const prestada = st.collectKey !== st.dayInfo.key;
+      if (prestada) colectasPrestadas++;
+      if (prestada !== /Esta feria no tiene Colecta propia/.test(text)) f.colectaPrestada.push(`${date}: la rúbrica de colecta prestada ${prestada ? 'falta' : 'sobra'} en la liturgia`);
+      if (prestada !== /Hoy se repite la Colecta del Domingo/.test(lib)) f.colectaPrestada.push(`${date} Librito: la indicación de colecta prestada ${prestada ? 'falta' : 'sobra'}`);
       // Salmo alternado: Lector el primer versículo que se muestra, Pueblo el siguiente, sin saltarse ninguno y en orden.
       if (st.psalmVerses && st.psalmVerses.length && st.readings) {
         const pm = /SALMO RESPONSORIAL<\/h3>([\s\S]*?)<\/div><\/div>/.exec(html);
@@ -150,6 +155,7 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   check(`1a. Sin excepciones (${days} días, ${Y0}-${Y1})`, f.excepcion, days);
   check('1b. Sin marcas de fallo en el HTML (16 patrones)', f.marcas, days);
   check('1c. Todo día tiene colecta', f.sinColecta, days);
+  check('1m. Colecta prestada del Domingo o fiesta precedente: la liturgia y el Librito lo dicen (solo ese día)', f.colectaPrestada, days);
   check('1d. Todo día tiene prefacio', f.sinPrefacio, days);
   check('1e. Todo día con Eucaristía tiene lecturas', f.sinLecturas, days - noEu);
   check('1f. …y primera lectura con texto', f.sinPrimera, days - noEu);

@@ -455,6 +455,7 @@ const BCPLibrito = (() => {
         <h2>✠ LA COLECTA DEL DÍA</h2>
         <div class="librito-response"><p><strong>Celebrante: El Señor esté con ustedes.</strong><br><strong>Pueblo: Y con tu espíritu.</strong></p></div>
         <div class="librito-text"><p>${collect}</p></div>
+        ${state.collectBorrowed ? '<div class="librito-instruction"><p>Hoy se repite la Colecta del Domingo o fiesta correspondiente.</p></div>' : ''}
       </section>`}
 
       <section class="librito-section">

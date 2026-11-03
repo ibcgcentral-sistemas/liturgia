@@ -67,7 +67,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=31` (Misal) y `?v=26` (bcp2019; la hoja de estilo, `?v=7`).
+   código viejo. Actualmente en `?v=31` (Misal) y `?v=27` (bcp2019; la hoja de estilo, `?v=7`).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -152,9 +152,11 @@ sale con título (no se midió cuántos).
   test-bcp2019.js` barre 2024-2060 y falla si algo falta o se aparta del libro.
   Lunes a Miércoles Santos llevan ya las lecturas del libro (`fa4d8f3`), no las del
   Misal Romano.
-- 10.400 días toman la Colecta del Domingo precedente sin anunciarlo. Las lecturas
-  prestadas sí llevan rúbrica; la colecta no. Rotularla «(Colecta del tiempo)»
-  sería falso, porque es la del domingo anterior: hace falta decidir la redacción.
+- Colecta prestada (resuelto, 2026-11-02): las ferias sin colecta propia toman la del
+  Domingo o fiesta precedente y ahora lo dicen, igual que las lecturas: «Esta feria no
+  tiene Colecta propia: se repite la del Domingo o fiesta correspondiente» en la liturgia
+  y «Hoy se repite la Colecta del Domingo o fiesta correspondiente» en el Librito
+  (`collectBorrowed` en `currentMassState`; `test-bcp2019.js` 1m lo vigila día a día).
 - `js/intercessions.js` no tiene intención estacional para Pre-Cuaresma (629 días).
 - Erratas en el latín de `canon.js`: ya corregidas `regnat` por *regnas*, «mi
   oración» / «mi clamor» frente a *orationem meam* y el Salmo 51 del Asperges
@@ -249,7 +251,14 @@ sale con título (no se midió cuántos).
   el texto de los salmos y cánticos de la Vigilia (solo sus citas, como en el libro), el
   Santo Bautismo y la Confirmación (necesitan candidatos y obispo; el libro remite a otro rito y
   solo queda su rúbrica; tampoco hay acción de gracias sobre el agua ni aspersión, que no están en
-  el libro para la Vigilia) y la marca del Cirio Pascual. **Renovación de los Votos Bautismales**
+  el libro para la Vigilia) y la marca del Cirio Pascual. **Decidido no modelarlos
+  (2026-11-02):** el Bautismo y la Confirmación necesitan datos de candidatos y un obispo, y el
+  libro los remite a otro rito; los salmos y cánticos son opcionales en el libro («un salmo,
+  himno o antífona puede seguir») y de los cánticos no hay texto en la Biblia de Jerusalén; la
+  marca del Cirio (LOC l. 15673-15691) llegó desordenada de la conversión del PDF («Como el Alfa
+  es trazado Alfa…») y el libro la coloca en mitad del Servicio de la Luz, así que imprimirla
+  obligaría a recomponer el texto y partir esa sección. Se reabre si el usuario lo pide.
+  **Renovación de los Votos Bautismales**
   (2026-11-02): sí está (`easterVigilRenewal` y `easterVigilContinues`, LOC l. 4835-4907 y
   15632-15633), tras el Sermón y antes de las Oraciones del Pueblo, sin Credo Niceno; se copió tal
   cual, con las erratas del libro («¿Creen y confían?» en plural, «las Oración de los Fieles»),
