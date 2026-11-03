@@ -605,6 +605,60 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   } catch (e) { op.push('no se pudo comprobar el texto del Decálogo y la Exhortación: ' + e.message); }
   check(`13. Orden Penitencial en vez de los Ritos Iniciales (${opDias} días, ambas formas), en la liturgia y el Librito`, op, opDias);
 
+  // ── 14. Orden de 1662 y Trisagio ─────────────────────────────────────────────────────────────────────────────────
+  // (a) `opts.opening === 'order1662'` (LOC l. 3706-3736): el Texto Estándar en el orden de 1662, sin Aclamación, Kyrie, paz, Fracción ni
+  // Agnus Dei, con la Oración de Consagración partida donde manda su nota al pie (Comunión y Padrenuestro tras las palabras del cáliz; el
+  // resto, como oración posterior alternativa), y sin cambiar nada en el Texto Antiguo Renovado ni en los días de rito propio.
+  // (b) `opts.kyrie === 'trisagion'`: el Trisagio en vez del Kyrie, en el orden habitual y en el Penitencial. Un día de cada cuatro + los de rito propio.
+  const o62 = []; let o62Dias = 0;
+  const O62 = (cond, msg) => { if (!cond) o62.push(msg); };
+  const EUC = C.get('BCPEucharist');
+  const sinTags = h => norm(String(h).replace(/<[^>]+>/g, ' '));
+  O62(sinTags(EUC.CONSECRATION_1662_A.replace(/<em class="rubric">[^<]*<\/em>|<span class="lit-rubric">[^<]*<\/span>/g, '')).length > 0, 'la Oración de Consagración de 1662 (parte A) sale vacía');
+  {
+    const plano = EUC.PLAIN, junto = a => norm(a.map(i => i.text).join(' '));
+    const A = plano.PRAYER_OF_CONSECRATION_1662_A.slice(0, -1), B = plano.PRAYER_OF_CONSECRATION_1662_B;
+    O62(junto([...A, ...B]) === junto(plano.PRAYER_OF_CONSECRATION), 'las dos partes de la Consagración de 1662 no suman exactamente la Consagración completa');
+    O62(/háganlo en memoria de Mí/.test(A[A.length - 1].text) && /^Por lo tanto, Oh Señor y Padre celestial/.test(B[0].text), 'la Consagración de 1662 no se parte tras las palabras sobre el cáliz');
+  }
+  const ORDEN_1662 = ['ORDEN DE LA SANTA COMUNIÓN SEGÚN EL LIBRO DE ORACIÓN COMÚN DE 1662', 'EL PADRENUESTRO', 'LA COLECTA POR PUREZA', 'EL DECÁLOGO', 'Dios habló estas palabras', 'LA COLECTA DEL DÍA', 'LITURGIA DE LA PALABRA', 'EL CREDO NICENO', 'EL SERMÓN', 'EL OFERTORIO', 'ORACIÓN DE LOS FIELES', 'LA EXHORTACIÓN', 'Amados míos en el Señor', 'CONFESIÓN Y ABSOLUCIÓN DE LOS PECADOS', 'PALABRAS RECONFORTANTES', 'PREFACIO:', 'EL SANCTUS', 'ORACIÓN DE HUMILDE ACCESO', 'LA ORACIÓN DE CONSAGRACIÓN', 'háganlo en memoria de Mí', 'la Distribución de la Comunión ocurre aquí', 'LA ADMINISTRACIÓN DE LA COMUNIÓN', 'LA ORACIÓN DEL SEÑOR', 'ORACIÓN DESPUÉS DE LA COMUNIÓN', 'O BIEN, EL RESTO DE LA ORACIÓN DE CONSAGRACIÓN', 'Por lo tanto, Oh Señor y Padre celestial', 'GLORIA IN EXCELSIS', 'LA BENDICIÓN'];
+  const ORDEN_1662_LIB = ['EL PADRENUESTRO', 'EL DECÁLOGO', 'LA COLECTA DEL DÍA', 'LITURGIA DE LA PALABRA', 'EL CREDO NICENO', 'EL OFERTORIO', 'ORACIÓN DE LOS FIELES', 'LA EXHORTACIÓN', 'CONFESIÓN Y ABSOLUCIÓN', 'PREFACIO:', 'ORACIÓN DE HUMILDE ACCESO', 'LA ORACIÓN DE CONSAGRACIÓN', 'Toda alabanza y gloria es tuya', 'háganlo en memoria de Mí', 'LA SAGRADA COMUNIÓN', 'EL PADRENUESTRO', 'ORACIÓN DE POSCOMUNIÓN', 'O BIEN, EL RESTO DE LA ORACIÓN DE CONSAGRACIÓN', 'Por lo tanto, Oh Señor y Padre celestial', 'GLORIA IN EXCELSIS', 'LA BENDICIÓN'];
+  const enOrden = (t, lista) => { let p = 0; for (const m of lista) { const j = t.indexOf(m, p); if (j < 0) return m; p = j + m.length; } return ''; };
+  for (let d = new Date(Y0, 0, 1, 12), i = 0; d.getFullYear() <= Y1; d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1, 12), i++) {
+    const info = Cal.getDay(d), propio = RITO_PROPIO.has(info.key);
+    if (!propio && i % 4 !== 1) continue;
+    o62Dias++;
+    const w = `${iso(d)} ${info.key}`;
+    let base, h62, l62, hr62, htri, ltri;
+    try {
+      base = await generateLiturgy(d);
+      h62 = await generateLiturgy(d, { opening: 'order1662' }); l62 = Librito.generateLibrito(C.state());
+      hr62 = await generateLiturgy(d, { form: 'renewed', opening: 'order1662' });
+      htri = await generateLiturgy(d, { kyrie: 'trisagion' }); ltri = Librito.generateLibrito(C.state());
+    } catch (e) { o62.push(`${w}: lanzó ${e.message}`); continue; }
+    if (propio) {
+      O62(h62 === base, `${w}: el orden de 1662 no debe cambiar el rito propio de este día`);
+      // El Jueves Santo conserva el Kyrie en sus ritos iniciales, así que el Trisagio sí lo sustituye ese día; en los demás no hay Kyrie.
+      if (info.key === 'maundyThursday') O62(/EL TRISAGIO/.test(norm(strip(htri))) && !/Cristo, ten piedad de nosotros/.test(norm(strip(htri))), `${w}: el Jueves Santo con el Trisagio no debe llevar el Kyrie`);
+      else O62(htri === base, `${w}: el Trisagio no debe cambiar el rito propio de este día`);
+      continue;
+    }
+    const t62 = norm(strip(h62)), tl62 = norm(strip(l62));
+    const f1 = enOrden(t62, ORDEN_1662); O62(!f1, `${w}: el orden de 1662 falla en «${f1}»`);
+    const f2 = enOrden(tl62, ORDEN_1662_LIB); O62(!f2, `${w} Librito: el orden de 1662 falla en «${f2}»`);
+    O62(!/LA ACLAMACIÓN|KYRIE|LA PAZ|EL AGNUS DEI|LA FRACCIÓN/.test(t62), `${w}: el orden de 1662 no lleva Aclamación, Kyrie, paz, Fracción ni Agnus Dei`);
+    O62((t62.match(/LA ORACIÓN DEL SEÑOR/g) || []).length === 1 && (t62.match(/EL PADRENUESTRO/g) || []).length === 1, `${w}: el Padrenuestro sale una vez al comienzo y una tras la Comunión`);
+    O62(hr62 === (await generateLiturgy(d, { form: 'renewed' })), `${w}: el orden de 1662 no debe cambiar el Texto Antiguo Renovado`);
+    const tt = norm(strip(htri)), ttl = norm(strip(ltri));
+    O62(/EL TRISAGIO/.test(tt) && /Santo Dios, Santo y Fuerte, Santo Inmortal/.test(tt) && !/Cristo, ten piedad de nosotros/.test(tt), `${w}: con el Trisagio no debe salir el Kyrie`);
+    O62(/EL TRISAGIO/.test(ttl) && /Santo Dios, Santo y Fuerte, Santo Inmortal/.test(ttl) && !/Cristo, ten piedad de nosotros/.test(ttl), `${w} Librito: con el Trisagio no debe salir el Kyrie`);
+    if (i % 8 === 1) {
+      const hp = await generateLiturgy(d, { opening: 'penitential', kyrie: 'trisagion' });
+      O62(/EL TRISAGIO/.test(norm(strip(hp))) && !/Cristo, ten piedad de nosotros/.test(norm(strip(hp))), `${w}: el Trisagio también va en el Orden Penitencial`);
+    }
+  }
+  check(`14. Orden de 1662 y Trisagio (${o62Dias} días), en la liturgia y el Librito`, o62, o62Dias);
+
   // ── 8. Colectas ──────────────────────────────────────────────────────────
   // 5 oficiales (Ceniza y Semana Santa) idénticas al libro en español; 90 traducidas del inglés, de las que se
   // comprueba la forma (Amén, fórmula final, longitud, nombre del santo). El inglés no está en el repositorio: sin él

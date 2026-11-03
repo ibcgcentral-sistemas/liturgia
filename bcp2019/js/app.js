@@ -80,7 +80,11 @@ async function generateLiturgy(date, opts = {}) {
   // Rito bautismal de la Gran Vigilia (solo el Sábado Santo): 'renewal' (Renovación de los Votos, sin candidatos), 'baptism'
   // (Santo Bautismo) o 'baptismConf' (Santo Bautismo con Confirmación, Recepción y Reafirmación): los tres que el libro permite.
   const baptism = ['baptism', 'baptismConf'].includes(opts.baptism) ? opts.baptism : 'renewal';
-  const penitential = opts.opening === 'penitential';   // Orden Penitencial en vez de los Ritos Iniciales habituales
+  // `opts.opening`: 'standard' (los Ritos Iniciales habituales), 'penitential' (Orden Penitencial) u 'order1662' (todo el Texto Estándar
+  // reorganizado al orden de 1662); son excluyentes. `opts.kyrie`: 'trisagion' pone el Trisagio en vez del Kyrie («el Kyrie (o el Trisagio)»).
+  const penitential = opts.opening === 'penitential';
+  const order1662 = opts.opening === 'order1662';
+  const trisagion = opts.kyrie === 'trisagion';
   const dayInfo = BCPCalendar.getDay(date);
   const { key: lKey, borrowedFromSunday, cycle: borrowedCycle } = resolveLectionaryKey(dayInfo, date);
   const readings = lKey ? BCPLectionary.getSundayReadings(lKey, borrowedCycle || dayInfo.cycle) : null;
@@ -117,7 +121,7 @@ async function generateLiturgy(date, opts = {}) {
 
   currentMassState = {
     date, dayInfo, readings, firstReading, secondReading, gospel, psalmVerses, psalmAnt,
-    collect, collectKey, preface, borrowedFromSunday, vigilTexts, form, baptism, penitential,
+    collect, collectKey, preface, borrowedFromSunday, vigilTexts, form, baptism, penitential, order1662, trisagion,
     // La feria sin Colecta propia toma la del Domingo o fiesta precedente (resolveCollectKey): la liturgia lo dice.
     collectBorrowed: collectKey !== dayInfo.key,
   };
@@ -155,6 +159,9 @@ function buildLiturgyHTML(d) {
   // Palabras Reconfortantes], el Kyrie y la Colecta del Día (sin Gloria). La confesión ya se hizo: no se repite tras las Oraciones
   // del Pueblo; la paz sí. Ramos, Ceniza, Jueves Santo, Viernes y Sábado Santo traen su propio rito.
   const penitential = !!d.penitential && !isPalm && !isAsh && !isMaundy && !noEucharistNotice(d.dayInfo);
+  // Orden de 1662 (LOC l. 3706-3736): solo el Texto Estándar, y en días de Eucaristía ordinarios (los ritos propios de la Semana Santa y de
+  // Ceniza no se reorganizan). El Kyrie lo hacen las respuestas del Decálogo.
+  const order1662 = !!d.order1662 && !isPalm && !isAsh && !isMaundy && !noEucharistNotice(d.dayInfo) && d.form !== 'renewed';
   // Segunda forma del libro, el Texto Antiguo Renovado: comparte con el Estándar el comienzo (Aclamación, Colecta por
   // pureza, Resumen de la Ley, Kyrie, Gloria, Colecta del Día) y la Liturgia de la Palabra; desde el Credo es texto propio
   // (holyweek.js, secciones `renewed*`, cortadas del libro en español). Los ritos propios de la Semana Santa y de Ceniza
@@ -458,6 +465,123 @@ function buildLiturgyHTML(d) {
   </div>`;
   }
 
+  // El Texto Estándar reorganizado al orden de 1662 (LOC l. 3706-3736): el Padrenuestro, la Colecta por la pureza, el Decálogo, la Colecta del
+  // Día, las lecturas, el Credo Niceno, el Sermón, el Ofertorio, las Oraciones del Pueblo, la Exhortación, la Confesión y la Absolución, las
+  // Palabras Reconfortantes, el Sursum Corda, el Sanctus, el Humilde Acceso, la Oración de Consagración y la Comunión (partida según su nota
+  // al pie), el Padrenuestro, la Oración Posterior a la Comunión, el Gloria y la Bendición. No lleva Aclamación, Kyrie propio (lo hacen las
+  // respuestas del Decálogo), paz, Fracción ni Agnus Dei, porque el libro no los nombra en ese orden.
+  if (order1662) {
+    const pf = d.preface;
+    const gloria1662 = shouldOmitGloria(d.dayInfo) ? `<p class="rubric">${gloriaOmittedRubric(d.dayInfo)}</p>` : `<div class="liturgical-text-block">${BCPEucharist.GLORIA}</div>`;
+    return `
+  <div class="liturgy-document">
+
+    ${headHtml}
+
+    <div class="mass-section">
+      <h3 class="section-title main-section">✠ ORDEN DE LA SANTA COMUNIÓN SEGÚN EL LIBRO DE ORACIÓN COMÚN DE 1662</h3>
+      <p class="rubric">El Texto Estándar Anglicano reorganizado al orden de 1662.</p>
+      <h4 class="section-title">EL PADRENUESTRO</h4>
+      <div class="liturgical-text-block">${BCPEucharist.LORDS_PRAYER_TEXT}</div>
+      <h4 class="section-title">LA COLECTA POR PUREZA</h4>
+      <div class="liturgical-text-block">${BCPEucharist.COLLECT_FOR_PURITY}</div>
+      <h4 class="section-title">EL DECÁLOGO</h4>
+      ${BCPHolyWeek.render('decalogue', '', null, null, { sinTitulo: true })}
+    </div>
+
+    <div class="mass-section">
+      <h3 class="section-title">✠ LA COLECTA DEL DÍA</h3>
+      <div class="liturgical-text-block">${BCPEucharist.SALUTATION}</div>
+      <div class="prayer-text collect-text">${d.collect}</div>
+      ${d.collectBorrowed ? '<p class="rubric">✠ Esta feria no tiene Colecta propia: se repite la del Domingo o fiesta correspondiente.</p>' : ''}
+      ${SHOW_COLLECT_TRANSLATION_NOTE && BCPPropers.isCollectTranslated(d.collectKey) ? `<p class="rubric">${COLLECT_TRANSLATION_NOTE}</p>` : ''}
+    </div>
+
+    <div class="mass-section">
+      <h3 class="section-title main-section">✠ LITURGIA DE LA PALABRA</h3>
+      ${d.borrowedFromSunday ? '<p class="rubric">✠ Esta feria no tiene lecturas propias asignadas: se repiten las del Domingo o fiesta correspondiente.</p>' : ''}
+      ${readingsHtml}
+    </div>
+
+    <div class="mass-section">
+      <h3 class="section-title">✠ EL CREDO NICENO</h3>
+      <div class="liturgical-text-block">${BCPEucharist.CREED}</div>
+    </div>
+
+    <div class="mass-section">
+      <p class="rubric">✠ EL SERMÓN — El Celebrante predica. Sigue un momento de silencio.</p>
+    </div>
+
+    <div class="mass-section">
+      <h3 class="section-title main-section">✠ EL OFERTORIO</h3>
+      <div class="liturgical-text-block">${BCPEucharist.OFFERTORY_SENTENCE}</div>
+    </div>
+
+    ${prayersHtml}
+
+    <div class="mass-section">
+      <h3 class="section-title">✠ LA EXHORTACIÓN</h3>
+      ${BCPHolyWeek.render('exhortation', '', null, null, { sinTitulo: true })}
+    </div>
+
+    <div class="mass-section">
+      <h3 class="section-title">✠ CONFESIÓN Y ABSOLUCIÓN DE LOS PECADOS</h3>
+      <div class="liturgical-text-block">${BCPEucharist.CONFESSION}</div>
+      <h4 class="section-title">PALABRAS RECONFORTANTES</h4>
+      <div class="liturgical-text-block">${BCPEucharist.COMFORTABLE_WORDS}</div>
+    </div>
+
+    <div class="mass-section">
+      <h3 class="section-title">✠ PREFACIO: ${pf ? pf.title.toUpperCase() : 'PREFACIO COMÚN'}</h3>
+      <div class="liturgical-text-block">${BCPEucharist.SURSUM_CORDA}</div>
+      <div class="prayer-text">${pf ? pf.text : ''}</div>
+      <div class="liturgical-text-block">${BCPEucharist.SURSUM_CORDA_CLOSE}</div>
+      <h4 class="section-title">EL SANCTUS</h4>
+      <div class="liturgical-text-block">${BCPEucharist.SANCTUS}</div>
+    </div>
+
+    <div class="mass-section">
+      <h3 class="section-title">✠ ORACIÓN DE HUMILDE ACCESO</h3>
+      <div class="liturgical-text-block">${BCPEucharist.HUMBLE_ACCESS}</div>
+    </div>
+
+    <div class="mass-section canon-section">
+      <h3 class="section-title main-section">✠ LA ORACIÓN DE CONSAGRACIÓN</h3>
+      <div class="liturgical-text-block">${BCPEucharist.CONSECRATION_1662_A}</div>
+    </div>
+
+    <div class="mass-section">
+      <h3 class="section-title">✠ LA ADMINISTRACIÓN DE LA COMUNIÓN</h3>
+      <div class="liturgical-text-block">${BCPEucharist.ADMINISTRATION}</div>
+    </div>
+
+    <div class="mass-section">
+      <h3 class="section-title">✠ LA ORACIÓN DEL SEÑOR</h3>
+      <div class="liturgical-text-block">${BCPEucharist.LORDS_PRAYER}</div>
+    </div>
+
+    <div class="mass-section">
+      <h3 class="section-title">✠ ORACIÓN DESPUÉS DE LA COMUNIÓN</h3>
+      <div class="liturgical-text-block">${BCPEucharist.POST_COMMUNION}</div>
+      <h4 class="section-title">O BIEN, EL RESTO DE LA ORACIÓN DE CONSAGRACIÓN</h4>
+      <div class="liturgical-text-block">${BCPEucharist.CONSECRATION_1662_B}</div>
+    </div>
+
+    <div class="mass-section">
+      <h3 class="section-title">✠ GLORIA IN EXCELSIS</h3>
+      ${gloria1662}
+    </div>
+
+    <div class="mass-section">
+      <h3 class="section-title main-section">✠ LA BENDICIÓN</h3>
+      <div class="liturgical-text-block">${BCPEucharist.BLESSING}</div>
+    </div>
+
+    ${footHtml}
+
+  </div>`;
+  }
+
   return `
   <div class="liturgy-document">
 
@@ -505,8 +629,8 @@ function buildLiturgyHTML(d) {
       <h4 class="section-title">PALABRAS RECONFORTANTES</h4>
       <div class="liturgical-text-block">${BCPEucharist.COMFORTABLE_WORDS}</div>`}
       ` : ''}
-      <h4 class="section-title">KYRIE</h4>
-      <div class="liturgical-text-block">${BCPEucharist.KYRIE}</div>
+      <h4 class="section-title">${d.trisagion ? 'EL TRISAGIO' : 'KYRIE'}</h4>
+      <div class="liturgical-text-block">${d.trisagion ? BCPEucharist.TRISAGION : BCPEucharist.KYRIE}</div>
 
       ${penitential ? '' : `<h4 class="section-title">GLORIA IN EXCELSIS</h4>
       ${shouldOmitGloria(d.dayInfo)
@@ -610,8 +734,8 @@ async function handleGenerate() {
   try {
     const formSelect = document.getElementById('form-select');
     const vigilSelect = document.getElementById('vigil-select');
-    const openingSelect = document.getElementById('opening-select');
-    const html = await generateLiturgy(date, { form: formSelect ? formSelect.value : 'standard', baptism: vigilSelect ? vigilSelect.value : 'renewal', opening: openingSelect ? openingSelect.value : 'standard' });
+    const openingSelect = document.getElementById('opening-select'), kyrieSelect = document.getElementById('kyrie-select');
+    const html = await generateLiturgy(date, { form: formSelect ? formSelect.value : 'standard', baptism: vigilSelect ? vigilSelect.value : 'renewal', opening: openingSelect ? openingSelect.value : 'standard', kyrie: kyrieSelect ? kyrieSelect.value : 'kyrie' });
     output.innerHTML = html;
     output.classList.remove('hidden');
     output.scrollIntoView({ behavior: 'smooth' });

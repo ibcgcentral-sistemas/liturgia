@@ -306,6 +306,19 @@ const BCPEucharist = (() => {
     { type: 'PUEBLO', text: 'Demos gracias a Dios, aleluya, aleluya.' },
   ];
 
+  // ── ORDEN DE 1662 (LOC l. 3706-3736 y la nota ‡ de la Oración de Consagración, l. 3015-3016) ─────────────────────────────
+  // El libro permite reorganizar el Texto Estándar al orden de 1662. Para esa oración manda: hasta las palabras sobre el cáliz («…háganlo
+  // en memoria de Mí»), luego la Distribución de la Comunión y el Padrenuestro, y «el resto de la Oración de Consagración sigue al Padrenuestro
+  // como una Oración Post Comunión alternativa». Se parte aquí en los mismos arreglos de arriba: no se copia ni se redacta nada aparte.
+  const CONSECRATION_1662_SPLIT = PRAYER_OF_CONSECRATION_DATA.findIndex(i => i.type === 'C') + 2;   // tras la segunda palabra de institución
+  const CONSECRATION_1662_A_DATA = [
+    ...PRAYER_OF_CONSECRATION_DATA.slice(0, CONSECRATION_1662_SPLIT),
+    { type: 'R', text: 'En la Orden de 1662, la Distribución de la Comunión ocurre aquí. Luego se dice el Padre Nuestro. El resto de la Oración de Consagración sigue al Padrenuestro como una Oración Post Comunión alternativa.' },
+  ];
+  const CONSECRATION_1662_B_DATA = PRAYER_OF_CONSECRATION_DATA.slice(CONSECRATION_1662_SPLIT);
+  // El Padrenuestro del comienzo (sin la rúbrica con que lo introduce la Eucaristía).
+  const LORDS_PRAYER_TEXT_DATA = LORDS_PRAYER_DATA.filter(i => i.type !== 'R');
+
   // ── VERSIONES EN TEXTO PLANO ─────────────────────────────────────────────
   // El Librito del Pueblo (librito-pueblo.js) necesita el texto sin el HTML de
   // render(). Se derivan de los MISMOS arreglos *_DATA que la liturgia
@@ -317,6 +330,8 @@ const BCPEucharist = (() => {
   const PLAIN = Object.freeze({
     OFFERTORY_SENTENCE: plainOf(OFFERTORY_SENTENCE_DATA),
     PRAYER_OF_CONSECRATION: plainOf(PRAYER_OF_CONSECRATION_DATA),
+    PRAYER_OF_CONSECRATION_1662_A: plainOf(CONSECRATION_1662_A_DATA),
+    PRAYER_OF_CONSECRATION_1662_B: plainOf(CONSECRATION_1662_B_DATA),
     HUMBLE_ACCESS: plainOf(HUMBLE_ACCESS_DATA),
     ADMINISTRATION: plainOf(ADMINISTRATION_DATA),
     POST_COMMUNION: plainOf(POST_COMMUNION_DATA),
@@ -337,6 +352,9 @@ const BCPEucharist = (() => {
     SUMMARY_OF_LAW: render(SUMMARY_OF_LAW_DATA),
     KYRIE: render(KYRIE_DATA),
     TRISAGION: render(TRISAGION_DATA),
+    CONSECRATION_1662_A: render(CONSECRATION_1662_A_DATA),
+    CONSECRATION_1662_B: render(CONSECRATION_1662_B_DATA),
+    LORDS_PRAYER_TEXT: render(LORDS_PRAYER_TEXT_DATA),
     GLORIA: render(GLORIA_DATA),
     SALUTATION: render(SALUTATION_DATA),
     CREED: render(CREED_DATA),

@@ -34,9 +34,9 @@ const BCPLibrito = (() => {
   // Oración de Consagración completa. Las palabras de la institución (tipo 'C')
   // van precedidas de la indicación de silencio reverente, y el resto sigue en
   // orden de fuente.
-  function consecrationHtml() {
+  function consecrationHtml(pieza = 'PRAYER_OF_CONSECRATION') {
     let html = '', open = false, instructed = false;
-    for (const it of plainItems('PRAYER_OF_CONSECRATION', 'O', 'C')) {
+    for (const it of plainItems(pieza, 'O', 'C')) {
       if (it.type === 'C' && !instructed) {
         if (open) html += '</div>';
         html += `<div class="librito-instruction warning">
@@ -68,6 +68,8 @@ const BCPLibrito = (() => {
     const omitGloria = shouldOmitGloria(dayInfo);
     // Orden Penitencial (igual que app.js): en vez de los Ritos Iniciales habituales, solo en días de Eucaristía ordinarios.
     const penitential = !!state.penitential && !isPalm && !isMaundy && !isAsh && !noEucharistNotice(dayInfo);
+    // Orden de 1662 (igual que app.js): solo el Texto Estándar y días de Eucaristía ordinarios.
+    const order1662 = !!state.order1662 && !isPalm && !isMaundy && !isAsh && !noEucharistNotice(dayInfo) && state.form !== 'renewed';
     // Segunda forma del libro (Texto Antiguo Renovado), igual que en app.js: desde el Credo el texto es el propio del libro.
     const renewed = state.form === 'renewed';
     const formName = renewed ? 'Texto Antiguo Renovado' : 'Texto Estándar Anglicano';
@@ -404,6 +406,149 @@ const BCPLibrito = (() => {
     `;
     }
 
+    // El Texto Estándar en el orden de 1662 (LOC l. 3706-3736): los textos salen de los MISMOS arreglos que la liturgia (sin HTML), de modo que no
+    // pueden divergir. La Exhortación y la Bendición las dice el Celebrante: aquí solo se indica.
+    if (order1662) {
+      const plano = html => String(html).replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
+      const pf = preface;
+      const [invitacion, ...formulas] = plainItems('ADMINISTRATION', 'CEL').map(i => i.text);
+      return `
+    <div class="librito-document">
+
+      ${headHtml}
+
+      <section class="librito-section">
+        <h2>✠ ANTES DE COMENZAR</h2>
+        <div class="librito-instruction"><p><strong>Nos preparamos en silencio.</strong> Hoy la liturgia sigue el orden de 1662.</p></div>
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ EL PADRENUESTRO</h2>
+        <div class="librito-instruction"><p><strong>Todos de pie.</strong> Todos juntos:</p></div>
+        <div class="librito-text"><p>${plano(BCPEucharist.LORDS_PRAYER_TEXT)}</p></div>
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ EL DECÁLOGO</h2>
+        <div class="librito-instruction"><p><strong>Nos arrodillamos si podemos.</strong> El pueblo responde a cada mandamiento:</p></div>
+        ${BCPHolyWeek.renderLibrito('decalogue', '', null, null, { sinTitulo: true })}
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ LA COLECTA DEL DÍA</h2>
+        <div class="librito-response"><p><strong>Celebrante: El Señor esté con ustedes.</strong><br><strong>Pueblo: Y con tu espíritu.</strong></p></div>
+        <div class="librito-text"><p>${collect}</p></div>
+        ${state.collectBorrowed ? '<div class="librito-instruction"><p>Hoy se repite la Colecta del Domingo o fiesta correspondiente.</p></div>' : ''}
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ LITURGIA DE LA PALABRA</h2>
+        <div class="librito-instruction"><p><strong>Nos sentamos.</strong></p></div>
+        ${borrowedFromSunday ? '<div class="librito-instruction"><p>Hoy se repiten las lecturas del Domingo o fiesta correspondiente.</p></div>' : ''}
+        ${firstReading && readings ? fmtReading(translateBibleReference(readings.first), firstReading, 'PRIMERA LECTURA') : ''}
+        ${psalmVerses && psalmVerses.length && readings ? fmtPsalm(translateBibleReference(readings.psalm), psalmVerses, psalmAnt) : ''}
+        ${secondReading && readings && readings.second ? fmtReading(translateBibleReference(readings.second), secondReading, 'SEGUNDA LECTURA') : ''}
+        <div class="librito-instruction"><p><strong>Nos ponemos de pie</strong> para el Evangelio.</p></div>
+        ${gospel && readings ? fmtGospel(translateBibleReference(readings.gospel), gospel) : ''}
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ EL CREDO NICENO</h2>
+        <div class="librito-instruction"><p><strong>Nos ponemos de pie.</strong> Todos juntos:</p></div>
+        <div class="librito-text"><p>${plano(BCPEucharist.CREED)}</p></div>
+        <div class="librito-instruction"><p><strong>Nos sentamos</strong> para el Sermón.</p></div>
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ EL OFERTORIO</h2>
+        <div class="librito-instruction"><p>Se presentan el pan, el vino y las ofrendas del pueblo.</p></div>
+        <div class="librito-response"><p>${celLine(plainItems('OFFERTORY_SENTENCE', 'CEL')[0].text)}<br>${puebloLine(plainItems('OFFERTORY_SENTENCE', 'PUEBLO')[0].text)}</p></div>
+      </section>
+
+      ${prayersLibrito}
+
+      <section class="librito-section">
+        <h2>✠ LA EXHORTACIÓN</h2>
+        <div class="librito-instruction"><p>El Celebrante dice la Exhortación.</p></div>
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ CONFESIÓN Y ABSOLUCIÓN</h2>
+        <div class="librito-instruction"><p><strong>Nos arrodillamos si podemos.</strong> Todos juntos:</p></div>
+        <div class="librito-text"><p>${plano(BCPEucharist.CONFESSION)}</p></div>
+        <div class="librito-instruction"><p>El Celebrante pronuncia la Absolución y las Palabras Reconfortantes.</p></div>
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ PREFACIO: ${pf ? pf.title.toUpperCase() : 'PREFACIO COMÚN'}</h2>
+        <div class="librito-response">
+          <p><strong>Celebrante: Levantemos el corazón.</strong><br><strong>Pueblo: Lo tenemos levantado hacia el Señor.</strong><br>
+          <strong>Celebrante: Demos gracias al Señor nuestro Dios.</strong><br><strong>Pueblo: Es justo darle gracias y alabanza.</strong></p>
+        </div>
+        <div class="librito-instruction"><p>El Celebrante continúa con el Prefacio propio del día, y todos cantan o recitan:</p></div>
+        <h3>SANCTUS</h3>
+        <div class="librito-text"><p>${plano(BCPEucharist.SANCTUS)}</p></div>
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ ORACIÓN DE HUMILDE ACCESO</h2>
+        <div class="librito-instruction"><p>${plainItems('HUMBLE_ACCESS', 'R')[0].text}</p></div>
+        <div class="librito-text"><p>${plainItems('HUMBLE_ACCESS', 'TODOS')[0].text}</p></div>
+      </section>
+
+      <section class="librito-section warning">
+        <h2>✠ LA ORACIÓN DE CONSAGRACIÓN</h2>
+        <div class="librito-instruction warning"><p><strong>Nos arrodillamos en reverencia.</strong></p></div>
+        ${consecrationHtml('PRAYER_OF_CONSECRATION_1662_A')}
+        ${plainItems('PRAYER_OF_CONSECRATION_1662_A', 'R').slice(-1).map(i => `<div class="librito-instruction"><p>${i.text}</p></div>`).join('')}
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ LA SAGRADA COMUNIÓN</h2>
+        <div class="librito-response"><p>${celLine(invitacion)}</p></div>
+        <div class="librito-instruction"><p>Nos acercamos a recibir el Pan y el Cáliz.</p></div>
+        <div class="librito-response"><p>${formulas.map(celLine).join('<br>')}</p></div>
+        <div class="librito-instruction"><p><strong>Después de comulgar</strong>, volvemos a nuestro lugar y oramos en silencio.</p></div>
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ EL PADRENUESTRO</h2>
+        <div class="librito-instruction"><p><strong>Nos ponemos de pie.</strong> Todos juntos:</p></div>
+        <div class="librito-text"><p>${plano(BCPEucharist.LORDS_PRAYER)}</p></div>
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ ORACIÓN DE POSCOMUNIÓN</h2>
+        <div class="librito-response"><p>${celLine(plainItems('POST_COMMUNION', 'CEL')[0].text)}</p></div>
+        <div class="librito-instruction"><p>Todos juntos:</p></div>
+        <div class="librito-text"><p>${plainItems('POST_COMMUNION', 'TODOS')[0].text}</p></div>
+        <h3>O BIEN, EL RESTO DE LA ORACIÓN DE CONSAGRACIÓN</h3>
+        ${consecrationHtml('PRAYER_OF_CONSECRATION_1662_B')}
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ GLORIA IN EXCELSIS</h2>
+        ${omitGloria
+          ? `<div class="librito-instruction"><p>${gloriaOmittedRubric(dayInfo)}</p></div>`
+          : `<div class="librito-instruction"><p>Todos juntos:</p></div>
+        <div class="librito-text"><p>${plano(BCPEucharist.GLORIA)}</p></div>`}
+      </section>
+
+      <section class="librito-section">
+        <h2>✠ LA BENDICIÓN</h2>
+        <div class="librito-instruction"><p>El Celebrante da la Bendición final.</p></div>
+      </section>
+
+      <div class="librito-footer">
+        <p>✠ Soli Deo Gloria ✠</p>
+        <p>Librito de la Santa Eucaristía para el Pueblo Cristiano</p>
+        <p><em>"Haced esto en memoria de mí."</em> — Lucas 22:19</p>
+      </div>
+
+    </div>
+    `;
+    }
+
     return `
     <div class="librito-document">
 
@@ -462,10 +607,11 @@ const BCPLibrito = (() => {
         </div>
         <div class="librito-instruction"><p>El Celebrante pronuncia la Absolución.</p></div>`}` : ''}
 
-        <h3>KYRIE</h3>
-        <div class="librito-response">
+        <h3>${state.trisagion ? 'EL TRISAGIO' : 'KYRIE'}</h3>
+        ${state.trisagion ? `<div class="librito-instruction"><p>Todos juntos:</p></div>
+        <div class="librito-text"><p>${BCPEucharist.TRISAGION.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()}</p></div>` : `<div class="librito-response">
           <p><strong>Celebrante: Señor, ten piedad de nosotros.</strong><br><strong>Pueblo: Cristo, ten piedad de nosotros.</strong><br><strong>Celebrante: Señor, ten piedad de nosotros.</strong></p>
-        </div>
+        </div>`}
 
         ${penitential ? '' : `<h3>GLORIA IN EXCELSIS</h3>
         ${omitGloria
