@@ -67,7 +67,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=31` (Misal) y `?v=27` (bcp2019; la hoja de estilo, `?v=7`).
+   código viejo. Actualmente en `?v=31` (Misal) y `?v=28` (bcp2019; la hoja de estilo, `?v=7`).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -251,13 +251,17 @@ sale con título (no se midió cuántos).
   el texto de los salmos y cánticos de la Vigilia (solo sus citas, como en el libro), el
   Santo Bautismo y la Confirmación (necesitan candidatos y obispo; el libro remite a otro rito y
   solo queda su rúbrica; tampoco hay acción de gracias sobre el agua ni aspersión, que no están en
-  el libro para la Vigilia) y la marca del Cirio Pascual. **Decidido no modelarlos
+  el libro para la Vigilia). **Decidido no modelar estos tres
   (2026-11-02):** el Bautismo y la Confirmación necesitan datos de candidatos y un obispo, y el
   libro los remite a otro rito; los salmos y cánticos son opcionales en el libro («un salmo,
-  himno o antífona puede seguir») y de los cánticos no hay texto en la Biblia de Jerusalén; la
-  marca del Cirio (LOC l. 15673-15691) llegó desordenada de la conversión del PDF («Como el Alfa
-  es trazado Alfa…») y el libro la coloca en mitad del Servicio de la Luz, así que imprimirla
-  obligaría a recomponer el texto y partir esa sección. Se reabre si el usuario lo pide.
+  himno o antífona puede seguir») y de los cánticos no hay texto en la Biblia de Jerusalén.
+  **El marcado del Cirio Pascual sí está (2026-11-02, a petición del usuario):** el libro (LOC
+  l. 15677-15691) lo trae desordenado por la conversión del PDF («Como el Alfa es trazado
+  Alfa…»); `easterVigilCandle` lo recompone separando cada rúbrica de lo que dice el celebrante,
+  y `construir()` exige que las palabras sean EXACTAMENTE las de esas líneas (si no, falla).
+  Va donde el libro lo pide, en mitad del Servicio de la Luz, que por eso se partió en
+  `easterVigilLight` y `easterVigilLightLit` (el contenido es el mismo, solo partido);
+  `test-bcp2019.js` 9 vigila el orden.
   **Renovación de los Votos Bautismales**
   (2026-11-02): sí está (`easterVigilRenewal` y `easterVigilContinues`, LOC l. 4835-4907 y
   15632-15633), tras el Sermón y antes de las Oraciones del Pueblo, sin Credo Niceno; se copió tal

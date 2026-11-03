@@ -373,6 +373,11 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
           HW(/PREFACIO: PASCUA/.test(t) && /ORACIÓN DE CONSAGRACIÓN/.test(t) && /\[Aleluya\.\] Cristo, nuestra Pascua/.test(t) && /aleluya, aleluya/i.test(t), `${w}${n}: la Eucaristía de la Vigilia debe llevar prefacio de Pascua, consagración, Fracción y Despedida con Aleluya`);
           // Renovación de los Votos Bautismales (LOC l. 4835-4907): tras el Sermón y antes de las Oraciones del Pueblo, sin Credo Niceno.
           const v = t.indexOf('LA GRAN VIGILIA DE RESURRECCIÓN'), parte = v < 0 ? '' : t.slice(v);
+          // Marcado opcional del Cirio Pascual (LOC l. 15677-15691, recompuesto: el libro lo trae desordenado): entre la rúbrica que lo
+          // pide y el encendido del Cirio, con cada palabra del celebrante tras su rúbrica y en el orden de la cruz, el Alfa y el Omega y el año.
+          let pc = parte.indexOf('se hace en este momento'), faltaC = pc < 0 ? 'se hace en este momento' : '';
+          for (const m of ['A medida que se traza la vertical de la cruz', 'Cristo, ayer y hoy,', 'el principio y el fin,', 'Como el Alfa es trazado', 'Alfa', 'Como el Omega es trazado', 'y Omega,', 'todo el tiempo le pertenece,', 'y todas las edades;', 'a Él sea la gloria y el poder,', 'a través de todos los tiempos y por siempre. Amén.', 'Por sus santas y gloriosas llagas', 'El Celebrante enciende el Cirio Pascual con el fuego']) { if (pc < 0) break; const j = parte.indexOf(m, pc); if (j < 0) { faltaC = faltaC || m; continue; } pc = j + m.length; }
+          HW(!faltaC, `${w}${n}: el marcado del Cirio Pascual falta o está fuera de orden en el Servicio de la Luz (${faltaC})`);
           let pos = 0, falta = '';
           for (const m of ['EL SERMÓN', 'RENOVACIÓN DE LAS PROMESAS BAUTISMALES', '¿Renuevas tú, aquí en la presencia de Dios', 'Sí, me comprometo.', 'Desde allí ha de venir a juzgar a vivos y muertos.', 'y la vida eterna. Amén.', 'que has edificado a tu Iglesia sobre el fundamento', 'La celebración continúa con las Oración de los Fieles.', 'ORACIÓN DE LOS FIELES', 'PREFACIO: PASCUA']) { const j = parte.indexOf(m, pos); if (j < 0) { falta = falta || m; continue; } pos = j + m.length; }
           HW(!falta, `${w}${n}: la Renovación de los Votos Bautismales falta o está fuera de orden en la Vigilia (${falta})`);

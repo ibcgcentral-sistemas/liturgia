@@ -2,7 +2,7 @@
  * holyweek-data.js — Liturgias de la Semana Santa (Libro de Oración Común 2019, ACNA).
  * GENERADO por bcp2019-tools/build-holyweek.js a partir del libro oficial en español (LOC-10-10-23.md); NO editar a
  * mano: test-bcp2019.js comprueba que sigue idéntico a lo que genera el script. Texto copiado, no traducido.
- * Procedencia: palmSundayPalms LOC l. 14728-14794; maundyThursdayOpening LOC l. 14844-14858; maundyThursdayFootWashing LOC l. 14875-14902; maundyThursdayClosing LOC l. 14903-14911; goodFriday LOC l. 14939-15244; holySaturday LOC l. 15248-15315; renewedCreed LOC l. 3283-3325; renewedPrayers LOC l. 3326-3365; renewedConfession LOC l. 3366-3409; renewedPeace LOC l. 3410-3413; renewedOffertory LOC l. 3414-3425; renewedSursum LOC l. 3426-3450; renewedConsecration LOC l. 3451-3494; renewedLordsPrayer LOC l. 3495-3515; renewedHumbleAccess LOC l. 3526-3542; renewedAgnusDei LOC l. 3543-3550; renewedAdministration LOC l. 3551-3567; renewedPostCommunion LOC l. 3568-3585; renewedBlessing LOC l. 3586-3595; renewedDismissal LOC l. 3596-3608; renewedDismissalAlleluia LOC l. 3609-3615; ashWednesdayOpening LOC l. 14474-14477; ashWednesdayInvitation LOC l. 14478-14502; ashWednesdayAshes LOC l. 14519-14568; ashWednesdayConfession LOC l. 14569-14649; ashWednesdayAbsolution LOC l. 14650-14685; ashWednesdayClosing LOC l. 14686-14697; easterVigilIntro LOC l. 15318-15337; easterVigilLight LOC l. 15341-15440; easterVigilReadings LOC l. 15441-15572; easterVigilWord LOC l. 15573-15631; easterVigilRenewal LOC l. 4835-4907; easterVigilContinues LOC l. 15632-15633; easterVigilBlessing LOC l. 15634-15641.
+ * Procedencia: palmSundayPalms LOC l. 14728-14794; maundyThursdayOpening LOC l. 14844-14858; maundyThursdayFootWashing LOC l. 14875-14902; maundyThursdayClosing LOC l. 14903-14911; goodFriday LOC l. 14939-15244; holySaturday LOC l. 15248-15315; renewedCreed LOC l. 3283-3325; renewedPrayers LOC l. 3326-3365; renewedConfession LOC l. 3366-3409; renewedPeace LOC l. 3410-3413; renewedOffertory LOC l. 3414-3425; renewedSursum LOC l. 3426-3450; renewedConsecration LOC l. 3451-3494; renewedLordsPrayer LOC l. 3495-3515; renewedHumbleAccess LOC l. 3526-3542; renewedAgnusDei LOC l. 3543-3550; renewedAdministration LOC l. 3551-3567; renewedPostCommunion LOC l. 3568-3585; renewedBlessing LOC l. 3586-3595; renewedDismissal LOC l. 3596-3608; renewedDismissalAlleluia LOC l. 3609-3615; ashWednesdayOpening LOC l. 14474-14477; ashWednesdayInvitation LOC l. 14478-14502; ashWednesdayAshes LOC l. 14519-14568; ashWednesdayConfession LOC l. 14569-14649; ashWednesdayAbsolution LOC l. 14650-14685; ashWednesdayClosing LOC l. 14686-14697; easterVigilIntro LOC l. 15318-15337; easterVigilLight LOC l. 15341-15354; easterVigilCandle LOC l. 15677-15692 (recompuesta); easterVigilLightLit LOC l. 15355-15440; easterVigilReadings LOC l. 15441-15572; easterVigilWord LOC l. 15573-15631; easterVigilRenewal LOC l. 4835-4907; easterVigilContinues LOC l. 15632-15633; easterVigilBlessing LOC l. 15634-15641.
  * Tipos: T título, R rúbrica, P párrafo, V versos (líneas separadas por \n), REF cita bíblica, CEL/PUEBLO/DIAC/LECTOR/
  * OFIC/TODOS/OBISPO/PRES voces, LECTURAS = lugar donde el app inserta las lecturas del día.
  */
@@ -1692,7 +1692,87 @@ const BCP_HOLYWEEK_DATA = {
   {
    "t": "R",
    "x": "Si se va a marcar el Cirio Pascual, se hace en este momento (página 595)."
+  }
+ ],
+ "easterVigilCandle": [
+  {
+   "t": "R",
+   "x": "Si lo desea, el Cirio Pascual se puede marcar antes de que se encienda, de la siguiente manera."
   },
+  {
+   "t": "R",
+   "x": "A medida que se traza la vertical de la cruz el celebrante dice"
+  },
+  {
+   "t": "P",
+   "x": "Cristo, ayer y hoy,"
+  },
+  {
+   "t": "R",
+   "x": "A medida que se traza la horizontal el celebrante dice"
+  },
+  {
+   "t": "P",
+   "x": "el principio y el fin,"
+  },
+  {
+   "t": "R",
+   "x": "Como el Alfa es trazado"
+  },
+  {
+   "t": "P",
+   "x": "Alfa"
+  },
+  {
+   "t": "R",
+   "x": "Como el Omega es trazado"
+  },
+  {
+   "t": "P",
+   "x": "y Omega,"
+  },
+  {
+   "t": "R",
+   "x": "A medida que se traza el primer número del año el celebrante dice"
+  },
+  {
+   "t": "P",
+   "x": "todo el tiempo le pertenece,"
+  },
+  {
+   "t": "R",
+   "x": "Como el segundo número es trazado"
+  },
+  {
+   "t": "P",
+   "x": "y todas las edades;"
+  },
+  {
+   "t": "R",
+   "x": "Como el tercer número es trazado"
+  },
+  {
+   "t": "P",
+   "x": "a Él sea la gloria y el poder,"
+  },
+  {
+   "t": "R",
+   "x": "Como el cuarto número es trazado"
+  },
+  {
+   "t": "P",
+   "x": "a través de todos los tiempos y por siempre. Amén."
+  },
+  {
+   "t": "R",
+   "x": "Clavos o granos de incienso pueden ser incrustados en el Cirio Pascual."
+  },
+  {
+   "t": "P",
+   "x": "Por sus santas y gloriosas llagas que Cristo nuestro Señor nos guarde y proteja. Amén."
+  }
+ ],
+ "easterVigilLightLit": [
   {
    "t": "R",
    "x": "El Celebrante enciende el Cirio Pascual con el fuego recién encendido y dice"

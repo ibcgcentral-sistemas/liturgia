@@ -353,6 +353,9 @@ const BCPLibrito = (() => {
       <section class="librito-section">
         <h2>✠ EL SERVICIO DE LA LUZ</h2>
         ${BCPHolyWeek.renderLibrito('easterVigilLight')}
+        <h3>EL MARCADO DEL CIRIO PASCUAL (OPCIONAL)</h3>
+        ${BCPHolyWeek.renderLibrito('easterVigilCandle')}
+        ${BCPHolyWeek.renderLibrito('easterVigilLightLit')}
       </section>
 
       <section class="librito-section">

@@ -405,6 +405,9 @@ function buildLiturgyHTML(d) {
     <div class="mass-section vigil-section">
       <h3 class="section-title main-section">✠ EL SERVICIO DE LA LUZ</h3>
       ${BCPHolyWeek.render('easterVigilLight')}
+      <h4 class="section-title">EL MARCADO DEL CIRIO PASCUAL (OPCIONAL)</h4>
+      ${BCPHolyWeek.render('easterVigilCandle')}
+      ${BCPHolyWeek.render('easterVigilLightLit')}
     </div>
     <div class="mass-section vigil-section">
       <h3 class="section-title main-section">✠ EL SERVICIO DE LAS LECTURAS</h3>

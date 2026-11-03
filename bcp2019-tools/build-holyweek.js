@@ -49,7 +49,26 @@ const SECCIONES = {
   ashWednesdayClosing: { ini: 'Cuando hay Comunión, la liturgia continúa', fin: 'INDICACCIONES ADICIONALES', desde: 14680 },
   // Gran Vigilia de Pascua: la introducción del libro (como rúbrica) y las cuatro partes de la liturgia.
   easterVigilIntro: { ini: 'La Gran Vigilia, cuando se observa', fin: 'LA', desde: 15300, comoRubrica: true },
-  easterVigilLight: { ini: 'LA ILUMINACIÓN DEL CIRIO PASCUAL', fin: 'LAS LECTURAS', desde: 15330 },
+  // El Servicio de la Luz se parte donde el libro dice «Si se va a marcar el Cirio Pascual, se hace en este momento (página
+  // 595)»: antes, la preparación; entre las dos mitades, el marcado opcional del Cirio (easterVigilCandle); después, su encendido.
+  easterVigilLight: { ini: 'LA ILUMINACIÓN DEL CIRIO PASCUAL', fin: 'El Celebrante enciende el Cirio Pascual con el fuego', desde: 15330 },
+  easterVigilCandle: { ini: 'Si lo desea, el Cirio Pascual se puede marcar', fin: '596', desde: 15670, items: [
+    // El libro en español (l. 15677-15691) imprime este texto desordenado por la conversión del PDF: las rúbricas y las palabras
+    // que dice el celebrante quedaron mezcladas en cada línea («Como el Alfa es trazado Alfa»). Aquí se separan, sin añadir,
+    // quitar ni cambiar una palabra: construir() comprueba que las palabras son EXACTAMENTE las de esas líneas.
+    { t: 'R', x: 'Si lo desea, el Cirio Pascual se puede marcar antes de que se encienda, de la siguiente manera.' },
+    { t: 'R', x: 'A medida que se traza la vertical de la cruz el celebrante dice' }, { t: 'P', x: 'Cristo, ayer y hoy,' },
+    { t: 'R', x: 'A medida que se traza la horizontal el celebrante dice' }, { t: 'P', x: 'el principio y el fin,' },
+    { t: 'R', x: 'Como el Alfa es trazado' }, { t: 'P', x: 'Alfa' },
+    { t: 'R', x: 'Como el Omega es trazado' }, { t: 'P', x: 'y Omega,' },
+    { t: 'R', x: 'A medida que se traza el primer número del año el celebrante dice' }, { t: 'P', x: 'todo el tiempo le pertenece,' },
+    { t: 'R', x: 'Como el segundo número es trazado' }, { t: 'P', x: 'y todas las edades;' },
+    { t: 'R', x: 'Como el tercer número es trazado' }, { t: 'P', x: 'a Él sea la gloria y el poder,' },
+    { t: 'R', x: 'Como el cuarto número es trazado' }, { t: 'P', x: 'a través de todos los tiempos y por siempre. Amén.' },
+    { t: 'R', x: 'Clavos o granos de incienso pueden ser incrustados en el Cirio Pascual.' },
+    { t: 'P', x: 'Por sus santas y gloriosas llagas que Cristo nuestro Señor nos guarde y proteja. Amén.' },
+  ] },
+  easterVigilLightLit: { ini: 'El Celebrante enciende el Cirio Pascual con el fuego', fin: 'LAS LECTURAS', desde: 15330 },
   easterVigilReadings: { ini: 'LAS LECTURAS', fin: 'LA ACLAMACIÓN PASCUAL', desde: 15430 },
   // La Palabra termina en el Sermón y su título; la Renovación de los Votos Bautismales (texto del rito, l. 4835-4907 del
   // libro; sin su última línea, que dice que «excepto en la Vigilia Pascual» siguen las Oraciones del Pueblo) va después, y
@@ -141,7 +160,7 @@ const VERSOS = {
     { ini: 'Padre Nuestro que estás en el cielo,', fin: 'El Oficiante concluye', corta: /ahora y por siempre\. Amén\.$/ },
   ],
   // Vigilia: el Pregón Pascual (Exsultet) en estrofas, y el Gloria. `fin` ausente = hasta el final de la sección.
-  easterVigilLight: [
+  easterVigilLightLit: [
     { ini: 'Alégrense por fin', fin: 'Diácono El Señor esté con ustedes.', corta: /poderoso\.$|eterno\.$|pueblo\.$|siglos de los siglos\. Amén\.$/ },
     { ini: 'Verdaderamente es justo y necesario', corta: /y nos santifica\.$|victorioso de la tumba\.$|tan grande y glorioso!$|reconcilia con Dios\.$|por los siglos de los siglos\. Amén\.$/ },
   ],
@@ -282,6 +301,15 @@ function construir(locPath) {
   const out = {}, origen = {}, aplicadas = new Set();
   for (const [nombre, def] of Object.entries(SECCIONES)) {
     const r = recorte(lineas, def, def.desde);
+    // Sección recompuesta a mano (`items`): el libro la trae desordenada. Se exige que tenga las MISMAS palabras que sus líneas.
+    if (def.items) {
+      const palabras = s => s.toLowerCase().replace(/[.,;:¿?¡!()«»“”"]/g, ' ').split(/\s+/).filter(Boolean).sort().join(' ');
+      const libro = r.lineas.map(l => l.trim()).filter(l => l && !/^\d{3}$/.test(l)).join(' ');
+      if (palabras(def.items.map(i => i.x).join(' ')) !== palabras(libro)) throw new Error(nombre + ': las palabras recompuestas no son exactamente las del libro (l. ' + (r.desde + 1) + '-' + r.hasta + ')');
+      out[nombre] = def.items.map(i => ({ ...i }));
+      origen[nombre] = `LOC l. ${r.desde + 1}-${r.hasta} (recompuesta)`;
+      continue;
+    }
     let ls = r.lineas.slice();
     // El libro dice «Inserta el Prefacio indicado (págs. 152-158)»: ahí va el prefacio del día (lo pone el app).
     ls = ls.map(l => (l.trim().startsWith('Inserta el Prefacio indicado') ? '[[PREFACIO]]' : l));
