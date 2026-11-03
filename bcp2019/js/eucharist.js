@@ -51,6 +51,28 @@ const BCPEucharist = (() => {
     { type: 'CEL', text: 'Bendigamos al Señor que perdona todos nuestros pecados.' },
     { type: 'PUEBLO', text: 'Su misericordia perdura para siempre.' },
   ];
+  // Los otros saludos de «Saludos para los Tiempos Litúrgicos» (LOC l. 3759-3805, p. 145-146), tal como los imprime el libro. En
+  // el de Adviento se quitó el «» sobrante que el libro imprime tras la cita («“Sí, vengo pronto”»»: errata de la conversión).
+  const ACCLAMATION_ADVENT_DATA = [
+    { type: 'R', text: 'Para Adviento.' },
+    { type: 'CEL', text: 'El Señor dice: “Sí, vengo pronto”.' },
+    { type: 'PUEBLO', text: 'Amén. ¡Ven Señor Jesús!' },
+  ];
+  const ACCLAMATION_CHRISTMAS_DATA = [
+    { type: 'R', text: 'Para el tiempo de Navidad y la fiesta de la Presentación de Cristo.' },
+    { type: 'CEL', text: 'Porque nos ha nacido un niño,' },
+    { type: 'PUEBLO', text: 'Se nos ha concedido un hijo.' },
+  ];
+  const ACCLAMATION_EPIPHANY_DATA = [
+    { type: 'R', text: 'Desde la fiesta de Epifanía hasta el final de la estación de Epifanía.' },
+    { type: 'CEL', text: 'Te pongo ahora como luz para las naciones,' },
+    { type: 'PUEBLO', text: 'A fin de que lleves mi salvación hasta los confines de la tierra.' },
+  ];
+  const ACCLAMATION_ALLSAINTS_DATA = [
+    { type: 'R', text: 'Para Todos los Santos y otras ocasiones apropiadas.' },
+    { type: 'CEL', text: 'Digno eres, Señor y Dios nuestro' },
+    { type: 'PUEBLO', text: 'Para recibir gloria, honra y poder.' },
+  ];
   const ACCLAMATION_HOLYWEEK_DATA = [
     { type: 'R', text: 'Para la Semana Santa.' },
     { type: 'CEL', text: 'Bendito sea nuestro Dios.' },
@@ -305,6 +327,10 @@ const BCPEucharist = (() => {
     ACCLAMATION: render(ACCLAMATION_DATA),
     ACCLAMATION_LENT: render(ACCLAMATION_LENT_DATA),
     ACCLAMATION_HOLYWEEK: render(ACCLAMATION_HOLYWEEK_DATA),
+    ACCLAMATION_ADVENT: render(ACCLAMATION_ADVENT_DATA),
+    ACCLAMATION_CHRISTMAS: render(ACCLAMATION_CHRISTMAS_DATA),
+    ACCLAMATION_EPIPHANY: render(ACCLAMATION_EPIPHANY_DATA),
+    ACCLAMATION_ALLSAINTS: render(ACCLAMATION_ALLSAINTS_DATA),
     ACCLAMATION_PENTECOST: render(ACCLAMATION_PENTECOST_DATA),
     ACCLAMATION_EASTER: render(ACCLAMATION_EASTER_DATA),
     COLLECT_FOR_PURITY: render(COLLECT_FOR_PURITY_DATA),

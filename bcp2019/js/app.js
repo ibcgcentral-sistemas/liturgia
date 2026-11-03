@@ -466,7 +466,7 @@ function buildLiturgyHTML(d) {
     </div>` : `<div class="mass-section">
       <h3 class="section-title main-section">✠ RITOS INICIALES</h3>
       <h4 class="section-title">LA ACLAMACIÓN</h4>
-      <div class="liturgical-text-block">${isMaundy ? '' : acclamation === 'lent' ? BCPEucharist.ACCLAMATION_LENT : acclamation === 'holyWeek' ? BCPEucharist.ACCLAMATION_HOLYWEEK : acclamation === 'easter' ? BCPEucharist.ACCLAMATION_EASTER : acclamation === 'pentecost' ? BCPEucharist.ACCLAMATION_PENTECOST : BCPEucharist.ACCLAMATION}</div>
+      <div class="liturgical-text-block">${isMaundy ? '' : ({ lent: BCPEucharist.ACCLAMATION_LENT, holyWeek: BCPEucharist.ACCLAMATION_HOLYWEEK, easter: BCPEucharist.ACCLAMATION_EASTER, pentecost: BCPEucharist.ACCLAMATION_PENTECOST, advent: BCPEucharist.ACCLAMATION_ADVENT, christmas: BCPEucharist.ACCLAMATION_CHRISTMAS, epiphany: BCPEucharist.ACCLAMATION_EPIPHANY, allSaints: BCPEucharist.ACCLAMATION_ALLSAINTS })[acclamation] || BCPEucharist.ACCLAMATION}</div>
       ${isMaundy ? BCPHolyWeek.render('maundyThursdayOpening') : ''}
 
       <h4 class="section-title">LA COLECTA POR PUREZA</h4>

@@ -110,8 +110,10 @@ function shouldOmitGloria(dayInfo) {
 // Santa» (saludo propio, el mismo con que abre la liturgia del Jueves Santo), «Desde el día de Resurrección
 // hasta la Víspera de Pentecostés» y «Para el Día de Pentecostés» (el saludo de Joel; DECISIÓN DEL USUARIO,
 // 2026-11-02: se usa, en vez de la Aclamación fija que el libro también admite). El Día de Pentecostés no es
-// Pascua para la Aclamación. Las otras opciones de esa página (Adviento, Navidad, Epifanía, Todos los Santos)
-// son opcionales y no se usan. Las semanas entre Pentecostés y la Trinidad llevan la ordinaria.
+// Pascua para la Aclamación. Las otras opciones de esa página se usan igual (decisión del revisor con la autoridad
+// delegada por el usuario, 2026-11-02, para que todos los tiempos con saludo propio lo lleven): Adviento; Navidad
+// (hasta el 5 de enero) y la Presentación (2 feb); Epifanía hasta su final; Todos los Santos (1 nov). Lo demás (las
+// semanas de Pentecostés a Adviento, el Tiempo Ordinario) lleva la Aclamación ordinaria.
 // OJO: la Fracción sin Aleluya (Cuaresma y Semana Santa) y la Despedida con «aleluya, aleluya» (hasta el Día
 // de Pentecostés inclusive) siguen otras reglas y las deciden app.js y librito-pueblo.js. Lo usan ambos.
 function acclamationKind(dayInfo) {
@@ -120,6 +122,11 @@ function acclamationKind(dayInfo) {
   if (s === 'lent') return 'lent';
   if (s === 'holyWeek') return 'holyWeek';
   if (s === 'easter') return 'easter';
+  if (dayInfo && dayInfo.key === '11-01') return 'allSaints';
+  if (dayInfo && dayInfo.key === '02-02') return 'christmas';
+  if (s === 'advent') return 'advent';
+  if (s === 'christmas') return 'christmas';
+  if (s === 'epiphany') return 'epiphany';
   return 'ordinary';
 }
 

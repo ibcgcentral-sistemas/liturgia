@@ -69,7 +69,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=32` (Misal) y `?v=28` (bcp2019; la hoja de estilo, `?v=7`).
+   código viejo. Actualmente en `?v=32` (Misal) y `?v=29` (bcp2019; la hoja de estilo, `?v=7`).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -218,9 +218,12 @@ sale con título (no se midió cuántos).
   el generador no modela). La Fracción sin Aleluya (Cuaresma y Semana Santa) y la
   Despedida con «aleluya, aleluya» (hasta Pentecostés inclusive) eran correctas y
   siguen con su propia regla; `test-bcp2019.js` 6a-6c vigila las tres, en la liturgia y
-  en el Librito, y 6a exige el saludo de Joel completo y en orden. Siguen sin estar los
-  saludos de Adviento, Navidad, Epifanía y Todos los Santos de esa misma página,
-  porque el libro los da como opcionales («puede ser reemplazada»).
+  en el Librito, y 6a exige el saludo de Joel completo y en orden. Los demás saludos de esa página
+  (Adviento, Navidad y Presentación, Epifanía y Todos los Santos) también se usan desde el
+  2026-11-02, por decisión del revisor con la autoridad que el usuario le delegó: así todos los
+  tiempos con saludo propio lo llevan. Texto copiado del libro (l. 3759-3805), salvo el «»
+  sobrante tras la cita de Adviento (errata de la conversión). `acclamationKind()` (`utils.js`) los
+  elige y `test-bcp2019.js` 6a vigila los ocho saludos día a día, en la liturgia y el Librito.
 - `bcp2019`, **formas de la Eucaristía** (2026-11-02): el libro da DOS (*Concerning the
   Holy Eucharist*, EN l. 2729-2745): el **Texto Estándar Anglicano** (de 1662 y sus
   sucesores, en lenguaje contemporáneo) y el **Texto Antiguo Renovado** (de la Iglesia

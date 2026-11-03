@@ -433,6 +433,10 @@ const BCPLibrito = (() => {
           ${acclamation === 'easter' ? `<p><strong>Celebrante: ¡Aleluya! ¡Cristo ha resucitado!</strong><br><strong>Pueblo: ¡Ciertamente el Señor ha resucitado! ¡Aleluya!</strong></p>`
           : acclamation === 'lent' ? `<p><strong>Celebrante: Bendigamos al Señor que perdona todos nuestros pecados.</strong><br><strong>Pueblo: Su misericordia perdura para siempre.</strong></p>`
           : acclamation === 'holyWeek' ? `<p><strong>Celebrante: Bendito sea nuestro Dios.</strong><br><strong>Pueblo: Ahora y por siempre. Amén.</strong></p>`
+          : acclamation === 'advent' ? `<p><strong>Celebrante: El Señor dice: “Sí, vengo pronto”.</strong><br><strong>Pueblo: Amén. ¡Ven Señor Jesús!</strong></p>`
+          : acclamation === 'christmas' ? `<p><strong>Celebrante: Porque nos ha nacido un niño,</strong><br><strong>Pueblo: Se nos ha concedido un hijo.</strong></p>`
+          : acclamation === 'epiphany' ? `<p><strong>Celebrante: Te pongo ahora como luz para las naciones,</strong><br><strong>Pueblo: A fin de que lleves mi salvación hasta los confines de la tierra.</strong></p>`
+          : acclamation === 'allSaints' ? `<p><strong>Celebrante: Digno eres, Señor y Dios nuestro</strong><br><strong>Pueblo: Para recibir gloria, honra y poder.</strong></p>`
           : acclamation === 'pentecost' ? `<p><strong>Celebrante: Derramaré mi Espíritu sobre todo el género humano.</strong><br><strong>Pueblo: Y los hijos y las hijas de ustedes profetizarán.</strong></p>
             <p><strong>Celebrante: Tendrán sueños los ancianos</strong><br><strong>Pueblo: Y visiones los jóvenes.</strong></p>
             <p><strong>Celebrante: Entonces sabrán que yo estoy en medio de Israel,</strong><br><strong>Pueblo: Que yo soy el Señor su Dios y no hay otro fuera de Mí</strong></p>
