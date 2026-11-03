@@ -243,14 +243,28 @@ sale con título (no se midió cuántos).
   revés) y que el Aleluya de la Despedida es de Pascua. **Orden Penitencial
   (2026-11-02, con la autoridad delegada):** el selector «Ritos iniciales» ofrece, en vez de los
   habituales, el orden del libro (LOC l. 3623-3635): Aclamación, Colecta por la pureza, de rodillas
-  el Resumen de la Ley y el Decálogo (\`decalogue\`, l. 2611-2643), la Exhortación opcional
-  (\`exhortation\`, l. 3806-3846), la Confesión y la Absolución (con las Palabras Reconfortantes en
+  el Resumen de la Ley y el Decálogo (`decalogue`, l. 2611-2643), la Exhortación opcional
+  (`exhortation`, l. 3806-3846), la Confesión y la Absolución (con las Palabras Reconfortantes en
   la forma Estándar), el Kyrie y la Colecta del Día, sin Gloria; la confesión no se repite tras las
   Oraciones del Pueblo y la paz sí. Vale solo en días de Eucaristía ordinarios (Ramos, Ceniza,
-  Jueves, Viernes y Sábado Santo quedan idénticos). \`currentMassState.penitential\`;
-  \`test-bcp2019.js\` 13. En el Librito no va la Exhortación (la lee el Celebrante). El libro da el
-  Decálogo «o» el Resumen: se imprimen los dos y se elige. **No están:** el reordenamiento de 1662
-  y el Trisagio (hay texto en \`eucharist.js\`, no se ofrece); el Sermón sí figura como rúbrica. Se vio en el navegador la liturgia y el
+  Jueves, Viernes y Sábado Santo quedan idénticos). `currentMassState.penitential`;
+  `test-bcp2019.js` 13. En el Librito no va la Exhortación (la lee el Celebrante). El libro da el
+  Decálogo «o» el Resumen: se imprimen los dos y se elige. **Orden de 1662 y Trisagio (2026-11-02, con la autoridad
+  delegada):** el selector «Orden de la liturgia» ofrece, además del Penitencial, el **orden de
+  1662** (LOC l. 3706-3736, solo en el Texto Estándar): Padrenuestro, Colecta por la pureza,
+  Decálogo, Colecta del Día, lecturas, Credo, Sermón, Ofertorio, Oraciones del Pueblo, Exhortación,
+  Confesión y Absolución, Palabras Reconfortantes, Sursum Corda, Sanctus, Humilde Acceso, Oración de
+  Consagración y Comunión, Padrenuestro, Poscomunión, Gloria y Bendición; sin Aclamación, Kyrie
+  (lo hacen las respuestas del Decálogo), paz, Fracción ni Agnus Dei, porque el libro no los nombra
+  en ese orden. La Consagración se parte donde manda su nota al pie (LOC l. 3015-3016): hasta las
+  palabras sobre el cáliz, luego la Comunión y el Padrenuestro, y el resto como oración posterior
+  alternativa (`CONSECRATION_1662_A/B` en `eucharist.js`; la prueba exige que sumen exactamente la
+  Consagración completa). No se aplica en el Texto Antiguo Renovado ni en los días de rito propio.
+  El selector «Kyrie o Trisagio» pone el Trisagio donde va el Kyrie (el libro dice «el Kyrie (o el
+  Trisagio)»; también en el Orden Penitencial y el Jueves Santo). `currentMassState.order1662` y
+  `.trisagion`; `test-bcp2019.js` 14. En el Librito del orden de 1662 el Credo, la Confesión y
+  el Gloria salen en texto corrido (sin las marcas de inclinación del Librito habitual).
+  **No está:** nada de las formas del libro; el Sermón sí figura como rúbrica. Se vio en el navegador la liturgia y el
   Librito del 2026-06-07 (sin errores de consola) y se exportó a Word, liturgia y
   Librito: los 116 bloques del libro llegan al `document.xml`, con los versos en líneas
   separadas (`<br>` es un salto real de Word). También en Ceniza, Ramos, Jueves Santo,
