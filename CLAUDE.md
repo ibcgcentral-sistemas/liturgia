@@ -23,6 +23,8 @@ js/calendar.js        Calendario litúrgico. Emite ~420 claves de día.
 js/lectionary.js      Leccionario por clave y ciclo A/B/C.
 js/propers.js         Colectas, introitos, graduales, ofertorios, comuniones,
                       secretas, poscomuniones, prefacios. Cadena de respaldo.
+js/propers-do.js      GENERADO (misal-tools/import-do.js): propios en español de
+                      Divinum Officium (MIT) donde el Misal impreso no trae el suyo.
 js/commemorations.js  Conmemoraciones y resolución de ocurrencias.
 js/canon.js           Ordinario y Canon en los cuatro ritos y tres idiomas.
 js/intercessions.js   Oración de los Fieles.
@@ -67,7 +69,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=31` (Misal) y `?v=28` (bcp2019; la hoja de estilo, `?v=7`).
+   código viejo. Actualmente en `?v=32` (Misal) y `?v=28` (bcp2019; la hoja de estilo, `?v=7`).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -112,21 +114,42 @@ liturgias concretas y cotejarlas con el Misal impreso antes de usarlas en públi
 
 ## Trabajo pendiente, por orden de valor
 
-### 1. Textos litúrgicos que faltan (bloquea el uso real)
+### 1. Textos litúrgicos que faltan (resuelto en lo esencial, 2026-11-02)
 
-Listados en `Propers.MISSING_TEXTS` (`js/propers.js:490`). Hoy se sirve el texto
-del tiempo con una rúbrica que lo declara suplido, en vez de rezar calladamente la
-Secreta de la Trinidad el Jueves Santo. Faltan, y hay que transcribirlos del Misal
-impreso:
+El Misal impreso de 2013 no trae secretas, poscomuniones, introitos, graduales, ofertorios ni
+comuniones por día. Desde el 2026-11-02 los da `js/propers-do.js`, **generado** por
+`misal-tools/import-do.js` con el texto EN ESPAÑOL de **Divinum Officium**
+(<https://github.com/DivinumOfficium/divinum-officium>, licencia MIT: el aviso va en la cabecera
+del archivo y hay que conservarlo). No se redactó nada: se copia sin cambiar palabras, y lo que no
+se pudo resolver sin adivinar se omitió y sigue en `Propers.MISSING_TEXTS`.
 
-- Secretas y Poscomuniones de Epifanía, Pre-Cuaresma, Cuaresma, Tiempo de Pasión,
-  Triduo, Miércoles de Ceniza, los 28 Domingos después de la Trinidad, Corpus,
-  Sagrado Corazón y las fiestas fijas no marianas.
-- Oración sobre el pueblo del Viernes Santo (*super populum*).
-- Introitos de Pre-Cuaresma: *Circumdederunt*, *Exsurge quare obdormis*,
-  *Esto mihi*.
-- Graduales, tractos, ofertorios y comuniones de los Domingos después de la
-  Trinidad y de las fiestas fijas no marianas.
+- **Es traducción de terceros** (el propio proyecto la declara «still under development»; el
+  registro varía: el Sagrado Corazón usa «Os rogamos…»). Calidad no auditada: no la ha revisado
+  ningún liturgista. `propers.js` solo la usa donde el Misal impreso no trae su texto, y nunca
+  sustituye lo que ya trae (`misal-tools/check-propers-do.js` lo vigila día a día).
+- **Cobertura** (barrido 2024-2060): secretas y poscomuniones genéricas pasaron de 3.396 días a
+  74 (solo Viernes y Sábado Santo, que no tienen Misa); introitos, ofertorios y comuniones
+  genéricos, de 616 a 0. Cubre Epifanía, Pre-Cuaresma, Cuaresma, Pasión, Semana Santa, Ceniza,
+  Corpus Christi, Sagrado Corazón, 21 fiestas fijas no marianas y los domingos 2.º y 4.º-25.º
+  después de la Trinidad.
+- **Decisión del usuario (2026-11-02): los domingos después de la Trinidad se reparten POR LA
+  COLECTA que imprime el Misal.** Cada domingo recibe la Misa romana cuya colecta es la suya, para
+  que la secreta y la poscomunión vayan con ella: `trinityN` = Pentecostés N−1 de la Misa
+  romana desde `trinity4` hasta `trinity25`, y `trinity2` = Pentecostés 2 (el desfase se midió
+  comparando colectas; el mapa está en `misal-tools/trinidad-do.json`). Por posición en el
+  calendario habría salido otra Misa, dos semanas distinta. `trinity4` descansa en una oración
+  que el archivo de colectas de Divinum Officium no trae y se identificó por su contenido.
+- **Sin texto propio (siguen suplidos, con su rúbrica)**: los domingos 1.º, 3.º, 26.º y 27.º después
+  de la Trinidad (su colecta del Misal no tiene Misa romana equivalente), Adviento II-IV, Ascensión,
+  Pascua II-VII y algunas fiestas fijas cuyas Misas usan Comunes que Divinum Officium no trae en
+  español (lista exacta en `MISSING_TEXTS`). La oración sobre el pueblo del Viernes Santo
+  (*super populum*) solo existe en latín y de 1955.
+- Divinum Officium usa el calendario y los textos romanos de 1962: Felipe y Santiago (05-01)
+  figura allí el 11 de mayo y no se importó; el importador comprueba el título de cada fiesta.
+- Para regenerar: bajar `web/www/missa/Espanol/{Tempora,Sancti,Ordo}` a una carpeta y correr
+  `node misal-tools/import-do.js <carpeta>`; `node misal-tools/check-propers-do.js [carpeta]`
+  comprueba que lo generado sigue idéntico a la fuente. Los archivos descargados son DATOS: se leen,
+  no se ejecutan.
 
 ### 2. Salmos del BCP 2019: título y versículos (resuelto en lo medible, 2026-11-02)
 

@@ -489,27 +489,15 @@ const Propers = (() => {
   // transcribirse del Misal Anglicano impreso.
   const MISSING_TEXTS = [
     { part: 'canon1928',     need: 'Revisar la traducción española del BCP 1928 (Canon.CANON_1928, CHURCH_MILITANT_1928, THANKSGIVING_1928 y la introducción del Padrenuestro): el texto inglés está cotejado con el BCP 1928, pero la versión española es traducción propia, no de una edición impresa en español' },
-    { part: 'secret',        need: 'Secreta del tiempo de Epifanía' },
-    { part: 'secret',        need: 'Secreta del tiempo de Pre-Cuaresma (Septuagésima)' },
-    { part: 'secret',        need: 'Secreta del tiempo de Cuaresma' },
-    { part: 'secret',        need: 'Secreta del Tiempo de Pasión y de la Semana Santa' },
-    { part: 'secret',        need: 'Secreta del Miércoles de Ceniza' },
-    { part: 'secret',        need: 'Secretas propias de los 28 Domingos después de la Trinidad' },
-    { part: 'secret',        need: 'Secreta de Corpus Christi y del Sagrado Corazón' },
-    { part: 'secret',        need: 'Secretas de las fiestas fijas no marianas (Apóstoles, Evangelistas, Todos los Santos, Transfiguración, Santa Cruz, San Miguel, comites Christi)' },
-    { part: 'postcommunion', need: 'Poscomunión del tiempo de Epifanía' },
-    { part: 'postcommunion', need: 'Poscomunión del tiempo de Pre-Cuaresma (Septuagésima)' },
-    { part: 'postcommunion', need: 'Poscomunión del tiempo de Cuaresma' },
-    { part: 'postcommunion', need: 'Poscomunión del Tiempo de Pasión y de la Semana Santa' },
-    { part: 'postcommunion', need: 'Poscomunión del Miércoles de Ceniza' },
-    { part: 'postcommunion', need: 'Oración sobre el pueblo del Viernes Santo (super populum)' },
-    { part: 'postcommunion', need: 'Poscomuniones propias de los 28 Domingos después de la Trinidad' },
-    { part: 'postcommunion', need: 'Poscomunión de Corpus Christi y del Sagrado Corazón' },
-    { part: 'postcommunion', need: 'Poscomuniones de las fiestas fijas no marianas' },
-    { part: 'introit',       need: 'Introito del tiempo de Pre-Cuaresma (Circumdederunt / Exsurge / Esto mihi)' },
-    { part: 'introit',       need: 'Introitos propios de los 28 Domingos después de la Trinidad' },
-    { part: 'introit',       need: 'Introitos de las fiestas fijas no marianas (incl. Todos los Santos, San José, Apóstoles)' },
-    { part: 'introit',       need: 'Introito del Jueves Santo, Viernes Santo y Sábado Santo' },
+    // Propios de la Misa que el Misal impreso no trae: desde 2026-11-02 los da js/propers-do.js (Divinum Officium, español de terceros;
+    // misal-tools/import-do.js). Lo que sigue es lo que AÚN no tiene texto propio y cae al del tiempo, rotulado como suplido.
+    { part: 'propers-do',    need: 'Revisar con el Misal impreso, o con un liturgista, los textos de propers-do.js: son traducción de terceros (Divinum Officium, MIT) de calidad y registro no auditados, con conclusiones y vocabulario que no siempre coinciden con las colectas del Misal 2013. Los domingos después de la Trinidad se repartieron por la colecta impresa (trinityN = Pentecostés N−1 de la Misa romana, de trinity4 a trinity25; trinity2 = Pentecostés 2); trinity4 descansa en una oración que el archivo de colectas de Divinum Officium no trae y se identificó por su contenido' },
+    { part: 'secret',        need: 'Sin Secreta propia (cae a la del tiempo, suplida): Domingos 1.º, 3.º, 26.º y 27.º después de la Trinidad (su colecta del Misal no tiene Misa romana equivalente), Adviento II-IV, Ascensión, Pascua II-VII, Epifanía (día), Bautismo del Señor, Domingos 1.º y 2.º después de Navidad, Circuncisión, Felipe y Santiago (05-01), San Miguel (09-29), Todos los Santos (11-01) y San Esteban (12-26). Viernes y Sábado Santo no tienen Misa' },
+    { part: 'postcommunion', need: 'Sin Poscomunión propia (cae a la del tiempo, suplida): los mismos días que la Secreta, más San Juan Evangelista (12-27). Falta además la oración sobre el pueblo del Viernes Santo (super populum): en Divinum Officium solo existe la versión de 1955 en latín' },
+    { part: 'introit',       need: 'Sin Introito propio (cae al del tiempo, suplido): San José (03-19), Felipe y Santiago (05-01), Bernabé (06-11), Santiago (07-25), Bartolomé (08-24), Mateo (09-21), Lucas (10-18), Simón y Judas (10-28), Tomás (12-21), Bautismo del Señor, Domingos 1.º y 2.º después de Navidad, Circuncisión, Jueves, Viernes y Sábado Santo, y los Domingos 1.º, 3.º, 26.º y 27.º después de la Trinidad. Los santos cuyas Misas usan el Común de Apóstoles o de Mártires no se importaron: Divinum Officium no trae esos Comunes en español' },
+    { part: 'gradual',       need: 'Sin Gradual o Tracto propio (cae al del tiempo, suplido): Felipe y Santiago (05-01), Adviento II y IV, Ascensión, Bautismo del Señor, Domingos 1.º y 2.º después de Navidad, Circuncisión, Viernes y Sábado Santo, y los Domingos 1.º, 3.º, 26.º y 27.º después de la Trinidad' },
+    { part: 'offertory',     need: 'Sin Ofertorio propio (cae al del tiempo, suplido): San José, Felipe y Santiago, Bernabé, Pedro y Pablo, Santiago, Bartolomé, Lucas, Simón y Judas, Todos los Santos y Tomás; Adviento II-IV, Ascensión, Pascua II-VII, Bautismo del Señor, Domingos 1.º y 2.º después de Navidad, Circuncisión, Viernes y Sábado Santo, y los Domingos 3.º, 26.º y 27.º después de la Trinidad' },
+    { part: 'communion',     need: 'Sin Comunión propia (cae a la del tiempo, suplida): Felipe y Santiago, Bernabé, Pedro y Pablo, Santiago, Bartolomé, Lucas, Simón y Judas; Adviento II-III, Bautismo del Señor, Domingos 1.º y 2.º después de Navidad, Circuncisión, Viernes y Sábado Santo, y los Domingos 3.º, 26.º y 27.º después de la Trinidad' },
     // Prefacios (Misal 2013, «PREFACIOS PROPIOS», l. 3403-3617). Los textos que
     // trae el Misal ya están transcritos en Propers.PREFACES; esto es lo que queda.
     { part: 'preface',       need: 'Prefacio de Corpus Christi: el Misal 2013 NO trae prefacio propio de esa fiesta. El texto que se sirve (narración de la Institución, «quien la víspera de su Pasión tomó el pan…») es del proyecto y no tiene fuente cotejada; no es un prefacio sino texto del Canon. Sin cotejar: sustituir por el que indique el Misal impreso o dejar el que corresponda al tiempo' },
@@ -520,14 +508,6 @@ const Propers = (() => {
     { part: 'preface',       need: 'Octava de la Ascensión: la rúbrica (l. 3452) da «siete días después», que acaba el jueves easterFeria7_4; el viernes easterFeria7_5 conserva Communicantes y Colecta de la Ascensión (canon.js, COLLECTS) pero ya no el prefacio. Decisión pendiente: si la octava llega al viernes, ampliar la regla' },
     { part: 'preface',       need: 'Prefacios del Misal sin día asignado en el calendario: «De Dios Padre/Hijo/Espíritu Santo», Encarnación (l. 3500), Un santo (tres formas, l. 3515-3527), Apóstoles y Evangelistas (l. 3571, segunda redacción; se usa «Apóstoles y Ordenaciones»), Dedicación de una iglesia, Bautismo, Matrimonio y el de la Misa Crismal (l. 1178). Trinidad: la segunda forma («O éste», l. 3478-3482) no se usa. No hay rúbrica que las vincule a un día; los santos no apostólicos llevan hoy el Prefacio Común' },
     { part: 'preface',       need: 'Erratas probables del Misal, transcritas como están impresas: «nos da la virtud y el premio» (Cuaresma, ¿«nos das»?), «cambia más no termina» (Difuntos, ¿«mas»?), comas que faltan en Cristo Rey y Apóstoles y Evangelistas, y «hijo» en minúscula en varios prefacios. Decidir si se corrigen' },
-    { part: 'gradual',       need: 'Graduales propios de los 28 Domingos después de la Trinidad' },
-    { part: 'gradual',       need: 'Graduales/Tractos de las fiestas fijas no marianas' },
-    { part: 'offertory',     need: 'Ofertorio del tiempo de Pre-Cuaresma' },
-    { part: 'offertory',     need: 'Ofertorios propios de Adviento II-IV, Cuaresma II-V y de los Domingos después de la Trinidad' },
-    { part: 'offertory',     need: 'Ofertorios de las fiestas fijas no marianas' },
-    { part: 'communion',     need: 'Comunión del tiempo de Pre-Cuaresma' },
-    { part: 'communion',     need: 'Comuniones propias de Adviento II-III, Cuaresma II-V y de los Domingos después de la Trinidad' },
-    { part: 'communion',     need: 'Comuniones de las fiestas fijas no marianas' },
     { part: 'collect',       need: 'Colectas propias de las ferias de Cuaresma, Adviento y Tiempo de Navidad (hoy toman la del domingo precedente, uso admitido)' },
     // Cotejo de las colectas con el Misal Anglicano 2013 (Sociedad Sacerdotal
     // Corpus Christi; sección «COLECTAS», pp. 57-103). Ese Misal NO trae secretas,
@@ -643,6 +623,20 @@ const Propers = (() => {
                           '08-24','09-21','10-18','10-28','11-30','12-21','12-27'];
 
   // ══════════════════════════════════════════════════════════════════════════
+  //  PROPIOS DE DIVINUM OFFICIUM (js/propers-do.js)
+  // ══════════════════════════════════════════════════════════════════════════
+  // El Misal impreso de 2013 no trae secretas, poscomuniones, introitos, graduales, ofertorios ni comuniones de la mayor parte del
+  // año. propers-do.js (generado por misal-tools/import-do.js) los trae EN ESPAÑOL de Divinum Officium (MIT), sin cambiar palabras.
+  // Son traducción de terceros, de calidad no auditada, y aquí SOLO llenan huecos: nunca sustituyen un texto que el Misal impreso
+  // ya trae. Los domingos después de la Trinidad se reparten por la colecta que imprime el Misal (decisión del usuario).
+  if (typeof PROPERS_DO !== 'undefined') {
+    for (const [parte, mapa] of [['introit', INTROITS], ['gradual', GRADUALS], ['offertory', OFFERTORIES],
+                                 ['communion', COMMUNIONS], ['secret', SECRETS], ['postcommunion', POSTCOMMUNIONS]]) {
+      for (const [clave, valor] of Object.entries(PROPERS_DO[parte] || {})) if (mapa[clave] === undefined) mapa[clave] = valor;
+    }
+  }
+
+  // ══════════════════════════════════════════════════════════════════════════
   //  CADENAS DE RESPALDO POR PIEZA
   // ══════════════════════════════════════════════════════════════════════════
   // Para cada pieza: el mapa de textos, qué clave usar como propio DEL TIEMPO
@@ -695,6 +689,13 @@ const Propers = (() => {
                   pentecost:'pentecost', trinity:'trinity' },
     },
   };
+
+  // Con los propios de propers-do.js hay texto del tiempo donde antes no lo había: se enlaza su clave de respaldo (el primer
+  // domingo del tiempo, como ya hace el introito de Cuaresma). Si falta la clave, la cadena sigue cayendo al genérico.
+  Object.assign(CHAINS.introit.bySeason, { preLent: 'septuagesima' });
+  Object.assign(CHAINS.offertory.bySeason, { preLent: 'septuagesima' });
+  Object.assign(CHAINS.communion.bySeason, { preLent: 'septuagesima' });
+  for (const p of ['secret', 'postcommunion']) Object.assign(CHAINS[p].bySeason, { epiphany: 'epi1', preLent: 'septuagesima', lent: 'lent1', passiontide: 'lent5' });
 
   const SEASON_LABEL = {
     advent:     'del tiempo de Adviento',
