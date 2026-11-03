@@ -50,11 +50,12 @@ function resolveLectionaryKey(dayInfo, date) {
   return { key: null, borrowedFromSunday: false };
 }
 
-// Las colectas, salvo las de Ceniza y Semana Santa, son traducción del inglés hecha en este proyecto (ver propers.js,
-// COLLECT_OFFICIAL): mientras no las revise un liturgista, la liturgia lo dice bajo la colecta. Ponerlo en false cuando
-// estén revisadas (la prueba de test-bcp2019.js no depende de esto).
-const SHOW_COLLECT_TRANSLATION_NOTE = true;
-const COLLECT_TRANSLATION_NOTE = 'Colecta traducida del inglés (BCP 2019); pendiente de revisión litúrgica.';
+// Las colectas, salvo las de Ceniza, Semana Santa y la Anunciación, son traducción del inglés hecha en este proyecto (ver
+// propers.js, COLLECT_OFFICIAL). La nota bajo la colecta decía que faltaba la revisión litúrgica; el 2026-11-02 el usuario
+// delegó en el revisor la autoridad litúrgica sobre cada colecta y la revisión se dio por hecha, así que se apagó (ver
+// COLECTAS-REVISION.md). Ponerla en true la muestra de nuevo (la prueba de test-bcp2019.js no depende de esto).
+const SHOW_COLLECT_TRANSLATION_NOTE = false;
+const COLLECT_TRANSLATION_NOTE = 'Colecta traducida del inglés (BCP 2019).';
 
 // La Colecta del Día toma prestada la del Domingo/fiesta precedente cuando la
 // feria no tiene una propia — a diferencia de resolveLectionaryKey(), esto NO

@@ -67,7 +67,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=31` (Misal) y `?v=25` (bcp2019; la hoja de estilo, `?v=7`).
+   código viejo. Actualmente en `?v=31` (Misal) y `?v=26` (bcp2019; la hoja de estilo, `?v=7`).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -300,9 +300,9 @@ No volver a plantearlas salvo que él las reabra:
   reconstruidas de memoria y no coincidían con el libro (el Propio 3 era otra oración).
   Ahora hay 95: **6 oficiales** (Ceniza, Ramos, Jueves, Viernes y Sábado Santo y la Anunciación,
   copiadas del libro en español, `COLLECT_OFFICIAL`) y **89 traducidas** por este proyecto del *Collects of the
-  Christian Year* del BCP 2019. Son traducciones propias, **pendientes de revisión litúrgica**
-  (`bcp2019/COLECTAS-REVISION.md`); la liturgia imprime bajo cada una la nota «Colecta traducida
-  del inglés», que se apaga con `SHOW_COLLECT_TRANSLATION_NOTE = false` en `app.js`. Fórmulas
+  Christian Year* del BCP 2019. Son traducciones propias (`bcp2019/COLECTAS-REVISION.md`), dadas
+  por revisadas por delegación del usuario (ver abajo), así que la nota «Colecta traducida del
+  inglés» está apagada: `SHOW_COLLECT_TRANSLATION_NOTE = false` en `app.js`. Fórmulas
   finales del propio libro en español. `test-bcp2019.js` 8 y `bcp2019-tools/check-colectas.js`
   vigilan que las oficiales sigan idénticas al libro y que las traducidas tengan la forma, la
   longitud y el santo correctos; no pueden juzgar la calidad del español. El inglés no está en
@@ -310,13 +310,18 @@ No volver a plantearlas salvo que él las reabra:
   **Revisión asistida (2026-11-02):** a petición del usuario, tres agentes contrastaron las 89
   colectas con el inglés y el léxico del libro, un modelo distinto consolidó, y se verificaron las
   citas antes de aplicar: 6 cambios en colectas (ver `COLECTAS-REVISION.md`). Lo hizo un modelo,
-  **no un liturgista**: las 89 traducciones siguen pendientes. Decisiones del usuario: el 2.º
+  **no un liturgista** (ver la delegación más abajo). Decisiones del usuario: el 2.º
   Domingo de Navidad conserva la traducción propia aunque el libro lo traiga en la Vigilia, y
   «Santísima Virgen María» unifica 05-31 y 08-15 (única forma del libro, l. 6492). Después, a
   petición del usuario, el revisor tomó las decisiones de estilo que quedaban: siete retoques de
   fidelidad (Epifanía 2 y 8, Pascua 4, Propio 20, 11 jun, 21 sep y 25 ene; ver
-  `COLECTAS-REVISION.md`) y el resto se dejó como está. Lo único que falta es la aprobación de
-  una autoridad litúrgica, que un modelo no puede dar: por eso la nota impresa sigue en pie.
+  `COLECTAS-REVISION.md`) y el resto se dejó como está. **Autoridad litúrgica delegada
+  (2026-11-02):** el usuario dio al revisor (Claude) la autoridad litúrgica sobre cada colecta
+  del BCP 2019 y mandó darlas por revisadas; por eso se apagó la nota. Es una delegación del
+  responsable del proyecto, **no una aprobación de ninguna autoridad eclesiástica**: no decir
+  en la app ni en la documentación que están «aprobadas» por la Iglesia o un obispo. Con esa
+  delegación el revisor puede cambiar la redacción de cualquier colecta traducida sin volver a
+  preguntar, comprobando siempre contra el inglés y el libro (y `check-colectas.js`).
   Las pruebas se corren con años (`node test-bcp2019.js 2026 2026`): `check-colectas.js` ya no toma
   esos años por rutas (antes se saltaba en silencio la comparación con el libro y la prueba decía
   «oficiales idénticas»; ahora el rótulo cuenta las comparadas).

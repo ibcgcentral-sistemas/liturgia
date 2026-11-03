@@ -16,8 +16,9 @@
  * (LOC-10-10-23.md); las otras 89 son TRADUCCIÓN del inglés
  * del BCP 2019 («Collects of the Christian Year», pp. 598-640 del libro en inglés), hecha en este proyecto POR
  * DECISIÓN EXPRESA DEL USUARIO (2026-11-02), que levantó para esto la regla 1 de CLAUDE.md (no traducir). Siguen
- * siendo traducciones propias, no texto oficial: están pendientes de revisión litúrgica (bcp2019/COLECTAS-REVISION.md)
- * y la liturgia lo avisa en una rúbrica (SHOW_COLLECT_TRANSLATION_NOTE en app.js).
+ * siendo traducciones propias, no texto oficial. El 2026-11-02 el usuario delegó en el revisor la autoridad litúrgica sobre
+ * cada colecta (no es aprobación de ninguna autoridad eclesiástica) y se dieron por revisadas (bcp2019/COLECTAS-REVISION.md);
+ * la nota bajo la colecta, que lo avisaba, se apagó (SHOW_COLLECT_TRANSLATION_NOTE en app.js).
  */
 
 const BCPPropers = (() => {
@@ -132,7 +133,7 @@ const BCPPropers = (() => {
   // Procedencia de cada colecta. Estas seis son el texto OFICIAL del libro en español, copiado de sus liturgias
   // (Miércoles de Ceniza, Semana Santa y Anunciación; el valor es la línea de LOC-10-10-23.md). TODAS las demás son TRADUCCIÓN
   // del inglés del BCP 2019 hecha en este proyecto (2026-11-02), porque la sección «Colectas del Año Cristiano» no
-  // existe en español en los archivos del proyecto. Las traducciones están pendientes de revisión litúrgica.
+  // existe en español en los archivos del proyecto. Las traducciones se dieron por revisadas por delegación del usuario (ver arriba).
   // Seis: a las cinco de Ceniza y Semana Santa se sumó (2026-11-02, tras la revisión litúrgica) la Anunciación, que el libro
   // trae completa en el Ángelus (l. 1069-1072). El Domingo 2.º después de Navidad también está en el libro (Vigilia Pascual,
   // l. 15456-15458, con fórmula final breve), pero por decisión del usuario se queda con la traducción propia del inglés.

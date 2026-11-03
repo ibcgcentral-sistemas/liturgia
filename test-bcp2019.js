@@ -527,7 +527,7 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   }
   console.log(`\nDías con lecturas prestadas del domingo o fiesta correspondiente: ${borrowed} de ${days}`);
   console.log('\nPENDIENTES CONOCIDOS (no los comprueba esta prueba):');
-  console.log(`  - Colectas: ${colectas.traducidas} son traducción propia del inglés (el libro en español no trae «Colectas del Año Cristiano»), pendientes de revisión litúrgica; ver bcp2019/COLECTAS-REVISION.md.`);
+  console.log(`  - Colectas: ${colectas.traducidas} son traducción propia del inglés (el libro en español no trae «Colectas del Año Cristiano»), dadas por revisadas por delegación del usuario, no aprobadas por una autoridad eclesiástica; ver bcp2019/COLECTAS-REVISION.md.`);
   for (const n of colectas.notas || []) console.log('  - Colectas: ' + n + ' (ver bcp2019-tools/check-colectas.js).');
   console.log(`  - ${inheritFallback} días cuyo Propio de la semana es el 1 o el 2 usan la colecta del domingo anterior (sin texto español).`);
   console.log('  - Salmos: se leen de la Biblia de Jerusalén; el Salterio español del libro aún no se usa.');
