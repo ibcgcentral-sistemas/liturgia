@@ -1,9 +1,7 @@
 // Vigila las colectas de bcp2019/js/propers.js (BCPPropers.COLLECTS).
-//  1. Las 7 de COLLECT_OFFICIAL (Miércoles de Ceniza, Semana Santa, Anunciación y Domingo 2.º después de Navidad) deben
-//     ser IDÉNTICAS al libro en español (LOC-10-10-23.md): se compara con el texto del libro, buscado por su comienzo, y se
-//     exige que esté en la línea que dice COLLECT_OFFICIAL (si el libro se vuelve a convertir y se mueve, falla a la vista).
-//     El Domingo 2.º después de Navidad es «oficial compuesta»: el libro lo trae en la Vigilia Pascual con fórmula final
-//     breve, y propers.js le pone la larga que el propio libro da en la misma juntura (FINAL_LIBRO, más abajo).
+//  1. Las 6 de COLLECT_OFFICIAL (Miércoles de Ceniza, Semana Santa y Anunciación) deben ser IDÉNTICAS al libro en español
+//     (LOC-10-10-23.md): se compara con el texto del libro, buscado por su comienzo, y se exige que esté en la línea que dice
+//     COLLECT_OFFICIAL (si el libro se vuelve a convertir y se mueve, falla a la vista).
 //  2. Las demás son TRADUCCIÓN del inglés y no se pueden comparar palabra por palabra; se comprueba lo que sí se puede:
 //     que cada una termine en «Amén.», que no quede inglés suelto, que la fórmula final (por los siglos de los siglos /
 //     ahora y por siempre / en gloria eterna) corresponda a la inglesa si se da el libro en inglés, y que su longitud sea
@@ -28,14 +26,7 @@ const INICIO = {
   maundyThursday: 'Padre todopoderoso, cuyo amadísimo Hijo, la noche antes de sufrir',
   goodFriday: 'Dios todopoderoso, te rogamos que mires compasivamente a esta tu familia',
   holySaturday: 'Oh Dios, Creador del cielo y de la tierra: Concede que, así como el Cuerpo crucificado',
-  christmasSunday2: 'Oh Dios, que creaste maravillosamente',
   '03-25': 'Derrama tu gracia en nuestros corazones',
-};
-// Oficiales cuyo libro da una fórmula final distinta de la que imprime propers.js: se comprueba que el libro trae esa
-// fórmula, tal cual, en la juntura indicada (líneas 1-based, ambas incluidas), y que el texto de propers.js es el oficial
-// sin su «Amén.» final más esa fórmula.
-const FINAL_LIBRO = {
-  christmasSunday2: { desde: 14246, hasta: 14252, antes: 'tu Hijo Jesucristo nuestro Señor', texto: '; que vive y reina contigo, en la unidad del Espíritu Santo, un solo Dios, por los siglos de los siglos. Amén.' },
 };
 // Que cada fiesta mencione a su santo o su misterio: guarda contra traducir la colecta de otro día.
 const NOMBRES = {
@@ -80,13 +71,7 @@ function compare(locPath = LOC, enPath = EN) {
       if (of === null) { fallos.push(`${k}: no encuentro su texto en el libro en español`); continue; }
       oficialesComparadas++;
       if (of.linea !== P.COLLECT_OFFICIAL[k]) fallos.push(`${k}: COLLECT_OFFICIAL dice l. ${P.COLLECT_OFFICIAL[k]} y el libro la trae en la l. ${of.linea}`);
-      let esperado = of.texto;
-      const fin = FINAL_LIBRO[k];
-      if (fin) {
-        const juntura = lines.slice(fin.desde - 1, fin.hasta).map(l => l.trim()).join(' ').replace(/\s+/g, ' ');
-        if (!juntura.includes(fin.antes + fin.texto)) fallos.push(`${k}: el libro ya no trae su fórmula final en l. ${fin.desde}-${fin.hasta}`);
-        esperado = esperado.replace(/\. Amén\.?$/, '') + fin.texto;
-      }
+      const esperado = of.texto;
       if (P.COLLECTS[k] !== esperado) fallos.push(`${k}: no coincide con el libro en español (l. ${P.COLLECT_OFFICIAL[k]}): app «${P.COLLECTS[k].slice(0, 50)}…» ≠ libro «${esperado.slice(0, 50)}…»`);
     }
   } else notas.push('sin el libro en español: no se compararon las oficiales');
@@ -101,6 +86,8 @@ function compare(locPath = LOC, enPath = EN) {
     const es = P.COLLECTS[k];
     if (!/Amén\.$/.test(es)) fallos.push(`${k}: no termina en «Amén.»`);
     if (INGLES.test(es)) fallos.push(`${k}: queda texto en inglés («${(INGLES.exec(es) || [])[0]}»)`);
+    // Decisión del usuario (2026-11-02): «the blessed Virgin Mary» se dice siempre «la Santísima Virgen María», la única forma del libro (l. 6492).
+    if (/(bendita|bienaventurada) Virgen María/.test(es)) fallos.push(`${k}: debe decir «la Santísima Virgen María», no «bendita» ni «bienaventurada»`);
     if (es.length < 120) fallos.push(`${k}: demasiado corta (${es.length} caracteres)`);
     for (const n of NOMBRES[k] || []) if (!es.includes(n)) fallos.push(`${k}: debería mencionar «${n}»`);
     if (ing && ing[k]) {

@@ -371,6 +371,7 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
           for (const m of ['EL SERMÓN', 'RENOVACIÓN DE LAS PROMESAS BAUTISMALES', '¿Renuevas tú, aquí en la presencia de Dios', 'Sí, me comprometo.', 'Desde allí ha de venir a juzgar a vivos y muertos.', 'y la vida eterna. Amén.', 'que has edificado a tu Iglesia sobre el fundamento', 'La celebración continúa con las Oración de los Fieles.', 'ORACIÓN DE LOS FIELES', 'PREFACIO: PASCUA']) { const j = parte.indexOf(m, pos); if (j < 0) { falta = falta || m; continue; } pos = j + m.length; }
           HW(!falta, `${w}${n}: la Renovación de los Votos Bautismales falta o está fuera de orden en la Vigilia (${falta})`);
           HW((parte.match(/Sí, renuncio\./g) || []).length === 3 && (parte.match(/Sí, creo\./g) || []).length === 3 && (parte.match(/¿Renuevas tú/g) || []).length === 1, `${w}${n}: la Renovación debe traer 3 «Sí, renuncio.», 3 «Sí, creo.» y una sola pregunta inicial`);
+          HW(parte.includes('¿Renuncias a Satanás y a todas sus fuerzas espirituales de maldad que se rebelan contra Dios?') && !/(^|[^¿])Renuncias a Satanás/.test(parte), `${w}${n}: la pregunta «¿Renuncias a Satanás…?» debe llevar su «¿» de apertura (errata del libro corregida)`);
           HW(!/Excepto en la Vigilia Pascual|RITOS PASTORALES|Creemos en un solo Dios|EL CREDO NICENO/.test(parte), `${w}${n}: la Vigilia no lleva Credo Niceno ni la última línea del rito de la Renovación`);
         }
         HW(lib.includes('<strong>Pueblo: Sí, creo. Creo en Dios Padre todopoderoso'), `${w} Librito: «Sí, creo.» y el artículo del Credo deben ir juntos y en negrita (lo que dice el pueblo)`);
@@ -394,7 +395,9 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
       const L = fs.readFileSync(gen2.LOC_POR_DEFECTO, 'utf8').split(/\r?\n/);
       const libro = (a, b) => n2(L.slice(a - 1, b).map(l => l.trim()).filter(l => l && !/^\d{3}$/.test(l)).map(l => l.replace(/^(Celebrante|Pueblo|Pregunta)\s+/, '')).join(' '));
       const datos = n => n2(D2[n].map(i => i.x).join(' '));
-      HW(libro(4835, 4907) === datos('easterVigilRenewal'), 'easterVigilRenewal no es el texto del libro (LOC l. 4835-4907)');
+      // Solo con las erratas que el usuario decidió corregir (CORRECCIONES en build-holyweek.js); todo lo demás, tal cual.
+      let ren = libro(4835, 4907); for (const [de, a] of gen2.CORRECCIONES) ren = ren.replace(de, a);
+      HW(ren === datos('easterVigilRenewal'), 'easterVigilRenewal no es el texto del libro (LOC l. 4835-4907) más las correcciones declaradas');
       HW(libro(15632, 15633) === datos('easterVigilContinues'), 'easterVigilContinues no es el texto del libro (LOC l. 15632-15633)');
     }
   } catch (e) { hw.push('no se pudo comprobar la Renovación de los Votos Bautismales: ' + e.message); }

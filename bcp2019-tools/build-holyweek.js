@@ -190,6 +190,14 @@ const OVERRIDES_PREFIJO = [
   ['Celebrante y ', 'R'],                             // «Celebrante y gente / y Pueblo / y las personas juntas pueden decir»: quién lo dice
 ];
 
+// Erratas del libro que se corrigen al copiar (decisión del usuario, 2026-11-02). Lo demás se copia tal cual, con sus
+// erratas: si algo no está aquí, es del libro. Cada una debe encontrar su texto, o el script falla (el libro cambió).
+// test-bcp2019.js 9 compara lo generado con el libro aplicando SOLO estas correcciones.
+const CORRECCIONES = [
+  // LOC l. 4849-4850: la pregunta de la Renovación de los Votos Bautismales no lleva el «¿» de apertura (tampoco en l. 4633).
+  ['Renuncias a Satanás y a todas sus fuerzas espirituales de maldad que se rebelan contra Dios?', '¿Renuncias a Satanás y a todas sus fuerzas espirituales de maldad que se rebelan contra Dios?'],
+];
+
 function tipoLinea(l) {
   if (OVERRIDES[l]) return OVERRIDES[l];
   for (const [p, t] of OVERRIDES_PREFIJO) if (l.startsWith(p)) return t;
@@ -271,7 +279,7 @@ function envuelveVersos(ls, v, nombre) {
 
 function construir(locPath) {
   const lineas = fs.readFileSync(locPath, 'utf8').split(/\r?\n/);
-  const out = {}, origen = {};
+  const out = {}, origen = {}, aplicadas = new Set();
   for (const [nombre, def] of Object.entries(SECCIONES)) {
     const r = recorte(lineas, def, def.desde);
     let ls = r.lineas.slice();
@@ -283,13 +291,19 @@ function construir(locPath) {
       ls = ls.slice(0, a).concat(['[[LECTURAS]]'], ls.slice(b));
     }
     for (const v of VERSOS[nombre] || []) ls = envuelveVersos(ls, v, nombre);
-    let items = analizar(ls);
+    let items = analizar(ls).map(it => {
+      if (it.x === undefined) return it;
+      let x = it.x;
+      for (const [de, a] of CORRECCIONES) if (x.includes(de)) { x = x.replace(de, a); aplicadas.add(de); }
+      return x === it.x ? it : { ...it, x };
+    });
     // Las citas bíblicas que el app sustituye por el texto (LECCION / EVANGELIO) y la introducción como rúbrica.
     items = items.map(it => (it.t === 'REF' && LECCIONES[it.x]) ? { t: LECCIONES[it.x].t, x: it.x, ref: LECCIONES[it.x].ref } : it);
     if (def.comoRubrica) items = items.map(it => (it.t === 'P' ? { t: 'R', x: it.x } : it));
     out[nombre] = items;
     origen[nombre] = `LOC l. ${r.desde + 1}-${r.hasta}`;
   }
+  for (const [de] of CORRECCIONES) if (!aplicadas.has(de)) throw new Error('la corrección «' + de.slice(0, 40) + '…» ya no encuentra su texto en el libro');
   return { out, origen };
 }
 
@@ -306,7 +320,7 @@ const BCP_HOLYWEEK_DATA = ${JSON.stringify(out, null, 1)};
 `;
 }
 
-module.exports = { construir, archivo, LOC_POR_DEFECTO };
+module.exports = { construir, archivo, LOC_POR_DEFECTO, CORRECCIONES };
 
 if (require.main === module) {
   const args = process.argv.slice(2);

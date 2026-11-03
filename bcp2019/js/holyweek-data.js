@@ -2219,7 +2219,7 @@ const BCP_HOLYWEEK_DATA = {
   },
   {
    "t": "CEL",
-   "x": "Renuncias a Satanás y a todas sus fuerzas espirituales de maldad que se rebelan contra Dios?"
+   "x": "¿Renuncias a Satanás y a todas sus fuerzas espirituales de maldad que se rebelan contra Dios?"
   },
   {
    "t": "PUEBLO",

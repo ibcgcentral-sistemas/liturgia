@@ -67,7 +67,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=31` (Misal) y `?v=23` (bcp2019; la hoja de estilo, `?v=7`).
+   código viejo. Actualmente en `?v=31` (Misal) y `?v=24` (bcp2019; la hoja de estilo, `?v=7`).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -252,8 +252,11 @@ sale con título (no se midió cuántos).
   el libro para la Vigilia) y la marca del Cirio Pascual. **Renovación de los Votos Bautismales**
   (2026-11-02): sí está (`easterVigilRenewal` y `easterVigilContinues`, LOC l. 4835-4907 y
   15632-15633), tras el Sermón y antes de las Oraciones del Pueblo, sin Credo Niceno; se copió tal
-  cual, con las erratas del libro (falta el «¿» de «Renuncias a Satanás…», «¿Creen y confían?» en
-  plural, «las Oración de los Fieles»). `test-bcp2019.js` 9 compara esas dos secciones con el libro.
+  cual, con las erratas del libro («¿Creen y confían?» en plural, «las Oración de los Fieles»),
+  salvo una que el usuario mandó corregir: el «¿» de apertura de «¿Renuncias a Satanás…?», que el
+  libro omite (`CORRECCIONES` en `build-holyweek.js`: el script falla si el libro cambia y la
+  corrección ya no encuentra su texto). `test-bcp2019.js` 9 compara esas dos secciones con el
+  libro más solo esas correcciones.
   Solo se modela la posición tras el Sermón (el libro permite también tras las lecturas). **Miércoles de Ceniza** (2026-11-02): su rito propio
   (`ashWednesday*` en `holyweek-data.js`, `test-bcp2019.js` 10) sustituye a los Ritos
   Iniciales, la colecta aparte, el Credo, las Oraciones del Pueblo y la confesión
@@ -295,10 +298,8 @@ No volver a plantearlas salvo que él las reabra:
 - **Colectas traducidas del inglés en el BCP 2019** (2026-11-02): el usuario pidió expresamente
   traducir, «a pesar de la regla del proyecto». Las colectas que traía `propers.js` estaban
   reconstruidas de memoria y no coincidían con el libro (el Propio 3 era otra oración).
-  Ahora hay 95: **7 oficiales** (Ceniza, Ramos, Jueves, Viernes y Sábado Santo, la Anunciación y
-  el Domingo 2.º después de Navidad, copiadas del libro en español, `COLLECT_OFFICIAL`; la última
-  es «compuesta»: cuerpo de la Vigilia Pascual y fórmula larga de la misma juntura en otra oración
-  del libro) y **88 traducidas** por este proyecto del *Collects of the
+  Ahora hay 95: **6 oficiales** (Ceniza, Ramos, Jueves, Viernes y Sábado Santo y la Anunciación,
+  copiadas del libro en español, `COLLECT_OFFICIAL`) y **89 traducidas** por este proyecto del *Collects of the
   Christian Year* del BCP 2019. Son traducciones propias, **pendientes de revisión litúrgica**
   (`bcp2019/COLECTAS-REVISION.md`); la liturgia imprime bajo cada una la nota «Colecta traducida
   del inglés», que se apaga con `SHOW_COLLECT_TRANSLATION_NOTE = false` en `app.js`. Fórmulas
@@ -308,9 +309,10 @@ No volver a plantearlas salvo que él las reabra:
   el repositorio: `BCP_EN_MD=ruta/BCP2019-en.md` activa la comparación con el original.
   **Revisión asistida (2026-11-02):** a petición del usuario, tres agentes contrastaron las 89
   colectas con el inglés y el léxico del libro, un modelo distinto consolidó, y se verificaron las
-  citas antes de aplicar: 7 cambios (ver `COLECTAS-REVISION.md`). Lo hizo un modelo, **no un
-  liturgista**: las 88 traducciones siguen pendientes. Falta decidir «bendita» frente a
-  «bienaventurada Virgen María» (05-31 y 08-15; el libro dice «la Santísima Virgen María»).
+  citas antes de aplicar: 6 cambios en colectas (ver `COLECTAS-REVISION.md`). Lo hizo un modelo,
+  **no un liturgista**: las 89 traducciones siguen pendientes. Decisiones del usuario: el 2.º
+  Domingo de Navidad conserva la traducción propia aunque el libro lo traiga en la Vigilia, y
+  «Santísima Virgen María» unifica 05-31 y 08-15 (única forma del libro, l. 6492).
   Las pruebas se corren con años (`node test-bcp2019.js 2026 2026`): `check-colectas.js` ya no toma
   esos años por rutas (antes se saltaba en silencio la comparación con el libro y la prueba decía
   «oficiales idénticas»; ahora el rótulo cuenta las comparadas).
