@@ -77,6 +77,9 @@ function resolveCollectKey(dayInfo, date) {
 // `opts.form`: 'standard' (Texto Estándar, la primera forma del libro) o 'renewed' (Texto Antiguo Renovado, la segunda).
 async function generateLiturgy(date, opts = {}) {
   const form = opts.form === 'renewed' ? 'renewed' : 'standard';
+  // Rito bautismal de la Gran Vigilia (solo el Sábado Santo): 'renewal' (Renovación de los Votos, sin candidatos), 'baptism'
+  // (Santo Bautismo) o 'baptismConf' (Santo Bautismo con Confirmación, Recepción y Reafirmación): los tres que el libro permite.
+  const baptism = ['baptism', 'baptismConf'].includes(opts.baptism) ? opts.baptism : 'renewal';
   const dayInfo = BCPCalendar.getDay(date);
   const { key: lKey, borrowedFromSunday, cycle: borrowedCycle } = resolveLectionaryKey(dayInfo, date);
   const readings = lKey ? BCPLectionary.getSundayReadings(lKey, borrowedCycle || dayInfo.cycle) : null;
@@ -113,7 +116,7 @@ async function generateLiturgy(date, opts = {}) {
 
   currentMassState = {
     date, dayInfo, readings, firstReading, secondReading, gospel, psalmVerses, psalmAnt,
-    collect, collectKey, preface, borrowedFromSunday, vigilTexts, form,
+    collect, collectKey, preface, borrowedFromSunday, vigilTexts, form, baptism,
     // La feria sin Colecta propia toma la del Domingo o fiesta precedente (resolveCollectKey): la liturgia lo dice.
     collectBorrowed: collectKey !== dayInfo.key,
   };
@@ -229,7 +232,10 @@ function buildLiturgyHTML(d) {
   // que cambia el prefacio (el de Pascua), la Fracción y la Despedida (con Aleluya) y añade su bendición opcional.
   // El Miércoles de Ceniza (ash) trae su propia confesión, absolución, palabras confortantes y paz (holyweek.js): aquí se
   // salta lo habitual y, antes de la bendición, va la oración de cierre del libro.
-  const eucharistEndHtml = ({ preface = d.preface, vigil = false, ash = false } = {}) => {
+  // `sinConfesion`: el rito del Santo Bautismo de la Vigilia trae su propia paz y sigue «con la Santa Cena, empezando con el
+  // Ofertorio»: no se repiten la confesión ni la paz.
+  const eucharistEndHtml = ({ preface = d.preface, vigil = false, ash = false, sinConfesion = false } = {}) => {
+    const sinConfesionNiPaz = ash || sinConfesion;   // Ceniza trae las suyas; el Bautismo, la paz
     const pf = preface;
     const fraccionSinAleluya = vigil ? false : isLent, despedidaConAleluya = vigil ? true : isEaster;
     const bendicionVigilia = vigil ? BCPHolyWeek.render('easterVigilBlessing') : '';
@@ -239,7 +245,7 @@ function buildLiturgyHTML(d) {
       // que en el Estándar (el libro la repite); el Miércoles de Ceniza salta la confesión y la paz, como arriba.
       const prefacioHtml = () => `<div class="prayer-text">${pf ? pf.text : ''}</div>`;
       return `
-    ${ash ? '' : `<div class="mass-section">
+    ${sinConfesionNiPaz ? '' : `<div class="mass-section">
       <h3 class="section-title">✠ CONFESIÓN Y ABSOLUCIÓN DE LOS PECADOS</h3>
       ${rat('renewedConfession')}
     </div>
@@ -303,7 +309,7 @@ function buildLiturgyHTML(d) {
 `;
     }
     return `
-    ${ash ? '' : `<div class="mass-section">
+    ${sinConfesionNiPaz ? '' : `<div class="mass-section">
       <h3 class="section-title">✠ CONFESIÓN Y ABSOLUCIÓN DE LOS PECADOS</h3>
       <div class="liturgical-text-block">${BCPEucharist.CONFESSION}</div>
       <h4 class="section-title">PALABRAS RECONFORTANTES</h4>
@@ -417,15 +423,21 @@ function buildLiturgyHTML(d) {
       <h3 class="section-title main-section">✠ LA ACLAMACIÓN PASCUAL Y LA PALABRA</h3>
       ${BCPHolyWeek.render('easterVigilWord', '', leerVigilia)}
     </div>
-    <!-- Sin candidatos para el Bautismo o la Confirmación, el libro manda la Renovación de los Votos Bautismales tras el
-         Sermón; el Bautismo y la Confirmación solo constan como la rúbrica del libro. No se dice el Credo Niceno. -->
+    <!-- Tras el Sermón, uno de los tres ritos que el libro permite (l. 15643-15654): sin candidatos, la Renovación de los Votos
+         Bautismales; si solo hay Bautismos, el Santo Bautismo «comenzando con la Exhortación»; si hay Bautismos y
+         Confirmaciones, el Santo Bautismo con Confirmación, Recepción y Reafirmación. En ninguno se dice el Credo Niceno. -->
     <div class="mass-section vigil-section">
-      <h3 class="section-title main-section">✠ RENOVACIÓN DE LOS VOTOS BAUTISMALES</h3>
+      ${d.baptism === 'baptism' ? `<h3 class="section-title main-section">✠ EL SANTO BAUTISMO</h3>
+      ${BCPHolyWeek.render('easterVigilBaptism')}`
+      : d.baptism === 'baptismConf' ? `<h3 class="section-title main-section">✠ EL SANTO BAUTISMO CON CONFIRMACIÓN, RECEPCIÓN Y REAFIRMACIÓN</h3>
+      ${BCPHolyWeek.render('easterVigilBaptismConf')}
+      ${BCPHolyWeek.render('easterVigilContinues')}`
+      : `<h3 class="section-title main-section">✠ RENOVACIÓN DE LOS VOTOS BAUTISMALES</h3>
       ${BCPHolyWeek.render('easterVigilRenewal')}
-      ${BCPHolyWeek.render('easterVigilContinues')}
+      ${BCPHolyWeek.render('easterVigilContinues')}`}
     </div>
-    ${prayersHtml}
-    ${eucharistEndHtml({ preface: BCPPropers.PREFACES.easter, vigil: true })}`;
+    ${d.baptism === 'baptism' ? '' : prayersHtml}
+    ${eucharistEndHtml({ preface: BCPPropers.PREFACES.easter, vigil: true, sinConfesion: d.baptism === 'baptism' })}`;
     return `
   <div class="liturgy-document">
     ${headHtml}
@@ -579,7 +591,8 @@ async function handleGenerate() {
 
   try {
     const formSelect = document.getElementById('form-select');
-    const html = await generateLiturgy(date, { form: formSelect ? formSelect.value : 'standard' });
+    const vigilSelect = document.getElementById('vigil-select');
+    const html = await generateLiturgy(date, { form: formSelect ? formSelect.value : 'standard', baptism: vigilSelect ? vigilSelect.value : 'renewal' });
     output.innerHTML = html;
     output.classList.remove('hidden');
     output.scrollIntoView({ behavior: 'smooth' });

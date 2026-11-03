@@ -521,6 +521,48 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   }
   check(`11. Eucaristía en Texto Antiguo Renovado, la segunda forma del libro (${raDias} días), en la liturgia y el Librito`, ra, raDias);
 
+  // ── 12. Vigilia: Santo Bautismo y Santo Bautismo con Confirmación ────────────────────────────────────────────────
+  // Los otros dos ritos que el libro permite en la Vigilia (LOC l. 15643-15654): se eligen con `opts.baptism` ('baptism' o
+  // 'baptismConf'; la Renovación de los Votos, por defecto, la vigila la comprobación 9). Cada Sábado Santo, en las dos formas de la
+  // Eucaristía, en la liturgia y el Librito: (a) sale el rito entero, en orden, tras el Sermón; (b) no se cuelan los textos de los
+  // otros ritos; (c) en el Santo Bautismo no se repiten la Oración de los Fieles, la confesión ni la paz (el rito trae sus propias
+  // letanía y paz y sigue con el Ofertorio); (d) las palabras de cada sección son EXACTAMENTE las del libro.
+  const bt = []; let btDias = 0;
+  const BT = (cond, msg) => { if (!cond) bt.push(msg); };
+  const D12 = C.get('BCP_HOLYWEEK_DATA');
+  const items12 = n => D12[n].filter(i => i.x).map(i => norm(escH(i.x)));
+  for (let y = Y0; y <= Y1; y++) {
+    const f = Cal.getFeastDates(y).easter; const d0 = new Date(f.getFullYear(), f.getMonth(), f.getDate() - 1, 12); btDias++;
+    for (const forma of ['standard', 'renewed']) for (const rito of ['baptism', 'baptismConf']) {
+      const w = `${iso(d0)} ${forma}/${rito}`, sec = rito === 'baptism' ? 'easterVigilBaptism' : 'easterVigilBaptismConf';
+      let html, lib; try { html = await generateLiturgy(d0, { form: forma, baptism: rito }); lib = Librito.generateLibrito(C.state()); } catch (e) { bt.push(`${w}: lanzó ${e.message}`); continue; }
+      for (const [h, n] of [[html, ''], [lib, ' Librito']]) {
+        const t = norm(strip(h)), v = t.indexOf('LA GRAN VIGILIA DE RESURRECCIÓN'), parte = v < 0 ? '' : t.slice(v);
+        let pos = parte.indexOf('EL SERMÓN'), falta = pos < 0 ? 'EL SERMÓN' : '';
+        for (const it of items12(sec)) { if (pos < 0) break; const j = parte.indexOf(it, pos); if (j < 0) { falta = falta || it.slice(0, 50); continue; } pos = j + it.length; }
+        BT(!falta, `${w}${n}: falta o está fuera de orden un bloque del rito (${falta})`);
+        BT(!/¿Renuevas tú/.test(parte), `${w}${n}: salió la Renovación de los Votos, que es otra opción`);
+        BT((rito === 'baptism') !== /ORACIÓN DE LOS FIELES/.test(parte), `${w}${n}: la Oración de los Fieles ${rito === 'baptism' ? 'sobra (la Letanía por los Candidatos la sustituye)' : 'falta'}`);
+        BT(rito !== 'baptism' || !/CONFESIÓN Y ABSOLUCIÓN/.test(parte), `${w}${n}: el Santo Bautismo no repite la confesión ni la paz`);
+        BT(!/Que la luz de Cristo, elevándose en gloria.*ORACIÓN DE LOS FIELES.*ORACIÓN DESPUÉS DE LA COMUNIÓN.*Dios todopoderoso y eterno, que nada de lo que has hecho odias/.test(parte), `${w}${n}: se coló el cierre de Ceniza`);
+      }
+    }
+  }
+  // (d) Mismas palabras que el libro, sin las etiquetas de quien habla (el script las quita de unas líneas y deja otras): se comparan los
+  // conjuntos de palabras, para que no sobre ni falte ninguna.
+  try {
+    const gen3 = require('./bcp2019-tools/build-holyweek.js');
+    if (fs.existsSync(gen3.LOC_POR_DEFECTO)) {
+      const L = fs.readFileSync(gen3.LOC_POR_DEFECTO, 'utf8').split(/\r?\n/);
+      const ETQ = new Set(['celebrante', 'pueblo', 'pregunta', 'diácono', 'lector', 'oficiante', 'todos', 'obispo', 'presbítero']);
+      const pal = s => s.toLowerCase().replace(/[.,;:¿?¡!()«»“”"⏎\[\]]/g, ' ').split(/\s+/).filter(x => x && !ETQ.has(x) && !/^\d{3}$/.test(x)).sort().join(' ');
+      const tramo = (ini, desde) => { const a = L.findIndex((l, n) => n >= desde && l.trim().startsWith(ini)); const b = L.findIndex((l, n) => n > a && l.trim().startsWith('INDICACIONES ADICIONALES')); return L.slice(a, b).join(' '); };
+      BT(pal(tramo('LA EXHORTACIÓN', 4140)) === pal(items12('easterVigilBaptism').join(' ')), 'easterVigilBaptism no tiene exactamente las palabras del libro (LOC l. 4144-4348)');
+      BT(pal(tramo('LA PRESENTACIÓN', 4585)) === pal(items12('easterVigilBaptismConf').join(' ')), 'easterVigilBaptismConf no tiene exactamente las palabras del libro (LOC l. 4589-4817)');
+    }
+  } catch (e) { bt.push('no se pudo comprobar el texto del rito bautismal: ' + e.message); }
+  check(`12. Vigilia con Santo Bautismo o con Confirmación (${btDias} Sábados Santos × 2 formas × 2 ritos), en la liturgia y el Librito`, bt, btDias * 4);
+
   // ── 8. Colectas ──────────────────────────────────────────────────────────
   // 5 oficiales (Ceniza y Semana Santa) idénticas al libro en español; 90 traducidas del inglés, de las que se
   // comprueba la forma (Amén, fórmula final, longitud, nombre del santo). El inglés no está en el repositorio: sin él

@@ -75,6 +75,11 @@ const SECCIONES = {
   // el cierre «La celebración continúa con las Oración de los Fieles» (sic) y el prefacio de Pascua, tras ella.
   easterVigilWord: { ini: 'LA ACLAMACIÓN PASCUAL', fin: 'La celebración continúa con las Oración', desde: 15560 },
   easterVigilRenewal: { ini: 'RENOVACIÓN DE LAS PROMESAS BAUTISMALES', fin: 'Excepto en la Vigilia Pascual', desde: 4800 },
+  // Los otros dos ritos que el libro permite en la Vigilia (l. 15643-15654): si solo hay Bautismos, el orden del Santo Bautismo
+  // «comenzando con la Exhortación» (l. 4144); si hay Bautismos y Confirmaciones, el del Santo Bautismo con Confirmación, Recepción
+  // y Reafirmación (desde su Presentación, l. 4589). Terminan donde termina cada rito.
+  easterVigilBaptism: { ini: 'LA EXHORTACIÓN', fin: 'INDICACIONES ADICIONALES', desde: 4140 },
+  easterVigilBaptismConf: { ini: 'LA PRESENTACIÓN', fin: 'INDICACIONES ADICIONALES', desde: 4585 },
   easterVigilContinues: { ini: 'La celebración continúa con las Oración', fin: 'La siguiente bendición puede usarse', desde: 15620 },
   easterVigilBlessing: { ini: 'La siguiente bendición puede usarse', fin: 'DIRECCIONES ADICIONALES', desde: 15620 },
 };
@@ -207,6 +212,7 @@ const OVERRIDES_PREFIJO = [
   ['Mesa para la celebración.', 'CONT'],            // sigue la rúbrica «El Diácono o Sacerdote prepara la Santa»
   ['Si Mis queridos hijos', 'P'],                    // «Si» sobrante de la conversión del PDF: es el texto de 1 Juan 2:1-2
   ['Celebrante y ', 'R'],                             // «Celebrante y gente / y Pueblo / y las personas juntas pueden decir»: quién lo dice
+  ['En una liturgia distinta a la Vigilia', 'R'],     // rúbrica al final del rito con Confirmación
 ];
 
 // Erratas del libro que se corrigen al copiar (decisión del usuario, 2026-11-02). Lo demás se copia tal cual, con sus

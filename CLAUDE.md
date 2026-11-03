@@ -69,7 +69,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=32` (Misal) y `?v=29` (bcp2019; la hoja de estilo, `?v=7`).
+   código viejo. Actualmente en `?v=32` (Misal) y `?v=30` (bcp2019; la hoja de estilo, `?v=7`).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -274,13 +274,21 @@ sale con título (no se midió cuántos).
   Despedida con Aleluya, bendición opcional de la Vigilia). Los textos bíblicos son de la
   Biblia de Jerusalén; Daniel 3 se pide como `3:1-23,91-95` y Jonás 1:17 tiene regla en
   `VERSE_SHIFTS` (`test-bcp2019.js` 9 cuenta los versículos de las 14 citas). **No están:**
-  el texto de los salmos y cánticos de la Vigilia (solo sus citas, como en el libro), el
-  Santo Bautismo y la Confirmación (necesitan candidatos y obispo; el libro remite a otro rito y
-  solo queda su rúbrica; tampoco hay acción de gracias sobre el agua ni aspersión, que no están en
-  el libro para la Vigilia). **Decidido no modelar estos tres
-  (2026-11-02):** el Bautismo y la Confirmación necesitan datos de candidatos y un obispo, y el
-  libro los remite a otro rito; los salmos y cánticos son opcionales en el libro («un salmo,
-  himno o antífona puede seguir») y de los cánticos no hay texto en la Biblia de Jerusalén.
+  el texto de los salmos y cánticos de la Vigilia (solo sus citas, como en el libro): son
+  opcionales en el libro («un salmo, himno o antífona puede seguir») y de los cánticos no hay
+  texto en la Biblia de Jerusalén. **Santo Bautismo y Confirmación (2026-11-02, con la autoridad
+  que el usuario delegó):** el selector «Vigilia Pascual (Sábado Santo)» ofrece los tres ritos que
+  el libro permite (l. 15643-15654): la Renovación de los Votos (por defecto), el **Santo
+  Bautismo** (`easterVigilBaptism`, LOC l. 4144-4348, «comenzando con la Exhortación») y el
+  **Santo Bautismo con Confirmación, Recepción y Reafirmación** (`easterVigilBaptismConf`, l.
+  4589-4817). Texto copiado del libro; `currentMassState.baptism` guarda la opción. En el Santo
+  Bautismo no se repiten la Oración de los Fieles (la Letanía por los Candidatos la sustituye), la
+  confesión ni la paz (el rito trae la suya y sigue con el Ofertorio). Quedan fuera las
+  Indicaciones adicionales del rito, el Bautismo condicional y de emergencia. `test-bcp2019.js` 12
+  barre los Sábados Santos (2 formas × 2 ritos, liturgia y Librito) y exige las mismas palabras que
+  el libro; se vio en el navegador y se exportó a Word. **Limitación:** en algunos párrafos el PDF
+  pegó la rúbrica a lo que se dice («El obispo dice Ahora se presentarán…»): el texto está completo
+  y en orden, pero esas rúbricas no salen en cursiva. No hay aspersión: no está en el libro.
   **El marcado del Cirio Pascual sí está (2026-11-02, a petición del usuario):** el libro (LOC
   l. 15677-15691) lo trae desordenado por la conversión del PDF («Como el Alfa es trazado
   Alfa…»); `easterVigilCandle` lo recompone separando cada rúbrica de lo que dice el celebrante,

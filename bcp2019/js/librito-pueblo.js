@@ -139,14 +139,15 @@ const BCPLibrito = (() => {
     // Pascua, Fracción y Despedida con Aleluya).
     // El Miércoles de Ceniza (ash) trae su propia confesión, absolución y paz (holyweek.js): se salta lo habitual y, antes de
     // la bendición, va la oración de cierre del libro.
-    const libritoEndHtml = ({ preface: pf = preface, vigil = false, ash = false } = {}) => {
+    const libritoEndHtml = ({ preface: pf = preface, vigil = false, ash = false, sinConfesion = false } = {}) => {
+      const sinConfesionNiPaz = ash || sinConfesion;   // Ceniza trae las suyas; el Bautismo, la paz (igual que app.js)
       const fraccionSinAleluya = vigil ? false : isLent, despedidaConAleluya = vigil ? true : isEaster;
       if (renewed) {
         // Texto Antiguo Renovado (igual que app.js): el texto propio del libro, íntegro. El Prefacio lo dice el Celebrante, así
         // que aquí va como indicación y no como texto, igual que en el Texto Estándar; la Fracción es la misma en las dos formas.
         const prefacioLibrito = () => `<div class="librito-instruction"><p>El Celebrante dice el Prefacio propio del día (${pf ? pf.title : 'Prefacio Común'}).</p></div>`;
         return `
-      ${ash ? '' : `<section class="librito-section">
+      ${sinConfesionNiPaz ? '' : `<section class="librito-section">
         <h2>✠ CONFESIÓN Y ABSOLUCIÓN</h2>
         <div class="librito-instruction"><p><strong>Nos arrodillamos si podemos.</strong></p></div>
         ${rat('renewedConfession')}
@@ -217,7 +218,7 @@ const BCPLibrito = (() => {
 `;
       }
       return `
-      ${ash ? '' : `<section class="librito-section">
+      ${sinConfesionNiPaz ? '' : `<section class="librito-section">
         <h2>✠ CONFESIÓN Y ABSOLUCIÓN</h2>
         <div class="librito-instruction"><p><strong>Nos arrodillamos si podemos.</strong> Todos juntos:</p></div>
         <div class="librito-text">
@@ -369,14 +370,19 @@ const BCPLibrito = (() => {
       </section>
 
       <section class="librito-section">
-        <h2>✠ RENOVACIÓN DE LOS VOTOS BAUTISMALES</h2>
+        ${state.baptism === 'baptism' ? `<h2>✠ EL SANTO BAUTISMO</h2>
+        ${BCPHolyWeek.renderLibrito('easterVigilBaptism')}`
+        : state.baptism === 'baptismConf' ? `<h2>✠ EL SANTO BAUTISMO CON CONFIRMACIÓN, RECEPCIÓN Y REAFIRMACIÓN</h2>
+        ${BCPHolyWeek.renderLibrito('easterVigilBaptismConf')}
+        ${BCPHolyWeek.renderLibrito('easterVigilContinues')}`
+        : `<h2>✠ RENOVACIÓN DE LOS VOTOS BAUTISMALES</h2>
         ${BCPHolyWeek.renderLibrito('easterVigilRenewal')}
-        ${BCPHolyWeek.renderLibrito('easterVigilContinues')}
+        ${BCPHolyWeek.renderLibrito('easterVigilContinues')}`}
       </section>
 
-      ${prayersLibrito}
+      ${state.baptism === 'baptism' ? '' : prayersLibrito}
 
-      ${libritoEndHtml({ preface: BCPPropers.PREFACES.easter, vigil: true })}`;
+      ${libritoEndHtml({ preface: BCPPropers.PREFACES.easter, vigil: true, sinConfesion: state.baptism === 'baptism' })}`;
       return `
     <div class="librito-document">
       ${headHtml}

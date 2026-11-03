@@ -2,7 +2,7 @@
  * holyweek-data.js — Liturgias de la Semana Santa (Libro de Oración Común 2019, ACNA).
  * GENERADO por bcp2019-tools/build-holyweek.js a partir del libro oficial en español (LOC-10-10-23.md); NO editar a
  * mano: test-bcp2019.js comprueba que sigue idéntico a lo que genera el script. Texto copiado, no traducido.
- * Procedencia: palmSundayPalms LOC l. 14728-14794; maundyThursdayOpening LOC l. 14844-14858; maundyThursdayFootWashing LOC l. 14875-14902; maundyThursdayClosing LOC l. 14903-14911; goodFriday LOC l. 14939-15244; holySaturday LOC l. 15248-15315; renewedCreed LOC l. 3283-3325; renewedPrayers LOC l. 3326-3365; renewedConfession LOC l. 3366-3409; renewedPeace LOC l. 3410-3413; renewedOffertory LOC l. 3414-3425; renewedSursum LOC l. 3426-3450; renewedConsecration LOC l. 3451-3494; renewedLordsPrayer LOC l. 3495-3515; renewedHumbleAccess LOC l. 3526-3542; renewedAgnusDei LOC l. 3543-3550; renewedAdministration LOC l. 3551-3567; renewedPostCommunion LOC l. 3568-3585; renewedBlessing LOC l. 3586-3595; renewedDismissal LOC l. 3596-3608; renewedDismissalAlleluia LOC l. 3609-3615; ashWednesdayOpening LOC l. 14474-14477; ashWednesdayInvitation LOC l. 14478-14502; ashWednesdayAshes LOC l. 14519-14568; ashWednesdayConfession LOC l. 14569-14649; ashWednesdayAbsolution LOC l. 14650-14685; ashWednesdayClosing LOC l. 14686-14697; easterVigilIntro LOC l. 15318-15337; easterVigilLight LOC l. 15341-15354; easterVigilCandle LOC l. 15677-15692 (recompuesta); easterVigilLightLit LOC l. 15355-15440; easterVigilReadings LOC l. 15441-15572; easterVigilWord LOC l. 15573-15631; easterVigilRenewal LOC l. 4835-4907; easterVigilContinues LOC l. 15632-15633; easterVigilBlessing LOC l. 15634-15641.
+ * Procedencia: palmSundayPalms LOC l. 14728-14794; maundyThursdayOpening LOC l. 14844-14858; maundyThursdayFootWashing LOC l. 14875-14902; maundyThursdayClosing LOC l. 14903-14911; goodFriday LOC l. 14939-15244; holySaturday LOC l. 15248-15315; renewedCreed LOC l. 3283-3325; renewedPrayers LOC l. 3326-3365; renewedConfession LOC l. 3366-3409; renewedPeace LOC l. 3410-3413; renewedOffertory LOC l. 3414-3425; renewedSursum LOC l. 3426-3450; renewedConsecration LOC l. 3451-3494; renewedLordsPrayer LOC l. 3495-3515; renewedHumbleAccess LOC l. 3526-3542; renewedAgnusDei LOC l. 3543-3550; renewedAdministration LOC l. 3551-3567; renewedPostCommunion LOC l. 3568-3585; renewedBlessing LOC l. 3586-3595; renewedDismissal LOC l. 3596-3608; renewedDismissalAlleluia LOC l. 3609-3615; ashWednesdayOpening LOC l. 14474-14477; ashWednesdayInvitation LOC l. 14478-14502; ashWednesdayAshes LOC l. 14519-14568; ashWednesdayConfession LOC l. 14569-14649; ashWednesdayAbsolution LOC l. 14650-14685; ashWednesdayClosing LOC l. 14686-14697; easterVigilIntro LOC l. 15318-15337; easterVigilLight LOC l. 15341-15354; easterVigilCandle LOC l. 15677-15692 (recompuesta); easterVigilLightLit LOC l. 15355-15440; easterVigilReadings LOC l. 15441-15572; easterVigilWord LOC l. 15573-15631; easterVigilRenewal LOC l. 4835-4907; easterVigilBaptism LOC l. 4144-4348; easterVigilBaptismConf LOC l. 4589-4817; easterVigilContinues LOC l. 15632-15633; easterVigilBlessing LOC l. 15634-15641.
  * Tipos: T título, R rúbrica, P párrafo, V versos (líneas separadas por \n), REF cita bíblica, CEL/PUEBLO/DIAC/LECTOR/
  * OFIC/TODOS/OBISPO/PRES voces, LECTURAS = lugar donde el app inserta las lecturas del día.
  */
@@ -2388,6 +2388,658 @@ const BCP_HOLYWEEK_DATA = {
   {
    "t": "P",
    "x": "Dios Todopoderoso, que has edificado a tu Iglesia sobre el fundamento de los Apóstoles y Profetas, siendo el mismo Jesucristo la principal piedra angular: concédenos que estemos unidos en unidad de espíritu por su doctrina, para que seamos hechos un templo santo que te agrade; Por Jesucristo nuestro Señor, que vive y reina contigo y el Espíritu Santo, un solo Dios, por los siglos de los siglos. Amén."
+  }
+ ],
+ "easterVigilBaptism": [
+  {
+   "t": "T",
+   "x": "LA EXHORTACIÓN"
+  },
+  {
+   "t": "R",
+   "x": "El Celebrante dice al pueblo"
+  },
+  {
+   "t": "P",
+   "x": "Amados, las Sagradas Escrituras enseñan que todos estábamos muertos en nuestros pecados y transgresiones. Nuestro Salvador Jesucristo dijo: \"quien no nazca del agua y del Espíritu, no puede entrar en el reino de Dios\", y le encargó a la Iglesia, \"hagan discípulos en todas las naciones, bautizándolos en el Nombre del Padre, y del Hijo y del Espíritu Santo \". Aquí le pedimos a nuestro Padre celestial que estos candidatos, siendo bautizados con agua, puedan ser llenados con el Espíritu Santo, nacidos de nuevo y recibidos en la Iglesia como miembros vivos del cuerpo de Cristo. Por lo tanto, los exhorto a invocar a Dios Padre, por nuestro Señor Jesucristo, que por su abundante misericordia, conceda a estos Candidatos lo que por naturaleza no pueden tener."
+  },
+  {
+   "t": "T",
+   "x": "LA PRESENTACIÓN"
+  },
+  {
+   "t": "R",
+   "x": "El Celebrante dice"
+  },
+  {
+   "t": "P",
+   "x": "Ahora los Candidatos para el Santo Bautismo serán presentados."
+  },
+  {
+   "t": "T",
+   "x": "ADULTOS Y NIÑOS MAYORES"
+  },
+  {
+   "t": "P",
+   "x": "Los Candidatos que pueden responder por sí mismos son presentados de forma individual por sus padrinos, utilizando los nombres completos de la siguiente manera Presento a N.N. para que reciba el Sacramento del Bautismo. El Celebrante les pregunta a los Candidatos lo siguiente"
+  },
+  {
+   "t": "CEL",
+   "x": "¿Ya has sido bautizado?"
+  },
+  {
+   "t": "P",
+   "x": "Candidato No."
+  },
+  {
+   "t": "CEL",
+   "x": "¿Deseas ser bautizado?"
+  },
+  {
+   "t": "P",
+   "x": "Candidato Sí, quiero"
+  },
+  {
+   "t": "T",
+   "x": "INFANTES Y NIÑOS MENORES"
+  },
+  {
+   "t": "R",
+   "x": "Luego, los candidatos que no pueden responder por sí mismos son presentados individualmente por sus padres y padrinos, utilizando los nombres completos, de la siguiente manera"
+  },
+  {
+   "t": "P",
+   "x": "Presento a N.N. para que reciba el Sacramento del Bautismo."
+  },
+  {
+   "t": "R",
+   "x": "Cuando las siguientes promesas son hechas por Padres y Padrinos de infantes o niños menores, el Celebrante se dirige a ellos diciendo"
+  },
+  {
+   "t": "P",
+   "x": "Hoy, en representación de este niño, ustedes prometerán renunciar al demonio y a todas sus obras, confiar en Dios de todo corazón y servirle fielmente. Les corresponde asegurarse de que este niño reciba enseñanza, tan pronto como sea capaz de aprender, sobre el significado de todas estas promesas y sobre la Fe que ustedes profesarán tal y como se revela en las Sagradas Escrituras. Él debe llegar a poner su confianza en Jesús, y aprender los Credos, el Padre Nuestro, los Diez Mandamientos, y todas las demás cosas que al cristiano le corresponde saber, creer y practicar para el bienestar de su alma. Una vez que él haya adoptado estas normas, habiéndose hecho discípulo de Jesús, tiene que acudir al Obispo para ser confirmado, para que pueda declarar la Fe por sí mismo y ser fortalecido aún más por el Espíritu Santo a fin de servir a Cristo y su reino. ¿Están dispuestos a aceptar esta responsabilidad? Padres y Padrinos Así lo haremos con la ayuda de Dios."
+  },
+  {
+   "t": "T",
+   "x": "PROFESIÓN DE FE"
+  },
+  {
+   "t": "R",
+   "x": "Luego, el Celebrante examina a los candidatos que pueden hablar por sí mismos, y a los padres y padrinos que hablarán en nombre de los infantes o niños menores, diciendo"
+  },
+  {
+   "t": "CEL",
+   "x": "¿Renuncias a Satanás y a todas las fuerzas espirituales del mal que se rebelan contra Dios?"
+  },
+  {
+   "t": "P",
+   "x": "Respuesta Sí, renuncio."
+  },
+  {
+   "t": "CEL",
+   "x": "¿Renuncias a los poderes malignos de este mundo, que corrompen y destruyen a las criaturas de Dios?"
+  },
+  {
+   "t": "P",
+   "x": "Respuesta Sí, renuncio."
+  },
+  {
+   "t": "CEL",
+   "x": "¿Renuncias a los deseos pecaminosos de la carne que te apartan del amor de Dios?"
+  },
+  {
+   "t": "P",
+   "x": "Respuesta Sí, renuncio. El Celebrante orará por el (los) Candidato (s) y podrá ungir a cada Candidato con el Óleo de Exorcismo, diciendo Que Dios Todopoderoso te libre de los poderes de las tinieblas y del maligno y te guíe a la luz de la obediencia del reino de su Hijo, Jesucristo nuestro Señor. Amén."
+  },
+  {
+   "t": "R",
+   "x": "El Celebrante continúa"
+  },
+  {
+   "t": "CEL",
+   "x": "¿Te entregas a Jesucristo y lo aceptas como tu Señor y Salvador?"
+  },
+  {
+   "t": "P",
+   "x": "Respuesta Sí, me entrego a Él y lo acepto."
+  },
+  {
+   "t": "CEL",
+   "x": "¿Recibes gozosamente la Fe Cristiana, tal y como se revela en las Sagradas Escrituras del Antiguo y del Nuevo Testamento?"
+  },
+  {
+   "t": "P",
+   "x": "Respuesta Sí, la recibo."
+  },
+  {
+   "t": "CEL",
+   "x": "¿Cumplirás la santa voluntad de Dios, y obedecerás sus mandamientos andando en ellos todos los días de tu vida?"
+  },
+  {
+   "t": "P",
+   "x": "Respuesta Así lo haré, con la ayuda de Dios. El Celebrante luego se dirige a la congregación, primero invitándolos a ponerse de pie. Ustedes, testigos de estos votos, ¿harán todo cuanto puedan para sostener a estas personas en su vida en Cristo?"
+  },
+  {
+   "t": "R",
+   "x": "La Congregación responde"
+  },
+  {
+   "t": "P",
+   "x": "Así lo haremos. El Celebrante luego dice Unámonos a estos Candidatos para proclamar nuestra fe en las palabras de la antigua confesión bautismal, el Credo de los Apóstoles."
+  },
+  {
+   "t": "CEL",
+   "x": "¿Crees y confías en Dios Padre?"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Sí."
+  },
+  {
+   "t": "P",
+   "x": "Creo en Dios Padre todopoderoso, creador del cielo y de la tierra."
+  },
+  {
+   "t": "CEL",
+   "x": "¿Crees y confías en Jesucristo?"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Sí. Creo en Jesucristo, su único Hijo, Nuestro Señor, que fue concebido por obra y gracia del Espíritu Santo, nació de Santa María Virgen, padeció bajo el poder de Poncio Pilato, fue crucificado, muerto y sepultado, descendió a los infiernos, al tercer día resucitó de entre los muertos, subió a los cielos, y está sentado a la derecha de Dios Padre. Desde allí ha de venir a juzgar a vivos y muertos."
+  },
+  {
+   "t": "CEL",
+   "x": "¿Crees y confías en el Espíritu Santo?"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Sí."
+  },
+  {
+   "t": "V",
+   "x": "Creo en el Espíritu Santo,\nla Santa Iglesia Católica,\nla comunión de los santos,\nel perdón de los pecados,\nla resurrección de los muertos,\ny la vida eterna. Amén."
+  },
+  {
+   "t": "T",
+   "x": "LETANÍA POR LOS CANDIDATOS"
+  },
+  {
+   "t": "R",
+   "x": "El Diácono, u otra persona indicada, puede decir"
+  },
+  {
+   "t": "P",
+   "x": "Oremos ahora por estos Candidatos quienes están por recibir el sacramento del Bautismo. Que estos niños lleguen a confesar su fe en Cristo Jesús como Señor y Salvador. Te suplicamos que nos escuches, buen Dios. Que estos Candidatos puedan continuar en la enseñanza y el compañerismo apostólico, en el partir del pan y en las oraciones. Te suplicamos que nos escuches, buen Dios. Que caminen de una manera digna del llamado al cual han sido llamados, siempre creciendo en la fe y todas las virtudes celestiales. Te suplicamos que nos escuches, buen Dios. Que perseveren en resistir el mal, y, cada vez que tropiecen por el pecado, se arrepientan y vuelvan al Señor. Te suplicamos que nos escuches, buen Dios. Que proclamen por palabra y obra las Buenas Nuevas de Dios en Cristo Jesús a un mundo perdido y quebrantado. Te suplicamos que nos escuches, buen Dios. Que, como miembros vivientes del Cuerpo de Cristo, puedan crecer integralmente conforme a la plena estatura de Cristo. Te suplicamos que nos escuches, buen Dios. Que mirando a Jesús, puedan correr con perseverancia la carrera que tienen por delante, y finalmente recibir la corona imperecedera de gloria. Te suplicamos que nos escuches, buen Dios."
+  },
+  {
+   "t": "R",
+   "x": "Se pueden añadir peticiones adicionales."
+  },
+  {
+   "t": "T",
+   "x": "ORACIÓN POR LOS CANDIDATOS"
+  },
+  {
+   "t": "P",
+   "x": "El Celebrante orará por los candidatos de la siguiente manera Oremos. Padre Todopoderoso y Eterno, en tu gran misericordia salvaste de la destrucción del diluvio a Noé y a su familia en el arca, prefigurando así el sacramento del Santo Bautismo. Mira con ojos de misericordia a estos tus siervos. Lávalos y santifícalos por tu Espíritu Santo, para que puedan ser liberados de la destrucción y recibidos en el Arca de la Iglesia de Cristo; y estando asimismo firmes en su fe, gozosos con esperanza, y arraigados en amor, puedan pasar por las aguas turbulentas de este problemático mundo, llegando a la patria de la vida eterna, por Jesucristo nuestro Señor. Amén."
+  },
+  {
+   "t": "T",
+   "x": "ACCIÓN DE GRACIAS SOBRE EL AGUA"
+  },
+  {
+   "t": "R",
+   "x": "Si hay una procesión a la fuente bautismal, se puede cantar un salmo, antífona o himno."
+  },
+  {
+   "t": "P",
+   "x": "El Diácono, o el Celebrante, vierte el agua para el bautismo."
+  },
+  {
+   "t": "CEL",
+   "x": "El Señor esté con ustedes."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Y con tu espíritu."
+  },
+  {
+   "t": "CEL",
+   "x": "Levantemos nuestros corazones."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Los tenemos levantados al Señor."
+  },
+  {
+   "t": "CEL",
+   "x": "Demos gracias al Señor nuestro Dios."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Es justo darle gracias y alabarlo."
+  },
+  {
+   "t": "R",
+   "x": "El Celebrante continúa"
+  },
+  {
+   "t": "P",
+   "x": "Te damos gracias, Padre todopoderoso, por el don del agua. Sobre ella, el Espíritu Santo se movía en el principio de la creación. A través de ella, sacaste a los hijos de Israel de la esclavitud de Egipto y los guiaste a la tierra prometida. En ella, tu Hijo Jesús recibió el bautismo de Juan en el río Jordán, cuando el Espíritu Santo descendió sobre Él como paloma. Te damos gracias, Padre, por el agua del Bautismo. En ella, somos sepultados con Cristo en su muerte. Gracias a ella, participamos en su resurrección. Mediante ella, nacemos de nuevo por el Espíritu Santo. Por tanto, en gozosa obediencia a tu Hijo, traemos a su comunión a los que, por fe, se acercan a él, bautizándolos en el Nombre del Padre, y del Hijo y del Espíritu Santo. El Celebrante toca el agua y dice Ahora, Padre, santifica esta agua, te suplicamos, por el poder de tu Espíritu Santo. Que todos los aquí bautizados sean lavados del pecado, nacidos de nuevo, y que continúen para siempre en la vida resucitada de Jesucristo nuestro Salvador. A Él, a Ti y al Espíritu Santo, sea todo honor y gloria, ahora y por siempre. Amén."
+  },
+  {
+   "t": "T",
+   "x": "EL BAUTISMO"
+  },
+  {
+   "t": "R",
+   "x": "El Celebrante le dice a los Padrinos ¿Qué nombre le quieren dar a este niño?"
+  },
+  {
+   "t": "P",
+   "x": "Entonces el Celebrante sumerge al candidato, o derrama agua sobre él tres veces, diciendo N., yo te bautizo en el Nombre del Padre, y del Hijo y del Espíritu Santo. Amén."
+  },
+  {
+   "t": "P",
+   "x": "El Celebrante hace la señal de la Cruz en la frente del recién bautizado (puede usar el Óleo del Santo Crisma), diciendo N., recibe la señal de la Cruz como prueba de tu nueva vida en Cristo, en la cual no te avergonzarás de confesar la fe del Cristo crucificado, de luchar con valentía bajo su bandera contra el mundo, el demonio, y la carne, y de continuar como su siervo fiel hasta el fin de tus días. Amén. o lo siguiente: N., quedas sellado por el Espíritu Santo en el Bautismo y marcado como propiedad de Cristo para siempre. Amén."
+  },
+  {
+   "t": "R",
+   "x": "Si se presentan prendas o velas, se entregan aquí"
+  },
+  {
+   "t": "R",
+   "x": "Cuando todos hayan sido bautizados y marcados con la Cruz, el Celebrante dice"
+  },
+  {
+   "t": "P",
+   "x": "Padre celestial, te damos gracias porque por medio del agua y del Espíritu Santo has concedido a estos tus siervos el perdón de los pecados, los has adoptado como tus hijos, los has hecho miembros de tu santa Iglesia, y los has resucitado a la nueva vida de gracia. Susténtalos, oh Señor, en tu Santo Espíritu, para que puedan disfrutar de la salvación eterna por Jesucristo Nuestro Señor. Amén."
+  },
+  {
+   "t": "R",
+   "x": "El Celebrante continúa"
+  },
+  {
+   "t": "P",
+   "x": "Demos la bienvenida a los que ahora han sido bautizados."
+  },
+  {
+   "t": "R",
+   "x": "Celebrante y pueblo"
+  },
+  {
+   "t": "P",
+   "x": "Nosotros los recibimos en la familia de Dios. Confiesen la fe de Cristo crucificado, proclamen su resurrección y participen con nosotros en el sacerdocio real de todo su pueblo."
+  },
+  {
+   "t": "R",
+   "x": "Se puede dar el Saludo de Paz"
+  },
+  {
+   "t": "CEL",
+   "x": "La paz del Señor esté siempre con ustedes."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Y con tu espíritu."
+  },
+  {
+   "t": "R",
+   "x": "La liturgia continúa con la Santa Cena, empezando con el Ofertorio."
+  }
+ ],
+ "easterVigilBaptismConf": [
+  {
+   "t": "T",
+   "x": "LA PRESENTACIÓN"
+  },
+  {
+   "t": "P",
+   "x": "El obispo dice Ahora se presentarán los Candidatos para el Santo Bautismo."
+  },
+  {
+   "t": "T",
+   "x": "ADULTOS Y NIÑOS MÁS GRANDES"
+  },
+  {
+   "t": "P",
+   "x": "Los Candidatos que pueden responder por sí mismos son presentados individualmente por sus Padrinos, usando los nombres completos de la siguiente manera Aquí le presento a N.N., para recibir el Sacramento del Bautismo. El obispo pide a los candidatos lo siguiente"
+  },
+  {
+   "t": "OBISPO",
+   "x": "¿Ya te has bautizado?"
+  },
+  {
+   "t": "P",
+   "x": "Candidato No."
+  },
+  {
+   "t": "OBISPO",
+   "x": "¿Deseas ser bautizado?"
+  },
+  {
+   "t": "P",
+   "x": "Candidato Sí, lo deseo."
+  },
+  {
+   "t": "T",
+   "x": "INFANTES Y NIÑOS MENORES"
+  },
+  {
+   "t": "R",
+   "x": "Luego, los padres y padrinos presentan individualmente a los Candidatos que no pueden responder por sí mismos, utilizando sus nombres completos, de la siguiente manera"
+  },
+  {
+   "t": "P",
+   "x": "Aquí le presento a N.N., para recibir el Sacramento del Bautismo."
+  },
+  {
+   "t": "R",
+   "x": "Cuando los Padres y Padrinos de bebés o niños menores hacen las siguientes promesas, el Obispo se dirige a ellos"
+  },
+  {
+   "t": "P",
+   "x": "Hoy, a nombre de este niño, ustedes harán promesas de renunciar al demonio y a todas sus seducciones, de confiar en Dios de todo corazón y de servirle fielmente. Su tarea es asegurarse de que a este niño se le enseñe, tan pronto como sea capaz de aprender, el significado de todos estos compromisos, y de la Fe que profesará según se revela en las Sagradas Escrituras. Él debe venir a profesar su fe en Jesucristo y aprender los Credos, el Padre Nuestro, los Diez Mandamientos y todas las demás cosas que un cristiano debe saber, creer y hacer por el bienestar de su alma. Cuando haya abrazado todo esto, debe acudir al Obispo para ser confirmado, para que pueda reafirmar públicamente la Fe como suya y ser fortalecido aún más por el Espíritu Santo para servir a Cristo y a su reino. ¿Están dispuestos y listos para emprender esto? Padres y Padrinos Sí lo estoy, con la ayuda del Señor."
+  },
+  {
+   "t": "T",
+   "x": "ADULTOS SOLICITANDO LA IMPOSICIÓN DE MANOS"
+  },
+  {
+   "t": "R",
+   "x": "El Obispo dice"
+  },
+  {
+   "t": "V",
+   "x": "Los Candidatos para Confirmación, Recepción y Reafirmación\nahora se presentarán.\nPresentadores Reverendo Padre en Dios, presentamos a estas\npersonas para recibir la imposición de manos."
+  },
+  {
+   "t": "OBISPO",
+   "x": "¿Han sido ellos preparados adecuadamente?"
+  },
+  {
+   "t": "P",
+   "x": "Presentadores Sí, lo han sido."
+  },
+  {
+   "t": "T",
+   "x": "PROFESIÓN DE FE"
+  },
+  {
+   "t": "P",
+   "x": "El obispo examina a todos los candidatos, junto con los Padres y Padrinos, diciendo"
+  },
+  {
+   "t": "CEL",
+   "x": "¿Renuncias a Satanás y a todas sus fuerzas espirituales de maldad que se rebelan contra Dios?"
+  },
+  {
+   "t": "P",
+   "x": "Respuesta Sí, renuncio."
+  },
+  {
+   "t": "CEL",
+   "x": "¿Renuncias a las promesas vacías y los engaños mortales de este mundo que corrompen y destruyen a las criaturas de Dios?"
+  },
+  {
+   "t": "P",
+   "x": "Respuesta Sí, renuncio."
+  },
+  {
+   "t": "CEL",
+   "x": "¿Renuncias a los deseos pecaminosos de la carne que te apartan del amor de Dios?"
+  },
+  {
+   "t": "P",
+   "x": "Respuesta Sí renuncio."
+  },
+  {
+   "t": "R",
+   "x": "Luego, el obispo ora por el Candidato o Candidatos Bautismales y puede ungir a cada candidato con el aceite del exorcismo, diciendo"
+  },
+  {
+   "t": "P",
+   "x": "Que Dios Todopoderoso te libre de los poderes de las tinieblas y del mal, y te conduzca a la luz y la obediencia del reino de su Hijo Jesucristo, nuestro Señor. Amén."
+  },
+  {
+   "t": "P",
+   "x": "El obispo continúa"
+  },
+  {
+   "t": "CEL",
+   "x": "¿Te conviertes a Jesucristo y lo confiesas como tu Señor y Salvador?"
+  },
+  {
+   "t": "P",
+   "x": "Respuesta Sí, lo confieso."
+  },
+  {
+   "t": "CEL",
+   "x": "¿Recibes con alegría la fe cristiana, revelada en las Sagradas Escrituras del Antiguo y Nuevo Testamento?"
+  },
+  {
+   "t": "P",
+   "x": "Respuesta Sí, recibo la fe cristiana."
+  },
+  {
+   "t": "CEL",
+   "x": "¿Guardarás obedientemente la santa voluntad y los mandamientos de Dios y caminarás en ellos todos los días de tu vida?"
+  },
+  {
+   "t": "P",
+   "x": "Respuesta: Sí, lo haré con la ayuda del Señor. El Obispo se dirige a la Congregación diciendo ¿Harán ustedes, que son testigos de estas promesas, todo lo que esté a su alcance para apoyar a estas personas en su vida en Cristo?"
+  },
+  {
+   "t": "R",
+   "x": "La Congregación responde"
+  },
+  {
+   "t": "P",
+   "x": "Sí, lo haremos. El Obispo luego dice Unámonos a estos Candidatos para proclamar nuestra fe en las palabras de la antigua confesión bautismal, el Credo de los Apóstoles."
+  },
+  {
+   "t": "OBISPO",
+   "x": "¿Crees y confías en Dios Padre?"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Sí creo. Creo en Dios Padre todopoderoso, creador del cielo y de la tierra."
+  },
+  {
+   "t": "OBISPO",
+   "x": "¿Crees y confían en Jesucristo?"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Sí creo. Creo en Jesucristo, su único Hijo, Nuestro Señor, que fue concebido por obra y gracia del Espíritu Santo, nació de Santa María Virgen, padeció bajo el poder de Poncio Pilato, fue crucificado, muerto y sepultado, descendió a los infiernos, al tercer día resucitó de entre los muertos, subió a los cielos, y está sentado a la derecha de Dios Padre. Desde allí ha de venir a juzgar a vivos y muertos."
+  },
+  {
+   "t": "OBISPO",
+   "x": "¿Crees y confías en el Espíritu Santo?"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Sí creo."
+  },
+  {
+   "t": "V",
+   "x": "Creo en el Espíritu Santo,\nla santa Iglesia católica,\nla comunión de los santos,\nel perdón de los pecados,\nla resurrección de los muertos\ny la vida eterna. Amén."
+  },
+  {
+   "t": "T",
+   "x": "ORACIÓN POR LOS CANDIDATOS PARA EL SANTO BAUTISMO"
+  },
+  {
+   "t": "P",
+   "x": "El obispo ahora ora por los candidatos bautismales de la siguiente manera Oremos: Padre todopoderoso y eterno, en tu gran misericordia salvaste a Noé y su familia en el Arca de la destrucción del diluvio, prefigurando el Sacramento del Santo Bautismo. Mira con misericordia a estos tus siervos. Lávalos y santifícalos mediante tu Espíritu Santo, para que sean librados de la destrucción y recibidos en el Arca de la Iglesia de Cristo; y siendo firmes en la fe, gozosos por la esperanza y arraigados en el amor, puedan atravesar las turbulentas inundaciones de este mundo problemático y llegar a la tierra de la vida eterna, por Jesucristo nuestro Señor. Amén."
+  },
+  {
+   "t": "T",
+   "x": "ACCIÓN DE GRACIAS SOBRE EL AGUA"
+  },
+  {
+   "t": "R",
+   "x": "Si hay una procesión a la pila bautismal, se puede cantar un salmo, himno o antífona."
+  },
+  {
+   "t": "P",
+   "x": "El diácono, o el obispo, vierte el agua para el bautismo."
+  },
+  {
+   "t": "CEL",
+   "x": "El Señor esté con ustedes."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Y con tu espíritu."
+  },
+  {
+   "t": "CEL",
+   "x": "Levantemos el corazón."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Lo tenemos levantado hacia el Señor."
+  },
+  {
+   "t": "CEL",
+   "x": "Demos gracias al Señor nuestro Dios."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Es justo darle gracias y alabarlo."
+  },
+  {
+   "t": "P",
+   "x": "El Obispo continúa Nosotros te damos gracias, Dios Todopoderoso, por el regalo del agua. Sobre ella se movió el Espíritu Santo al principio de la creación. A través de ella, sacaste a los hijos de Israel de su esclavitud en Egipto a la tierra prometida. En ella tu Hijo Jesús recibió el bautismo de Juan en el río Jordán cuando el Espíritu Santo descendió sobre él en forma de paloma. Nosotros te damos gracias, Padre, por el agua del Bautismo. En ella somos sepultados con Cristo en su muerte. Por ella compartimos su Resurrección. Por ella somos regenerados por el Espíritu Santo. Por tanto, en gozosa obediencia a tu Hijo, traemos a su comunión a los que vienen a él con fe, bautizándolos en el Nombre del Padre, y del Hijo, y del Espíritu Santo. Aquí el obispo toca el agua y dice Ahora Padre santifica esta agua por el poder de tu Espíritu Santo. Que todos los que son bautizados aquí sean limpiados del pecado, nazcan de nuevo y permanezcan por siempre fieles en la vida resucitada de Jesucristo nuestro Salvador. A Él, a Ti y al Espíritu Santo sea todo honor y gloria, ahora y por siempre. Amén."
+  },
+  {
+   "t": "T",
+   "x": "EL BAUTISMO"
+  },
+  {
+   "t": "R",
+   "x": "El Obispo puede decir a los Padrinos ¿Cuál es el nombre de este Candidato / Niño?"
+  },
+  {
+   "t": "R",
+   "x": "Luego, el Celebrante sumerge al Candidato o vierte agua sobre el Candidato tres veces, diciendo"
+  },
+  {
+   "t": "P",
+   "x": "N., Yo te bautizo en el Nombre del Padre, y del Hijo, y del Espíritu Santo. Amén."
+  },
+  {
+   "t": "P",
+   "x": "El Obispo hace la señal de la Cruz en la frente del recién bautizado (y puede usar el Óleo del Crisma para hacerlo), diciendo N., recibe la señal de la Cruz como muestra de tu nueva vida en Cristo, en la que no te avergonzarás de confesar la fe de Cristo crucificado, de luchar con valentía bajo su estandarte contra el mundo, la carne y el demonio, y para continuar como su fiel soldado y siervo hasta el fin de tus días. Amén."
+  },
+  {
+   "t": "R",
+   "x": "o bien"
+  },
+  {
+   "t": "P",
+   "x": "N., Estás sellado por el Espíritu Santo en el Bautismo y marcado como perteneciente a Cristo para siempre. Amén."
+  },
+  {
+   "t": "R",
+   "x": "Si se presentan prendas o velas, aquí se dan."
+  },
+  {
+   "t": "R",
+   "x": "Cuando todos hayan sido bautizados y santiguados, el Celebrante dice"
+  },
+  {
+   "t": "P",
+   "x": "Padre Celestial, te damos gracias porque por el agua y el Espíritu Santo has otorgado a estos tus siervos el perdón de los pecados, los has recibido como tus propios hijos por adopción, los has hecho miembros de tu santa Iglesia y los has creado a la nueva vida de gracia. Sostenlos, oh Señor, en tu Espíritu Santo, para que disfruten de la salvación eterna por Jesucristo nuestro Señor. Amén."
+  },
+  {
+   "t": "P",
+   "x": "El Obispo continúa Demos la bienvenida a los que acaban de ser bautizados."
+  },
+  {
+   "t": "OBISPO",
+   "x": "y pueblo Los recibimos en la familia de la Iglesia. Confiesen la fe de Cristo crucificado, proclamen su resurrección y participen con nosotros en el sacerdocio real de todo su pueblo."
+  },
+  {
+   "t": "T",
+   "x": "LAS CONFIRMACIONES, RECEPCIONES Y REAFIRMACIONES"
+  },
+  {
+   "t": "P",
+   "x": "El obispo continúa"
+  },
+  {
+   "t": "P",
+   "x": "Oremos ahora por aquellos que han hecho una profesión de fe adulta y que buscan la imposición de manos. Dios todopoderoso y eterno, te suplicamos que fortalezcas a estos tus siervos para el testimonio y el ministerio mediante el poder de tu Espíritu Santo. Aumenta cada día en ellos tus múltiples virtudes de gracia: el espíritu de sabiduría y entendimiento, espíritu de consejo y fortaleza, espíritu de conocimiento y verdadera piedad, y el espíritu de tu santo temor, ahora y por siempre. Amén."
+  },
+  {
+   "t": "T",
+   "x": "PARA CONFIRMACIÓN"
+  },
+  {
+   "t": "P",
+   "x": "Cada Confirmando se arrodilla frente al Obispo. El Obispo, luego poniendo sus manos sobre la cabeza de la persona, reza Defiende, oh Señor, a este tu siervo N. con tu gracia celestial, para que sea tuyo para siempre, y aumenta cada día en él tu Espíritu Santo cada vez más hasta que entre en la plenitud de tu reino eterno."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Amén."
+  },
+  {
+   "t": "P",
+   "x": "O bien Fortalece, oh Señor, con tu Espíritu Santo, a tu siervo N. dale poder para tu servicio; y sostenlo todos los días de su vida."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Amén."
+  },
+  {
+   "t": "T",
+   "x": "PARA LA RECEPCIÓN"
+  },
+  {
+   "t": "P",
+   "x": "Aquellos que han hecho profesiones de fe adultas en otras tradiciones cristianas son Recibidos con la imposición de manos de la siguiente manera. Fortalece, oh Señor, con tu Espíritu Santo, a tu siervo N., a quien reconocemos como miembro de la Iglesia Una, Santa, Católica y Apostólica, y recibimos en la hermandad de esta familia. Dale poder para tu servicio y sostenlo todos los días de su vida."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Amén."
+  },
+  {
+   "t": "T",
+   "x": "PARA LA REAFIRMACIÓN"
+  },
+  {
+   "t": "P",
+   "x": "El Obispo también podrá aceptar con la imposición de manos la Reafirmación de los votos por parte de una persona que haya sido previamente Confirmada o Recibida en esta Iglesia. N., el Espíritu Santo, que ha comenzado una buena obra en ti, te dirija y te dé poder con su gracia, para que puedas continuar en el servicio de nuestro Señor Jesucristo todos los días de tu vida."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Amén."
+  },
+  {
+   "t": "R",
+   "x": "El Obispo puede hacer la señal de la cruz con el Óleo del Crisma en la frente de cualquiera que reciba la imposición de manos, y puede decir"
+  },
+  {
+   "t": "P",
+   "x": "N., Te marco con la señal de la Cruz de nuestro Señor Jesucristo en el Nombre del Padre, y del Hijo, y del Espíritu Santo."
+  },
+  {
+   "t": "T",
+   "x": "ORACIÓN FINAL DESPUÉS DE LA IMPOSICIÓN DE LAS MANOS"
+  },
+  {
+   "t": "P",
+   "x": "El obispo luego dice Dios Todopoderoso y eterno, tu mano paternal esté siempre sobre estos tus siervos; que tu Espíritu Santo esté siempre con ellos; y así guíalos en el conocimiento y la obediencia de tu Santa Palabra, para que te sirvan fielmente en esta vida y moren con gozo contigo en la vida venidera; Por Jesucristo nuestro Señor. Amén."
+  },
+  {
+   "t": "R",
+   "x": "En una liturgia distinta a la Vigilia Pascual, siguen el Intercambio de la Paz y el Ofertorio."
+  },
+  {
+   "t": "P",
+   "x": "Al concluir la liturgia, se puede usar la siguiente bendición. Vayan al mundo en paz, sean valientes y luchen la buena batalla de la fe, para que puedan terminar su carrera con alegría; y la bendición de Dios Todopoderoso, Padre, Hijo y Espíritu Santo, esté entre ustedes y permanezca con ustedes por siempre. Amén."
   }
  ],
  "easterVigilContinues": [
