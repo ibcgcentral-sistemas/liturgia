@@ -2,7 +2,7 @@
  * holyweek-data.js — Liturgias de la Semana Santa (Libro de Oración Común 2019, ACNA).
  * GENERADO por bcp2019-tools/build-holyweek.js a partir del libro oficial en español (LOC-10-10-23.md); NO editar a
  * mano: test-bcp2019.js comprueba que sigue idéntico a lo que genera el script. Texto copiado, no traducido.
- * Procedencia: palmSundayPalms LOC l. 14728-14794; maundyThursdayOpening LOC l. 14844-14858; maundyThursdayFootWashing LOC l. 14875-14902; maundyThursdayClosing LOC l. 14903-14911; goodFriday LOC l. 14939-15244; holySaturday LOC l. 15248-15315; renewedCreed LOC l. 3283-3325; renewedPrayers LOC l. 3326-3365; renewedConfession LOC l. 3366-3409; renewedPeace LOC l. 3410-3413; renewedOffertory LOC l. 3414-3425; renewedSursum LOC l. 3426-3450; renewedConsecration LOC l. 3451-3494; renewedLordsPrayer LOC l. 3495-3515; renewedHumbleAccess LOC l. 3526-3542; renewedAgnusDei LOC l. 3543-3550; renewedAdministration LOC l. 3551-3567; renewedPostCommunion LOC l. 3568-3585; renewedBlessing LOC l. 3586-3595; renewedDismissal LOC l. 3596-3608; renewedDismissalAlleluia LOC l. 3609-3615; ashWednesdayOpening LOC l. 14474-14477; ashWednesdayInvitation LOC l. 14478-14502; ashWednesdayAshes LOC l. 14519-14568; ashWednesdayConfession LOC l. 14569-14649; ashWednesdayAbsolution LOC l. 14650-14685; ashWednesdayClosing LOC l. 14686-14697; easterVigilIntro LOC l. 15318-15337; easterVigilLight LOC l. 15341-15440; easterVigilReadings LOC l. 15441-15572; easterVigilWord LOC l. 15573-15633; easterVigilBlessing LOC l. 15634-15641.
+ * Procedencia: palmSundayPalms LOC l. 14728-14794; maundyThursdayOpening LOC l. 14844-14858; maundyThursdayFootWashing LOC l. 14875-14902; maundyThursdayClosing LOC l. 14903-14911; goodFriday LOC l. 14939-15244; holySaturday LOC l. 15248-15315; renewedCreed LOC l. 3283-3325; renewedPrayers LOC l. 3326-3365; renewedConfession LOC l. 3366-3409; renewedPeace LOC l. 3410-3413; renewedOffertory LOC l. 3414-3425; renewedSursum LOC l. 3426-3450; renewedConsecration LOC l. 3451-3494; renewedLordsPrayer LOC l. 3495-3515; renewedHumbleAccess LOC l. 3526-3542; renewedAgnusDei LOC l. 3543-3550; renewedAdministration LOC l. 3551-3567; renewedPostCommunion LOC l. 3568-3585; renewedBlessing LOC l. 3586-3595; renewedDismissal LOC l. 3596-3608; renewedDismissalAlleluia LOC l. 3609-3615; ashWednesdayOpening LOC l. 14474-14477; ashWednesdayInvitation LOC l. 14478-14502; ashWednesdayAshes LOC l. 14519-14568; ashWednesdayConfession LOC l. 14569-14649; ashWednesdayAbsolution LOC l. 14650-14685; ashWednesdayClosing LOC l. 14686-14697; easterVigilIntro LOC l. 15318-15337; easterVigilLight LOC l. 15341-15440; easterVigilReadings LOC l. 15441-15572; easterVigilWord LOC l. 15573-15631; easterVigilRenewal LOC l. 4835-4907; easterVigilContinues LOC l. 15632-15633; easterVigilBlessing LOC l. 15634-15641.
  * Tipos: T título, R rúbrica, P párrafo, V versos (líneas separadas por \n), REF cita bíblica, CEL/PUEBLO/DIAC/LECTOR/
  * OFIC/TODOS/OBISPO/PRES voces, LECTURAS = lugar donde el app inserta las lecturas del día.
  */
@@ -1661,11 +1661,7 @@ const BCP_HOLYWEEK_DATA = {
   },
   {
    "t": "R",
-   "x": "El Santo Bautismo es el Sacramento a través del cual los candidatos se unen a la muerte y resurrección de Jesucristo (ROMANOS 6: 3-4), que la Iglesia celebra en esta noche santísima. Cuando el Obispo está presente, también se puede administrar la Confirmación. Si no hay candidatos para el Bautismo o la Confirmación, la"
-  },
-  {
-   "t": "R",
-   "x": "Congregación se une a la Renovación de los Votos Bautismales."
+   "x": "El Santo Bautismo es el Sacramento a través del cual los candidatos se unen a la muerte y resurrección de Jesucristo (ROMANOS 6: 3-4), que la Iglesia celebra en esta noche santísima. Cuando el Obispo está presente, también se puede administrar la Confirmación. Si no hay candidatos para el Bautismo o la Confirmación, la Congregación se une a la Renovación de los Votos Bautismales."
   },
   {
    "t": "R",
@@ -2194,7 +2190,127 @@ const BCP_HOLYWEEK_DATA = {
   {
    "t": "R",
    "x": "El Santo Bautismo puede administrarse aquí. La Confirmación también se puede administrar como se indica en Instrucciones Adicionales. En ausencia de Candidatos para el Bautismo o Confirmación, el Celebrante dirige al pueblo en la Renovación de los Votos Bautismales."
+  }
+ ],
+ "easterVigilRenewal": [
+  {
+   "t": "T",
+   "x": "RENOVACIÓN DE LAS PROMESAS BAUTISMALES"
   },
+  {
+   "t": "R",
+   "x": "Si no hay bautismos o confirmaciones en la Vigilia Pascual, la Renovación de las Promesas Bautismales tiene lugar después del Servicio de las Lecturas o del Sermón. En otras ocasiones, la Renovación de Promesas sigue al Sermón. El Credo Niceno no se dice."
+  },
+  {
+   "t": "R",
+   "x": "La gente se pone de pie. El Celebrante se dirige a la Congregación con estas u otras palabras similares"
+  },
+  {
+   "t": "P",
+   "x": "Mediante el misterio Pascual, queridos hermanos, somos sepultados con Cristo por el Bautismo en su muerte y resucitados con él a la vida nueva. Por tanto, los exhorto [ahora que nuestra observancia de la Cuaresma ha terminado] a renovar las solemnes promesas y votos del Santo Bautismo, por las que una vez renunciamos a Satanás y a todas sus obras, y prometimos servir a Dios fielmente en su única santa Iglesia católica y apostólica."
+  },
+  {
+   "t": "CEL",
+   "x": "¿Renuevas tú, aquí en la presencia de Dios y de la Iglesia, las solemnes promesas y votos hechos en tu Bautismo y te comprometes a cumplirlos?"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Sí, me comprometo."
+  },
+  {
+   "t": "CEL",
+   "x": "Renuncias a Satanás y a todas sus fuerzas espirituales de maldad que se rebelan contra Dios?"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Sí, renuncio."
+  },
+  {
+   "t": "CEL",
+   "x": "¿Renuncias a las promesas vacías y los engaños mortales de este mundo que corrompen y destruyen a las criaturas de Dios?"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Sí, renuncio."
+  },
+  {
+   "t": "CEL",
+   "x": "¿Renuncias a los deseos pecaminosos de la carne que te apartan del amor de Dios?"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Sí, renuncio."
+  },
+  {
+   "t": "CEL",
+   "x": "¿Te conviertes a Jesucristo y lo confiesas como tu Señor y Salvador?"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Sí, lo confieso."
+  },
+  {
+   "t": "CEL",
+   "x": "¿Recibes con alegría la fe cristiana, como revelada en las Sagradas Escrituras del Antiguo y Nuevo Testamento?"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Sí, recibo la fe cristiana."
+  },
+  {
+   "t": "CEL",
+   "x": "¿Guardarás obedientemente la santa voluntad y los mandamientos de Dios y caminarás en ellos todos los días de tu vida?"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Sí, lo haré con la ayuda del Señor."
+  },
+  {
+   "t": "R",
+   "x": "El Celebrante continúa"
+  },
+  {
+   "t": "P",
+   "x": "Reafirmemos ahora nuestra fe en las palabras de la antigua confesión bautismal, el Credo de los Apóstoles."
+  },
+  {
+   "t": "CEL",
+   "x": "¿Creen y confían en Dios Padre?"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Sí, creo. Creo en Dios Padre todopoderoso, creador del cielo y de la tierra."
+  },
+  {
+   "t": "CEL",
+   "x": "¿Crees y confías en Jesucristo?"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Sí, creo. Creo en Jesucristo, su único Hijo, Nuestro Señor, que fue concebido por obra y gracia del Espíritu Santo, nació de Santa María Virgen, padeció bajo el poder de Poncio Pilato, fue crucificado, muerto y sepultado, descendió a los infiernos, al tercer día resucitó de entre los muertos, subió a los cielos, y está sentado a la derecha de Dios Padre. Desde allí ha de venir a juzgar a vivos y muertos."
+  },
+  {
+   "t": "CEL",
+   "x": "¿Crees y confías en el Espíritu Santo?"
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Sí, creo. Creo en el Espíritu Santo, la Santa Iglesia Católica, la comunión de los santos, el perdón de los pecados, la resurrección de los muertos y la vida eterna. Amén."
+  },
+  {
+   "t": "R",
+   "x": "El Celebrante concluye la Renovación de Votos de la siguiente manera"
+  },
+  {
+   "t": "P",
+   "x": "Oremos:"
+  },
+  {
+   "t": "P",
+   "x": "Dios Todopoderoso, que has edificado a tu Iglesia sobre el fundamento de los Apóstoles y Profetas, siendo el mismo Jesucristo la principal piedra angular: concédenos que estemos unidos en unidad de espíritu por su doctrina, para que seamos hechos un templo santo que te agrade; Por Jesucristo nuestro Señor, que vive y reina contigo y el Espíritu Santo, un solo Dios, por los siglos de los siglos. Amén."
+  }
+ ],
+ "easterVigilContinues": [
   {
    "t": "R",
    "x": "La celebración continúa con las Oración de los Fieles."

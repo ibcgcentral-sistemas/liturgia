@@ -411,6 +411,13 @@ function buildLiturgyHTML(d) {
       <h3 class="section-title main-section">✠ LA ACLAMACIÓN PASCUAL Y LA PALABRA</h3>
       ${BCPHolyWeek.render('easterVigilWord', '', leerVigilia)}
     </div>
+    <!-- Sin candidatos para el Bautismo o la Confirmación, el libro manda la Renovación de los Votos Bautismales tras el
+         Sermón; el Bautismo y la Confirmación solo constan como la rúbrica del libro. No se dice el Credo Niceno. -->
+    <div class="mass-section vigil-section">
+      <h3 class="section-title main-section">✠ RENOVACIÓN DE LOS VOTOS BAUTISMALES</h3>
+      ${BCPHolyWeek.render('easterVigilRenewal')}
+      ${BCPHolyWeek.render('easterVigilContinues')}
+    </div>
     ${prayersHtml}
     ${eucharistEndHtml({ preface: BCPPropers.PREFACES.easter, vigil: true })}`;
     return `

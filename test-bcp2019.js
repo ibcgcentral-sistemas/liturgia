@@ -365,7 +365,15 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
           HW(/(Lectura de|LECCIÓN)\s+Éxodo 14:10-15:1/.test(t) && /(Lectura de|LECCIÓN)\s+Romanos 6:3-11/.test(t) && /(Lectura de|LECCIÓN)\s+Mateo 28:1-10/.test(t),`${w}${n}: falta el texto bíblico de la Vigilia (Éxodo, Epístola o Evangelio)`);
           HW(/¡Aleluya! ¡Cristo ha resucitado!/.test(t) && /Oh Dios, que hiciste resplandecer esta noche santísima/.test(t), `${w}${n}: falta la Aclamación Pascual o la colecta de la Vigilia`);
           HW(/PREFACIO: PASCUA/.test(t) && /ORACIÓN DE CONSAGRACIÓN/.test(t) && /\[Aleluya\.\] Cristo, nuestra Pascua/.test(t) && /aleluya, aleluya/i.test(t), `${w}${n}: la Eucaristía de la Vigilia debe llevar prefacio de Pascua, consagración, Fracción y Despedida con Aleluya`);
+          // Renovación de los Votos Bautismales (LOC l. 4835-4907): tras el Sermón y antes de las Oraciones del Pueblo, sin Credo Niceno.
+          const v = t.indexOf('LA GRAN VIGILIA DE RESURRECCIÓN'), parte = v < 0 ? '' : t.slice(v);
+          let pos = 0, falta = '';
+          for (const m of ['EL SERMÓN', 'RENOVACIÓN DE LAS PROMESAS BAUTISMALES', '¿Renuevas tú, aquí en la presencia de Dios', 'Sí, me comprometo.', 'Desde allí ha de venir a juzgar a vivos y muertos.', 'y la vida eterna. Amén.', 'que has edificado a tu Iglesia sobre el fundamento', 'La celebración continúa con las Oración de los Fieles.', 'ORACIÓN DE LOS FIELES', 'PREFACIO: PASCUA']) { const j = parte.indexOf(m, pos); if (j < 0) { falta = falta || m; continue; } pos = j + m.length; }
+          HW(!falta, `${w}${n}: la Renovación de los Votos Bautismales falta o está fuera de orden en la Vigilia (${falta})`);
+          HW((parte.match(/Sí, renuncio\./g) || []).length === 3 && (parte.match(/Sí, creo\./g) || []).length === 3 && (parte.match(/¿Renuevas tú/g) || []).length === 1, `${w}${n}: la Renovación debe traer 3 «Sí, renuncio.», 3 «Sí, creo.» y una sola pregunta inicial`);
+          HW(!/Excepto en la Vigilia Pascual|RITOS PASTORALES|Creemos en un solo Dios|EL CREDO NICENO/.test(parte), `${w}${n}: la Vigilia no lleva Credo Niceno ni la última línea del rito de la Renovación`);
         }
+        HW(lib.includes('<strong>Pueblo: Sí, creo. Creo en Dios Padre todopoderoso'), `${w} Librito: «Sí, creo.» y el artículo del Credo deben ir juntos y en negrita (lo que dice el pueblo)`);
       }
     }
   }
@@ -377,7 +385,19 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   HW(JSON.stringify([...HWm.VIGIL_REFS].sort()) === JSON.stringify(Object.keys(CUENTA_VIGILIA).sort()), 'las citas de la Vigilia en holyweek-data.js no son las esperadas: ' + HWm.VIGIL_REFS.join(' | '));
   for (const [ref, n] of Object.entries(CUENTA_VIGILIA)) { const got = [...(await fetchScripture(ref)).text.matchAll(/<sup class="verse-num">/g)].length; HW(got === n, `${ref}: salen ${got} versículos y el libro tiene ${n}`); }
   // Ningún otro día lleva rito de Semana Santa: la Liturgia de las Palmas y el lavatorio no se cuelan.
-  for (const k of ['2026-06-07', '2026-11-08', '2026-03-10']) { const d = new Date(k + 'T12:00:00'); const t = strip(await generateLiturgy(d)); HW(!/LITURGIA DE LAS PALMAS|LAVATORIO DE LOS PIES|IMPROPERIOS|IMPOSICIÓN DE LA CENIZA|LETANÍA DE PENITENCIA/.test(t), `${k}: se coló un rito de Semana Santa o de Ceniza`); }
+  for (const k of ['2026-06-07', '2026-11-08', '2026-03-10']) { const d = new Date(k + 'T12:00:00'); const t = strip(await generateLiturgy(d)); HW(!/LITURGIA DE LAS PALMAS|LAVATORIO DE LOS PIES|IMPROPERIOS|IMPOSICIÓN DE LA CENIZA|LETANÍA DE PENITENCIA|RENOVACIÓN DE LAS PROMESAS BAUTISMALES/.test(t), `${k}: se coló un rito de Semana Santa o de Ceniza`); }
+  // La Renovación de los Votos Bautismales y el cierre de la Vigilia son el texto del libro, línea por línea (LOC l. 4835-4907 y
+  // 15632-15633): sin líneas en blanco, números de página ni etiquetas de quien habla, que el generador quita o convierte.
+  try {
+    const gen2 = require('./bcp2019-tools/build-holyweek.js'), D2 = C.get('BCP_HOLYWEEK_DATA'), n2 = s => String(s).replace(/\s+/g, ' ').trim();
+    if (fs.existsSync(gen2.LOC_POR_DEFECTO)) {
+      const L = fs.readFileSync(gen2.LOC_POR_DEFECTO, 'utf8').split(/\r?\n/);
+      const libro = (a, b) => n2(L.slice(a - 1, b).map(l => l.trim()).filter(l => l && !/^\d{3}$/.test(l)).map(l => l.replace(/^(Celebrante|Pueblo|Pregunta)\s+/, '')).join(' '));
+      const datos = n => n2(D2[n].map(i => i.x).join(' '));
+      HW(libro(4835, 4907) === datos('easterVigilRenewal'), 'easterVigilRenewal no es el texto del libro (LOC l. 4835-4907)');
+      HW(libro(15632, 15633) === datos('easterVigilContinues'), 'easterVigilContinues no es el texto del libro (LOC l. 15632-15633)');
+    }
+  } catch (e) { hw.push('no se pudo comprobar la Renovación de los Votos Bautismales: ' + e.message); }
   // El archivo generado sigue siendo idéntico al libro.
   try {
     const gen = require('./bcp2019-tools/build-holyweek.js');
@@ -442,6 +462,7 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
     const k = dayInfo.key, ash = k === 'ashWednesday', palm = k === 'palmSunday', maundy = k === 'maundyThursday', sat = k === 'holySaturday';
     const s = [];
     if (!palm && !ash && !sat) s.push('renewedCreed');
+    if (sat) s.push('easterVigilRenewal');   // la Vigilia renueva los votos bautismales antes de las Oraciones del Pueblo
     if (!palm && !ash) s.push('renewedPrayers');
     if (!ash) s.push('renewedConfession', 'renewedPeace');
     s.push('renewedOffertory', 'renewedSursum', 'renewedConsecration', 'renewedLordsPrayer', 'renewedHumbleAccess', 'renewedAgnusDei', 'renewedAdministration', 'renewedPostCommunion');
@@ -491,7 +512,7 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   // se omite esa comparación y se anota como pendiente.
   let colectas;
   try { colectas = require('./bcp2019-tools/check-colectas.js').compare(); } catch (e) { colectas = { total: 1, oficiales: 0, traducidas: 0, fallos: ['no se pudo comprobar: ' + e.message], notas: [] }; }
-  check(`8. Colectas: ${colectas.oficiales} oficiales idénticas al libro en español y ${colectas.traducidas} traducidas con forma correcta`, colectas.fallos, colectas.total);
+  check(`8. Colectas: ${colectas.oficialesComparadas} de ${colectas.oficiales} oficiales idénticas al libro en español y ${colectas.traducidas} traducidas con forma correcta`, colectas.fallos, colectas.total);
 
   // ── Informe ──────────────────────────────────────────────────────────────
   let failed = 0;

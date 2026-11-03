@@ -365,6 +365,12 @@ const BCPLibrito = (() => {
         ${BCPHolyWeek.renderLibrito('easterVigilWord', '', leerVigilia)}
       </section>
 
+      <section class="librito-section">
+        <h2>✠ RENOVACIÓN DE LOS VOTOS BAUTISMALES</h2>
+        ${BCPHolyWeek.renderLibrito('easterVigilRenewal')}
+        ${BCPHolyWeek.renderLibrito('easterVigilContinues')}
+      </section>
+
       ${prayersLibrito}
 
       ${libritoEndHtml({ preface: BCPPropers.PREFACES.easter, vigil: true })}`;

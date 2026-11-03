@@ -51,7 +51,12 @@ const SECCIONES = {
   easterVigilIntro: { ini: 'La Gran Vigilia, cuando se observa', fin: 'LA', desde: 15300, comoRubrica: true },
   easterVigilLight: { ini: 'LA ILUMINACIÓN DEL CIRIO PASCUAL', fin: 'LAS LECTURAS', desde: 15330 },
   easterVigilReadings: { ini: 'LAS LECTURAS', fin: 'LA ACLAMACIÓN PASCUAL', desde: 15430 },
-  easterVigilWord: { ini: 'LA ACLAMACIÓN PASCUAL', fin: 'La siguiente bendición puede usarse', desde: 15560 },
+  // La Palabra termina en el Sermón y su título; la Renovación de los Votos Bautismales (texto del rito, l. 4835-4907 del
+  // libro; sin su última línea, que dice que «excepto en la Vigilia Pascual» siguen las Oraciones del Pueblo) va después, y
+  // el cierre «La celebración continúa con las Oración de los Fieles» (sic) y el prefacio de Pascua, tras ella.
+  easterVigilWord: { ini: 'LA ACLAMACIÓN PASCUAL', fin: 'La celebración continúa con las Oración', desde: 15560 },
+  easterVigilRenewal: { ini: 'RENOVACIÓN DE LAS PROMESAS BAUTISMALES', fin: 'Excepto en la Vigilia Pascual', desde: 4800 },
+  easterVigilContinues: { ini: 'La celebración continúa con las Oración', fin: 'La siguiente bendición puede usarse', desde: 15620 },
   easterVigilBlessing: { ini: 'La siguiente bendición puede usarse', fin: 'DIRECCIONES ADICIONALES', desde: 15620 },
 };
 // Citas del libro que el app sustituye por el texto bíblico (lo pide al leccionario/Biblia de Jerusalén). La clave es
@@ -84,8 +89,9 @@ const LECTURAS = {
 const ROTULO = /^(Se (dice|canta|puede|pueden|utiliza|omiten|omite|guarda|lleva)|Luego[ ,]|A continuación|Todos (de pie|se |pueden)|El (Celebrante|Oficiante|Diácono|Presbítero|Obispo) (puede|dice|reza|lee|entonces|concluye|invita|se pone|se levanta)|El servicio siempre|El rito de la Santa Eucaristía no|No hay celebración de la Eucaristía|El Celebrante (enciende|puede presentar)|El oficiante dice|El Pueblo se pone|Todos de rodillas|El Lector solo continúa|Entonces todos rezan|Si está presente el Obispo|El Oficiante puede entonces|Cuando hay Comunión|El silencio puede seguir|El Diácono \(o el Celebrante|El [Dd]iácono (u otra|y el [Pp]ueblo)|El Pueblo permanece|El Celebrante continúa|La gente se pone de pie|En las siguientes palabras|El [Oo]bispo o sacerdote|El obispo, cuando|El diácono, o el sacerdote|Después de la Comunión|El Pan y el Cáliz se entregan|El Celebrante puede ofrecer|Durante el ministerio|Juntos, el Celebrante|Se puede cantar un himno|Si el Pan consagrado|En Cuaresma, se omite|Después de cada lectura|Se leen una o más|Se puede agregar una cita|O el lector puede|Puede seguir un momento|Un salmo, himno|Todos de pie, el diácono|Después del Evangelio, el lector|El Celebrante le dice|El Celebrante reza|Desde la Vigilia Pascual|Puede añadirse en otros|La gente responde|Antes de la celebración|El Celebrante puede comenzar|Durante el ofertorio|El Pueblo se pone de pie mientras|Entonces los Ministros|Se puede cantar o decir la Gloria|Luego sigue el Resumen|El celebrante y el pueblo rezan|El Celebrante y el pueblo rezan|El Cirio Pascual se coloca|El servicio continúa|Se leen |Después del Evangelio|La celebración continúa|El Prefacio de Pascua|La siguiente bendición|El Santo Bautismo puede|O, si las oraciones|Todos se ponen de pie|Se puede tocar|El Gloria in Excelsis, o algún otro|El Diácono, u otra persona|La Gran Vigilia, cuando|El Servicio de la Luz|El servicio de las lecturas|El Santo Bautismo es|La Sagrada Eucaristía es|En la oscuridad, el fuego|El Obispo o Sacerdote|El Diácono (u otra|y el Pueblo)|El Oficiante (y el|dice|entonces)|Los Ministros|Los ministros|La Congregación|Cuando |Si |Durante |Después |Siguiendo |En (un lugar|la ausencia|ausencia|este día los)|Puede |Pueden |Estas |Esta liturgia|Las peticiones|Las oraciones iniciales|El himno de|El Evangelio de la Pasión|Año [ABC] |Frente al|Pueden seguir|Ahora se puede|Entonces se puede|La liturgia continúa|Silencio)/;
 const ROTULO_EXACTO = /^(o esto|o bien,?|O lo siguiente|Silencio\.?)$/;
 // «Pueblo mío», «Todos los que…» y «Todos nosotros…» son texto, no la etiqueta de quien habla.
-const ETIQUETA = /^(Celebrante|Pueblo(?! mío| de Dios| santo)|Diácono|Lector|Oficiante|Todos(?! los| nosotros)|Obispo|Presbítero)\s+(.+)$/;
-const TIPO_ETIQUETA = { Celebrante: 'CEL', Pueblo: 'PUEBLO', 'Diácono': 'DIAC', Lector: 'LECTOR', Oficiante: 'OFIC', Todos: 'TODOS', Obispo: 'OBISPO', 'Presbítero': 'PRES' };
+// «Pregunta» es la etiqueta que el libro pone a una de las preguntas del Celebrante en la Renovación de los Votos.
+const ETIQUETA = /^(Pregunta|Celebrante|Pueblo(?! mío| de Dios| santo)|Diácono|Lector|Oficiante|Todos(?! los| nosotros)|Obispo|Presbítero)\s+(.+)$/;
+const TIPO_ETIQUETA = { Pregunta: 'CEL', Celebrante: 'CEL', Pueblo: 'PUEBLO', 'Diácono': 'DIAC', Lector: 'LECTOR', Oficiante: 'OFIC', Todos: 'TODOS', Obispo: 'OBISPO', 'Presbítero': 'PRES' };
 const MAYUSCULAS = /^[A-ZÁÉÍÓÚÜÑ0-9 ,.:;()¿?¡!\-—“”"'/]+$/;
 const REFERENCIA = /^\(?(Año [ABC] )?([1-3] )?[A-ZÁÉÍÓÚÑ]{3,}( [A-ZÁÉÍÓÚÑ]{2,})*[ —]*\(?\d/;
 const FIN_FRASE = /[.:;?!”»)"]$/;
@@ -107,6 +113,14 @@ const OVERRIDES = {
   'LA PAZ': 'T',
   'Confirmación. Si no hay candidatos para el Bautismo o la Confirmación, la': 'CONT',
   'Anglicano):': 'CONT',
+  // Renovación de los Votos Bautismales: la rúbrica de la introducción, la última línea de la rúbrica de la Renovación, la
+  // primera pregunta (el libro no le pone etiqueta, como en inglés) y los artículos del Credo de los Apóstoles, que siguen
+  // a su «Sí, creo.» y son parte de lo que dice el pueblo.
+  'Congregación se une a la Renovación de los Votos Bautismales.': 'CONT',
+  'El Credo Niceno no se dice.': 'CONT',
+  '¿Renuevas tú, aquí en la presencia de Dios y de la Iglesia, las solemnes promesas y': 'CEL',
+  'Creo en Dios Padre todopoderoso, creador del': 'CONT', 'Creo en Jesucristo, su único Hijo, Nuestro Señor,': 'CONT',
+  'Desde allí ha de venir a juzgar a vivos y muertos.': 'CONT', 'Creo en el Espíritu Santo, la': 'CONT',
   // Últimas líneas de una rúbrica, que el ancho de la página parte y empiezan en mayúscula.
   'Colecta adecuada.': 'CONT', 'Confirmación, el Celebrante dirige al pueblo a la Renovación de los Votos Bautismales.': 'CONT',
   'Instrucciones Adicionales. En ausencia de Candidatos para el Bautismo o Confirmación, el Celebrante dirige al': 'CONT',
