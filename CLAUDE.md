@@ -67,7 +67,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=31` (Misal) y `?v=21` (bcp2019; la hoja de estilo, `?v=7`).
+   código viejo. Actualmente en `?v=31` (Misal) y `?v=22` (bcp2019; la hoja de estilo, `?v=7`).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -201,11 +201,23 @@ sale con título (no se midió cuántos).
   sucesores, en lenguaje contemporáneo) y el **Texto Antiguo Renovado** (de la Iglesia
   primitiva, cercano al Rito II de 1979), más las *Additional Directions* (orden de
   1662, Orden Penitencial, abreviaturas, Oración de los Fieles alternativas). El
-  generador implementa **solo el Texto Estándar** (`eucharist.js`); el Texto Antiguo
-  Renovado, el Orden Penitencial, el reordenamiento de 1662 y el Trisagio (hay texto
-  en `eucharist.js`, no se ofrece) no están; el Sermón sí figura como rúbrica. Falta
-  decidir si se quiere el Texto Antiguo Renovado como segunda forma: es trabajo grande y
-  el texto español está en `LOC-10-10-23.md`, no hay que inventar nada.
+  generador ofrece **las dos formas** (selector «Forma de la Eucaristía»;
+  `generateLiturgy(date, {form})` guarda `form` en `currentMassState`). El Estándar sale
+  de `eucharist.js`; el **Texto Antiguo Renovado** (2026-11-02) son las secciones
+  `renewed*` de `holyweek-data.js`, cortadas del libro en español (`LOC-10-10-23.md`
+  l. 3174-3612) por `build-holyweek.js`, copiadas y no traducidas. Comparten el comienzo
+  (Aclamación, Pureza, Ley, Kyrie, Gloria), la Colecta, las lecturas y la Fracción; desde
+  el Credo hasta la Despedida el Renovado trae texto propio, en la liturgia y en el
+  Librito (el Prefacio lo dice el Celebrante: el Librito pone solo la indicación). Los
+  ritos de Ceniza, Ramos, Jueves y la Vigilia usan la forma elegida para lo que les
+  queda de Eucaristía. `test-bcp2019.js` 11 barre 2024-2060 y comprueba que sale cada
+  bloque del libro que ese día toca, en orden, que no se cuela texto del Estándar (ni al
+  revés) y que el Aleluya de la Despedida es de Pascua. **No están:** el Orden
+  Penitencial, el reordenamiento de 1662 y el Trisagio (hay texto en `eucharist.js`, no
+  se ofrece); el Sermón sí figura como rúbrica. Se vio en el navegador la liturgia y el
+  Librito del 2026-06-07 (sin errores de consola); **sin comprobar** la exportación a Word
+  de la forma Renovada (el recorrido del DOM de `docx-export.js` no se ejercitó con ella).
+  El libro imprime «JOHN 1:29» en una referencia de la Administración; se copió tal cual.
 - `bcp2019`, **Semana Santa** (2026-11-02): Domingo de Ramos, Jueves, Viernes y Sábado
   Santo llevan su rito del libro en español, **copiado, no traducido**. `bcp2019-tools/
   build-holyweek.js` corta el libro por anclas y genera `bcp2019/js/holyweek-data.js`
