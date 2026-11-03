@@ -67,7 +67,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=31` (Misal) y `?v=24` (bcp2019; la hoja de estilo, `?v=7`).
+   código viejo. Actualmente en `?v=31` (Misal) y `?v=25` (bcp2019; la hoja de estilo, `?v=7`).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -312,7 +312,11 @@ No volver a plantearlas salvo que él las reabra:
   citas antes de aplicar: 6 cambios en colectas (ver `COLECTAS-REVISION.md`). Lo hizo un modelo,
   **no un liturgista**: las 89 traducciones siguen pendientes. Decisiones del usuario: el 2.º
   Domingo de Navidad conserva la traducción propia aunque el libro lo traiga en la Vigilia, y
-  «Santísima Virgen María» unifica 05-31 y 08-15 (única forma del libro, l. 6492).
+  «Santísima Virgen María» unifica 05-31 y 08-15 (única forma del libro, l. 6492). Después, a
+  petición del usuario, el revisor tomó las decisiones de estilo que quedaban: siete retoques de
+  fidelidad (Epifanía 2 y 8, Pascua 4, Propio 20, 11 jun, 21 sep y 25 ene; ver
+  `COLECTAS-REVISION.md`) y el resto se dejó como está. Lo único que falta es la aprobación de
+  una autoridad litúrgica, que un modelo no puede dar: por eso la nota impresa sigue en pie.
   Las pruebas se corren con años (`node test-bcp2019.js 2026 2026`): `check-colectas.js` ya no toma
   esos años por rutas (antes se saltaba en silencio la comparación con el libro y la prueba decía
   «oficiales idénticas»; ahora el rótulo cuenta las comparadas).
