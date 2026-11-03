@@ -66,6 +66,8 @@ const BCPLibrito = (() => {
     const isLent = dayInfo.season === 'lent' || dayInfo.season === 'holyWeek';
     const isEaster = dayInfo.season === 'easter' || dayInfo.key === 'pentecost';
     const omitGloria = shouldOmitGloria(dayInfo);
+    // Orden Penitencial (igual que app.js): en vez de los Ritos Iniciales habituales, solo en días de Eucaristía ordinarios.
+    const penitential = !!state.penitential && !isPalm && !isMaundy && !isAsh && !noEucharistNotice(dayInfo);
     // Segunda forma del libro (Texto Antiguo Renovado), igual que en app.js: desde el Credo el texto es el propio del libro.
     const renewed = state.form === 'renewed';
     const formName = renewed ? 'Texto Antiguo Renovado' : 'Texto Estándar Anglicano';
@@ -147,13 +149,13 @@ const BCPLibrito = (() => {
         // que aquí va como indicación y no como texto, igual que en el Texto Estándar; la Fracción es la misma en las dos formas.
         const prefacioLibrito = () => `<div class="librito-instruction"><p>El Celebrante dice el Prefacio propio del día (${pf ? pf.title : 'Prefacio Común'}).</p></div>`;
         return `
-      ${sinConfesionNiPaz ? '' : `<section class="librito-section">
+      ${(sinConfesionNiPaz || penitential) ? '' : `<section class="librito-section">
         <h2>✠ CONFESIÓN Y ABSOLUCIÓN</h2>
         <div class="librito-instruction"><p><strong>Nos arrodillamos si podemos.</strong></p></div>
         ${rat('renewedConfession')}
-      </section>
+      </section>`}
 
-      <section class="librito-section">
+      ${sinConfesionNiPaz ? '' : `<section class="librito-section">
         <h2>✠ LA PAZ</h2>
         <div class="librito-instruction"><p><strong>Nos ponemos de pie.</strong></p></div>
         ${rat('renewedPeace')}
@@ -218,16 +220,16 @@ const BCPLibrito = (() => {
 `;
       }
       return `
-      ${sinConfesionNiPaz ? '' : `<section class="librito-section">
+      ${(sinConfesionNiPaz || penitential) ? '' : `<section class="librito-section">
         <h2>✠ CONFESIÓN Y ABSOLUCIÓN</h2>
         <div class="librito-instruction"><p><strong>Nos arrodillamos si podemos.</strong> Todos juntos:</p></div>
         <div class="librito-text">
           <p>Dios Todopoderoso, Padre de nuestro Señor Jesucristo, Creador y juez de todos nosotros: Confesamos y lamentamos nuestros muchos pecados y ofensas, que hemos cometido de pensamiento, palabra y obra contra tu divina majestad, provocando muy justamente tu razonable ira contra nosotros. Sentimos profundamente nuestras transgresiones; la carga de ellas es más de lo que podemos soportar. Ten misericordia de nosotros, ten misericordia de nosotros, Padre misericordioso; por amor de tu Hijo, nuestro Señor Jesucristo, perdónanos todo lo pasado; y concédenos que podamos servirte y agradarte cada vez más en una vida nueva, para el honor y la gloria de tu Nombre; por Jesucristo nuestro Señor. Amén.</p>
         </div>
         <div class="librito-instruction"><p>El Celebrante pronuncia la Absolución.</p></div>
-      </section>
+      </section>`}
 
-      <section class="librito-section">
+      ${sinConfesionNiPaz ? '' : `<section class="librito-section">
         <h2>✠ LA PAZ</h2>
         <div class="librito-instruction"><p><strong>Nos ponemos de pie</strong> y nos saludamos en el Nombre del Señor.</p></div>
         <div class="librito-response"><p><strong>Celebrante: La paz del Señor esté siempre con ustedes.</strong><br><strong>Pueblo: Y con tu espíritu.</strong></p></div>
@@ -450,18 +452,28 @@ const BCPLibrito = (() => {
           : `<p><strong>Celebrante: Bendito sea Dios: Padre, Hijo y Espíritu Santo.</strong><br><strong>Pueblo: Y bendito sea su reino, ahora y por siempre. Amén.</strong></p>`}
         </div>`}
 
+        ${penitential ? `<h3>ORDEN PENITENCIAL</h3>
+        <div class="librito-instruction"><p><strong>Nos arrodillamos si podemos.</strong> El Decálogo (o el Resumen de la Ley); el pueblo responde a cada mandamiento:</p></div>
+        ${BCPHolyWeek.renderLibrito('decalogue', '', null, null, { sinTitulo: true })}
+        <h3>CONFESIÓN Y ABSOLUCIÓN</h3>
+        ${renewed ? rat('renewedConfession') : `<div class="librito-instruction"><p>Todos juntos:</p></div>
+        <div class="librito-text">
+          <p>Dios Todopoderoso, Padre de nuestro Señor Jesucristo, Creador y juez de todos nosotros: Confesamos y lamentamos nuestros muchos pecados y ofensas, que hemos cometido de pensamiento, palabra y obra contra tu divina majestad, provocando muy justamente tu razonable ira contra nosotros. Sentimos profundamente nuestras transgresiones; la carga de ellas es más de lo que podemos soportar. Ten misericordia de nosotros, ten misericordia de nosotros, Padre misericordioso; por amor de tu Hijo, nuestro Señor Jesucristo, perdónanos todo lo pasado; y concédenos que podamos servirte y agradarte cada vez más en una vida nueva, para el honor y la gloria de tu Nombre; por Jesucristo nuestro Señor. Amén.</p>
+        </div>
+        <div class="librito-instruction"><p>El Celebrante pronuncia la Absolución.</p></div>`}` : ''}
+
         <h3>KYRIE</h3>
         <div class="librito-response">
           <p><strong>Celebrante: Señor, ten piedad de nosotros.</strong><br><strong>Pueblo: Cristo, ten piedad de nosotros.</strong><br><strong>Celebrante: Señor, ten piedad de nosotros.</strong></p>
         </div>
 
-        <h3>GLORIA IN EXCELSIS</h3>
+        ${penitential ? '' : `<h3>GLORIA IN EXCELSIS</h3>
         ${omitGloria
           ? `<div class="librito-instruction"><p>${gloriaOmittedRubric(dayInfo)}</p></div>`
           : `<div class="librito-instruction"><p>Todos juntos:</p></div>
         <div class="librito-text">
           <p>Gloria a Dios en el cielo, y paz en la tierra a quienes ama el Señor. Por tu inmensa gloria te alabamos, te bendecimos, te adoramos, te glorificamos, te damos gracias; Señor Dios, Rey celestial, Dios Padre Todopoderoso. Señor, Hijo único Jesucristo, Señor Dios, Cordero de Dios, Hijo del Padre: Tú que quitas el pecado del mundo, ten piedad de nosotros; Tú que quitas el pecado del mundo, atiende a nuestra súplica; Tú que estás sentado a la derecha del Padre, ten piedad de nosotros. Porque solo tú eres Santo, sólo tú Señor, sólo tú Altísimo, Jesucristo, con el Espíritu Santo, en la gloria de Dios Padre. Amén.</p>
-        </div>`}
+        </div>`}`}
       </section>`}
 
       ${isAsh ? '' : `<section class="librito-section">

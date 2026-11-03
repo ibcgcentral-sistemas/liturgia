@@ -80,6 +80,9 @@ const SECCIONES = {
   // y Reafirmación (desde su Presentación, l. 4589). Terminan donde termina cada rito.
   easterVigilBaptism: { ini: 'LA EXHORTACIÓN', fin: 'INDICACIONES ADICIONALES', desde: 4140 },
   easterVigilBaptismConf: { ini: 'LA PRESENTACIÓN', fin: 'INDICACIONES ADICIONALES', desde: 4585 },
+  // Orden Penitencial (l. 3623-3635): el Decálogo (l. 2611-2640) y la Exhortación (l. 3806-3848), que el libro pone entre sus piezas.
+  decalogue: { ini: 'Celebrante Dios habló estas palabras', fin: 'ÉXODO 20:1-17', desde: 2605 },
+  exhortation: { ini: 'LA EXHORTACIÓN', fin: 'MONICIONES PARA EL OFERTORIO', desde: 3800 },
   easterVigilContinues: { ini: 'La celebración continúa con las Oración', fin: 'La siguiente bendición puede usarse', desde: 15620 },
   easterVigilBlessing: { ini: 'La siguiente bendición puede usarse', fin: 'DIRECCIONES ADICIONALES', desde: 15620 },
 };
@@ -137,6 +140,7 @@ const OVERRIDES = {
   'LA PAZ': 'T',
   'Confirmación. Si no hay candidatos para el Bautismo o la Confirmación, la': 'CONT',
   'Anglicano):': 'CONT',
+  'No tendrás otros dioses más que Yo.': 'CONT',   // Decálogo: sigue al «Yo soy el Señor tu Dios» del Celebrante
   // Renovación de los Votos Bautismales: la rúbrica de la introducción, la última línea de la rúbrica de la Renovación, la
   // primera pregunta (el libro no le pone etiqueta, como en inglés) y los artículos del Credo de los Apóstoles, que siguen
   // a su «Sí, creo.» y son parte de lo que dice el pueblo.

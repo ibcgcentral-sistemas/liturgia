@@ -2,7 +2,7 @@
  * holyweek-data.js — Liturgias de la Semana Santa (Libro de Oración Común 2019, ACNA).
  * GENERADO por bcp2019-tools/build-holyweek.js a partir del libro oficial en español (LOC-10-10-23.md); NO editar a
  * mano: test-bcp2019.js comprueba que sigue idéntico a lo que genera el script. Texto copiado, no traducido.
- * Procedencia: palmSundayPalms LOC l. 14728-14794; maundyThursdayOpening LOC l. 14844-14858; maundyThursdayFootWashing LOC l. 14875-14902; maundyThursdayClosing LOC l. 14903-14911; goodFriday LOC l. 14939-15244; holySaturday LOC l. 15248-15315; renewedCreed LOC l. 3283-3325; renewedPrayers LOC l. 3326-3365; renewedConfession LOC l. 3366-3409; renewedPeace LOC l. 3410-3413; renewedOffertory LOC l. 3414-3425; renewedSursum LOC l. 3426-3450; renewedConsecration LOC l. 3451-3494; renewedLordsPrayer LOC l. 3495-3515; renewedHumbleAccess LOC l. 3526-3542; renewedAgnusDei LOC l. 3543-3550; renewedAdministration LOC l. 3551-3567; renewedPostCommunion LOC l. 3568-3585; renewedBlessing LOC l. 3586-3595; renewedDismissal LOC l. 3596-3608; renewedDismissalAlleluia LOC l. 3609-3615; ashWednesdayOpening LOC l. 14474-14477; ashWednesdayInvitation LOC l. 14478-14502; ashWednesdayAshes LOC l. 14519-14568; ashWednesdayConfession LOC l. 14569-14649; ashWednesdayAbsolution LOC l. 14650-14685; ashWednesdayClosing LOC l. 14686-14697; easterVigilIntro LOC l. 15318-15337; easterVigilLight LOC l. 15341-15354; easterVigilCandle LOC l. 15677-15692 (recompuesta); easterVigilLightLit LOC l. 15355-15440; easterVigilReadings LOC l. 15441-15572; easterVigilWord LOC l. 15573-15631; easterVigilRenewal LOC l. 4835-4907; easterVigilBaptism LOC l. 4144-4348; easterVigilBaptismConf LOC l. 4589-4817; easterVigilContinues LOC l. 15632-15633; easterVigilBlessing LOC l. 15634-15641.
+ * Procedencia: palmSundayPalms LOC l. 14728-14794; maundyThursdayOpening LOC l. 14844-14858; maundyThursdayFootWashing LOC l. 14875-14902; maundyThursdayClosing LOC l. 14903-14911; goodFriday LOC l. 14939-15244; holySaturday LOC l. 15248-15315; renewedCreed LOC l. 3283-3325; renewedPrayers LOC l. 3326-3365; renewedConfession LOC l. 3366-3409; renewedPeace LOC l. 3410-3413; renewedOffertory LOC l. 3414-3425; renewedSursum LOC l. 3426-3450; renewedConsecration LOC l. 3451-3494; renewedLordsPrayer LOC l. 3495-3515; renewedHumbleAccess LOC l. 3526-3542; renewedAgnusDei LOC l. 3543-3550; renewedAdministration LOC l. 3551-3567; renewedPostCommunion LOC l. 3568-3585; renewedBlessing LOC l. 3586-3595; renewedDismissal LOC l. 3596-3608; renewedDismissalAlleluia LOC l. 3609-3615; ashWednesdayOpening LOC l. 14474-14477; ashWednesdayInvitation LOC l. 14478-14502; ashWednesdayAshes LOC l. 14519-14568; ashWednesdayConfession LOC l. 14569-14649; ashWednesdayAbsolution LOC l. 14650-14685; ashWednesdayClosing LOC l. 14686-14697; easterVigilIntro LOC l. 15318-15337; easterVigilLight LOC l. 15341-15354; easterVigilCandle LOC l. 15677-15692 (recompuesta); easterVigilLightLit LOC l. 15355-15440; easterVigilReadings LOC l. 15441-15572; easterVigilWord LOC l. 15573-15631; easterVigilRenewal LOC l. 4835-4907; easterVigilBaptism LOC l. 4144-4348; easterVigilBaptismConf LOC l. 4589-4817; decalogue LOC l. 2611-2643; exhortation LOC l. 3806-3846; easterVigilContinues LOC l. 15632-15633; easterVigilBlessing LOC l. 15634-15641.
  * Tipos: T título, R rúbrica, P párrafo, V versos (líneas separadas por \n), REF cita bíblica, CEL/PUEBLO/DIAC/LECTOR/
  * OFIC/TODOS/OBISPO/PRES voces, LECTURAS = lugar donde el app inserta las lecturas del día.
  */
@@ -3040,6 +3040,106 @@ const BCP_HOLYWEEK_DATA = {
   {
    "t": "P",
    "x": "Al concluir la liturgia, se puede usar la siguiente bendición. Vayan al mundo en paz, sean valientes y luchen la buena batalla de la fe, para que puedan terminar su carrera con alegría; y la bendición de Dios Todopoderoso, Padre, Hijo y Espíritu Santo, esté entre ustedes y permanezca con ustedes por siempre. Amén."
+  }
+ ],
+ "decalogue": [
+  {
+   "t": "CEL",
+   "x": "Dios habló estas palabras y dijo: Yo soy el Señor tu Dios. No tendrás otros dioses más que Yo."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Señor, ten piedad de nosotros, e inclinamos nuestro corazón a guardar esta ley."
+  },
+  {
+   "t": "CEL",
+   "x": "No te harás ningún ídolo."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Señor, ten piedad de nosotros, e inclinamos nuestro corazón a guardar esta ley."
+  },
+  {
+   "t": "CEL",
+   "x": "No tomarás el Nombre del Señor tu Dios en vano."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Señor, ten piedad de nosotros, e inclinamos nuestro corazón a guardar esta ley."
+  },
+  {
+   "t": "CEL",
+   "x": "Acuérdate del día de reposo y santifícalo."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Señor, ten piedad de nosotros, e inclinamos nuestro corazón a guardar esta ley."
+  },
+  {
+   "t": "CEL",
+   "x": "Honra a tu padre y a tu madre."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Señor, ten piedad de nosotros, e inclinamos nuestro corazón a guardar esta ley."
+  },
+  {
+   "t": "CEL",
+   "x": "No matarás."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Señor, ten piedad de nosotros, e inclinamos nuestro corazón a guardar esta ley."
+  },
+  {
+   "t": "CEL",
+   "x": "No cometerás adulterio."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Señor, ten piedad de nosotros, e inclinamos nuestro corazón a guardar esta ley."
+  },
+  {
+   "t": "CEL",
+   "x": "No robarás."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Señor, ten piedad de nosotros, e inclinamos nuestro corazón a guardar esta ley."
+  },
+  {
+   "t": "CEL",
+   "x": "No darás falso testimonio contra tu prójimo."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Señor, ten piedad de nosotros, e inclinamos nuestro corazón a guardar esta ley."
+  },
+  {
+   "t": "CEL",
+   "x": "No codiciarás."
+  },
+  {
+   "t": "PUEBLO",
+   "x": "Señor, ten piedad de nosotros y escribe todas estas, tus leyes, en nuestro corazón, te lo suplicamos."
+  }
+ ],
+ "exhortation": [
+  {
+   "t": "T",
+   "x": "LA EXHORTACIÓN"
+  },
+  {
+   "t": "P",
+   "x": "Amados míos en el Señor: si ustedes quieren participar en la Sagrada Comunión del Cuerpo y la Sangre de nuestro Salvador Jesucristo, deben considerar cómo San Pablo, en su Primera Carta a los Corintios, nos exhorta a todos a examinarnos diligentemente antes de atrevernos a comer de ese Pan y a beber de ese Cáliz. Porque como el beneficio es grande, si recibimos este Santo Sacramento con un corazón verdaderamente arrepentido y una fe viva, comiendo espiritualmente el Cuerpo de Cristo y bebiendo su Sangre, para que podamos ser hechos uno con Cristo y él con nosotros; así también es grande el peligro, si recibimos estos dones indignamente. Porque entonces nos volvemos culpables de profanar el Cuerpo y la Sangre de Cristo nuestro Salvador, y lo comemos y bebemos para nuestra propia condenación. Por tanto, júzguense a ustedes mismos para que no sean juzgados por el Señor. Primero, examinen sus vidas según la regla de los mandamientos de Dios. Dondequiera que hayan ofendido, ya sea por pensamiento, palabra o hecho, confiesen sus pecados al Dios Todopoderoso, con la plena intención de enmendar sus vidas. Estén preparados para restituir todos los daños y perjuicios que hayan hecho a otros; y también prepárense para perdonar a los que los han ofendido: de lo contrario, si reciben la Sagrada Comunión indignamente, aumentarán su propia condenación. Por tanto, arrepiéntanse de sus pecados; de lo contrario, no vengan a la Santa Mesa del Señor."
+  },
+  {
+   "t": "R",
+   "x": "Si has venido aquí hoy con la conciencia atribulada, y necesitas ayuda y consejo, ven a mí o a algún otro sacerdote y confiesa tus pecados, para que puedas recibir consejo piadoso, dirección y absolución. Hacerlo remediará tu conciencia y eliminará cualquier escrúpulo o duda."
+  },
+  {
+   "t": "P",
+   "x": "Sobre todo, cada uno de nosotros debe dar gracias a Dios con corazón humilde y sincero por la redención del mundo por la pasión y muerte de nuestro Salvador Jesucristo. Él se humilló a sí mismo, hasta la muerte de cruz, por nosotros los pecadores que reposamos en tinieblas y en la sombra de la muerte, para hacernos hijos de Dios y exaltarnos a la vida eterna. Debido a su gran amor por nosotros, nuestro Salvador Jesucristo ha instituido y ordenado estos santos misterios como prenda de su amor, y para un recuerdo continuo de su pasión y muerte, para nuestro gran e infinito consuelo. A él, por tanto, con el Padre y el Espíritu Santo, demos gracias continuamente, como es nuestro deber y nuestro gozo, sometiéndonos enteramente a su santa voluntad y esforzándonos por servirle en santidad y justicia todos los días de nuestra vida. Amén."
   }
  ],
  "easterVigilContinues": [

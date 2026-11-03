@@ -563,6 +563,48 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   } catch (e) { bt.push('no se pudo comprobar el texto del rito bautismal: ' + e.message); }
   check(`12. Vigilia con Santo Bautismo o con Confirmación (${btDias} Sábados Santos × 2 formas × 2 ritos), en la liturgia y el Librito`, bt, btDias * 4);
 
+  // ── 13. Orden Penitencial ──────────────────────────────────────────────────────────────────────────────────────────
+  // Alternativa de los Ritos Iniciales (`opts.opening === 'penitential'`; LOC l. 3623-3635): Aclamación, Colecta por la pureza, de rodillas
+  // el Decálogo o el Resumen de la Ley, [Exhortación], Confesión y Absolución, Kyrie y Colecta del Día, SIN Gloria. Un día de cada tres
+  // (alternando las dos formas de la Eucaristía) y todos los de rito propio: (a) los de Eucaristía ordinaria llevan ese orden, la
+  // confesión una sola vez (no se repite tras las Oraciones del Pueblo) y la paz una; (b) Ramos, Ceniza, Jueves, Viernes y Sábado Santo
+  // quedan IDÉNTICOS a su rito de siempre; (c) el Decálogo y la Exhortación tienen exactamente las palabras del libro.
+  const op = []; let opDias = 0;
+  const OP = (cond, msg) => { if (!cond) op.push(msg); };
+  const RITO_PROPIO = new Set(['palmSunday', 'ashWednesday', 'maundyThursday', 'goodFriday', 'holySaturday']);
+  for (let d = new Date(Y0, 0, 1, 12), i = 0; d.getFullYear() <= Y1; d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1, 12), i++) {
+    const info = Cal.getDay(d), propio = RITO_PROPIO.has(info.key);
+    if (!propio && i % 3 !== 0) continue;
+    opDias++;
+    const forma = (i % 2 === 0) ? 'standard' : 'renewed', w = `${iso(d)} ${info.key} ${forma}`;
+    let html, lib; try { html = await generateLiturgy(d, { form: forma, opening: 'penitential' }); lib = Librito.generateLibrito(C.state()); } catch (e) { op.push(`${w}: lanzó ${e.message}`); continue; }
+    if (propio) {
+      const base = await generateLiturgy(d, { form: forma });
+      OP(html === base, `${w}: el Orden Penitencial no debe cambiar el rito propio de este día`);
+      continue;
+    }
+    const t = norm(strip(html));
+    let pos = 0, falta = '';
+    for (const m of ['RITOS INICIALES', 'LA ACLAMACIÓN', 'LA COLECTA POR PUREZA', 'RESUMEN DE LA LEY', 'EL DECÁLOGO', 'Dios habló estas palabras', 'LA EXHORTACIÓN', 'Amados míos en el Señor', 'CONFESIÓN Y ABSOLUCIÓN DE LOS PECADOS', 'KYRIE', 'LA COLECTA DEL DÍA']) { const j = t.indexOf(m, pos); if (j < 0) { falta = falta || m; continue; } pos = j + m.length; }
+    OP(!falta, `${w}: el orden del Orden Penitencial falla en «${falta}»`);
+    OP(!/GLORIA IN EXCELSIS/.test(t), `${w}: el Orden Penitencial no lleva Gloria`);
+    OP((t.match(/CONFESIÓN Y ABSOLUCIÓN DE LOS PECADOS/g) || []).length === 1, `${w}: la confesión debe salir una sola vez`);
+    OP((t.match(/✠ LA PAZ|LA PAZ/g) || []).length >= 1 && /LA PAZ/.test(t.slice(t.indexOf('ORACIÓN DE LOS FIELES'))), `${w}: tras las Oraciones del Pueblo debe ir la paz`);
+    const tl = norm(strip(lib));
+    OP(/ORDEN PENITENCIAL/.test(tl) && /inclinamos nuestro corazón a guardar esta ley/.test(tl) && !/GLORIA IN EXCELSIS/.test(tl) && (tl.match(/CONFESIÓN Y ABSOLUCIÓN/g) || []).length === 1, `${w} Librito: debe traer el Orden Penitencial con el Decálogo, sin Gloria y con una sola confesión`);
+  }
+  try {
+    const gen4 = require('./bcp2019-tools/build-holyweek.js');
+    if (fs.existsSync(gen4.LOC_POR_DEFECTO)) {
+      const L = fs.readFileSync(gen4.LOC_POR_DEFECTO, 'utf8').split(/\r?\n/);
+      const pal = s => s.toLowerCase().replace(/[.,;:¿?¡!()«»“”"⏎\[\]]/g, ' ').split(/\s+/).filter(x => x && !['celebrante', 'pueblo'].includes(x) && !/^\d{3}$/.test(x)).sort().join(' ');
+      const tramo = (ini, fin, desde) => { const a = L.findIndex((l, n) => n >= desde && l.trim().startsWith(ini)); const b = L.findIndex((l, n) => n > a && l.trim().startsWith(fin)); return L.slice(a, b).join(' '); };
+      OP(pal(tramo('Celebrante Dios habló estas palabras', 'ÉXODO 20:1-17', 2605)) === pal(items12('decalogue').join(' ')), 'decalogue no tiene exactamente las palabras del libro (LOC l. 2611-2643)');
+      OP(pal(tramo('LA EXHORTACIÓN', 'MONICIONES PARA EL OFERTORIO', 3800)).replace(/^la exhortación /, '') === pal(items12('exhortation').join(' ')).replace(/^la exhortación /, ''), 'exhortation no tiene exactamente las palabras del libro (LOC l. 3806-3846)');
+    }
+  } catch (e) { op.push('no se pudo comprobar el texto del Decálogo y la Exhortación: ' + e.message); }
+  check(`13. Orden Penitencial en vez de los Ritos Iniciales (${opDias} días, ambas formas), en la liturgia y el Librito`, op, opDias);
+
   // ── 8. Colectas ──────────────────────────────────────────────────────────
   // 5 oficiales (Ceniza y Semana Santa) idénticas al libro en español; 90 traducidas del inglés, de las que se
   // comprueba la forma (Amén, fórmula final, longitud, nombre del santo). El inglés no está en el repositorio: sin él

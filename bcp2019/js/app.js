@@ -80,6 +80,7 @@ async function generateLiturgy(date, opts = {}) {
   // Rito bautismal de la Gran Vigilia (solo el Sábado Santo): 'renewal' (Renovación de los Votos, sin candidatos), 'baptism'
   // (Santo Bautismo) o 'baptismConf' (Santo Bautismo con Confirmación, Recepción y Reafirmación): los tres que el libro permite.
   const baptism = ['baptism', 'baptismConf'].includes(opts.baptism) ? opts.baptism : 'renewal';
+  const penitential = opts.opening === 'penitential';   // Orden Penitencial en vez de los Ritos Iniciales habituales
   const dayInfo = BCPCalendar.getDay(date);
   const { key: lKey, borrowedFromSunday, cycle: borrowedCycle } = resolveLectionaryKey(dayInfo, date);
   const readings = lKey ? BCPLectionary.getSundayReadings(lKey, borrowedCycle || dayInfo.cycle) : null;
@@ -116,7 +117,7 @@ async function generateLiturgy(date, opts = {}) {
 
   currentMassState = {
     date, dayInfo, readings, firstReading, secondReading, gospel, psalmVerses, psalmAnt,
-    collect, collectKey, preface, borrowedFromSunday, vigilTexts, form, baptism,
+    collect, collectKey, preface, borrowedFromSunday, vigilTexts, form, baptism, penitential,
     // La feria sin Colecta propia toma la del Domingo o fiesta precedente (resolveCollectKey): la liturgia lo dice.
     collectBorrowed: collectKey !== dayInfo.key,
   };
@@ -149,6 +150,11 @@ function buildLiturgyHTML(d) {
   // letanía, absolución, palabras confortantes y paz) sustituye a los Ritos Iniciales, la colecta aparte, el Credo, las
   // Oraciones del Pueblo y la confesión habitual (holyweek.js, texto del libro en español).
   const isAsh = key === 'ashWednesday';
+  // Orden Penitencial (LOC l. 3623-3635): alternativa de los Ritos Iniciales para los días de Eucaristía ordinarios: Aclamación,
+  // Colecta por la pureza, de rodillas el Decálogo o el Resumen de la Ley, [la Exhortación], la Confesión y la Absolución [y las
+  // Palabras Reconfortantes], el Kyrie y la Colecta del Día (sin Gloria). La confesión ya se hizo: no se repite tras las Oraciones
+  // del Pueblo; la paz sí. Ramos, Ceniza, Jueves Santo, Viernes y Sábado Santo traen su propio rito.
+  const penitential = !!d.penitential && !isPalm && !isAsh && !isMaundy && !noEucharistNotice(d.dayInfo);
   // Segunda forma del libro, el Texto Antiguo Renovado: comparte con el Estándar el comienzo (Aclamación, Colecta por
   // pureza, Resumen de la Ley, Kyrie, Gloria, Colecta del Día) y la Liturgia de la Palabra; desde el Credo es texto propio
   // (holyweek.js, secciones `renewed*`, cortadas del libro en español). Los ritos propios de la Semana Santa y de Ceniza
@@ -245,12 +251,12 @@ function buildLiturgyHTML(d) {
       // que en el Estándar (el libro la repite); el Miércoles de Ceniza salta la confesión y la paz, como arriba.
       const prefacioHtml = () => `<div class="prayer-text">${pf ? pf.text : ''}</div>`;
       return `
-    ${sinConfesionNiPaz ? '' : `<div class="mass-section">
+    ${(sinConfesionNiPaz || penitential) ? '' : `<div class="mass-section">
       <h3 class="section-title">✠ CONFESIÓN Y ABSOLUCIÓN DE LOS PECADOS</h3>
       ${rat('renewedConfession')}
-    </div>
+    </div>`}
 
-    <div class="mass-section">
+    ${sinConfesionNiPaz ? '' : `<div class="mass-section">
       <h3 class="section-title">✠ LA PAZ</h3>
       ${rat('renewedPeace')}
     </div>`}
@@ -309,14 +315,14 @@ function buildLiturgyHTML(d) {
 `;
     }
     return `
-    ${sinConfesionNiPaz ? '' : `<div class="mass-section">
+    ${(sinConfesionNiPaz || penitential) ? '' : `<div class="mass-section">
       <h3 class="section-title">✠ CONFESIÓN Y ABSOLUCIÓN DE LOS PECADOS</h3>
       <div class="liturgical-text-block">${BCPEucharist.CONFESSION}</div>
       <h4 class="section-title">PALABRAS RECONFORTANTES</h4>
       <div class="liturgical-text-block">${BCPEucharist.COMFORTABLE_WORDS}</div>
-    </div>
+    </div>`}
 
-    <div class="mass-section">
+    ${sinConfesionNiPaz ? '' : `<div class="mass-section">
       <h3 class="section-title">✠ LA PAZ</h3>
       <div class="liturgical-text-block">${BCPEucharist.PEACE}</div>
     </div>`}
@@ -484,16 +490,28 @@ function buildLiturgyHTML(d) {
       <h4 class="section-title">LA COLECTA POR PUREZA</h4>
       <div class="liturgical-text-block">${BCPEucharist.COLLECT_FOR_PURITY}</div>
 
+      ${penitential ? '<p class="rubric">Luego, de rodillas en cuanto sea posible:</p>' : ''}
       <h4 class="section-title">RESUMEN DE LA LEY</h4>
       <div class="liturgical-text-block">${BCPEucharist.SUMMARY_OF_LAW}</div>
 
+      ${penitential ? `<h4 class="section-title">EL DECÁLOGO (en lugar del Resumen de la Ley)</h4>
+      ${BCPHolyWeek.render('decalogue', '', null, null, { sinTitulo: true })}
+
+      <h4 class="section-title">LA EXHORTACIÓN (opcional)</h4>
+      ${BCPHolyWeek.render('exhortation', '', null, null, { sinTitulo: true })}
+
+      <h4 class="section-title">CONFESIÓN Y ABSOLUCIÓN DE LOS PECADOS</h4>
+      ${renewed ? rat('renewedConfession') : `<div class="liturgical-text-block">${BCPEucharist.CONFESSION}</div>
+      <h4 class="section-title">PALABRAS RECONFORTANTES</h4>
+      <div class="liturgical-text-block">${BCPEucharist.COMFORTABLE_WORDS}</div>`}
+      ` : ''}
       <h4 class="section-title">KYRIE</h4>
       <div class="liturgical-text-block">${BCPEucharist.KYRIE}</div>
 
-      <h4 class="section-title">GLORIA IN EXCELSIS</h4>
+      ${penitential ? '' : `<h4 class="section-title">GLORIA IN EXCELSIS</h4>
       ${shouldOmitGloria(d.dayInfo)
         ? `<p class="rubric">${gloriaOmittedRubric(d.dayInfo)}</p>`
-        : `<div class="liturgical-text-block">${BCPEucharist.GLORIA}</div>`}
+        : `<div class="liturgical-text-block">${BCPEucharist.GLORIA}</div>`}`}
     </div>`}
 
     <!-- COLECTA DEL DÍA (el Miércoles de Ceniza va dentro de la Invitación a la santa Cuaresma, tras el silencio) -->
@@ -592,7 +610,8 @@ async function handleGenerate() {
   try {
     const formSelect = document.getElementById('form-select');
     const vigilSelect = document.getElementById('vigil-select');
-    const html = await generateLiturgy(date, { form: formSelect ? formSelect.value : 'standard', baptism: vigilSelect ? vigilSelect.value : 'renewal' });
+    const openingSelect = document.getElementById('opening-select');
+    const html = await generateLiturgy(date, { form: formSelect ? formSelect.value : 'standard', baptism: vigilSelect ? vigilSelect.value : 'renewal', opening: openingSelect ? openingSelect.value : 'standard' });
     output.innerHTML = html;
     output.classList.remove('hidden');
     output.scrollIntoView({ behavior: 'smooth' });

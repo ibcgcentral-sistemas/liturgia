@@ -69,7 +69,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=32` (Misal) y `?v=30` (bcp2019; la hoja de estilo, `?v=7`).
+   código viejo. Actualmente en `?v=32` (Misal) y `?v=31` (bcp2019; la hoja de estilo, `?v=7`).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -240,9 +240,17 @@ sale con título (no se midió cuántos).
   ritos de Ceniza, Ramos, Jueves y la Vigilia usan la forma elegida para lo que les
   queda de Eucaristía. `test-bcp2019.js` 11 barre 2024-2060 y comprueba que sale cada
   bloque del libro que ese día toca, en orden, que no se cuela texto del Estándar (ni al
-  revés) y que el Aleluya de la Despedida es de Pascua. **No están:** el Orden
-  Penitencial, el reordenamiento de 1662 y el Trisagio (hay texto en `eucharist.js`, no
-  se ofrece); el Sermón sí figura como rúbrica. Se vio en el navegador la liturgia y el
+  revés) y que el Aleluya de la Despedida es de Pascua. **Orden Penitencial
+  (2026-11-02, con la autoridad delegada):** el selector «Ritos iniciales» ofrece, en vez de los
+  habituales, el orden del libro (LOC l. 3623-3635): Aclamación, Colecta por la pureza, de rodillas
+  el Resumen de la Ley y el Decálogo (\`decalogue\`, l. 2611-2643), la Exhortación opcional
+  (\`exhortation\`, l. 3806-3846), la Confesión y la Absolución (con las Palabras Reconfortantes en
+  la forma Estándar), el Kyrie y la Colecta del Día, sin Gloria; la confesión no se repite tras las
+  Oraciones del Pueblo y la paz sí. Vale solo en días de Eucaristía ordinarios (Ramos, Ceniza,
+  Jueves, Viernes y Sábado Santo quedan idénticos). \`currentMassState.penitential\`;
+  \`test-bcp2019.js\` 13. En el Librito no va la Exhortación (la lee el Celebrante). El libro da el
+  Decálogo «o» el Resumen: se imprimen los dos y se elige. **No están:** el reordenamiento de 1662
+  y el Trisagio (hay texto en \`eucharist.js\`, no se ofrece); el Sermón sí figura como rúbrica. Se vio en el navegador la liturgia y el
   Librito del 2026-06-07 (sin errores de consola) y se exportó a Word, liturgia y
   Librito: los 116 bloques del libro llegan al `document.xml`, con los versos en líneas
   separadas (`<br>` es un salto real de Word). También en Ceniza, Ramos, Jueves Santo,
