@@ -215,8 +215,12 @@ sale con título (no se midió cuántos).
   revés) y que el Aleluya de la Despedida es de Pascua. **No están:** el Orden
   Penitencial, el reordenamiento de 1662 y el Trisagio (hay texto en `eucharist.js`, no
   se ofrece); el Sermón sí figura como rúbrica. Se vio en el navegador la liturgia y el
-  Librito del 2026-06-07 (sin errores de consola); **sin comprobar** la exportación a Word
-  de la forma Renovada (el recorrido del DOM de `docx-export.js` no se ejercitó con ella).
+  Librito del 2026-06-07 (sin errores de consola) y se exportó a Word, liturgia y
+  Librito: los 116 bloques del libro llegan al `document.xml`, con los versos en líneas
+  separadas (`<br>` es un salto real de Word). La prueba 11 se mutó a propósito (quitar el
+  Humilde Acceso de la liturgia, el Agnus Dei del Librito, forzar las Oraciones del
+  Estándar, el Aleluya fuera de Pascua, el Renovado en la forma Estándar y el Librito sin
+  recibir la forma): detectó las seis.
   El libro imprime «JOHN 1:29» en una referencia de la Administración; se copió tal cual.
 - `bcp2019`, **Semana Santa** (2026-11-02): Domingo de Ramos, Jueves, Viernes y Sábado
   Santo llevan su rito del libro en español, **copiado, no traducido**. `bcp2019-tools/
