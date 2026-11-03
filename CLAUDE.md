@@ -217,7 +217,10 @@ sale con título (no se midió cuántos).
   se ofrece); el Sermón sí figura como rúbrica. Se vio en el navegador la liturgia y el
   Librito del 2026-06-07 (sin errores de consola) y se exportó a Word, liturgia y
   Librito: los 116 bloques del libro llegan al `document.xml`, con los versos en líneas
-  separadas (`<br>` es un salto real de Word). La prueba 11 se mutó a propósito (quitar el
+  separadas (`<br>` es un salto real de Word). También en Ceniza, Ramos, Jueves Santo,
+  Sábado Santo (Vigilia) y Pascua de 2026: ningún bloque perdido, ningún texto del
+  Estándar, el rito propio presente, el Jueves sin despedida y el Aleluya solo en Vigilia
+  y Pascua. La prueba 11 se mutó a propósito (quitar el
   Humilde Acceso de la liturgia, el Agnus Dei del Librito, forzar las Oraciones del
   Estándar, el Aleluya fuera de Pascua, el Renovado en la forma Estándar y el Librito sin
   recibir la forma): detectó las seis.
