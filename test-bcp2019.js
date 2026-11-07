@@ -683,7 +683,7 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   console.log('  - Salmos: se leen de la Biblia de Jerusalén; el Salterio español del libro aún no se usa.');
   console.log('  - Lecturas: el libro en español no trae leccionario; el texto es de la Biblia de Jerusalén, que no trae Hechos 8:37 ni Marcos 9:44 y 9:46 (ver DIF_CONOCIDAS); Mateo 21:44 se completa con la NVI y lo avisa una rúbrica.');
   if (!prefacios) console.log('  - Prefacios: no se cotejaron con el libro (falta LOC-10-10-23.md; ver bcp2019-tools/check-prefacios.js).');
-  console.log('  - Semana Santa y Ceniza (holyweek.js): Ceniza, Ramos, Jueves, Viernes, Sábado Santo y Gran Vigilia sí; sin modelar el Bautismo y la Renovación de los Votos de la Vigilia, y el texto de sus salmos y cánticos.');
+  console.log('  - Semana Santa y Ceniza (holyweek.js): Ceniza, Ramos, Jueves, Viernes, Sábado Santo y Gran Vigilia (con Renovación de los Votos, Santo Bautismo y Bautismo con Confirmación) sí; sin el texto de los salmos y cánticos de la Vigilia, sin las Indicaciones adicionales del Bautismo (condicional y de emergencia), con la Renovación solo tras el Sermón, y el rito de Ceniza sin Comunión solo como rúbrica.');
   console.log(failed ? `\n${failed} comprobación(es) con fallos.` : '\nTodas las comprobaciones pasan.');
   process.exit(failed ? 1 : 0);
 })();

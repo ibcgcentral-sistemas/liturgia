@@ -228,7 +228,8 @@ const BCPManual = (() => {
       <ul>
         <li>Domingo de Ramos: rojo, con la lectura completa de la Pasión.</li>
         <li>Jueves Santo: blanco; puede incluir el lavatorio de los pies.</li>
-        <li>Viernes Santo y Sábado Santo: liturgias propias (ver <code>bcp2019</code> fase de Cuaresma y Semana Santa, aún no implementada en este generador).</li>
+        <li>Viernes Santo: rito propio del libro, sin Eucaristía (Colectas Solemnes, Improperios y Distribución de la Comunión).</li>
+        <li>Sábado Santo: rito propio del libro y, a continuación, la Gran Vigilia Pascual, con la Renovación de los Votos Bautismales, el Santo Bautismo o el Santo Bautismo con Confirmación, a elección.</li>
       </ul>
 
       <h3>Tiempo Pascual</h3>
