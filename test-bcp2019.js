@@ -679,7 +679,7 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   console.log('\nPENDIENTES CONOCIDOS (no los comprueba esta prueba):');
   console.log(`  - Colectas: ${colectas.traducidas} son traducción propia del inglés (el libro en español no trae «Colectas del Año Cristiano»), dadas por revisadas por delegación del usuario, no aprobadas por una autoridad eclesiástica; ver bcp2019/COLECTAS-REVISION.md.`);
   for (const n of colectas.notas || []) console.log('  - Colectas: ' + n + ' (ver bcp2019-tools/check-colectas.js).');
-  console.log(`  - ${inheritFallback} días cuyo Propio de la semana es el 1 o el 2 usan la colecta del domingo anterior (sin texto español).`);
+  if (inheritFallback) console.log(`  - ${inheritFallback} días cuyo Propio de la semana es el 1 o el 2 usan la colecta del domingo anterior (sin texto español).`);
   console.log('  - Salmos: se leen de la Biblia de Jerusalén; el Salterio español del libro aún no se usa.');
   console.log('  - Lecturas: el libro en español no trae leccionario; el texto es de la Biblia de Jerusalén, que no trae Hechos 8:37 ni Marcos 9:44 y 9:46 (ver DIF_CONOCIDAS); Mateo 21:44 se completa con la NVI y lo avisa una rúbrica.');
   if (!prefacios) console.log('  - Prefacios: no se cotejaron con el libro (falta LOC-10-10-23.md; ver bcp2019-tools/check-prefacios.js).');

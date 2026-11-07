@@ -69,7 +69,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=32` (Misal) y `?v=33` (los scripts propios de bcp2019; `biblia-wrapper.js`, compartido con el Misal, sigue en `?v=32`; la hoja de estilo, `?v=7`).
+   código viejo. Actualmente en `?v=32` (Misal) y `?v=34` (los scripts propios de bcp2019; `biblia-wrapper.js`, compartido con el Misal, sigue en `?v=32`; la hoja de estilo, `?v=7`).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -367,15 +367,18 @@ No volver a plantearlas salvo que él las reabra:
 - **Colectas traducidas del inglés en el BCP 2019** (2026-11-02): el usuario pidió expresamente
   traducir, «a pesar de la regla del proyecto». Las colectas que traía `propers.js` estaban
   reconstruidas de memoria y no coincidían con el libro (el Propio 3 era otra oración).
-  Ahora hay 95: **6 oficiales** (Ceniza, Ramos, Jueves, Viernes y Sábado Santo y la Anunciación,
-  copiadas del libro en español, `COLLECT_OFFICIAL`) y **89 traducidas** por este proyecto del *Collects of the
-  Christian Year* del BCP 2019. Son traducciones propias (`bcp2019/COLECTAS-REVISION.md`), dadas
+  Ahora hay 97: **6 oficiales** (Ceniza, Ramos, Jueves, Viernes y Sábado Santo y la Anunciación,
+  copiadas del libro en español, `COLLECT_OFFICIAL`) y **91 traducidas** por este proyecto del *Collects of the
+  Christian Year* del BCP 2019 (las dos últimas, **Propios 1 y 2**, se tradujeron el 2026-11-07 a petición del
+  usuario, del *Altar Book*; antes esas ferias repetían la colecta del domingo anterior). Son traducciones propias (`bcp2019/COLECTAS-REVISION.md`), dadas
   por revisadas por delegación del usuario (ver abajo), así que la nota «Colecta traducida del
   inglés» está apagada: `SHOW_COLLECT_TRANSLATION_NOTE = false` en `app.js`. Fórmulas
   finales del propio libro en español. `test-bcp2019.js` 8 y `bcp2019-tools/check-colectas.js`
   vigilan que las oficiales sigan idénticas al libro y que las traducidas tengan la forma, la
   longitud y el santo correctos; no pueden juzgar la calidad del español. El inglés no está en
-  el repositorio: `BCP_EN_MD=ruta/BCP2019-en.md` activa la comparación con el original.
+  el repositorio: `BCP_EN_MD=ruta/BCP2019-en.md` activa la comparación con el original. Sirve
+  también el *Altar Book* del BCP 2019 convertido con `markitdown` (PDF «for educational use
+  only»: no subirlo al repo); el extractor lo reconoce solo si falta el libro completo.
   **Revisión asistida (2026-11-02):** a petición del usuario, tres agentes contrastaron las 89
   colectas con el inglés y el léxico del libro, un modelo distinto consolidó, y se verificaron las
   citas antes de aplicar: 6 cambios en colectas (ver `COLECTAS-REVISION.md`). Lo hizo un modelo,

@@ -1,6 +1,8 @@
 # Colectas del BCP 2019: revisión
 
-Generado el 2026-11-02 desde `bcp2019/js/propers.js`. **Hay 95 colectas, 6 oficiales y 89 traducidas.**
+Generado el 2026-11-02 desde `bcp2019/js/propers.js`. **Hay 97 colectas, 6 oficiales y 91 traducidas.**
+
+- **Propios 1 y 2 (2026-11-07), a petición del usuario:** se tradujeron del inglés del *Altar Book* del BCP 2019 (las dos del «Week of the Sunday from May 8 to May 14» y «May 15 to May 21»); hasta entonces las ferias de esas semanas repetían la colecta del domingo anterior. Traducción propia, con la autoridad litúrgica delegada al revisor; `check-colectas.js` (con `BCP_EN_MD` apuntando al Altar Book) las comparó con el original: forma, fórmula final y longitud correctas. No pasaron por las revisiones de arriba.
 
 - **Oficial** = texto del libro en español (`LOC-10-10-23.md`), copiado sin cambios de las liturgias de Ceniza y Semana Santa y del Ángelus (la Anunciación, l. 1069-1072). La prueba `test-bcp2019.js` 8 verifica que sigue idéntico.
 - **Traducción** = traducción propia del inglés del BCP 2019 («Collects of the Christian Year»), hecha por decisión expresa del usuario, que levantó para esto la regla 1 de `CLAUDE.md`. **No es texto oficial.** Se dieron por revisadas el 2026-11-02 por delegación del usuario (ver «Autoridad litúrgica delegada», más abajo); **no están aprobadas por ninguna autoridad eclesiástica.** Hasta esa fecha el app traía colectas reconstruidas de memoria que no coincidían con el libro.
