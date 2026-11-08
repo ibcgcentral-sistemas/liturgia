@@ -481,7 +481,7 @@ const PROPERS_DO = {
   "trinity25": "Desde lo más íntimo de mi corazón clamé a ti, oh Señor; oye benignamente mis oraciones, Dios mío; porque a ti llamé desde lo más íntimo, Señor.",
   "epi1": "Sus padres llevaron a Jesús a Jerusalén, para presentarle al Señor.",
   "epi2": "Canta a Dios, ¡oh tierra toda!, canta un himno a su nombre; venid y oíd todos los que teméis a Dios, y os contaré todo lo que ha hecho el Señor a mi alma, aleluya.",
-  "epi3": "La diestra del Señor ha obrado proezas; la diestra del Señor me ha salvado» No moriré, sino viviré y pregonaré las obras del Señor.",
+  "epi3": "La diestra del Señor ha obrado proezas; la diestra del Señor me ha salvado. No moriré, sino viviré y pregonaré las obras del Señor.",
   "epi4": "La diestra del Señor ha hecho maravillas: la diestra del Señor me ha ensalzado; ya no moriré, sino que viviré y publicaré las obras del Señor.",
   "epi5": "La diestra del Señor ha hecho maravillas: la diestra del Señor me ha ensalzado; ya no moriré, sino que viviré y publicaré las obras del Señor.",
   "epi6": "La diestra del Señor ha hecho maravillas: la diestra del Señor me ha ensalzado; ya no moriré, sino que viviré y publicaré las obras del Señor.",
@@ -508,7 +508,7 @@ const PROPERS_DO = {
   "09-14": "Protege, Señor, a tu pueblo por la señal de la Santa Cruz, contra las asechanzas de todos los enemigos; para que te tributemos grata servidumbre, y te sea acepto nuestro sacrificio, aleluya.",
   "09-21": "Pusiste, Señor, sobre su cabeza una corona de piedras preciosas; tepidió vida, y Tú se la concediste. Aleluya.",
   "09-29": "Púsose el ángel junto al ara del templo, con un incensario de oro en su mano; y diéronsele muchos perfumes; y subió el humo de estos aromas hasta Dios, aleluya.",
-  "11-30": "Oh Dios! Veo que honras sobremanera a tus amigos, y que su poderío se acrecienta grandemente.",
+  "11-30": "¡Oh Dios! Veo que honras sobremanera a tus amigos, y que su poderío se acrecienta grandemente.",
   "12-26": "Los Apóstoles eligieron para diácono a Esteban, lleno de fe y del Espíritu Santo, a quien apedrearon los judíos mientras él oraba y decía: Señor Jesús, recibe mi espíritu, aleluya.",
   "12-27": "El justo florece como la palma, y se levanta como un cedro del Líbano.",
   "12-28": "Nuestra alma escapó, como pájaro, del lazo de los cazadores; rompióse el lazo, y quedamos libres."

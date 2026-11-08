@@ -144,6 +144,7 @@ se pudo resolver sin adivinar se omitió y sigue en `Propers.MISSING_TEXTS`.
   Pascua II-VII y algunas fiestas fijas cuyas Misas usan Comunes que Divinum Officium no trae en
   español (lista exacta en `MISSING_TEXTS`). La oración sobre el pueblo del Viernes Santo
   (*super populum*) solo existe en latín y de 1955.
+- **Erratas de puntuación corregidas (2026-11-08, autorizado por el usuario):** tabla `CORRECCIONES` en `import-do.js` (ofertorio de San Andrés: «¡Oh Dios!»; ofertorio `epi3`: «salvado» seguido de «.» en vez de un «»» suelto). Es la única excepción a «copiar sin cambiar»; el importador falla si la fuente cambia y el texto ya no está.
 - Divinum Officium usa el calendario y los textos romanos de 1962: Felipe y Santiago (05-01)
   figura allí el 11 de mayo y no se importó; el importador comprueba el título de cada fiesta.
 - Para regenerar: bajar `web/www/missa/Espanol/{Tempora,Sancti,Ordo}` a una carpeta y correr

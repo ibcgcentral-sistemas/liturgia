@@ -134,6 +134,13 @@ const PIEZAS = {
   postcommunion: rel => texto(rel, 'Postcommunio'),
 };
 
+// Erratas de puntuación de la fuente (autorizadas por el usuario, 2026-11-08). Única excepción a «copiar sin cambiar»:
+// [parte, clave, texto de la fuente, texto corregido]. Si la fuente cambia y el texto ya no está, construir() falla.
+const CORRECCIONES = [
+  ['offertory', 'epi3', 'me ha salvado» No moriré', 'me ha salvado. No moriré'], // «» de cierre sin apertura
+  ['offertory', '11-30', 'Oh Dios! Veo', '¡Oh Dios! Veo'], // falta el «¡» de apertura
+];
+
 function construir() {
   const datos = { introit: {}, gradual: {}, offertory: {}, communion: {}, secret: {}, postcommunion: {} };
   const fuente = {};
@@ -149,6 +156,11 @@ function construir() {
     const s = secciones(rel);
     if (!s || !s.Officium || !titulo.test(s.Officium.join(' '))) { omite('fiesta fija con otro título'); continue; }
     intenta(clave, rel);
+  }
+  for (const [parte, clave, viejo, nuevo] of CORRECCIONES) {
+    const v = datos[parte] && datos[parte][clave];
+    if (!v || !v.includes(viejo)) throw new Error(`CORRECCIONES: ya no aparece «${viejo}» en ${parte}.${clave}; revisar la tabla`);
+    datos[parte][clave] = v.replace(viejo, nuevo);
   }
   return { datos, fuente };
 }
