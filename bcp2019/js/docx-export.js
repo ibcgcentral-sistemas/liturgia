@@ -93,6 +93,28 @@ const BCPDocxExport = (() => {
       for (const child of container.children) walkElement(child);
     }
 
+    // El «Amén.» con que termina una oración, una colecta, una absolución o una bendición lo dice el pueblo, aunque vaya dentro
+    // del párrafo del Celebrante: en el Word se pone en negrita como el resto de lo que dice el pueblo. Devuelve una COPIA del
+    // elemento con ese «Amén.» final envuelto en <strong>, que buildRuns ya pinta en negrita. Solo el final del texto (no un
+    // «Amén» a media oración) y solo en oraciones: las lecturas no pasan por aquí.
+    function conAmenEnNegrita(el) {
+      const copia = el.cloneNode(true);
+      const walker = document.createTreeWalker(copia, NodeFilter.SHOW_TEXT);
+      let ultimo = null;
+      while (walker.nextNode()) { if (walker.currentNode.textContent.trim()) ultimo = walker.currentNode; }
+      if (!ultimo || ultimo.parentElement?.closest('strong, .lit-rubric, .rubric, em')) return copia;
+      const m = ultimo.textContent.match(/^([\s\S]*?)(\s*)(Amén\.?)(\s*)$/);
+      if (!m) return copia;
+      const fuerte = document.createElement('strong');
+      fuerte.textContent = m[3];
+      const padre = ultimo.parentNode;
+      padre.insertBefore(document.createTextNode(m[1] + m[2]), ultimo);
+      padre.insertBefore(fuerte, ultimo);
+      if (m[4]) padre.insertBefore(document.createTextNode(m[4]), ultimo);
+      padre.removeChild(ultimo);
+      return copia;
+    }
+
     // ── Spans .lit-* (Ordinario, comparte vocabulario con el Misal Anglicano) ──
     function walkSpan(span) {
       const cls = span.classList;
@@ -130,7 +152,7 @@ const BCPDocxExport = (() => {
         return;
       }
       if (cls.contains('lit-prayer')) {
-        paras.push(new Paragraph({ children: buildRuns(span), indent: { left: 450 }, spacing: { before: 60, after: 60 } }));
+        paras.push(new Paragraph({ children: buildRuns(conAmenEnNegrita(span)), indent: { left: 450 }, spacing: { before: 60, after: 60 } }));
         return;
       }
       if (cls.contains('lit-line')) {
@@ -143,7 +165,7 @@ const BCPDocxExport = (() => {
         paras.push(new Paragraph({
           children: [
             new TextRun({ text: label + '\t', bold: true, size: SZ, color: C_RUB, font: FONT }),
-            ...buildRuns(textEl, { bold: isPeoplePart }),
+            ...buildRuns(isPeoplePart ? textEl : conAmenEnNegrita(textEl), { bold: isPeoplePart }),
           ],
           tabStops: [{ type: TabStopType.LEFT, position: 900 }],
           indent: { left: 900, hanging: 900 },
@@ -245,7 +267,7 @@ const BCPDocxExport = (() => {
       if (cls.contains('liturgical-text-block')) {
         const hasStructuredSpans = el.querySelector('.lit-line, .lit-consecracion, .lit-title, .lit-prayer');
         if (!hasStructuredSpans) {
-          paras.push(new Paragraph({ children: buildRuns(el), spacing: { before: 120, after: 120, line: 276 }, alignment: AlignmentType.JUSTIFIED }));
+          paras.push(new Paragraph({ children: buildRuns(conAmenEnNegrita(el)), spacing: { before: 120, after: 120, line: 276 }, alignment: AlignmentType.JUSTIFIED }));
         } else {
           for (const child of el.childNodes) {
             if (child.nodeType === Node.TEXT_NODE) {
@@ -262,7 +284,7 @@ const BCPDocxExport = (() => {
       // Colectas y oraciones destacadas
       if (cls.contains('prayer-text') || cls.contains('collect-text')) {
         paras.push(new Paragraph({
-          children: buildRuns(el), indent: { left: 450, right: 450 },
+          children: buildRuns(conAmenEnNegrita(el)), indent: { left: 450, right: 450 },
           border: { left: { style: BorderStyle.SINGLE, size: 12, color: C_RUB, space: 15 } },
           spacing: { before: 180, after: 180, line: 300 }, alignment: AlignmentType.JUSTIFIED,
         }));

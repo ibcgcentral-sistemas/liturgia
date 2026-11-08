@@ -69,7 +69,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=39` (los scripts propios del Misal; `biblia-wrapper.js` sigue en `?v=32`) y `?v=41` (los scripts propios de bcp2019, incluido `daily-office.js`; `biblia-wrapper.js`, compartido con el Misal, sigue en `?v=32`; la hoja de estilo, `?v=8`).
+   código viejo. Actualmente en `?v=39` (los scripts propios del Misal; `biblia-wrapper.js` sigue en `?v=32`) y `?v=42` (los scripts propios de bcp2019, incluido `daily-office.js`; `biblia-wrapper.js`, compartido con el Misal, sigue en `?v=32`; la hoja de estilo, `?v=8`).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -284,6 +284,13 @@ sale con título (no se midió cuántos).
   las Oraciones del Pueblo). **No va en el Librito** del orden habitual (la lee el Celebrante y es opcional; el del orden de 1662
   sí la indica). Verificado en el navegador (Estándar, Renovado, Penitencial, 1662, Ceniza y Ramos de 2026) y con
   `test-bcp2019.js` 2026 sin fallos; **no hay prueba propia** que la vigile. No se cotejó con el libro en español.
+- `bcp2019`, **Negritas del pueblo en el Word** (2026-11-08, a petición del usuario): en el .docx va en negrita todo lo que dice
+  el pueblo. Las líneas rotuladas Pueblo/Todos y las respuestas de las lecturas ya salían en negrita (`walkSpan`); faltaba el
+  **«Amén.» final** de colectas, oraciones, absoluciones y bendiciones, que el libro pone al pueblo pero va dentro del párrafo del
+  Celebrante. `conAmenEnNegrita()` (`docx-export.js`) lo envuelve en <strong> (solo el final del texto, solo en oraciones; no
+  en lecturas ni rúbricas). Comprobado en el XML de 7 Word (Estándar, Renovado, Penitencial, 1662, Ramos, Vigilia y Ceniza de
+  2026): 0 líneas del pueblo sin negrita y 0 «Amén.» finales sin negrita. Solo la liturgia del Celebrante; **el Librito no
+  cambia** (todo su texto es para el pueblo). Pendiente de criterio: en la forma Estándar el Kyrie sale rotulado Cel. entero.
 - `bcp2019`, **Semana Santa** (2026-11-02): Domingo de Ramos, Jueves, Viernes y Sábado
   Santo llevan su rito del libro en español, **copiado, no traducido**. `bcp2019-tools/
   build-holyweek.js` corta el libro por anclas y genera `bcp2019/js/holyweek-data.js`
