@@ -503,8 +503,11 @@ body.dark-mode .manual-close-btn { background: #a4243b; color: #fff; }
   .feast-header { padding: 1.2rem 1.2rem 1rem; }
   .feast-meta { gap: 0.6rem 1rem; font-size: 0.8rem; }
 
-  .lit-line { flex-wrap: wrap; }
+  /* La etiqueta (Cel., Pueblo, Todos) queda a la izquierda de su texto aunque sea largo. Con `flex-wrap: wrap` el texto
+     largo pasaba DEBAJO de la etiqueta y esta parecía de la línea anterior (el Resumen de la Ley y el Decálogo). */
+  .lit-line { flex-wrap: nowrap; }
   .lit-line .lit-label { min-width: 2.4rem; }
+  .lit-line .lit-text { flex: 1 1 0; min-width: 0; }
 }
 
 /* ══════════════════════════════════════════════════════════════════════════

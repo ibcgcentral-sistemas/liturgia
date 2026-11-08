@@ -106,8 +106,8 @@ const BCPEucharist = (() => {
   ];
 
   // ── RESUMEN DE LA LEY (o el Decálogo, en su lugar) ───────────────────────
+  // El título («Resumen de la Ley») lo pone app.js como encabezado de sección: aquí repetirlo salía dos veces.
   const SUMMARY_OF_LAW_DATA = [
-    { type: 'T', text: 'Resumen de la Ley' },
     { type: 'CEL', text: 'Oigan lo que dice Jesucristo nuestro Señor: "Amarás al Señor tu Dios con todo tu corazón, con toda tu alma y con toda tu mente. Este es el primer y mayor mandamiento. Y el segundo es semejante a éste: amarás a tu prójimo como a ti mismo. De estos dos mandamientos dependen toda la Ley y los Profetas."' },
     { type: 'R', text: 'Mateo 22:37-40' },
   ];
