@@ -739,7 +739,26 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('date-picker').addEventListener('change', updateDayInfo);
   updateDayInfo();
   document.getElementById('generate-btn').addEventListener('click', handleGenerate);
+
+  // Cambiar la fecha o una opción con la liturgia ya en pantalla la vuelve a generar con ella. Sin esto la pantalla (y el
+  // Librito y el Word, que parten del mismo estado) seguían con la opción anterior mientras el selector decía otra.
+  for (const id of ['date-picker', 'form-select', 'opening-select', 'kyrie-select', 'vigil-select']) {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('change', regenerarSiHayLiturgia);
+  }
 });
+
+// `currentMassState` vale null MIENTRAS genera, así que no sirve para saber si hay liturgia en pantalla: de eso se encarga
+// `liturgiaGenerada`. Un cambio durante una generación se anota y, al terminar, se repite una vez con lo último elegido.
+let regenerarPendiente = false, liturgiaGenerada = false;
+async function regenerarSiHayLiturgia() {
+  const btn = document.getElementById('generate-btn');
+  if (btn && btn.disabled) { regenerarPendiente = true; return; }
+  if (!liturgiaGenerada) return;   // aún no hay liturgia en pantalla: se genera con el botón
+  const val = document.getElementById('date-picker').value;
+  if (!val || isNaN(new Date(val + 'T12:00:00').getTime())) return;
+  await handleGenerate({ scroll: false });
+}
 
 function updateDayInfo() {
   const val = document.getElementById('date-picker').value;
@@ -754,7 +773,8 @@ function updateDayInfo() {
   document.getElementById('cycle-info').textContent = `Ciclo dominical: ${dayInfo.cycle}`;
 }
 
-async function handleGenerate() {
+// `opts.scroll === false` (al regenerar por un cambio de opción) no mueve la pantalla al resultado.
+async function handleGenerate(opts) {
   const val = document.getElementById('date-picker').value;
   if (!val) { alert('Por favor selecciona una fecha.'); return; }
   const date = new Date(val + 'T12:00:00');
@@ -778,7 +798,8 @@ async function handleGenerate() {
     const html = await generateLiturgy(date, { form: formSelect ? formSelect.value : 'standard', baptism: vigilSelect ? vigilSelect.value : 'renewal', opening: openingSelect ? openingSelect.value : 'standard', kyrie: kyrieSelect ? kyrieSelect.value : 'kyrie' });
     output.innerHTML = html;
     output.classList.remove('hidden');
-    output.scrollIntoView({ behavior: 'smooth' });
+    liturgiaGenerada = true;
+    if (!opts || opts.scroll !== false) output.scrollIntoView({ behavior: 'smooth' });
   } catch (e) {
     console.error('Error generando liturgia:', e);
     output.innerHTML = `<div class="liturgy-document" style="padding:2rem"><p class="error">Error al generar la liturgia: ${escapeHtml(e.message)}</p><pre style="font-size:0.8rem;color:#666">${escapeHtml(e.stack || '')}</pre></div>`;
@@ -787,6 +808,8 @@ async function handleGenerate() {
     loading.classList.add('hidden');
     if (generateBtn) generateBtn.disabled = false;
   }
+  // Se cambió una opción mientras generaba: se repite una vez, ya con lo último elegido.
+  if (regenerarPendiente) { regenerarPendiente = false; await handleGenerate({ scroll: false }); }
 }
 
 function openLibrito() {
