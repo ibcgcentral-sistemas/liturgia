@@ -423,11 +423,17 @@ async function downloadDocx() {
       if (cls.contains('section-title') || tag === 'H3' || tag === 'H4') {
         const t = nodeText(el);
         if (!t) return;
+        // Con las oraciones secretas omitidas el tramo anterior al Canon se acorta, y el Prefacio quedaría a mitad de una página
+        // casi vacía: el Prefacio (con el Sanctus) abre página y el Canon abre la siguiente (salto de la regla 6), igual en los
+        // cuatro ritos. Sin la opción la paginación no cambia.
+        const omiteSecretas = typeof currentMassState !== 'undefined' && currentMassState && currentMassState.omitSecret;
+        const saltoPrefacio = !!omiteSecretas && tag === 'H3' && /^\W*PREFACIO\b/i.test(t);
         paras.push(new Paragraph({
           children: [new TextRun({ text: t.toUpperCase(), bold: true, size: SZ_MD, color: C_INK, font: FONT })],
           heading: H((tag === 'H4' || cls.contains('commemoration-title')) ? 3 : 2),
           keepNext: true,
           spacing: { before: 300, after: 120 },
+          pageBreakBefore: saltoPrefacio,
         }));
         return;
       }

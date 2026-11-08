@@ -464,7 +464,7 @@ async function generateLiturgy(date, canonType = 'roman', votiveType = 'none', l
     secret, preface, postcommunion, omitJudica, season,
     commemorations, hancIgitur, useBenoedicamus, votiveType,
     omissions, borrowedFromSunday, omittedFeasts, suppliedProperNotes,
-    gradualText, gradual,
+    gradualText, gradual, omitSecret,
   };
 
   return html;

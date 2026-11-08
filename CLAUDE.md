@@ -69,7 +69,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=37` (los scripts propios del Misal; `biblia-wrapper.js` sigue en `?v=32`) y `?v=39` (los scripts propios de bcp2019, incluido `daily-office.js`; `biblia-wrapper.js`, compartido con el Misal, sigue en `?v=32`; la hoja de estilo, `?v=8`).
+   código viejo. Actualmente en `?v=38` (los scripts propios del Misal; `biblia-wrapper.js` sigue en `?v=32`) y `?v=39` (los scripts propios de bcp2019, incluido `daily-office.js`; `biblia-wrapper.js`, compartido con el Misal, sigue en `?v=32`; la hoja de estilo, `?v=8`).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -446,6 +446,12 @@ No volver a plantearlas salvo que él las reabra:
   y las dos Abluciones) con su título y rúbrica de «en voz baja», y la **Secreta del día**; no toca el Canon, el
   «Domine, non sum dignus» ni la Poscomunión. Vale en pantalla y en el Word (parten del mismo HTML); el Librito no cambia
   (ya sustituye esas piezas por una rúbrica). `Canon.setOmitSecret()` la fija tras `setLanguage()`, que la apaga.
+  **Saltos de página del Word (decisión del usuario, 2026-11-08):** sin la casilla solo hay uno forzado, antes del
+  Canon (`pageBreakBefore` por el título «CANON», regla 6 de `docx-export.js`). Con ella el Prefacio (con el Sanctus)
+  abre además página nueva (`currentMassState.omitSecret`), igual en los cuatro ritos, para que no quede a mitad de una
+  página casi vacía al acortarse el tramo anterior. Comprobado en el XML de los ocho Word (4 ritos × con/sin casilla):
+  cero restos de oraciones secretas y los saltos esperados. **No se midió la paginación real en Word** (no hay Word ni
+  LibreOffice utilizables aquí): el efecto en páginas se estimó, no se vio.
 - **Gloria**: uso tradicional. Se omite desde Septuagésima (domingos de
   Pre-Cuaresma incluidos) y en el Domingo de Ramos.
 - **Gloria en el BCP 2019** (2026-11-02): se omite en **Adviento**, Cuaresma y
