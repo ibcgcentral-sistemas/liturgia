@@ -274,11 +274,22 @@ function buildLiturgyHTML(d) {
     const fraccionSinAleluya = vigil ? false : isLent, despedidaConAleluya = vigil ? true : isEaster;
     const bendicionVigilia = vigil ? BCPHolyWeek.render('easterVigilBlessing') : '';
     const cierreCeniza = ash ? BCPHolyWeek.render('ashWednesdayClosing') : '';
+    // La Exhortación opcional va tras las Oraciones del Pueblo y antes de la Confesión, en el Texto Estándar y en el Renovado
+    // («El Celebrante puede decir entonces la Exhortación», BCP 2019 en inglés, en ambos textos). El libro añade que se lee
+    // tradicionalmente el primer domingo de Adviento, el primero de Cuaresma y el domingo de la Trinidad. No va donde la
+    // confesión es otra (Ceniza, Vigilia, Orden Penitencial, que ya la trae en su lugar) ni el Domingo de Ramos, que omite las
+    // Oraciones del Pueblo. La rúbrica es de este proyecto (traducción del aviso del libro); el texto es el del libro en español.
+    const exhortacion = (sinConfesionNiPaz || penitential || vigil || isPalm) ? '' : `<div class="mass-section">
+      <h3 class="section-title">✠ LA EXHORTACIÓN (opcional)</h3>
+      <p class="rubric">El Celebrante puede decir entonces la Exhortación. Tradicionalmente se lee el primer domingo de Adviento, el primer domingo de Cuaresma y el domingo de la Trinidad.</p>
+      ${BCPHolyWeek.render('exhortation', '', null, null, { sinTitulo: true })}
+    </div>`;
     if (renewed) {
       // Texto Antiguo Renovado: de la Confesión a la Despedida con el texto propio del libro. La Fracción es la misma
       // que en el Estándar (el libro la repite); el Miércoles de Ceniza salta la confesión y la paz, como arriba.
       const prefacioHtml = () => `<div class="prayer-text">${pf ? pf.text : ''}</div>`;
       return `
+    ${exhortacion}
     ${(sinConfesionNiPaz || penitential) ? '' : `<div class="mass-section">
       <h3 class="section-title">✠ CONFESIÓN Y ABSOLUCIÓN DE LOS PECADOS</h3>
       ${rat('renewedConfession')}
@@ -343,6 +354,7 @@ function buildLiturgyHTML(d) {
 `;
     }
     return `
+    ${exhortacion}
     ${(sinConfesionNiPaz || penitential) ? '' : `<div class="mass-section">
       <h3 class="section-title">✠ CONFESIÓN Y ABSOLUCIÓN DE LOS PECADOS</h3>
       <div class="liturgical-text-block">${BCPEucharist.CONFESSION}</div>

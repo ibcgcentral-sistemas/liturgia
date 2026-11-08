@@ -69,7 +69,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=39` (los scripts propios del Misal; `biblia-wrapper.js` sigue en `?v=32`) y `?v=39` (los scripts propios de bcp2019, incluido `daily-office.js`; `biblia-wrapper.js`, compartido con el Misal, sigue en `?v=32`; la hoja de estilo, `?v=8`).
+   código viejo. Actualmente en `?v=39` (los scripts propios del Misal; `biblia-wrapper.js` sigue en `?v=32`) y `?v=41` (los scripts propios de bcp2019, incluido `daily-office.js`; `biblia-wrapper.js`, compartido con el Misal, sigue en `?v=32`; la hoja de estilo, `?v=8`).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -276,6 +276,14 @@ sale con título (no se midió cuántos).
   Estándar, el Aleluya fuera de Pascua, el Renovado en la forma Estándar y el Librito sin
   recibir la forma): detectó las seis.
   El libro imprime «JOHN 1:29» en una referencia de la Administración; se copió tal cual.
+- `bcp2019`, **Exhortación opcional en el orden habitual** (2026-11-08, a petición del usuario): el BCP 2019 (texto inglés,
+  Estándar y Renovado) dice «El Celebrante puede decir entonces la Exhortación» tras las Oraciones del Pueblo y antes de la
+  Confesión, y que tradicionalmente se lee el primer domingo de Adviento, el primero de Cuaresma y el de la Trinidad. Antes solo
+  salía en el Orden Penitencial, el orden de 1662 y el Bautismo. Ahora `eucharistEndHtml` (`app.js`) la imprime, con esa
+  rúbrica (redactada por este proyecto), salvo con Orden Penitencial (ya la trae), Ceniza, Vigilia y Domingo de Ramos (que omite
+  las Oraciones del Pueblo). **No va en el Librito** del orden habitual (la lee el Celebrante y es opcional; el del orden de 1662
+  sí la indica). Verificado en el navegador (Estándar, Renovado, Penitencial, 1662, Ceniza y Ramos de 2026) y con
+  `test-bcp2019.js` 2026 sin fallos; **no hay prueba propia** que la vigile. No se cotejó con el libro en español.
 - `bcp2019`, **Semana Santa** (2026-11-02): Domingo de Ramos, Jueves, Viernes y Sábado
   Santo llevan su rito del libro en español, **copiado, no traducido**. `bcp2019-tools/
   build-holyweek.js` corta el libro por anclas y genera `bcp2019/js/holyweek-data.js`
