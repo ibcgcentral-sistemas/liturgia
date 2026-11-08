@@ -120,6 +120,24 @@ const BCPLibrito = (() => {
       return html;
     };
 
+    // Feria sin lecturas propias (igual que app.js): las cuatro lecciones del Leccionario del Oficio Diario, con el salmo de cada
+    // Oración, y el celebrante elige cuáles lee. Una lección que es de un Evangelio se anuncia como Evangelio.
+    const officeReading = (l, label) => {
+      if (!l || !l.data) return '';
+      const shown = l.label || translateBibleReference(BCPDailyOffice.shownRef(l.ref));
+      const abrev = l.abrev ? `<div class="librito-instruction"><p>Puede abreviarse: vv. ${l.abrev.replace(/,/g, ', ')}.</p></div>` : '';
+      return abrev + (!l.label && getGospelAuthor(shown) ? fmtGospel(shown, l.data) : fmtReading(shown, l.data, label));
+    };
+    const officeBlock = (titulo, o) => `
+        <div class="librito-instruction"><p><strong>${titulo}</strong></p></div>
+        ${o.psalms.map(p => fmtPsalm(translateBibleReference(p.ref), p.verses)).join('')}
+        ${officeReading(o.first, 'PRIMERA LECTURA')}
+        ${officeReading(o.second, 'SEGUNDA LECTURA')}`;
+    const officeLibrito = !state.office ? '' : `
+        <div class="librito-instruction"><p>Hoy no hay lecturas propias asignadas: se ofrecen las del Leccionario del Oficio Diario para el ${date.toLocaleDateString('es-ES', { day: 'numeric', month: 'long' })}. El celebrante elige cuáles lee.</p></div>
+        ${officeBlock('LECCIONES DE LA ORACIÓN MATUTINA', state.office.mp)}
+        ${officeBlock('LECCIONES DE LA ORACIÓN VESPERTINA', state.office.ep)}`;
+
     const headHtml = `
       <div class="cover-page">
         <div class="cover-cross">✠</div>
@@ -444,12 +462,12 @@ const BCPLibrito = (() => {
       <section class="librito-section">
         <h2>✠ LITURGIA DE LA PALABRA</h2>
         <div class="librito-instruction"><p><strong>Nos sentamos.</strong></p></div>
-        ${borrowedFromSunday ? '<div class="librito-instruction"><p>Hoy se repiten las lecturas del Domingo o fiesta correspondiente.</p></div>' : ''}
+        ${state.office ? officeLibrito : `${borrowedFromSunday ? '<div class="librito-instruction"><p>Hoy se repiten las lecturas del Domingo o fiesta correspondiente.</p></div>' : ''}
         ${firstReading && readings ? fmtReading(translateBibleReference(readings.first), firstReading, 'PRIMERA LECTURA') : ''}
         ${psalmVerses && psalmVerses.length && readings ? fmtPsalm(translateBibleReference(readings.psalm), psalmVerses, psalmAnt) : ''}
         ${secondReading && readings && readings.second ? fmtReading(translateBibleReference(readings.second), secondReading, 'SEGUNDA LECTURA') : ''}
         <div class="librito-instruction"><p><strong>Nos ponemos de pie</strong> para el Evangelio.</p></div>
-        ${gospel && readings ? fmtGospel(translateBibleReference(readings.gospel), gospel) : ''}
+        ${gospel && readings ? fmtGospel(translateBibleReference(readings.gospel), gospel) : ''}`}
       </section>
 
       <section class="librito-section">
@@ -632,14 +650,14 @@ const BCPLibrito = (() => {
       <section class="librito-section">
         <h2>✠ LITURGIA DE LA PALABRA</h2>
         <div class="librito-instruction"><p><strong>Nos sentamos.</strong></p></div>
-        ${borrowedFromSunday ? '<div class="librito-instruction"><p>Hoy se repiten las lecturas del Domingo o fiesta correspondiente.</p></div>' : ''}
+        ${state.office ? officeLibrito : `${borrowedFromSunday ? '<div class="librito-instruction"><p>Hoy se repiten las lecturas del Domingo o fiesta correspondiente.</p></div>' : ''}
 
         ${firstReading && readings ? fmtReading(translateBibleReference(readings.first), firstReading, 'PRIMERA LECTURA') : ''}
         ${psalmVerses && psalmVerses.length && readings ? fmtPsalm(translateBibleReference(readings.psalm), psalmVerses, psalmAnt) : ''}
         ${secondReading && readings && readings.second ? fmtReading(translateBibleReference(readings.second), secondReading, 'SEGUNDA LECTURA') : ''}
 
         <div class="librito-instruction"><p><strong>Nos ponemos de pie</strong> para el Evangelio.</p></div>
-        ${gospel && readings ? fmtGospel(translateBibleReference(readings.gospel), gospel) : ''}
+        ${gospel && readings ? fmtGospel(translateBibleReference(readings.gospel), gospel) : ''}`}
 
         <div class="librito-instruction"><p><strong>Nos sentamos</strong> para el Sermón.</p></div>
 

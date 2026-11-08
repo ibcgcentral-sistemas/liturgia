@@ -69,7 +69,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=32` (Misal) y `?v=34` (los scripts propios de bcp2019; `biblia-wrapper.js`, compartido con el Misal, sigue en `?v=32`; la hoja de estilo, `?v=7`).
+   código viejo. Actualmente en `?v=32` (Misal) y `?v=35` (los scripts propios de bcp2019, incluido `daily-office.js`; `biblia-wrapper.js`, compartido con el Misal, sigue en `?v=32`; la hoja de estilo, `?v=7`).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -357,6 +357,29 @@ sale con título (no se midió cuántos).
   Reina-Valera 1909 (está anotada en el comentario). Las citas de varios capítulos solo
   se compararon por su primer y último versículo. **No** se verificó que la traducción
   sea fiel ni, en los salmos, cada versículo interior.
+- `bcp2019`, **Leccionario del Oficio Diario** (2026-11-07): las ferias sin lecturas propias (9.934 de 13.515 días
+  en 2024-2060) imprimen, en la liturgia, el Librito y el Word, las lecciones de ese día del mes: Oración Matutina y
+  Vespertina, primera y segunda lección de cada una y su salmo (`daily-office.js`, 366 días; `currentMassState.office`).
+  La tabla sale del PDF oficial «Daily Office Lectionary» (St. Andrew's Day Final Revision, 2018; el libro en español la
+  remite a la p. 734): `bcp2019-tools/extract-daily-office.py` (necesita pdfplumber; `python -P`) lo vuelca a
+  `bcp2019-tools/data/daily-office.json` y `bcp2019-tools/build-daily-office.js` lo convierte en `daily-office.js`
+  (**generado, no editar**; solo normaliza la forma de las citas y falla si no sabe leer una). El PDF no está en el repo.
+  Se cotejaron con la página <https://liturgical-calendar.com/es/ACNA2019/AAAA-MM-DD> (que muestra el mismo
+  leccionario) 17 fechas repartidas por el año y coinciden; la única diferencia, el 26 de diciembre (San Esteban, que
+  tiene lecturas propias y no usa la tabla): la página trae «Hechos 6:8–15; 7:6, 17–41, 44–60» y el PDF «Acts
+  6:8—7:6, 7:44-60». **Límites:** (1) es el PDF de 2018: no se cotejó contra el libro impreso; (2) se usa el salterio de
+  **60 días**, no el de un mes; el PDF trae también las lecciones de Maitines y de Vísperas y el libro no dice cuáles
+  van en la Eucaristía; (3) los salmos con «v» del PDF (18, 37, 69, 78, 89, 105 y 106 partidos en dos) usan la
+  numeración del salterio New Coverdale; se imprimen con la numeración inglesa de la Biblia de Jerusalén sin la «v»,
+  así que el corte entre mitades puede no coincidir al versículo; (4) el † del PDF (capítulo que puede abreviarse) se
+  avisa con una rúbrica y el capítulo sale entero; (5) los capítulos enteros dependen de la numeración: para los 62 de
+  la tabla cuyo capítulo inglés se parte distinto del hebreo se añadieron reglas a `VERSE_SHIFTS` (`utils.js`),
+  validadas contra el conteo de versículos de la Biblia cargada, con dos límites anotados allí (1 S 20:42 e Is 63:19);
+  no se verificó la numeración de Eclesiástico, Sabiduría, Judit, Baruc, Macabeos y Ester, que solo se comprobó que
+  devuelven texto; (6) el 25 de diciembre trae un salmo alternativo («19 o 45»), irrelevante porque no es feria.
+  `test-bcp2019.js` 15 vigila que la tabla siga idéntica a lo que genera el script, los 366 días, y en cada feria las
+  cuatro lecciones con texto y salmos completos, en la liturgia y el Librito. Para esto `PSALM_FUSED_TITLE` creció de 33
+  a 53 salmos (el ciclo de 60 días recorre todo el Salterio).
 - Código muerto inocuo: `takeProper()` en `app.js`, el alias `ordinaryFeria` en
   `propers.js`, `circumcision` y `getSundaysAfterPentecostLabel()` en `bcp2019`.
 
@@ -415,10 +438,12 @@ No volver a plantearlas salvo que él las reabra:
   vigila. Efecto lateral: en el Word el Lector ya no sale en negrita (antes sí, a
   diferencia de la pantalla), para que se distinga del Pueblo.
 - **Color del Domingo de Ramos**: se queda en rojo, sin cambiar.
-- **Ciclo ferial I/II**: se retiró el anuncio de la interfaz, porque el
-  leccionario ferial no está implementado y las ferias reutilizan las lecturas del
-  Domingo precedente. `getWeekdayCycle` sigue en `calendar.js`, correcto pero sin
-  anunciarse. Se designa por el año civil en que **termina** el año litúrgico:
+- **Lecturas de las ferias en el BCP 2019** (2026-11-07): la feria sin lecturas propias ya no repite las del
+  Domingo: ofrece **las cuatro lecciones del Leccionario del Oficio Diario** del libro (Maitines y Vísperas, primera
+  y segunda de cada una, con su salmo) y **el celebrante elige** (decisión del usuario; las dos alternativas eran esa o
+  solo Maitines). Ver «Leccionario del Oficio Diario» en *Huecos conocidos*.
+- **Ciclo ferial I/II**: se retiró el anuncio de la interfaz. `getWeekdayCycle` sigue en
+  `calendar.js`, correcto pero sin anunciarse (el Leccionario del Oficio Diario del BCP 2019 es por fecha, no por ciclo I/II). Se designa por el año civil en que **termina** el año litúrgico:
   final impar es Ciclo I, final par es Ciclo II.
 - **Propios faltantes**: cadena de respaldo por tiempo con rúbrica visible, nunca
   inventar el texto.

@@ -30,6 +30,21 @@ async function fetchScripture(ref) {
   return { text: `<em class="rubric">[Biblia de Jerusalén no disponible — ${ref}]</em>`, reference: ref };
 }
 
+// Las lecciones y salmos de un día del Leccionario del Oficio Diario (daily-office.js): Oración Matutina y Vespertina, cada
+// una con sus dos lecciones y su salmo o salmos. Devuelve {mp, ep} con el texto ya pedido a la Biblia de Jerusalén;
+// la Liturgia, el Librito y la prueba parten de aquí, así que no se vuelve a pedir nada.
+async function loadOfficeReadings(entry) {
+  const lesson = async l => {
+    let data;
+    try { data = await fetchScripture(BCPDailyOffice.fetchRef(l.ref)); }
+    catch (e) { data = { text: '<em class="rubric">[Error cargando lectura]</em>', reference: l.ref }; }
+    return { ref: l.ref, label: l.label || '', abrev: l.abrev || '', data };
+  };
+  const psalm = ref => ({ ref, verses: window.BibliaJerusalen ? cleanPsalmVerses(ref, window.BibliaJerusalen.getVerses(ref)) : [] });
+  const office = async o => ({ first: await lesson(o.first), second: await lesson(o.second), psalms: o.psalms.map(psalm), psalmsOr: !!o.psalmsOr });
+  return { name: entry.name || '', mp: await office(entry.mp), ep: await office(entry.ep) };
+}
+
 // Ferias sin lecturas propias: se toman prestadas las del Domingo/fiesta
 // precedente — mismo criterio que el Misal Anglicano (js/app.js).
 function getPreviousSunday(date) {
@@ -86,8 +101,12 @@ async function generateLiturgy(date, opts = {}) {
   const order1662 = opts.opening === 'order1662';
   const trisagion = opts.kyrie === 'trisagion';
   const dayInfo = BCPCalendar.getDay(date);
-  const { key: lKey, borrowedFromSunday, cycle: borrowedCycle } = resolveLectionaryKey(dayInfo, date);
-  const readings = lKey ? BCPLectionary.getSundayReadings(lKey, borrowedCycle || dayInfo.cycle) : null;
+  const { key: lKey, borrowedFromSunday: sinPropias, cycle: borrowedCycle } = resolveLectionaryKey(dayInfo, date);
+  // La feria sin lecturas propias ofrece las del Leccionario del Oficio Diario del libro (daily-office.js): las cuatro
+  // lecciones del día, y el celebrante elige (decisión del usuario, 2026-11-07). Ya no repite las del Domingo.
+  const officeDay = sinPropias ? BCPDailyOffice.get(date) : null;
+  const borrowedFromSunday = sinPropias && !officeDay;
+  const readings = lKey && !officeDay ? BCPLectionary.getSundayReadings(lKey, borrowedCycle || dayInfo.cycle) : null;
 
   const collectKey = resolveCollectKey(dayInfo, date);
   const collect = BCPPropers.getCollect(collectKey);
@@ -108,6 +127,7 @@ async function generateLiturgy(date, opts = {}) {
     }
     psalmAnt = readings.psalmAnt || '';
   }
+  const office = officeDay ? await loadOfficeReadings(officeDay) : null;
 
   // Sábado Santo: junto al rito del día se ofrece la Gran Vigilia Pascual, cuyas lecciones, Epístola y Evangelio salen
   // de la Biblia de Jerusalén. Se piden todas aquí (la liturgia se arma luego de forma síncrona) y van al estado para
@@ -120,7 +140,7 @@ async function generateLiturgy(date, opts = {}) {
   }
 
   currentMassState = {
-    date, dayInfo, readings, firstReading, secondReading, gospel, psalmVerses, psalmAnt,
+    date, dayInfo, readings, firstReading, secondReading, gospel, psalmVerses, psalmAnt, office,
     collect, collectKey, preface, borrowedFromSunday, vigilTexts, form, baptism, penitential, order1662, trisagion,
     // La feria sin Colecta propia toma la del Domingo o fiesta precedente (resolveCollectKey): la liturgia lo dice.
     collectBorrowed: collectKey !== dayInfo.key,
@@ -405,7 +425,27 @@ function buildLiturgyHTML(d) {
 
   // Las cuatro lecturas del día (primera, salmo, segunda, Evangelio). Las usa la Liturgia de la Palabra y, el Viernes y el
   // Sábado Santo, el rito propio, donde sustituyen al marcador LECTURAS de holyweek-data.js.
-  const readingsHtml = `
+  // Feria sin lecturas propias: las cuatro lecciones del Leccionario del Oficio Diario, con el salmo de cada Oración; el
+  // celebrante elige cuáles lee. Una lección que es de un Evangelio se anuncia como Evangelio. El † del libro (capítulo que
+  // puede abreviarse) se avisa con una rúbrica: el capítulo sale entero.
+  const officeReading = (l, tipo) => {
+    if (!l || !l.data) return '';
+    const shown = l.label || translateBibleReference(BCPDailyOffice.shownRef(l.ref));
+    const abrev = l.abrev ? `<p class="rubric">Puede abreviarse: vv. ${l.abrev.replace(/,/g, ', ')}.</p>` : '';
+    return abrev + fmtReading(shown, l.data, !l.label && getGospelAuthor(shown) ? 'gospel' : tipo);
+  };
+  const officeBlock = (titulo, o) => `
+      <div class="office-readings">
+        <h3 class="section-title">✠ ${titulo}</h3>
+        ${o.psalms.map(p => fmtPsalm(translateBibleReference(p.ref), p.verses)).join('')}
+        ${officeReading(o.first, 'first')}
+        ${officeReading(o.second, 'second')}
+      </div>`;
+  const officeHtml = !d.office ? '' : `
+      <p class="rubric">✠ Esta feria no tiene lecturas propias asignadas: se ofrecen las del Leccionario del Oficio Diario (libro, p. 734) para el ${d.date.toLocaleDateString('es-ES', { day: 'numeric', month: 'long' })}. El celebrante elige cuáles lee.</p>
+      ${officeBlock('LECCIONES DE LA ORACIÓN MATUTINA', d.office.mp)}
+      ${officeBlock('LECCIONES DE LA ORACIÓN VESPERTINA', d.office.ep)}`;
+  const readingsHtml = d.office ? officeHtml : `
       ${d.firstReading && d.readings ? fmtReading(translateBibleReference(d.readings.first), d.firstReading, 'first') : '<p class="rubric">[Primera lectura no especificada para este día]</p>'}
       ${d.psalmVerses && d.psalmVerses.length && d.readings ? fmtPsalm(translateBibleReference(d.readings.psalm), d.psalmVerses, d.psalmAnt) : ''}
       ${d.secondReading && d.readings && d.readings.second ? fmtReading(translateBibleReference(d.readings.second), d.secondReading, 'second') : ''}

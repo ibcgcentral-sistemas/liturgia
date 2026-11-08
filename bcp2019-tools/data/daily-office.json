@@ -1,0 +1,9649 @@
+{
+ "01": {
+  "1": {
+   "ep": {
+    "first": {
+     "ref": "Gal 1"
+    },
+    "psalms": [
+     "3",
+     "4"
+    ],
+    "second": {
+     "ref": "Luke 2:8-21"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 1"
+    },
+    "psalms": [
+     "1",
+     "2"
+    ],
+    "second": {
+     "ref": "John 1:1-28"
+    }
+   },
+   "name": "Holy Name"
+  },
+  "10": {
+   "ep": {
+    "first": {
+     "ref": "Jer 9"
+    },
+    "psalms": [
+     "27"
+    ],
+    "second": {
+     "ref": "1 Thess 2:17—3 end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-9,15-22,30-32",
+     "ref": "Gen 10"
+    },
+    "psalms": [
+     "25"
+    ],
+    "second": {
+     "ref": "John 5:25-end"
+    }
+   },
+   "name": null
+  },
+  "11": {
+   "ep": {
+    "first": {
+     "ref": "Jer 10"
+    },
+    "psalms": [
+     "31"
+    ],
+    "second": {
+     "ref": "1 Thess 4:1-12"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-9,27-32",
+     "ref": "Gen 11"
+    },
+    "psalms": [
+     "26",
+     "28"
+    ],
+    "second": {
+     "ref": "John 6:1-21"
+    }
+   },
+   "name": null
+  },
+  "12": {
+   "ep": {
+    "first": {
+     "ref": "Jer 11"
+    },
+    "psalms": [
+     "33"
+    ],
+    "second": {
+     "ref": "1 Thess 4:13—5:11"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 12"
+    },
+    "psalms": [
+     "29",
+     "30"
+    ],
+    "second": {
+     "ref": "John 6:22-40"
+    }
+   },
+   "name": null
+  },
+  "13": {
+   "ep": {
+    "first": {
+     "ref": "Jer 12"
+    },
+    "psalms": [
+     "35"
+    ],
+    "second": {
+     "ref": "1 Thess 5:12-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 13"
+    },
+    "psalms": [
+     "34"
+    ],
+    "second": {
+     "ref": "John 6:41-end"
+    }
+   },
+   "name": null
+  },
+  "14": {
+   "ep": {
+    "first": {
+     "ref": "Jer 13"
+    },
+    "psalms": [
+     "38"
+    ],
+    "second": {
+     "ref": "2 Thess 1"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 14"
+    },
+    "psalms": [
+     "32",
+     "36"
+    ],
+    "second": {
+     "ref": "John 7:1-24"
+    }
+   },
+   "name": null
+  },
+  "15": {
+   "ep": {
+    "first": {
+     "ref": "Jer 14"
+    },
+    "psalms": [
+     "37:19-42v"
+    ],
+    "second": {
+     "ref": "2 Thess 2"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 15"
+    },
+    "psalms": [
+     "37:1-18v"
+    ],
+    "second": {
+     "ref": "John 7:25-52"
+    }
+   },
+   "name": null
+  },
+  "16": {
+   "ep": {
+    "first": {
+     "ref": "Jer 15"
+    },
+    "psalms": [
+     "39",
+     "41"
+    ],
+    "second": {
+     "ref": "2 Thess 3"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 16"
+    },
+    "psalms": [
+     "40"
+    ],
+    "second": {
+     "ref": "John 7:53—8:30"
+    }
+   },
+   "name": null
+  },
+  "17": {
+   "ep": {
+    "first": {
+     "ref": "Jer 16"
+    },
+    "psalms": [
+     "44"
+    ],
+    "second": {
+     "ref": "1 Cor 1:1-25"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 17"
+    },
+    "psalms": [
+     "42",
+     "43"
+    ],
+    "second": {
+     "ref": "John 8:31-end"
+    }
+   },
+   "name": null
+  },
+  "18": {
+   "ep": {
+    "first": {
+     "ref": "Jer 17"
+    },
+    "psalms": [
+     "46"
+    ],
+    "second": {
+     "ref": "1 Cor 1:26—2 end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 18"
+    },
+    "psalms": [
+     "45"
+    ],
+    "second": {
+     "ref": "Matt 16:13-20"
+    }
+   },
+   "name": "Conf. Peter"
+  },
+  "19": {
+   "ep": {
+    "first": {
+     "ref": "Jer 18"
+    },
+    "psalms": [
+     "49"
+    ],
+    "second": {
+     "ref": "1 Cor 3"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-29",
+     "ref": "Gen 19"
+    },
+    "psalms": [
+     "47",
+     "48"
+    ],
+    "second": {
+     "ref": "John 9"
+    }
+   },
+   "name": null
+  },
+  "2": {
+   "ep": {
+    "first": {
+     "ref": "Jer 1"
+    },
+    "psalms": [
+     "7"
+    ],
+    "second": {
+     "ref": "Gal 2"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 2"
+    },
+    "psalms": [
+     "5",
+     "6"
+    ],
+    "second": {
+     "ref": "John 1:29-end"
+    }
+   },
+   "name": null
+  },
+  "20": {
+   "ep": {
+    "first": {
+     "ref": "Jer 19"
+    },
+    "psalms": [
+     "51"
+    ],
+    "second": {
+     "ref": "1 Cor 4:1-17"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 20"
+    },
+    "psalms": [
+     "50"
+    ],
+    "second": {
+     "ref": "John 10:1-21"
+    }
+   },
+   "name": null
+  },
+  "21": {
+   "ep": {
+    "first": {
+     "ref": "Jer 20"
+    },
+    "psalms": [
+     "55"
+    ],
+    "second": {
+     "ref": "1 Cor 4:18—5 end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-21",
+     "ref": "Gen 21"
+    },
+    "psalms": [
+     "52",
+     "53",
+     "54"
+    ],
+    "second": {
+     "ref": "John 10:22-end"
+    }
+   },
+   "name": null
+  },
+  "22": {
+   "ep": {
+    "first": {
+     "ref": "Jer 21"
+    },
+    "psalms": [
+     "58",
+     "60"
+    ],
+    "second": {
+     "ref": "1 Cor 6"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 22"
+    },
+    "psalms": [
+     "56",
+     "57"
+    ],
+    "second": {
+     "ref": "John 11:1-44"
+    }
+   },
+   "name": null
+  },
+  "23": {
+   "ep": {
+    "first": {
+     "ref": "Jer 22"
+    },
+    "psalms": [
+     "63",
+     "64"
+    ],
+    "second": {
+     "ref": "1 Cor 7"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 23"
+    },
+    "psalms": [
+     "59"
+    ],
+    "second": {
+     "ref": "John 11:45-end"
+    }
+   },
+   "name": null
+  },
+  "24": {
+   "ep": {
+    "first": {
+     "abrev": "1-9,16-18,21-40",
+     "ref": "Jer 23"
+    },
+    "psalms": [
+     "65",
+     "67"
+    ],
+    "second": {
+     "ref": "1 Cor 8"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-28,53-58",
+     "ref": "Gen 24"
+    },
+    "psalms": [
+     "61",
+     "62"
+    ],
+    "second": {
+     "ref": "John 12:1-19"
+    }
+   },
+   "name": null
+  },
+  "25": {
+   "ep": {
+    "first": {
+     "ref": "Jer 24"
+    },
+    "psalms": [
+     "68:19-36"
+    ],
+    "second": {
+     "ref": "1 Cor 9"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Acts 9:1-22"
+    },
+    "psalms": [
+     "68:1-18"
+    ],
+    "second": {
+     "ref": "John 12:20-end"
+    }
+   },
+   "name": "Conv. Paul"
+  },
+  "26": {
+   "ep": {
+    "first": {
+     "abrev": "1-19,26-31",
+     "ref": "Jer 25"
+    },
+    "psalms": [
+     "69:19-38v"
+    ],
+    "second": {
+     "ref": "1 Cor 10"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "7-11,19-34",
+     "ref": "Gen 25"
+    },
+    "psalms": [
+     "69:1-18v"
+    ],
+    "second": {
+     "ref": "John 13"
+    }
+   },
+   "name": null
+  },
+  "27": {
+   "ep": {
+    "first": {
+     "ref": "Jer 26"
+    },
+    "psalms": [
+     "70",
+     "72"
+    ],
+    "second": {
+     "ref": "1 Cor 11"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-25",
+     "ref": "Gen 26"
+    },
+    "psalms": [
+     "66"
+    ],
+    "second": {
+     "ref": "John 14:1-14"
+    }
+   },
+   "name": null
+  },
+  "28": {
+   "ep": {
+    "first": {
+     "ref": "Jer 27"
+    },
+    "psalms": [
+     "73"
+    ],
+    "second": {
+     "ref": "1 Cor 12"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-13,18-36,39-40",
+     "ref": "Gen 27"
+    },
+    "psalms": [
+     "71"
+    ],
+    "second": {
+     "ref": "John 14:15-end"
+    }
+   },
+   "name": null
+  },
+  "29": {
+   "ep": {
+    "first": {
+     "ref": "Jer 28"
+    },
+    "psalms": [
+     "77"
+    ],
+    "second": {
+     "ref": "1 Cor 13"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 28"
+    },
+    "psalms": [
+     "74"
+    ],
+    "second": {
+     "ref": "John 15:1-17"
+    }
+   },
+   "name": null
+  },
+  "3": {
+   "ep": {
+    "first": {
+     "abrev": "1-22",
+     "ref": "Jer 2"
+    },
+    "psalms": [
+     "10"
+    ],
+    "second": {
+     "ref": "Gal 3"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 3"
+    },
+    "psalms": [
+     "9"
+    ],
+    "second": {
+     "ref": "John 2"
+    }
+   },
+   "name": null
+  },
+  "30": {
+   "ep": {
+    "first": {
+     "abrev": "1-14,24-32",
+     "ref": "Jer 29"
+    },
+    "psalms": [
+     "79",
+     "82"
+    ],
+    "second": {
+     "ref": "1 Cor 14:1-19"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-28",
+     "ref": "Gen 29"
+    },
+    "psalms": [
+     "75",
+     "76"
+    ],
+    "second": {
+     "ref": "John 15:18-end"
+    }
+   },
+   "name": null
+  },
+  "31": {
+   "ep": {
+    "first": {
+     "ref": "Jer 30"
+    },
+    "psalms": [
+     "78:19-40v"
+    ],
+    "second": {
+     "ref": "1 Cor 14:20-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-2,22-43",
+     "ref": "Gen 30"
+    },
+    "psalms": [
+     "78:1-18v"
+    ],
+    "second": {
+     "ref": "John 16:1-15"
+    }
+   },
+   "name": null
+  },
+  "4": {
+   "ep": {
+    "first": {
+     "ref": "Jer 3"
+    },
+    "psalms": [
+     "15",
+     "16"
+    ],
+    "second": {
+     "ref": "Gal 4"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 4"
+    },
+    "psalms": [
+     "8",
+     "11"
+    ],
+    "second": {
+     "ref": "John 3:1-21"
+    }
+   },
+   "name": null
+  },
+  "5": {
+   "ep": {
+    "first": {
+     "ref": "Jer 4"
+    },
+    "psalms": [
+     "17"
+    ],
+    "second": {
+     "ref": "Gal 5"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 5"
+    },
+    "psalms": [
+     "12",
+     "13",
+     "14"
+    ],
+    "second": {
+     "ref": "John 3:22-end"
+    }
+   },
+   "name": null
+  },
+  "6": {
+   "ep": {
+    "first": {
+     "ref": "Jer 5"
+    },
+    "psalms": [
+     "67",
+     "72"
+    ],
+    "second": {
+     "ref": "John 2:1-12"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 6"
+    },
+    "psalms": [
+     "96",
+     "97"
+    ],
+    "second": {
+     "ref": "Matt 2:1-12"
+    }
+   },
+   "name": "Epiphany"
+  },
+  "7": {
+   "ep": {
+    "first": {
+     "ref": "Jer 6"
+    },
+    "psalms": [
+     "18:21-50v"
+    ],
+    "second": {
+     "ref": "Gal 6"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 7"
+    },
+    "psalms": [
+     "18:1-20v"
+    ],
+    "second": {
+     "ref": "John 4:1-26"
+    }
+   },
+   "name": null
+  },
+  "8": {
+   "ep": {
+    "first": {
+     "abrev": "1-28,34",
+     "ref": "Jer 7"
+    },
+    "psalms": [
+     "20",
+     "21"
+    ],
+    "second": {
+     "ref": "1 Thess 1"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 8"
+    },
+    "psalms": [
+     "19"
+    ],
+    "second": {
+     "ref": "John 4:27-end"
+    }
+   },
+   "name": null
+  },
+  "9": {
+   "ep": {
+    "first": {
+     "ref": "Jer 8"
+    },
+    "psalms": [
+     "23",
+     "24"
+    ],
+    "second": {
+     "ref": "1 Thess 2:1-16"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 9"
+    },
+    "psalms": [
+     "22"
+    ],
+    "second": {
+     "ref": "John 5:1-24"
+    }
+   },
+   "name": null
+  }
+ },
+ "02": {
+  "1": {
+   "ep": {
+    "first": {
+     "abrev": "1-17,27-37",
+     "ref": "Jer 31"
+    },
+    "psalms": [
+     "80"
+    ],
+    "second": {
+     "ref": "1 Cor 15:1-34"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-3,17-45",
+     "ref": "Gen 31"
+    },
+    "psalms": [
+     "78:41-73v"
+    ],
+    "second": {
+     "ref": "John 16:16-end"
+    }
+   },
+   "name": null
+  },
+  "10": {
+   "ep": {
+    "first": {
+     "ref": "Jer 40"
+    },
+    "psalms": [
+     "104"
+    ],
+    "second": {
+     "ref": "2 Cor 8"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 40"
+    },
+    "psalms": [
+     "103"
+    ],
+    "second": {
+     "ref": "Matt 1:1-17"
+    }
+   },
+   "name": null
+  },
+  "11": {
+   "ep": {
+    "first": {
+     "ref": "Jer 41"
+    },
+    "psalms": [
+     "105:23-45v"
+    ],
+    "second": {
+     "ref": "2 Cor 9"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-15,25-40",
+     "ref": "Gen 41"
+    },
+    "psalms": [
+     "105:1-22v"
+    ],
+    "second": {
+     "ref": "Matt 1:18-end"
+    }
+   },
+   "name": null
+  },
+  "12": {
+   "ep": {
+    "first": {
+     "ref": "Jer 42"
+    },
+    "psalms": [
+     "106:19-48v"
+    ],
+    "second": {
+     "ref": "2 Cor 10"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-28",
+     "ref": "Gen 42"
+    },
+    "psalms": [
+     "106:1-18v"
+    ],
+    "second": {
+     "ref": "Matt 2"
+    }
+   },
+   "name": null
+  },
+  "13": {
+   "ep": {
+    "first": {
+     "ref": "Jer 43"
+    },
+    "psalms": [
+     "107:23-43"
+    ],
+    "second": {
+     "ref": "2 Cor 11"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-10,15-34",
+     "ref": "Gen 43"
+    },
+    "psalms": [
+     "107:1-22"
+    ],
+    "second": {
+     "ref": "Matt 3"
+    }
+   },
+   "name": null
+  },
+  "14": {
+   "ep": {
+    "first": {
+     "abrev": "1-19,24-30",
+     "ref": "Jer 44"
+    },
+    "psalms": [
+     "109"
+    ],
+    "second": {
+     "ref": "2 Cor 12:1-13"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-20,30-34",
+     "ref": "Gen 44"
+    },
+    "psalms": [
+     "108",
+     "110"
+    ],
+    "second": {
+     "ref": "Matt 4"
+    }
+   },
+   "name": null
+  },
+  "15": {
+   "ep": {
+    "first": {
+     "ref": "Jer 45"
+    },
+    "psalms": [
+     "113",
+     "114"
+    ],
+    "second": {
+     "ref": "2 Cor 12:14—13 end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 45"
+    },
+    "psalms": [
+     "111",
+     "112"
+    ],
+    "second": {
+     "ref": "Matt 5:1-20"
+    }
+   },
+   "name": null
+  },
+  "16": {
+   "ep": {
+    "first": {
+     "ref": "Jer 46"
+    },
+    "psalms": [
+     "116",
+     "117"
+    ],
+    "second": {
+     "ref": "Rom 1"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-7,28-34",
+     "ref": "Gen 46"
+    },
+    "psalms": [
+     "115"
+    ],
+    "second": {
+     "ref": "Matt 5:21-48"
+    }
+   },
+   "name": null
+  },
+  "17": {
+   "ep": {
+    "first": {
+     "ref": "Jer 47"
+    },
+    "psalms": [
+     "119:25-48"
+    ],
+    "second": {
+     "ref": "Rom 2"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-15,23-31",
+     "ref": "Gen 47"
+    },
+    "psalms": [
+     "119:1-24"
+    ],
+    "second": {
+     "ref": "Matt 6:1-18"
+    }
+   },
+   "name": null
+  },
+  "18": {
+   "ep": {
+    "first": {
+     "abrev": "1-20,40-47",
+     "ref": "Jer 48"
+    },
+    "psalms": [
+     "119:73-88"
+    ],
+    "second": {
+     "ref": "Rom 3"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 48"
+    },
+    "psalms": [
+     "119:49-72"
+    ],
+    "second": {
+     "ref": "Matt 6:19-end"
+    }
+   },
+   "name": null
+  },
+  "19": {
+   "ep": {
+    "first": {
+     "abrev": "1-13,23-39",
+     "ref": "Jer 49"
+    },
+    "psalms": [
+     "119:105-128"
+    ],
+    "second": {
+     "ref": "Rom 4"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 49"
+    },
+    "psalms": [
+     "119:89-104"
+    ],
+    "second": {
+     "ref": "Matt 7"
+    }
+   },
+   "name": null
+  },
+  "2": {
+   "ep": {
+    "first": {
+     "abrev": "1-15,36-44",
+     "ref": "Jer 32"
+    },
+    "psalms": [
+     "84"
+    ],
+    "second": {
+     "ref": "1 Cor 15:35-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-13,21-32",
+     "ref": "Gen 32"
+    },
+    "psalms": [
+     "24",
+     "81"
+    ],
+    "second": {
+     "ref": "Luke 2:22-40"
+    }
+   },
+   "name": "Presentation"
+  },
+  "20": {
+   "ep": {
+    "first": {
+     "abrev": "1-20,33-40",
+     "ref": "Jer 50"
+    },
+    "psalms": [
+     "119:153-176"
+    ],
+    "second": {
+     "ref": "Rom 5"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 50"
+    },
+    "psalms": [
+     "119:129-152"
+    ],
+    "second": {
+     "ref": "Matt 8:1-17"
+    }
+   },
+   "name": null
+  },
+  "21": {
+   "ep": {
+    "first": {
+     "abrev": "6-10,45-64",
+     "ref": "Jer 51"
+    },
+    "psalms": [
+     "120",
+     "121"
+    ],
+    "second": {
+     "ref": "Rom 6"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Exod 1"
+    },
+    "psalms": [
+     "118"
+    ],
+    "second": {
+     "ref": "Matt 8:18-end"
+    }
+   },
+   "name": null
+  },
+  "22": {
+   "ep": {
+    "first": {
+     "abrev": "1-27,31-34",
+     "ref": "Jer 52"
+    },
+    "psalms": [
+     "124",
+     "125",
+     "126"
+    ],
+    "second": {
+     "ref": "Rom 7"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Exod 2"
+    },
+    "psalms": [
+     "122",
+     "123"
+    ],
+    "second": {
+     "ref": "Matt 9:1-17"
+    }
+   },
+   "name": null
+  },
+  "23": {
+   "ep": {
+    "first": {
+     "abrev": "5-13,21-37",
+     "ref": "Baruch 4"
+    },
+    "psalms": [
+     "129",
+     "130",
+     "131"
+    ],
+    "second": {
+     "ref": "Rom 8:1-17"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Exod 3"
+    },
+    "psalms": [
+     "127",
+     "128"
+    ],
+    "second": {
+     "ref": "Matt 9:18-34"
+    }
+   },
+   "name": null
+  },
+  "24": {
+   "ep": {
+    "first": {
+     "ref": "Baruch 5"
+    },
+    "psalms": [
+     "134",
+     "135"
+    ],
+    "second": {
+     "ref": "Rom 8:18-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Acts 1:15-26"
+    },
+    "psalms": [
+     "132",
+     "133"
+    ],
+    "second": {
+     "ref": "Matt 9:35—10:23"
+    }
+   },
+   "name": "Matthias"
+  },
+  "25": {
+   "ep": {
+    "first": {
+     "abrev": "1-12,17-22",
+     "ref": "Lam 1"
+    },
+    "psalms": [
+     "137",
+     "138"
+    ],
+    "second": {
+     "ref": "Rom 9"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Exod 4"
+    },
+    "psalms": [
+     "136"
+    ],
+    "second": {
+     "ref": "Matt 10:24-end"
+    }
+   },
+   "name": null
+  },
+  "26": {
+   "ep": {
+    "first": {
+     "abrev": "1-18",
+     "ref": "Lam 2"
+    },
+    "psalms": [
+     "141",
+     "142"
+    ],
+    "second": {
+     "ref": "Rom 10"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Exod 5"
+    },
+    "psalms": [
+     "139"
+    ],
+    "second": {
+     "ref": "Matt 11"
+    }
+   },
+   "name": null
+  },
+  "27": {
+   "ep": {
+    "first": {
+     "abrev": "1-9,19-33,52-66",
+     "ref": "Lam 3"
+    },
+    "psalms": [
+     "143"
+    ],
+    "second": {
+     "ref": "Rom 11"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-13",
+     "ref": "Exod 6"
+    },
+    "psalms": [
+     "140"
+    ],
+    "second": {
+     "ref": "Matt 12:1-21"
+    }
+   },
+   "name": null
+  },
+  "28": {
+   "ep": {
+    "first": {
+     "ref": "Lam 4"
+    },
+    "psalms": [
+     "145"
+    ],
+    "second": {
+     "ref": "Rom 12"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Exod 7"
+    },
+    "psalms": [
+     "144"
+    ],
+    "second": {
+     "ref": "Matt 12:22-end"
+    }
+   },
+   "name": null
+  },
+  "29": {
+   "ep": {
+    "first": {
+     "abrev": "1-2,12-32",
+     "ref": "Joel 2"
+    },
+    "psalms": [
+     "104"
+    ],
+    "second": {
+     "ref": "2 Pet 3"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Kings 2"
+    },
+    "psalms": [
+     "90"
+    ],
+    "second": {
+     "ref": "Luke 24:44-53"
+    }
+   },
+   "name": null
+  },
+  "3": {
+   "ep": {
+    "first": {
+     "ref": "Jer 33"
+    },
+    "psalms": [
+     "85"
+    ],
+    "second": {
+     "ref": "1 Cor 16"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 33"
+    },
+    "psalms": [
+     "83"
+    ],
+    "second": {
+     "ref": "John 17"
+    }
+   },
+   "name": null
+  },
+  "4": {
+   "ep": {
+    "first": {
+     "ref": "Jer 34"
+    },
+    "psalms": [
+     "88"
+    ],
+    "second": {
+     "ref": "2 Cor 1:1—2:11"
+    }
+   },
+   "movable": true,
+   "mp": {
+    "first": {
+     "ref": "Gen 34"
+    },
+    "psalms": [
+     "86",
+     "87"
+    ],
+    "second": {
+     "ref": "John 18:1-27"
+    }
+   },
+   "name": null
+  },
+  "5": {
+   "ep": {
+    "first": {
+     "ref": "Jer 35"
+    },
+    "psalms": [
+     "89:19-52v"
+    ],
+    "second": {
+     "ref": "2 Cor 2:12—3 end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 35"
+    },
+    "psalms": [
+     "89:1-18v"
+    ],
+    "second": {
+     "ref": "John 18:28-end"
+    }
+   },
+   "name": null
+  },
+  "6": {
+   "ep": {
+    "first": {
+     "abrev": "1-10,19-32",
+     "ref": "Jer 36"
+    },
+    "psalms": [
+     "91"
+    ],
+    "second": {
+     "ref": "2 Cor 4"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-8",
+     "ref": "Gen 36"
+    },
+    "psalms": [
+     "90"
+    ],
+    "second": {
+     "ref": "John 19:1-37"
+    }
+   },
+   "name": null
+  },
+  "7": {
+   "ep": {
+    "first": {
+     "ref": "Jer 37"
+    },
+    "psalms": [
+     "94"
+    ],
+    "second": {
+     "ref": "2 Cor 5"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "3-8,12-36",
+     "ref": "Gen 37"
+    },
+    "psalms": [
+     "92",
+     "93"
+    ],
+    "second": {
+     "ref": "John 19:38-end"
+    }
+   },
+   "name": null
+  },
+  "8": {
+   "ep": {
+    "first": {
+     "ref": "Jer 38"
+    },
+    "psalms": [
+     "97",
+     "98"
+    ],
+    "second": {
+     "ref": "2 Cor 6"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-26",
+     "ref": "Gen 38"
+    },
+    "psalms": [
+     "95",
+     "96"
+    ],
+    "second": {
+     "ref": "John 20"
+    }
+   },
+   "name": null
+  },
+  "9": {
+   "ep": {
+    "first": {
+     "ref": "Jer 39"
+    },
+    "psalms": [
+     "102"
+    ],
+    "second": {
+     "ref": "2 Cor 7"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Gen 39"
+    },
+    "psalms": [
+     "99",
+     "100",
+     "101"
+    ],
+    "second": {
+     "ref": "John 21"
+    }
+   },
+   "name": null
+  }
+ },
+ "03": {
+  "1": {
+   "ep": {
+    "first": {
+     "ref": "Lam 5"
+    },
+    "psalms": [
+     "147"
+    ],
+    "second": {
+     "ref": "Rom 13"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Exod 8"
+    },
+    "psalms": [
+     "146"
+    ],
+    "second": {
+     "ref": "Matt 13:1-23"
+    }
+   },
+   "name": null
+  },
+  "10": {
+   "ep": {
+    "first": {
+     "ref": "Prov 9"
+    },
+    "psalms": [
+     "23",
+     "24"
+    ],
+    "second": {
+     "ref": "Phil 4"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Exod 17"
+    },
+    "psalms": [
+     "22"
+    ],
+    "second": {
+     "ref": "Matt 18:15-end"
+    }
+   },
+   "name": null
+  },
+  "11": {
+   "ep": {
+    "first": {
+     "ref": "Prov 10"
+    },
+    "psalms": [
+     "27"
+    ],
+    "second": {
+     "ref": "Col 1:1-20"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Exod 18"
+    },
+    "psalms": [
+     "25"
+    ],
+    "second": {
+     "ref": "Matt 19:1-15"
+    }
+   },
+   "name": null
+  },
+  "12": {
+   "ep": {
+    "first": {
+     "ref": "Prov 11"
+    },
+    "psalms": [
+     "31"
+    ],
+    "second": {
+     "ref": "Col 1:21—2:7"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Exod 19"
+    },
+    "psalms": [
+     "26",
+     "28"
+    ],
+    "second": {
+     "ref": "Matt 19:16—20:16"
+    }
+   },
+   "name": null
+  },
+  "13": {
+   "ep": {
+    "first": {
+     "ref": "Prov 12"
+    },
+    "psalms": [
+     "33"
+    ],
+    "second": {
+     "ref": "Col 2:8-19"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Exod 20"
+    },
+    "psalms": [
+     "29",
+     "30"
+    ],
+    "second": {
+     "ref": "Matt 20:17-end"
+    }
+   },
+   "name": null
+  },
+  "14": {
+   "ep": {
+    "first": {
+     "ref": "Prov 13"
+    },
+    "psalms": [
+     "35"
+    ],
+    "second": {
+     "ref": "Col 2:20—3:11"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-19,22-29",
+     "ref": "Exod 21"
+    },
+    "psalms": [
+     "34"
+    ],
+    "second": {
+     "ref": "Matt 21:1-22"
+    }
+   },
+   "name": null
+  },
+  "15": {
+   "ep": {
+    "first": {
+     "ref": "Prov 14"
+    },
+    "psalms": [
+     "38"
+    ],
+    "second": {
+     "ref": "Col 3:12-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Exod 22"
+    },
+    "psalms": [
+     "32",
+     "36"
+    ],
+    "second": {
+     "ref": "Matt 21:23-end"
+    }
+   },
+   "name": null
+  },
+  "16": {
+   "ep": {
+    "first": {
+     "ref": "Prov 15"
+    },
+    "psalms": [
+     "37:19-42v"
+    ],
+    "second": {
+     "ref": "Col 4"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-13,18-30",
+     "ref": "Exod 23"
+    },
+    "psalms": [
+     "37:1-18v"
+    ],
+    "second": {
+     "ref": "Matt 22:1-33"
+    }
+   },
+   "name": null
+  },
+  "17": {
+   "ep": {
+    "first": {
+     "ref": "Prov 16"
+    },
+    "psalms": [
+     "39",
+     "41"
+    ],
+    "second": {
+     "ref": "Philemon"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Exod 24"
+    },
+    "psalms": [
+     "40"
+    ],
+    "second": {
+     "ref": "Matt 22:34—23:12"
+    }
+   },
+   "name": null
+  },
+  "18": {
+   "ep": {
+    "first": {
+     "ref": "Prov 17"
+    },
+    "psalms": [
+     "44"
+    ],
+    "second": {
+     "ref": "Eph 1:1-14"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-23,31-40",
+     "ref": "Exod 25"
+    },
+    "psalms": [
+     "42",
+     "43"
+    ],
+    "second": {
+     "ref": "Matt 23:13-end"
+    }
+   },
+   "name": null
+  },
+  "19": {
+   "ep": {
+    "first": {
+     "ref": "Eph 1:15-end"
+    },
+    "psalms": [
+     "46"
+    ],
+    "second": {
+     "ref": "Matt 1:18-26"
+    }
+   },
+   "movable": true,
+   "mp": {
+    "first": {
+     "abrev": "1-10,15-16,29-37",
+     "ref": "Exod 26"
+    },
+    "psalms": [
+     "45"
+    ],
+    "second": {
+     "ref": "Matt 24:1-28"
+    }
+   },
+   "name": "Joseph"
+  },
+  "2": {
+   "ep": {
+    "first": {
+     "ref": "Prov 1"
+    },
+    "psalms": [
+     "149",
+     "150"
+    ],
+    "second": {
+     "ref": "Rom 14"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-29,33-34",
+     "ref": "Exod 9"
+    },
+    "psalms": [
+     "148"
+    ],
+    "second": {
+     "ref": "Matt 13:24-43"
+    }
+   },
+   "name": null
+  },
+  "20": {
+   "ep": {
+    "first": {
+     "ref": "Prov 18"
+    },
+    "psalms": [
+     "49"
+    ],
+    "second": {
+     "ref": "Eph 2:1-10"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Exod 27"
+    },
+    "psalms": [
+     "47",
+     "48"
+    ],
+    "second": {
+     "ref": "Matt 24:29-end"
+    }
+   },
+   "name": null
+  },
+  "21": {
+   "ep": {
+    "first": {
+     "ref": "Prov 19"
+    },
+    "psalms": [
+     "51"
+    ],
+    "second": {
+     "ref": "Eph 2:11-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-6,15-21, 29-43",
+     "ref": "Exod 28"
+    },
+    "psalms": [
+     "50"
+    ],
+    "second": {
+     "ref": "Matt 25:1-30"
+    }
+   },
+   "name": null
+  },
+  "22": {
+   "ep": {
+    "first": {
+     "ref": "Prov 20"
+    },
+    "psalms": [
+     "55"
+    ],
+    "second": {
+     "ref": "Eph 3"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-18,35-46",
+     "ref": "Exod 29"
+    },
+    "psalms": [
+     "52",
+     "53",
+     "54"
+    ],
+    "second": {
+     "ref": "Matt 25:31-end"
+    }
+   },
+   "name": null
+  },
+  "23": {
+   "ep": {
+    "first": {
+     "ref": "Prov 21"
+    },
+    "psalms": [
+     "58",
+     "60"
+    ],
+    "second": {
+     "ref": "Eph 4:1-16"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-3,7-33",
+     "ref": "Exod 30"
+    },
+    "psalms": [
+     "56",
+     "57"
+    ],
+    "second": {
+     "ref": "Matt 26:1-30"
+    }
+   },
+   "name": null
+  },
+  "24": {
+   "ep": {
+    "first": {
+     "ref": "Prov 22"
+    },
+    "psalms": [
+     "63",
+     "64"
+    ],
+    "second": {
+     "ref": "Eph 4:17-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Exod 31"
+    },
+    "psalms": [
+     "59"
+    ],
+    "second": {
+     "ref": "Matt 26:31-56"
+    }
+   },
+   "name": null
+  },
+  "25": {
+   "ep": {
+    "first": {
+     "ref": "Prov 23"
+    },
+    "psalms": [
+     "131",
+     "132"
+    ],
+    "second": {
+     "ref": "Eph 5:1-17"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-29",
+     "ref": "Exod 32"
+    },
+    "psalms": [
+     "113",
+     "138"
+    ],
+    "second": {
+     "ref": "Luke 1:26-38"
+    }
+   },
+   "name": "Annun."
+  },
+  "26": {
+   "ep": {
+    "first": {
+     "abrev": "1-14, 23-34",
+     "ref": "Prov 24"
+    },
+    "psalms": [
+     "65",
+     "67"
+    ],
+    "second": {
+     "ref": "Eph 5:18-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Exod 33"
+    },
+    "psalms": [
+     "61",
+     "62"
+    ],
+    "second": {
+     "ref": "Matt 26:57-end"
+    }
+   },
+   "name": null
+  },
+  "27": {
+   "ep": {
+    "first": {
+     "ref": "Prov 25"
+    },
+    "psalms": [
+     "68:19-36"
+    ],
+    "second": {
+     "ref": "Eph 6:1-9"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-17,27-35",
+     "ref": "Exod 34"
+    },
+    "psalms": [
+     "68:1-18"
+    ],
+    "second": {
+     "ref": "Matt 27:1-26"
+    }
+   },
+   "name": null
+  },
+  "28": {
+   "ep": {
+    "first": {
+     "ref": "Prov 26"
+    },
+    "psalms": [
+     "69:19-38v"
+    ],
+    "second": {
+     "ref": "Eph 6:10-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-10,20-35",
+     "ref": "Exod 35"
+    },
+    "psalms": [
+     "69:1-18v"
+    ],
+    "second": {
+     "ref": "Matt 27:27-56"
+    }
+   },
+   "name": null
+  },
+  "29": {
+   "ep": {
+    "first": {
+     "ref": "Prov 27"
+    },
+    "psalms": [
+     "70",
+     "72"
+    ],
+    "second": {
+     "ref": "1 Tim 1:1-17"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-10,18-20, 31-38",
+     "ref": "Exod 36"
+    },
+    "psalms": [
+     "66"
+    ],
+    "second": {
+     "ref": "Matt 27:57—28 end"
+    }
+   },
+   "name": null
+  },
+  "3": {
+   "ep": {
+    "first": {
+     "ref": "Prov 2"
+    },
+    "psalms": [
+     "3",
+     "4"
+    ],
+    "second": {
+     "ref": "Rom 15"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Exod 10"
+    },
+    "psalms": [
+     "1",
+     "2"
+    ],
+    "second": {
+     "ref": "Matt 13:44-end"
+    }
+   },
+   "name": null
+  },
+  "30": {
+   "ep": {
+    "first": {
+     "ref": "Prov 28"
+    },
+    "psalms": [
+     "73"
+    ],
+    "second": {
+     "ref": "1 Tim 1:18—2 end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-11,16-29",
+     "ref": "Exod 37"
+    },
+    "psalms": [
+     "71"
+    ],
+    "second": {
+     "ref": "Mark 1:1-13"
+    }
+   },
+   "name": null
+  },
+  "31": {
+   "ep": {
+    "first": {
+     "ref": "Prov 29"
+    },
+    "psalms": [
+     "77"
+    ],
+    "second": {
+     "ref": "1 Tim 3"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-23",
+     "ref": "Exod 38"
+    },
+    "psalms": [
+     "74"
+    ],
+    "second": {
+     "ref": "Mark 1:14-31"
+    }
+   },
+   "name": null
+  },
+  "4": {
+   "ep": {
+    "first": {
+     "abrev": "1-27",
+     "ref": "Prov 3"
+    },
+    "psalms": [
+     "7"
+    ],
+    "second": {
+     "ref": "Rom 16"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Exod 11"
+    },
+    "psalms": [
+     "5",
+     "6"
+    ],
+    "second": {
+     "ref": "Matt 14"
+    }
+   },
+   "name": null
+  },
+  "5": {
+   "ep": {
+    "first": {
+     "ref": "Prov 4"
+    },
+    "psalms": [
+     "10"
+    ],
+    "second": {
+     "ref": "Phil 1:1-11"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-20,28-36",
+     "ref": "Exod 12"
+    },
+    "psalms": [
+     "9"
+    ],
+    "second": {
+     "ref": "Matt 15:1-28"
+    }
+   },
+   "name": null
+  },
+  "6": {
+   "ep": {
+    "first": {
+     "ref": "Prov 5"
+    },
+    "psalms": [
+     "15",
+     "16"
+    ],
+    "second": {
+     "ref": "Phil 1:12-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Exod 13"
+    },
+    "psalms": [
+     "8",
+     "11"
+    ],
+    "second": {
+     "ref": "Matt 15:29—16:12"
+    }
+   },
+   "name": null
+  },
+  "7": {
+   "ep": {
+    "first": {
+     "abrev": "1-11,20-35",
+     "ref": "Prov 6"
+    },
+    "psalms": [
+     "17"
+    ],
+    "second": {
+     "ref": "Phil 2:1-11"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "5-31",
+     "ref": "Exod 14"
+    },
+    "psalms": [
+     "12",
+     "13",
+     "14"
+    ],
+    "second": {
+     "ref": "Matt 16:13-end"
+    }
+   },
+   "name": null
+  },
+  "8": {
+   "ep": {
+    "first": {
+     "ref": "Prov 7"
+    },
+    "psalms": [
+     "18:21-50v"
+    ],
+    "second": {
+     "ref": "Phil 2:12-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Exod 15"
+    },
+    "psalms": [
+     "18:1-20v"
+    ],
+    "second": {
+     "ref": "Matt 17:1-23"
+    }
+   },
+   "name": null
+  },
+  "9": {
+   "ep": {
+    "first": {
+     "ref": "Prov 8"
+    },
+    "psalms": [
+     "20",
+     "21"
+    ],
+    "second": {
+     "ref": "Phil 3"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-7,11-33",
+     "ref": "Exod 16"
+    },
+    "psalms": [
+     "19"
+    ],
+    "second": {
+     "ref": "Matt 17:24—18:14"
+    }
+   },
+   "name": null
+  }
+ },
+ "04": {
+  "1": {
+   "ep": {
+    "first": {
+     "abrev": "1-9,15-33",
+     "ref": "Prov 30"
+    },
+    "psalms": [
+     "79",
+     "82"
+    ],
+    "second": {
+     "ref": "1 Tim 4"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-14,27-43",
+     "ref": "Exod 39"
+    },
+    "psalms": [
+     "75",
+     "76"
+    ],
+    "second": {
+     "ref": "Mark 1:32-end"
+    }
+   },
+   "name": null
+  },
+  "10": {
+   "ep": {
+    "first": {
+     "ref": "Job 8"
+    },
+    "psalms": [
+     "97",
+     "98"
+    ],
+    "second": {
+     "ref": "2 Tim 4"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Lev 20"
+    },
+    "psalms": [
+     "95",
+     "96"
+    ],
+    "second": {
+     "ref": "Mark 7:1-23"
+    }
+   },
+   "name": null
+  },
+  "11": {
+   "ep": {
+    "first": {
+     "ref": "Job 9"
+    },
+    "psalms": [
+     "102"
+    ],
+    "second": {
+     "ref": "Heb 1"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "9-32,39-43",
+     "ref": "Lev 23"
+    },
+    "psalms": [
+     "99",
+     "100",
+     "101"
+    ],
+    "second": {
+     "ref": "Mark 7:24—8:10"
+    }
+   },
+   "name": null
+  },
+  "12": {
+   "ep": {
+    "first": {
+     "ref": "Job 10"
+    },
+    "psalms": [
+     "104"
+    ],
+    "second": {
+     "ref": "Heb 2"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "3-20,38-46",
+     "ref": "Lev 26"
+    },
+    "psalms": [
+     "103"
+    ],
+    "second": {
+     "ref": "Mark 8:11-end"
+    }
+   },
+   "name": null
+  },
+  "13": {
+   "ep": {
+    "first": {
+     "ref": "Job 11"
+    },
+    "psalms": [
+     "105:23-45v"
+    ],
+    "second": {
+     "ref": "Heb 3"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Num 6"
+    },
+    "psalms": [
+     "105:1-22v"
+    ],
+    "second": {
+     "ref": "Mark 9:1-29"
+    }
+   },
+   "name": null
+  },
+  "14": {
+   "ep": {
+    "first": {
+     "ref": "Job 12"
+    },
+    "psalms": [
+     "106:19-48v"
+    ],
+    "second": {
+     "ref": "Heb 4:1-13"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "5-26",
+     "ref": "Num 8"
+    },
+    "psalms": [
+     "106:1-18v"
+    ],
+    "second": {
+     "ref": "Mark 9:30-end"
+    }
+   },
+   "name": null
+  },
+  "15": {
+   "ep": {
+    "first": {
+     "ref": "Job 13"
+    },
+    "psalms": [
+     "107:23-43"
+    ],
+    "second": {
+     "ref": "Heb 4:14—5:10"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "4-6,10-33",
+     "ref": "Num 11"
+    },
+    "psalms": [
+     "107:1-22"
+    ],
+    "second": {
+     "ref": "Mark 10:1-31"
+    }
+   },
+   "name": null
+  },
+  "16": {
+   "ep": {
+    "first": {
+     "ref": "Job 14"
+    },
+    "psalms": [
+     "109"
+    ],
+    "second": {
+     "ref": "Heb 5:11—6 end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Num 12"
+    },
+    "psalms": [
+     "108",
+     "110"
+    ],
+    "second": {
+     "ref": "Mark 10:32-end"
+    }
+   },
+   "name": null
+  },
+  "17": {
+   "ep": {
+    "first": {
+     "ref": "Job 15"
+    },
+    "psalms": [
+     "113",
+     "114"
+    ],
+    "second": {
+     "ref": "Heb 7"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-3,17-33",
+     "ref": "Num 13"
+    },
+    "psalms": [
+     "111",
+     "112"
+    ],
+    "second": {
+     "ref": "Mark 11:1-26"
+    }
+   },
+   "name": null
+  },
+  "18": {
+   "ep": {
+    "first": {
+     "ref": "Job 16"
+    },
+    "psalms": [
+     "116",
+     "117"
+    ],
+    "second": {
+     "ref": "Heb 8"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-31",
+     "ref": "Num 14"
+    },
+    "psalms": [
+     "115"
+    ],
+    "second": {
+     "ref": "Mark 11:27—12:12"
+    }
+   },
+   "name": null
+  },
+  "19": {
+   "ep": {
+    "first": {
+     "ref": "Job 17"
+    },
+    "psalms": [
+     "119:25-48"
+    ],
+    "second": {
+     "ref": "Heb 9:1-14"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "22-41",
+     "ref": "Num 15"
+    },
+    "psalms": [
+     "119:1-24"
+    ],
+    "second": {
+     "ref": "Mark 12:13-34"
+    }
+   },
+   "name": null
+  },
+  "2": {
+   "ep": {
+    "first": {
+     "ref": "Prov 31"
+    },
+    "psalms": [
+     "78:19-40v"
+    ],
+    "second": {
+     "ref": "1 Tim 5"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1,16-38",
+     "ref": "Exod 40"
+    },
+    "psalms": [
+     "78:1-18v"
+    ],
+    "second": {
+     "ref": "Mark 2:1-22"
+    }
+   },
+   "name": null
+  },
+  "20": {
+   "ep": {
+    "first": {
+     "ref": "Job 18"
+    },
+    "psalms": [
+     "119:73-88"
+    ],
+    "second": {
+     "ref": "Heb 9:15-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-11,20-38",
+     "ref": "Num 16"
+    },
+    "psalms": [
+     "119:49-72"
+    ],
+    "second": {
+     "ref": "Mark 12:35—13:13"
+    }
+   },
+   "name": null
+  },
+  "21": {
+   "ep": {
+    "first": {
+     "ref": "Job 19"
+    },
+    "psalms": [
+     "119:105-128"
+    ],
+    "second": {
+     "ref": "Heb 10:1-18"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Num 17"
+    },
+    "psalms": [
+     "119:89-104"
+    ],
+    "second": {
+     "ref": "Mark 13:14-end"
+    }
+   },
+   "name": null
+  },
+  "22": {
+   "ep": {
+    "first": {
+     "ref": "Job 20"
+    },
+    "psalms": [
+     "119:153-176"
+    ],
+    "second": {
+     "ref": "Heb 10:19-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-24",
+     "ref": "Num 18"
+    },
+    "psalms": [
+     "119:129-152"
+    ],
+    "second": {
+     "ref": "Mark 14:1-25"
+    }
+   },
+   "name": null
+  },
+  "23": {
+   "ep": {
+    "first": {
+     "ref": "Job 21"
+    },
+    "psalms": [
+     "120",
+     "121"
+    ],
+    "second": {
+     "ref": "Heb 11"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Num 20"
+    },
+    "psalms": [
+     "118"
+    ],
+    "second": {
+     "ref": "Mark 14:26-52"
+    }
+   },
+   "name": null
+  },
+  "24": {
+   "ep": {
+    "first": {
+     "ref": "Job 22"
+    },
+    "psalms": [
+     "124",
+     "125",
+     "126"
+    ],
+    "second": {
+     "ref": "Heb 12:1-17"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "4-9,21-35",
+     "ref": "Num 21"
+    },
+    "psalms": [
+     "122",
+     "123"
+    ],
+    "second": {
+     "ref": "Mark 14:53-end"
+    }
+   },
+   "name": null
+  },
+  "25": {
+   "ep": {
+    "first": {
+     "ref": "Job 23"
+    },
+    "psalms": [
+     "129",
+     "130",
+     "131"
+    ],
+    "second": {
+     "ref": "Heb 12:18-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Acts 12:11-25"
+    },
+    "psalms": [
+     "127",
+     "128"
+    ],
+    "second": {
+     "ref": "Mark 15"
+    }
+   },
+   "name": "Mark"
+  },
+  "26": {
+   "ep": {
+    "first": {
+     "ref": "Job 24"
+    },
+    "psalms": [
+     "134",
+     "135"
+    ],
+    "second": {
+     "ref": "Heb 13"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-35",
+     "ref": "Num 22"
+    },
+    "psalms": [
+     "132",
+     "133"
+    ],
+    "second": {
+     "ref": "Mark 16"
+    }
+   },
+   "name": null
+  },
+  "27": {
+   "ep": {
+    "first": {
+     "ref": "Job 25 & 26"
+    },
+    "psalms": [
+     "137",
+     "138"
+    ],
+    "second": {
+     "ref": "Jas 1"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-26",
+     "ref": "Num 23"
+    },
+    "psalms": [
+     "136"
+    ],
+    "second": {
+     "ref": "Luke 1:1-23"
+    }
+   },
+   "name": null
+  },
+  "28": {
+   "ep": {
+    "first": {
+     "ref": "Job 27"
+    },
+    "psalms": [
+     "141",
+     "142"
+    ],
+    "second": {
+     "ref": "Jas 2:1-13"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Num 24"
+    },
+    "psalms": [
+     "139"
+    ],
+    "second": {
+     "ref": "Luke 1:24-56"
+    }
+   },
+   "name": null
+  },
+  "29": {
+   "ep": {
+    "first": {
+     "ref": "Job 28"
+    },
+    "psalms": [
+     "143"
+    ],
+    "second": {
+     "ref": "Jas 2:14-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Num 25"
+    },
+    "psalms": [
+     "140"
+    ],
+    "second": {
+     "ref": "Luke 1:57-end"
+    }
+   },
+   "name": null
+  },
+  "3": {
+   "ep": {
+    "first": {
+     "ref": "Job 1"
+    },
+    "psalms": [
+     "80"
+    ],
+    "second": {
+     "ref": "1 Tim 6"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Lev 1"
+    },
+    "psalms": [
+     "78:41-73v"
+    ],
+    "second": {
+     "ref": "Mark 2:23—3:12"
+    }
+   },
+   "name": null
+  },
+  "30": {
+   "ep": {
+    "first": {
+     "ref": "Job 29"
+    },
+    "psalms": [
+     "145"
+    ],
+    "second": {
+     "ref": "Jas 3"
+    }
+   },
+   "movable": true,
+   "mp": {
+    "first": {
+     "abrev": "1-21,26-33",
+     "ref": "Deut 1"
+    },
+    "psalms": [
+     "144"
+    ],
+    "second": {
+     "ref": "Luke 2:1-21"
+    }
+   },
+   "name": null
+  },
+  "4": {
+   "ep": {
+    "first": {
+     "ref": "Job 2"
+    },
+    "psalms": [
+     "83"
+    ],
+    "second": {
+     "ref": "Titus 1"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-24,30-36",
+     "ref": "Lev 8"
+    },
+    "psalms": [
+     "81"
+    ],
+    "second": {
+     "ref": "Mark 3:13-end"
+    }
+   },
+   "name": null
+  },
+  "5": {
+   "ep": {
+    "first": {
+     "ref": "Job 3"
+    },
+    "psalms": [
+     "85"
+    ],
+    "second": {
+     "ref": "Titus 2"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Lev 10"
+    },
+    "psalms": [
+     "84"
+    ],
+    "second": {
+     "ref": "Mark 4:1-34"
+    }
+   },
+   "name": null
+  },
+  "6": {
+   "ep": {
+    "first": {
+     "ref": "Job 4"
+    },
+    "psalms": [
+     "88"
+    ],
+    "second": {
+     "ref": "Titus 3"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-22,29-34",
+     "ref": "Lev 16"
+    },
+    "psalms": [
+     "86",
+     "87"
+    ],
+    "second": {
+     "ref": "Mark 4:35—5:20"
+    }
+   },
+   "name": null
+  },
+  "7": {
+   "ep": {
+    "first": {
+     "ref": "Job 5"
+    },
+    "psalms": [
+     "89:19-52v"
+    ],
+    "second": {
+     "ref": "2 Tim 1"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Lev 17"
+    },
+    "psalms": [
+     "89:1-18v"
+    ],
+    "second": {
+     "ref": "Mark 5:21-end"
+    }
+   },
+   "name": null
+  },
+  "8": {
+   "ep": {
+    "first": {
+     "ref": "Job 6"
+    },
+    "psalms": [
+     "91"
+    ],
+    "second": {
+     "ref": "2 Tim 2"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Lev 18"
+    },
+    "psalms": [
+     "90"
+    ],
+    "second": {
+     "ref": "Mark 6:1-29"
+    }
+   },
+   "name": null
+  },
+  "9": {
+   "ep": {
+    "first": {
+     "ref": "Job 7"
+    },
+    "psalms": [
+     "94"
+    ],
+    "second": {
+     "ref": "2 Tim 3"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-2,9-37",
+     "ref": "Lev 19"
+    },
+    "psalms": [
+     "92",
+     "93"
+    ],
+    "second": {
+     "ref": "Mark 6:30-end"
+    }
+   },
+   "name": null
+  }
+ },
+ "05": {
+  "1": {
+   "ep": {
+    "first": {
+     "ref": "Jas 4"
+    },
+    "psalms": [
+     "147"
+    ],
+    "second": {
+     "ref": "John 1:43-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-9,14-19,24-37",
+     "ref": "Deut 2"
+    },
+    "psalms": [
+     "146"
+    ],
+    "second": {
+     "ref": "Luke 2:22-end"
+    }
+   },
+   "name": "Phil. & Jam."
+  },
+  "10": {
+   "ep": {
+    "first": {
+     "abrev": "1-27,31-33",
+     "ref": "Job 38"
+    },
+    "psalms": [
+     "23",
+     "24"
+    ],
+    "second": {
+     "ref": "2 Pet 2"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 11"
+    },
+    "psalms": [
+     "22"
+    ],
+    "second": {
+     "ref": "Luke 6:39—7:10"
+    }
+   },
+   "name": null
+  },
+  "11": {
+   "ep": {
+    "first": {
+     "ref": "Job 39"
+    },
+    "psalms": [
+     "27"
+    ],
+    "second": {
+     "ref": "2 Pet 3"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 12"
+    },
+    "psalms": [
+     "25"
+    ],
+    "second": {
+     "ref": "Luke 7:11-35"
+    }
+   },
+   "name": null
+  },
+  "12": {
+   "ep": {
+    "first": {
+     "ref": "Job 40"
+    },
+    "psalms": [
+     "31"
+    ],
+    "second": {
+     "ref": "Jude"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 13"
+    },
+    "psalms": [
+     "26",
+     "28"
+    ],
+    "second": {
+     "ref": "Luke 7:36-end"
+    }
+   },
+   "name": null
+  },
+  "13": {
+   "ep": {
+    "first": {
+     "ref": "Job 41"
+    },
+    "psalms": [
+     "33"
+    ],
+    "second": {
+     "ref": "1 John 1:1—2:6"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 14"
+    },
+    "psalms": [
+     "29",
+     "30"
+    ],
+    "second": {
+     "ref": "Luke 8:1-21"
+    }
+   },
+   "name": null
+  },
+  "14": {
+   "ep": {
+    "first": {
+     "ref": "Job 42"
+    },
+    "psalms": [
+     "35"
+    ],
+    "second": {
+     "ref": "1 John 2:7-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 15"
+    },
+    "psalms": [
+     "34"
+    ],
+    "second": {
+     "ref": "Luke 8:22-end"
+    }
+   },
+   "name": null
+  },
+  "15": {
+   "ep": {
+    "first": {
+     "ref": "Eccl 1"
+    },
+    "psalms": [
+     "38"
+    ],
+    "second": {
+     "ref": "1 John 3:1-10"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 16"
+    },
+    "psalms": [
+     "32",
+     "36"
+    ],
+    "second": {
+     "ref": "Luke 9:1-17"
+    }
+   },
+   "name": null
+  },
+  "16": {
+   "ep": {
+    "first": {
+     "ref": "Eccl 2"
+    },
+    "psalms": [
+     "37:19-42v"
+    ],
+    "second": {
+     "ref": "1 John 3:11—4:6"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 17"
+    },
+    "psalms": [
+     "37:1-18v"
+    ],
+    "second": {
+     "ref": "Luke 9:18-50"
+    }
+   },
+   "name": null
+  },
+  "17": {
+   "ep": {
+    "first": {
+     "ref": "Eccl 3"
+    },
+    "psalms": [
+     "39",
+     "41"
+    ],
+    "second": {
+     "ref": "1 John 4:7-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 18"
+    },
+    "psalms": [
+     "40"
+    ],
+    "second": {
+     "ref": "Luke 9:51-end"
+    }
+   },
+   "name": null
+  },
+  "18": {
+   "ep": {
+    "first": {
+     "ref": "Eccl 4"
+    },
+    "psalms": [
+     "44"
+    ],
+    "second": {
+     "ref": "1 John 5"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 19"
+    },
+    "psalms": [
+     "42",
+     "43"
+    ],
+    "second": {
+     "ref": "Luke 10:1-24"
+    }
+   },
+   "name": null
+  },
+  "19": {
+   "ep": {
+    "first": {
+     "ref": "Eccl 5"
+    },
+    "psalms": [
+     "46"
+    ],
+    "second": {
+     "ref": "2 John"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 20"
+    },
+    "psalms": [
+     "45"
+    ],
+    "second": {
+     "ref": "Luke 10:25-end"
+    }
+   },
+   "name": null
+  },
+  "2": {
+   "ep": {
+    "first": {
+     "ref": "Job 30"
+    },
+    "psalms": [
+     "149",
+     "150"
+    ],
+    "second": {
+     "ref": "Jas 5"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 3"
+    },
+    "psalms": [
+     "148"
+    ],
+    "second": {
+     "ref": "Luke 3:1-22"
+    }
+   },
+   "name": null
+  },
+  "20": {
+   "ep": {
+    "first": {
+     "ref": "Eccl 6"
+    },
+    "psalms": [
+     "49"
+    ],
+    "second": {
+     "ref": "3 John"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 21"
+    },
+    "psalms": [
+     "47",
+     "48"
+    ],
+    "second": {
+     "ref": "Luke 11:1-28"
+    }
+   },
+   "name": null
+  },
+  "21": {
+   "ep": {
+    "first": {
+     "ref": "Eccl 7"
+    },
+    "psalms": [
+     "51"
+    ],
+    "second": {
+     "ref": "Acts 1:1-14"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 22"
+    },
+    "psalms": [
+     "50"
+    ],
+    "second": {
+     "ref": "Luke 11:29-end"
+    }
+   },
+   "name": null
+  },
+  "22": {
+   "ep": {
+    "first": {
+     "ref": "Eccl 8"
+    },
+    "psalms": [
+     "55"
+    ],
+    "second": {
+     "ref": "Acts 1:15-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 23"
+    },
+    "psalms": [
+     "52",
+     "53",
+     "54"
+    ],
+    "second": {
+     "ref": "Luke 12:1-34"
+    }
+   },
+   "name": null
+  },
+  "23": {
+   "ep": {
+    "first": {
+     "ref": "Eccl 9"
+    },
+    "psalms": [
+     "58",
+     "60"
+    ],
+    "second": {
+     "ref": "Acts 2:1-21"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 24"
+    },
+    "psalms": [
+     "56",
+     "57"
+    ],
+    "second": {
+     "ref": "Luke 12:35-53"
+    }
+   },
+   "name": null
+  },
+  "24": {
+   "ep": {
+    "first": {
+     "ref": "Eccl 10"
+    },
+    "psalms": [
+     "63",
+     "64"
+    ],
+    "second": {
+     "ref": "Acts 2:22-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 25"
+    },
+    "psalms": [
+     "59"
+    ],
+    "second": {
+     "ref": "Luke 12:54—13:9"
+    }
+   },
+   "name": null
+  },
+  "25": {
+   "ep": {
+    "first": {
+     "ref": "Eccl 11"
+    },
+    "psalms": [
+     "65",
+     "67"
+    ],
+    "second": {
+     "ref": "Acts 3:1—4:4"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 26"
+    },
+    "psalms": [
+     "61",
+     "62"
+    ],
+    "second": {
+     "ref": "Luke 13:10-end"
+    }
+   },
+   "name": null
+  },
+  "26": {
+   "ep": {
+    "first": {
+     "ref": "Eccl 12"
+    },
+    "psalms": [
+     "68:19-36"
+    ],
+    "second": {
+     "ref": "Acts 4:5-31"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 27"
+    },
+    "psalms": [
+     "68:1-18"
+    ],
+    "second": {
+     "ref": "Luke 14:1-24"
+    }
+   },
+   "name": null
+  },
+  "27": {
+   "ep": {
+    "first": {
+     "ref": "Ezek 1"
+    },
+    "psalms": [
+     "69:19-38v"
+    ],
+    "second": {
+     "ref": "Acts 4:32—5:11"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-25,64-68",
+     "ref": "Deut 28"
+    },
+    "psalms": [
+     "69:1-18v"
+    ],
+    "second": {
+     "ref": "Luke 14:25—15:10"
+    }
+   },
+   "name": null
+  },
+  "28": {
+   "ep": {
+    "first": {
+     "ref": "Ezek 2"
+    },
+    "psalms": [
+     "70",
+     "72"
+    ],
+    "second": {
+     "ref": "Acts 5:12-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 29"
+    },
+    "psalms": [
+     "66"
+    ],
+    "second": {
+     "ref": "Luke 15:11-end"
+    }
+   },
+   "name": null
+  },
+  "29": {
+   "ep": {
+    "first": {
+     "ref": "Ezek 3"
+    },
+    "psalms": [
+     "73"
+    ],
+    "second": {
+     "ref": "Acts 6:1—7:16"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 30"
+    },
+    "psalms": [
+     "71"
+    ],
+    "second": {
+     "ref": "Luke 16"
+    }
+   },
+   "name": null
+  },
+  "3": {
+   "ep": {
+    "first": {
+     "abrev": "1-23,35-40",
+     "ref": "Job 31"
+    },
+    "psalms": [
+     "3",
+     "4"
+    ],
+    "second": {
+     "ref": "1 Pet 1:1-21"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-18,24-40",
+     "ref": "Deut 4"
+    },
+    "psalms": [
+     "1",
+     "2"
+    ],
+    "second": {
+     "ref": "Luke 3:23-end"
+    }
+   },
+   "name": null
+  },
+  "30": {
+   "ep": {
+    "first": {
+     "ref": "Ezek 4"
+    },
+    "psalms": [
+     "77"
+    ],
+    "second": {
+     "ref": "Acts 7:17-34"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 31"
+    },
+    "psalms": [
+     "74"
+    ],
+    "second": {
+     "ref": "Luke 17:1-19"
+    }
+   },
+   "name": null
+  },
+  "31": {
+   "ep": {
+    "first": {
+     "ref": "Ezek 5"
+    },
+    "psalms": [
+     "79",
+     "82"
+    ],
+    "second": {
+     "ref": "Acts 7:35—8:3"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-10,15-22,39-52",
+     "ref": "Deut 32"
+    },
+    "psalms": [
+     "75",
+     "76"
+    ],
+    "second": {
+     "ref": "Luke 1:39-56"
+    }
+   },
+   "name": "Visitation"
+  },
+  "4": {
+   "ep": {
+    "first": {
+     "ref": "Job 32"
+    },
+    "psalms": [
+     "7"
+    ],
+    "second": {
+     "ref": "1 Pet 1:22—2:10"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 5"
+    },
+    "psalms": [
+     "5",
+     "6"
+    ],
+    "second": {
+     "ref": "Luke 4:1-30"
+    }
+   },
+   "name": null
+  },
+  "5": {
+   "ep": {
+    "first": {
+     "ref": "Job 33"
+    },
+    "psalms": [
+     "10"
+    ],
+    "second": {
+     "ref": "1 Pet 2:11—3:7"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 6"
+    },
+    "psalms": [
+     "9"
+    ],
+    "second": {
+     "ref": "Luke 4:31-end"
+    }
+   },
+   "name": null
+  },
+  "6": {
+   "ep": {
+    "first": {
+     "abrev": "1-15,21-28,31-37",
+     "ref": "Job 34"
+    },
+    "psalms": [
+     "15",
+     "16"
+    ],
+    "second": {
+     "ref": "1 Pet 3:8—4:6"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 7"
+    },
+    "psalms": [
+     "8",
+     "11"
+    ],
+    "second": {
+     "ref": "Luke 5:1-16"
+    }
+   },
+   "name": null
+  },
+  "7": {
+   "ep": {
+    "first": {
+     "ref": "Job 35"
+    },
+    "psalms": [
+     "17"
+    ],
+    "second": {
+     "ref": "1 Pet 4:7-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 8"
+    },
+    "psalms": [
+     "12",
+     "13",
+     "14"
+    ],
+    "second": {
+     "ref": "Luke 5:17-end"
+    }
+   },
+   "name": null
+  },
+  "8": {
+   "ep": {
+    "first": {
+     "ref": "Job 36"
+    },
+    "psalms": [
+     "18:21-50v"
+    ],
+    "second": {
+     "ref": "1 Pet 5"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 9"
+    },
+    "psalms": [
+     "18:1-20v"
+    ],
+    "second": {
+     "ref": "Luke 6:1-19"
+    }
+   },
+   "name": null
+  },
+  "9": {
+   "ep": {
+    "first": {
+     "ref": "Job 37"
+    },
+    "psalms": [
+     "20",
+     "21"
+    ],
+    "second": {
+     "ref": "2 Pet 1"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 10"
+    },
+    "psalms": [
+     "19"
+    ],
+    "second": {
+     "ref": "Luke 6:20-38"
+    }
+   },
+   "name": null
+  }
+ },
+ "06": {
+  "1": {
+   "ep": {
+    "first": {
+     "ref": "Ezek 6"
+    },
+    "psalms": [
+     "78:19-40v"
+    ],
+    "second": {
+     "ref": "Acts 8:4-25"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 33"
+    },
+    "psalms": [
+     "78:1-18v"
+    ],
+    "second": {
+     "ref": "Luke 17:20-end"
+    }
+   },
+   "name": null
+  },
+  "10": {
+   "ep": {
+    "first": {
+     "ref": "Ezek 15"
+    },
+    "psalms": [
+     "102"
+    ],
+    "second": {
+     "ref": "Acts 12:25—13:12"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-22,30-35",
+     "ref": "Josh 8"
+    },
+    "psalms": [
+     "99",
+     "100",
+     "101"
+    ],
+    "second": {
+     "ref": "Luke 22:39-53"
+    }
+   },
+   "name": null
+  },
+  "11": {
+   "ep": {
+    "first": {
+     "abrev": "1-15,33-47, 59-63",
+     "ref": "Ezek 16"
+    },
+    "psalms": [
+     "104"
+    ],
+    "second": {
+     "ref": "Acts 13:13-43"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Acts 4:32-37"
+    },
+    "psalms": [
+     "103"
+    ],
+    "second": {
+     "ref": "Luke 22:54-end"
+    }
+   },
+   "name": "Barnabas"
+  },
+  "12": {
+   "ep": {
+    "first": {
+     "ref": "Ezek 17"
+    },
+    "psalms": [
+     "105:23-45v"
+    ],
+    "second": {
+     "ref": "Acts 13:44—14:7"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Josh 9"
+    },
+    "psalms": [
+     "105:1-22v"
+    ],
+    "second": {
+     "ref": "Luke 23:1-25"
+    }
+   },
+   "name": null
+  },
+  "13": {
+   "ep": {
+    "first": {
+     "ref": "Ezek 18"
+    },
+    "psalms": [
+     "106:19-48v"
+    ],
+    "second": {
+     "ref": "Acts 14:8-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-27,40-43",
+     "ref": "Josh 10"
+    },
+    "psalms": [
+     "106:1-18v"
+    ],
+    "second": {
+     "ref": "Luke:23:26-49"
+    }
+   },
+   "name": null
+  },
+  "14": {
+   "ep": {
+    "first": {
+     "abrev": "1-23,30-33",
+     "ref": "Ezek 33"
+    },
+    "psalms": [
+     "107:23-43"
+    ],
+    "second": {
+     "ref": "Acts 15:1-21"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "5-15",
+     "ref": "Josh 14"
+    },
+    "psalms": [
+     "107:1-22"
+    ],
+    "second": {
+     "ref": "Luke 23:50—24:12"
+    }
+   },
+   "name": null
+  },
+  "15": {
+   "ep": {
+    "first": {
+     "ref": "Ezek 34"
+    },
+    "psalms": [
+     "109"
+    ],
+    "second": {
+     "ref": "Acts 15:22-35"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "7-31",
+     "ref": "Josh 22"
+    },
+    "psalms": [
+     "108",
+     "110"
+    ],
+    "second": {
+     "ref": "Luke 24:13-end"
+    }
+   },
+   "name": null
+  },
+  "16": {
+   "ep": {
+    "first": {
+     "ref": "Ezek 35"
+    },
+    "psalms": [
+     "113",
+     "114"
+    ],
+    "second": {
+     "ref": "Acts 15:36—16:5"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Josh 23"
+    },
+    "psalms": [
+     "111",
+     "112"
+    ],
+    "second": {
+     "ref": "Gal 1"
+    }
+   },
+   "name": null
+  },
+  "17": {
+   "ep": {
+    "first": {
+     "abrev": "16-37",
+     "ref": "Ezek 36"
+    },
+    "psalms": [
+     "116",
+     "117"
+    ],
+    "second": {
+     "ref": "Acts 16:6-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-31",
+     "ref": "Josh 24"
+    },
+    "psalms": [
+     "115"
+    ],
+    "second": {
+     "ref": "Gal 2"
+    }
+   },
+   "name": null
+  },
+  "18": {
+   "ep": {
+    "first": {
+     "ref": "Ezek 37"
+    },
+    "psalms": [
+     "119:25-48"
+    ],
+    "second": {
+     "ref": "Acts 17:1-15"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-21",
+     "ref": "Judg 1"
+    },
+    "psalms": [
+     "119:1-24"
+    ],
+    "second": {
+     "ref": "Gal 3"
+    }
+   },
+   "name": null
+  },
+  "19": {
+   "ep": {
+    "first": {
+     "abrev": "1-5,17-19,35-49",
+     "ref": "Ezek 40"
+    },
+    "psalms": [
+     "119:73-88"
+    ],
+    "second": {
+     "ref": "Acts 17:16-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "6-23",
+     "ref": "Judg 2"
+    },
+    "psalms": [
+     "119:49-72"
+    ],
+    "second": {
+     "ref": "Gal 4"
+    }
+   },
+   "name": null
+  },
+  "2": {
+   "ep": {
+    "first": {
+     "ref": "Ezek 7"
+    },
+    "psalms": [
+     "80"
+    ],
+    "second": {
+     "ref": "Acts 8:26-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Deut 34"
+    },
+    "psalms": [
+     "78:41-73v"
+    ],
+    "second": {
+     "ref": "Luke 18:1-30"
+    }
+   },
+   "name": null
+  },
+  "20": {
+   "ep": {
+    "first": {
+     "ref": "Ezek 43"
+    },
+    "psalms": [
+     "119:105-128"
+    ],
+    "second": {
+     "ref": "Acts 18:1-23"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "7-30",
+     "ref": "Judg 3"
+    },
+    "psalms": [
+     "119:89-104"
+    ],
+    "second": {
+     "ref": "Gal 5"
+    }
+   },
+   "name": null
+  },
+  "21": {
+   "ep": {
+    "first": {
+     "ref": "Ezek 47"
+    },
+    "psalms": [
+     "119:153-176"
+    ],
+    "second": {
+     "ref": "Acts 18:24—19:7"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Judg 4"
+    },
+    "psalms": [
+     "119:129-152"
+    ],
+    "second": {
+     "ref": "Gal 6"
+    }
+   },
+   "name": null
+  },
+  "22": {
+   "ep": {
+    "first": {
+     "ref": "Dan 1"
+    },
+    "psalms": [
+     "120",
+     "121"
+    ],
+    "second": {
+     "ref": "Acts 19:8-20"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-5,19-31",
+     "ref": "Judg 5"
+    },
+    "psalms": [
+     "118"
+    ],
+    "second": {
+     "ref": "1 Thess 1"
+    }
+   },
+   "name": null
+  },
+  "23": {
+   "ep": {
+    "first": {
+     "abrev": "1-14,25-28,31-45",
+     "ref": "Dan 2"
+    },
+    "psalms": [
+     "124",
+     "125",
+     "126"
+    ],
+    "second": {
+     "ref": "Acts 19:21-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1,6,11-24,33-40",
+     "ref": "Judg 6"
+    },
+    "psalms": [
+     "122",
+     "123"
+    ],
+    "second": {
+     "ref": "1 Thess 2:1-16"
+    }
+   },
+   "name": null
+  },
+  "24": {
+   "ep": {
+    "first": {
+     "ref": "Dan 3"
+    },
+    "psalms": [
+     "129",
+     "130",
+     "131"
+    ],
+    "second": {
+     "ref": "Acts 20:1-16"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Thess 2:17—3 end"
+    },
+    "psalms": [
+     "127",
+     "128"
+    ],
+    "second": {
+     "ref": "Matt 14:1-13"
+    }
+   },
+   "name": "Nat. Bap."
+  },
+  "25": {
+   "ep": {
+    "first": {
+     "abrev": "1-9,19-35",
+     "ref": "Dan 4"
+    },
+    "psalms": [
+     "134",
+     "135"
+    ],
+    "second": {
+     "ref": "Acts 20:17-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-8,16-25",
+     "ref": "Judg 7"
+    },
+    "psalms": [
+     "132",
+     "133"
+    ],
+    "second": {
+     "ref": "1 Thess 4:1-12"
+    }
+   },
+   "name": null
+  },
+  "26": {
+   "ep": {
+    "first": {
+     "ref": "Dan 5"
+    },
+    "psalms": [
+     "137",
+     "138"
+    ],
+    "second": {
+     "ref": "Acts 21:1-16"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "4-23,28",
+     "ref": "Judg 8"
+    },
+    "psalms": [
+     "136"
+    ],
+    "second": {
+     "ref": "1 Thess 4:13—5:11"
+    }
+   },
+   "name": null
+  },
+  "27": {
+   "ep": {
+    "first": {
+     "ref": "Dan 6"
+    },
+    "psalms": [
+     "141",
+     "142"
+    ],
+    "second": {
+     "ref": "Acts 21:17-36"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-6,22-25,43-56",
+     "ref": "Judg 9"
+    },
+    "psalms": [
+     "139"
+    ],
+    "second": {
+     "ref": "1 Thess 5:12-end"
+    }
+   },
+   "name": null
+  },
+  "28": {
+   "ep": {
+    "first": {
+     "ref": "Dan 7"
+    },
+    "psalms": [
+     "143"
+    ],
+    "second": {
+     "ref": "Acts 21:37—22:22"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "6-18",
+     "ref": "Judg 10"
+    },
+    "psalms": [
+     "140"
+    ],
+    "second": {
+     "ref": "2 Thess 1"
+    }
+   },
+   "name": null
+  },
+  "29": {
+   "ep": {
+    "first": {
+     "ref": "Dan 8"
+    },
+    "psalms": [
+     "145"
+    ],
+    "second": {
+     "ref": "Acts 22:23—23:11"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Thess 2"
+    },
+    "psalms": [
+     "144"
+    ],
+    "second": {
+     "ref": "2 Pet 3:14-end"
+    }
+   },
+   "name": "Pet. & Paul"
+  },
+  "3": {
+   "ep": {
+    "first": {
+     "ref": "Ezek 8"
+    },
+    "psalms": [
+     "83"
+    ],
+    "second": {
+     "ref": "Acts 9:1-31"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Josh 1"
+    },
+    "psalms": [
+     "81"
+    ],
+    "second": {
+     "ref": "Luke 18:31—19:10"
+    }
+   },
+   "name": null
+  },
+  "30": {
+   "ep": {
+    "first": {
+     "ref": "Dan 9"
+    },
+    "psalms": [
+     "147"
+    ],
+    "second": {
+     "ref": "Acts 23:12-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-11,29-40",
+     "ref": "Judg 11"
+    },
+    "psalms": [
+     "146"
+    ],
+    "second": {
+     "ref": "2 Thess 3"
+    }
+   },
+   "name": null
+  },
+  "4": {
+   "ep": {
+    "first": {
+     "ref": "Ezek 9"
+    },
+    "psalms": [
+     "85"
+    ],
+    "second": {
+     "ref": "Acts 9:32-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Josh 2"
+    },
+    "psalms": [
+     "84"
+    ],
+    "second": {
+     "ref": "Luke 19:11-28"
+    }
+   },
+   "name": null
+  },
+  "5": {
+   "ep": {
+    "first": {
+     "ref": "Ezek 10"
+    },
+    "psalms": [
+     "88"
+    ],
+    "second": {
+     "ref": "Acts 10:1-23"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Josh 3"
+    },
+    "psalms": [
+     "86",
+     "87"
+    ],
+    "second": {
+     "ref": "Luke 19:29-end"
+    }
+   },
+   "name": null
+  },
+  "6": {
+   "ep": {
+    "first": {
+     "ref": "Ezek 11"
+    },
+    "psalms": [
+     "89:19-52v"
+    ],
+    "second": {
+     "ref": "Acts 10:24-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Josh 4"
+    },
+    "psalms": [
+     "89:1-18v"
+    ],
+    "second": {
+     "ref": "Luke 20:1-26"
+    }
+   },
+   "name": null
+  },
+  "7": {
+   "ep": {
+    "first": {
+     "ref": "Ezek 12"
+    },
+    "psalms": [
+     "91"
+    ],
+    "second": {
+     "ref": "Acts 11:1-18"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Josh 5"
+    },
+    "psalms": [
+     "90"
+    ],
+    "second": {
+     "ref": "Luke 20:27—21:4"
+    }
+   },
+   "name": null
+  },
+  "8": {
+   "ep": {
+    "first": {
+     "ref": "Ezek 13"
+    },
+    "psalms": [
+     "94"
+    ],
+    "second": {
+     "ref": "Acts 11:19-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Josh 6"
+    },
+    "psalms": [
+     "92",
+     "93"
+    ],
+    "second": {
+     "ref": "Luke 21:5-end"
+    }
+   },
+   "name": null
+  },
+  "9": {
+   "ep": {
+    "first": {
+     "ref": "Ezek 14"
+    },
+    "psalms": [
+     "97",
+     "98"
+    ],
+    "second": {
+     "ref": "Acts 12:1-24"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Josh 7"
+    },
+    "psalms": [
+     "95",
+     "96"
+    ],
+    "second": {
+     "ref": "Luke 22:1-38"
+    }
+   },
+   "name": null
+  }
+ },
+ "07": {
+  "1": {
+   "ep": {
+    "first": {
+     "ref": "Dan 10"
+    },
+    "psalms": [
+     "149",
+     "150"
+    ],
+    "second": {
+     "ref": "Acts 24:1-23"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Judg 12"
+    },
+    "psalms": [
+     "148"
+    ],
+    "second": {
+     "ref": "1 Cor 1:1-25"
+    }
+   },
+   "name": null
+  },
+  "10": {
+   "ep": {
+    "first": {
+     "ref": "Esth 6"
+    },
+    "psalms": [
+     "27"
+    ],
+    "second": {
+     "ref": "1 Tim 1:18—2 end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-20",
+     "ref": "1 Sam 1"
+    },
+    "psalms": [
+     "25"
+    ],
+    "second": {
+     "ref": "1 Cor 10"
+    }
+   },
+   "name": null
+  },
+  "11": {
+   "ep": {
+    "first": {
+     "ref": "Esth 7"
+    },
+    "psalms": [
+     "31"
+    ],
+    "second": {
+     "ref": "1 Tim 3"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-21",
+     "ref": "1 Sam 2"
+    },
+    "psalms": [
+     "26",
+     "28"
+    ],
+    "second": {
+     "ref": "1 Cor 11"
+    }
+   },
+   "name": null
+  },
+  "12": {
+   "ep": {
+    "first": {
+     "ref": "Esth 8"
+    },
+    "psalms": [
+     "33"
+    ],
+    "second": {
+     "ref": "1 Tim 4"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Sam 3"
+    },
+    "psalms": [
+     "29",
+     "30"
+    ],
+    "second": {
+     "ref": "1 Cor 12"
+    }
+   },
+   "name": null
+  },
+  "13": {
+   "ep": {
+    "first": {
+     "ref": "Esth 9 & 10"
+    },
+    "psalms": [
+     "35"
+    ],
+    "second": {
+     "ref": "1 Tim 5"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Sam 4"
+    },
+    "psalms": [
+     "34"
+    ],
+    "second": {
+     "ref": "1 Cor 13"
+    }
+   },
+   "name": null
+  },
+  "14": {
+   "ep": {
+    "first": {
+     "ref": "Ezra 1"
+    },
+    "psalms": [
+     "38"
+    ],
+    "second": {
+     "ref": "1 Tim 6"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Sam 5"
+    },
+    "psalms": [
+     "32",
+     "36"
+    ],
+    "second": {
+     "ref": "1 Cor 14:1-19"
+    }
+   },
+   "name": null
+  },
+  "15": {
+   "ep": {
+    "first": {
+     "ref": "Ezra 3"
+    },
+    "psalms": [
+     "37:19-42v"
+    ],
+    "second": {
+     "ref": "Titus 1"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-15",
+     "ref": "1 Sam 6"
+    },
+    "psalms": [
+     "37:1-18v"
+    ],
+    "second": {
+     "ref": "1 Cor 14:20-end"
+    }
+   },
+   "name": null
+  },
+  "16": {
+   "ep": {
+    "first": {
+     "ref": "Ezra 4"
+    },
+    "psalms": [
+     "39",
+     "41"
+    ],
+    "second": {
+     "ref": "Titus 2"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Sam 7"
+    },
+    "psalms": [
+     "40"
+    ],
+    "second": {
+     "ref": "1 Cor 15:1-34"
+    }
+   },
+   "name": null
+  },
+  "17": {
+   "ep": {
+    "first": {
+     "ref": "Ezra 5"
+    },
+    "psalms": [
+     "44"
+    ],
+    "second": {
+     "ref": "Titus 3"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Sam 8"
+    },
+    "psalms": [
+     "42",
+     "43"
+    ],
+    "second": {
+     "ref": "1 Cor 15:35-end"
+    }
+   },
+   "name": null
+  },
+  "18": {
+   "ep": {
+    "first": {
+     "ref": "Ezra 6"
+    },
+    "psalms": [
+     "46"
+    ],
+    "second": {
+     "ref": "2 Tim 1"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Sam 9"
+    },
+    "psalms": [
+     "45"
+    ],
+    "second": {
+     "ref": "1 Cor 16"
+    }
+   },
+   "name": null
+  },
+  "19": {
+   "ep": {
+    "first": {
+     "ref": "Ezra 7"
+    },
+    "psalms": [
+     "49"
+    ],
+    "second": {
+     "ref": "2 Tim 2"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Sam 10"
+    },
+    "psalms": [
+     "47",
+     "48"
+    ],
+    "second": {
+     "ref": "2 Cor 1:1—2:11"
+    }
+   },
+   "name": null
+  },
+  "2": {
+   "ep": {
+    "first": {
+     "abrev": "1-19",
+     "ref": "Dan 11"
+    },
+    "psalms": [
+     "3",
+     "4"
+    ],
+    "second": {
+     "ref": "Acts 24:24—25:12"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Judg 13"
+    },
+    "psalms": [
+     "1",
+     "2"
+    ],
+    "second": {
+     "ref": "1 Cor 1:26—2 end"
+    }
+   },
+   "name": null
+  },
+  "20": {
+   "ep": {
+    "first": {
+     "abrev": "21-36",
+     "ref": "Ezra 8"
+    },
+    "psalms": [
+     "51"
+    ],
+    "second": {
+     "ref": "2 Tim 3"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Sam 11"
+    },
+    "psalms": [
+     "50"
+    ],
+    "second": {
+     "ref": "2 Cor 2:12—3 end"
+    }
+   },
+   "name": null
+  },
+  "21": {
+   "ep": {
+    "first": {
+     "ref": "Ezra 9"
+    },
+    "psalms": [
+     "55"
+    ],
+    "second": {
+     "ref": "2 Tim 4"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Sam 12"
+    },
+    "psalms": [
+     "52",
+     "53",
+     "54"
+    ],
+    "second": {
+     "ref": "2 Cor 4"
+    }
+   },
+   "name": null
+  },
+  "22": {
+   "ep": {
+    "first": {
+     "abrev": "1-16",
+     "ref": "Ezra 10"
+    },
+    "psalms": [
+     "58",
+     "60"
+    ],
+    "second": {
+     "ref": "John 1:1-28"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Cor 5"
+    },
+    "psalms": [
+     "56",
+     "57"
+    ],
+    "second": {
+     "ref": "Luke 7:36—8:3"
+    }
+   },
+   "name": "Mary Mag."
+  },
+  "23": {
+   "ep": {
+    "first": {
+     "ref": "Neh 1"
+    },
+    "psalms": [
+     "63",
+     "64"
+    ],
+    "second": {
+     "ref": "John 1:29-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Sam 13"
+    },
+    "psalms": [
+     "59"
+    ],
+    "second": {
+     "ref": "2 Cor 6"
+    }
+   },
+   "name": null
+  },
+  "24": {
+   "ep": {
+    "first": {
+     "ref": "Neh 2"
+    },
+    "psalms": [
+     "65",
+     "67"
+    ],
+    "second": {
+     "ref": "John 2"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-15,20,24-30",
+     "ref": "1 Sam 14"
+    },
+    "psalms": [
+     "61",
+     "62"
+    ],
+    "second": {
+     "ref": "2 Cor 7"
+    }
+   },
+   "name": null
+  },
+  "25": {
+   "ep": {
+    "first": {
+     "abrev": "1-15",
+     "ref": "Neh 3"
+    },
+    "psalms": [
+     "68:19-36"
+    ],
+    "second": {
+     "ref": "John 3:1-21"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Cor 8"
+    },
+    "psalms": [
+     "68:1-18"
+    ],
+    "second": {
+     "ref": "Mark 1:14-20"
+    }
+   },
+   "name": "James"
+  },
+  "26": {
+   "ep": {
+    "first": {
+     "ref": "Neh 4"
+    },
+    "psalms": [
+     "69:19-38v"
+    ],
+    "second": {
+     "ref": "John 3:22-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Sam 15"
+    },
+    "psalms": [
+     "69:1-18v"
+    ],
+    "second": {
+     "ref": "2 Cor 9"
+    }
+   },
+   "name": null
+  },
+  "27": {
+   "ep": {
+    "first": {
+     "ref": "Neh 5"
+    },
+    "psalms": [
+     "70",
+     "72"
+    ],
+    "second": {
+     "ref": "John 4:1-26"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Sam 16"
+    },
+    "psalms": [
+     "66"
+    ],
+    "second": {
+     "ref": "2 Cor 10"
+    }
+   },
+   "name": null
+  },
+  "28": {
+   "ep": {
+    "first": {
+     "ref": "Neh 6"
+    },
+    "psalms": [
+     "73"
+    ],
+    "second": {
+     "ref": "John 4:27-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-11,26-27,31-51",
+     "ref": "1 Sam 17"
+    },
+    "psalms": [
+     "71"
+    ],
+    "second": {
+     "ref": "2 Cor 11"
+    }
+   },
+   "name": null
+  },
+  "29": {
+   "ep": {
+    "first": {
+     "ref": "Neh 8"
+    },
+    "psalms": [
+     "77"
+    ],
+    "second": {
+     "ref": "John 5:1-24"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Sam 18"
+    },
+    "psalms": [
+     "74"
+    ],
+    "second": {
+     "ref": "2 Cor 12:1-13"
+    }
+   },
+   "name": null
+  },
+  "3": {
+   "ep": {
+    "first": {
+     "ref": "Dan 12"
+    },
+    "psalms": [
+     "7"
+    ],
+    "second": {
+     "ref": "Acts 25:13-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Judg 14"
+    },
+    "psalms": [
+     "5",
+     "6"
+    ],
+    "second": {
+     "ref": "1 Cor 3"
+    }
+   },
+   "name": null
+  },
+  "30": {
+   "ep": {
+    "first": {
+     "abrev": "1-15,26-38",
+     "ref": "Neh 9"
+    },
+    "psalms": [
+     "79",
+     "82"
+    ],
+    "second": {
+     "ref": "John 5:25-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Sam 19"
+    },
+    "psalms": [
+     "75",
+     "76"
+    ],
+    "second": {
+     "ref": "2 Cor 12:14—13 end"
+    }
+   },
+   "name": null
+  },
+  "31": {
+   "ep": {
+    "first": {
+     "abrev": "28-39",
+     "ref": "Neh 10"
+    },
+    "psalms": [
+     "78:19-40v"
+    ],
+    "second": {
+     "ref": "John 6:1-21"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-7,24-42",
+     "ref": "1 Sam 20"
+    },
+    "psalms": [
+     "78:1-18v"
+    ],
+    "second": {
+     "ref": "Rom 1"
+    }
+   },
+   "name": null
+  },
+  "4": {
+   "ep": {
+    "first": {
+     "ref": "Susanna"
+    },
+    "psalms": [
+     "10"
+    ],
+    "second": {
+     "ref": "Acts 26"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Judg 15"
+    },
+    "psalms": [
+     "9"
+    ],
+    "second": {
+     "ref": "1 Cor 4:1-17"
+    }
+   },
+   "name": null
+  },
+  "5": {
+   "ep": {
+    "first": {
+     "ref": "Esth 1"
+    },
+    "psalms": [
+     "15",
+     "16"
+    ],
+    "second": {
+     "ref": "Acts 27"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Judg 16"
+    },
+    "psalms": [
+     "8",
+     "11"
+    ],
+    "second": {
+     "ref": "1 Cor 4:18—5 end"
+    }
+   },
+   "name": null
+  },
+  "6": {
+   "ep": {
+    "first": {
+     "ref": "Esth 2"
+    },
+    "psalms": [
+     "17"
+    ],
+    "second": {
+     "ref": "Acts 28:1-15"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Ruth 1"
+    },
+    "psalms": [
+     "12",
+     "13",
+     "14"
+    ],
+    "second": {
+     "ref": "1 Cor 6"
+    }
+   },
+   "name": null
+  },
+  "7": {
+   "ep": {
+    "first": {
+     "ref": "Esth 3"
+    },
+    "psalms": [
+     "18:21-50v"
+    ],
+    "second": {
+     "ref": "Acts 28:16-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Ruth 2"
+    },
+    "psalms": [
+     "18:1-20v"
+    ],
+    "second": {
+     "ref": "1 Cor 7"
+    }
+   },
+   "name": null
+  },
+  "8": {
+   "ep": {
+    "first": {
+     "ref": "Esth 4"
+    },
+    "psalms": [
+     "20",
+     "21"
+    ],
+    "second": {
+     "ref": "Philemon"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Ruth 3"
+    },
+    "psalms": [
+     "19"
+    ],
+    "second": {
+     "ref": "1 Cor 8"
+    }
+   },
+   "name": null
+  },
+  "9": {
+   "ep": {
+    "first": {
+     "ref": "Esth 5"
+    },
+    "psalms": [
+     "23",
+     "24"
+    ],
+    "second": {
+     "ref": "1 Tim 1:1-17"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Ruth 4"
+    },
+    "psalms": [
+     "22"
+    ],
+    "second": {
+     "ref": "1 Cor 9"
+    }
+   },
+   "name": null
+  }
+ },
+ "08": {
+  "1": {
+   "ep": {
+    "first": {
+     "abrev": "27-47",
+     "ref": "Neh 12"
+    },
+    "psalms": [
+     "80"
+    ],
+    "second": {
+     "ref": "John 6:22-40"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Sam 21"
+    },
+    "psalms": [
+     "78:41-73v"
+    ],
+    "second": {
+     "ref": "Rom 2"
+    }
+   },
+   "name": null
+  },
+  "10": {
+   "ep": {
+    "first": {
+     "ref": "Hos 8"
+    },
+    "psalms": [
+     "102"
+    ],
+    "second": {
+     "ref": "John 11:1-44"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Sam 29"
+    },
+    "psalms": [
+     "99",
+     "100",
+     "101"
+    ],
+    "second": {
+     "ref": "Rom 10"
+    }
+   },
+   "name": null
+  },
+  "11": {
+   "ep": {
+    "first": {
+     "ref": "Hos 9"
+    },
+    "psalms": [
+     "104"
+    ],
+    "second": {
+     "ref": "John 11:45-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-25",
+     "ref": "1 Sam 30"
+    },
+    "psalms": [
+     "103"
+    ],
+    "second": {
+     "ref": "Rom 11"
+    }
+   },
+   "name": null
+  },
+  "12": {
+   "ep": {
+    "first": {
+     "ref": "Hos 10"
+    },
+    "psalms": [
+     "105:23-45v"
+    ],
+    "second": {
+     "ref": "John 12:1-19"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Sam 31"
+    },
+    "psalms": [
+     "105:1-22v"
+    ],
+    "second": {
+     "ref": "Rom 12"
+    }
+   },
+   "name": null
+  },
+  "13": {
+   "ep": {
+    "first": {
+     "ref": "Hos 11"
+    },
+    "psalms": [
+     "106:19-48v"
+    ],
+    "second": {
+     "ref": "John 12:20-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Sam 1"
+    },
+    "psalms": [
+     "106:1-18v"
+    ],
+    "second": {
+     "ref": "Rom 13"
+    }
+   },
+   "name": null
+  },
+  "14": {
+   "ep": {
+    "first": {
+     "ref": "Hos 12"
+    },
+    "psalms": [
+     "107:23-43"
+    ],
+    "second": {
+     "ref": "John 13"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-17,26-31",
+     "ref": "2 Sam 2"
+    },
+    "psalms": [
+     "107:1-22"
+    ],
+    "second": {
+     "ref": "Rom 14"
+    }
+   },
+   "name": null
+  },
+  "15": {
+   "ep": {
+    "first": {
+     "ref": "Hos 13"
+    },
+    "psalms": [
+     "109"
+    ],
+    "second": {
+     "ref": "John 14:1-14"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "6-11,17-39",
+     "ref": "2 Sam 3"
+    },
+    "psalms": [
+     "108",
+     "110"
+    ],
+    "second": {
+     "ref": "Luke 1:26-38"
+    }
+   },
+   "name": "Mary Virg."
+  },
+  "16": {
+   "ep": {
+    "first": {
+     "ref": "Hos 14"
+    },
+    "psalms": [
+     "113",
+     "114"
+    ],
+    "second": {
+     "ref": "John 14:15-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Sam 4"
+    },
+    "psalms": [
+     "111",
+     "112"
+    ],
+    "second": {
+     "ref": "Rom 15"
+    }
+   },
+   "name": null
+  },
+  "17": {
+   "ep": {
+    "first": {
+     "ref": "Joel 1"
+    },
+    "psalms": [
+     "116",
+     "117"
+    ],
+    "second": {
+     "ref": "John 15:1-17"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Sam 5"
+    },
+    "psalms": [
+     "115"
+    ],
+    "second": {
+     "ref": "Rom 16"
+    }
+   },
+   "name": null
+  },
+  "18": {
+   "ep": {
+    "first": {
+     "abrev": "1-17,28-32",
+     "ref": "Joel 2"
+    },
+    "psalms": [
+     "119:25-48"
+    ],
+    "second": {
+     "ref": "John 15:18-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Sam 6"
+    },
+    "psalms": [
+     "119:1-24"
+    ],
+    "second": {
+     "ref": "Phil 1:1-11"
+    }
+   },
+   "name": null
+  },
+  "19": {
+   "ep": {
+    "first": {
+     "ref": "Joel 3"
+    },
+    "psalms": [
+     "119:73-88"
+    ],
+    "second": {
+     "ref": "John 16:1-15"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Sam 7"
+    },
+    "psalms": [
+     "119:49-72"
+    ],
+    "second": {
+     "ref": "Phil 1:12-end"
+    }
+   },
+   "name": null
+  },
+  "2": {
+   "ep": {
+    "first": {
+     "abrev": "1-22,30-31",
+     "ref": "Neh 13"
+    },
+    "psalms": [
+     "83"
+    ],
+    "second": {
+     "ref": "John 6:41-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Sam 22"
+    },
+    "psalms": [
+     "81"
+    ],
+    "second": {
+     "ref": "Rom 3"
+    }
+   },
+   "name": null
+  },
+  "20": {
+   "ep": {
+    "first": {
+     "ref": "Amos 1"
+    },
+    "psalms": [
+     "119:105-128"
+    ],
+    "second": {
+     "ref": "John 16:16-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Sam 8"
+    },
+    "psalms": [
+     "119:89-104"
+    ],
+    "second": {
+     "ref": "Phil 2:1-11"
+    }
+   },
+   "name": null
+  },
+  "21": {
+   "ep": {
+    "first": {
+     "ref": "Amos 2"
+    },
+    "psalms": [
+     "119:153-176"
+    ],
+    "second": {
+     "ref": "John 17"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Sam 9"
+    },
+    "psalms": [
+     "119:129-152"
+    ],
+    "second": {
+     "ref": "Phil 2:12-end"
+    }
+   },
+   "name": null
+  },
+  "22": {
+   "ep": {
+    "first": {
+     "ref": "Amos 3"
+    },
+    "psalms": [
+     "120",
+     "121"
+    ],
+    "second": {
+     "ref": "John 18:1-27"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Sam 10"
+    },
+    "psalms": [
+     "118"
+    ],
+    "second": {
+     "ref": "Phil 3"
+    }
+   },
+   "name": null
+  },
+  "23": {
+   "ep": {
+    "first": {
+     "ref": "Amos 4"
+    },
+    "psalms": [
+     "124",
+     "125",
+     "126"
+    ],
+    "second": {
+     "ref": "John 18:28-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Sam 11"
+    },
+    "psalms": [
+     "122",
+     "123"
+    ],
+    "second": {
+     "ref": "Phil 4"
+    }
+   },
+   "name": null
+  },
+  "24": {
+   "ep": {
+    "first": {
+     "ref": "Amos 5"
+    },
+    "psalms": [
+     "129",
+     "130",
+     "131"
+    ],
+    "second": {
+     "ref": "John 19:1-37"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Col 1:1-20"
+    },
+    "psalms": [
+     "127",
+     "128"
+    ],
+    "second": {
+     "ref": "Luke 6:12-16"
+    }
+   },
+   "name": "Bart."
+  },
+  "25": {
+   "ep": {
+    "first": {
+     "ref": "Amos 6"
+    },
+    "psalms": [
+     "134",
+     "135"
+    ],
+    "second": {
+     "ref": "John 19:38-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-25",
+     "ref": "2 Sam 12"
+    },
+    "psalms": [
+     "132",
+     "133"
+    ],
+    "second": {
+     "ref": "Col 1:21—2:7"
+    }
+   },
+   "name": null
+  },
+  "26": {
+   "ep": {
+    "first": {
+     "ref": "Amos 7"
+    },
+    "psalms": [
+     "137",
+     "138"
+    ],
+    "second": {
+     "ref": "John 20"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-29,38-39",
+     "ref": "2 Sam 13"
+    },
+    "psalms": [
+     "136"
+    ],
+    "second": {
+     "ref": "Col 2:8-19"
+    }
+   },
+   "name": null
+  },
+  "27": {
+   "ep": {
+    "first": {
+     "ref": "Amos 8"
+    },
+    "psalms": [
+     "141",
+     "142"
+    ],
+    "second": {
+     "ref": "John 21"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-21,28",
+     "ref": "2 Sam 14"
+    },
+    "psalms": [
+     "139"
+    ],
+    "second": {
+     "ref": "Col 2:20—3:11"
+    }
+   },
+   "name": null
+  },
+  "28": {
+   "ep": {
+    "first": {
+     "ref": "Amos 9"
+    },
+    "psalms": [
+     "143"
+    ],
+    "second": {
+     "ref": "Matt 1:1-17"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-18,23-25,32-34",
+     "ref": "2 Sam 15"
+    },
+    "psalms": [
+     "140"
+    ],
+    "second": {
+     "ref": "Col 3:12-end"
+    }
+   },
+   "name": null
+  },
+  "29": {
+   "ep": {
+    "first": {
+     "ref": "Obadiah"
+    },
+    "psalms": [
+     "145"
+    ],
+    "second": {
+     "ref": "Matt 1:18-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Sam 16"
+    },
+    "psalms": [
+     "144"
+    ],
+    "second": {
+     "ref": "Col 4"
+    }
+   },
+   "name": null
+  },
+  "3": {
+   "ep": {
+    "first": {
+     "ref": "Hos 1"
+    },
+    "psalms": [
+     "85"
+    ],
+    "second": {
+     "ref": "John 7:1-24"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Sam 23"
+    },
+    "psalms": [
+     "84"
+    ],
+    "second": {
+     "ref": "Rom 4"
+    }
+   },
+   "name": null
+  },
+  "30": {
+   "ep": {
+    "first": {
+     "ref": "Jonah 1"
+    },
+    "psalms": [
+     "147"
+    ],
+    "second": {
+     "ref": "Matt 2"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-23",
+     "ref": "2 Sam 17"
+    },
+    "psalms": [
+     "146"
+    ],
+    "second": {
+     "ref": "Philemon"
+    }
+   },
+   "name": null
+  },
+  "31": {
+   "ep": {
+    "first": {
+     "ref": "Jonah 2"
+    },
+    "psalms": [
+     "149",
+     "150"
+    ],
+    "second": {
+     "ref": "Matt 3"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-15,19-33",
+     "ref": "2 Sam 18"
+    },
+    "psalms": [
+     "148"
+    ],
+    "second": {
+     "ref": "Eph 1:1-14"
+    }
+   },
+   "name": null
+  },
+  "4": {
+   "ep": {
+    "first": {
+     "ref": "Hos 2"
+    },
+    "psalms": [
+     "88"
+    ],
+    "second": {
+     "ref": "John 7:25-52"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Sam 24"
+    },
+    "psalms": [
+     "86",
+     "87"
+    ],
+    "second": {
+     "ref": "Rom 5"
+    }
+   },
+   "name": null
+  },
+  "5": {
+   "ep": {
+    "first": {
+     "ref": "Hos 3"
+    },
+    "psalms": [
+     "89:19-52v"
+    ],
+    "second": {
+     "ref": "John 7:53—8:30"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-19,23-25,32-42",
+     "ref": "1 Sam 25"
+    },
+    "psalms": [
+     "89:1-18v"
+    ],
+    "second": {
+     "ref": "Rom 6"
+    }
+   },
+   "name": null
+  },
+  "6": {
+   "ep": {
+    "first": {
+     "ref": "Hos 4"
+    },
+    "psalms": [
+     "80"
+    ],
+    "second": {
+     "ref": "John 8:31-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Rom 7"
+    },
+    "psalms": [
+     "27"
+    ],
+    "second": {
+     "ref": "Mark 9:2-10"
+    }
+   },
+   "name": "Transfig."
+  },
+  "7": {
+   "ep": {
+    "first": {
+     "ref": "Hos 5"
+    },
+    "psalms": [
+     "91"
+    ],
+    "second": {
+     "ref": "John 9"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Sam 26"
+    },
+    "psalms": [
+     "90"
+    ],
+    "second": {
+     "ref": "Rom 8:1-17"
+    }
+   },
+   "name": null
+  },
+  "8": {
+   "ep": {
+    "first": {
+     "ref": "Hos 6"
+    },
+    "psalms": [
+     "94"
+    ],
+    "second": {
+     "ref": "John 10:1-21"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Sam 27"
+    },
+    "psalms": [
+     "92",
+     "93"
+    ],
+    "second": {
+     "ref": "Rom 8:18-end"
+    }
+   },
+   "name": null
+  },
+  "9": {
+   "ep": {
+    "first": {
+     "ref": "Hos 7"
+    },
+    "psalms": [
+     "97",
+     "98"
+    ],
+    "second": {
+     "ref": "John 10:22-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Sam 28"
+    },
+    "psalms": [
+     "95",
+     "96"
+    ],
+    "second": {
+     "ref": "Rom 9"
+    }
+   },
+   "name": null
+  }
+ },
+ "09": {
+  "1": {
+   "ep": {
+    "first": {
+     "ref": "Jonah 3"
+    },
+    "psalms": [
+     "3",
+     "4"
+    ],
+    "second": {
+     "ref": "Matt 4"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-30",
+     "ref": "2 Sam 19"
+    },
+    "psalms": [
+     "1",
+     "2"
+    ],
+    "second": {
+     "ref": "Eph 1:15-end"
+    }
+   },
+   "name": null
+  },
+  "10": {
+   "ep": {
+    "first": {
+     "ref": "Nahum 1"
+    },
+    "psalms": [
+     "31"
+    ],
+    "second": {
+     "ref": "Matt 9:18-34"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-25",
+     "ref": "1 Kings 2"
+    },
+    "psalms": [
+     "26",
+     "28"
+    ],
+    "second": {
+     "ref": "Heb 1"
+    }
+   },
+   "name": null
+  },
+  "11": {
+   "ep": {
+    "first": {
+     "ref": "Nahum 2"
+    },
+    "psalms": [
+     "33"
+    ],
+    "second": {
+     "ref": "Matt 9:35—10:23"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Kings 3"
+    },
+    "psalms": [
+     "29",
+     "30"
+    ],
+    "second": {
+     "ref": "Heb 2"
+    }
+   },
+   "name": null
+  },
+  "12": {
+   "ep": {
+    "first": {
+     "ref": "Nahum 3"
+    },
+    "psalms": [
+     "35"
+    ],
+    "second": {
+     "ref": "Matt 10:24-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-6,20-34",
+     "ref": "1 Kings 4"
+    },
+    "psalms": [
+     "34"
+    ],
+    "second": {
+     "ref": "Heb 3"
+    }
+   },
+   "name": null
+  },
+  "13": {
+   "ep": {
+    "first": {
+     "ref": "Hab 1"
+    },
+    "psalms": [
+     "38"
+    ],
+    "second": {
+     "ref": "Matt 11"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Kings 5"
+    },
+    "psalms": [
+     "32",
+     "36"
+    ],
+    "second": {
+     "ref": "Heb 4:1-13"
+    }
+   },
+   "name": null
+  },
+  "14": {
+   "ep": {
+    "first": {
+     "ref": "Hab 2"
+    },
+    "psalms": [
+     "37:19-42v"
+    ],
+    "second": {
+     "ref": "Matt 12:1-21"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Heb 4:14—5:10"
+    },
+    "psalms": [
+     "37:1-18v"
+    ],
+    "second": {
+     "ref": "John 12:23-33"
+    }
+   },
+   "name": "Holy Cross"
+  },
+  "15": {
+   "ep": {
+    "first": {
+     "ref": "Hab 3"
+    },
+    "psalms": [
+     "39",
+     "41"
+    ],
+    "second": {
+     "ref": "Matt 12:22-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-7,11-30,37-38",
+     "ref": "1 Kings 6"
+    },
+    "psalms": [
+     "40"
+    ],
+    "second": {
+     "ref": "Heb 5:11—6 end"
+    }
+   },
+   "name": null
+  },
+  "16": {
+   "ep": {
+    "first": {
+     "ref": "Zeph 1"
+    },
+    "psalms": [
+     "44"
+    ],
+    "second": {
+     "ref": "Matt 13:1-23"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-14,40-44,47-51",
+     "ref": "1 Kings 7"
+    },
+    "psalms": [
+     "42",
+     "43"
+    ],
+    "second": {
+     "ref": "Heb 7"
+    }
+   },
+   "name": null
+  },
+  "17": {
+   "ep": {
+    "first": {
+     "ref": "Zeph 2"
+    },
+    "psalms": [
+     "46"
+    ],
+    "second": {
+     "ref": "Matt 13:24-43"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-11,22-30,54-63",
+     "ref": "1 Kings 8"
+    },
+    "psalms": [
+     "45"
+    ],
+    "second": {
+     "ref": "Heb 8"
+    }
+   },
+   "name": null
+  },
+  "18": {
+   "ep": {
+    "first": {
+     "ref": "Zeph 3"
+    },
+    "psalms": [
+     "49"
+    ],
+    "second": {
+     "ref": "Matt 13:44-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-9,15-28",
+     "ref": "1 Kings 9"
+    },
+    "psalms": [
+     "47",
+     "48"
+    ],
+    "second": {
+     "ref": "Heb 9:1-14"
+    }
+   },
+   "name": null
+  },
+  "19": {
+   "ep": {
+    "first": {
+     "ref": "Hag 1"
+    },
+    "psalms": [
+     "51"
+    ],
+    "second": {
+     "ref": "Matt 14"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-13,23-29",
+     "ref": "1 Kings 10"
+    },
+    "psalms": [
+     "50"
+    ],
+    "second": {
+     "ref": "Heb 9:15-end"
+    }
+   },
+   "name": null
+  },
+  "2": {
+   "ep": {
+    "first": {
+     "ref": "Jonah 4"
+    },
+    "psalms": [
+     "7"
+    ],
+    "second": {
+     "ref": "Matt 5:1-20"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Sam 20"
+    },
+    "psalms": [
+     "5",
+     "6"
+    ],
+    "second": {
+     "ref": "Eph 2:1-10"
+    }
+   },
+   "name": null
+  },
+  "20": {
+   "ep": {
+    "first": {
+     "ref": "Hag 2"
+    },
+    "psalms": [
+     "55"
+    ],
+    "second": {
+     "ref": "Matt 15:1-28"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-14,23-33,41-43",
+     "ref": "1 Kings 11"
+    },
+    "psalms": [
+     "52",
+     "53",
+     "54"
+    ],
+    "second": {
+     "ref": "Heb 10:1-18"
+    }
+   },
+   "name": null
+  },
+  "21": {
+   "ep": {
+    "first": {
+     "ref": "Zech 1"
+    },
+    "psalms": [
+     "58",
+     "60"
+    ],
+    "second": {
+     "ref": "Matt 15:29—16:12"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Heb 10:19-end"
+    },
+    "psalms": [
+     "56",
+     "57"
+    ],
+    "second": {
+     "ref": "Matt 9:9-13"
+    }
+   },
+   "name": "Matthew"
+  },
+  "22": {
+   "ep": {
+    "first": {
+     "ref": "Zech 2"
+    },
+    "psalms": [
+     "63",
+     "64"
+    ],
+    "second": {
+     "ref": "Matt 16:13-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-20,25-30",
+     "ref": "1 Kings 12"
+    },
+    "psalms": [
+     "59"
+    ],
+    "second": {
+     "ref": "Heb 11"
+    }
+   },
+   "name": null
+  },
+  "23": {
+   "ep": {
+    "first": {
+     "ref": "Zech 3"
+    },
+    "psalms": [
+     "65",
+     "67"
+    ],
+    "second": {
+     "ref": "Matt 17:1-23"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-25,33-34",
+     "ref": "1 Kings 13"
+    },
+    "psalms": [
+     "61",
+     "62"
+    ],
+    "second": {
+     "ref": "Heb 12:1-17"
+    }
+   },
+   "name": null
+  },
+  "24": {
+   "ep": {
+    "first": {
+     "ref": "Zech 4"
+    },
+    "psalms": [
+     "68:19-36"
+    ],
+    "second": {
+     "ref": "Matt 17:24—18:14"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Kings 14"
+    },
+    "psalms": [
+     "68:1-18"
+    ],
+    "second": {
+     "ref": "Heb 12:18-end"
+    }
+   },
+   "name": null
+  },
+  "25": {
+   "ep": {
+    "first": {
+     "ref": "Zech 5"
+    },
+    "psalms": [
+     "69:19-38v"
+    ],
+    "second": {
+     "ref": "Matt 18:15-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Chron 12"
+    },
+    "psalms": [
+     "69:1-18v"
+    ],
+    "second": {
+     "ref": "Heb 13"
+    }
+   },
+   "name": null
+  },
+  "26": {
+   "ep": {
+    "first": {
+     "ref": "Zech 6"
+    },
+    "psalms": [
+     "70",
+     "72"
+    ],
+    "second": {
+     "ref": "Matt 19:1-15"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Chron 13"
+    },
+    "psalms": [
+     "66"
+    ],
+    "second": {
+     "ref": "Jas 1"
+    }
+   },
+   "name": null
+  },
+  "27": {
+   "ep": {
+    "first": {
+     "ref": "Zech 7"
+    },
+    "psalms": [
+     "73"
+    ],
+    "second": {
+     "ref": "Matt 19:16—20:16"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Chron 14"
+    },
+    "psalms": [
+     "71"
+    ],
+    "second": {
+     "ref": "Jas 2:1-13"
+    }
+   },
+   "name": null
+  },
+  "28": {
+   "ep": {
+    "first": {
+     "ref": "Zech 8"
+    },
+    "psalms": [
+     "77"
+    ],
+    "second": {
+     "ref": "Matt 20:17-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Chron 15"
+    },
+    "psalms": [
+     "74"
+    ],
+    "second": {
+     "ref": "Jas 2:14-end"
+    }
+   },
+   "name": null
+  },
+  "29": {
+   "ep": {
+    "first": {
+     "ref": "Zech 9"
+    },
+    "psalms": [
+     "79",
+     "82"
+    ],
+    "second": {
+     "ref": "Matt 21:1-22"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Rev 12:7-12"
+    },
+    "psalms": [
+     "75",
+     "76"
+    ],
+    "second": {
+     "ref": "Jas 3"
+    }
+   },
+   "name": "Michael"
+  },
+  "3": {
+   "ep": {
+    "first": {
+     "ref": "Mic 1"
+    },
+    "psalms": [
+     "10"
+    ],
+    "second": {
+     "ref": "Matt 5:21-48"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Sam 21"
+    },
+    "psalms": [
+     "9"
+    ],
+    "second": {
+     "ref": "Eph 2:11-end"
+    }
+   },
+   "name": null
+  },
+  "30": {
+   "ep": {
+    "first": {
+     "ref": "Zech 10"
+    },
+    "psalms": [
+     "78:19-40v"
+    ],
+    "second": {
+     "ref": "Matt 21:23-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Chron 16"
+    },
+    "psalms": [
+     "78:1-18v"
+    ],
+    "second": {
+     "ref": "Jas 4"
+    }
+   },
+   "name": null
+  },
+  "4": {
+   "ep": {
+    "first": {
+     "ref": "Mic 2"
+    },
+    "psalms": [
+     "15",
+     "16"
+    ],
+    "second": {
+     "ref": "Matt 6:1-18"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-7,14-20,32-51",
+     "ref": "2 Sam 22"
+    },
+    "psalms": [
+     "8",
+     "11"
+    ],
+    "second": {
+     "ref": "Eph 3"
+    }
+   },
+   "name": null
+  },
+  "5": {
+   "ep": {
+    "first": {
+     "ref": "Mic 3"
+    },
+    "psalms": [
+     "17"
+    ],
+    "second": {
+     "ref": "Matt 6:19-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-23",
+     "ref": "2 Sam 23"
+    },
+    "psalms": [
+     "12",
+     "13",
+     "14"
+    ],
+    "second": {
+     "ref": "Eph 4:1-16"
+    }
+   },
+   "name": null
+  },
+  "6": {
+   "ep": {
+    "first": {
+     "ref": "Mic 4"
+    },
+    "psalms": [
+     "18:21-50v"
+    ],
+    "second": {
+     "ref": "Matt 7"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Sam 24"
+    },
+    "psalms": [
+     "18:1-20v"
+    ],
+    "second": {
+     "ref": "Eph 4:17-end"
+    }
+   },
+   "name": null
+  },
+  "7": {
+   "ep": {
+    "first": {
+     "ref": "Mic 5"
+    },
+    "psalms": [
+     "20",
+     "21"
+    ],
+    "second": {
+     "ref": "Matt 8:1-17"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Chron 22"
+    },
+    "psalms": [
+     "19"
+    ],
+    "second": {
+     "ref": "Eph 5:1-17"
+    }
+   },
+   "name": null
+  },
+  "8": {
+   "ep": {
+    "first": {
+     "ref": "Mic 6"
+    },
+    "psalms": [
+     "23",
+     "24"
+    ],
+    "second": {
+     "ref": "Matt 8:18-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-18,29-40",
+     "ref": "1 Kings 1"
+    },
+    "psalms": [
+     "22"
+    ],
+    "second": {
+     "ref": "Eph 5:18-end"
+    }
+   },
+   "name": null
+  },
+  "9": {
+   "ep": {
+    "first": {
+     "ref": "Mic 7"
+    },
+    "psalms": [
+     "27"
+    ],
+    "second": {
+     "ref": "Matt 9:1-17"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Chron 28"
+    },
+    "psalms": [
+     "25"
+    ],
+    "second": {
+     "ref": "Eph 6"
+    }
+   },
+   "name": null
+  }
+ },
+ "10": {
+  "1": {
+   "ep": {
+    "first": {
+     "ref": "Zech 11"
+    },
+    "psalms": [
+     "80"
+    ],
+    "second": {
+     "ref": "Matt 22:1-33"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-30",
+     "ref": "1 Kings 15"
+    },
+    "psalms": [
+     "78:41-73v"
+    ],
+    "second": {
+     "ref": "Jas 5"
+    }
+   },
+   "name": null
+  },
+  "10": {
+   "ep": {
+    "first": {
+     "abrev": "1-28",
+     "ref": "1 Macc 2"
+    },
+    "psalms": [
+     "104"
+    ],
+    "second": {
+     "ref": "Matt 26:57-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Kings 1"
+    },
+    "psalms": [
+     "103"
+    ],
+    "second": {
+     "ref": "2 Pet 3"
+    }
+   },
+   "name": null
+  },
+  "11": {
+   "ep": {
+    "first": {
+     "ref": "2 Macc 6"
+    },
+    "psalms": [
+     "105:23-45v"
+    ],
+    "second": {
+     "ref": "Matt 27:1-26"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Kings 2"
+    },
+    "psalms": [
+     "105:1-22v"
+    ],
+    "second": {
+     "ref": "Jude"
+    }
+   },
+   "name": null
+  },
+  "12": {
+   "ep": {
+    "first": {
+     "ref": "2 Macc 7"
+    },
+    "psalms": [
+     "106:19-48v"
+    ],
+    "second": {
+     "ref": "Matt 27:27-56"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Kings 3"
+    },
+    "psalms": [
+     "106:1-18v"
+    ],
+    "second": {
+     "ref": "1 John 1:1—2:6"
+    }
+   },
+   "name": null
+  },
+  "13": {
+   "ep": {
+    "first": {
+     "abrev": "1-29",
+     "ref": "2 Macc 8"
+    },
+    "psalms": [
+     "107:23-43"
+    ],
+    "second": {
+     "ref": "Matt 27:57—28 end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "8-37",
+     "ref": "2 Kings 4"
+    },
+    "psalms": [
+     "107:1-22"
+    ],
+    "second": {
+     "ref": "1 John 2:7-end"
+    }
+   },
+   "name": null
+  },
+  "14": {
+   "ep": {
+    "first": {
+     "abrev": "1-8,24-38",
+     "ref": "2 Macc 10"
+    },
+    "psalms": [
+     "109"
+    ],
+    "second": {
+     "ref": "Mark 1:1-13"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Kings 5"
+    },
+    "psalms": [
+     "108",
+     "110"
+    ],
+    "second": {
+     "ref": "1 John 3:1-10"
+    }
+   },
+   "name": null
+  },
+  "15": {
+   "ep": {
+    "first": {
+     "abrev": "1-6,23-50",
+     "ref": "1 Macc 7"
+    },
+    "psalms": [
+     "113",
+     "114"
+    ],
+    "second": {
+     "ref": "Mark 1:14-31"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-24",
+     "ref": "2 Kings 6"
+    },
+    "psalms": [
+     "111",
+     "112"
+    ],
+    "second": {
+     "ref": "1 John 3:11—4:6"
+    }
+   },
+   "name": null
+  },
+  "16": {
+   "ep": {
+    "first": {
+     "abrev": "1-31",
+     "ref": "1 Macc 9"
+    },
+    "psalms": [
+     "116",
+     "117"
+    ],
+    "second": {
+     "ref": "Mark 1:32-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Kings 7"
+    },
+    "psalms": [
+     "115"
+    ],
+    "second": {
+     "ref": "1 John 4:7-end"
+    }
+   },
+   "name": null
+  },
+  "17": {
+   "ep": {
+    "first": {
+     "abrev": "1-30,41-42",
+     "ref": "1 Macc 13"
+    },
+    "psalms": [
+     "119:25-48"
+    ],
+    "second": {
+     "ref": "Mark 2:1-22"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-19,25-27",
+     "ref": "2 Kings 8"
+    },
+    "psalms": [
+     "119:1-24"
+    ],
+    "second": {
+     "ref": "1 John 5"
+    }
+   },
+   "name": null
+  },
+  "18": {
+   "ep": {
+    "first": {
+     "abrev": "4-18,35-43",
+     "ref": "1 Macc 14"
+    },
+    "psalms": [
+     "119:73-88"
+    ],
+    "second": {
+     "ref": "Mark 2:23—3:12"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 John"
+    },
+    "psalms": [
+     "119:49-72"
+    ],
+    "second": {
+     "ref": "Luke 1:1-4"
+    }
+   },
+   "name": "Luke"
+  },
+  "19": {
+   "ep": {
+    "first": {
+     "ref": "Isa 1"
+    },
+    "psalms": [
+     "119:105-128"
+    ],
+    "second": {
+     "ref": "Mark 3:13-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-26,30-37",
+     "ref": "2 Kings 9"
+    },
+    "psalms": [
+     "119:89-104"
+    ],
+    "second": {
+     "ref": "3 John"
+    }
+   },
+   "name": null
+  },
+  "2": {
+   "ep": {
+    "first": {
+     "ref": "Zech 12"
+    },
+    "psalms": [
+     "83"
+    ],
+    "second": {
+     "ref": "Matt 22:34—23:12"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-4,8-19,23-34",
+     "ref": "1 Kings 16"
+    },
+    "psalms": [
+     "81"
+    ],
+    "second": {
+     "ref": "1 Pet 1:1-21"
+    }
+   },
+   "name": null
+  },
+  "20": {
+   "ep": {
+    "first": {
+     "ref": "Isa 2"
+    },
+    "psalms": [
+     "119:153-176"
+    ],
+    "second": {
+     "ref": "Mark 4:1-34"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-11,18-31",
+     "ref": "2 Kings 10"
+    },
+    "psalms": [
+     "119:129-152"
+    ],
+    "second": {
+     "ref": "Acts 1:1-14"
+    }
+   },
+   "name": null
+  },
+  "21": {
+   "ep": {
+    "first": {
+     "ref": "Isa 3"
+    },
+    "psalms": [
+     "120",
+     "121"
+    ],
+    "second": {
+     "ref": "Mark 4:35—5:20"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-16,23-27",
+     "ref": "2 Kings 11"
+    },
+    "psalms": [
+     "118"
+    ],
+    "second": {
+     "ref": "Acts 1:15-end"
+    }
+   },
+   "name": null
+  },
+  "22": {
+   "ep": {
+    "first": {
+     "ref": "Isa 4"
+    },
+    "psalms": [
+     "124",
+     "125",
+     "126"
+    ],
+    "second": {
+     "ref": "Mark 5:21-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Kings 12"
+    },
+    "psalms": [
+     "122",
+     "123"
+    ],
+    "second": {
+     "ref": "Acts 2:1-21"
+    }
+   },
+   "name": null
+  },
+  "23": {
+   "ep": {
+    "first": {
+     "ref": "Isa 5"
+    },
+    "psalms": [
+     "129",
+     "130",
+     "131"
+    ],
+    "second": {
+     "ref": "Mark 6:1-29"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Acts 2:22-end"
+    },
+    "psalms": [
+     "127",
+     "128"
+    ],
+    "second": {
+     "ref": "James 1"
+    }
+   },
+   "name": "James Jer."
+  },
+  "24": {
+   "ep": {
+    "first": {
+     "ref": "Isa 6"
+    },
+    "psalms": [
+     "134",
+     "135"
+    ],
+    "second": {
+     "ref": "Mark 6:30-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Kings 13"
+    },
+    "psalms": [
+     "132",
+     "133"
+    ],
+    "second": {
+     "ref": "Acts 3:1—4:4"
+    }
+   },
+   "name": null
+  },
+  "25": {
+   "ep": {
+    "first": {
+     "ref": "Isa 7"
+    },
+    "psalms": [
+     "137",
+     "138"
+    ],
+    "second": {
+     "ref": "Mark 7:1-23"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Kings 14"
+    },
+    "psalms": [
+     "136"
+    ],
+    "second": {
+     "ref": "Acts 4:5-31"
+    }
+   },
+   "name": null
+  },
+  "26": {
+   "ep": {
+    "first": {
+     "ref": "Isa 8"
+    },
+    "psalms": [
+     "141",
+     "142"
+    ],
+    "second": {
+     "ref": "Mark 7:24—8:10"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Chron 26"
+    },
+    "psalms": [
+     "139"
+    ],
+    "second": {
+     "ref": "Acts 4:32—5:11"
+    }
+   },
+   "name": null
+  },
+  "27": {
+   "ep": {
+    "first": {
+     "ref": "Isa 9"
+    },
+    "psalms": [
+     "143"
+    ],
+    "second": {
+     "ref": "Mark 8:11-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-29",
+     "ref": "2 Kings 15"
+    },
+    "psalms": [
+     "140"
+    ],
+    "second": {
+     "ref": "Acts 5:12-end"
+    }
+   },
+   "name": null
+  },
+  "28": {
+   "ep": {
+    "first": {
+     "ref": "Isa 10"
+    },
+    "psalms": [
+     "145"
+    ],
+    "second": {
+     "ref": "Mark 9:1-29"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Acts 6:1—7:16"
+    },
+    "psalms": [
+     "144"
+    ],
+    "second": {
+     "ref": "John 14:15-31"
+    }
+   },
+   "name": "Sim. & Jude"
+  },
+  "29": {
+   "ep": {
+    "first": {
+     "ref": "Isa 11"
+    },
+    "psalms": [
+     "147"
+    ],
+    "second": {
+     "ref": "Mark 9:30-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Kings 16"
+    },
+    "psalms": [
+     "146"
+    ],
+    "second": {
+     "ref": "Acts 7:17-34"
+    }
+   },
+   "name": null
+  },
+  "3": {
+   "ep": {
+    "first": {
+     "ref": "Zech 13"
+    },
+    "psalms": [
+     "85"
+    ],
+    "second": {
+     "ref": "Matt 23:13-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Kings 17"
+    },
+    "psalms": [
+     "84"
+    ],
+    "second": {
+     "ref": "1 Pet 1:22—2:10"
+    }
+   },
+   "name": null
+  },
+  "30": {
+   "ep": {
+    "first": {
+     "ref": "Isa 12"
+    },
+    "psalms": [
+     "149",
+     "150"
+    ],
+    "second": {
+     "ref": "Mark 10:1-31"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-28,41",
+     "ref": "2 Kings 17"
+    },
+    "psalms": [
+     "148"
+    ],
+    "second": {
+     "ref": "Acts 7:35—8:3"
+    }
+   },
+   "name": null
+  },
+  "31": {
+   "ep": {
+    "first": {
+     "ref": "Isa 13"
+    },
+    "psalms": [
+     "3",
+     "4"
+    ],
+    "second": {
+     "ref": "Mark 10:32-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Chron 28"
+    },
+    "psalms": [
+     "2"
+    ],
+    "second": {
+     "ref": "Acts 8:4-25"
+    }
+   },
+   "name": null
+  },
+  "4": {
+   "ep": {
+    "first": {
+     "ref": "Zech 14"
+    },
+    "psalms": [
+     "88"
+    ],
+    "second": {
+     "ref": "Matt 24:1-28"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-8,17-46",
+     "ref": "1 Kings 18"
+    },
+    "psalms": [
+     "86",
+     "87"
+    ],
+    "second": {
+     "ref": "1 Pet 2:11—3:7"
+    }
+   },
+   "name": null
+  },
+  "5": {
+   "ep": {
+    "first": {
+     "ref": "Mal 1"
+    },
+    "psalms": [
+     "89:19-52v"
+    ],
+    "second": {
+     "ref": "Matt 24:29-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Kings 19"
+    },
+    "psalms": [
+     "89:1-18v"
+    ],
+    "second": {
+     "ref": "1 Pet 3:8—4:6"
+    }
+   },
+   "name": null
+  },
+  "6": {
+   "ep": {
+    "first": {
+     "ref": "Mal 2"
+    },
+    "psalms": [
+     "91"
+    ],
+    "second": {
+     "ref": "Matt 25:1-30"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1,13,21-43",
+     "ref": "1 Kings 20"
+    },
+    "psalms": [
+     "90"
+    ],
+    "second": {
+     "ref": "1 Pet 4:7-end"
+    }
+   },
+   "name": null
+  },
+  "7": {
+   "ep": {
+    "first": {
+     "ref": "Mal 3"
+    },
+    "psalms": [
+     "94"
+    ],
+    "second": {
+     "ref": "Matt 25:31-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "1 Kings 21"
+    },
+    "psalms": [
+     "92",
+     "93"
+    ],
+    "second": {
+     "ref": "1 Pet 5"
+    }
+   },
+   "name": null
+  },
+  "8": {
+   "ep": {
+    "first": {
+     "ref": "Mal 4"
+    },
+    "psalms": [
+     "97",
+     "98"
+    ],
+    "second": {
+     "ref": "Matt 26:1-30"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-23,29-38",
+     "ref": "1 Kings 22"
+    },
+    "psalms": [
+     "95",
+     "96"
+    ],
+    "second": {
+     "ref": "2 Pet 1"
+    }
+   },
+   "name": null
+  },
+  "9": {
+   "ep": {
+    "first": {
+     "abrev": "1-15,20-25,41-64",
+     "ref": "1 Macc 1"
+    },
+    "psalms": [
+     "102"
+    ],
+    "second": {
+     "ref": "Matt 26:31-56"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Chron 20"
+    },
+    "psalms": [
+     "99",
+     "100",
+     "101"
+    ],
+    "second": {
+     "ref": "2 Pet 2"
+    }
+   },
+   "name": null
+  }
+ },
+ "11": {
+  "1": {
+   "ep": {
+    "first": {
+     "ref": "Isa 14"
+    },
+    "psalms": [
+     "34"
+    ],
+    "second": {
+     "ref": "Rev 19:1-16"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Heb 11:32—12:2"
+    },
+    "psalms": [
+     "1",
+     "15"
+    ],
+    "second": {
+     "ref": "Acts 8:26-end"
+    }
+   },
+   "name": "All Saints"
+  },
+  "10": {
+   "ep": {
+    "first": {
+     "ref": "Isa 23"
+    },
+    "psalms": [
+     "31"
+    ],
+    "second": {
+     "ref": "Mark 15"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-20,26-30",
+     "ref": "2 Kings 23"
+    },
+    "psalms": [
+     "26",
+     "28"
+    ],
+    "second": {
+     "ref": "Acts 13:13-43"
+    }
+   },
+   "name": null
+  },
+  "11": {
+   "ep": {
+    "first": {
+     "ref": "Isa 24"
+    },
+    "psalms": [
+     "33"
+    ],
+    "second": {
+     "ref": "Mark 16"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Kings 24"
+    },
+    "psalms": [
+     "29",
+     "30"
+    ],
+    "second": {
+     "ref": "Acts 13:44—14:7"
+    }
+   },
+   "name": null
+  },
+  "12": {
+   "ep": {
+    "first": {
+     "ref": "Isa 25"
+    },
+    "psalms": [
+     "35"
+    ],
+    "second": {
+     "ref": "Luke 1:1-23"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-22,25-30",
+     "ref": "2 Kings 25"
+    },
+    "psalms": [
+     "34"
+    ],
+    "second": {
+     "ref": "Acts 14:8-end"
+    }
+   },
+   "name": null
+  },
+  "13": {
+   "ep": {
+    "first": {
+     "ref": "Isa 26"
+    },
+    "psalms": [
+     "38"
+    ],
+    "second": {
+     "ref": "Luke 1:24-56"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Judith 4"
+    },
+    "psalms": [
+     "32",
+     "36"
+    ],
+    "second": {
+     "ref": "Acts 15:1-21"
+    }
+   },
+   "name": null
+  },
+  "14": {
+   "ep": {
+    "first": {
+     "ref": "Isa 27"
+    },
+    "psalms": [
+     "37:19-42v"
+    ],
+    "second": {
+     "ref": "Luke 1:57-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Judith 8"
+    },
+    "psalms": [
+     "37:1-18v"
+    ],
+    "second": {
+     "ref": "Acts 15:22-35"
+    }
+   },
+   "name": null
+  },
+  "15": {
+   "ep": {
+    "first": {
+     "ref": "Isa 28"
+    },
+    "psalms": [
+     "39",
+     "41"
+    ],
+    "second": {
+     "ref": "Luke 2:1-21"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Judith 9"
+    },
+    "psalms": [
+     "40"
+    ],
+    "second": {
+     "ref": "Acts 15:36—16:5"
+    }
+   },
+   "name": null
+  },
+  "16": {
+   "ep": {
+    "first": {
+     "ref": "Isa 29"
+    },
+    "psalms": [
+     "44"
+    ],
+    "second": {
+     "ref": "Luke 2:22-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Judith 10"
+    },
+    "psalms": [
+     "42",
+     "43"
+    ],
+    "second": {
+     "ref": "Acts 16:6-end"
+    }
+   },
+   "name": null
+  },
+  "17": {
+   "ep": {
+    "first": {
+     "ref": "Isa 30"
+    },
+    "psalms": [
+     "46"
+    ],
+    "second": {
+     "ref": "Luke 3:1-22"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Judith 11"
+    },
+    "psalms": [
+     "45"
+    ],
+    "second": {
+     "ref": "Acts 17:1-15"
+    }
+   },
+   "name": null
+  },
+  "18": {
+   "ep": {
+    "first": {
+     "ref": "Isa 31"
+    },
+    "psalms": [
+     "49"
+    ],
+    "second": {
+     "ref": "Luke 3:23-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Judith 12"
+    },
+    "psalms": [
+     "47",
+     "48"
+    ],
+    "second": {
+     "ref": "Acts 17:16-end"
+    }
+   },
+   "name": null
+  },
+  "19": {
+   "ep": {
+    "first": {
+     "ref": "Isa 32"
+    },
+    "psalms": [
+     "51"
+    ],
+    "second": {
+     "ref": "Luke 4:1-30"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Judith 13"
+    },
+    "psalms": [
+     "50"
+    ],
+    "second": {
+     "ref": "Acts 18:1-23"
+    }
+   },
+   "name": null
+  },
+  "2": {
+   "ep": {
+    "first": {
+     "ref": "Isa 15"
+    },
+    "psalms": [
+     "7"
+    ],
+    "second": {
+     "ref": "Mark 11:1-26"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-11,20-30,35-36",
+     "ref": "2 Chron 29"
+    },
+    "psalms": [
+     "5",
+     "6"
+    ],
+    "second": {
+     "ref": "Acts 9:1-31"
+    }
+   },
+   "name": null
+  },
+  "20": {
+   "ep": {
+    "first": {
+     "ref": "Isa 33"
+    },
+    "psalms": [
+     "55"
+    ],
+    "second": {
+     "ref": "Luke 4:31-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Judith 14"
+    },
+    "psalms": [
+     "52",
+     "53",
+     "54"
+    ],
+    "second": {
+     "ref": "Acts 18:24—19:7"
+    }
+   },
+   "name": null
+  },
+  "21": {
+   "ep": {
+    "first": {
+     "ref": "Isa 34"
+    },
+    "psalms": [
+     "58",
+     "60"
+    ],
+    "second": {
+     "ref": "Luke 5:1-16"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Judith 15"
+    },
+    "psalms": [
+     "56",
+     "57"
+    ],
+    "second": {
+     "ref": "Acts 19:8-20"
+    }
+   },
+   "name": null
+  },
+  "22": {
+   "ep": {
+    "first": {
+     "ref": "Isa 35"
+    },
+    "psalms": [
+     "63",
+     "64"
+    ],
+    "second": {
+     "ref": "Luke 5:17-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Judith 16"
+    },
+    "psalms": [
+     "59"
+    ],
+    "second": {
+     "ref": "Acts 19:21-end"
+    }
+   },
+   "name": null
+  },
+  "23": {
+   "ep": {
+    "first": {
+     "ref": "Isa 36"
+    },
+    "psalms": [
+     "65",
+     "67"
+    ],
+    "second": {
+     "ref": "Luke 6:1-19"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Ecclesiasticus 1"
+    },
+    "psalms": [
+     "61",
+     "62"
+    ],
+    "second": {
+     "ref": "Acts 20:1-16"
+    }
+   },
+   "name": null
+  },
+  "24": {
+   "ep": {
+    "first": {
+     "ref": "Isa 37"
+    },
+    "psalms": [
+     "68:19-36"
+    ],
+    "second": {
+     "ref": "Luke 6:20-38"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Ecclesiasticus 2"
+    },
+    "psalms": [
+     "68:1-18"
+    ],
+    "second": {
+     "ref": "Acts 20:17-end"
+    }
+   },
+   "name": null
+  },
+  "25": {
+   "ep": {
+    "first": {
+     "ref": "Isa 38"
+    },
+    "psalms": [
+     "69:19-38v"
+    ],
+    "second": {
+     "ref": "Luke 6:39—7:10"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-19",
+     "ref": "Ecclesiasticus 4"
+    },
+    "psalms": [
+     "69:1-18v"
+    ],
+    "second": {
+     "ref": "Acts 21:1-16"
+    }
+   },
+   "name": null
+  },
+  "26": {
+   "ep": {
+    "first": {
+     "ref": "Isa 39"
+    },
+    "psalms": [
+     "70",
+     "72"
+    ],
+    "second": {
+     "ref": "Luke 7:11-35"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "5-31",
+     "ref": "Ecclesiasticus 6"
+    },
+    "psalms": [
+     "66"
+    ],
+    "second": {
+     "ref": "Acts 21:17-36"
+    }
+   },
+   "name": null
+  },
+  "27": {
+   "ep": {
+    "first": {
+     "ref": "Isa 40"
+    },
+    "psalms": [
+     "73"
+    ],
+    "second": {
+     "ref": "Luke 7:36-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-21,27-36",
+     "ref": "Ecclesiasticus 7"
+    },
+    "psalms": [
+     "71"
+    ],
+    "second": {
+     "ref": "Acts 21:37—22:22"
+    }
+   },
+   "name": null
+  },
+  "28": {
+   "ep": {
+    "first": {
+     "ref": "Isa 41"
+    },
+    "psalms": [
+     "77"
+    ],
+    "second": {
+     "ref": "Luke 8:1-21"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Ecclesiasticus 9"
+    },
+    "psalms": [
+     "74"
+    ],
+    "second": {
+     "ref": "Acts 22:23—23:11"
+    }
+   },
+   "name": null
+  },
+  "29": {
+   "ep": {
+    "first": {
+     "ref": "Isa 42"
+    },
+    "psalms": [
+     "79",
+     "82"
+    ],
+    "second": {
+     "ref": "Luke 8:22-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-24",
+     "ref": "Ecclesiasticus 10"
+    },
+    "psalms": [
+     "75",
+     "76"
+    ],
+    "second": {
+     "ref": "Acts 23:12-end"
+    }
+   },
+   "name": null
+  },
+  "3": {
+   "ep": {
+    "first": {
+     "ref": "Isa 16"
+    },
+    "psalms": [
+     "10"
+    ],
+    "second": {
+     "ref": "Mark 11:27—12:12"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-22,26-27",
+     "ref": "2 Chron 30"
+    },
+    "psalms": [
+     "9"
+    ],
+    "second": {
+     "ref": "Acts 9:32-end"
+    }
+   },
+   "name": null
+  },
+  "30": {
+   "ep": {
+    "first": {
+     "ref": "Isa 43"
+    },
+    "psalms": [
+     "78:19-40v"
+    ],
+    "second": {
+     "ref": "Luke 9:1-17"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-9,18-28",
+     "ref": "Ecclesiasticus 11"
+    },
+    "psalms": [
+     "78:1-18v"
+    ],
+    "second": {
+     "ref": "John 1:35-42"
+    }
+   },
+   "name": "Andrew"
+  },
+  "4": {
+   "ep": {
+    "first": {
+     "ref": "Isa 17"
+    },
+    "psalms": [
+     "15",
+     "16"
+    ],
+    "second": {
+     "ref": "Mark 12:13-34"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-13,17-30,35-37",
+     "ref": "2 Kings 18"
+    },
+    "psalms": [
+     "8",
+     "11"
+    ],
+    "second": {
+     "ref": "Acts 10:1-23"
+    }
+   },
+   "name": null
+  },
+  "5": {
+   "ep": {
+    "first": {
+     "ref": "Isa 18"
+    },
+    "psalms": [
+     "17"
+    ],
+    "second": {
+     "ref": "Mark 12:35—13:13"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-20,29-31,35-37",
+     "ref": "2 Kings 19"
+    },
+    "psalms": [
+     "12",
+     "13",
+     "14"
+    ],
+    "second": {
+     "ref": "Acts 10:24-end"
+    }
+   },
+   "name": null
+  },
+  "6": {
+   "ep": {
+    "first": {
+     "ref": "Isa 19"
+    },
+    "psalms": [
+     "18:21-50v"
+    ],
+    "second": {
+     "ref": "Mark 13:14-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Kings 20"
+    },
+    "psalms": [
+     "18:1-20v"
+    ],
+    "second": {
+     "ref": "Acts 11:1-18"
+    }
+   },
+   "name": null
+  },
+  "7": {
+   "ep": {
+    "first": {
+     "ref": "Isa 20"
+    },
+    "psalms": [
+     "20",
+     "21"
+    ],
+    "second": {
+     "ref": "Mark 14:1-25"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Chron 33"
+    },
+    "psalms": [
+     "19"
+    ],
+    "second": {
+     "ref": "Acts 11:19-end"
+    }
+   },
+   "name": null
+  },
+  "8": {
+   "ep": {
+    "first": {
+     "ref": "Isa 21"
+    },
+    "psalms": [
+     "23",
+     "24"
+    ],
+    "second": {
+     "ref": "Mark 14:26-52"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Kings 21"
+    },
+    "psalms": [
+     "22"
+    ],
+    "second": {
+     "ref": "Acts 12:1-24"
+    }
+   },
+   "name": null
+  },
+  "9": {
+   "ep": {
+    "first": {
+     "ref": "Isa 22"
+    },
+    "psalms": [
+     "27"
+    ],
+    "second": {
+     "ref": "Mark 14:53-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "2 Kings 22"
+    },
+    "psalms": [
+     "25"
+    ],
+    "second": {
+     "ref": "Acts 12:25—13:12"
+    }
+   },
+   "name": null
+  }
+ },
+ "12": {
+  "1": {
+   "ep": {
+    "first": {
+     "ref": "Isa 44"
+    },
+    "psalms": [
+     "80"
+    ],
+    "second": {
+     "ref": "Luke 9:18-50"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Ecclesiasticus 14"
+    },
+    "psalms": [
+     "78:41-73v"
+    ],
+    "second": {
+     "ref": "Acts 24:1-23"
+    }
+   },
+   "name": null
+  },
+  "10": {
+   "ep": {
+    "first": {
+     "ref": "Isa 53"
+    },
+    "psalms": [
+     "104"
+    ],
+    "second": {
+     "ref": "Luke 13:10-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Ecclesiasticus 46"
+    },
+    "psalms": [
+     "103"
+    ],
+    "second": {
+     "ref": "Rev 2:18—3:6"
+    }
+   },
+   "name": null
+  },
+  "11": {
+   "ep": {
+    "first": {
+     "ref": "Isa 54"
+    },
+    "psalms": [
+     "105:23-45v"
+    ],
+    "second": {
+     "ref": "Luke 14:1-24"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Ecclesiasticus 47"
+    },
+    "psalms": [
+     "105:1-22v"
+    ],
+    "second": {
+     "ref": "Rev 3:7-end"
+    }
+   },
+   "name": null
+  },
+  "12": {
+   "ep": {
+    "first": {
+     "ref": "Isa 55"
+    },
+    "psalms": [
+     "106:19-48v"
+    ],
+    "second": {
+     "ref": "Luke 14:25—15:10"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Ecclesiasticus 48"
+    },
+    "psalms": [
+     "106:1-18v"
+    ],
+    "second": {
+     "ref": "Rev 4"
+    }
+   },
+   "name": null
+  },
+  "13": {
+   "ep": {
+    "first": {
+     "ref": "Isa 56"
+    },
+    "psalms": [
+     "107:23-43"
+    ],
+    "second": {
+     "ref": "Luke 15:11-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Ecclesiasticus 49"
+    },
+    "psalms": [
+     "107:1-22"
+    ],
+    "second": {
+     "ref": "Rev 5"
+    }
+   },
+   "name": null
+  },
+  "14": {
+   "ep": {
+    "first": {
+     "ref": "Isa 57"
+    },
+    "psalms": [
+     "109"
+    ],
+    "second": {
+     "ref": "Luke 16"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Ecclesiasticus 50"
+    },
+    "psalms": [
+     "108",
+     "110"
+    ],
+    "second": {
+     "ref": "Rev 6"
+    }
+   },
+   "name": null
+  },
+  "15": {
+   "ep": {
+    "first": {
+     "ref": "Isa 58"
+    },
+    "psalms": [
+     "113",
+     "114"
+    ],
+    "second": {
+     "ref": "Luke 17:1-19"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Ecclesiasticus 51"
+    },
+    "psalms": [
+     "111",
+     "112"
+    ],
+    "second": {
+     "ref": "Rev 7"
+    }
+   },
+   "name": null
+  },
+  "16": {
+   "ep": {
+    "first": {
+     "ref": "Isa 59"
+    },
+    "psalms": [
+     "116",
+     "117"
+    ],
+    "second": {
+     "ref": "Luke 17:20-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Wisdom 1"
+    },
+    "psalms": [
+     "115"
+    ],
+    "second": {
+     "ref": "Rev 8"
+    }
+   },
+   "name": null
+  },
+  "17": {
+   "ep": {
+    "first": {
+     "ref": "Isa 60"
+    },
+    "psalms": [
+     "119:25-48"
+    ],
+    "second": {
+     "ref": "Luke 18:1-30"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Wisdom 2"
+    },
+    "psalms": [
+     "119:1-24"
+    ],
+    "second": {
+     "ref": "Rev 9"
+    }
+   },
+   "name": null
+  },
+  "18": {
+   "ep": {
+    "first": {
+     "ref": "Isa 61"
+    },
+    "psalms": [
+     "119:73-88"
+    ],
+    "second": {
+     "ref": "Luke 18:31—19:10"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Wisdom 3"
+    },
+    "psalms": [
+     "119:49-72"
+    ],
+    "second": {
+     "ref": "Rev 10"
+    }
+   },
+   "name": null
+  },
+  "19": {
+   "ep": {
+    "first": {
+     "ref": "Isa 62"
+    },
+    "psalms": [
+     "119:105-128"
+    ],
+    "second": {
+     "ref": "Luke 19:11-28"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Wisdom 4"
+    },
+    "psalms": [
+     "119:89-104"
+    ],
+    "second": {
+     "ref": "Rev 11"
+    }
+   },
+   "name": null
+  },
+  "2": {
+   "ep": {
+    "first": {
+     "ref": "Isa 45"
+    },
+    "psalms": [
+     "83"
+    ],
+    "second": {
+     "ref": "Luke 9:51-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Ecclesiasticus 17"
+    },
+    "psalms": [
+     "81"
+    ],
+    "second": {
+     "ref": "Acts 24:24—25:12"
+    }
+   },
+   "name": null
+  },
+  "20": {
+   "ep": {
+    "first": {
+     "ref": "Isa 63"
+    },
+    "psalms": [
+     "119:153-176"
+    ],
+    "second": {
+     "ref": "Luke 19:29-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Wisdom 5"
+    },
+    "psalms": [
+     "119:129-152"
+    ],
+    "second": {
+     "ref": "Rev 12"
+    }
+   },
+   "name": null
+  },
+  "21": {
+   "ep": {
+    "first": {
+     "ref": "Isa 64"
+    },
+    "psalms": [
+     "120",
+     "121"
+    ],
+    "second": {
+     "ref": "Luke 20:1-26"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Rev 13"
+    },
+    "psalms": [
+     "118"
+    ],
+    "second": {
+     "ref": "John 14:1-7"
+    }
+   },
+   "name": "Thomas"
+  },
+  "22": {
+   "ep": {
+    "first": {
+     "ref": "Isa 65"
+    },
+    "psalms": [
+     "124",
+     "125",
+     "126"
+    ],
+    "second": {
+     "ref": "Luke 20:27—21:4"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Wisdom 6"
+    },
+    "psalms": [
+     "122",
+     "123"
+    ],
+    "second": {
+     "ref": "Rev 14"
+    }
+   },
+   "name": null
+  },
+  "23": {
+   "ep": {
+    "first": {
+     "ref": "Isa 66"
+    },
+    "psalms": [
+     "129",
+     "130",
+     "131"
+    ],
+    "second": {
+     "ref": "Luke 21:5-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Wisdom 7"
+    },
+    "psalms": [
+     "127",
+     "128"
+    ],
+    "second": {
+     "ref": "Rev 15"
+    }
+   },
+   "name": null
+  },
+  "24": {
+   "ep": {
+    "first": {
+     "ref": "Song of Songs 1"
+    },
+    "psalms": [
+     "134",
+     "135"
+    ],
+    "second": {
+     "ref": "Luke 22:1-38"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Wisdom 8"
+    },
+    "psalms": [
+     "132",
+     "133"
+    ],
+    "second": {
+     "ref": "Rev 16"
+    }
+   },
+   "name": null
+  },
+  "25": {
+   "ep": {
+    "first": {
+     "ref": "Song of Songs 2"
+    },
+    "psalms": [
+     "85",
+     "110"
+    ],
+    "second": {
+     "ref": "Luke 2:1-14"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Isa 9:1-8"
+    },
+    "psalms": [
+     "19 or 45"
+    ],
+    "second": {
+     "ref": "Rev 17"
+    }
+   },
+   "name": "Christmas"
+  },
+  "26": {
+   "ep": {
+    "first": {
+     "ref": "Song of Songs 3"
+    },
+    "psalms": [
+     "137",
+     "138"
+    ],
+    "second": {
+     "ref": "Luke 22:39-53"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Acts 6:8—7:6, 7:44-60"
+    },
+    "psalms": [
+     "136"
+    ],
+    "second": {
+     "ref": "Rev 18"
+    }
+   },
+   "name": "Stephen"
+  },
+  "27": {
+   "ep": {
+    "first": {
+     "ref": "Song of Songs 4"
+    },
+    "psalms": [
+     "141",
+     "142"
+    ],
+    "second": {
+     "ref": "Luke 22:54-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Rev 19"
+    },
+    "psalms": [
+     "139"
+    ],
+    "second": {
+     "ref": "John 21:9-25"
+    }
+   },
+   "name": "John"
+  },
+  "28": {
+   "ep": {
+    "first": {
+     "ref": "Song of Songs 5"
+    },
+    "psalms": [
+     "143"
+    ],
+    "second": {
+     "ref": "Luke 23:1-25"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Jer 31:1-17"
+    },
+    "psalms": [
+     "140"
+    ],
+    "second": {
+     "ref": "Rev 20"
+    }
+   },
+   "name": "Innocents"
+  },
+  "29": {
+   "ep": {
+    "first": {
+     "ref": "Song of Songs 6"
+    },
+    "psalms": [
+     "145"
+    ],
+    "second": {
+     "ref": "Luke:23:26-49"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Wisdom 9"
+    },
+    "psalms": [
+     "144"
+    ],
+    "second": {
+     "ref": "Rev 21:1-14"
+    }
+   },
+   "name": null
+  },
+  "3": {
+   "ep": {
+    "first": {
+     "ref": "Isa 46"
+    },
+    "psalms": [
+     "85"
+    ],
+    "second": {
+     "ref": "Luke 10:1-24"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-26,30-33",
+     "ref": "Ecclesiasticus 18"
+    },
+    "psalms": [
+     "84"
+    ],
+    "second": {
+     "ref": "Acts 25:13-end"
+    }
+   },
+   "name": null
+  },
+  "30": {
+   "ep": {
+    "first": {
+     "ref": "Song of Songs 7"
+    },
+    "psalms": [
+     "147"
+    ],
+    "second": {
+     "ref": "Luke 23:50—24:12"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Wisdom 10"
+    },
+    "psalms": [
+     "146"
+    ],
+    "second": {
+     "ref": "Rev 21:15—22:5"
+    }
+   },
+   "name": null
+  },
+  "31": {
+   "ep": {
+    "first": {
+     "ref": "Song of Songs 8"
+    },
+    "psalms": [
+     "149",
+     "150"
+    ],
+    "second": {
+     "ref": "Luke 24:13-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Wisdom 11"
+    },
+    "psalms": [
+     "148"
+    ],
+    "second": {
+     "ref": "Rev 22:6-end"
+    }
+   },
+   "name": null
+  },
+  "4": {
+   "ep": {
+    "first": {
+     "ref": "Isa 47"
+    },
+    "psalms": [
+     "88"
+    ],
+    "second": {
+     "ref": "Luke 10:25-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Ecclesiasticus 21"
+    },
+    "psalms": [
+     "86",
+     "87"
+    ],
+    "second": {
+     "ref": "Acts 26"
+    }
+   },
+   "name": null
+  },
+  "5": {
+   "ep": {
+    "first": {
+     "ref": "Isa 48"
+    },
+    "psalms": [
+     "89:19-52v"
+    ],
+    "second": {
+     "ref": "Luke 11:1-28"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Ecclesiasticus 34"
+    },
+    "psalms": [
+     "89:1-18v"
+    ],
+    "second": {
+     "ref": "Acts 27"
+    }
+   },
+   "name": null
+  },
+  "6": {
+   "ep": {
+    "first": {
+     "ref": "Isa 49"
+    },
+    "psalms": [
+     "91"
+    ],
+    "second": {
+     "ref": "Luke 11:29-end"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-15,24-34",
+     "ref": "Ecclesiasticus 38"
+    },
+    "psalms": [
+     "90"
+    ],
+    "second": {
+     "ref": "Acts 28:1-15"
+    }
+   },
+   "name": null
+  },
+  "7": {
+   "ep": {
+    "first": {
+     "ref": "Isa 50"
+    },
+    "psalms": [
+     "94"
+    ],
+    "second": {
+     "ref": "Luke 12:1-34"
+    }
+   },
+   "mp": {
+    "first": {
+     "abrev": "1-11,16-35",
+     "ref": "Ecclesiasticus 39"
+    },
+    "psalms": [
+     "92",
+     "93"
+    ],
+    "second": {
+     "ref": "Acts 28:16-end"
+    }
+   },
+   "name": null
+  },
+  "8": {
+   "ep": {
+    "first": {
+     "ref": "Isa 51"
+    },
+    "psalms": [
+     "97",
+     "98"
+    ],
+    "second": {
+     "ref": "Luke 12:35-53"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Ecclesiasticus 44"
+    },
+    "psalms": [
+     "95",
+     "96"
+    ],
+    "second": {
+     "ref": "Rev 1"
+    }
+   },
+   "name": null
+  },
+  "9": {
+   "ep": {
+    "first": {
+     "ref": "Isa 52"
+    },
+    "psalms": [
+     "102"
+    ],
+    "second": {
+     "ref": "Luke 12:54—13:9"
+    }
+   },
+   "mp": {
+    "first": {
+     "ref": "Ecclesiasticus 45"
+    },
+    "psalms": [
+     "99",
+     "100",
+     "101"
+    ],
+    "second": {
+     "ref": "Rev 2:1-17"
+    }
+   },
+   "name": null
+  }
+ }
+}

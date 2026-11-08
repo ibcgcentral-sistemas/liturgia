@@ -15,7 +15,7 @@ const BIBLE_TRANSLATIONS = {
   '1 Kings':'I Reyes','2 Kings':'II Reyes','1 Chronicles':'I Crónicas','2 Chronicles':'II Crónicas',
   'Ezra':'Esdras','Nehemiah':'Nehemías','Esther':'Ester','Job':'Job','Psalms':'Salmos','Psalm':'Salmo','Proverbs':'Proverbios',
   'Ecclesiastes':'Eclesiastés','Song of Songs':'Cantar de los Cantares','Wisdom':'Sabiduría',
-  'Sirach':'Eclesiástico','Baruch':'Baruc','Isaiah':'Isaías','Jeremiah':'Jeremías',
+  'Sirach':'Eclesiástico','Baruch':'Baruc','Judith':'Judit','1 Maccabees':'I Macabeos','2 Maccabees':'II Macabeos','Isaiah':'Isaías','Jeremiah':'Jeremías',
   'Lamentations':'Lamentaciones','Ezekiel':'Ezequiel','Daniel':'Daniel','Hosea':'Oseas',
   'Joel':'Joel','Amos':'Amós','Obadiah':'Abdías','Jonah':'Jonás','Micah':'Miqueas',
   'Nahum':'Nahúm','Habakkuk':'Habacuc','Zephaniah':'Sofonías','Haggai':'Ageo',
@@ -189,6 +189,30 @@ function escapeHtml(s) {
 // versículo y que ningún salmo del día empieza con un título. Las letras del
 // acróstico («Alef.», «Bet.») no son título y se dejan como están.
 const PSALM_FUSED_TITLE = {
+  // Los salmos 11 a 144 de abajo que no citan los domingos (11, 14, 28, 35, 73, 74, 79, 101, 109, 120, 125, 127-129, 131, 133,
+  // 134, 141, 143 y 144) se añadieron el 2026-11-07 para el ciclo de 60 días del Leccionario del Oficio Diario, que recorre
+  // todo el Salterio: se leyó el v. 1 de los 150 salmos y estos son los que traen título fundido (134 lo trae con la errata
+  // «Cancion» de la Biblia cargada, que se copia tal cual).
+  11: 'Del maestro de coro. De David. ',
+  14: 'Del maestro de coro. De David. ',
+  28: 'De David. ',
+  35: 'De David. ',
+  73: 'Salmo. De Asaf. ',
+  74: 'Poema. De Asaf. ',
+  79: 'Salmo. De Asaf. ',
+  101: 'De David. Salmo. ',
+  109: 'Del maestro de coro. De David. Salmo. ',
+  120: 'Canción de las subidas. ',
+  125: 'Canción de las subidas. ',
+  127: 'Canción de las subidas. De Salomón. ',
+  128: 'Canción de las subidas. ',
+  129: 'Canción de las subidas. ',
+  131: 'Canción de las subidas. De David. ',
+  133: 'Canción de las subidas. De David. ',
+  134: 'Cancion de las subidas. ',
+  141: 'Salmo. De David. ',
+  143: 'Salmo. De David. ',
+  144: 'De David. ',
   15: 'Salmo. De David. ',
   16: 'A media voz. De David. ',
   17: 'Oración. De David. ',
@@ -247,18 +271,54 @@ function cleanPsalmVerses(ref, verses) {
 // Gran Vigilia: Jonás 1:1-2:10), Mi 5:1 =
 // 4:14 y 5:2-15 = 5:1-14, Mal 4:1-6 = 3:19-24, Gn 32:1-32 = 32:2-33 y
 // Ex 22:1 = 21:37 y 22:2-31 = 22:1-30.
+// A las citas del leccionario dominical se sumaron (2026-11-07) las del Leccionario del Oficio Diario (daily-office.js),
+// que lee capítulos ENTEROS de toda la Biblia: aquí están también los demás capítulos cuya numeración inglesa parte el
+// texto de otro modo que la hebrea (Gn 31-32, Ex 7-8 y 21-22, Nm 16-17, Dt 12-13 y 22-23, 1 S 20-24, 2 S 18-19, 1 R 4-5,
+// 2 Cr 13-14, Ne 3-4 y 9-10, Job 40-41, Qo 4-5, Ct 6-7, Is 8-9 y 63-64, Jr 8-9, Ez 20-21, Dn 3-6, Os 1-2 y 11-14, Jl 2-3,
+// Jon 1-2, Mi 4-5, Na 1-2, Za 1-2 y Mal 3-4). La concordancia es la estándar inglés↔hebreo y se comprobó contra el conteo de
+// versículos de la Biblia de Jerusalén cargada (cada capítulo hebreo tiene los versículos que esa concordancia predice).
+// Daniel sigue la Biblia de Jerusalén (versión griega): Dn 3:24-30 inglés = 3:91-97, 4:1-3 = 3:98-100 y 4:4-37 = 4:1-34,
+// 5:31 = 6:1 y 6:1-28 = 6:2-29; las adiciones griegas de Dn 3 (la Oración de Azarías y el Cántico) no son de la cita inglesa.
+// Límite: 1 S 20:42 inglés es el 20:42 y el 21:1 hebreos (el v. 42 se parte en dos), y Is 63:19 hebreo trae el 63:19 y el 64:1
+// ingleses: el tramo del segundo no se puede separar por versículos.
 const VERSE_SHIFTS = [
-  ['Isaiah', 9, 1, 1, 8, 22], ['Isaiah', 9, 2, 7, 9, -1],
+  ['Genesis', 31, 55, 55, 32, -54], ['Genesis', 32, 1, 32, 32, 1],
+  ['Exodus', 8, 1, 4, 7, 25], ['Exodus', 8, 5, 32, 8, -4],
+  ['Exodus', 22, 1, 1, 21, 36], ['Exodus', 22, 2, 31, 22, -1],
+  ['Numbers', 16, 36, 50, 17, -35], ['Numbers', 17, 1, 13, 17, 15],
+  ['Deuteronomy', 12, 32, 32, 13, -31], ['Deuteronomy', 13, 1, 18, 13, 1],
+  ['Deuteronomy', 22, 30, 30, 23, -29], ['Deuteronomy', 23, 1, 25, 23, 1],
+  ['1 Samuel', 21, 1, 15, 21, 1], ['1 Samuel', 23, 29, 29, 24, -28], ['1 Samuel', 24, 1, 22, 24, 1],
+  ['2 Samuel', 18, 33, 33, 19, -32], ['2 Samuel', 19, 1, 43, 19, 1],
+  ['1 Kings', 4, 21, 34, 5, -20], ['1 Kings', 5, 1, 18, 5, 14],
+  ['2 Chronicles', 14, 1, 1, 13, 22], ['2 Chronicles', 14, 2, 15, 14, -1],
+  ['Nehemiah', 4, 1, 6, 3, 32], ['Nehemiah', 4, 7, 23, 4, -6],
+  ['Nehemiah', 9, 38, 38, 10, -37], ['Nehemiah', 10, 1, 39, 10, 1],
+  ['Job', 41, 1, 8, 40, 24], ['Job', 41, 9, 34, 41, -8],
+  ['Ecclesiastes', 5, 1, 1, 4, 16], ['Ecclesiastes', 5, 2, 20, 5, -1],
+  ['Song of Songs', 6, 13, 13, 7, -12], ['Song of Songs', 7, 1, 13, 7, 1],
+  ['Isaiah', 9, 1, 1, 8, 22], ['Isaiah', 9, 2, 21, 9, -1],
   ['Isaiah', 64, 1, 1, 63, 18], ['Isaiah', 64, 2, 12, 64, -1],
-  ['Hosea', 2, 1, 23, 2, 2],
+  ['Jeremiah', 9, 1, 1, 8, 22], ['Jeremiah', 9, 2, 26, 9, -1],
+  ['Ezekiel', 20, 45, 49, 21, -44], ['Ezekiel', 21, 1, 32, 21, 5],
+  ['Daniel', 3, 24, 30, 3, 67], ['Daniel', 4, 1, 3, 3, 97], ['Daniel', 4, 4, 37, 4, -3],
+  ['Daniel', 5, 31, 31, 6, -30], ['Daniel', 6, 1, 28, 6, 1],
+  ['Hosea', 1, 10, 11, 2, -9], ['Hosea', 2, 1, 23, 2, 2],
+  ['Hosea', 11, 12, 12, 12, -11], ['Hosea', 12, 1, 14, 12, 1],
+  ['Hosea', 13, 16, 16, 14, -15], ['Hosea', 14, 1, 9, 14, 1],
+  ['Joel', 2, 28, 32, 3, -27], ['Joel', 3, 1, 21, 4, 0],
   ['Jonah', 2, 1, 10, 2, 1], ['Jonah', 1, 17, 17, 2, -16],
   ['Micah', 5, 1, 1, 4, 13], ['Micah', 5, 2, 15, 5, -1],
+  ['Nahum', 1, 15, 15, 2, -14], ['Nahum', 2, 1, 13, 2, 1],
+  ['Zechariah', 1, 18, 21, 2, -17], ['Zechariah', 2, 1, 13, 2, 4],
   ['Malachi', 4, 1, 6, 3, 18],
-  ['Genesis', 32, 1, 32, 32, 1],
-  ['Exodus', 22, 1, 1, 21, 36], ['Exodus', 22, 2, 31, 22, -1],
 ];
-// Último versículo de un capítulo inglés, solo donde hace falta para abrir un tramo entre capítulos.
-const ESV_CHAPTER_LAST = { 'Malachi 3': 18 };
+// Último versículo de un capítulo inglés, donde hace falta para abrir un tramo entre capítulos o para leer el capítulo
+// entero sin arrastrar versículos que el inglés cuenta en el capítulo siguiente.
+const ESV_CHAPTER_LAST = {
+  'Malachi 3': 18, 'Exodus 7': 25, 'Exodus 21': 36, '2 Chronicles 13': 22, 'Nehemiah 3': 32, 'Job 40': 24, 'Ecclesiastes 4': 16,
+  'Isaiah 8': 22, 'Jeremiah 8': 22, 'Daniel 3': 30, 'Micah 4': 13,
+};
 
 // Versículos que el leccionario pide y la Biblia de Jerusalén cargada NO trae en el texto (los remite a una nota por ser
 // dudosos en los manuscritos). Se completan con otra traducción, a petición del usuario (2026-11-02), y la lectura lo
@@ -310,11 +370,19 @@ function toBibliaPieces(ref) {
     else if ((mm = raw.match(/^(\d+):(\d+)$/))) { segs.push({ c: +mm[1], a: +mm[2], b: +mm[2] }); last = +mm[1]; }
     else if (last != null && (mm = raw.match(/^(\d+)-(\d+)$/))) segs.push({ c: last, a: +mm[1], b: +mm[2] });
     else if (last != null && (mm = raw.match(/^(\d+)$/))) segs.push({ c: last, a: +mm[1], b: +mm[1] });
+    // Capítulos enteros («Joel 2», «Job 25-26»), como los cita el Leccionario del Oficio Diario: hasta el último versículo
+    // INGLÉS del capítulo (ESV_CHAPTER_LAST) si el hebreo trae más, que el inglés cuenta en el capítulo siguiente.
+    else if (last == null && (mm = raw.match(/^(\d+)(?:-(\d+))?$/))) {
+      const c1 = +mm[1], c2 = mm[2] ? +mm[2] : c1;
+      for (let c = c1; c <= c2; c++) { const tope = ESV_CHAPTER_LAST[book + ' ' + c]; segs.push({ c, a: 1, b: tope || 999, tope: !!tope }); }
+      last = c2;
+    }
     else return null;
   }
   let changed = false;
   const pieces = [];
   for (const s of segs) {
+    if (s.tope) changed = true;
     let cur = s.a;
     while (cur <= s.b) {
       const rule = VERSE_SHIFTS.find(r => r[0] === book && r[1] === s.c && cur >= r[2] && cur <= r[3]);

@@ -31,7 +31,7 @@ function load() {
   new Function('module', 'exports', fs.readFileSync(LIB + 'biblia-de-jerusalen.min.js', 'utf8'))(mod, mod.exports);
   ctx._BibliaInstance = new mod.exports.Bible();
   vm.runInContext(fs.readFileSync(LIB + 'biblia-wrapper.js', 'utf8') + '\n;', ctx, { filename: 'biblia-wrapper.js' });
-  for (const f of ['calendar.js', 'lectionary.js', 'propers.js', 'eucharist.js', 'holyweek-data.js', 'holyweek.js', 'utils.js', 'app.js', 'librito-pueblo.js']) {
+  for (const f of ['calendar.js', 'lectionary.js', 'daily-office.js', 'propers.js', 'eucharist.js', 'holyweek-data.js', 'holyweek.js', 'utils.js', 'app.js', 'librito-pueblo.js']) {
     vm.runInContext(fs.readFileSync(BCP + f, 'utf8') + '\n;', ctx, { filename: f });
   }
   const get = n => vm.runInContext(`typeof ${n} !== 'undefined' ? ${n} : undefined`, ctx);
@@ -45,7 +45,7 @@ const strip = h => String(h).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(
 const iso = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 
 // Salmo listo para mostrar: sin título pegado al v. 1 y sin versículos repetidos (etiquetas estrictamente crecientes).
-const TITULO_SALMO = /^(Salmo|De David|De Asaf|De Salomón|De Moisés|De los hijos|Del maestro|Canción|Oración|Himno|Poema|A media voz|Cántico)[\s.,]/;
+const TITULO_SALMO = /^(Salmo|De David|De Asaf|De Salomón|De Moisés|De los hijos|Del maestro|Canción|Cancion|Oración|Himno|Poema|A media voz|Cántico)[\s.,]/;
 function psalmProblem(verses) {
   if (!verses || !verses.length) return '';
   if (verses[0].h === '1' && TITULO_SALMO.test(strip(verses[0].content))) return `título pegado al v. 1: «${strip(verses[0].content).slice(0, 40)}…»`;
@@ -69,8 +69,9 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
 
 (async () => {
   // ── 1. Mecánica ──────────────────────────────────────────────────────────
-  const f = { colectaPrestada: [], excepcion: [], marcas: [], sinColecta: [], sinPrefacio: [], sinLecturas: [], sinPrimera: [], sinEvangelio: [], sinSalmo: [], noEucaristiaSinAviso: [], noEucaristiaConMisa: [], gloria: [], salmoMal: [], aclamacion: [], fraccion: [], despedida: [], salmoAlterna: [] };
-  let days = 0, borrowed = 0, noEu = 0, inheritFallback = 0, colectasPrestadas = 0;
+  const f = { colectaPrestada: [], excepcion: [], marcas: [], sinColecta: [], sinPrefacio: [], sinLecturas: [], sinPrimera: [], sinEvangelio: [], sinSalmo: [], noEucaristiaSinAviso: [], noEucaristiaConMisa: [], gloria: [], salmoMal: [], aclamacion: [], fraccion: [], despedida: [], salmoAlterna: [], officeLeccion: [], officeSalmo: [], officeImpreso: [], officeRubrica: [], officeDia: [] };
+  let days = 0, borrowed = 0, noEu = 0, inheritFallback = 0, colectasPrestadas = 0, officeDays = 0;
+  const Office = C.get('BCPDailyOffice');
   for (let d = new Date(Y0, 0, 1, 12); d.getFullYear() <= Y1; d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1, 12)) {
     days++;
     const date = iso(d);
@@ -146,6 +147,33 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
       const lfr = /Celebrante: (\[Aleluya\.\] )?Cristo, nuestra Pascua/.exec(lib), ldm = /Salgamos en el Nombre de Cristo\.( Aleluya, aleluya\.)?/.exec(lib);
       if (lib && (!lfr || !!lfr[1] !== debeAleluyaFr)) f.fraccion.push(`${date} ${k} (${s}) Librito: ${!lfr ? 'sin Fracción' : lfr[1] ? 'con' : 'sin'} Aleluya`);
       if (lib && !sinDespedida && (!ldm || !!ldm[1] !== debeAleluyaDesp)) f.despedida.push(`${date} ${k} (${s}) Librito: ${!ldm ? 'sin Despedida' : ldm[1] ? 'con' : 'sin'} aleluya`);
+    }
+    // Feria sin lecturas propias: las cuatro lecciones del Leccionario del Oficio Diario (comprobación 15). Nada de lo del
+    // Domingo: ni lectura, ni Evangelio ni salmo suyos.
+    if (st.office) {
+      officeDays++;
+      const entrada = Office.get(d);
+      const lib = Librito.generateLibrito(st);
+      const aviso = /Leccionario del Oficio Diario/.test(text) && /Leccionario del Oficio Diario/.test(lib) && !/se repiten las (del Domingo|lecturas del Domingo)/.test(text + lib);
+      if (!aviso) f.officeRubrica.push(`${date}: falta el aviso del Oficio Diario, o sigue diciendo que se repite el Domingo`);
+      if (st.readings || st.firstReading || st.gospel || st.borrowedFromSunday) f.officeDia.push(`${date}: conserva lecturas del Domingo`);
+      if (!entrada) f.officeDia.push(`${date}: sin entrada en la tabla`);
+      for (const of of ['mp', 'ep']) {
+        const o = st.office[of];
+        for (const q of ['first', 'second']) {
+          const l = o[q], pedida = entrada && entrada[of][q].ref;
+          if (!l.data || ERR_IN_TEXT.test(l.data.text || '') || strip(l.data.text || '').length < 25) f.officeLeccion.push(`${date} ${of}.${q} ${l.ref}`);
+          if (entrada && l.ref !== pedida) f.officeLeccion.push(`${date} ${of}.${q}: la tabla dice ${pedida} y el día usa ${l.ref}`);
+          // Está impresa, en la liturgia y en el Librito: su comienzo literal y su cita.
+          const ini = strip(l.data && l.data.text || '').slice(0, 50);
+          if (ini && !text.includes(ini)) f.officeImpreso.push(`${date} ${of}.${q} ${l.ref}: no sale en la liturgia`);
+          if (ini && !strip(lib).includes(ini)) f.officeImpreso.push(`${date} ${of}.${q} ${l.ref}: no sale en el Librito`);
+        }
+        if (!o.psalms.length || o.psalms.some(p => !p.verses.length)) f.officeSalmo.push(`${date} ${of}: ${o.psalms.map(p => p.ref).join(', ') || 'sin salmo'}`);
+        for (const p of o.psalms) { const pp = psalmProblem(p.verses); if (pp) f.officeSalmo.push(`${date} ${p.ref}: ${pp}`); }
+        if (o.psalmsOr) f.officeSalmo.push(`${date} ${of}: trae un salmo alternativo («o») que la liturgia no distingue`);
+      }
+      continue;
     }
     if (!st.readings) { f.sinLecturas.push(date + ' ' + st.dayInfo.key); continue; }
     if (!st.firstReading || strip(st.firstReading.text || '').length < 40) f.sinPrimera.push(date + ' ' + st.readings.first);
@@ -659,6 +687,27 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   }
   check(`14. Orden de 1662 y Trisagio (${o62Dias} días), en la liturgia y el Librito`, o62, o62Dias);
 
+  // ── 15. Leccionario del Oficio Diario en las ferias ──────────────────────
+  // La feria sin lecturas propias ofrece las cuatro lecciones del Leccionario del Oficio Diario (la tabla del PDF oficial,
+  // por fecha; decisión del usuario, 2026-11-07) y el celebrante elige. Se comprueba: (a) que daily-office.js sigue siendo
+  // idéntico a lo que genera build-daily-office.js desde el JSON del PDF; (b) que la tabla tiene los 366 días, cada uno con
+  // sus cuatro lecciones y sus salmos; (c) que ninguna feria conserva las lecturas del Domingo, y que cada una imprime, en
+  // la liturgia y en el Librito, sus cuatro lecciones con texto de la Biblia y sus salmos completos y sin título pegado.
+  const of15 = [];
+  try {
+    const B = require('./bcp2019-tools/build-daily-office.js');
+    if (fs.readFileSync(BCP + 'daily-office.js', 'utf8').replace(/\r\n/g, '\n') !== B.archivo(B.construir())) of15.push('daily-office.js no es lo que genera build-daily-office.js (¿se editó a mano?)');
+  } catch (e) { of15.push('no se pudo regenerar la tabla: ' + e.message); }
+  const entradas = Object.keys(Office.TABLE);
+  if (entradas.length !== 366) of15.push(`la tabla tiene ${entradas.length} días, no 366`);
+  for (const k of entradas) for (const of of ['mp', 'ep']) {
+    const o = Office.TABLE[k][of];
+    if (!o.first.ref || !o.second.ref || !o.psalms.length) of15.push(`${k} ${of}: incompleta`);
+  }
+  for (const [lista, nombre] of [[f.officeDia, 'estado del día'], [f.officeRubrica, 'aviso'], [f.officeLeccion, 'lección'], [f.officeImpreso, 'lección impresa'], [f.officeSalmo, 'salmo']]) for (const x of lista) of15.push(`${nombre}: ${x}`);
+  if (borrowed) of15.push(`${borrowed} días siguen tomando las lecturas del Domingo`);
+  check(`15. Ferias con el Leccionario del Oficio Diario (${officeDays} días, 4 lecciones y sus salmos, en la liturgia y el Librito; tabla de 366 días idéntica al PDF)`, of15, Math.max(1, officeDays));
+
   // ── 8. Colectas ──────────────────────────────────────────────────────────
   // 5 oficiales (Ceniza y Semana Santa) idénticas al libro en español; 90 traducidas del inglés, de las que se
   // comprueba la forma (Amén, fórmula final, longitud, nombre del santo). El inglés no está en el repositorio: sin él
@@ -675,13 +724,15 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
     console.log(`${ok ? 'OK    ' : 'FALLA '} ${r.name}${ok ? '' : `  → ${r.fails} de ${r.total}`}`);
     for (const ex of r.examples) console.log('         ' + ex);
   }
-  console.log(`\nDías con lecturas prestadas del domingo o fiesta correspondiente: ${borrowed} de ${days}`);
+  console.log(`\nDías con las lecciones del Leccionario del Oficio Diario (ferias sin lecturas propias): ${officeDays} de ${days}`);
+  if (borrowed) console.log(`Días con lecturas prestadas del domingo o fiesta correspondiente: ${borrowed} de ${days}`);
   console.log('\nPENDIENTES CONOCIDOS (no los comprueba esta prueba):');
   console.log(`  - Colectas: ${colectas.traducidas} son traducción propia del inglés (el libro en español no trae «Colectas del Año Cristiano»), dadas por revisadas por delegación del usuario, no aprobadas por una autoridad eclesiástica; ver bcp2019/COLECTAS-REVISION.md.`);
   for (const n of colectas.notas || []) console.log('  - Colectas: ' + n + ' (ver bcp2019-tools/check-colectas.js).');
   if (inheritFallback) console.log(`  - ${inheritFallback} días cuyo Propio de la semana es el 1 o el 2 usan la colecta del domingo anterior (sin texto español).`);
   console.log('  - Salmos: se leen de la Biblia de Jerusalén; el Salterio español del libro aún no se usa.');
   console.log('  - Lecturas: el libro en español no trae leccionario; el texto es de la Biblia de Jerusalén, que no trae Hechos 8:37 ni Marcos 9:44 y 9:46 (ver DIF_CONOCIDAS); Mateo 21:44 se completa con la NVI y lo avisa una rúbrica.');
+  console.log('  - Ferias (Leccionario del Oficio Diario): la tabla sale del PDF de 2018, no cotejada con el libro impreso; salterio de 60 días; los salmos partidos en dos («v») usan la numeración New Coverdale del PDF, aproximada con la de la Biblia de Jerusalén; no se verificó la numeración de Eclesiástico, Sabiduría, Judit, Baruc, Macabeos ni Ester.');
   if (!prefacios) console.log('  - Prefacios: no se cotejaron con el libro (falta LOC-10-10-23.md; ver bcp2019-tools/check-prefacios.js).');
   console.log('  - Semana Santa y Ceniza (holyweek.js): Ceniza, Ramos, Jueves, Viernes, Sábado Santo y Gran Vigilia (con Renovación de los Votos, Santo Bautismo y Bautismo con Confirmación) sí; sin el texto de los salmos y cánticos de la Vigilia, sin las Indicaciones adicionales del Bautismo (condicional y de emergencia), con la Renovación solo tras el Sermón, y el rito de Ceniza sin Comunión solo como rúbrica.');
   console.log(failed ? `\n${failed} comprobación(es) con fallos.` : '\nTodas las comprobaciones pasan.');
