@@ -212,7 +212,7 @@ function resolveSeason(dayInfo, date) {
 // ══════════════════════════════════════════════════════════════════════════
 //  GENERACIÓN DE LA LITURGIA PRINCIPAL
 // ══════════════════════════════════════════════════════════════════════════
-async function generateLiturgy(date, canonType = 'roman', votiveType = 'none', lang = 'es') {
+async function generateLiturgy(date, canonType = 'roman', votiveType = 'none', lang = 'es', omitSecret = false) {
   let dayInfo = LiturgicalCalendar.getDay(date);
   let omissions = LiturgicalCalendar.getOmissions(dayInfo);
 
@@ -440,8 +440,10 @@ async function generateLiturgy(date, canonType = 'roman', votiveType = 'none', l
   // fijar aquí, inmediatamente antes de construir la plantilla, que es síncrona
   // y por tanto ya no puede intercalarse con otra generación.
   Canon.setLanguage(lang, dayInfo.key, date);
+  Canon.setOmitSecret(omitSecret);   // después de setLanguage(), que la apaga
 
   const html = buildLiturgyHTML({
+    omitSecret,
     date, dayInfo, cycle, season, key, omissions, omittedFeasts, suppliedProperNotes,
     readings, firstReading, psalmVerses, psalmAnt, secondReading, gospel,
     collect, preface, introit, gradualText, offertory, communion, secret, postcommunion,
@@ -760,8 +762,8 @@ function buildLiturgyHTML(d) {
 
       <div class="liturgical-text-block">${Canon.OFFERTORY}</div>
 
-      <h4 class="section-title">ORACIÓN SOBRE LAS OFRENDAS (Secreta)</h4>${suppliedMark('Secreta')}
-      <div class="prayer-text">${d.secret || omittedText('Secreta') || ''}</div>
+      ${d.omitSecret ? '' : `<h4 class="section-title">ORACIÓN SOBRE LAS OFRENDAS (Secreta)</h4>${suppliedMark('Secreta')}
+      <div class="prayer-text">${d.secret || omittedText('Secreta') || ''}</div>`}
     </div>
 
     ${d.canonType === '1662' ? `
@@ -942,7 +944,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Cambiar la fecha o una opción con la liturgia ya en pantalla la vuelve a generar con ella. Sin esto la pantalla (y el
   // Librito y el Word, que parten del mismo estado) seguían con la opción anterior mientras el selector decía otra.
-  for (const id of ['date-picker', 'canon-select', 'lang-select', 'votive-select']) {
+  for (const id of ['date-picker', 'canon-select', 'lang-select', 'votive-select', 'omit-secret']) {
     const el = document.getElementById(id);
     if (el) el.addEventListener('change', regenerarSiHayLiturgia);
   }
@@ -1013,7 +1015,8 @@ async function handleGenerate(opts) {
   if (generateBtn) generateBtn.disabled = true;
 
   try {
-    const html = await generateLiturgy(date, canonType, votiveType, lang);
+    const omitSecretEl = document.getElementById('omit-secret');
+    const html = await generateLiturgy(date, canonType, votiveType, lang, !!(omitSecretEl && omitSecretEl.checked));
     output.innerHTML = html;
     output.classList.remove('hidden');
     liturgiaGenerada = true;

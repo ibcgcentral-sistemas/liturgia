@@ -69,7 +69,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=36` (los scripts propios del Misal; `biblia-wrapper.js` sigue en `?v=32`) y `?v=39` (los scripts propios de bcp2019, incluido `daily-office.js`; `biblia-wrapper.js`, compartido con el Misal, sigue en `?v=32`; la hoja de estilo, `?v=8`).
+   código viejo. Actualmente en `?v=37` (los scripts propios del Misal; `biblia-wrapper.js` sigue en `?v=32`) y `?v=39` (los scripts propios de bcp2019, incluido `daily-office.js`; `biblia-wrapper.js`, compartido con el Misal, sigue en `?v=32`; la hoja de estilo, `?v=8`).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -440,6 +440,12 @@ No volver a plantearlas salvo que él las reabra:
   Adviento no era Cristo Rey. Barrido 2024-2060 (887 domingos): ninguno sin lecturas, ninguno repite el Evangelio del
   anterior y el último domingo antes de Adviento siempre lleva Cristo Rey. Las intercesiones específicas
   (`INTERCESSIONS_BY_SUNDAY`) siguen la clave de las lecturas. Las ferias toman las del domingo precedente ya mapeadas.
+- **Omitir las oraciones secretas del Sacerdote (Misal, 2026-11-08, a petición del usuario):** casilla «Oraciones
+  secretas» junto a los selectores. Quita las piezas marcadas `secret: true` en `canon.js` (Aufer a nobis, Oramus te,
+  las cuatro del Ofertorio y el Lavabo, las dos primeras oraciones de preparación para la Comunión y «Panem caelestem»,
+  y las dos Abluciones) con su título y rúbrica de «en voz baja», y la **Secreta del día**; no toca el Canon, el
+  «Domine, non sum dignus» ni la Poscomunión. Vale en pantalla y en el Word (parten del mismo HTML); el Librito no cambia
+  (ya sustituye esas piezas por una rúbrica). `Canon.setOmitSecret()` la fija tras `setLanguage()`, que la apaga.
 - **Gloria**: uso tradicional. Se omite desde Septuagésima (domingos de
   Pre-Cuaresma incluidos) y en el Domingo de Ramos.
 - **Gloria en el BCP 2019** (2026-11-02): se omite en **Adviento**, Cuaresma y

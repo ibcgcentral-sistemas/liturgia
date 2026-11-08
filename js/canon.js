@@ -57,9 +57,31 @@ const Canon = (() => {
     return out;
   }
 
+  // Opción «omitir las oraciones secretas del Sacerdote»: quita las piezas marcadas
+  // `secret` (las que dice en voz baja o en privado) junto con el título y las rúbricas
+  // que solo las anuncian («OFRENDA DEL PAN», «dice en voz baja:»…), para que no quede un
+  // encabezado sin oración. Solo afecta a la liturgia en pantalla y al Word: el Librito del
+  // Pueblo (pueblo=true) ya las sustituye por una rúbrica. setLanguage() la apaga, de modo
+  // que solo vale para la generación que la pide con setOmitSecret().
+  let omitSecret = false;
+  function dropSecret(arr) {
+    const out = [];
+    for (const item of arr) {
+      if (item.secret) {
+        while (out.length && out[out.length - 1].type === 'R') out.pop();
+        if (out.length && out[out.length - 1].type === 'T') out.pop();
+        continue;
+      }
+      out.push(item);
+    }
+    return out;
+  }
+
   function zip(arr, pueblo = false) {
     if (pueblo) {
       arr = reduceForPueblo(arr);
+    } else if (omitSecret) {
+      arr = dropSecret(arr);
     }
     if (currentLang === 'es') {
       return arr.map(item => {
@@ -734,7 +756,10 @@ const Canon = (() => {
     currentLang = lang || 'es';
     currentDayKey = dayKey || null;
     currentDayDate = (date instanceof Date) ? date : null;
+    omitSecret = false;
   }
+
+  function setOmitSecret(on) { omitSecret = !!on; }
 
   // Además de devolver el embolismo, sincroniza el día activo del módulo. Los
   // llamadores consultan esta función con la clave DEFINITIVA del día (ya
@@ -815,6 +840,7 @@ const Canon = (() => {
 
   const CanonInterface = {
     setLanguage,
+    setOmitSecret,
     getPaterNosterOnly,
     getCommunicantesEmbolism,
     getHancIgitur,
