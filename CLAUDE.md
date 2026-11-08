@@ -69,7 +69,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=34` (los scripts propios del Misal; `biblia-wrapper.js` sigue en `?v=32`) y `?v=39` (los scripts propios de bcp2019, incluido `daily-office.js`; `biblia-wrapper.js`, compartido con el Misal, sigue en `?v=32`; la hoja de estilo, `?v=8`).
+   código viejo. Actualmente en `?v=35` (los scripts propios del Misal; `biblia-wrapper.js` sigue en `?v=32`) y `?v=39` (los scripts propios de bcp2019, incluido `daily-office.js`; `biblia-wrapper.js`, compartido con el Misal, sigue en `?v=32`; la hoja de estilo, `?v=8`).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 

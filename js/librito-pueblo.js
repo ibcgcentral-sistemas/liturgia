@@ -260,7 +260,7 @@ const LibritoPueblo = (() => {
           }
           return `
           <div class="librito-psalm">
-            <p class="rubric"><em>Salmo ${readings && readings.psalm ? translateBibleReference(readings.psalm) : ''}</em></p>
+            <p class="rubric"><em>${readings && readings.psalm ? translateBibleReference(readings.psalm) : ''}</em></p>
             ${strophes.map(strophe => `
               <div class="psalm-strophe" style="margin-bottom: 1rem;">
                 <p style="margin-bottom: 0.4rem; line-height: 1.4;">${strophe.map(v => `<sup class="verse-num">${v.v}</sup> ${v.content}`).join('<br>')}</p>
