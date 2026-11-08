@@ -69,7 +69,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=35` (los scripts propios del Misal; `biblia-wrapper.js` sigue en `?v=32`) y `?v=39` (los scripts propios de bcp2019, incluido `daily-office.js`; `biblia-wrapper.js`, compartido con el Misal, sigue en `?v=32`; la hoja de estilo, `?v=8`).
+   código viejo. Actualmente en `?v=36` (los scripts propios del Misal; `biblia-wrapper.js` sigue en `?v=32`) y `?v=39` (los scripts propios de bcp2019, incluido `daily-office.js`; `biblia-wrapper.js`, compartido con el Misal, sigue en `?v=32`; la hoja de estilo, `?v=8`).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -431,6 +431,15 @@ No volver a plantearlas salvo que él las reabra:
   esos años por rutas (antes se saltaba en silencio la comparación con el libro y la prueba decía
   «oficiales idénticas»; ahora el rótulo cuenta las comparadas).
 
+- **Lecturas de los domingos después de la Trinidad (Misal, 2026-11-08):** son las del Leccionario Común
+  Revisado y se reparten **por fecha** (Propio N = el domingo de una ventana fija de 7 días: Propio 4, 29 may-4
+  jun; … ; Propio 29, Cristo Rey, 20-26 nov), no por el número de domingo después de la Trinidad. `lectionary.js`
+  guarda el Propio N bajo `trinity(N-3)` y `rclReadingsKey()` (`app.js`) elige la clave por la fecha; el Propio 3
+  (22-28 may, Pascua muy temprana) usa las lecturas de `epi7`. **Colectas, introitos y demás propios siguen por el número
+  de domingo** (el Misal impreso los da así). Antes, el 8 nov. 2026 llevaba el Propio 26 y el domingo antes de
+  Adviento no era Cristo Rey. Barrido 2024-2060 (887 domingos): ninguno sin lecturas, ninguno repite el Evangelio del
+  anterior y el último domingo antes de Adviento siempre lleva Cristo Rey. Las intercesiones específicas
+  (`INTERCESSIONS_BY_SUNDAY`) siguen la clave de las lecturas. Las ferias toman las del domingo precedente ya mapeadas.
 - **Gloria**: uso tradicional. Se omite desde Septuagésima (domingos de
   Pre-Cuaresma incluidos) y en el Domingo de Ramos.
 - **Gloria en el BCP 2019** (2026-11-02): se omite en **Adviento**, Cuaresma y

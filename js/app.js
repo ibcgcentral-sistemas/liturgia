@@ -80,10 +80,29 @@ const DIRECT_LECTIONARY_KEYS = new Set([
   'trinity', 'corpusChristi', 'sacredHeart',
 ]);
 
-function getLectionaryKey(dayInfo) {
+// Las lecturas de los domingos después de la Trinidad son las del Leccionario Común
+// Revisado (RCL), que las reparte por FECHA: el «Propio N» es el domingo que cae en
+// una ventana fija de 7 días (Propio 4: 29 may-4 jun, Propio 5: 5-11 jun, …, Propio
+// 29, Cristo Rey: 20-26 nov). La tabla de lectionary.js guarda el Propio N bajo la
+// clave trinity(N-3). Indexar por el número de domingo después de la Trinidad
+// (la clave del calendario, que sí rige las colectas del Misal) atrasaba o adelantaba
+// las lecturas según la Pascua: en 2026 el 8 de nov. (23.º tras la Trinidad) llevaba el
+// Propio 26 en vez del 27, y el domingo antes de Adviento no era Cristo Rey.
+// El Propio 3 (22-28 may, solo con Pascua muy temprana) tiene sus lecturas en 'epi7'.
+function rclReadingsKey(key, sundayDate) {
+  if (!/^trinity\d+$/.test(key) || !sundayDate) return key;
+  const dias = (Date.UTC(sundayDate.getFullYear(), sundayDate.getMonth(), sundayDate.getDate()) -
+                Date.UTC(sundayDate.getFullYear(), 4, 29)) / 86400000;
+  const proper = 4 + Math.floor(dias / 7);
+  if (proper >= 4) return 'trinity' + (Math.min(proper, 29) - 3);
+  if (proper === 3) return 'epi7';
+  return key;
+}
+
+function getLectionaryKey(dayInfo, date) {
   const k = dayInfo.key;
   if (DIRECT_LECTIONARY_KEYS.has(k)) return k;
-  if (k && k.startsWith('trinity')) return k;
+  if (k && k.startsWith('trinity')) return rclReadingsKey(k, date);
   if (k && /^\d{2}-\d{2}$/.test(k)) return k;
   return null;
 }
@@ -115,9 +134,10 @@ function resolveCollectKey(dayInfo, date) {
 }
 
 function resolveLectionaryKey(dayInfo, date) {
-  const direct = getLectionaryKey(dayInfo);
+  const direct = getLectionaryKey(dayInfo, date);
   if (direct) return { key: direct, borrowedFromSunday: false };
-  const prevKey = getLectionaryKey(LiturgicalCalendar.getDay(getPreviousSunday(date)));
+  const prevSunday = getPreviousSunday(date);
+  const prevKey = getLectionaryKey(LiturgicalCalendar.getDay(prevSunday), prevSunday);
   // Un domingo no «repite el Domingo precedente»: el «precedente» de un domingo es
   // él mismo (getPreviousSunday devuelve la misma fecha), así que la rúbrica
   // «Esta feria no tiene lecturas propias…» sería inexacta. Solo se declara
