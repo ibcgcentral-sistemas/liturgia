@@ -655,12 +655,12 @@ function buildLiturgyHTML(d) {
       <h4 class="section-title">LA COLECTA POR PUREZA</h4>
       <div class="liturgical-text-block">${BCPEucharist.COLLECT_FOR_PURITY}</div>
 
-      ${penitential ? '<p class="rubric">Luego, de rodillas en cuanto sea posible:</p>' : ''}
-      <h4 class="section-title">RESUMEN DE LA LEY</h4>
-      <div class="liturgical-text-block">${BCPEucharist.SUMMARY_OF_LAW}</div>
+      ${penitential ? `<p class="rubric">Luego, de rodillas en cuanto sea posible:</p>
+      <h4 class="section-title">EL DECÁLOGO</h4>
+      ${BCPHolyWeek.render('decalogue', '', null, null, { sinTitulo: true })}` : `<h4 class="section-title">RESUMEN DE LA LEY</h4>
+      <div class="liturgical-text-block">${BCPEucharist.SUMMARY_OF_LAW}</div>`}
 
-      ${penitential ? `<h4 class="section-title">EL DECÁLOGO (en lugar del Resumen de la Ley)</h4>
-      ${BCPHolyWeek.render('decalogue', '', null, null, { sinTitulo: true })}
+      ${penitential ? `
 
       <h4 class="section-title">LA EXHORTACIÓN (opcional)</h4>
       ${BCPHolyWeek.render('exhortation', '', null, null, { sinTitulo: true })}

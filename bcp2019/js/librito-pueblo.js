@@ -616,7 +616,7 @@ const BCPLibrito = (() => {
         </div>`}
 
         ${penitential ? `<h3>ORDEN PENITENCIAL</h3>
-        <div class="librito-instruction"><p><strong>Nos arrodillamos si podemos.</strong> El Decálogo (o el Resumen de la Ley); el pueblo responde a cada mandamiento:</p></div>
+        <div class="librito-instruction"><p><strong>Nos arrodillamos si podemos.</strong> El Decálogo; el pueblo responde a cada mandamiento:</p></div>
         ${BCPHolyWeek.renderLibrito('decalogue', '', null, null, { sinTitulo: true })}
         <h3>CONFESIÓN Y ABSOLUCIÓN</h3>
         ${renewed ? rat('renewedConfession') : `<div class="librito-instruction"><p>Todos juntos:</p></div>

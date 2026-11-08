@@ -250,7 +250,7 @@ sale con título (no se midió cuántos).
   Oraciones del Pueblo y la paz sí. Vale solo en días de Eucaristía ordinarios (Ramos, Ceniza,
   Jueves, Viernes y Sábado Santo quedan idénticos). `currentMassState.penitential`;
   `test-bcp2019.js` 13. En el Librito no va la Exhortación (la lee el Celebrante). El libro da el
-  Decálogo «o» el Resumen: se imprimen los dos y se elige. **Orden de 1662 y Trisagio (2026-11-02, con la autoridad
+  Decálogo «o» el Resumen: en el Orden Penitencial se imprime solo el Decálogo (2026-11-08, por queja del usuario de que el Resumen salía dos veces; antes se imprimían los dos), y el Resumen queda para los demás órdenes; `test-bcp2019.js` 13 lo vigila. **Orden de 1662 y Trisagio (2026-11-02, con la autoridad
   delegada):** el selector «Orden de la liturgia» ofrece, además del Penitencial, el **orden de
   1662** (LOC l. 3706-3736, solo en el Texto Estándar): Padrenuestro, Colecta por la pureza,
   Decálogo, Colecta del Día, lecturas, Credo, Sermón, Ofertorio, Oraciones del Pueblo, Exhortación,

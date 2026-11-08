@@ -627,9 +627,10 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
     }
     const t = norm(strip(html));
     let pos = 0, falta = '';
-    for (const m of ['RITOS INICIALES', 'LA ACLAMACIÓN', 'LA COLECTA POR PUREZA', 'RESUMEN DE LA LEY', 'EL DECÁLOGO', 'Dios habló estas palabras', 'LA EXHORTACIÓN', 'Amados míos en el Señor', 'CONFESIÓN Y ABSOLUCIÓN DE LOS PECADOS', 'KYRIE', 'LA COLECTA DEL DÍA']) { const j = t.indexOf(m, pos); if (j < 0) { falta = falta || m; continue; } pos = j + m.length; }
+    for (const m of ['RITOS INICIALES', 'LA ACLAMACIÓN', 'LA COLECTA POR PUREZA', 'EL DECÁLOGO', 'Dios habló estas palabras', 'LA EXHORTACIÓN', 'Amados míos en el Señor', 'CONFESIÓN Y ABSOLUCIÓN DE LOS PECADOS', 'KYRIE', 'LA COLECTA DEL DÍA']) { const j = t.indexOf(m, pos); if (j < 0) { falta = falta || m; continue; } pos = j + m.length; }
     OP(!falta, `${w}: el orden del Orden Penitencial falla en «${falta}»`);
     OP(!/GLORIA IN EXCELSIS/.test(t), `${w}: el Orden Penitencial no lleva Gloria`);
+    OP(!/RESUMEN DE LA LEY/.test(t) && !/en lugar del Resumen/.test(t), `${w}: el Orden Penitencial imprime solo el Decálogo, no también el Resumen de la Ley`);
     OP((t.match(/CONFESIÓN Y ABSOLUCIÓN DE LOS PECADOS/g) || []).length === 1, `${w}: la confesión debe salir una sola vez`);
     OP((t.match(/✠ LA PAZ|LA PAZ/g) || []).length >= 1 && /LA PAZ/.test(t.slice(t.indexOf('ORACIÓN DE LOS FIELES'))), `${w}: tras las Oraciones del Pueblo debe ir la paz`);
     const tl = norm(strip(lib));
