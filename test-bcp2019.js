@@ -295,6 +295,20 @@ const ERR_IN_TEXT = /Referencia no reconocida|Libro no encontrado|No se encontr|
   if (!/<sup class="verse-num">44<\/sup> El que caiga sobre esta piedra quedará despedazado, y si ella cae sobre alguien, lo hará polvo\./.test(mt2144) || !/\[v\. 44 según la NVI; la Biblia de Jerusalén no lo trae en el texto\]/.test(mt2144)) difVersos.push('Matthew 21:33-44: falta el v. 44 completado con la NVI y su rúbrica');
   check(`2d. Versículos impresos = pedidos (${versosComparadas} citas de un capítulo; ${Object.keys(DIF_CONOCIDAS).length} diferencias conocidas; Mt 21:44 completado con la NVI)`, difVersos, versosComparadas);
 
+  // ── 2e. Texto bíblico sin espacio de más antes de la puntuación ──────────
+  // La Biblia de Jerusalén cargada trae en unos 40 pasajes «como el buey , y…» o «Pausa .» (restos de notas al pie);
+  // tidyScriptureText (utils.js) junta la puntuación a su palabra. Se miran TODAS las citas que imprime el BCP: las del
+  // leccionario dominical y las del Oficio Diario, lecturas y salmos, tal como salen en la liturgia.
+  const plano = h => String(h).replace(/<\/?(?:em|strong|i|b)(?:\s[^>]*)?>/g, '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
+  const rxSucio = / [,;:.](?=\s|$)|Ã.|â€|�/;
+  const sucio = []; let textosRevisados = 0;
+  const lecturasTodas = new Set([...refs.values()].filter(x => x.s !== 'psalm').map(x => x.r));
+  const salmosTodos = new Set(psalmRefs.map(x => x.r));
+  for (const t of Object.values(Office.TABLE)) for (const o of [t.mp, t.ep]) { lecturasTodas.add(Office.fetchRef(o.first.ref)); lecturasTodas.add(Office.fetchRef(o.second.ref)); for (const p of o.psalms) salmosTodos.add(p); }
+  for (const r of lecturasTodas) { textosRevisados++; const t = plano((await fetchScripture(r)).text); const m = rxSucio.exec(t); if (m) sucio.push(`${r}: …${t.slice(Math.max(0, m.index - 25), m.index + 25)}…`); }
+  for (const r of salmosTodos) { textosRevisados++; const t = plano(cleanPsalmVerses(r, C.ctx.BibliaJerusalen.getVerses(r)).map(v => v.content).join(' ')); const m = rxSucio.exec(t); if (m) sucio.push(`${r}: …${t.slice(Math.max(0, m.index - 25), m.index + 25)}…`); }
+  check(`2e. Texto bíblico: sin espacio de más antes de la puntuación ni codificación rota (${textosRevisados} citas)`, sucio, textosRevisados);
+
   // ── 3. Leccionario = libro ───────────────────────────────────────────────
   let drift = [], compared = 0;
   try {

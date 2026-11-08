@@ -253,8 +253,19 @@ const PSALM_FUSED_TITLE = {
 function cleanPsalmVerses(ref, verses) {
   const m = /^Psalms? (\d+)/.exec(String(ref || '').trim());
   const title = m && PSALM_FUSED_TITLE[+m[1]];
-  if (!title || !verses || !verses.length) return verses;
-  return verses.map(v => (v.h === '1' && String(v.content).startsWith(title)) ? { ...v, content: v.content.slice(title.length) } : v);
+  if (!verses || !verses.length) return verses;
+  return verses.map(v => {
+    let c = String(v.content);
+    if (title && v.h === '1' && c.startsWith(title)) c = c.slice(title.length);
+    return { ...v, content: tidyScriptureText(c) };
+  });
+}
+
+// La Biblia de Jerusalén cargada trae, en unos 40 pasajes de los que lee el BCP, un espacio de más antes de una coma, un punto y
+// coma, dos puntos o un punto («como el buey , y la serpiente», «Pausa .»): lo que dejaron las notas al pie que se quitaron. Se
+// junta la puntuación a su palabra. Solo cambia ese espacio, nunca una palabra; los puntos suspensivos («...») no se tocan.
+function tidyScriptureText(html) {
+  return String(html).replace(/(^|>)([^<]+)/g, (m, a, t) => a + t.replace(/(\S) +([,;:.])(?=\s|$)/g, '$1$2'));
 }
 
 // ══════════════════════════════════════════════════════════════════════════

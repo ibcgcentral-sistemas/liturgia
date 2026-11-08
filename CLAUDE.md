@@ -69,7 +69,7 @@ ausente del Librito todos los días de todos los años hasta el 20 de septiembre
 5. **Subir el cache-buster.** Los `<script src="js/x.js?v=NN">` de `index.html`
    llevan versión y `sw.js` cachea por URL. Si se tocan los JS y no se sube el
    número, los navegadores con el service worker activo siguen sirviendo el
-   código viejo. Actualmente en `?v=34` (los scripts propios del Misal; `biblia-wrapper.js` sigue en `?v=32`) y `?v=38` (los scripts propios de bcp2019, incluido `daily-office.js`; `biblia-wrapper.js`, compartido con el Misal, sigue en `?v=32`; la hoja de estilo, `?v=8`).
+   código viejo. Actualmente en `?v=34` (los scripts propios del Misal; `biblia-wrapper.js` sigue en `?v=32`) y `?v=39` (los scripts propios de bcp2019, incluido `daily-office.js`; `biblia-wrapper.js`, compartido con el Misal, sigue en `?v=32`; la hoja de estilo, `?v=8`).
 
 ## Fuente litúrgica autorizada (2026-10-04)
 
@@ -380,6 +380,15 @@ sale con título (no se midió cuántos).
   `test-bcp2019.js` 15 vigila que la tabla siga idéntica a lo que genera el script, los 366 días, y en cada feria las
   cuatro lecciones con texto y salmos completos, en la liturgia y el Librito. Para esto `PSALM_FUSED_TITLE` creció de 33
   a 53 salmos (el ciclo de 60 días recorre todo el Salterio).
+- `bcp2019`, **revisión del texto impreso** (2026-11-08): se leyó todo lo que imprime el generador en 2026 (730
+  liturgias y Librito, ambas formas) y las opciones poco comunes en 10 días clave (360 combinaciones), y aparte el
+  texto de las 1.677 lecturas y 248 salmos que cita. Del texto litúrgico solo salen **erratas del propio libro**, que se
+  copian tal cual por la regla del proyecto: «nosotros. .» (Viernes Santo, LOC l. 14944), «Oremos.. Silencio» (Sábado
+  Santo, Vigilia, LOC l. 15455 y 15462) y el espacio en «especialmente _____ )» de las Colectas Solemnes (un blanco para
+  poner el nombre). Del texto bíblico: `tidyScriptureText` (`utils.js`) junta la puntuación a su palabra en ~40
+  pasajes con un espacio de más («el buey , y»; `test-bcp2019.js` 2e vigila las 1.915 citas); quedan **erratas de la
+  Biblia cargada que no se tocan** porque arreglarlas sería adivinar el texto: «bestias bestias» (Jr 7:20), «que que»
+  (2 Ts 1:8 y 2:4), «Efraím Efraím» (Is 9:20, falta un «y») y «[]» vacío (1 S 13:1).
 - Código muerto inocuo: `takeProper()` en `app.js`, el alias `ordinaryFeria` en
   `propers.js`, `circumcision` y `getSundaysAfterPentecostLabel()` en `bcp2019`.
 
