@@ -321,6 +321,16 @@ const Canon = (() => {
     { type: 'O', secret: true, es: 'Señor Jesucristo, Hijo del Dios vivo, que por voluntad del Padre, con la cooperación del Espíritu Santo, diste por tu muerte la vida al mundo; líbrame por este sacrosanto Cuerpo y Sangre tuya de todos mis pecados y de todo mal; haz que me adhiera siempre a tus mandamientos, y no permitas que jamás me separe de ti; que con el mismo Dios Padre y el Espíritu Santo vives y reinas, Dios, por los siglos de los siglos. Amén.', la: 'Domine Iesu Christe, Fili Dei vivi, qui ex voluntate Patris, cooperante Spiritu Sancto, per mortem tuam mundum vivificasti: libera me per hoc sacrosanctum Corpus et Sanguinem tuum ab omnibus iniquitatibus meis, et universis malis: et fac me tuis semper inhaerere mandatis, et a te numquam separari permittas: Qui cum eodem Deo Patre et Spiritu Sancto vivis et regnas Deus in saecula saeculorum. Amen.' },
     { type: 'O', secret: true, es: 'La recepción de tu Cuerpo, Señor Jesucristo, que yo, indigno, presumo recibir, no se convierta en mi juicio y condenación; sino que, por tu bondad, me sea provechosa para protección y curación de alma y cuerpo; que vives y reinas con Dios Padre en la unidad del Espíritu Santo, Dios, por los siglos de los siglos. Amén.', la: 'Perceptio Corporis tui, Domine Iesu Christe, quod ego indignus sumere praesumo, non mihi proveniat in iudicium et condemnationem: sed pro tua pietate prosit mihi ad tutamentum mentis et corporis, et ad medelam percipiendam: Qui vivis et regnas cum Deo Patre in unitate Spiritus Sancti Deus, per omnia saecula saeculorum. Amen.' },
     { type: 'S', secret: true, es: 'Tomaré el Pan del Cielo, e invocaré el Nombre del Señor.', la: 'Panem caelestem accipiam, et nomen Domini invocabo.' },
+    // «He aquí el Cordero de Dios» y la respuesta del pueblo: Misal Anglicano impreso (2013), l. 4563-4577 de su conversión
+    // a texto, que lo trae antes de la Comunión del Celebrante. Las rúbricas son las del Misal. El latín no figura en el
+    // Misal: es el texto romano corriente («Ecce Agnus Dei… Beati qui ad cenam Agni vocati sunt») y el «Domine, non sum
+    // dignus» que ya usaba este archivo; conviene que lo revise quien conozca el latín del uso anglocatólico.
+    { type: 'R', es: 'El Celebrante se vuelve al pueblo y, sosteniendo en alto el Santísimo Sacramento, repite las palabras de San Juan el Bautista:', la: 'Sacerdos, ostendens populo Sacramentum, dicit:' },
+    { type: 'S', es: 'He aquí el Cordero de Dios ✠ He aquí el que quita el pecado del mundo. Dichosos los llamados a esta Cena.', la: 'Ecce Agnus Dei, ecce qui tollit peccata mundi. Beati qui ad cenam Agni vocati sunt.' },
+    { type: 'R', es: 'El pueblo repite tres veces las palabras del Centurión, quien con humildad y fe obtuvo la curación de su siervo por Nuestro Señor:', la: 'Populus ter respondet:' },
+    { type: 'P', es: 'Señor, no soy digno que entres en mi casa, pero una palabra tuya bastará para sanarme.', la: 'Domine, non sum dignus, ut intres sub tectum meum: sed tantum dic verbo, et sanabitur anima mea.' },
+    { type: 'P', es: 'Señor, no soy digno que entres en mi casa, pero una palabra tuya bastará para sanarme.', la: 'Domine, non sum dignus, ut intres sub tectum meum: sed tantum dic verbo, et sanabitur anima mea.' },
+    { type: 'P', es: 'Señor, no soy digno que entres en mi casa, pero una palabra tuya bastará para sanarme.', la: 'Domine, non sum dignus, ut intres sub tectum meum: sed tantum dic verbo, et sanabitur anima mea.' },
     { type: 'R', es: 'Se dice tres veces:', la: 'Dicitur ter:' },
     { type: 'O', es: 'Señor, no soy digno de que entres en mi morada; mas di una sola palabra, y mi alma será sanada.', la: 'Domine, non sum dignus, ut intres sub tectum meum: sed tantum dic verbo, et sanabitur anima mea.' },
     { type: 'R', es: 'El Sacerdote consume el Cuerpo del Señor y después la Sangre del Señor. Se distribuye la Comunión al pueblo.', la: 'Sacerdos sumit Corpus et Sanguinem Domini. Distribuiter Communio populo.' }
@@ -573,6 +583,15 @@ const Canon = (() => {
     { type: 'O', es: 'Acepta, pues, Señor, con bondad esta ofrenda de tus siervos y de toda tu familia; ordena en tu paz nuestros días, líbranos de la condenación eterna, y cuéntanos entre tus elegidos; por Cristo nuestro Señor. Amén.', la: 'Hanc igitur oblationem servitutis nostrae, sed et cunctae familiae tuae, quaesumus, Domine, ut placatus accipias: diesque nostros in tua pace disponas, et ab aeterna damnatione nos eripi, et in electorum tuorum iubeas gregem numerari. Per Christum Dominum nostrum. Amen.' }
   ];
 
+  // Hanc igitur del Jueves Santo: texto del Misal Anglicano impreso (2013), «En la misa del Jueves santo» de su Canon
+  // Gregoriano (l. 4005-4011 de su conversión), copiado sin cambios. Es la redacción de ESA plegaria, no la del resto de este
+  // Canon (que dice «Acepta, pues, Señor, con bondad…»). El Misal no trae latín: en latín se muestra el español, sin inventar.
+  const HANC_IGITUR_MAUNDY_DATA = [
+    { type: 'T', es: 'HANC IGITUR', la: 'HANC IGITUR' },
+    { type: 'R', es: 'Extendiendo las manos sobre las oblaciones:', la: 'Sacerdos expandens manus super oblata dicit:' },
+    { type: 'O', es: 'Acepta, Señor, en tu bondad, esta ofrenda de tus siervos y de toda tu familia santa, que te presentamos en el día mismo en que nuestro Señor Jesucristo encomendó a sus discípulos la celebración del sacramento de su Cuerpo y de su Sangre; ordena en tu paz nuestros días, líbranos de la condenación eterna y cuéntanos entre tus elegidos. Por Cristo, nuestro Señor. Amén.' }
+  ];
+
   const HANC_IGITUR_EASTER_DATA = [
     { type: 'T', es: 'HANC IGITUR', la: 'HANC IGITUR' },
     { type: 'R', es: 'Extendiendo las manos sobre las oblaciones:', la: 'Sacerdos expandens manus super oblata dicit:' },
@@ -788,7 +807,8 @@ const Canon = (() => {
     // bautizados, igual que la Vigilia Pascual. Son 37 días de 2024-2060.
     const isPentecostOctave = dayKey === 'pentecost' || dayKey === 'easterFeria7_6' ||
       (dayKey && dayKey.startsWith('pentecostFeria'));
-    const data = (isEasterOctave || isPentecostOctave) ? HANC_IGITUR_EASTER_DATA : HANC_IGITUR_NORMAL_DATA;
+    const data = dayKey === 'maundyThursday' ? HANC_IGITUR_MAUNDY_DATA
+      : (isEasterOctave || isPentecostOctave) ? HANC_IGITUR_EASTER_DATA : HANC_IGITUR_NORMAL_DATA;
     return zip(data);
   }
 
